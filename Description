@@ -1,1 +1,6 @@
+Es soll ein Karten-Lernsystem für Studierende entwickelt werden.
+Studierende können selbst Karten hinzufügen oder vorhandene Karten-Pakete kaufen.
+Karten-Pakete bestehen aus thematisch zusammenhängenden Karten.
+Karten haben jeweils eine Vorder- und eine Rückseite. Auf der Vorderseite steht ein Begriff
+oder eine Frage, auf der Rückseite die zugehörige Erklärung.
 
