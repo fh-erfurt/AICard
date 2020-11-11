@@ -16,3 +16,16 @@ Falsch Beantwortete Begriffe fallen ab in die Kategorie 1 (Außer aus Kategorie 
 Lernsets können öffentlich gestellt werden in eine Art Shop und dann in den eigenen Account anderer Studenten als KOPIE(nicht Referenz)[mit allen Begriffen in Kat.1] verlinkt werden
 
 
+Es soll ein Kartenlernsystem für Studierende und Lehrende der FH Erfurt entwickelt werden. 
+Die Mitglieder können ihr eigenes Konto erstellen und ihre persönliche Daten währenddessen eingeben und Freunde mittels Name oder Matrikel Nr suchen und hinzufügen. 
+Studierende haben unterschiedliche Fächer (AI, Architektur, etc…) und sind in verschiedene Semester. Studierende können Chat Gruppen bilden und einander schreiben. 
+Studierende und Lehrende können Lernsets und Ordner um ihre Lernsets zu organisieren erstellen. 
+jeder Ordner/Lernset hat ein Titel und ein Referenz (Besitzer ID) und ist entweder veröffentlicht oder nicht veröffentlicht 
+oder nur für gewählte Mitglieder veröffentlicht(z.B nur für Studierende des 3 Semester). Der Besitzer von einem Lernset kann Rechte für lesen oder lesen und schreiben geben. 
+Studierende und Lehrende können  Lernsets und Ordner mittels Titel suchen. 
+Lernsets bestehen aus zusammenhängenden Karten (Karten-Pakete), Karten haben jeweils eine Vorder- und eine Rückseite.
+Auf der Vorderseite steht ein Begriff oder eine Frage, auf der Rückseite die zugehörige Erklärung.
+Studierende haben die Möglichkeit ihre gelernte Lernsets in die Rubrik “gelernt“ oder die 
+Interessante Lernsets in die Rubrik “Favoriten“ zu speichern
+Lehrende können ihre Lernsets durch die Studierende nach Schwierigkeit bewerten lassen, diese können eingestuft in 3 Stufen (Leicht Mittel Schwierig). 
+
