@@ -4,3 +4,15 @@ Karten-Pakete bestehen aus thematisch zusammenhängenden Karten.
 Karten haben jeweils eine Vorder- und eine Rückseite. Auf der Vorderseite steht ein Begriff
 oder eine Frage, auf der Rückseite die zugehörige Erklärung.
 
+
+Es soll ein Multiuser Karteikartensystem für die AI-Erfurt erstellt werden,
+bei dem sollen die Studenten Lernsets erstellen und untereinanert teilen könnnen.
+Dozenten sollen Lernsets erstellen und an die in Kurse eingeteilten Studenten verteilen können.
+die Lernsets sollen gemischt werden können
+die Lernsets sollen eine Kombination aus 2 Werten haben (Vorder- und HintenSeite der Karte)
+gelernte(gewusste) Begriffe sollen weniger häufig in einer Lernsession auftauchen
+gelernte (gewusste) Begrife sollen nach 5 Stufen gelernt werden (1-nie Gewusst --> 5-(5xhintereinander Gewusst)
+Falsch Beantwortete Begriffe fallen ab in die Kategorie 1 (Außer aus Kategorie 5, diese Fallen nur eine Kategorie in Kategorie 4 (mit ENUM)
+Lernsets können öffentlich gestellt werden in eine Art Shop und dann in den eigenen Account anderer Studenten als KOPIE(nicht Referenz)[mit allen Begriffen in Kat.1] verlinkt werden
+
+
