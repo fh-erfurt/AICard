@@ -17,7 +17,7 @@ Lernsets können öffentlich gestellt werden in eine Art Shop und dann in den ei
 
 
 Es soll ein Kartenlernsystem für Studierende und Lehrende der FH Erfurt entwickelt werden. 
-Die Mitglieder können ihr eigenes Konto erstellen und ihre persönliche Daten währenddessen eingeben und Freunde mittels Name oder Matrikel Nr suchen und hinzufügen. 
+Die Mitglieder sollen und können ihr eigenes Konto erstellen und ihre persönliche Daten währenddessen eingeben und Freunde mittels Nutzername  suchen und hinzufügen. 
 Studierende haben unterschiedliche Fächer (AI, Architektur, etc…) und sind in verschiedene Semester. Studierende können Chat Gruppen bilden und einander schreiben. 
 Studierende und Lehrende können Lernsets und Ordner um ihre Lernsets zu organisieren erstellen. 
 jeder Ordner/Lernset hat ein Titel und ein Referenz (Besitzer ID) und ist entweder veröffentlicht oder nicht veröffentlicht 
