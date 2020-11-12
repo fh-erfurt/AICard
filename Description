@@ -3,3 +3,31 @@ Studierende können selbst Karten hinzufügen oder vorhandene Karten-Pakete kauf
 Karten-Pakete bestehen aus thematisch zusammenhängenden Karten.
 Karten haben jeweils eine Vorder- und eine Rückseite. Auf der Vorderseite steht ein Begriff
 oder eine Frage, auf der Rückseite die zugehörige Erklärung.
+
+
+Es soll ein Multiuser Karteikartensystem für die AI-Erfurt erstellt werden,
+bei dem sollen die Studenten Lernsets erstellen und untereinanert teilen könnnen.
+Dozenten sollen Lernsets erstellen und an die in Kurse eingeteilten Studenten verteilen können.
+die Lernsets sollen gemischt werden können
+die Lernsets sollen eine Kombination aus 2 Werten haben (Vorder- und HintenSeite der Karte)
+gelernte(gewusste) Begriffe sollen weniger häufig in einer Lernsession auftauchen
+gelernte (gewusste) Begrife sollen nach 5 Stufen gelernt werden (1-nie Gewusst --> 5-(5xhintereinander Gewusst)
+Falsch Beantwortete Begriffe fallen ab in die Kategorie 1 (Außer aus Kategorie 5, diese Fallen nur eine Kategorie in Kategorie 4 (mit ENUM)
+Lernsets können öffentlich gestellt werden in eine Art Shop und dann in den eigenen Account anderer Studenten als KOPIE(nicht Referenz)[mit allen Begriffen in Kat.1] verlinkt werden
+
+
+Es soll ein Kartenlernsystem für Studierende und Lehrende der FH Erfurt entwickelt werden. 
+Die Mitglieder sollen und können ihr eigenes Konto erstellen und ihre persönliche Daten währenddessen eingeben und Freunde mittels Nutzername  suchen und hinzufügen. 
+Studierende haben unterschiedliche Fächer (AI, Architektur, etc…) und sind in verschiedene Semester. Studierende können Chat Gruppen bilden und einander schreiben. 
+Studierende und Lehrende können Lernsets und Ordner um ihre Lernsets zu organisieren erstellen. 
+jeder Ordner/Lernset hat ein Titel, eine Beschreibung und ein Besitzer Referenz (Nutzername) und ist entweder veröffentlicht oder nicht veröffentlicht 
+// oder nur für gewählte Mitglieder veröffentlicht(z.B nur für Studierende des 3 Semester).//
+Der Besitzer von einem Lernset kann Rechte für Lesen oder Lesen und Schreiben von Kommentare  geben. 
+Studierende und Lehrende können  Lernsets und Ordner mittels Titel suchen. 
+Lernsets bestehen aus zusammenhängenden Karten (Karten-Pakete), Karten haben jeweils eine Vorder- und eine Rückseite und ein Index.
+Auf der Vorderseite steht ein Begriff oder eine Frage, auf der Rückseite die zugehörige Erklärung.
+Studierende haben die Möglichkeit ihre gelernte Lernsets in die Rubrik “gelernt“ oder die 
+Interessante Lernsets in die Rubrik “Favoriten“ zu speichern
+Lehrende können ihre Lernsets durch die Studierende nach Schwierigkeit bewerten lassen, diese können eingestuft in 3 Stufen (Leicht Mittel Schwierig).
+Die Bewertungen können veröffentlicht oder nicht veröffentlicht sein.
+
