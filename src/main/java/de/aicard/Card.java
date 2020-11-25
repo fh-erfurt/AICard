@@ -3,7 +3,7 @@ package de.aicard;
 public class Card {
 
 
-    enum CARDKNOWLEDGELEVEL{
+   public enum CARDKNOWLEDGELEVEL{
         NOINFORMATION,
         SOMEINFORMATION,
         KNOW,

@@ -6,14 +6,14 @@ public class LearningSession {
     //attributes
     private int currentCard;
     private Card[] cardList;
-    private Skipper canSkip;
+    //private Skipper canSkip;
 
 
     //Constructer
-    public LearningSession(int _numOfCards) {
+      public LearningSession(int _numOfCards) {
       this.currentCard = 0;
       this.cardList = new Card[_numOfCards];
-      this.canSkip = new Skipper();
+      //this.canSkip = new Skipper();
     }
 
     //setter & getter
@@ -23,12 +23,20 @@ public class LearningSession {
     public void setCardList(Card[] _cardList){this.cardList = _cardList;}
     public Card[] getCardList(){return this.cardList;}
 
-    public void setCanSkip(Skipper _canSkip){this.canSkip = _canSkip;}      //TODO Brauch der Skipper getter und setter?
-    public Skipper getCanSkip(){return this.canSkip;}
+    //public void setCanSkip(Skipper _canSkip){this.canSkip = _canSkip;}      //TODO Brauch der Skipper getter und setter? - wahrscheinlich nicht
+    //public Skipper getCanSkip(){return this.canSkip;}
 
     //methods
     public void createCardList(int _numOfCards){} //TODO ich weiß nicht mehr was die Funktionen macht. brauche Dokumentation::habe es in den Constructor hinzugefügt
     public void cardKnown(){}
     public void cardUnKnown(){}
+
+    public void next(){
+        this.setCurrentCard(currentCard + 1);
+    }
+    public void previous(){
+        this.setCurrentCard(currentCard - 1);
+    }
+
 }
 //TODO Erkennt andere Klassen nicht im Package
