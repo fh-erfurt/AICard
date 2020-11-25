@@ -23,7 +23,7 @@ public class LearnSet {
     private String description;
     private State state;
     private Faculty faculty;
-    private ArrayList cardList;
+    private ArrayList<Card> cardList = new ArrayList<Card> ();
     private int currentCard;
     //private Skipper canSkip;
 
@@ -86,10 +86,12 @@ public class LearnSet {
     //}
 
     public void createCard(){
-        this.cardList.add(new Card); //TODO adjust the function when Card constructor is known.
+        Card newCard= new Card();
+        cardList.add(newCard);
     }
 
     public void createLearningSession(int noOfCards){
+
         LearningSession session = new LearningSession(noOfCards); //TODO adjust the function when Card constructor is known.
     }
 

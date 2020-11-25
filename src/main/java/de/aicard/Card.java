@@ -27,6 +27,8 @@ public class Card {
         this.cardXP = _cardXP;
     }
 
+    public Card(){}
+
     //Setter + Getter
 
     public String getCardTextFront()
