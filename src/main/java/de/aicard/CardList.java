@@ -24,13 +24,27 @@ public class CardList {
         cardList = _arrList;
         ListIndex = 0;
     }
-
     //functions
+
     public void addToList(Card _card){
+
         cardList.add(_card);
     }
-    public Card getCurrCard(){
+    public void removeFromList(Card _card){
+        cardList.remove(_card);
+    }
+
+    public void removeFromList(int _index){
+        cardList.remove(_index);
+    }
+
+    public Card getCurrentCard(){
+
         return cardList.get(ListIndex);
+    }
+
+    public int getListLength(){
+        return cardList.size();
     }
 
     public void next(){
@@ -38,10 +52,10 @@ public class CardList {
            ListIndex++;
         }
     }
-
     public void previous(){
         if (ListIndex > 0){
             ListIndex--;
         }
     }
+
 }

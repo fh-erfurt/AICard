@@ -23,30 +23,38 @@ public class CardListTest {
 
         boolean done = false;
         //tests
-        for (int i = 0; i < 4; i++) {
-            System.out.println("(1) test: " + test.getCurrCard().getCardTextFront());
+        for (int i = 0; i < test.getListLength(); i++) {
+            System.out.println("(1) test: " + test.getCurrentCard().getCardTextFront());
             test.next();
             if(!done) {
                 test.addToList(new Card("Card4", "Card4", Card.CARDKNOWLEDGELEVEL.NOINFORMATION, 0));
                 done = true;
             }
         }
-
-        for(int i = 0;i<5;i++){
-            System.out.println("(2) test: " + test.getCurrCard().getCardTextFront());
+        for(int i = 0;i<test.getListLength();i++){
+            System.out.println("(2) test: " + test.getCurrentCard().getCardTextFront());
             test.previous();
         }
+        if(true){
+            for (int i = 0; i < test1.getListLength(); i++) {
+                System.out.println("(3) test1: " + test1.getCurrentCard().getCardTextFront());
+                test1.next();
+            }
+            for (int i = 0; i < test2.getListLength(); i++) {
+                System.out.println("(4) test2: " + test2.getCurrentCard().getCardTextFront());
+                test2.next();
+            }
+        }
 
-        for (int i = 0; i < 3; i++) {
-            System.out.println("(3) test1: " + test1.getCurrCard().getCardTextFront());
-            test1.next();
+        test.removeFromList(test.getCurrentCard());
+        test.removeFromList(0);
+
+        for (int i = 0;i < test.getListLength();i++) {
+            System.out.println("(5) test: " + test.getCurrentCard().getCardTextFront());
+            test.next();
         }
-        for (int i = 0; i < 3; i++) {
-            System.out.println("(4) test2: " + test2.getCurrCard().getCardTextFront());
-            test2.next();
-        }
+
         return true;
     }
-
 
 }
