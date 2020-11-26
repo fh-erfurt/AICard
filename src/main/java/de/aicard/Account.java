@@ -108,12 +108,12 @@ public class Account
         this.favoriteSets = favoriteSets;
     }
     
-    
+
     //Methods
     public void createLearnSet(String _title, String _description /*enum _status,*/)
     {
         ownedLearningSets.add(new LearnSet(_title, _description, /*enum _status,*/ this.faculty));
     }
-    
-    
+
+
 }

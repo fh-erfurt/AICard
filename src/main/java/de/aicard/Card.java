@@ -11,7 +11,7 @@ public class Card {
         KNOWVERYWELL
     }
 
-//Attribute
+    //Attribute
 
     private String cardTextFront;
     private String cardTextBack;

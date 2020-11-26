@@ -27,7 +27,7 @@ public class LearnSet {
     private Faculty faculty;
     private ArrayList<Card> cardList = new ArrayList<Card> ();
     private int currentCard;
-    //private Skipper canSkip;
+
 
     public LearnSet(String title, String description, State state, Faculty faculty, ArrayList cardList){
         this.title = title;
@@ -36,7 +36,6 @@ public class LearnSet {
         this.faculty = faculty;
         this.cardList = cardList;
         this.currentCard = 0;
-        //this.canSkip = new Skipper(); //TODO check Skipper class when declared
     }
 
     public String getTitle() {
@@ -61,10 +60,6 @@ public class LearnSet {
 
     public int getCurrentCard() {return currentCard;}
 
-    //public Skipper getCanSkip() {
-    //    return canSkip;
-    //}
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -83,9 +78,6 @@ public class LearnSet {
 
     public void setCurrentCard(int currentCard) {this.currentCard = currentCard;}
 
-    //public void setCanSkip(Skipper canSkip) {
-    //    this.canSkip = canSkip;
-    //}
 
     public void createCard(){
         Card newCard= new Card();
@@ -97,10 +89,4 @@ public class LearnSet {
         LearningSession session = new LearningSession(noOfCards); //TODO adjust the function when Card constructor is known.
     }
 
-    public void next(){
-        this.setCurrentCard(currentCard + 1);
-    }
-    public void previous(){
-        this.setCurrentCard(currentCard - 1);
-    }
 }
