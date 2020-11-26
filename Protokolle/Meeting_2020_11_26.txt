@@ -1,0 +1,35 @@
+Protokoll
+
+Meeting
+
+Datum: 12.11.2020
+Uhrzeit: 19:00
+
+Teilnehmer:
+    Amine Semlali
+    Clemens Berger
+    Daniel Michel (Protokoll)
+    Martin Kühlborn
+    Antonio Blechschmidt
+
+Inhalt:
+    - Aktueller Stand Klassen
+    - Skipper-Problem
+    - Dokumentation
+    - Ziele bis nächste Woche
+
+Status:
+    - LearnSet Status: Status, wenn nicht neu: Prozentzahl wird angezeigt
+
+Dokumentation:
+    - 1. Foliensatz, Seite 14
+
+Optionaler Termin bei Problemen: Montag Abend
+
+ToDo:
+    - Klassen aufeinander abstimmen
+    - @Daniel Konstruktor LearnSet bezüglich State überarbeiten
+    - @Clemens neue Klasse CardList
+    - @all Code dokumentieren
+    - @Daniel Enums auslagern
+    - @Daniel Nachfragen, ob Rücksprache mit Dozent möglich

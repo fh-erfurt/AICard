@@ -12,6 +12,8 @@ public class LearnSet {
         PROCESSING,
         LEARNED
     }
+
+
     enum Faculty{
         //TODO changed type of faculty from String to enum. Hope that's ok?
         //TODO add all Faculties of FH Erfurt
