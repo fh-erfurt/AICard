@@ -3,36 +3,28 @@ package de.aicard;
 import java.util.ArrayList;
 
 public class LearnSet {
+    /* This class represents a learn set, which is a accumulation of cards of a specific topic (cardList).
+        They have a title, a description and they belong to a specific faculty.
+        They are in a specific state, either new, processing, or learned.
 
-    //TODO Deklaration der Enums auslagern
+     */
 
-    enum State{
-        //TODO discuss possible states
-        NEW,
-        PROCESSING,
-        LEARNED
-    }
-
-
-    enum Faculty{
-        //TODO changed type of faculty from String to enum. Hope that's ok?
-        //TODO add all Faculties of FH Erfurt
-        AI,
-        SOMETHINGSOCIAL
-
-    }
     private String title;
     private String description;
-    private State state;
-    private Faculty faculty;
-    private ArrayList<Card> cardList = new ArrayList<Card> ();
+    private Enums.State state;
+    private Enums.Faculty faculty;
+    private CardList cardList;
     private int currentCard;
 
 
-    public LearnSet(String title, String description, State state, Faculty faculty, ArrayList cardList){
+    public LearnSet(String title, String description, Enums.Faculty faculty, CardList cardList){
+        /*
+        The constructor of LearnSet gets the parameters title, description, faculty and cardList.
+        It sets the state of the new LearnSet to NEW and the index of the current card to 0.
+         */
         this.title = title;
         this.description = description;
-        this.state = state;
+        this.state = Enums.State.NEW;
         this.faculty = faculty;
         this.cardList = cardList;
         this.currentCard = 0;
@@ -46,15 +38,15 @@ public class LearnSet {
         return description;
     }
 
-    public State getState() {
+    public Enums.State getState() {
         return state;
     }
 
-    public Faculty getFaculty() {
+    public Enums.Faculty getFaculty() {
         return faculty;
     }
 
-    public ArrayList getCardList() {
+    public CardList getCardList() {
         return cardList;
     }
 
@@ -64,15 +56,15 @@ public class LearnSet {
         this.title = title;
     }
 
-    public void setState(State state) {
+    public void setState(Enums.State state) {
         this.state = state;
     }
 
-    public void setFaculty(Faculty faculty) {
+    public void setFaculty(Enums.Faculty faculty) {
         this.faculty = faculty;
     }
 
-    public void setCardList(ArrayList cardList) {
+    public void setCardList(CardList cardList) {
         this.cardList = cardList;
     }
 
@@ -80,11 +72,17 @@ public class LearnSet {
 
 
     public void createCard(){
+        /*
+        with this function, new Cards can be created and added to the cardList of the LearningSet
+         */
         Card newCard= new Card();
-        cardList.add(newCard);
+        cardList.addToList(newCard);
     }
 
     public void createLearningSession(int noOfCards){
+        /*
+        This function creates a LearningSession of cards in the learnSet
+         */
 
         LearningSession session = new LearningSession(noOfCards); //TODO adjust the function when Card constructor is known.
     }
