@@ -24,6 +24,9 @@ to see the front text and the back text of it
 
     //Constructor Card
     public Card(String _cardTextFront, String _cardTextBack, CARDKNOWLEDGELEVEL _cardKnowledgeLevel, int _cardXP) {
+        /*
+        The constructor of Card gets the parameters _cardTextFront, _cardTextBack, _cardKnowledgeLevel and _cardXP.
+         */
         this.cardTextFront = _cardTextFront;
         this.cardTextBack = _cardTextBack;
         this.cardKnowledgeLevel = _cardKnowledgeLevel;
