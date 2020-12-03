@@ -2,6 +2,9 @@ package de.aicard;
 
 public class Card {
 
+    /* This class represents a Card, each card has a level of knowledge meaning how good the student knows the content of the card, each card can be 'flipped'
+to see the front text and the back text of it
+        */
 
    public enum CARDKNOWLEDGELEVEL{
         NOINFORMATION,
