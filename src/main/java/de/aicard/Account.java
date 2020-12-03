@@ -108,12 +108,24 @@ public class Account
         this.favoriteSets = favoriteSets;
     }
     
-
+    
     //Methods
-    public void createLearnSet(String _title, String _description /*enum _status,*/)
+    
+    
+    /*
+     *
+     *Erzeugt neues Lernset
+     */
+    //TODO LearnSet Constructor erstellen ohne CardList, da beim erstelle
+    //      eines neuen LearnSet die darin beinhalteten Karten nicht bekannt sind
+    //  Anpassung des Constructors dementsprechend
+    
+    
+    //mögliche Lösung
+    public void createLearnSet(String _title, String _description, Enums.Faculty _faculty)
     {
-        ownedLearningSets.add(new LearnSet(_title, _description, /*enum _status,*/ this.faculty));
+        ownedLearningSets.add(new LearnSet(_title, _description, _faculty));
     }
-
-
+    
+    
 }
