@@ -2,6 +2,9 @@ package de.aicard;
 
 public class Card {
 
+    /* This class represents a Card, each card has a level of knowledge meaning how good the student knows the content of the card, each card can be 'flipped'
+to see the front text and the back text of it
+        */
 
    public enum CARDKNOWLEDGELEVEL{
         NOINFORMATION,
@@ -21,6 +24,9 @@ public class Card {
 
     //Constructor Card
     public Card(String _cardTextFront, String _cardTextBack, CARDKNOWLEDGELEVEL _cardKnowledgeLevel, int _cardXP) {
+        /*
+        The constructor of Card gets the parameters _cardTextFront, _cardTextBack, _cardKnowledgeLevel and _cardXP.
+         */
         this.cardTextFront = _cardTextFront;
         this.cardTextBack = _cardTextBack;
         this.cardKnowledgeLevel = _cardKnowledgeLevel;
