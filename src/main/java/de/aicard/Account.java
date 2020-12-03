@@ -12,12 +12,12 @@ public class Account
     private String name;
     private String description;
     private int semester;
-    private String faculty;
+    private Enums.Faculty faculty;
     private List<LearnSet> ownedLearningSets;
     private List<LearnSet> favoriteSets;
     
     //Constructor CreateAccount
-    public Account(String _email, String _password, String _name, String _description, int _semester, String _faculty)
+    public Account(String _email, String _password, String _name, String _description, int _semester, Enums.Faculty _faculty)
     {
         this.email = _email;
         this.password = _password;
@@ -78,12 +78,12 @@ public class Account
         this.semester = semester;
     }
     
-    public String getFaculty()
+    public Enums.Faculty getFaculty()
     {
         return faculty;
     }
     
-    public void setFaculty(String faculty)
+    public void setFaculty(Enums.Faculty faculty)
     {
         this.faculty = faculty;
     }
@@ -112,7 +112,7 @@ public class Account
     //Methods
     public void createLearnSet(String _title, String _description /*enum _status,*/)
     {
-        ownedLearningSets.add(new LearnSet(_title, _description, /*enum _status,*/ this.faculty));
+        ownedLearningSets.add(new LearnSet(_title, _description, this.faculty));
     }
 
 

@@ -17,7 +17,7 @@ public class LearnSet {
     private int currentCard;
 
 
-    public LearnSet(String title, String description, Enums.Faculty faculty, CardList cardList){
+    public LearnSet(String title, String description, Enums.Faculty faculty){
         /*
         The constructor of LearnSet gets the parameters title, description, faculty and cardList.
         It sets the state of the new LearnSet to NEW and the index of the current card to 0.
@@ -26,7 +26,7 @@ public class LearnSet {
         this.description = description;
         this.state = Enums.State.NEW;
         this.faculty = faculty;
-        this.cardList = cardList;
+        this.cardList = new CardList();
         this.currentCard = 0;
     }
 
