@@ -6,24 +6,17 @@ public class Card {
 to see the front text and the back text of it
         */
 
-   public enum CARDKNOWLEDGELEVEL{
-        NOINFORMATION,
-        SOMEINFORMATION,
-        KNOW,
-        KNOWWELL,
-        KNOWVERYWELL
-    }
 
     //Attribute
 
     private String cardTextFront;
     private String cardTextBack;
-    private CARDKNOWLEDGELEVEL cardKnowledgeLevel ;
+    private Enums.CARDKNOWLEDGELEVEL cardKnowledgeLevel ;
     private int cardXP;
 
 
     //Constructor Card
-    public Card(String _cardTextFront, String _cardTextBack, CARDKNOWLEDGELEVEL _cardKnowledgeLevel, int _cardXP) {
+    public Card(String _cardTextFront, String _cardTextBack, Enums.CARDKNOWLEDGELEVEL _cardKnowledgeLevel, int _cardXP) {
         /*
         The constructor of Card gets the parameters _cardTextFront, _cardTextBack, _cardKnowledgeLevel and _cardXP.
          */
@@ -55,11 +48,11 @@ to see the front text and the back text of it
         this.cardTextBack = cardTextBack;
     }
 
-    public CARDKNOWLEDGELEVEL getCardKnowledgeLevel()
+    public Enums.CARDKNOWLEDGELEVEL getCardKnowledgeLevel()
     {
         return cardKnowledgeLevel;
     }
-    public void setCardKnowledgeLevel(CARDKNOWLEDGELEVEL cardKnowledgeLevel) { this.cardKnowledgeLevel = cardKnowledgeLevel; }
+    public void setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL cardKnowledgeLevel) { this.cardKnowledgeLevel = cardKnowledgeLevel; }
 
     public int getCardXP()
     {

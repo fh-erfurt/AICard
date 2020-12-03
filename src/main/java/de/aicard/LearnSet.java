@@ -84,7 +84,7 @@ public class LearnSet {
         This function creates a LearningSession of cards in the learnSet
          */
 
-        LearningSession session = new LearningSession(noOfCards); //TODO adjust the function when Card constructor is known.
+        LearningSession session = new LearningSession(noOfCards, this.cardList); //TODO adjust the function when Card constructor is known.
     }
 
 }

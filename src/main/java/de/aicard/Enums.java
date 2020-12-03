@@ -15,4 +15,12 @@ public class Enums {
         SOMETHINGSOCIAL
 
     }
+
+    public enum CARDKNOWLEDGELEVEL{
+        NOINFORMATION,
+        SOMEINFORMATION,
+        KNOW,
+        KNOWWELL,
+        KNOWVERYWELL
+    }
 }
