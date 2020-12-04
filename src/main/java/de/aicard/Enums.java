@@ -8,13 +8,24 @@ public class Enums {
         LEARNED
     }
 
-
+    // Bachelor Degree Subjects at FHE, no all letter capitalisation for improved readability
     public enum Faculty{
-        //TODO add all Faculties of FH Erfurt
-        AI,
-        SOMETHINGSOCIAL
-
-    }
+        AppliedComputerScience,
+        Architecture,
+        CivilEngineering,
+        ManagementAndLeadershipInEarlyChildhoodEducation,
+        BusinessAdministration,
+        ForestryAndEcosystemManagement,
+        Horticulture,
+        BuildingServicesEngineering,
+        LandscapeArchitecture,
+        EarlyChildhoodEducation,
+        SocialWork,
+        UrbanAndSpatialPlanningFoundations,
+        RailwayEngineering,
+        EnergyEngineering,
+        TrafficTransportationAndLogisticsEngineering
+        }
 
     public enum CARDKNOWLEDGELEVEL{
         NOINFORMATION,

@@ -1,6 +1,6 @@
 package de.aicard;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Account
 {
@@ -13,8 +13,9 @@ public class Account
     private String description;
     private int semester;
     private Enums.Faculty faculty;
-    private List<LearnSet> ownedLearningSets;
-    private List<LearnSet> favoriteSets;
+    private ArrayList<LearnSet> ownedLearningSets;
+    private ArrayList<LearnSet> favoriteSets;
+    
     
     //Constructor CreateAccount
     public Account(String _email, String _password, String _name, String _description, int _semester, Enums.Faculty _faculty)
@@ -25,6 +26,9 @@ public class Account
         this.description = _description;
         this.semester = _semester;
         this.faculty = _faculty;
+        this.ownedLearningSets = new ArrayList<LearnSet>();
+        this.favoriteSets = new ArrayList<LearnSet>();
+        
     }
     
     //Setter + Getter
@@ -88,32 +92,87 @@ public class Account
         this.faculty = faculty;
     }
     
-    public List<LearnSet> getOwnedLearningSets()
+    public ArrayList<LearnSet> getOwnedLearningSets()
     {
-        return ownedLearningSets;
+        return this.ownedLearningSets;
     }
     
-    public void setOwnedLearningSets(List<LearnSet> ownedLearningSets)
+    public ArrayList<LearnSet> getFavoriteSets()
     {
-        this.ownedLearningSets = ownedLearningSets;
+        return this.favoriteSets;
     }
     
-    public List<LearnSet> getFavoriteSets()
+    /**
+     * Setter for ArrayLists are not Required
+     */
+    
+    /*
+     * public void setOwnedLearningSets(ArrayList<LearnSet> _NewLearningSets)
+     * {
+     *   this.ownedLearningSets = _NewLearningSets;
+     * }
+     *
+     *
+     * public void setFavoriteSets (ArrayList<LearnSet> (_NewFavoriteSets)
+     * {
+     *   this.favoriteSets = _NewFavoriteSets;
+     * }
+     *
+     * */
+    
+    //Advanced Getter, Setter and Delete for ArrayLists
+    public LearnSet getOwnedLearningSetByPosition(int _Position)
     {
-        return favoriteSets;
+        return ownedLearningSets.get(_Position);
     }
     
-    public void setFavoriteSets(List<LearnSet> favoriteSets)
+    public void createNewOwnedLearningSetsLearnSet(String _title, String _description)
     {
-        this.favoriteSets = favoriteSets;
+        ownedLearningSets.add(new LearnSet(_title, _description, this.faculty));
     }
     
-
+    public void deleteFromOwnedLearningSetsByIndex(int _Index)
+    {
+        this.ownedLearningSets.remove(_Index);
+    }
+    
+    public void deleteFromOwnedLearningSetsLastElement()
+    {
+        this.ownedLearningSets.remove(this.ownedLearningSets.size() - 1);
+    }
+    
+    public void deleteAllFromOwnedLearningSets()
+    {
+        this.ownedLearningSets.clear();
+    }
+    
+    
+    public LearnSet getFavoriteSetByPosition(int _Position)
+    {
+        return this.favoriteSets.get(_Position);
+    }
+    
+    public void addNewFavoriteSetsLearnSet(LearnSet favoriteSets)
+    {
+        this.favoriteSets.add(favoriteSets);
+    }
+    
+    public void deleteFromFavoriteSetsByIndex(int _Index)
+    {
+        this.favoriteSets.remove(_Index);
+    }
+    
+    public void deleteFromFavoriteSetsLastElement()
+    {
+        this.favoriteSets.remove(this.favoriteSets.size() - 1);
+    }
+    
+    public void deleteAllFromFavoriteSets()
+    {
+        this.favoriteSets.clear();
+    }
+    
     //Methods
-    public void createLearnSet(String _title, String _description /*enum _status,*/)
-    {
-        ownedLearningSets.add(new LearnSet(_title, _description, /*enum _status,*/ this.faculty));
-    }
-
-
+    
+    
 }
