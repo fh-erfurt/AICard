@@ -17,11 +17,11 @@ Inhalt:
 
 Fragen für Montag :
 -	Datenbank implementieren ?
--	Wie viele Klassen brauchen wir für 5 Personen ??
+-	Wie viele Klassen brauchen wir für 5 Personen ?? 20
 -	Jeweils eine Klasse für Vorder- und Rückseite der Karte ?
 -	Fotos auf Karten ?
 -   Welche Kriterien/Themen gibt es für die Zwischenpräsentation?
--   Enums als Klasse so ok?
+-   Enums als Klasse so ok? -> eine Klasse pro Enum
 
 ToDo: bis Montag 07.12.2020
     - @Martin : Enum Klasse (Studiengänge)
