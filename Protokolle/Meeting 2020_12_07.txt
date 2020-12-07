@@ -1,0 +1,55 @@
+Protokoll
+
+Meeting
+
+Datum:07.12.2020
+Uhrzeit:19:00-21:30 Uhr
+
+
+Teilnehmer:
+    Amine Semlali
+    Clemens Berger
+    Daniel Michel
+    Martin Kühlborn
+    Antonio Blechschmidt (Protokollant)
+
+
+Inhalt:
+    Diskusion neue Klassen
+        (EnumKlassen)
+            State
+            CardKnowledgeLevel
+            Fakultäten
+            Studiengänge
+        (abstrakte)Karteninhalt - Superklasse der MedienKlassen
+            TextKartenSeite
+            AudioKartenSeite
+            BildKartenSeite
+            VideoKartenSeite
+        (abstrakte)AccountKlasse aufspalten
+            Student - Semester
+            Dozent - Administrative Funktionen
+        ChatKlasse mit ArrayKommentare
+            KommentareKlasse - für CardSets, Cards
+        LearningGroupKlasse - alle Können karten erstellen
+    LearnSet AccountArray für eine Whitelist
+    CardProgress - Knowlegdelevel, Status Auslagern in eine Klasse die Accountgebundene Card/Cardset festhält
+        Array mit Knowlegdelevel
+        Array mit Status
+    KlassenDiagramm in lucidchart (https://lucid.app/lucidchart/c7963545-5f00-46cf-94dc-b8bf282ebe30/edit?shared=true&page=HWEp-vi-RSFO#?folder_id=home&browser=icon )
+
+
+
+Aufgaben:
+    alle Mitglieder:
+    Use-Cases überlegen
+    Amine:
+    Card
+    Clemens:
+    Learnset und Cardlist
+    Daniel:
+    Roter Bereich in lucidchard
+    Martin:
+    Gelber Bereich in lucidchard
+    Antonio:
+    LearningSeason
