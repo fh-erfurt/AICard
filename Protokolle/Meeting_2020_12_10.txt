@@ -1,0 +1,25 @@
+Protokoll
+
+Meeting
+
+Datum:10.12.2020
+Uhrzeit:19:00-21:00 Uhr
+
+
+Teilnehmer:
+    Amine Semlali
+    Clemens Berger
+    Daniel Michel
+    Martin Kühlborn	(Protokollant)
+    Antonio Blechschmidt 
+
+
+Inhalt:
+	Auswertung der UseCase-Diagramme
+	Überarbeiten des Klassendiagramms
+	Funktionen aus des UseCase-Diagrammen in das Klassendiagramm übertragen
+	
+
+
+Aufgaben:
+	@all :nächstes Treffen Samstag 12.12.2020 19:00Uhr
