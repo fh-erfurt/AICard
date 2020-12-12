@@ -2,7 +2,7 @@ Protokoll
 
 Meeting
 
-Datum:10.12.2020
+Datum:12.12.2020
 Uhrzeit:19:00-21:00 Uhr
 
 
@@ -15,11 +15,19 @@ Teilnehmer:
 
 
 Inhalt:
-	Auswertung der UseCase-Diagramme
-	Überarbeiten des Klassendiagramms
-	Funktionen aus des UseCase-Diagrammen in das Klassendiagramm übertragen
+	Präsentation erstellen für Zwischenpräsentation
 	
 
-
-Aufgaben:
-	@all :nächstes Treffen Samstag 12.12.2020 19:00Uhr
+Amine:
+	Card(8+9)
+Antonio:
+	Lernsets(10+11)
+Clemens:
+	Account(4+5, 12)
+Martin:
+	Einleitung (1,2,3)
+Daniel:
+	Chats(6+7)
+	
+@all:
+	Sonntag 19:00Uhr treffen und Präsentation durchsprechen
