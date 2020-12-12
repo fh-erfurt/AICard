@@ -50,7 +50,7 @@ public class LearningSession
                 break;
 
             default:
-                System.out.printIn("Error:riseCardKnowledgeLevel() failed");
+                System.out.println("Error:riseCardKnowledgeLevel() failed");
                 break;
       }
     }
@@ -81,7 +81,7 @@ public class LearningSession
                 break;
 
             default:
-                System.out.printIn("Error:lowerCardKnowledgeLevel() failed");
+                System.out.println("Error:lowerCardKnowledgeLevel() failed");
                 break;
 
         }
