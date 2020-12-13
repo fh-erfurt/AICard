@@ -2,7 +2,7 @@ Protokoll
 
 Meeting
 
-Datum:12.12.2020
+Datum:12+13.12.2020
 Uhrzeit:19:00-21:00 Uhr
 
 
@@ -19,15 +19,15 @@ Inhalt:
 	
 
 Amine:
-	Card(8+9)
+	Card(6+7)
 Antonio:
-	Lernsets(10+11)
+	Lernsets(8+9)
 Clemens:
 	Account(4+5, 12)
 Martin:
 	Einleitung (1,2,3)
 Daniel:
-	Chats(6+7)
+	Chats(10+11)
 	
 @all:
 	Sonntag 19:00Uhr treffen und Präsentation durchsprechen
