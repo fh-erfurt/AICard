@@ -39,8 +39,13 @@ public class CardList {
     }
 
     public Card getCurrentCard(){
+        if(cardList.get(ListIndex) != null){
+            return cardList.get(ListIndex);
+        }
+        else {
+            return null;
+        }
 
-        return cardList.get(ListIndex);
     }
 
     public int getListLength(){

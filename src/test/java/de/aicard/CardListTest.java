@@ -16,10 +16,15 @@ public class CardListTest {
 
         CardList test = new CardList(cards);
         CardList test1 = new CardList();
+
         for (int i = 0; i < 3; i++) {
             test1.addToList(cards[i]);
         }
         CardList test2 = new CardList(cardList);
+        CardList test3 = new CardList();
+
+        test3.getCurrentCard();
+
 
         boolean done = false;
         //tests
