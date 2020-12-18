@@ -1,0 +1,20 @@
+Protokoll
+
+Datum: 17. Dez 2020
+Uhrzeit: 19:17 Uhr bis 19:47 Uhr
+
+Anwesend: Alle :)
+
+Themenverteilung:
+CardStatus, Card und das rechts davon: Martin
+LearnSet, LearnSetAbo, LearningSession: Daniel
+Account, Student, Professor: Clemens
+AccountList, Groups, LearnSetAbo: Amine
+Antonio: Dokumentation
+
+Code-Review-Kreis: Martin-> Daniel -> Clemens -> Amine -> Martin
+
+und Antonio rewied alles
+
+Nächste Meetings: Mittwochs, 19 Uhr
+
