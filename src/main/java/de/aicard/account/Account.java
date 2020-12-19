@@ -1,4 +1,7 @@
-package de.aicard;
+package de.aicard.account;
+
+import de.aicard.learnset.LearnSet;
+import de.aicard.enums.Faculty;
 
 import java.util.ArrayList;
 
@@ -12,13 +15,13 @@ public class Account
     private String name;
     private String description;
     private int semester;
-    private Enums.Faculty faculty;
+    private Faculty faculty;
     private ArrayList<LearnSet> ownedLearningSets;
     private ArrayList<LearnSet> favoriteSets;
     
     
     //Constructor CreateAccount
-    public Account(String _email, String _password, String _name, String _description, int _semester, Enums.Faculty _faculty)
+    public Account(String _email, String _password, String _name, String _description, int _semester, Faculty _faculty)
     {
         this.email = _email;
         this.password = _password;
@@ -82,12 +85,12 @@ public class Account
         this.semester = semester;
     }
     
-    public Enums.Faculty getFaculty()
+    public Faculty getFaculty()
     {
         return faculty;
     }
     
-    public void setFaculty(Enums.Faculty faculty)
+    public void setFaculty(Faculty faculty)
     {
         this.faculty = faculty;
     }

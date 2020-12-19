@@ -1,4 +1,6 @@
-package de.aicard;
+package de.aicard.card;
+
+import de.aicard.Card;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,31 +8,31 @@ import java.util.List;
 
 public class CardList {
     //attributes
-    private List<Card> cardList;
+    private List<de.aicard.Card> cardList;
     private int ListIndex;
 
     //Constructor
     public CardList(){
-        cardList = new ArrayList<Card>();
+        cardList = new ArrayList<de.aicard.Card>();
         ListIndex = 0;
     }
-    public CardList(Card[] _cards){
-        cardList = new ArrayList<Card>();
+    public CardList(de.aicard.Card[] _cards){
+        cardList = new ArrayList<de.aicard.Card>();
         cardList.addAll(Arrays.asList(_cards));
         ListIndex = 0;
     }
-    public CardList(ArrayList<Card> _arrList){
-        cardList = new ArrayList<Card>();
+    public CardList(ArrayList<de.aicard.Card> _arrList){
+        cardList = new ArrayList<de.aicard.Card>();
         cardList = _arrList;
         ListIndex = 0;
     }
     //functions
 
-    public void addToList(Card _card){
+    public void addToList(de.aicard.Card _card){
 
         cardList.add(_card);
     }
-    public void removeFromList(Card _card){
+    public void removeFromList(de.aicard.Card _card){
         cardList.remove(_card);
     }
 

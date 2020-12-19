@@ -1,6 +1,10 @@
-package de.aicard;
+package de.aicard.learnset;
 
-import java.util.ArrayList;
+import de.aicard.Card;
+import de.aicard.card.CardList;
+import de.aicard.enums.Faculty;
+import de.aicard.enums.State;
+import de.aicard.learnset.LearningSession;
 
 public class LearnSet {
     /* This class represents a learn set, which is a accumulation of cards of a specific topic (cardList).
@@ -11,20 +15,20 @@ public class LearnSet {
 
     private String title;
     private String description;
-    private Enums.State state;
-    private Enums.Faculty faculty;
+    private State state;
+    private Faculty faculty;
     private CardList cardList;
     private int currentCard;
 
 
-    public LearnSet(String title, String description, Enums.Faculty faculty){
+    public LearnSet(String title, String description, Faculty faculty){
         /*
         The constructor of LearnSet gets the parameters title, description, faculty and cardList.
         It sets the state of the new LearnSet to NEW and the index of the current card to 0.
          */
         this.title = title;
         this.description = description;
-        this.state = Enums.State.NEW;
+        this.state = State.NEW;
         this.faculty = faculty;
         this.cardList = new CardList();
         this.currentCard = 0;
@@ -38,11 +42,11 @@ public class LearnSet {
         return description;
     }
 
-    public Enums.State getState() {
+    public State getState() {
         return state;
     }
 
-    public Enums.Faculty getFaculty() {
+    public Faculty getFaculty() {
         return faculty;
     }
 
@@ -56,11 +60,11 @@ public class LearnSet {
         this.title = title;
     }
 
-    public void setState(Enums.State state) {
+    public void setState(State state) {
         this.state = state;
     }
 
-    public void setFaculty(Enums.Faculty faculty) {
+    public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
 

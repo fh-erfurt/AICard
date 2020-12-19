@@ -1,5 +1,7 @@
 package de.aicard;
 
+import de.aicard.card.CardList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 

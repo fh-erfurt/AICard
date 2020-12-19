@@ -1,5 +1,9 @@
-package de.aicard;
+package de.aicard.learnset;
 
+
+import de.aicard.Card;
+import de.aicard.card.CardList;
+import de.aicard.enums.CardKnowledgeLevel;
 
 public class LearningSession
 {
@@ -30,23 +34,23 @@ public class LearningSession
         switch (currentCard.getCardKnowledgeLevel())
         {
             case NOINFORMATION:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.SOMEINFORMATION);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.SOMEINFORMATION);
                 break;
 
             case SOMEINFORMATION:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.KNOW);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.KNOW);
                 break;
 
             case KNOW:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.KNOWWELL);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.KNOWWELL);
                 break;
 
             case KNOWWELL:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.KNOWVERYWELL);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.KNOWVERYWELL);
                 break;
 
             case KNOWVERYWELL:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.KNOWVERYWELL);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.KNOWVERYWELL);
                 break;
 
             default:
@@ -61,23 +65,23 @@ public class LearningSession
         switch (currentCard.getCardKnowledgeLevel())
         {
             case NOINFORMATION:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.NOINFORMATION);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.NOINFORMATION);
                 break;
 
             case SOMEINFORMATION:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.NOINFORMATION);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.NOINFORMATION);
                 break;
 
             case KNOW:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.SOMEINFORMATION);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.SOMEINFORMATION);
                 break;
 
             case KNOWWELL:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.KNOW);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.KNOW);
                 break;
 
             case KNOWVERYWELL:
-                currentCard.setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL.KNOWWELL);
+                currentCard.setCardKnowledgeLevel(CardKnowledgeLevel.KNOWWELL);
                 break;
 
             default:

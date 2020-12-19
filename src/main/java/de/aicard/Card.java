@@ -1,5 +1,7 @@
 package de.aicard;
 
+import de.aicard.enums.CardKnowledgeLevel;
+
 public class Card {
 
     /* This class represents a Card, each card has a level of knowledge meaning how good the student knows the content of the card, each card can be 'flipped'
@@ -11,12 +13,12 @@ to see the front text and the back text of it
 
     private String cardTextFront;
     private String cardTextBack;
-    private Enums.CARDKNOWLEDGELEVEL cardKnowledgeLevel ;
+    private CardKnowledgeLevel cardKnowledgeLevel ;
     private int cardXP;
 
 
     //Constructor Card
-    public Card(String _cardTextFront, String _cardTextBack, Enums.CARDKNOWLEDGELEVEL _cardKnowledgeLevel, int _cardXP) {
+    public Card(String _cardTextFront, String _cardTextBack, CardKnowledgeLevel _cardKnowledgeLevel, int _cardXP) {
         /*
         The constructor of Card gets the parameters _cardTextFront, _cardTextBack, _cardKnowledgeLevel and _cardXP.
          */
@@ -48,11 +50,11 @@ to see the front text and the back text of it
         this.cardTextBack = cardTextBack;
     }
 
-    public Enums.CARDKNOWLEDGELEVEL getCardKnowledgeLevel()
+    public CardKnowledgeLevel getCardKnowledgeLevel()
     {
         return cardKnowledgeLevel;
     }
-    public void setCardKnowledgeLevel(Enums.CARDKNOWLEDGELEVEL cardKnowledgeLevel) { this.cardKnowledgeLevel = cardKnowledgeLevel; }
+    public void setCardKnowledgeLevel(CardKnowledgeLevel cardKnowledgeLevel) { this.cardKnowledgeLevel = cardKnowledgeLevel; }
 
     public int getCardXP()
     {
