@@ -1,10 +1,13 @@
-package de.aicard.account;
+package de.aicard.Social;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import de.aicard.account.Account;
+import de.aicard.account.AccountList;
 import de.aicard.enums.Visibility;
 
-public class Groups {
+public class Group {
 
     private String name;
     private AccountList members;
@@ -12,13 +15,13 @@ public class Groups {
 
     //Constructor
 
-    public Groups(){
+    public Group(){
         name = null;
         members = new AccountList();
         publicity = Visibility.PRIVATE;
 
     }
-    public Groups(String _name , Visibility _publicity, AccountList _acclist){
+    public Group(String _name , Visibility _publicity, AccountList _acclist){
         name = _name;
         members = new AccountList();
         members = _acclist;

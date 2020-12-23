@@ -1,7 +1,8 @@
 package de.aicard.account;
 
+import de.aicard.Social.Chat;
+import de.aicard.Social.Group;
 import de.aicard.enums.AcademicGrade;
-import de.aicard.enums.Faculty;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class Professor extends Account{
         this.favoriteSets = new ArrayList<LearnSetAbo>();
         this.friends = new AccountList();
         this.chats = new ArrayList<Chat>();
-        this.groups = new ArrayList<Groups>();
+        this.groups = new ArrayList<Group>();
         this.academicGrade = _academic;
 
     }

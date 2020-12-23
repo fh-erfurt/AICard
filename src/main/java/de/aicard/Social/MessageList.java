@@ -1,4 +1,4 @@
-package de.aicard.account;
+package de.aicard.Social;
 
 public class MessageList {
 }
