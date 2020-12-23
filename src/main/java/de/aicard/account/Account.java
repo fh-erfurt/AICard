@@ -84,7 +84,7 @@ public abstract class Account
         return this.chats;
     }
 
-    public List<Groups> getGroups()
+    public List<Group> getGroups()
     {
         return this.groups;
     }
