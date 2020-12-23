@@ -2,37 +2,27 @@ package de.aicard.account;
 
 import de.aicard.learnset.LearnSet;
 import de.aicard.enums.Faculty;
-
+import java.util.List;
 import java.util.ArrayList;
 
-public class Account
+public abstract class Account
 {
     
     
     //Attribute
-    private String email;
-    private String password;
-    private String name;
-    private String description;
-    private int semester;
-    private Faculty faculty;
-    private ArrayList<LearnSet> ownedLearningSets;
-    private ArrayList<LearnSet> favoriteSets;
+    protected String email;
+    protected String password;
+    protected String name;
+    protected String description;
+    protected List<LearnSetAbo> ownedLearningSets;
+    protected List<LearnSetAbo> favoriteSets;
+    protected List<Account> friends;
+    protected List<Chat> chats;
+    protected List<Group> groups;
     
     
     //Constructor CreateAccount
-    public Account(String _email, String _password, String _name, String _description, int _semester, Faculty _faculty)
-    {
-        this.email = _email;
-        this.password = _password;
-        this.name = _name;
-        this.description = _description;
-        this.semester = _semester;
-        this.faculty = _faculty;
-        this.ownedLearningSets = new ArrayList<LearnSet>();
-        this.favoriteSets = new ArrayList<LearnSet>();
-        
-    }
+
     
     //Setter + Getter
     public String getEmail()
@@ -75,34 +65,24 @@ public class Account
         this.description = description;
     }
     
-    public int getSemester()
-    {
-        return semester;
-    }
-    
-    public void setSemester(int semester)
-    {
-        this.semester = semester;
-    }
-    
-    public Faculty getFaculty()
-    {
-        return faculty;
-    }
-    
-    public void setFaculty(Faculty faculty)
-    {
-        this.faculty = faculty;
-    }
-    
-    public ArrayList<LearnSet> getOwnedLearningSets()
+    public List<LearnSetAbo> getOwnedLearningSets()
     {
         return this.ownedLearningSets;
     }
     
-    public ArrayList<LearnSet> getFavoriteSets()
+    public List<Account> getFriends()
     {
-        return this.favoriteSets;
+        return this.friends;
+    } //XD
+
+    public List<Chat> getChats()
+    {
+        return this.chats;
+    }
+
+    public List<Group> getGroups()
+    {
+        return this.groups;
     }
     
     /**
@@ -124,19 +104,19 @@ public class Account
      * */
     
     //Advanced Getter, Setter and Delete for ArrayLists
-    public LearnSet getOwnedLearningSetByPosition(int _Position)
+    public LearnSetAbo getOwnedLearnSetAboByPosition(int _position)
     {
-        return ownedLearningSets.get(_Position);
+        return ownedLearningSets.get(_position);
     }
     
-    public void createNewOwnedLearningSetsLearnSet(String _title, String _description)
+    public void createNewOwnedLearnSet(String _title, String _description, Faculty _faculty)
     {
-        ownedLearningSets.add(new LearnSet(_title, _description, this.faculty));
+        ownedLearningSets.add(new LearnSetAbo(new LearnSet(_title,_description,_faculty)));
     }
     
-    public void deleteFromOwnedLearningSetsByIndex(int _Index)
+    public void deleteFromOwnedLearningSetsByIndex(int _index)
     {
-        this.ownedLearningSets.remove(_Index);
+        this.ownedLearningSets.remove(_index);
     }
     
     public void deleteFromOwnedLearningSetsLastElement()
@@ -148,21 +128,22 @@ public class Account
     {
         this.ownedLearningSets.clear();
     }
+
+    //favorites
     
-    
-    public LearnSet getFavoriteSetByPosition(int _Position)
+    public LearnSetAbo getFavoriteSetByPosition(int _position)
     {
-        return this.favoriteSets.get(_Position);
+        return this.favoriteSets.get(_position);
     }
     
-    public void addNewFavoriteSetsLearnSet(LearnSet favoriteSets)
+    public void addNewFavoriteSets(LearnSetAbo _favoriteSet)
     {
-        this.favoriteSets.add(favoriteSets);
+        this.favoriteSets.add(_favoriteSet);
     }
     
-    public void deleteFromFavoriteSetsByIndex(int _Index)
+    public void deleteFromFavoriteSetsByIndex(int _index)
     {
-        this.favoriteSets.remove(_Index);
+        this.favoriteSets.remove(_index);
     }
     
     public void deleteFromFavoriteSetsLastElement()
@@ -173,6 +154,31 @@ public class Account
     public void deleteAllFromFavoriteSets()
     {
         this.favoriteSets.clear();
+    }
+
+    //friends
+
+    public void addFriend(Account _friend){
+        this.friends.add(_friend);
+    }
+
+    public void removeFriendByIndex(int _index){
+        this.friends.remove(_index);
+    }
+
+    //groups
+/*
+    public void createGroup(){
+        this.groups.add(); //constructor von group;
+    }
+
+ */
+    public void joinGroup(Group _group){
+        this.groups.add(_group);
+    }
+
+    public void leaveGroup(int _index){
+        this.groups.remove(_index);
     }
     
     //Methods
