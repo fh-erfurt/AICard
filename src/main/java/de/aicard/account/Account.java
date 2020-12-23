@@ -73,7 +73,7 @@ public abstract class Account
         return this.ownedLearningSets;
     }
     
-    public List<Account> getFriends()
+    public AccountList getFriends()
     {
         return this.friends;
     } //XD
@@ -83,7 +83,7 @@ public abstract class Account
         return this.chats;
     }
 
-    public List<Group> getGroups()
+    public List<Groups> getGroups()
     {
         return this.groups;
     }
