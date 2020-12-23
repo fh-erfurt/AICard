@@ -1,9 +1,12 @@
 package de.aicard.account;
 
+import de.aicard.enums.Visibility;
 import de.aicard.learnset.LearnSet;
 import de.aicard.enums.Faculty;
+import de.aicard.account.AccountList;
 import java.util.List;
 import java.util.ArrayList;
+import de.aicard.account.Groups;
 
 public abstract class Account
 {
@@ -16,9 +19,9 @@ public abstract class Account
     protected String description;
     protected List<LearnSetAbo> ownedLearningSets;
     protected List<LearnSetAbo> favoriteSets;
-    protected List<Account> friends;
+    protected AccountList friends;
     protected List<Chat> chats;
-    protected List<Group> groups;
+    protected List<Groups> groups;
     
     
     //Constructor CreateAccount
@@ -159,29 +162,45 @@ public abstract class Account
     //friends
 
     public void addFriend(Account _friend){
-        this.friends.add(_friend);
+        this.friends.addPerson(_friend);
     }
 
-    public void removeFriendByIndex(int _index){
+    public void removeFriend(Account _friend){
+        this.friends.removePerson(_friend);
+    }
+
+    /*public void removeFriendByIndex(int _index){
         this.friends.remove(_index);
     }
+*/
 
     //groups
-/*
+
     public void createGroup(){
-        this.groups.add(); //constructor von group;
+        this.groups.add( new Groups()); //constructor von group;
     }
 
- */
-    public void joinGroup(Group _group){
-        this.groups.add(_group);
+
+    public void joinGroup(Groups _group){
+        if(_group.get_publicity() == PUBLIC) {
+            this.groups.add(_group);
+        }
     }
 
+    public void leaveGroup(Groups _group){
+        this.groups.remove(_group);
+    }
+
+
+
+    /*
     public void leaveGroup(int _index){
         this.groups.remove(_index);
     }
+
+     */
     
     //Methods
-    
-    
+
+
 }

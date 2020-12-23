@@ -16,9 +16,9 @@ public class Professor extends Account{
         this.description = _description;
         this.ownedLearningSets = new ArrayList<LearnSetAbo>();
         this.favoriteSets = new ArrayList<LearnSetAbo>();
-        this.friends = new ArrayList<Account>();
+        this.friends = new AccountList();
         this.chats = new ArrayList<Chat>();
-        this.groups = new ArrayList<Group>();
+        this.groups = new ArrayList<Groups>();
         this.academicGrade = _academic;
 
     }
