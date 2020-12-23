@@ -1,6 +1,7 @@
 package de.aicard.account;
 
-import de.aicard.enums.AcademicGrade;
+import de.aicard.Social.Chat;
+import de.aicard.Social.Group;
 import de.aicard.enums.Faculty;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Student extends Account{
         this.favoriteSets = new ArrayList<LearnSetAbo>();
         this.friends = new AccountList();
         this.chats = new ArrayList<Chat>();
-        this.groups = new ArrayList<Groups>();
+        this.groups = new ArrayList<Group>();
         this.semester  = _semester;
         this.faculty = _faculty;
 

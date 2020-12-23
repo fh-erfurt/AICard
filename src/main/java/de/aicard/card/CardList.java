@@ -47,7 +47,10 @@ public class CardList {
         else {
             return null;
         }
+    }
 
+    public Card getCardByIndex(int _index){
+        return cardList.get(_index);
     }
 
     public int getListLength(){
