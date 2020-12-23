@@ -23,9 +23,9 @@ public class Card
         return this.m_CardFront;
     }
     
-    public void setCardFront(CardContent _newCarFront)
+    public void setCardFront(CardContent _newCardFront)
     {
-        this.m_CardFront = _newCarFront;
+        this.m_CardFront = _newCardFront;
     }
     
     public CardContent getCardBack()
@@ -33,4 +33,8 @@ public class Card
         return this.m_CardBack;
     }
     
+    public void setCardBack(CardContent _newCardBack)
+    {
+        this.m_CardBack = _newCardBack;
+    }
 }

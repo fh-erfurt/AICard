@@ -7,20 +7,27 @@ import org.junit.jupiter.api.Test;
 class CardTest
 {
     @Test
-    public void testingCardFrontAndBack()
+    public void testingCardFrontAndBackandEditability()
     {
-        
+    
         String ExpectedTestData1 = "I'm TestData1";
         String ExpectedTestData2 = "I'm TestData2";
-        
+    
         TextFile TestTextFile1 = new TextFile(ExpectedTestData1);
         TextFile TestTextFile2 = new TextFile(ExpectedTestData2);
-        
+    
         Card TestCard = new Card((CardContent) TestTextFile1, (CardContent) TestTextFile2);
-        Assertions.assertEquals(ExpectedTestData1,((TextFile)TestCard.getCardFront()).getTextData());
-        Assertions.assertEquals(ExpectedTestData2, ((TextFile)TestCard.getCardBack()).getTextData());
-        
+        Assertions.assertEquals(ExpectedTestData1, ((TextFile) TestCard.getCardFront()).getTextData());
+        Assertions.assertEquals(ExpectedTestData2, ((TextFile) TestCard.getCardBack()).getTextData());
+    
+        ExpectedTestData1 = "I'm edited1";
+        ExpectedTestData2 = "I'm edited2";
+    
+        Assertions.assertEquals(ExpectedTestData1, ((TextFile) TestCard.getCardFront()).getTextData());
+        Assertions.assertEquals(ExpectedTestData2, ((TextFile) TestCard.getCardBack()).getTextData());
+    
     }
+    
     
     @Test
     public void testingCardWithAllFileTypes()
