@@ -19,14 +19,14 @@ public class Message {
     public Message(){
 
         message = null;
-        sendersname = Account.getName();
+        sendersname = sender.getName();
         time = LocalDateTime.now();
         likes = 0;
     }
     public Message(String _message){
 
         message = _message;
-        sendersname = Account.getName();
+        sendersname = sender.getName();
         time = LocalDateTime.now();
         likes = 0;
     }

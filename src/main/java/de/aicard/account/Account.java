@@ -18,7 +18,7 @@ public abstract class Account
     //Attribute
     protected String email;
     protected String password;
-    protected static String name;
+    protected String name;
     protected String description;
     protected List<LearnSetAbo> ownedLearningSets;
     protected List<LearnSetAbo> favoriteSets;
@@ -51,7 +51,7 @@ public abstract class Account
         this.password = password;
     }
     
-    public static String getName()
+    public String getName()
     {
         return name;
     }
