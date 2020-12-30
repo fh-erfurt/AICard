@@ -1,7 +1,9 @@
 package de.aicard.account;
 
 import de.aicard.Social.Chat;
+import de.aicard.Social.Message;
 import de.aicard.Social.Group;
+import de.aicard.Social.MessageList;
 import de.aicard.enums.Visibility;
 import de.aicard.learnset.LearnSet;
 import de.aicard.enums.Faculty;
@@ -16,7 +18,7 @@ public abstract class Account
     //Attribute
     protected String email;
     protected String password;
-    protected String name;
+    protected static String name;
     protected String description;
     protected List<LearnSetAbo> ownedLearningSets;
     protected List<LearnSetAbo> favoriteSets;
@@ -49,7 +51,7 @@ public abstract class Account
         this.password = password;
     }
     
-    public String getName()
+    public static String getName()
     {
         return name;
     }
@@ -192,8 +194,31 @@ public abstract class Account
         this.groups.remove(_group);
     }
 
+    // chats
 
+    public void sendmessage(Account _sendto,Account _creator,String _message) {
+    this.chats.add( new Chat(_sendto,_creator,_message));
+}
 
+    public void likeMessage(Message _message)
+    {
+        _message.raise_likes();
+    }
+
+    public void editMessage(Message _message, String message)
+    {
+        _message.set_message(message);
+    }
+
+    public void deleteMessage (Message _message, MessageList _messagelist)
+    {
+        _messagelist.removeMessage(_message);
+    }
+
+public void deletechat(Chat _chat)
+{
+    this.chats.remove(_chat);
+}
     /*
     public void leaveGroup(int _index){
         this.groups.remove(_index);

@@ -10,10 +10,10 @@ public class AccountList {
     //Constructor
 
     public AccountList(){ accountlist = new ArrayList<Account>(); }
-    public AccountList(ArrayList<Account> _arrList)
+    public AccountList(ArrayList<Account> _accList)
     {
         accountlist = new ArrayList<Account>();
-        accountlist = _arrList;
+        accountlist = _accList;
     }
 
     //Setter & getter
