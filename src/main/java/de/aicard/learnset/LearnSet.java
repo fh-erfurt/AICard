@@ -1,10 +1,8 @@
 package de.aicard.learnset;
 
-import de.aicard.Card;
-import de.aicard.card.CardList;
+import de.aicard.card.Card;
 import de.aicard.enums.Faculty;
 import de.aicard.enums.State;
-import de.aicard.learnset.LearningSession;
 
 public class LearnSet {
     /* This class represents a learn set, which is a accumulation of cards of a specific topic (cardList).

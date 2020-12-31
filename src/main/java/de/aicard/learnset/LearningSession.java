@@ -1,8 +1,7 @@
 package de.aicard.learnset;
 
 
-import de.aicard.Card;
-import de.aicard.card.CardList;
+import de.aicard.card.Card;
 import de.aicard.enums.CardKnowledgeLevel;
 
 public class LearningSession

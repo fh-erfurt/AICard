@@ -1,7 +1,6 @@
 package de.aicard.account;
 
-import de.aicard.Card;
-import de.aicard.card.CardList;
+import de.aicard.learnset.CardList;
 import de.aicard.card.CardStatus;
 import de.aicard.enums.CardKnowledgeLevel;
 import de.aicard.enums.State;
@@ -55,7 +54,7 @@ public class LearnSetAbo
         for(int i=0; i<(this.m_cardStatus.size()); i++){
             CardStatus status = this.m_cardStatus.get(i);
             if (status.getCardKnowledgeLevel() == level){
-                result.addToList(status.card);
+                result.addToList(status.getCard());
             }
         }
         return result;
@@ -69,7 +68,7 @@ public class LearnSetAbo
             if(lowestLevelList != null){
                 for(int i = 0; i< lowestLevelList.getListLength(); i++){
                     while (resultCardList.getListLength()<_numOfCards){
-                        resultCardList.addToList(lowestLevelList.get(i)); //TODO CardList braucht eine allgemeine get Methode für Elemente der Liste
+                        resultCardList.addToList(lowestLevelList.getCardByIndex(i)); //TODO CardList braucht eine allgemeine get Methode für Elemente der Liste
                     }
                 }
             }
