@@ -1,6 +1,7 @@
 package de.aicard.learnset;
 
 
+import de.aicard.Social.Message;
 import de.aicard.enums.Faculty;
 import de.aicard.enums.Visibility;
 import de.aicard.account.Account;
@@ -32,8 +33,8 @@ public class LearnSet
         m_Title = null;
         m_Description = null;
         m_Faculty = null;
-        m_CardList = null;
-        m_CommentList = null;
+        m_CardList = new CardList();
+        m_CommentList = new MessageList();
         m_Owner = null;
         m_Visibility = Visibility.PRIVATE;
         m_Admins = null; // GET_CALLED_CLASS wie in PHP?
@@ -144,13 +145,21 @@ public class LearnSet
     }
     
     
-    // Methods
+    /**
+     * Methods
+     *
+     *
+     * */
+    
     public void createCardList()
     {
-        m_CardList = new CardList();
+        this.m_CardList = new CardList();
         // TODO: Do Something here
     }
     
+    /*
+    * Evaluation
+    * */
     public void addEvaluation(double /* oder int? */ _newEvaluation)
     {
         if(getNumberOfEvaluations() == 0)
@@ -185,25 +194,51 @@ public class LearnSet
             updatedEvaluation = updatedEvaluation - _EvaluationToDelete;
             decreaseNumberOfEvaluations();
             updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
-            m_Evaluation = updatedEvaluation;
+            setEvaluation(updatedEvaluation);
         }
        
     }
     
+    /*
+    * Admin
+    *
+    * */
     public void addAdmin(Account _newAdmin)
     {
-        m_Admins.add(_newAdmin);
+        this.m_Admins.add(_newAdmin);
     }
     
     public void removeAdminByIndex(int _IndexToRemove)
     {
-        m_Admins.remove(_IndexToRemove);
+        this.m_Admins.remove(_IndexToRemove);
     }
     
     public void removeAdminByAccount(Account _AccountToRemove)
     {
-        m_Admins.remove(_AccountToRemove);
+        this.m_Admins.remove(_AccountToRemove);
     }
+    
+    /*
+    * Messages
+    * */
+    public void addMessage(Message _newMessage)
+    {
+        this.m_CommentList.addMessage(_newMessage);
+    }
+    
+    public void removeMessageByMessage(Message _MessageToRemove)
+    {
+        this.m_CommentList.removeMessage(_MessageToRemove);
+        // updated
+        //  this.m_CommentList.removeMessageByMessage(_MessageToRemove);
+    }
+    
+    // should be Added?
+    public void removeMessageByIndex(int _IndexToRemove)
+    {
+        this.m_CommentList.removeMessageByIndex(_IndexToRemove);
+    }
+    
     
     // small HelperMethods
     public void increaseNumberOfEvaluations()
