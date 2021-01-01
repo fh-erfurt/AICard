@@ -1,92 +1,222 @@
 package de.aicard.learnset;
 
-import de.aicard.card.Card;
+
 import de.aicard.enums.Faculty;
-import de.aicard.enums.State;
+import de.aicard.enums.Visibility;
+import de.aicard.account.Account;
+import de.aicard.learnset.CardList;
+import de.aicard.Social.MessageList;
+import java.util.ArrayList;
 
-public class LearnSet {
-    /* This class represents a learn set, which is a accumulation of cards of a specific topic (cardList).
-        They have a title, a description and they belong to a specific faculty.
-        They are in a specific state, either new, processing, or learned.
+/*
+* LearnSet in LearnSet Package for adjustment to UML-Class Diagramm and Package Structure
+* with new member variables
+* */
 
-     */
-
-    private String title;
-    private String description;
-    private State state;
-    private Faculty faculty;
-    private CardList cardList;
-    private int currentCard;
-
-
-    public LearnSet(String title, String description, Faculty faculty){
+public class LearnSet
+{
+    private String m_Title;
+    private String m_Description;
+    private Faculty m_Faculty;
+    private CardList m_CardList;
+    private MessageList m_CommentList;
+    private Account m_Owner;
+    private Visibility m_Visibility;
+    private ArrayList<Account> m_Admins;
+    private double m_Evaluation;
+    private int m_NumberOfEvaluations;
+    
+    // Constructor
+    public LearnSet()
+    {
+        m_Title = null;
+        m_Description = null;
+        m_Faculty = null;
+        m_CardList = null;
+        m_CommentList = null;
+        m_Owner = null;
+        m_Visibility = Visibility.PRIVATE;
+        m_Admins = null; // GET_CALLED_CLASS wie in PHP?
+        m_Evaluation = 0;
+        m_NumberOfEvaluations = 0;
+    }
+    
+    // Getter + Setter
+    public String getTitle()
+    {
+        return this.m_Title;
+    }
+    
+    public void setTitle(String _newTitle)
+    {
+        this.m_Title = _newTitle;
+    }
+    
+    public String getDescription()
+    {
+        return this.m_Description;
+    }
+    
+    public void setDescription(String _newDescription)
+    {
+        this.m_Description = _newDescription;
+    }
+    
+    public Faculty getFaculty()
+    {
+        return this.m_Faculty;
+    }
+    
+    public void setFaculty(Faculty _newFaculty)
+    {
+        this.m_Faculty = _newFaculty;
+    }
+    
+    public CardList getCardList()
+    {
+        return this.m_CardList;
+    }
+    
+    public void setCardList(CardList _newCardList)
+    {
+        this.m_CardList = _newCardList;
+    }
+    
+    public MessageList getCommentList()
+    {
+        return this.m_CommentList;
+    }
+    
+    public void setCommentList(MessageList _newCommentList)
+    {
+        this.m_CommentList = _newCommentList;
+    }
+    
+    public Account getOwner()
+    {
+        return this.m_Owner;
+    }
+    
+    public void setOwner(Account _newOwner)
+    {
+        this.m_Owner = _newOwner;
+    }
+    
+    public Visibility getVisibility()
+    {
+        return this.m_Visibility;
+    }
+    
+    public void setVisibility(Visibility _newVisibility)
+    {
+        this.m_Visibility = _newVisibility;
+    }
+    
+    public ArrayList<Account> getAdmins()
+    {
+        return this.m_Admins;
+    }
+    
+    public void setAdmins(ArrayList<Account> _newAdmins)
+    {
+        this.m_Admins = _newAdmins;
+    }
+    
+    public double getEvaluation()
+    {
+        return this.m_Evaluation;
+    }
+    
+    // Vielleicht private und nur über addEvaluation() Methode bearbeiten
+    public void setEvaluation(double _newEvaluation)
+    {
+        this.m_Evaluation = _newEvaluation;
+    }
+    
+    public int getNumberOfEvaluations()
+    {
+        return this.m_NumberOfEvaluations;
+    }
+    
+    public void setNumberOfEvaluations(int _newNumberOfEvaluations)
+    {
+        this.m_NumberOfEvaluations = _newNumberOfEvaluations;
+    }
+    
+    
+    // Methods
+    public void createCardList()
+    {
+        m_CardList = new CardList();
+        // TODO: Do Something here
+    }
+    
+    public void addEvaluation(double /* oder int? */ _newEvaluation)
+    {
+        if(getNumberOfEvaluations() == 0)
+        {
+            setEvaluation(_newEvaluation);
+            increaseNumberOfEvaluations();
+        }
+        else
+        {
+            double updatedEvaluation = getEvaluation() * getNumberOfEvaluations();
+            updatedEvaluation = updatedEvaluation + _newEvaluation;
+            increaseNumberOfEvaluations();
+            updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
+            setEvaluation(updatedEvaluation);
+        }
+        
+        
         /*
-        The constructor of LearnSet gets the parameters title, description, faculty and cardList.
-        It sets the state of the new LearnSet to NEW and the index of the current card to 0.
-         */
-        this.title = title;
-        this.description = description;
-        this.state = State.NEW;
-        this.faculty = faculty;
-        this.cardList = new CardList();
-        this.currentCard = 0;
+        oder:
+        double updatedEvaluation = (m_Evaluation * m_NumberOfEvaluations) + _newEvaluation;
+        m_NumberOfEvaluations++;
+        updatedEvaluation = updatedEvaluation / m_NumberOfEvaluations;
+        m_Evaluation = updatedEvaluation;
+        */
     }
-
-    public String getTitle() {
-        return title;
+    
+    public void deleteEvaluation(double _EvaluationToDelete)
+    {
+        if(getNumberOfEvaluations() > 0)
+        {
+            double updatedEvaluation = getEvaluation() * getNumberOfEvaluations();
+            updatedEvaluation = updatedEvaluation - _EvaluationToDelete;
+            decreaseNumberOfEvaluations();
+            updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
+            m_Evaluation = updatedEvaluation;
+        }
+       
     }
-
-    public String getDescription() {
-        return description;
+    
+    public void addAdmin(Account _newAdmin)
+    {
+        m_Admins.add(_newAdmin);
     }
-
-    public State getState() {
-        return state;
+    
+    public void removeAdminByIndex(int _IndexToRemove)
+    {
+        m_Admins.remove(_IndexToRemove);
     }
-
-    public Faculty getFaculty() {
-        return faculty;
+    
+    public void removeAdminByAccount(Account _AccountToRemove)
+    {
+        m_Admins.remove(_AccountToRemove);
     }
-
-    public CardList getCardList() {
-        return cardList;
+    
+    // small HelperMethods
+    public void increaseNumberOfEvaluations()
+    {
+        setNumberOfEvaluations(getNumberOfEvaluations() + 1);
     }
-
-    public int getCurrentCard() {return currentCard;}
-
-    public void setTitle(String title) {
-        this.title = title;
+    
+    public void decreaseNumberOfEvaluations()
+    {
+        if(getNumberOfEvaluations() > 0)
+        {
+            setNumberOfEvaluations(getNumberOfEvaluations() - 1);
+        }
+        // else: Error
     }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
-
-    public void setCardList(CardList cardList) {
-        this.cardList = cardList;
-    }
-
-    public void setCurrentCard(int currentCard) {this.currentCard = currentCard;}
-
-
-    public void createCard(){
-        /*
-        with this function, new Cards can be created and added to the cardList of the LearningSet
-         */
-        Card newCard= new Card();
-        cardList.addToList(newCard);
-    }
-
-    public void createLearningSession(int noOfCards){
-        /*
-        This function creates a LearningSession of cards in the learnSet
-         */
-
-        LearningSession session = new LearningSession(noOfCards, this.cardList); //TODO adjust the function when Card constructor is known.
-    }
-
 }
