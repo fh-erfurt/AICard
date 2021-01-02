@@ -3,6 +3,7 @@ package de.aicard.learnset;
 
 import de.aicard.Social.Message;
 import de.aicard.enums.Faculty;
+import de.aicard.enums.State;
 import de.aicard.enums.Visibility;
 import de.aicard.account.Account;
 import de.aicard.learnset.CardList;
@@ -32,12 +33,29 @@ public class LearnSet
     {
         m_Title = null;
         m_Description = null;
-        m_Faculty = null;
+        m_Faculty = null; // GET_CALLED_CLASS -> Faculty
         m_CardList = new CardList();
         m_CommentList = new MessageList();
-        m_Owner = null;
+        m_Owner = null; // GET_CALLED_CLASS wie in PHP?
         m_Visibility = Visibility.PRIVATE;
-        m_Admins = null; // GET_CALLED_CLASS wie in PHP?
+        m_Admins = new ArrayList<Account>();
+        m_Evaluation = 0;
+        m_NumberOfEvaluations = 0;
+        
+        //ODER:
+        // new LearnSet(new CardList());
+    }
+    
+    public LearnSet(CardList _newCardList)
+    {
+        m_Title = null;
+        m_Description = null;
+        m_Faculty = null; // GET_CALLED_CLASS -> Faculty
+        m_CardList = _newCardList;
+        m_CommentList = new MessageList();
+        m_Owner = null; // GET_CALLED_CLASS wie in PHP?
+        m_Visibility = Visibility.PRIVATE;
+        m_Admins = new ArrayList<Account>();
         m_Evaluation = 0;
         m_NumberOfEvaluations = 0;
     }
@@ -144,6 +162,7 @@ public class LearnSet
         this.m_NumberOfEvaluations = _newNumberOfEvaluations;
     }
     
+ 
     
     /**
      * Methods
@@ -175,15 +194,6 @@ public class LearnSet
             updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
             setEvaluation(updatedEvaluation);
         }
-        
-        
-        /*
-        oder:
-        double updatedEvaluation = (m_Evaluation * m_NumberOfEvaluations) + _newEvaluation;
-        m_NumberOfEvaluations++;
-        updatedEvaluation = updatedEvaluation / m_NumberOfEvaluations;
-        m_Evaluation = updatedEvaluation;
-        */
     }
     
     public void deleteEvaluation(double _EvaluationToDelete)
@@ -234,10 +244,10 @@ public class LearnSet
     }
     
     // should be Added?
-    public void removeMessageByIndex(int _IndexToRemove)
-    {
-        this.m_CommentList.removeMessageByIndex(_IndexToRemove);
-    }
+    //public void removeMessageByIndex(int _IndexToRemove)
+    //{
+    //    this.m_CommentList.removeMessageByIndex(_IndexToRemove);
+    //}
     
     
     // small HelperMethods
