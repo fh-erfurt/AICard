@@ -16,16 +16,16 @@ public class Group {
     //Constructor
 
     public Group(){
-        name = null;
-        members = new AccountList();
-        publicity = Visibility.PRIVATE;
+        this.name = null;
+        this.members = new AccountList();
+        this.publicity = Visibility.PRIVATE;
 
     }
     public Group(String _name , Visibility _publicity, AccountList _acclist){
-        name = _name;
-        members = new AccountList();
-        members = _acclist;
-        publicity = _publicity;
+        this.name = _name;
+        this.members = new AccountList();
+        this.members = _acclist;
+        this.publicity = _publicity;
 
     }
 

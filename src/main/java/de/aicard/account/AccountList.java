@@ -12,8 +12,12 @@ public class AccountList {
     public AccountList(){ accountlist = new ArrayList<Account>(); }
     public AccountList(ArrayList<Account> _accList)
     {
-        accountlist = new ArrayList<Account>();
-        accountlist = _accList;
+        this.accountlist = new ArrayList<Account>();
+        this.accountlist = _accList;
+    }
+    public AccountList(Account[] _accounts){
+        this.accountlist = new ArrayList<Account>();
+        this.accountlist.addAll(Arrays.asList(_accounts));
     }
 
     //Setter & getter

@@ -49,6 +49,7 @@ public class Message {
     public int get_likes() {
         return likes;
     }
+    public void set_likes (int _number){this.likes = _number;}
     public void raise_likes(){this.likes += 1;}
 
 
