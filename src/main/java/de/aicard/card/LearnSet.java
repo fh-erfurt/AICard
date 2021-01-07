@@ -83,12 +83,12 @@ public class LearnSet {
         cardList.addToList(newCard);
     }
 
-    //public void createLearningSession(int noOfCards){
+    public void createLearningSession(int noOfCards){
         /*
         This function creates a LearningSession of cards in the learnSet
          */
 
-      //  LearningSession session = new LearningSession(this.cardList); //TODO adjust the function when Card constructor is known.
-    //}
+        LearningSession session = new LearningSession(noOfCards, this.cardList); //TODO adjust the function when Card constructor is known.
+    }
 
 }

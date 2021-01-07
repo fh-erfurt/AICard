@@ -5,7 +5,6 @@ import de.aicard.Social.Message;
 import de.aicard.Social.Group;
 import de.aicard.Social.MessageList;
 import de.aicard.enums.Visibility;
-import de.aicard.card.LearnSet;
 import de.aicard.enums.Faculty;
 
 import java.util.List;
@@ -174,7 +173,7 @@ public abstract class Account
 
     public void removeFriendByIndex(Account _notFriendAnymore){
         this.friends.removePerson(_notFriendAnymore);
-    }
+    }//TODO gibt es ein unterschied zwischen removeFriend() und removeFriendByIndex(). ansonsten überladen?
 
 
     //groups
@@ -182,13 +181,13 @@ public abstract class Account
     public void createGroup(){
         this.groups.add( new Group()); //constructor von group;
     }
-
-
+    //TODO überladen um den 2. constructer von group mit daten zu füttern
     public void joinGroup(Group _group){
         if(_group.get_publicity() == Visibility.PUBLIC) {
             this.groups.add(_group);
         }
     }
+    //TODO inviteToGroup?
 
     public void leaveGroup(Group _group){
         this.groups.remove(_group);
@@ -198,6 +197,7 @@ public abstract class Account
 
     public void sendmessage(Account _sendto,Account _creator,String _message) {
     this.chats.add( new Chat(_sendto,_creator,_message));
+    //TODO kreiert sendmessage nicht jedesmal eine neuen Chat?
 }
 
     public void likeMessage(Message _message)
@@ -215,7 +215,7 @@ public abstract class Account
         _messagelist.removeMessage(_message);
     }
 
-public void deletechat(Chat _chat)
+    public void deletechat(Chat _chat)
 {
     this.chats.remove(_chat);
 }
