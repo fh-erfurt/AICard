@@ -1,5 +1,6 @@
 package de.aicard.account;
 
+import de.aicard.card.Card;
 import de.aicard.learnset.CardList;
 import de.aicard.card.CardStatus;
 import de.aicard.enums.CardKnowledgeLevel;
@@ -46,41 +47,44 @@ public class LearnSetAbo
         m_learnSetStatus = State.NEW;
         m_cardStatus = new ArrayList<CardStatus>();
         //TODO Add initialization of cardStatus to constructor, when CardStatus is implemented
+        for(int i = 0; i<m_learnSet.getCardList().getListLength(); i++){
+            m_cardStatus.add(new CardStatus(m_learnSet.getCardList().getCardByIndex(i)));
+        }
     }
 
-    private CardList getCardOfKnowledgeLevel(CardKnowledgeLevel level){
+    private ArrayList<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel level){
         //TODO check when CardStatus is implemented
-        CardList result = new CardList();
+        ArrayList<CardStatus> result = new ArrayList<CardStatus>();
         for(int i=0; i<(this.m_cardStatus.size()); i++){
             CardStatus status = this.m_cardStatus.get(i);
             if (status.getCardKnowledgeLevel() == level){
-                result.addToList(status.getCard());
+                result.add(status);
             }
         }
         return result;
     }
 
-    private CardList createCardListForSession(int _numOfCards){
-        CardList resultCardList = new CardList();
+    private ArrayList<CardStatus> createCardStatusListForSession(int _numOfCards){
+        ArrayList<CardStatus> resultCardStatusList = new ArrayList<CardStatus>();
 
         for (CardKnowledgeLevel level : CardKnowledgeLevel.values()) {
-            CardList lowestLevelList = getCardOfKnowledgeLevel(level);
+            ArrayList<CardStatus> lowestLevelList = getCardStatusOfKnowledgeLevel(level);
             if(lowestLevelList != null){
-                for(int i = 0; i< lowestLevelList.getListLength(); i++){
-                    while (resultCardList.getListLength()<_numOfCards){
-                        resultCardList.addToList(lowestLevelList.getCardByIndex(i)); //TODO CardList braucht eine allgemeine get Methode für Elemente der Liste
+                for(int i = 0; i< lowestLevelList.size(); i++){
+                    while (resultCardStatusList.size()<_numOfCards){
+                        resultCardStatusList.add(lowestLevelList.get(i)); //TODO CardList braucht eine allgemeine get Methode für Elemente der Liste
                     }
                 }
             }
-            if (resultCardList.getListLength()==_numOfCards) break;
+            if (resultCardStatusList.size()==_numOfCards) break;
         }
 
-        return resultCardList;
+        return resultCardStatusList;
     }
 
     public LearningSession createLearningSession(int _numOfCards){
 
-        CardList sessionList = createCardListForSession(_numOfCards);
+        ArrayList<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
         //TODO LearningSession needs constructor with only a cardList as parameter, because the list can only be created here
 
         return new LearningSession(sessionList);
