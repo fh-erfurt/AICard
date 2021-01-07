@@ -2,7 +2,6 @@ package de.aicard.account;
 
 import de.aicard.card.Card;
 import de.aicard.card.CardContent;
-import de.aicard.card.LearnSet;
 import de.aicard.card.TextFile;
 import de.aicard.enums.CardKnowledgeLevel;
 import de.aicard.enums.Faculty;

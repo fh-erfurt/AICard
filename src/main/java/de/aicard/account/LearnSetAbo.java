@@ -5,6 +5,7 @@ import de.aicard.learnset.CardList;
 import de.aicard.card.CardStatus;
 import de.aicard.enums.CardKnowledgeLevel;
 import de.aicard.enums.State;
+import de.aicard.learnset.LearnSet;
 import de.aicard.learnset.LearningSession;
 
 import java.util.ArrayList;
