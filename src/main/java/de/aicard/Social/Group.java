@@ -15,12 +15,7 @@ public class Group {
 
     //Constructor
 
-    public Group(){
-        this.name = null;
-        this.members = new AccountList();
-        this.publicity = Visibility.PRIVATE;
 
-    }
     public Group(String _name , Visibility _publicity, AccountList _acclist){
         this.name = _name;
         this.members = new AccountList();

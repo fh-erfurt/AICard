@@ -33,4 +33,15 @@ private Account creator;
     public void set_participants(AccountList _participant) {
         this.participants = _participant;
     }
+
+    //Functions
+
+    // chats
+
+    public void sendmessage(String _message) {
+     Message message = new Message(_message);
+     this.chathistory.addMessage(message);
+    }
+
+
 }

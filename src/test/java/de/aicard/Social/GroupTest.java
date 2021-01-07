@@ -19,7 +19,7 @@ public class GroupTest {
         AccountList accountlist2 = new AccountList();
 
         Student Std1 = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.A);
+        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UniversityProfessor);
 
         accountlist2.addPerson(Std1);
         accountlist2.addPerson(Prof1);

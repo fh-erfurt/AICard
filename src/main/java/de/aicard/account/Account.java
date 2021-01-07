@@ -179,10 +179,10 @@ public abstract class Account
 
     //groups
 
-    public void createGroup(){
-        this.groups.add( new Group()); //constructor von group;
+    public void createGroup(String _name , Visibility _publicity, AccountList _acclist){
+        this.groups.add( new Group(_name,_publicity,_acclist)); //constructor von group;
     }
-    //TODO überladen um den 2. constructer von group mit daten zu füttern
+
     public void joinGroup(Group _group){
         if(_group.get_publicity() == Visibility.PUBLIC) {
             this.groups.add(_group);
@@ -193,13 +193,6 @@ public abstract class Account
     public void leaveGroup(Group _group){
         this.groups.remove(_group);
     }
-
-    // chats
-
-    public void sendmessage(Account _sendto,Account _creator,String _message) {
-    this.chats.add( new Chat(_sendto,_creator,_message));
-    //TODO kreiert sendmessage nicht jedesmal eine neuen Chat?
-}
 
     public void likeMessage(Message _message)
     {
