@@ -5,7 +5,6 @@ import de.aicard.Social.Message;
 import de.aicard.Social.Group;
 import de.aicard.Social.MessageList;
 import de.aicard.enums.Visibility;
-import de.aicard.card.LearnSet;
 import de.aicard.enums.Faculty;
 
 import java.util.List;
