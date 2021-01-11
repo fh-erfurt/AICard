@@ -31,29 +31,32 @@ public class LearnSet
     // Constructor
     public LearnSet()
     {
-        m_Title = null;
-        m_Description = null;
-        m_Faculty = null; // GET_CALLED_CLASS -> Faculty
-        m_CardList = new CardList();
-        m_CommentList = new MessageList();
-        m_Owner = null; // GET_CALLED_CLASS wie in PHP?
-        m_Visibility = Visibility.PRIVATE;
-        m_Admins = new ArrayList<Account>();
-        m_Evaluation = 0;
-        m_NumberOfEvaluations = 0;
-        
-        //ODER:
-        // new LearnSet(new CardList());
+        this(null, null, null, null, null);
     }
     
     public LearnSet(CardList _newCardList)
     {
-        m_Title = null;
-        m_Description = null;
-        m_Faculty = null; // GET_CALLED_CLASS -> Faculty
+        this(null, null, null, _newCardList, null);
+    }
+    
+    public LearnSet(String _newTitle, Faculty _newFaculty, CardList _newCardList, Account _newOwner)
+    {
+        this(_newTitle, null, _newFaculty, _newCardList, _newOwner);
+    }
+    
+    public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty)
+    {
+        this(_newTitle, _newDescription, _newFaculty, null, null);
+    }
+    
+    public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty, CardList _newCardList, Account _newOwner)
+    {
+        m_Title = _newTitle;
+        m_Description = _newDescription;
+        m_Faculty = _newFaculty;
         m_CardList = _newCardList;
         m_CommentList = new MessageList();
-        m_Owner = null; // GET_CALLED_CLASS wie in PHP?
+        m_Owner = _newOwner;
         m_Visibility = Visibility.PRIVATE;
         m_Admins = new ArrayList<Account>();
         m_Evaluation = 0;
@@ -230,6 +233,7 @@ public class LearnSet
     
     /*
     * Messages
+    *
     * */
     public void addMessage(Message _newMessage)
     {
