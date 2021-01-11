@@ -2,11 +2,14 @@ package de.aicard.card;
 
 public class AudioFile extends CardContent
 {
+    // MEMBER VARIABLES
     private String m_AudioData;
     
+    
+    // CONSTRUCTORS
     public AudioFile()
     {
-        new AudioFile("Test");
+        this(null);
     }
     
     public AudioFile(String _newAudioData)
@@ -14,8 +17,15 @@ public class AudioFile extends CardContent
         this.m_AudioData = _newAudioData;
     }
     
-    public String getAudioData()
+    
+    // GETTER + SETTER
+    public String getAudioData() throws NullPointerException
     {
+        if(this.m_AudioData == null)
+        {
+            throw new NullPointerException("AudioData was not set.");
+        }
+        
         return this.m_AudioData;
     }
     
@@ -24,6 +34,8 @@ public class AudioFile extends CardContent
         this.m_AudioData = _newAudioData;
     }
     
+    
+    // Methods
     public String pauseAudioData()
     {
         return "AudioData is paused";
@@ -33,7 +45,5 @@ public class AudioFile extends CardContent
     {
         return "AudioData is playing";
     }
-    
-    
     
 }

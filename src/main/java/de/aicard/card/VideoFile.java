@@ -2,11 +2,13 @@ package de.aicard.card;
 
 public class VideoFile extends CardContent
 {
+    // MEMBER VARIABLES
     private String m_VideoData;
     
+    // CONSTRUCTORS
     public VideoFile()
     {
-        new VideoFile(null);
+        this(null);
     }
     
     public VideoFile(String _newVideoData)
@@ -15,8 +17,14 @@ public class VideoFile extends CardContent
     }
     
     
-    public String getVideoData()
+    // GETTER + Setter
+    public String getVideoData() throws NullPointerException
     {
+        if(this.m_VideoData == null)
+        {
+            throw new NullPointerException("VideoData was not set.");
+        }
+        
         return this.m_VideoData;
     }
     
@@ -25,6 +33,8 @@ public class VideoFile extends CardContent
         this.m_VideoData = _newVideoData;
     }
     
+    
+    // METHODS
     public String pauseVideoData()
     {
         return "VideoData is paused";

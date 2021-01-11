@@ -2,11 +2,13 @@ package de.aicard.card;
 
 public class TextFile extends CardContent
 {
+    // MEMBER VARIABLES
     private String m_TextData;
     
+    // CONSTRUCTORS
     public TextFile()
     {
-        new TextFile(null);
+        this(null);
     }
     
     public TextFile(String _newTextData)
@@ -14,8 +16,14 @@ public class TextFile extends CardContent
         this.m_TextData = _newTextData;
     }
     
-    public String getTextData()
+    // GETTER + SETTER
+    public String getTextData() throws NullPointerException
     {
+        if(this.m_TextData == null)
+        {
+            throw new NullPointerException("TextData was not set.");
+        }
+        
         return this.m_TextData;
     }
     

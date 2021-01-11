@@ -4,17 +4,20 @@ import de.aicard.enums.CardKnowledgeLevel;
 
 public class CardStatus
 {
+    // MEMBER VARIABLES
     private CardKnowledgeLevel m_CardKnowledgeLevel;
     private int m_CardXP;
     private Card m_Card;
     
-    // Constructor
+    
+    // CONSTRUCTORS
     public CardStatus(Card _newCard)
     {
         this.m_CardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
         this.m_CardXP = 0;
         this.m_Card = _newCard;
     }
+    
     
     //Getter + Setter
     public Card getCard()
@@ -48,7 +51,7 @@ public class CardStatus
     }
     
     
-    //Some Methods and Functions
+    // METHODS
     
     public void increaseCardKnowledgeLevel()
     {

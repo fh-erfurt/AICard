@@ -3,9 +3,12 @@ package de.aicard.card;
 
 public class Card
 {
+    // MEMBER VARIABLES
     private CardContent m_CardFront;
     private CardContent m_CardBack;
     
+    
+    // CONSTRUCTORS
     public Card()
     {
         new Card(null, null);
@@ -18,8 +21,14 @@ public class Card
     }
     
     
-    public CardContent getCardFront()
+    // GETTER + SETTER
+    public CardContent getCardFront() throws NullPointerException
     {
+        if(this.m_CardFront == null)
+        {
+            throw new NullPointerException("CardFront not was not set.");
+        }
+        
         return this.m_CardFront;
     }
     
@@ -28,8 +37,13 @@ public class Card
         this.m_CardFront = _newCardFront;
     }
     
-    public CardContent getCardBack()
+    public CardContent getCardBack() throws NullPointerException
     {
+        if(this.m_CardBack == null)
+        {
+            throw new NullPointerException("CardBack was not set.");
+        }
+        
         return this.m_CardBack;
     }
     

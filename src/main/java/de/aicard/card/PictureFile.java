@@ -2,11 +2,14 @@ package de.aicard.card;
 
 public class PictureFile extends CardContent
 {
+    // MEMBER VARIABLES
     private String m_PictureData;
     
+    
+    // CONSTRUCTORS
     public PictureFile()
     {
-        new PictureFile(null);
+        this(null);
     }
     
     public PictureFile(String _newPictureData)
@@ -14,8 +17,14 @@ public class PictureFile extends CardContent
         this.m_PictureData = _newPictureData;
     }
     
-    public String getPictureData()
+    // GETTER + SETTER
+    public String getPictureData() throws NullPointerException
     {
+        if(this.m_PictureData == null)
+        {
+            throw new NullPointerException("PictureData was not set.");
+        }
+        
         return this.m_PictureData;
     }
     
