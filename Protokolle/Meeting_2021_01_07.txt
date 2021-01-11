@@ -1,0 +1,35 @@
+Meeting
+
+Datum:07.01.2021
+Uhrzeit:19 Uhr
+
+
+Teilnehmer:
+    Amine Semlali
+    Clemens Berger
+    Daniel Michel
+    Martin Kühlborn
+    Antonio Blechschmidt (Protokollant)
+
+
+Inhalt:
+    besprechen von Problemen
+    überarbeiten von Klassen anhand von fehlschlagenden Tests
+        account.creategroup() 2. Constructer
+        leanset.learnset() parameter übergeben
+        owner von Account übergeben
+        LearnsetAbo int für Evaluation
+
+Aufgaben:
+    alle Mitglieder:
+        m_ für alle Member
+        Test schreiben
+    Amine:
+        -
+    Clemens:
+        -
+    Daniel:
+
+    Martin:
+
+    Antonio:
