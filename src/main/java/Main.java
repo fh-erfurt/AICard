@@ -1,4 +1,3 @@
-import de.aicard.*;
 
 
 import java.util.ArrayList;

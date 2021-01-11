@@ -17,24 +17,23 @@ public class CardListTest
         // Before
         Card Card1 = new Card();
         Card Card2 = new Card();
-        Card [] CardArray = {Card1, Card2};
         
         ArrayList CardArrayList = new ArrayList<>();
         CardArrayList.add(Card1);
         CardArrayList.add(Card2);
         
-        CardList CardList1 = new CardList();
-        CardList CardList2 = new CardList(CardArray);
-        CardList CardList3 = new CardList(CardArrayList);
-        
+        CardList CardList1 = new CardList(CardArrayList);
+        CardList CardList2 = new CardList();
+        CardList2.getCardList().add(Card1);
+        CardList2.getCardList().add(Card2);
+    
+    
         // Testing
         Assertions.assertEquals(Card2, CardList1.getCardByIndex(1));
         Assertions.assertEquals(Card2, CardList2.getCardByIndex(1));
-        Assertions.assertEquals(Card2, CardList3.getCardByIndex(1));
     
         Assertions.assertEquals(Card1, CardList1.getCurrentCard());
         Assertions.assertEquals(Card1, CardList2.getCurrentCard());
-        Assertions.assertEquals(Card1, CardList3.getCurrentCard());
         
     }
     
@@ -44,9 +43,10 @@ public class CardListTest
         // Before
         Card Card1 = new Card();
         Card Card2 = new Card();
-        Card [] CardArray = {Card1, Card2};
         
-        CardList CardList1 = new CardList(CardArray);
+        CardList CardList1 = new CardList();
+        CardList1.addToList(Card1);
+        CardList1.addToList(Card2);
         
         // Testing
         CardList1.addToList(Card1);
@@ -67,12 +67,15 @@ public class CardListTest
         Card Card1 = new Card();
         Card Card2 = new Card();
         Card Card3 = new Card();
-        Card [] CardArray = {Card1, Card2, Card3};
     
-        CardList CardList1 = new CardList(CardArray);
+        CardList CardList1 = new CardList();
+        CardList1.addToList(Card1);
+        CardList1.addToList(Card2);
+        CardList1.addToList(Card3);
+    
     
         // Testing
-        Assertions.assertEquals(CardArray.length, CardList1.getListLength(), "Should show same List Length");
+        Assertions.assertEquals(3, CardList1.getListLength(), "Should show same List Length");
         Assertions.assertEquals(Card1, CardList1.getCardByIndex(0));
         
         CardList1.next();

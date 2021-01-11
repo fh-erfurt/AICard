@@ -2,69 +2,114 @@ package de.aicard.learnset;
 
 import de.aicard.card.Card;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CardList {
-    //attributes
-    private List<de.aicard.card.Card> cardList;
-    private int ListIndex;
 
-    //Constructor
-    public CardList(){
-        cardList = new ArrayList<de.aicard.card.Card>();
-        ListIndex = 0;
-    }
-    public CardList(de.aicard.card.Card[] _cards){
-        cardList = new ArrayList<de.aicard.card.Card>();
-        cardList.addAll(Arrays.asList(_cards));
-        ListIndex = 0;
-    }
-    public CardList(ArrayList<de.aicard.card.Card> _arrList){
-        cardList = new ArrayList<de.aicard.card.Card>();
-        cardList = _arrList;
-        ListIndex = 0;
-    }
-    //functions
+public class CardList
+{
+    // MEMBER VARIABLES
+    private ArrayList<Card> m_CardList;
+    private int m_ListIndex;
 
-    public void addToList(de.aicard.card.Card _card){
-
-        cardList.add(_card);
-    }
-    public void removeFromList(de.aicard.card.Card _card){
-        cardList.remove(_card);
+    
+    // CONSTRUCTORS
+    public CardList()
+    {
+        this(null);
     }
 
-    public void removeFromList(int _index){
-        cardList.remove(_index);
+    public CardList(ArrayList<Card> _newCardList)
+    {
+        this.m_CardList = _newCardList;
+        this.m_ListIndex = 0;
     }
-
-    public Card getCurrentCard(){
-        if(cardList.get(ListIndex) != null){
-            return cardList.get(ListIndex);
+    
+    // GETTER + SETTER
+    public ArrayList<Card> getCardList() throws NullPointerException
+    {
+        if(this.m_CardList == null)
+        {
+            throw new NullPointerException("CardList was not set.");
         }
-        else {
-            return null;
+        
+        return this.m_CardList;
+    }
+    
+    public void setCardList(ArrayList<Card> _newCardList)
+    {
+        this.m_CardList = _newCardList;
+    }
+    
+    public int getListIndex()
+    {
+        return m_ListIndex;
+    }
+    
+    public void setListIndex(int _newListIndex)
+    {
+        this.m_ListIndex = _newListIndex;
+    }
+    
+    
+    // METHODS
+    public void addToList(Card _newCard)
+    {
+        this.m_CardList.add(_newCard);
+    }
+    
+    public void removeFromList(Card _Card)
+    {
+       this.m_CardList.remove(_Card);
+    }
+
+    public void removeFromList(int _Index)
+    {
+        this.m_CardList.remove(_Index);
+    }
+
+    public Card getCurrentCard() throws NullPointerException
+    {
+        if(this.m_CardList.get(m_ListIndex) == null)
+        {
+            throw new NullPointerException("No Card set on current ListIndex: " + m_ListIndex);
+        }
+        
+        return this.m_CardList.get(m_ListIndex);
+    }
+
+    public Card getCardByIndex(int _Index) throws NullPointerException
+    {
+        if(this.m_CardList.get(_Index) == null)
+        {
+            throw new NullPointerException("No Card set on ListIndex: " + _Index);
+        }
+        
+        return this.m_CardList.get(_Index);
+    }
+    
+    
+
+    public int getListLength()
+    {
+        return this.m_CardList.size();
+    }
+
+    public void next()
+    {
+        if (m_ListIndex < m_CardList.size() - 1)
+        {
+           m_ListIndex++;
         }
     }
-
-    public Card getCardByIndex(int _index){
-        return cardList.get(_index);
-    }
-
-    public int getListLength(){
-        return cardList.size();
-    }
-
-    public void next(){
-        if (ListIndex < cardList.size() - 1){
-           ListIndex++;
-        }
-    }
-    public void previous(){
-        if (ListIndex > 0){
-            ListIndex--;
+    
+    public void previous()
+    {
+        if (m_ListIndex > 0)
+        {
+            m_ListIndex--;
         }
     }
 

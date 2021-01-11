@@ -3,7 +3,6 @@ package de.aicard.learnset;
 
 import de.aicard.Social.Message;
 import de.aicard.enums.Faculty;
-import de.aicard.enums.State;
 import de.aicard.enums.Visibility;
 import de.aicard.account.Account;
 import de.aicard.learnset.CardList;
@@ -64,8 +63,12 @@ public class LearnSet
     }
     
     // Getter + Setter
-    public String getTitle()
+    public String getTitle() throws NullPointerException
     {
+        if(m_Title == null)
+        {
+            throw new NullPointerException("LearnSet Title was not set.");
+        }
         return this.m_Title;
     }
     
@@ -74,8 +77,12 @@ public class LearnSet
         this.m_Title = _newTitle;
     }
     
-    public String getDescription()
+    public String getDescription() throws NullPointerException
     {
+        if(m_Description == null)
+        {
+            throw new NullPointerException("LearnSet Description was not set.");
+        }
         return this.m_Description;
     }
     
@@ -84,8 +91,12 @@ public class LearnSet
         this.m_Description = _newDescription;
     }
     
-    public Faculty getFaculty()
+    public Faculty getFaculty() throws NullPointerException
     {
+        if(m_Faculty == null)
+        {
+            throw new NullPointerException("LearnSet Faculty was not set.");
+        }
         return this.m_Faculty;
     }
     
@@ -94,8 +105,12 @@ public class LearnSet
         this.m_Faculty = _newFaculty;
     }
     
-    public CardList getCardList()
+    public CardList getCardList() throws NullPointerException
     {
+        if(m_CardList == null)
+        {
+            throw new NullPointerException("LearnSet CardList was not set.");
+        }
         return this.m_CardList;
     }
     
@@ -104,8 +119,12 @@ public class LearnSet
         this.m_CardList = _newCardList;
     }
     
-    public MessageList getCommentList()
+    public MessageList getCommentList() throws NullPointerException
     {
+        if(m_CommentList == null)
+        {
+            throw new NullPointerException("LearnSet CommentList was not set.");
+        }
         return this.m_CommentList;
     }
     
@@ -114,8 +133,12 @@ public class LearnSet
         this.m_CommentList = _newCommentList;
     }
     
-    public Account getOwner()
+    public Account getOwner() throws NullPointerException
     {
+        if(m_Owner == null)
+        {
+            throw new NullPointerException("LearnSet Owner was not set.");
+        }
         return this.m_Owner;
     }
     
@@ -124,8 +147,12 @@ public class LearnSet
         this.m_Owner = _newOwner;
     }
     
-    public Visibility getVisibility()
+    public Visibility getVisibility() throws NullPointerException
     {
+        if(m_Visibility == null)
+        {
+            throw new NullPointerException("LearnSet Visibility was not set.");
+        }
         return this.m_Visibility;
     }
     
@@ -134,8 +161,12 @@ public class LearnSet
         this.m_Visibility = _newVisibility;
     }
     
-    public ArrayList<Account> getAdmins()
+    public ArrayList<Account> getAdmins() throws NullPointerException
     {
+        if(m_Admins == null)
+        {
+            throw new NullPointerException("LearnSet AdminList was not set.");
+        }
         return this.m_Admins;
     }
     
@@ -149,7 +180,6 @@ public class LearnSet
         return this.m_Evaluation;
     }
     
-    // Vielleicht private und nur über addEvaluation() Methode bearbeiten
     public void setEvaluation(double _newEvaluation)
     {
         this.m_Evaluation = _newEvaluation;
@@ -205,12 +235,28 @@ public class LearnSet
         {
             double updatedEvaluation = getEvaluation() * getNumberOfEvaluations();
             updatedEvaluation = updatedEvaluation - _EvaluationToDelete;
+            //TODO: Catch Exception or Logger error
             decreaseNumberOfEvaluations();
             updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
             setEvaluation(updatedEvaluation);
         }
-       
     }
+    
+    public void increaseNumberOfEvaluations()
+    {
+        setNumberOfEvaluations(getNumberOfEvaluations() + 1);
+    }
+    
+    public void decreaseNumberOfEvaluations()
+    {
+        if(getNumberOfEvaluations() > 0)
+        {
+            setNumberOfEvaluations(getNumberOfEvaluations() - 1);
+        }
+        //TODO
+        // else: Error -> throw exception or do something with Logger
+    }
+    
     
     /*
     * Admin
@@ -243,29 +289,8 @@ public class LearnSet
     public void removeMessageByMessage(Message _MessageToRemove)
     {
         this.m_CommentList.removeMessage(_MessageToRemove);
-        // updated
-        //  this.m_CommentList.removeMessageByMessage(_MessageToRemove);
     }
     
-    // should be Added?
-    //public void removeMessageByIndex(int _IndexToRemove)
-    //{
-    //    this.m_CommentList.removeMessageByIndex(_IndexToRemove);
-    //}
     
-    
-    // small HelperMethods
-    public void increaseNumberOfEvaluations()
-    {
-        setNumberOfEvaluations(getNumberOfEvaluations() + 1);
-    }
-    
-    public void decreaseNumberOfEvaluations()
-    {
-        if(getNumberOfEvaluations() > 0)
-        {
-            setNumberOfEvaluations(getNumberOfEvaluations() - 1);
-        }
-        // else: Error
-    }
+   
 }
