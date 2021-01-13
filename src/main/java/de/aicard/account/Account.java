@@ -6,6 +6,7 @@ import de.aicard.Social.Group;
 import de.aicard.Social.MessageList;
 import de.aicard.enums.Visibility;
 import de.aicard.enums.Faculty;
+import de.aicard.learnset.LearnSet;
 
 import java.util.List;
 
@@ -171,9 +172,8 @@ public abstract class Account
         this.friends.removePerson(_friend);
     }
 
-    public void removeFriendByIndex(Account _notFriendAnymore){
-        this.friends.removePerson(_notFriendAnymore);
-    }//TODO gibt es ein unterschied zwischen removeFriend() und removeFriendByIndex(). ansonsten überladen?
+    public void removeFriend(int _friend){ this.friends.removePerson(_friend);
+    }
 
 
     //groups

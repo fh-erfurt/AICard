@@ -42,6 +42,10 @@ public class AccountList {
     {
         accountlist.remove(_acc);
     }
+    public void removePerson(int _acc)
+    {
+        accountlist.remove(_acc);
+    }
 
     public int getNumberPersons(){
         return accountlist.size();

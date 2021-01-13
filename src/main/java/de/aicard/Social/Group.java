@@ -19,7 +19,6 @@ public class Group {
     public Group(String _name , Visibility _publicity, AccountList _acclist){
         this.name = _name;
         this.members = new AccountList();
-        this.members = _acclist;
         this.publicity = _publicity;
 
     }
