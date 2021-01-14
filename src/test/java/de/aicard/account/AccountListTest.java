@@ -11,7 +11,7 @@ public class AccountListTest {
     {
         AccountList AccList1 = new AccountList();
 
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UniversityProfessor);
+        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
         Student Std1 = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
 
         AccList1.addPerson(Prof1);
@@ -19,8 +19,8 @@ public class AccountListTest {
 
         AccountList AccList2 = new AccountList();
 
-        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UniversityProfessor);
-        Professor Prof3 = new Professor("Prof2@fh-erfurt.de","adminProf2","Prof2","Professor2", AcademicGrade.AcademicCouncil);
+        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor Prof3 = new Professor("Prof2@fh-erfurt.de","adminProf2","Prof2","Professor2", AcademicGrade.ACADEMIC_COUNCIL);
         Student Std2 = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
         Student Std3 = new Student("Std2@fh-erfurt.de","adminStd2","Std2","Student2", 3, Faculty.Architecture);
 

@@ -4,7 +4,8 @@ public class TextFile extends CardContent
 {
     // MEMBER VARIABLES
     private String m_TextData;
-    
+
+
     // CONSTRUCTORS
     public TextFile()
     {

@@ -62,7 +62,8 @@ public class CardList
     
     public void removeFromList(Card _Card)
     {
-       this.m_CardList.remove(_Card);
+       //TODO test this. mucho mucho testos.
+        this.m_CardList.remove(_Card);
     }
 
     public void removeFromList(int _Index)
@@ -81,7 +82,7 @@ public class CardList
     }
 
     public Card getCardByIndex(int _Index) throws NullPointerException
-    {
+    { //TODO überprüfen, ob ehhhm... index größer kleiner gleich ist wie größe des Dings
         if(this.m_CardList.get(_Index) == null)
         {
             throw new NullPointerException("No Card set on ListIndex: " + _Index);

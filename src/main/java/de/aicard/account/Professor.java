@@ -23,4 +23,7 @@ public class Professor extends Account{
         this.academicGrade = _academic;
 
     }
+
+    //todo getter und setter für academic grade
+
 }

@@ -4,6 +4,8 @@ public class VideoFile extends CardContent
 {
     // MEMBER VARIABLES
     private String m_VideoData;
+    //TODO is playing einfügen
+    //TODO Überschrift
     
     // CONSTRUCTORS
     public VideoFile()

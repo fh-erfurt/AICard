@@ -1,6 +1,9 @@
 package de.aicard.enums;
 
 public enum Faculty{
+
+    //Todo fix this.
+
     AppliedComputerScience,
     Architecture,
     CivilEngineering,

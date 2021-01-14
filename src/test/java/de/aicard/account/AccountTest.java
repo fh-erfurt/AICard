@@ -2,8 +2,6 @@ package de.aicard.account;
 
 import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
-import de.aicard.enums.Visibility;
-import de.aicard.learnset.LearnSet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +11,9 @@ public class AccountTest
     void testCreatedLearnSetManipulation()
     {
         //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1",AcademicGrade.UniversityProfessor);
-        LearnSetAbo LearnSetAbo1 = new LearnSetAbo(new LearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience));
-        LearnSetAbo LearnSetAbo2 = new LearnSetAbo(new LearnSet());
+        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.A);
+        LearnSetAbo LearnSetAbo1 = LearnSetAbo(new LearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience))
+        LearnSetAbo LearnSetAbo2 = LearnSetAbo(new LearnSet())
 
         //test createNewOwnedLearnSet and getOwnedLearnSetAboByPosition
         Prof1.createNewOwnedLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
@@ -38,7 +36,7 @@ public class AccountTest
 
         //test deleteAllFromOwnedLearningSets()
         Prof1.deleteAllFromOwnedLearningSets();
-        Assertions.assertEquals(Prof1.getOwnedLearnSetAboByPosition(0), LearnSetAbo1);
+        Assertions.assertEquals(Prof1.getOwnedLearnSetAboByPosition(0), LearnSetAbo0);
 
 
 
@@ -48,13 +46,13 @@ public class AccountTest
     void testFavoriteLearnSetManipulation()
     {
         //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UniversityProfessor);
-        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UniversityProfessor);
+        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.A);
+        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.A);
         Prof2.createNewOwnedLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
         Prof2.createNewOwnedLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
 
         //test addNewFavoriteSets() and getFavoriteSetByPosition()
-        Prof1.addNewFavoriteSets(Prof2.getOwnedLearnSetAboByPosition(0));
+        Prof1.addNewFavoriteSets(Prof2.getOwnedLearnSetAboByPosition(0));//TODO wie werden alle public Sets angezeigt
         Assertions.assertEquals(Prof1.getFavoriteSetByPosition(0), Prof2.getOwnedLearnSetAboByPosition(0));
 
         //test deleteFromOwnedLearningSetsByIndex
@@ -81,16 +79,16 @@ public class AccountTest
     void testFriendManipulation()
     {
         //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UniversityProfessor);
-        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UniversityProfessor);
-        Professor Prof3 = new Professor("Prof@fh-erfurt.de","adminProf","Prof3","Professor3", AcademicGrade.UniversityProfessor);
+        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.A);
+        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.A);
+        Professor Prof3 = new Professor("Prof@fh-erfurt.de","adminProf","Prof3","Professor3", AcademicGrade.A);
 
         //test addFriend()
         Prof1.addFriend(Prof2);
         Assertions.assertEquals(Prof1.getFriends(), Prof2);
 
         //test removeFriend()
-        Prof1.removeFriend(Prof2);
+        removeFriend(Prof2);
         Assertions.assertEquals(Prof1.getFriends(), null);
 
         //setup for removeFriendByIndex()
@@ -98,7 +96,7 @@ public class AccountTest
         Prof1.addFriend(Prof3);
 
         //test removeFriendByIndex()
-        Prof1.removeFriend(1);
+        removeFriendByIndex(1);
         Assertions.assertEquals(Prof1.getFriends(), Prof2);
 
     }
@@ -107,20 +105,21 @@ public class AccountTest
     void testGroupManipulation()
     {
         //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UniversityProfessor);
-        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UniversityProfessor);
-        Prof1.createGroup("Prof1Group", Visibility.PUBLIC,new AccountList()); //TODO muss eine AccountList übergeben werden bei Constructor von Group
-        Prof2.createGroup("Prof2Group", Visibility.PUBLIC,new AccountList());
+        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.A);
+        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.A);
+        Prof1.createGroup();
+        Prof2.createGroup();
 
         //test createGroup() and leaveGroup()
-        Prof1.leaveGroup(Prof1.getGroups().get(0));
+        Prof1.leaveGroup(Prof1.getGroups());
         Assertions.assertEquals(Prof1.getGroups(), null);
 
         //test joinGroup() negetiv
-        Prof1.joinGroup(Prof2.getGroups().get(0));
+        Prof1.joinGroup(Group _group);
         Assertions.assertEquals(Prof1.getGroups(), null);
         //test joinGroup() positiv
-        Prof1.joinGroup(Prof2.getGroups().get(0));
+        //TODO weiß nicht wie ich in Group den Status ändere von Prof2
+        Prof1.joinGroup(Group _group);
     }
 
     @Test

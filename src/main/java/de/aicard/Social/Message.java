@@ -11,22 +11,14 @@ public class Message {
 
     private String message;
     private Account sender;
-    private String sendersname;
     private LocalDateTime time;
     private int likes;
 
     //constructor
-    public Message(){
-
-        message = null;
-        sendersname = sender.getName();
-        time = LocalDateTime.now();
-        likes = 0;
-    }
-    public Message(String _message){
+    public Message(String _message, Account _sender){
 
         message = _message;
-        sendersname = sender.getName();
+        sender = _sender;
         time = LocalDateTime.now();
         likes = 0;
     }
@@ -38,19 +30,25 @@ public class Message {
     public void set_message(String _message) {
         this.message = _message;
     }
-
-    public String get_sender() {
-        return sendersname;
-    }
-    public LocalDateTime get_time() {
-        return time;
-    }
-
     public int get_likes() {
         return likes;
     }
     public void set_likes (int _number){this.likes = _number;}
-    public void raise_likes(){this.likes += 1;}
+    public LocalDateTime get_time() {
+        return time;
+    }
+
+    //functions
+
+    public void raise_likes(){
+        //TODO Kopplung an Account? Alle können nur jeweils 1 mal liken.
+        this.likes += 1;
+    }
+
+    public void removeLike(){
+        //TODO Kopplung an Accont? Alle können nur eigene likes entfernen.
+        this.likes -= 1;
+    }
 
 
 

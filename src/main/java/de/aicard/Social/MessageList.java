@@ -1,20 +1,20 @@
 package de.aicard.Social;
 import de.aicard.Social.Message;
+import de.aicard.account.Account;
+
 import java.util.ArrayList;
 
 public class MessageList {
 
     private ArrayList<Message> messagelist;
-    private Message message1 ;
 
     //Constructor
 
     public MessageList(){ messagelist = new ArrayList<Message>(); }
-    public MessageList(String _message)
+    public MessageList(String _message, Account _account)
     {
         messagelist = new ArrayList<Message>();
-        message1 = new Message(_message);
-        this.addMessage(message1);
+        this.addMessage(new Message(_message,_account));
     }
 
     //Setter & getter

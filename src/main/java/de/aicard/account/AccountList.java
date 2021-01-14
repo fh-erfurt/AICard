@@ -15,10 +15,8 @@ public class AccountList {
         this.accountlist = new ArrayList<Account>();
         this.accountlist = _accList;
     }
-    public AccountList(Account[] _accounts){
-        this.accountlist = new ArrayList<Account>();
-        this.accountlist.addAll(Arrays.asList(_accounts));
-    }
+    //todo mach hier array list übergeben tun.
+
 
     //Setter & getter
 
@@ -49,6 +47,10 @@ public class AccountList {
 
     public int getNumberPersons(){
         return accountlist.size();
+    }
+
+    public Account getPerson(int _number){
+        return this.accountlist.get(_number);
     }
 
 }
