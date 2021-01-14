@@ -3,7 +3,11 @@ package de.aicard.card;
 public class AudioFile extends CardContent
 {
     // MEMBER VARIABLES
+    // this will be a real audio in future...
     private String m_AudioData;
+    private boolean m_isPlaying;
+    //TODO write functions for isPlaying
+    //TODO Überschrift
     
     
     // CONSTRUCTORS

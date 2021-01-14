@@ -24,5 +24,6 @@ public class Student extends Account{
         this.semester  = _semester;
         this.faculty = _faculty;
 
+
     }
 }

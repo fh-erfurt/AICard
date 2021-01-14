@@ -6,7 +6,6 @@ public class Chat {
 
 private MessageList chathistory;
 private AccountList participants ;
-private Account creator;
 
     //Constructor
 
@@ -16,7 +15,7 @@ private Account creator;
     }
     public Chat(Account _participant,Account _creator, String _message)
     {
-        chathistory = new MessageList(_message);
+        chathistory = new MessageList(_message, _creator);
         participants = new AccountList();
         participants.addPerson(_creator);
         participants.addPerson(_participant);
@@ -35,13 +34,26 @@ private Account creator;
     }
 
     //Functions
+    public void addParticipant(Account _participant){
+        this.participants.addPerson(_participant);
+    }
+
+    public Account getChatCreator(){
+        return participants.getPerson(0);
+    }
+
+    public void clearHistory(){
+        this.chathistory = new MessageList();
+    }
 
     // chats
 
-    public void sendmessage(String _message) {
-     Message message = new Message(_message);
+    public void sendmessage(String _message, Account _sender) {
+     Message message = new Message(_message, _sender);
      this.chathistory.addMessage(message);
     }
+
+    //TODO remove message function
 
 
 }

@@ -15,6 +15,8 @@ public class LearnSetAbo
     private ArrayList<CardStatus> m_cardStatus;
     private State m_learnSetStatus;
     private LearnSet m_learnSet;
+    private int m_evaluation;
+    //TODO create setter/getter die getEvaluation etc aufrufen von LearnSet und Delete im Learnset...
 
     public State getM_learnSetStatus() {
         return m_learnSetStatus;
@@ -72,7 +74,7 @@ public class LearnSetAbo
             if(lowestLevelList != null){
                 for(int i = 0; i< lowestLevelList.size(); i++){
                     while (resultCardStatusList.size()<_numOfCards){
-                        resultCardStatusList.add(lowestLevelList.get(i)); //TODO CardList braucht eine allgemeine get Methode für Elemente der Liste
+                        resultCardStatusList.add(lowestLevelList.get(i));
                     }
                 }
             }
@@ -85,8 +87,6 @@ public class LearnSetAbo
     public LearningSession createLearningSession(int _numOfCards){
 
         ArrayList<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
-        //TODO LearningSession needs constructor with only a cardList as parameter, because the list can only be created here
-
         return new LearningSession(sessionList);
 
 

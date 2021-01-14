@@ -2,8 +2,10 @@ package de.aicard.card;
 
 public class PictureFile extends CardContent
 {
+
     // MEMBER VARIABLES
     private String m_PictureData;
+    //TODO Überschrift
     
     
     // CONSTRUCTORS

@@ -6,7 +6,7 @@ public class CardStatus
 {
     // MEMBER VARIABLES
     private CardKnowledgeLevel m_CardKnowledgeLevel;
-    private int m_CardXP;
+    // private int m_CardXP; might be implemented later...
     private Card m_Card;
     
     
@@ -14,7 +14,6 @@ public class CardStatus
     public CardStatus(Card _newCard)
     {
         this.m_CardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
-        this.m_CardXP = 0;
         this.m_Card = _newCard;
     }
     
@@ -29,17 +28,7 @@ public class CardStatus
     {
         this.m_Card = _newCard;
     }
-    
-    public int getCardXP()
-    {
-        return m_CardXP;
-    }
-    
-    public void setCardXP(int _newCardXP)
-    {
-        this.m_CardXP = _newCardXP;
-    }
-    
+
     public CardKnowledgeLevel getCardKnowledgeLevel()
     {
         return m_CardKnowledgeLevel;
@@ -67,8 +56,6 @@ public class CardStatus
                 this.m_CardKnowledgeLevel = CardKnowledgeLevel.KNOWWELL;
                 break;
             case KNOWWELL:
-                this.m_CardKnowledgeLevel = CardKnowledgeLevel.KNOWVERYWELL;
-                break;
             case KNOWVERYWELL:
                 //Not sure about this one, cant be increased afer KNOWVERYWELL
                 this.m_CardKnowledgeLevel = CardKnowledgeLevel.KNOWVERYWELL;
@@ -85,10 +72,8 @@ public class CardStatus
         switch (m_CardKnowledgeLevel)
         {
             case NOINFORMATION:
-                //Not sure about this one, cant be decrased afer NOINFORMATION
-                this.m_CardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
-                break;
             case SOMEINFORMATION:
+                //Not sure about this one, cant be decrased afer NOINFORMATION
                 this.m_CardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
                 break;
             case KNOW:

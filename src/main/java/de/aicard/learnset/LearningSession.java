@@ -11,25 +11,21 @@ public class LearningSession
 {
     //attributes
     private int currentCard;
-   // private CardList cardList;
     private ArrayList<CardStatus> cardStatusList;
+    private boolean isActive;
 
 
-    //Constructer
-    //public LearningSession(CardList _cardList)
-    //{
-        //this.currentCard = 0;
-    //    cardList = _cardList;
-   // }
 
     public LearningSession(ArrayList<CardStatus> _cardStatusList){
         this.cardStatusList = _cardStatusList;
         this.currentCard = 0;
+        this.isActive = true;
     }
 
     //setter & getter
     public void setCurrentCard(int _currentCard){this.currentCard = _currentCard;}
     public int getCurrentCard(){return this.currentCard;}
+    public boolean getIsActive(){return this.isActive;}
 
    // public void setCardList(CardList _cardList){this.cardList = _cardList;}
     //public CardList getCardList(){return this.cardList;}
@@ -43,7 +39,7 @@ public class LearningSession
     }
 
     //methods
-
+    //todo kann weg.
     private void riseCardKnowledgeLevel() //rises CardKnowledgeLevel of the currentCard
     {
         CardStatus currentStatus=this.cardStatusList.get(this.currentCard);
@@ -75,6 +71,7 @@ public class LearningSession
       }
     }
 
+    //todo kann weg...
     private void lowerCardKnowledgeLevel() //lowers CardKnowledgeLevel of the currentCard
     {
         CardStatus currentStatus=this.cardStatusList.get(this.currentCard);
@@ -106,30 +103,26 @@ public class LearningSession
 
         }
     }
-    //private Card searchForCardKnowledgeLevel() //TODO suche nach CardKnowledgeLevel - Listarray
-
-    //public void createCardList(int _numOfCards, CardList _cardList)
-    //{
-      //  this.cardList = new CardList();
-        //int numberOfCardsOnSessionList = 0;
-        //while(_numOfCards>numberOfCardsOnSessionList)
-        //{
-          //  //TODO hier soll gesucht werden nach Karten von NOINFORMATION bis KNOWVERYWELL und zu der CardList des Objekts hinzugefügt werden
-        //}
-    //}
 
     public void cardKnown()
     {
+        //TODO Funktion von CardStatus aufrufen
         riseCardKnowledgeLevel();
         this.currentCard++;
-        //TODO check if it is the last card in the list. if it is -> stop learning session. Else: currentCard++
+        if(this.currentCard == this.cardStatusList.size()){
+            this.isActive = false;
+        }
+
     }
 
     public void cardUnKnown()
     {
+        //ToDO Funktion von CardStatus aufrufen
         lowerCardKnowledgeLevel();
         this.currentCard++;
-        //TODO siehe cardKnown()
+        if(this.currentCard == this.cardStatusList.size()){
+            this.isActive = false;
+        }
     }
 
 }

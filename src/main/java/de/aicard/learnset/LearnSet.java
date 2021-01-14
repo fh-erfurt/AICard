@@ -206,12 +206,13 @@ public class LearnSet
     public void createCardList()
     {
         this.m_CardList = new CardList();
-        // TODO: Do Something here
+
     }
     
     /*
     * Evaluation
     * */
+    //TODO make Evaluation INT!!
     public void addEvaluation(double /* oder int? */ _newEvaluation)
     {
         if(getNumberOfEvaluations() == 0)

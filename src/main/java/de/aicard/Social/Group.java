@@ -6,19 +6,24 @@ import java.util.Arrays;
 import de.aicard.account.Account;
 import de.aicard.account.AccountList;
 import de.aicard.enums.Visibility;
+import de.aicard.learnset.LearnSet;
 
 public class Group {
+    //might be implemented later... maybe... next semester...
+
 
     private String name;
     private AccountList members;
     private Visibility publicity;
+    private ArrayList<LearnSet> groupLearnSets;
 
     //Constructor
 
 
-    public Group(String _name , Visibility _publicity, AccountList _acclist){
+    public Group(String _name , Visibility _publicity, Account _creator){
         this.name = _name;
         this.members = new AccountList();
+        this.members.addPerson(_creator);
         this.publicity = _publicity;
 
     }
@@ -48,9 +53,13 @@ public class Group {
 
 //functions
 
-public void inviteToGroup(Account _acc){
+public void addToGroup(Account _acc){
 
     this.members.addPerson(_acc);
+}
+
+public void leaveGroup(Account _acc){
+        //TODO write this fuction!!!!
 }
 
 }

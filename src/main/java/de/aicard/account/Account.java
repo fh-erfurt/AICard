@@ -178,8 +178,8 @@ public abstract class Account
 
     //groups
 
-    public void createGroup(String _name , Visibility _publicity, AccountList _acclist){
-        this.groups.add( new Group(_name,_publicity,_acclist)); //constructor von group;
+    public void createGroup(String _name , Visibility _publicity){
+        this.groups.add( new Group(_name,_publicity,this)); //constructor von group;
     }
 
     public void joinGroup(Group _group){
@@ -187,7 +187,7 @@ public abstract class Account
             this.groups.add(_group);
         }
     }
-    //TODO inviteToGroup?
+
 
     public void leaveGroup(Group _group){
         this.groups.remove(_group);
@@ -208,7 +208,7 @@ public abstract class Account
         _messagelist.removeMessage(_message);
     }
 
-    public void deletechat(Chat _chat)
+    public void deleteChat(Chat _chat)
 {
     this.chats.remove(_chat);
 }

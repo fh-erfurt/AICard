@@ -1,14 +1,12 @@
 package de.aicard.enums;
 
 public enum AcademicGrade {
-
-    UniversityProfessor ,
-    UniversityLecturer ,
-    JuniorProfessor ,
-    JuniorLecturer ,
-    AcademicCouncil,
-    ScientificAssistant,
-    ResearchAssistant,
-    StudentAssistant
-
+    UNIVERSITY_PROFESSOR,
+    UNIVERSITY_LECTURER,
+    JUNIOR_PROFESSOR,
+    JUNIOR_LECTURER,
+    ACADEMIC_COUNCIL,
+    SCIENTIFIC_ASSISTANT,
+    RESEARCH_ASSISTANT,
+    STUDENT_ASSISTANT
     }

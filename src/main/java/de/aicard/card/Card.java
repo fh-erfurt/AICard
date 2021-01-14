@@ -3,6 +3,7 @@ package de.aicard.card;
 
 public class Card
 {
+
     // MEMBER VARIABLES
     private CardContent m_CardFront;
     private CardContent m_CardBack;
