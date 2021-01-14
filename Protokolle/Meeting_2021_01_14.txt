@@ -1,0 +1,39 @@
+Meeting
+
+Datum:14.01.2021
+Uhrzeit:19 Uhr
+
+Nächstes Treffen: Montag, 18.01.2021 19:00UHR
+
+Teilnehmer:
+    Amine Semlali
+    Clemens Berger
+    Daniel Michel
+    Martin Kühlborn
+    Antonio Blechschmidt (Protokollant)
+
+
+Inhalt:	
+	Problembehandlung Chat
+	Gruppe wird nach hinten verschoben
+	
+    
+	
+Ideen für die Dokumentation:
+	Löschbare Nachrichten im Chat
+	
+
+Aufgaben:
+    alle Mitglieder:
+        - TODOS in eingenen Klassen bearbeiten
+		- Bei Gettern NullPointerExceptioons hinzufügen
+		- 
+    Amine:
+        -
+    Clemens:
+        - 
+    Daniel:
+
+    Martin:
+
+    Antonio:
