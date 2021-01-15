@@ -6,19 +6,19 @@ public class AudioFile extends CardContent
     // this will be a real audio in future...
     private String m_AudioData;
     private boolean m_isPlaying;
-    //TODO write functions for isPlaying
-    //TODO Überschrift
-    
+    private String m_Title;
     
     // CONSTRUCTORS
     public AudioFile()
     {
-        this(null);
+        this(null, null);
     }
     
-    public AudioFile(String _newAudioData)
+    public AudioFile(String _newAudioData, String _newTitle)
     {
+        this.m_isPlaying = false;
         this.m_AudioData = _newAudioData;
+        this.m_Title     = _newTitle;
     }
     
     
@@ -38,16 +38,44 @@ public class AudioFile extends CardContent
         this.m_AudioData = _newAudioData;
     }
     
+    public boolean getIsPlaying()
+    {
+        return this.m_isPlaying;
+    }
+    
+    public void setIsPlaying(boolean _newIsPlaying)
+    {
+        this.m_isPlaying = _newIsPlaying;
+    }
+    
+    public String getTitle() throws NullPointerException
+    {
+        if(this.m_Title == null)
+        {
+            throw new NullPointerException("AudioTitle was not set.");
+        }
+        
+        return this.m_Title;
+    }
+    
+    public void setTitle(String _neTitle)
+    {
+        this.m_Title = _neTitle;
+    }
+    
     
     // Methods
     public String pauseAudioData()
     {
+        m_isPlaying = false;
         return "AudioData is paused";
     }
     
     public String playAudioData()
     {
+        m_isPlaying = true;
         return "AudioData is playing";
     }
     
+
 }

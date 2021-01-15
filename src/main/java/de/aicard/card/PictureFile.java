@@ -5,7 +5,7 @@ public class PictureFile extends CardContent
 
     // MEMBER VARIABLES
     private String m_PictureData;
-    //TODO Überschrift
+    private String m_Title;
     
     
     // CONSTRUCTORS
@@ -33,5 +33,20 @@ public class PictureFile extends CardContent
     public void setPictureData(String _newPictureData)
     {
         this.m_PictureData = _newPictureData;
+    }
+    
+    public String getTitle() throws NullPointerException
+    {
+        if(this.m_Title == null)
+        {
+            throw new NullPointerException("PictureTitle was not set.");
+        }
+        
+        return this.m_Title;
+    }
+    
+    public void setTitle(String _newTitle)
+    {
+        this.m_Title = _newTitle;
     }
 }

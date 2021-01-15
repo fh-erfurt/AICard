@@ -57,7 +57,6 @@ public class CardStatus
                 break;
             case KNOWWELL:
             case KNOWVERYWELL:
-                //Not sure about this one, cant be increased afer KNOWVERYWELL
                 this.m_CardKnowledgeLevel = CardKnowledgeLevel.KNOWVERYWELL;
                 break;
             default:
@@ -73,7 +72,6 @@ public class CardStatus
         {
             case NOINFORMATION:
             case SOMEINFORMATION:
-                //Not sure about this one, cant be decrased afer NOINFORMATION
                 this.m_CardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
                 break;
             case KNOW:

@@ -206,14 +206,12 @@ public class LearnSet
     public void createCardList()
     {
         this.m_CardList = new CardList();
-
     }
     
     /*
     * Evaluation
     * */
-    //TODO make Evaluation INT!!
-    public void addEvaluation(double /* oder int? */ _newEvaluation)
+    public void addEvaluation(int _newEvaluation)
     {
         if(getNumberOfEvaluations() == 0)
         {
@@ -230,13 +228,13 @@ public class LearnSet
         }
     }
     
-    public void deleteEvaluation(double _EvaluationToDelete)
+    public void deleteEvaluation(int _EvaluationToDelete)
     {
         if(getNumberOfEvaluations() > 0)
         {
             double updatedEvaluation = getEvaluation() * getNumberOfEvaluations();
             updatedEvaluation = updatedEvaluation - _EvaluationToDelete;
-            //TODO: Catch Exception or Logger error
+            //TODO: Catch Exception or Logger error + nach Vorlesung am 18.1
             decreaseNumberOfEvaluations();
             updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
             setEvaluation(updatedEvaluation);
@@ -255,7 +253,7 @@ public class LearnSet
             setNumberOfEvaluations(getNumberOfEvaluations() - 1);
         }
         //TODO
-        // else: Error -> throw exception or do something with Logger
+        // else: Error -> throw exception or do something with Logger + nach Vorlesung am 18.1
     }
     
     

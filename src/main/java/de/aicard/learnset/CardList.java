@@ -81,14 +81,19 @@ public class CardList
         return this.m_CardList.get(m_ListIndex);
     }
 
-    public Card getCardByIndex(int _Index) throws NullPointerException
+    public Card getCardByIndex(int _Index) throws NullPointerException, Exception //?
     { //TODO überprüfen, ob ehhhm... index größer kleiner gleich ist wie größe des Dings
-        if(this.m_CardList.get(_Index) == null)
+        if((_Index <= this.m_CardList.size()) && (0 <= _Index))
         {
-            throw new NullPointerException("No Card set on ListIndex: " + _Index);
+            if(this.m_CardList.get(_Index) == null)
+            {
+                throw new NullPointerException("No Card set on ListIndex: " + _Index);
+            }
+    
+            return this.m_CardList.get(_Index);
         }
-        
-        return this.m_CardList.get(_Index);
+        // TODO geht das so?
+        throw new Exception("Index out of bounce.");
     }
     
     
