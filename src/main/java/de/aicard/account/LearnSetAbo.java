@@ -34,7 +34,22 @@ public class LearnSetAbo
         this.m_learnSet = m_learnSet;
     }
 
+    public int get_evaluation(){return this.m_evaluation;}
 
+    public void set_evaluation(int _evaluation){
+        if(this.m_evaluation != -1){
+            this.m_learnSet.deleteEvaluation(this.m_evaluation);
+        }
+        this.m_evaluation = _evaluation;
+        this.m_learnSet.addEvaluation(_evaluation);
+    }
+
+    public void delete_evaluation(){
+        if(this.m_evaluation != -1){
+            this.m_learnSet.deleteEvaluation(this.m_evaluation);
+            this.m_evaluation = -1;
+        }
+    }
 
     public ArrayList<CardStatus> getM_cardStatus() {
         return m_cardStatus;
@@ -48,15 +63,24 @@ public class LearnSetAbo
         m_learnSet = _learnSet;
         m_learnSetStatus = State.NEW;
         m_cardStatus = new ArrayList<CardStatus>();
-        //TODO Add initialization of cardStatus to constructor, when CardStatus is implemented
+        m_evaluation = -1;
         for(int i = 0; i<m_learnSet.getCardList().getListLength(); i++){
-            m_cardStatus.add(new CardStatus(m_learnSet.getCardList().getCardByIndex(i)));
+            try {
+                m_cardStatus.add(new CardStatus(m_learnSet.getCardList().getCardByIndex(i)));
+            }
+            // TODO was machen wir mit den Exceptions? ausgeben? weiterwerfen?
+            catch(NullPointerException e){
+                System.out.println(e);
+            }
+            catch(Exception e){
+                System.out.println();
+            }
         }
     }
 
     private ArrayList<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel level){
-        //TODO check when CardStatus is implemented
         ArrayList<CardStatus> result = new ArrayList<CardStatus>();
+
         for(int i=0; i<(this.m_cardStatus.size()); i++){
             CardStatus status = this.m_cardStatus.get(i);
             if (status.getCardKnowledgeLevel() == level){
