@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 public class GroupTest {
 
     @Test
-    public void TestInviteToGroup()
+    public void TestAddToGroup()
     {
         AccountList accountlist = new AccountList();
         AccountList accountlist2 = new AccountList();
@@ -24,8 +24,8 @@ public class GroupTest {
         accountlist2.addPerson(Prof1);
 
         accountlist.addPerson(Std1);
-        Group group = new Group("group1", Visibility.PUBLIC,accountlist);
-        group.inviteToGroup(Prof1);
+        Group group = new Group("group1", Visibility.PUBLIC,Std1);
+        group.addToGroup(Prof1);
 
         Assertions.assertEquals(accountlist2, group.get_members());
 

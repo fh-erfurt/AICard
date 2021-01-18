@@ -193,9 +193,15 @@ public abstract class Account
         this.groups.remove(_group);
     }
 
-    public void likeMessage(Message _message)
-    {
-        _message.raise_likes();
+    public boolean likeMessage(Message _message) {
+        if (!(_message.get_likedby()).contain(this))
+        { _message.raise_likes(); _message.newliker(this); return true; }
+        else{return false;}
+    }
+    public boolean dislikeMessage(Message _message){
+        if ((_message.get_likedby()).contain(this))
+        { _message.remove_Like(); _message.lostliker(this); return true;}
+        else{return false;}
     }
 
     public void editMessage(Message _message, String message)

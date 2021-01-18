@@ -16,7 +16,7 @@ public class AccountList {
         this.accountlist = _accList;
     }
     //todo mach hier array list übergeben tun.
-
+// ?? xD
 
     //Setter & getter
 
@@ -51,6 +51,11 @@ public class AccountList {
 
     public Account getPerson(int _number){
         return this.accountlist.get(_number);
+    }
+
+    public boolean contain (Account _acc){
+
+        return (this.accountlist.contains(_acc));
     }
 
 }

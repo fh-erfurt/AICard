@@ -1,5 +1,6 @@
 package de.aicard.account;
 
+import de.aicard.Social.Message;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
 import org.junit.jupiter.api.Assertions;
@@ -126,5 +127,26 @@ public class AccountTest
     void testChatManipulation()
     {
         //TODO verstehe nicht die Chatzugriffe in Account
+    }
+
+    boolean testLikeMessage()
+    {
+        boolean x = false;
+        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Message msg1 = new Message("this is message1",Std); // liked message
+        msg1.newliker(Std);
+        Message msg2 = new Message("this is message2",Std);// not liked message
+        if ((Std.likeMessage(msg1) == false) && (Std.likeMessage(msg2) == true)) {  x= true;}
+        return x;
+    }
+    boolean testdislikeMessage()
+    {
+        boolean x = false;
+        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Message msg1 = new Message("this is message1",Std); // liked message
+        msg1.newliker(Std);
+        Message msg2 = new Message("this is message2",Std);// not liked message
+        if ((Std.dislikeMessage(msg1) == true) && (Std.dislikeMessage(msg2) == false)) {  x= true;}
+        return x;
     }
 }

@@ -52,14 +52,18 @@ public class Group {
     }
 
 //functions
+    public Account getGroupCreator(){
+        return members.getPerson(0);
+    }
 
-public void addToGroup(Account _acc){
+    public void addToGroup(Account _acc){
 
-    this.members.addPerson(_acc);
+    members.addPerson(_acc);
 }
 
-public void leaveGroup(Account _acc){
-        //TODO write this fuction!!!!
+
+     public void removefromGroup(Account _acc){
+        members.removePerson(_acc);
 }
 
 }

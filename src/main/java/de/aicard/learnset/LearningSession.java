@@ -39,75 +39,11 @@ public class LearningSession
     }
 
     //methods
-    //todo kann weg.
-    private void riseCardKnowledgeLevel() //rises CardKnowledgeLevel of the currentCard
-    {
-        CardStatus currentStatus=this.cardStatusList.get(this.currentCard);
-        switch (currentStatus.getCardKnowledgeLevel())
-        {
-            case NOINFORMATION:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.SOMEINFORMATION);
-                break;
 
-            case SOMEINFORMATION:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.KNOW);
-                break;
-
-            case KNOW:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.KNOWWELL);
-                break;
-
-            case KNOWWELL:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.KNOWVERYWELL);
-                break;
-
-            case KNOWVERYWELL:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.KNOWVERYWELL);
-                break;
-
-            default:
-                System.out.println("Error:riseCardKnowledgeLevel() failed");
-                break;
-      }
-    }
-
-    //todo kann weg...
-    private void lowerCardKnowledgeLevel() //lowers CardKnowledgeLevel of the currentCard
-    {
-        CardStatus currentStatus=this.cardStatusList.get(this.currentCard);
-        switch (currentStatus.getCardKnowledgeLevel())
-        {
-            case NOINFORMATION:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.NOINFORMATION);
-                break;
-
-            case SOMEINFORMATION:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.NOINFORMATION);
-                break;
-
-            case KNOW:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.SOMEINFORMATION);
-                break;
-
-            case KNOWWELL:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.KNOW);
-                break;
-
-            case KNOWVERYWELL:
-                currentStatus.setCardKnowledgeLevel(CardKnowledgeLevel.KNOWWELL);
-                break;
-
-            default:
-                System.out.println("Error:lowerCardKnowledgeLevel() failed");
-                break;
-
-        }
-    }
 
     public void cardKnown()
     {
-        //TODO Funktion von CardStatus aufrufen
-        riseCardKnowledgeLevel();
+        this.cardStatusList.get(this.currentCard).increaseCardKnowledgeLevel();
         this.currentCard++;
         if(this.currentCard == this.cardStatusList.size()){
             this.isActive = false;
@@ -117,8 +53,7 @@ public class LearningSession
 
     public void cardUnKnown()
     {
-        //ToDO Funktion von CardStatus aufrufen
-        lowerCardKnowledgeLevel();
+        this.cardStatusList.get(this.currentCard).decreaseCardKnowledgeLevel();
         this.currentCard++;
         if(this.currentCard == this.cardStatusList.size()){
             this.isActive = false;

@@ -8,6 +8,8 @@ public class MessageList {
 
     private ArrayList<Message> messagelist;
 
+
+
     //Constructor
 
     public MessageList(){ messagelist = new ArrayList<Message>(); }
