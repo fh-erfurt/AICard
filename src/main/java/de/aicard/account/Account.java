@@ -220,6 +220,6 @@ public abstract class Account
      */
     
     //Methods
-
+    // TODO: Login + Signin Methode(Mit RegEx oder similar abgleich auf validität)), Reset Password,
 
 }
