@@ -1,6 +1,11 @@
 package de.aicard.card;
 
-public class TextFile extends CardContent
+/**
+ * Provides an TextFile as String for side of a card
+ *
+ * @author: Martin Kühlborn
+ */
+public class TextFile implements CardContent
 {
     // MEMBER VARIABLES
     private String m_TextData;

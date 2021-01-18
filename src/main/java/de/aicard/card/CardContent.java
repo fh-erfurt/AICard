@@ -1,8 +1,11 @@
 package de.aicard.card;
 
-public abstract class CardContent
+/**
+ * CardContent is the connection interface between Card and *File Classes
+ *
+ * @author: Martin Kühlborn
+ */
+public interface CardContent
 {
-    
-    //This is just used as a connection between Card and the different filetypes
-    //lol
+
 }

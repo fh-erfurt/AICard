@@ -1,9 +1,15 @@
 package de.aicard.card;
 
-public class AudioFile extends CardContent
+/**
+ * Provides an AudioFile for side of a card that can be played and paused
+ * Currently using placeholder Strings
+ * Will be real Audio in Java 2
+ *
+ * @author: Martin Kühlborn
+ */
+public class AudioFile implements CardContent
 {
     // MEMBER VARIABLES
-    // this will be a real audio in future...
     private String m_AudioData;
     private boolean m_isPlaying;
     private String m_Title;

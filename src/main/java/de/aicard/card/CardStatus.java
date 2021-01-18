@@ -2,11 +2,16 @@ package de.aicard.card;
 
 import de.aicard.enums.CardKnowledgeLevel;
 
+/**
+ * Provides current CardStatus of a Card
+ * Shows and edits CardKnowledgeLevel of any Account who has the Card in a LearnSetAbo
+ *
+ * @author: Martin Kühlborn
+ */
 public class CardStatus
 {
     // MEMBER VARIABLES
     private CardKnowledgeLevel m_CardKnowledgeLevel;
-    // private int m_CardXP; might be implemented later...
     private Card m_Card;
     
     
