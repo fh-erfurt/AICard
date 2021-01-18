@@ -5,6 +5,7 @@ import de.aicard.account.AccountList;
 import de.aicard.enums.Visibility;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 public class Message {
@@ -13,7 +14,7 @@ public class Message {
     private Account sender;
     private LocalDateTime time;
     private int likes;
-
+    private ArrayList<Account> likedby ;
     //constructor
     public Message(String _message, Account _sender){
 
@@ -21,6 +22,7 @@ public class Message {
         sender = _sender;
         time = LocalDateTime.now();
         likes = 0;
+
     }
     //Setter & getter
 
@@ -34,6 +36,8 @@ public class Message {
         return likes;
     }
     public void set_likes (int _number){this.likes = _number;}
+    public ArrayList<Account> get_likedby(){ return likedby;}
+    public void set_likedby (ArrayList<Account> _likedby) {this.likedby = _likedby;}
     public LocalDateTime get_time() {
         return time;
     }
@@ -41,15 +45,16 @@ public class Message {
     //functions
 
     public void raise_likes(){
-        //TODO Kopplung an Account? Alle können nur jeweils 1 mal liken.
         this.likes += 1;
     }
-
-    public void removeLike(){
-        //TODO Kopplung an Accont? Alle können nur eigene likes entfernen.
+    public void newliker (Account _account){
+        likedby.add(_account);
+    }
+    public void remove_Like(){
         this.likes -= 1;
     }
-
-
+    public void lostliker (Account _account){
+        likedby.remove(_account);
+    }
 
 }

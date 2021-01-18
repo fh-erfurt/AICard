@@ -53,7 +53,10 @@ private AccountList participants ;
      this.chathistory.addMessage(message);
     }
 
-    //TODO remove message function
+    public void removemessage (Message _message){
+
+        this.chathistory.removeMessage(_message);
+    }
 
 
 }

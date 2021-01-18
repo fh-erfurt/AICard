@@ -16,7 +16,7 @@ public class AccountList {
         this.accountlist = _accList;
     }
     //todo mach hier array list übergeben tun.
-
+// ?? xD
 
     //Setter & getter
 
