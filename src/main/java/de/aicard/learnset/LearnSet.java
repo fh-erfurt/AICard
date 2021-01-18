@@ -9,13 +9,19 @@ import de.aicard.learnset.CardList;
 import de.aicard.Social.MessageList;
 import java.util.ArrayList;
 
-/*
-* LearnSet in LearnSet Package for adjustment to UML-Class Diagramm and Package Structure
-* with new member variables
-* */
 
+/**
+ * Proviedes CardList with additional information:
+ * Title, Description, Faculty(to which Accounts from which Faculties it will be shown)
+ * CommentList, Evaluations(only 1 per Account->LearnSetAbo is possible)
+ * Owner(Account who created the LearnSet), Admins(Accounts who can edit the LearnSet)
+ * Visibility(to show the LearnSet to all Account, to Faculty and Friends or only to Owner)
+ *
+ * @author: Martin Kühlborn
+ */
 public class LearnSet
 {
+    // MEMBER VARIABLES
     private String m_Title;
     private String m_Description;
     private Faculty m_Faculty;
@@ -27,7 +33,7 @@ public class LearnSet
     private double m_Evaluation;
     private int m_NumberOfEvaluations;
     
-    // Constructor
+    // CONSTRUCTORS
     public LearnSet()
     {
         this(null, null, null, null, null);
@@ -62,7 +68,7 @@ public class LearnSet
         m_NumberOfEvaluations = 0;
     }
     
-    // Getter + Setter
+    // GETTER + SETTER
     public String getTitle() throws NullPointerException
     {
         if(m_Title == null)
@@ -197,20 +203,21 @@ public class LearnSet
     
  
     
-    /**
-     * Methods
-     *
-     *
-     * */
+    // METHODS
     
     public void createCardList()
     {
         this.m_CardList = new CardList();
     }
     
+    
     /*
-    * Evaluation
-    * */
+     * Evaluation
+     * */
+    
+    /**Add a new Evaluation and calculates the new average
+     * @param _newEvaluation int value that in used to calculate new average Evaluation
+     */
     public void addEvaluation(int _newEvaluation)
     {
         if(getNumberOfEvaluations() == 0)
@@ -232,12 +239,18 @@ public class LearnSet
     {
         if(getNumberOfEvaluations() > 0)
         {
-            double updatedEvaluation = getEvaluation() * getNumberOfEvaluations();
-            updatedEvaluation = updatedEvaluation - _EvaluationToDelete;
-            //TODO: Catch Exception or Logger error + nach Vorlesung am 18.1
-            decreaseNumberOfEvaluations();
-            updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
-            setEvaluation(updatedEvaluation);
+            try
+            {
+                double updatedEvaluation = getEvaluation() * getNumberOfEvaluations();
+                updatedEvaluation = updatedEvaluation - _EvaluationToDelete;
+                decreaseNumberOfEvaluations();
+                updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
+                setEvaluation(updatedEvaluation);
+            }
+            catch (Exception e)
+            {
+                // TODO ausgabe mit Logger -> Warning oder höher
+            }
         }
     }
     
@@ -246,14 +259,16 @@ public class LearnSet
         setNumberOfEvaluations(getNumberOfEvaluations() + 1);
     }
     
-    public void decreaseNumberOfEvaluations()
+    public void decreaseNumberOfEvaluations() throws Exception
     {
-        if(getNumberOfEvaluations() > 0)
+        if(getNumberOfEvaluations() <=  0)
         {
-            setNumberOfEvaluations(getNumberOfEvaluations() - 1);
+            throw new Exception("Can't decrease Number of Evaluations because lower or equal 0.");
         }
-        //TODO
-        // else: Error -> throw exception or do something with Logger + nach Vorlesung am 18.1
+    
+        setNumberOfEvaluations(getNumberOfEvaluations() - 1);
+    
+    
     }
     
     
@@ -290,6 +305,4 @@ public class LearnSet
         this.m_CommentList.removeMessage(_MessageToRemove);
     }
     
-    
-   
 }

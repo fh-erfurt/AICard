@@ -57,10 +57,10 @@ class CardTest
         TestCardPicture.setCardFront((CardContent) new PictureFile(TestCardPictureData));
         Assertions.assertEquals(TestCardPictureData, ((PictureFile) TestCardPicture.getCardFront()).getPictureData());
         
-        TestCardAudio.setCardFront((CardContent) new AudioFile(TestCardAudioData));
+        TestCardAudio.setCardFront((CardContent) new AudioFile(TestCardAudioData, ""));
         Assertions.assertEquals(TestCardAudioData,((AudioFile) TestCardAudio.getCardFront()).getAudioData());
         
-        TestCardVideo.setCardFront((CardContent) new VideoFile(TestCardVideoData));
+        TestCardVideo.setCardFront((CardContent) new VideoFile(TestCardVideoData, ""));
         Assertions.assertEquals(TestCardVideoData,((VideoFile) TestCardVideo.getCardFront()).getVideoData());
     }
 }
