@@ -1,4 +1,7 @@
 package de.aicard.Social;
+import de.aicard.account.Account;
+import de.aicard.account.Student;
+import de.aicard.enums.Faculty;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
@@ -7,9 +10,10 @@ public class MessageListTest {
     public void TestAddRemoveMessage()
     {
         MessageList messageList = new MessageList();
-        Message msg1 = new Message("this is message1");
-        Message msg2 = new Message("this is message2");
-        Message msg3 = new Message("this is message3");
+        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Message msg1 = new Message("this is message1",Std);
+        Message msg2 = new Message("this is message2",Std);
+        Message msg3 = new Message("this is message3",Std);
 
         messageList.addMessage(msg1);
         messageList.addMessage(msg2);
@@ -28,9 +32,10 @@ public class MessageListTest {
     public void TestGetNumberMessages()
     {
         MessageList messageList = new MessageList();
-        Message msg1 = new Message("this is message1");
-        Message msg2 = new Message("this is message2");
-        Message msg3 = new Message("this is message3");
+        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Message msg1 = new Message("this is message1",Std);
+        Message msg2 = new Message("this is message2",Std);
+        Message msg3 = new Message("this is message3",Std);
 
         messageList.addMessage(msg1);
         messageList.addMessage(msg2);

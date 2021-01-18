@@ -22,6 +22,7 @@ public class Message {
         sender = _sender;
         time = LocalDateTime.now();
         likes = 0;
+        likedby = null;
 
     }
     //Setter & getter
