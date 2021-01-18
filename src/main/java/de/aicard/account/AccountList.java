@@ -53,4 +53,9 @@ public class AccountList {
         return this.accountlist.get(_number);
     }
 
+    public boolean contain (Account _acc){
+
+        return (this.accountlist.contains(_acc));
+    }
+
 }

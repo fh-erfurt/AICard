@@ -14,7 +14,7 @@ public class Message {
     private Account sender;
     private LocalDateTime time;
     private int likes;
-    private ArrayList<Account> likedby ;
+    private AccountList likedby ;
     //constructor
     public Message(String _message, Account _sender){
 
@@ -37,8 +37,8 @@ public class Message {
         return likes;
     }
     public void set_likes (int _number){this.likes = _number;}
-    public ArrayList<Account> get_likedby(){ return likedby;}
-    public void set_likedby (ArrayList<Account> _likedby) {this.likedby = _likedby;}
+    public AccountList get_likedby(){ return likedby;}
+    public void set_likedby (AccountList _likedby) {this.likedby = _likedby;}
     public LocalDateTime get_time() {
         return time;
     }
@@ -49,13 +49,13 @@ public class Message {
         this.likes += 1;
     }
     public void newliker (Account _account){
-        likedby.add(_account);
+        likedby.addPerson(_account);
     }
     public void remove_Like(){
         this.likes -= 1;
     }
     public void lostliker (Account _account){
-        likedby.remove(_account);
+        likedby.removePerson(_account);
     }
 
 }
