@@ -5,9 +5,9 @@ import de.aicard.Social.Message;
 import de.aicard.enums.Faculty;
 import de.aicard.enums.Visibility;
 import de.aicard.account.Account;
-import de.aicard.learnset.CardList;
 import de.aicard.Social.MessageList;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 
 /**
@@ -21,6 +21,9 @@ import java.util.ArrayList;
  */
 public class LearnSet
 {
+    // CLASS VARIABLES
+    private static final Logger logger = Logger.getLogger(LearnSet.class.getName());
+ 
     // MEMBER VARIABLES
     private String m_Title;
     private String m_Description;
@@ -249,7 +252,7 @@ public class LearnSet
             }
             catch (Exception e)
             {
-                // TODO ausgabe mit Logger -> Warning oder höher
+                logger.warning(e.getMessage());
             }
         }
     }
@@ -267,7 +270,6 @@ public class LearnSet
         }
     
         setNumberOfEvaluations(getNumberOfEvaluations() - 1);
-    
     
     }
     

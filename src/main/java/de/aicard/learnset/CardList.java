@@ -2,10 +2,7 @@ package de.aicard.learnset;
 
 import de.aicard.card.Card;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Provides CardList with Cards and a Pointer to the current ListIndex
@@ -120,7 +117,7 @@ public class CardList
             return this.m_CardList.get(_Index);
         }
         
-        throw new Exception("Index out of bounce.");
+        throw new Exception("Index out of bounce. Index: " + _Index);
     }
     
     
@@ -138,10 +135,12 @@ public class CardList
     public void next()
     {
         // LOGGER -> out of bounce
+        // EXCEPTION -> must the caught in calling method
         if (m_ListIndex < m_CardList.size() - 1)
         {
            m_ListIndex++;
         }
+        
     }
     
     /**
@@ -150,10 +149,12 @@ public class CardList
     public void previous()
     {
         // LOGGER -> out of bounce
+        // EXCEPTION -> must the caught in calling method
         if (m_ListIndex > 0)
         {
             m_ListIndex--;
         }
+       
     }
 
 }
