@@ -7,6 +7,8 @@ import de.aicard.enums.AcademicGrade;
 import java.util.ArrayList;
 
 public class Professor extends Account{
+
+
     private AcademicGrade academicGrade;
 
     public Professor(String _email, String _password, String _name, String _description, AcademicGrade _academic)
@@ -24,6 +26,15 @@ public class Professor extends Account{
 
     }
 
-    //todo getter und setter für academic grade
+    //todo getter und setter für academic grade -- die 8 probleme kommen durch die set und get Methoden
+    public AcademicGrade getAcademicGrade() {
+        return academicGrade;
+    }
+
+    public void setAcademicGrade(AcademicGrade academicGrade) {
+        this.academicGrade = academicGrade;
+    }
+
+
 
 }

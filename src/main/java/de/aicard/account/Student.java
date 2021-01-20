@@ -7,6 +7,7 @@ import de.aicard.enums.Faculty;
 import java.util.ArrayList;
 
 public class Student extends Account{
+
     private int semester;
     private Faculty faculty;
 
@@ -26,4 +27,20 @@ public class Student extends Account{
 
 
     }
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+
 }
