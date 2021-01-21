@@ -1,0 +1,50 @@
+Meeting
+
+Datum:21.01.2021
+Uhrzeit:19 Uhr
+
+Nächstes Treffen: Montag, 28.01.2021 19:00UHR
+
+Teilnehmer:
+    Amine Semlali
+    Clemens Berger (Protokollant)
+    Daniel Michel
+    Martin Kühlborn
+    Antonio Blechschmidt 
+
+
+Inhalt:		
+	Mehr Kommentare einfügen
+	Codereview
+	Codestyle
+	CamelCase
+	membervariable nicht mit m_
+	Methoden aufräumen (überladen, _ in namen wegmachen)
+	{} in zweiter zeile anfangen
+	GitHub action anlegen
+	nullpointer exception in alle getter die objekte zurückgeben
+
+
+Ideen für die Dokumentation:
+	
+
+Aufgaben:
+    alle Mitglieder:
+		
+    Amine:
+		- social
+		- Codestyle
+    Clemens:
+		- Klassendiagramm updaten
+		- Codestyle
+		- GitHub action anlegen
+    Daniel:
+		- LearnSet
+		- Codestyle
+    Martin:
+    	- Test anpassen
+    	- Card
+    	- Codestyle
+    Antonio:
+		- Account
+		- Codestyle
