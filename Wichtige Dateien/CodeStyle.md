@@ -1,8 +1,8 @@
-#CodeStyle aiCard
+# CodeStyle aiCard
 - The gaol of this document is to ensure a consistent CodeStyle throughout the project
 - Violations of this CodyStyle are allowed if it enhances readability
 
-##Naming conventions
+## Naming conventions
 - All names should be written in English
 - Class names must be PascalCase <br>
     ```
@@ -24,7 +24,7 @@
     getNumberOfCars();          // not: GetNumberOfCars();
     calculateEverageSales();    // not: Calculateeveragesales();
     ``` 
-##Files and Folders
+## Files and Folders
 - Java file names must be PascalCase
     ```
     Car.java        // not: car.java
@@ -41,9 +41,9 @@
     ```
 - packages must always be lower case
     - packages in java and test folder must mirror each other
-##Statements
+## Statements
 
-##Layout
+## Layout
 
-##Comments
+## Comments
 
