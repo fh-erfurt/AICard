@@ -10,9 +10,9 @@ package de.aicard.card;
 public class AudioFile implements CardContent
 {
     // MEMBER VARIABLES
-    private String m_AudioData;
-    private boolean m_isPlaying;
-    private String m_Title;
+    private String audioData;
+    private boolean isPlaying;
+    private String title;
     
     // CONSTRUCTORS
     public AudioFile()
@@ -22,64 +22,64 @@ public class AudioFile implements CardContent
     
     public AudioFile(String _newAudioData, String _newTitle)
     {
-        this.m_isPlaying = false;
-        this.m_AudioData = _newAudioData;
-        this.m_Title     = _newTitle;
+        this.isPlaying = false;
+        this.audioData = _newAudioData;
+        this.title     = _newTitle;
     }
     
     
     // GETTER + SETTER
     public String getAudioData() throws NullPointerException
     {
-        if(this.m_AudioData == null)
+        if(this.audioData == null)
         {
             throw new NullPointerException("AudioData was not set.");
         }
         
-        return this.m_AudioData;
+        return this.audioData;
     }
     
     public void setAudioData(String _newAudioData)
     {
-        this.m_AudioData = _newAudioData;
+        this.audioData = _newAudioData;
     }
     
     public boolean getIsPlaying()
     {
-        return this.m_isPlaying;
+        return this.isPlaying;
     }
     
     public void setIsPlaying(boolean _newIsPlaying)
     {
-        this.m_isPlaying = _newIsPlaying;
+        this.isPlaying = _newIsPlaying;
     }
     
     public String getTitle() throws NullPointerException
     {
-        if(this.m_Title == null)
+        if(this.title == null)
         {
             throw new NullPointerException("AudioTitle was not set.");
         }
         
-        return this.m_Title;
+        return this.title;
     }
     
-    public void setTitle(String _neTitle)
+    public void setTitle(String _newTitle)
     {
-        this.m_Title = _neTitle;
+        this.title = _newTitle;
     }
     
     
     // Methods
     public String pauseAudioData()
     {
-        m_isPlaying = false;
+        isPlaying = false;
         return "AudioData is paused";
     }
     
     public String playAudioData()
     {
-        m_isPlaying = true;
+        isPlaying = true;
         return "AudioData is playing";
     }
     

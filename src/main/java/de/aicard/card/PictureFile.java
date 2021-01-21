@@ -11,8 +11,8 @@ public class PictureFile implements CardContent
 {
 
     // MEMBER VARIABLES
-    private String m_PictureData;
-    private String m_Title;
+    private String pictureData;
+    private String title;
     
     
     // CONSTRUCTORS
@@ -23,37 +23,37 @@ public class PictureFile implements CardContent
     
     public PictureFile(String _newPictureData)
     {
-        this.m_PictureData = _newPictureData;
+        this.pictureData = _newPictureData;
     }
     
     // GETTER + SETTER
     public String getPictureData() throws NullPointerException
     {
-        if(this.m_PictureData == null)
+        if(this.pictureData == null)
         {
             throw new NullPointerException("PictureData was not set.");
         }
         
-        return this.m_PictureData;
+        return this.pictureData;
     }
     
     public void setPictureData(String _newPictureData)
     {
-        this.m_PictureData = _newPictureData;
+        this.pictureData = _newPictureData;
     }
     
     public String getTitle() throws NullPointerException
     {
-        if(this.m_Title == null)
+        if(this.title == null)
         {
             throw new NullPointerException("PictureTitle was not set.");
         }
         
-        return this.m_Title;
+        return this.title;
     }
     
     public void setTitle(String _newTitle)
     {
-        this.m_Title = _newTitle;
+        this.title = _newTitle;
     }
 }

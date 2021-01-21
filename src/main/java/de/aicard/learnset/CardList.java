@@ -3,6 +3,7 @@ package de.aicard.learnset;
 import de.aicard.card.Card;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * Provides CardList with Cards and a Pointer to the current ListIndex
@@ -11,54 +12,64 @@ import java.util.ArrayList;
  */
 public class CardList
 {
+    // CLASS VARIABLES
+    private static final Logger logger = Logger.getLogger(CardList.class.getName());
+    
     // MEMBER VARIABLES
-    private ArrayList<Card> m_CardList;
-    private int m_ListIndex;
+    private ArrayList<Card> cardList;
+    private int listIndex;
 
     
     // CONSTRUCTORS
     public CardList()
     {
-        this(null);
+        this(new ArrayList<Card>());
     }
 
     public CardList(ArrayList<Card> _newCardList)
     {
-        this.m_CardList = _newCardList;
-        this.m_ListIndex = 0;
+        this.cardList = _newCardList;
+        this.listIndex = 0;
     }
     
     // GETTER + SETTER
     public ArrayList<Card> getCardList() throws NullPointerException
     {
-        if(this.m_CardList == null)
+        if(this.cardList == null)
         {
             throw new NullPointerException("CardList was not set.");
         }
         
-        return this.m_CardList;
+        return this.cardList;
     }
     
     public void setCardList(ArrayList<Card> _newCardList)
     {
-        this.m_CardList = _newCardList;
+        this.cardList = _newCardList;
     }
     
     public int getListIndex()
     {
-        return m_ListIndex;
+        return listIndex;
     }
     
     public void setListIndex(int _newListIndex)
     {
-        this.m_ListIndex = _newListIndex;
+        this.listIndex = _newListIndex;
     }
     
     
     // METHODS
     public void addToList(Card _newCard)
     {
-        this.m_CardList.add(_newCard);
+        if(getListLength() < 200)
+        {
+            this.cardList.add(_newCard);
+        }
+        else
+        {
+            logger.warning("Card not added to CardList, only 200 Card are allowed.");
+        }
     }
     
     
@@ -69,8 +80,7 @@ public class CardList
      */
     public void removeFromList(Card _Card)
     {
-       //TODO test this. mucho mucho testos.
-        this.m_CardList.remove(_Card);
+        this.cardList.remove(_Card);
     }
     
     /**Removes Card Object from list
@@ -80,7 +90,7 @@ public class CardList
      */
     public void removeFromList(int _Index)
     {
-        this.m_CardList.remove(_Index);
+        this.cardList.remove(_Index);
     }
     
     /**
@@ -90,12 +100,12 @@ public class CardList
      */
     public Card getCurrentCard() throws NullPointerException
     {
-        if(this.m_CardList.get(m_ListIndex) == null)
+        if(this.cardList.get(listIndex) == null)
         {
-            throw new NullPointerException("No Card set on current ListIndex: " + m_ListIndex);
+            throw new NullPointerException("No Card set on current ListIndex: " + listIndex);
         }
         
-        return this.m_CardList.get(m_ListIndex);
+        return this.cardList.get(listIndex);
     }
     
     /**Method to get a Card from the list by _Index
@@ -107,14 +117,14 @@ public class CardList
      */
     public Card getCardByIndex(int _Index) throws NullPointerException, Exception
     {
-        if((_Index < this.m_CardList.size()) && (0 <= _Index))
+        if((_Index < this.cardList.size()) && (0 <= _Index))
         {
-            if(this.m_CardList.get(_Index) == null)
+            if(this.cardList.get(_Index) == null)
             {
                 throw new NullPointerException("No Card set on ListIndex: " + _Index);
             }
     
-            return this.m_CardList.get(_Index);
+            return this.cardList.get(_Index);
         }
         
         throw new Exception("Index out of bounce. Index: " + _Index);
@@ -124,7 +134,7 @@ public class CardList
 
     public int getListLength()
     {
-        return this.m_CardList.size();
+        return this.cardList.size();
     }
 
     // METHODS
@@ -134,11 +144,13 @@ public class CardList
      */
     public void next()
     {
-        // LOGGER -> out of bounce
-        // EXCEPTION -> must the caught in calling method
-        if (m_ListIndex < m_CardList.size() - 1)
+        if (this.listIndex < this.cardList.size() - 1)
         {
-           m_ListIndex++;
+           this.listIndex++;
+        }
+        else
+        {
+            logger.warning("ListIndex out of bounce");
         }
         
     }
@@ -148,13 +160,14 @@ public class CardList
      */
     public void previous()
     {
-        // LOGGER -> out of bounce
-        // EXCEPTION -> must the caught in calling method
-        if (m_ListIndex > 0)
+        if (this.listIndex > 0)
         {
-            m_ListIndex--;
+            this.listIndex--;
         }
-       
+        else
+        {
+            logger.warning("ListIndex out of bounce.");
+        }
     }
 
 }

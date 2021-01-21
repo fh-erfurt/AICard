@@ -10,9 +10,9 @@ package de.aicard.card;
 public class VideoFile implements CardContent
 {
     // MEMBER VARIABLES
-    private String m_VideoData;
-    private boolean m_isPlaying;
-    private String m_Title;
+    private String videoData;
+    private boolean isPlaying;
+    private String title;
     
     // CONSTRUCTORS
     public VideoFile()
@@ -22,51 +22,51 @@ public class VideoFile implements CardContent
     
     public VideoFile(String _newVideoData, String _newTitle)
     {
-        this.m_VideoData = _newVideoData;
-        this.m_isPlaying = false;
-        this.m_Title     = _newTitle;
+        this.videoData = _newVideoData;
+        this.isPlaying = false;
+        this.title     = _newTitle;
     }
     
     
     // GETTER + Setter
     public String getVideoData() throws NullPointerException
     {
-        if(this.m_VideoData == null)
+        if(this.videoData == null)
         {
             throw new NullPointerException("VideoData was not set.");
         }
         
-        return this.m_VideoData;
+        return this.videoData;
     }
     
     public void setVideoData(String _newVideoData)
     {
-        this.m_VideoData = _newVideoData;
+        this.videoData = _newVideoData;
     }
     
     public boolean getIsPlaying()
     {
-        return this.m_isPlaying;
+        return this.isPlaying;
     }
     
     public void setIsPlaying(boolean _newIsPlaying)
     {
-        this.m_isPlaying = _newIsPlaying;
+        this.isPlaying = _newIsPlaying;
     }
     
     public String getTitle() throws NullPointerException
     {
-        if(this.m_Title == null)
+        if(this.title == null)
         {
             throw new NullPointerException("VideoTitle was not set.");
         }
         
-        return this.m_Title;
+        return this.title;
     }
     
     public void setTitle(String _newTitle)
     {
-        this.m_Title = _newTitle;
+        this.title = _newTitle;
     }
     
     
