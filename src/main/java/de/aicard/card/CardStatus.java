@@ -2,11 +2,21 @@ package de.aicard.card;
 
 import de.aicard.enums.CardKnowledgeLevel;
 
+import java.util.logging.Logger;
+
+/**
+ * Provides current CardStatus of a Card
+ * Shows and edits CardKnowledgeLevel of any Account who has the Card in a LearnSetAbo
+ *
+ * @author: Martin Kühlborn
+ */
 public class CardStatus
 {
+    // CLASS VARIABLES
+    private static final Logger logger = Logger.getLogger(CardStatus.class.getName());
+    
     // MEMBER VARIABLES
     private CardKnowledgeLevel m_CardKnowledgeLevel;
-    // private int m_CardXP; might be implemented later...
     private Card m_Card;
     
     
@@ -42,6 +52,10 @@ public class CardStatus
     
     // METHODS
     
+    /**
+     * Increases CardKnowledgeLevel or keeps the highest level
+     *
+     */
     public void increaseCardKnowledgeLevel()
     {
         switch (m_CardKnowledgeLevel)
@@ -60,12 +74,14 @@ public class CardStatus
                 this.m_CardKnowledgeLevel = CardKnowledgeLevel.KNOWVERYWELL;
                 break;
             default:
-                // Should never reach this.
-                //Maybe usefull for logger
-                return;
+                logger.warning("Something went wrong, Default case should never be reached!");
+                break;
         }
     }
     
+    /**
+     * Decrases CardKnowlegeLevel or keeps the lowest level
+     */
     public void decreaseCardKnowledgeLevel()
     {
         switch (m_CardKnowledgeLevel)
@@ -84,8 +100,7 @@ public class CardStatus
                 this.m_CardKnowledgeLevel = CardKnowledgeLevel.KNOWWELL;
                 break;
             default:
-                // Should never reach this.
-                //Maybe usefull for logger
+                logger.warning("Something went wrong, Default case should never be reached!");
                 return;
         }
     }

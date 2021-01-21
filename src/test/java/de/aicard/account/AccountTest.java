@@ -13,8 +13,8 @@ public class AccountTest
     {
         //setup
         Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.A);
-        LearnSetAbo LearnSetAbo1 = LearnSetAbo(new LearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience))
-        LearnSetAbo LearnSetAbo2 = LearnSetAbo(new LearnSet())
+        LearnSetAbo LearnSetAbo1 = LearnSetAbo(new LearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience));
+        LearnSetAbo LearnSetAbo2 = LearnSetAbo(new LearnSet());
 
         //test createNewOwnedLearnSet and getOwnedLearnSetAboByPosition
         Prof1.createNewOwnedLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);

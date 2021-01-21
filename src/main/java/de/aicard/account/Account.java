@@ -194,12 +194,12 @@ public abstract class Account
     }
 
     public boolean likeMessage(Message _message) {
-        if (!(_message.get_likedby()).contains(this))
+        if (!(_message.get_likedby()).contain(this))
         { _message.raise_likes(); _message.newliker(this); return true; }
         else{return false;}
     }
     public boolean dislikeMessage(Message _message){
-        if ((_message.get_likedby()).contains(this))
+        if ((_message.get_likedby()).contain(this))
         { _message.remove_Like(); _message.lostliker(this); return true;}
         else{return false;}
     }
@@ -226,6 +226,6 @@ public abstract class Account
      */
     
     //Methods
-
+    // TODO: Login + Signin Methode(Mit RegEx oder similar abgleich auf validität)), Reset Password,
 
 }

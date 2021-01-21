@@ -1,6 +1,13 @@
 package de.aicard.card;
 
-public class VideoFile extends CardContent
+/**
+ * Provides an VideoFile for side of a card that can be played and paused
+ * Currently using placeholder Strings
+ * Will be real Video in Java 2
+ *
+ * @author: Martin Kühlborn
+ */
+public class VideoFile implements CardContent
 {
     // MEMBER VARIABLES
     private String m_VideoData;
@@ -57,10 +64,11 @@ public class VideoFile extends CardContent
         return this.m_Title;
     }
     
-    public void setTitle(String _neTitle)
+    public void setTitle(String _newTitle)
     {
-        this.m_Title = _neTitle;
+        this.m_Title = _newTitle;
     }
+    
     
     // METHODS
     public String pauseVideoData()

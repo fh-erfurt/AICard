@@ -70,9 +70,9 @@ public class LearnSetAbo
             }
             // TODO was machen wir mit den Exceptions? ausgeben? weiterwerfen?
             catch(NullPointerException e){
-                System.out.println(e);
-            }
-            catch(Exception e){
+                System.out.println(e); // sorry für rumschieren :D aber wir sollen keine Ausgabe machen
+            }                          // am besten eine Logger ausgabe verwenden denke ich
+            catch(Exception e){        // mfg Martin
                 System.out.println();
             }
         }

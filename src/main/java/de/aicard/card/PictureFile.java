@@ -1,6 +1,13 @@
 package de.aicard.card;
 
-public class PictureFile extends CardContent
+/**
+ * Provides an PictureFile for side of a card
+ * Currently using placeholder Strings
+ * Will be real Picture in Java 2
+ *
+ * @author: Martin Kühlborn
+ */
+public class PictureFile implements CardContent
 {
 
     // MEMBER VARIABLES
