@@ -35,7 +35,11 @@ public class LearnSet
     private ArrayList<Account> m_Admins;
     private double m_Evaluation;
     private int m_NumberOfEvaluations;
-    
+
+    //ToDo Visibility prüfen, bevor LearnSetAbo erstellt wird
+    //ToDo Funktion, dass maximal 200 Karten angelegt werden können
+    //ToDo Wo wird LearnSet Status geändert?
+
     // CONSTRUCTORS
     public LearnSet()
     {
@@ -55,6 +59,7 @@ public class LearnSet
     public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty)
     {
         this(_newTitle, _newDescription, _newFaculty, null, null);
+        this.m_CardList = new CardList();
     }
     
     public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty, CardList _newCardList, Account _newOwner)

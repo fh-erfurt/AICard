@@ -1,0 +1,26 @@
+Meeting
+
+Datum:18.01.2021
+Uhrzeit:19 Uhr
+
+Nächstes Treffen:
+
+Teilnehmer:
+    Amine Semlali
+    Clemens Berger
+    Daniel Michel (Protokollant)
+    Martin Kühlborn
+    Antonio Blechschmidt
+
+
+Inhalt:
+	Dokumentation
+
+Funktionalitäten, die wir noch brauchen:
+- generelle Suchfunktion
+
+Aufgabe:
+
+Clemens überarbeitet die Klassen in Doku.
+alle anderen: ToDos abarbeiten, Fehler in Tests beheben, weitere Tests schreiben, Code-Dokumentation in Englisch und
+Java-Code-Standard

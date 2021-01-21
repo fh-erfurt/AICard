@@ -19,8 +19,8 @@ public class LearnSetTest
         //before
         LearnSet testLearnSet = new LearnSet();
         int evaluation1 = 4;
-        double evaluation2 = 2.4;
-        float evaluation3 = 3.2f;
+        int evaluation2 = 2;
+        int evaluation3 = 3;
         
         //Testing adding Evaluations
         testLearnSet.addEvaluation(evaluation1);
