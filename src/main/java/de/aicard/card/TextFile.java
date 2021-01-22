@@ -8,7 +8,7 @@ package de.aicard.card;
 public class TextFile implements CardContent
 {
     // MEMBER VARIABLES
-    private String m_TextData;
+    private String testData;
 
 
     // CONSTRUCTORS
@@ -19,22 +19,22 @@ public class TextFile implements CardContent
     
     public TextFile(String _newTextData)
     {
-        this.m_TextData = _newTextData;
+        this.testData = _newTextData;
     }
     
     // GETTER + SETTER
     public String getTextData() throws NullPointerException
     {
-        if(this.m_TextData == null)
+        if(this.testData == null)
         {
             throw new NullPointerException("TextData was not set.");
         }
         
-        return this.m_TextData;
+        return this.testData;
     }
     
     public void setTextData(String _newTextData)
     {
-        this.m_TextData = _newTextData;
+        this.testData = _newTextData;
     }
 }

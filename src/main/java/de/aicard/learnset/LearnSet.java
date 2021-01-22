@@ -25,25 +25,28 @@ public class LearnSet
     private static final Logger logger = Logger.getLogger(LearnSet.class.getName());
  
     // MEMBER VARIABLES
-    private String m_Title;
-    private String m_Description;
-    private Faculty m_Faculty;
-    private CardList m_CardList;
-    private MessageList m_CommentList;
-    private Account m_Owner;
-    private Visibility m_Visibility;
-    private ArrayList<Account> m_Admins;
-    private double m_Evaluation;
-    private int m_NumberOfEvaluations;
+    private String title;
+    private String description;
+    private Faculty faculty;
+    private CardList cardList;
+    private MessageList commentList;
+    private Account owner;
+    private Visibility visibility;
+    private ArrayList<Account> adminList;
+    private double evaluations;
+    private int numberOfEvaluations;
 
     //ToDo Visibility prüfen, bevor LearnSetAbo erstellt wird
+        // why? visibility interresiert doch nur beim anzeigen und nicht beim anlegen
     //ToDo Funktion, dass maximal 200 Karten angelegt werden können
+        // Done at CardList->addToList()
     //ToDo Wo wird LearnSet Status geändert?
+        // LearnSet hat keinen Status, sondern LearnSetAbo?
 
     // CONSTRUCTORS
     public LearnSet()
     {
-        this(null, null, null, null, null);
+        this(null, null, null, new CardList(), null);
     }
     
     public LearnSet(CardList _newCardList)
@@ -58,155 +61,154 @@ public class LearnSet
     
     public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty)
     {
-        this(_newTitle, _newDescription, _newFaculty, null, null);
-        this.m_CardList = new CardList();
+        this(_newTitle, _newDescription, _newFaculty, new CardList(), null);
     }
     
     public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty, CardList _newCardList, Account _newOwner)
     {
-        m_Title = _newTitle;
-        m_Description = _newDescription;
-        m_Faculty = _newFaculty;
-        m_CardList = _newCardList;
-        m_CommentList = new MessageList();
-        m_Owner = _newOwner;
-        m_Visibility = Visibility.PRIVATE;
-        m_Admins = new ArrayList<Account>();
-        m_Evaluation = 0;
-        m_NumberOfEvaluations = 0;
+        title = _newTitle;
+        description = _newDescription;
+        faculty = _newFaculty;
+        cardList = _newCardList;
+        commentList = new MessageList();
+        owner = _newOwner;
+        visibility = Visibility.PRIVATE;
+        adminList = new ArrayList<Account>();
+        evaluations = 0;
+        numberOfEvaluations = 0;
     }
     
     // GETTER + SETTER
     public String getTitle() throws NullPointerException
     {
-        if(m_Title == null)
+        if(title == null)
         {
             throw new NullPointerException("LearnSet Title was not set.");
         }
-        return this.m_Title;
+        return this.title;
     }
     
     public void setTitle(String _newTitle)
     {
-        this.m_Title = _newTitle;
+        this.title = _newTitle;
     }
     
     public String getDescription() throws NullPointerException
     {
-        if(m_Description == null)
+        if(description == null)
         {
             throw new NullPointerException("LearnSet Description was not set.");
         }
-        return this.m_Description;
+        return this.description;
     }
     
     public void setDescription(String _newDescription)
     {
-        this.m_Description = _newDescription;
+        this.description = _newDescription;
     }
     
     public Faculty getFaculty() throws NullPointerException
     {
-        if(m_Faculty == null)
+        if(faculty == null)
         {
             throw new NullPointerException("LearnSet Faculty was not set.");
         }
-        return this.m_Faculty;
+        return this.faculty;
     }
     
     public void setFaculty(Faculty _newFaculty)
     {
-        this.m_Faculty = _newFaculty;
+        this.faculty = _newFaculty;
     }
     
     public CardList getCardList() throws NullPointerException
     {
-        if(m_CardList == null)
+        if(cardList == null)
         {
             throw new NullPointerException("LearnSet CardList was not set.");
         }
-        return this.m_CardList;
+        return this.cardList;
     }
     
     public void setCardList(CardList _newCardList)
     {
-        this.m_CardList = _newCardList;
+        this.cardList = _newCardList;
     }
     
     public MessageList getCommentList() throws NullPointerException
     {
-        if(m_CommentList == null)
+        if(commentList == null)
         {
             throw new NullPointerException("LearnSet CommentList was not set.");
         }
-        return this.m_CommentList;
+        return this.commentList;
     }
     
     public void setCommentList(MessageList _newCommentList)
     {
-        this.m_CommentList = _newCommentList;
+        this.commentList = _newCommentList;
     }
     
     public Account getOwner() throws NullPointerException
     {
-        if(m_Owner == null)
+        if(owner == null)
         {
             throw new NullPointerException("LearnSet Owner was not set.");
         }
-        return this.m_Owner;
+        return this.owner;
     }
     
     public void setOwner(Account _newOwner)
     {
-        this.m_Owner = _newOwner;
+        this.owner = _newOwner;
     }
     
     public Visibility getVisibility() throws NullPointerException
     {
-        if(m_Visibility == null)
+        if(visibility == null)
         {
             throw new NullPointerException("LearnSet Visibility was not set.");
         }
-        return this.m_Visibility;
+        return this.visibility;
     }
     
     public void setVisibility(Visibility _newVisibility)
     {
-        this.m_Visibility = _newVisibility;
+        this.visibility = _newVisibility;
     }
     
     public ArrayList<Account> getAdmins() throws NullPointerException
     {
-        if(m_Admins == null)
+        if(adminList == null)
         {
             throw new NullPointerException("LearnSet AdminList was not set.");
         }
-        return this.m_Admins;
+        return this.adminList;
     }
     
     public void setAdmins(ArrayList<Account> _newAdmins)
     {
-        this.m_Admins = _newAdmins;
+        this.adminList = _newAdmins;
     }
     
     public double getEvaluation()
     {
-        return this.m_Evaluation;
+        return this.evaluations;
     }
     
     public void setEvaluation(double _newEvaluation)
     {
-        this.m_Evaluation = _newEvaluation;
+        this.evaluations = _newEvaluation;
     }
     
     public int getNumberOfEvaluations()
     {
-        return this.m_NumberOfEvaluations;
+        return this.numberOfEvaluations;
     }
     
     public void setNumberOfEvaluations(int _newNumberOfEvaluations)
     {
-        this.m_NumberOfEvaluations = _newNumberOfEvaluations;
+        this.numberOfEvaluations = _newNumberOfEvaluations;
     }
     
  
@@ -215,7 +217,7 @@ public class LearnSet
     
     public void createCardList()
     {
-        this.m_CardList = new CardList();
+        this.cardList = new CardList();
     }
     
     
@@ -285,17 +287,29 @@ public class LearnSet
     * */
     public void addAdmin(Account _newAdmin)
     {
-        this.m_Admins.add(_newAdmin);
+        this.adminList.add(_newAdmin);
     }
     
-    public void removeAdminByIndex(int _IndexToRemove)
+    /**
+     * Removes Admin from adminList by Index
+     * is overloaded
+     *
+     * @param _IndexToRemove
+     */
+    public void removeAdmin(int _IndexToRemove)
     {
-        this.m_Admins.remove(_IndexToRemove);
+        this.adminList.remove(_IndexToRemove);
     }
     
-    public void removeAdminByAccount(Account _AccountToRemove)
+    /**
+     * Removes Admin from adminList by Account
+     * is overloaded
+     *
+     * @param _AccountToRemove
+     */
+    public void removeAdmin(Account _AccountToRemove)
     {
-        this.m_Admins.remove(_AccountToRemove);
+        this.adminList.remove(_AccountToRemove);
     }
     
     /*
@@ -304,12 +318,12 @@ public class LearnSet
     * */
     public void addMessage(Message _newMessage)
     {
-        this.m_CommentList.addMessage(_newMessage);
+        this.commentList.addMessage(_newMessage);
     }
     
     public void removeMessageByMessage(Message _MessageToRemove)
     {
-        this.m_CommentList.removeMessage(_MessageToRemove);
+        this.commentList.removeMessage(_MessageToRemove);
     }
     
 }
