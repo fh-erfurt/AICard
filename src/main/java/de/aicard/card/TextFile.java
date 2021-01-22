@@ -17,9 +17,9 @@ public class TextFile implements CardContent
         this(null);
     }
     
-    public TextFile(String _newTextData)
+    public TextFile(String newTextData)
     {
-        this.testData = _newTextData;
+        this.testData = newTextData;
     }
     
     // GETTER + SETTER
@@ -33,8 +33,8 @@ public class TextFile implements CardContent
         return this.testData;
     }
     
-    public void setTextData(String _newTextData)
+    public void setTextData(String newTextData)
     {
-        this.testData = _newTextData;
+        this.testData = newTextData;
     }
 }

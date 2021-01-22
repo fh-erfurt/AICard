@@ -16,15 +16,29 @@ public class CardStatus
     private static final Logger logger = Logger.getLogger(CardStatus.class.getName());
     
     // MEMBER VARIABLES
+    /**
+     * Provides information on how well the user has already learned the card content.
+     */
     private CardKnowledgeLevel cardKnowledgeLevel;
+    /**
+     * The card to which the Object belongs.
+     */
     private Card card;
     
     
     // CONSTRUCTORS
-    public CardStatus(Card _newCard)
+
+    /**
+     * Constructor of an CardStatus object.
+     *
+     * Assigns the lowest CardKnowledgeLevel (NOINFORMATION) to the member cardKnowledgeLevel.
+     *
+     * @param newCard the Card to which the status belongs.
+     */
+    public CardStatus(Card newCard)
     {
         this.cardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
-        this.card = _newCard;
+        this.card = newCard;
     }
     
     
@@ -34,9 +48,9 @@ public class CardStatus
         return card;
     }
     
-    public void setCard(Card _newCard)
+    public void setCard(Card newCard)
     {
-        this.card = _newCard;
+        this.card = newCard;
     }
 
     public CardKnowledgeLevel getCardKnowledgeLevel()
@@ -44,9 +58,9 @@ public class CardStatus
         return cardKnowledgeLevel;
     }
     
-    public void setCardKnowledgeLevel(CardKnowledgeLevel _newCardKnowledgeLevel)
+    public void setCardKnowledgeLevel(CardKnowledgeLevel newCardKnowledgeLevel)
     {
-        this.cardKnowledgeLevel = _newCardKnowledgeLevel;
+        this.cardKnowledgeLevel = newCardKnowledgeLevel;
     }
     
     

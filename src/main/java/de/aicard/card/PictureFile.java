@@ -11,19 +11,26 @@ public class PictureFile implements CardContent
 {
 
     // MEMBER VARIABLES
+    /**
+     * Placeholder for an audio file. Will be a real audio in Java 2
+     */
     private String pictureData;
+    /**
+     * The title of the CardContent. Will be shown on top of the AudioData.
+     */
     private String title;
     
     
     // CONSTRUCTORS
+    //Todo Do we need this
     public PictureFile()
     {
         this(null);
     }
     
-    public PictureFile(String _newPictureData)
+    public PictureFile(String newPictureData)
     {
-        this.pictureData = _newPictureData;
+        this.pictureData = newPictureData;
     }
     
     // GETTER + SETTER
@@ -37,9 +44,9 @@ public class PictureFile implements CardContent
         return this.pictureData;
     }
     
-    public void setPictureData(String _newPictureData)
+    public void setPictureData(String newPictureData)
     {
-        this.pictureData = _newPictureData;
+        this.pictureData = newPictureData;
     }
     
     public String getTitle() throws NullPointerException
@@ -52,8 +59,8 @@ public class PictureFile implements CardContent
         return this.title;
     }
     
-    public void setTitle(String _newTitle)
+    public void setTitle(String newTitle)
     {
-        this.title = _newTitle;
+        this.title = newTitle;
     }
 }

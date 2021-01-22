@@ -15,15 +15,17 @@ public class Card
     
     
     // CONSTRUCTORS
+    //ToDo same question as in AudioFile: why not force user to directly put content into the card Object?
+
     public Card()
     {
         new Card(null, null);
     }
     
-    public Card(CardContent _newCardFront, CardContent _newCardBack)
+    public Card(CardContent newCardFront, CardContent newCardBack)
     {
-        this.cardFront = _newCardFront;
-        this.cardBack  = _newCardBack ;
+        this.cardFront = newCardFront;
+        this.cardBack  = newCardBack ;
     }
     
     
@@ -38,9 +40,9 @@ public class Card
         return this.cardFront;
     }
     
-    public void setCardFront(CardContent _newCardFront)
+    public void setCardFront(CardContent newCardFront)
     {
-        this.cardFront = _newCardFront;
+        this.cardFront = newCardFront;
     }
     
     public CardContent getCardBack() throws NullPointerException
@@ -53,8 +55,8 @@ public class Card
         return this.cardBack;
     }
     
-    public void setCardBack(CardContent _newCardBack)
+    public void setCardBack(CardContent newCardBack)
     {
-        this.cardBack = _newCardBack;
+        this.cardBack = newCardBack;
     }
 }

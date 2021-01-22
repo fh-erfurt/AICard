@@ -10,21 +10,41 @@ package de.aicard.card;
 public class AudioFile implements CardContent
 {
     // MEMBER VARIABLES
+    /**
+     * Placeholder for an audio file. Will be a real audio in Java 2
+     */
     private String audioData;
+    /**
+     * Boolean, that is true if the audio file is currently playing, false if it is not.
+     */
     private boolean isPlaying;
+    /**
+     * The title of the CardContent. Will be shown on top of the AudioData.
+     */
     private String title;
     
     // CONSTRUCTORS
+
+    //Todo do we really need this? maybe we should rather force the users to directly create the
+    //todo full content by uploading the file directly on the page and then creating the CardContent
+    //todo by clicking ok?
     public AudioFile()
     {
         this(null, null);
     }
-    
-    public AudioFile(String _newAudioData, String _newTitle)
+
+    /**
+     * Constructor of an AudioFile. Sets isPlaying to false assigns an audio file and a title to
+     * the member variables.
+     *
+     * @param newAudioData  Audio File to initialise audioData
+     * @param newTitle  String to initialize title
+     */
+    public AudioFile(String newAudioData, String newTitle)
     {
         this.isPlaying = false;
-        this.audioData = _newAudioData;
-        this.title     = _newTitle;
+        this.audioData = newAudioData;
+        this.title     = newTitle;
     }
     
     
@@ -39,9 +59,9 @@ public class AudioFile implements CardContent
         return this.audioData;
     }
     
-    public void setAudioData(String _newAudioData)
+    public void setAudioData(String newAudioData)
     {
-        this.audioData = _newAudioData;
+        this.audioData = newAudioData;
     }
     
     public boolean getIsPlaying()
@@ -49,9 +69,9 @@ public class AudioFile implements CardContent
         return this.isPlaying;
     }
     
-    public void setIsPlaying(boolean _newIsPlaying)
+    public void setIsPlaying(boolean newIsPlaying)
     {
-        this.isPlaying = _newIsPlaying;
+        this.isPlaying = newIsPlaying;
     }
     
     public String getTitle() throws NullPointerException
@@ -64,13 +84,14 @@ public class AudioFile implements CardContent
         return this.title;
     }
     
-    public void setTitle(String _newTitle)
+    public void setTitle(String newTitle)
     {
-        this.title = _newTitle;
+        this.title = newTitle;
     }
     
     
     // Methods
+    //ToDo what do we do with the returned String? -> Put reason why it exists in documentation (both methods)
     public String pauseAudioData()
     {
         isPlaying = false;
