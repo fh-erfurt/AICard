@@ -7,9 +7,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class CardListTest
 {
+    private static final Logger logger = Logger.getLogger(CardList.class.getName());
 
     @Test
     public void testingCardListConstructors()
@@ -29,15 +31,14 @@ public class CardListTest
     
     
         // Testing
-        try{
+        try
+        {
             Assertions.assertEquals(Card2, CardList1.getCardByIndex(1));
             Assertions.assertEquals(Card2, CardList2.getCardByIndex(1));
         }
-        catch(NullPointerException e){
-
-    }
-        catch(Exception e){
-            //just added this to compile the project ;)
+        catch(Exception e)
+        {
+        
         }
 
     
@@ -58,7 +59,8 @@ public class CardListTest
         CardList1.addToList(Card2);
         
         // Testing
-        try{
+        try
+        {
             CardList1.addToList(Card1);
             Assertions.assertEquals(Card1, CardList1.getCardByIndex(2), "Adding Card to CardList");
 
@@ -68,7 +70,8 @@ public class CardListTest
             CardList1.removeFromList(Card2);
             Assertions.assertEquals(Card1, CardList1.getCardByIndex(0));
         }
-        catch(Exception e){
+        catch(Exception e)
+        {
 
         }
 
@@ -92,10 +95,12 @@ public class CardListTest
     
         // Testing
         Assertions.assertEquals(3, CardList1.getListLength(), "Should show same List Length");
-        try{
+        try
+        {
             Assertions.assertEquals(Card1, CardList1.getCardByIndex(0));
         }
-        catch(Exception e){
+        catch(Exception e)
+        {
 
         }
 
@@ -109,6 +114,39 @@ public class CardListTest
         CardList1.previous();
         Assertions.assertEquals(Card2, CardList1.getCurrentCard());
         
+    }
+    
+    @Test
+    public void shouldDisplayLoggerWarningAndNotIncreaseSizePast200()
+    {
+        CardList testCardList = new CardList();
+        for(int index = 0; index < 200; index++)
+        {
+            testCardList.addToList(new Card());
+        }
+        
+        testCardList.addToList(new Card());
+        Assertions.assertEquals(200, testCardList.getListLength());
+    }
+    
+    @Test void testingRemoveFromCardList()
+    {
+        // before
+        CardList testCardList = new CardList();
+        Card testCard1 = new Card();
+        Card testCard2 = new Card();
+        
+        testCardList.addToList(testCard1);
+        testCardList.addToList(testCard2);
+        testCardList.addToList(testCard1);
+        // testing
+        testCardList.removeFromList(1);
+        Assertions.assertEquals(2, testCardList.getListLength());
+        Assertions.assertEquals(testCard1, testCardList.getCurrentCard());
+        
+        testCardList.removeFromList(testCard1);
+        Assertions.assertEquals(1, testCardList.getListLength());
+
     }
     
 }

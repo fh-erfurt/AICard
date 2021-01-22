@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class CardStatusTest
 {
     @Test
-    public void testingCardKnowledgeLevel()
+    public void testingCardKnowledgeLevelIncreaseAndDecrease()
     {
         // before
         Card testCard = new Card();
@@ -19,13 +19,27 @@ public class CardStatusTest
         testCardStatus.increaseCardKnowledgeLevel();
         testCardStatus.increaseCardKnowledgeLevel();
         testCardStatus.increaseCardKnowledgeLevel();
-        Assertions.assertEquals(CardKnowledgeLevel.KNOWWELL, testCardStatus.getCardKnowledgeLevel());
+        Assertions.assertEquals(CardKnowledgeLevel.KNOWVERYWELL, testCardStatus.getCardKnowledgeLevel());
         
         testCardStatus.decreaseCardKnowledgeLevel();
-        Assertions.assertEquals(CardKnowledgeLevel.KNOW, testCardStatus.getCardKnowledgeLevel());
+        Assertions.assertEquals(CardKnowledgeLevel.KNOWWELL, testCardStatus.getCardKnowledgeLevel());
+        
+    }
+    
+    @Test
+    public void testingCardKnowledgeLevelReset()
+    {
+        // before
+        Card testCard = new Card();
+        CardStatus testCardStatus = new CardStatus(testCard);
+        // testing
+        testCardStatus.increaseCardKnowledgeLevel();
+        testCardStatus.increaseCardKnowledgeLevel();
+        testCardStatus.increaseCardKnowledgeLevel();
+        
+        Assertions.assertEquals(CardKnowledgeLevel.KNOWWELL, testCardStatus.getCardKnowledgeLevel());
         
         testCardStatus.resetCardKnowledgeLevel();
         Assertions.assertEquals(CardKnowledgeLevel.NOINFORMATION, testCardStatus.getCardKnowledgeLevel());
-        
     }
 }

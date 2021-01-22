@@ -45,6 +45,8 @@ public class LearnSet
 
     // CONSTRUCTORS
     //ToDo brauchen wir wirklich so viele Construktoren?
+    //  -> NEIN!!1! aber ich habe die Construktoren so erstellt, wie die Test der anderen Klassen ware
+    //  => Sinnvoll sind nur Konstruktoren, bei denen mindestens Faculty und Owner übergeben wird (vielleicht auch title)
     public LearnSet()
     {
         this(null, null, null, new CardList(), null);
@@ -254,15 +256,15 @@ public class LearnSet
      */
     public void deleteEvaluation(int evaluationToDelete)
     {
-        if(this.getNumberOfEvaluations() > 0)
+        if(this.numberOfEvaluations > 0)
         {
             try
             {
-                double updatedEvaluation = getEvaluation() * getNumberOfEvaluations();
+                double updatedEvaluation = this.evaluations * this.numberOfEvaluations;
                 updatedEvaluation = updatedEvaluation - evaluationToDelete;
                 decreaseNumberOfEvaluations();
-                updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
-                setEvaluation(updatedEvaluation);
+                updatedEvaluation = updatedEvaluation / this.numberOfEvaluations;
+                this.evaluations = updatedEvaluation;
             }
             catch (Exception e)
             {
@@ -273,17 +275,18 @@ public class LearnSet
     
     public void increaseNumberOfEvaluations()
     {
-        setNumberOfEvaluations(getNumberOfEvaluations() + 1);
+        setNumberOfEvaluations(this.numberOfEvaluations + 1);
     }
     
     public void decreaseNumberOfEvaluations() throws Exception
     {
-        if(getNumberOfEvaluations() <=  0)
+        if(this.numberOfEvaluations <=  0)
         {
+            // this should never be reached
             throw new Exception("Can't decrease Number of Evaluations because lower or equal 0.");
         }
     
-        setNumberOfEvaluations(getNumberOfEvaluations() - 1);
+        this.numberOfEvaluations = this.numberOfEvaluations - 1;
     
     }
     
@@ -294,7 +297,14 @@ public class LearnSet
     * */
     public void addAdmin(Account newAdmin)
     {
-        this.adminList.add(newAdmin);
+        if(!adminList.contains(newAdmin))
+        {
+            this.adminList.add(newAdmin);
+        }
+        else
+        {
+            logger.warning("New Admin is already part of adminList");
+        }
     }
     
     /**
@@ -305,7 +315,14 @@ public class LearnSet
      */
     public void removeAdmin(int indexToRemove)
     {
-        this.adminList.remove(indexToRemove);
+        if(indexToRemove <= adminList.size() && 0 <= indexToRemove)
+        {
+            this.adminList.remove(indexToRemove);
+        }
+        else
+        {
+            logger.warning("indexToRemvoe is out of bounce");
+        }
     }
     
     /**
@@ -316,7 +333,14 @@ public class LearnSet
      */
     public void removeAdmin(Account accountToRemove)
     {
-        this.adminList.remove(accountToRemove);
+        if(adminList.contains(accountToRemove))
+        {
+            this.adminList.remove(accountToRemove);
+        }
+        else
+        {
+            logger.warning("accountToRemove is not part of adminList");
+        }
     }
     
     /*
@@ -328,9 +352,16 @@ public class LearnSet
         this.commentList.addMessage(newMessage);
     }
     
-    public void removeMessageByMessage(Message MessageToRemove)
+    public void removeMessageByMessage(Message messageToRemove)
     {
-        this.commentList.removeMessage(MessageToRemove);
+        if(commentList.get_messagelist().contains(messageToRemove))
+        {
+            this.commentList.removeMessage(messageToRemove);
+        }
+        else
+        {
+            logger.warning("messageToRemove is not part of commentList");
+        }
     }
     
 }
