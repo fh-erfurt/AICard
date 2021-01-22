@@ -37,27 +37,43 @@ public class LearningSession
      *
      * sets currentCard to 0 and isActive to true.
      *
-     * @param _cardStatusList The List for the LearningSession.
+     * @param cardStatusList The List for the LearningSession.
      */
-    public LearningSession(ArrayList<CardStatus> _cardStatusList){
-        this.cardStatusList = _cardStatusList;
+    public LearningSession(ArrayList<CardStatus> cardStatusList)
+    {
+        this.cardStatusList = cardStatusList;
         this.currentCard = 0;
         this.isActive = true;
     }
 
     //setter & getter
-    public void setCurrentCard(int _currentCard){this.currentCard = _currentCard;}
-    public int getCurrentCard(){return this.currentCard;}
-    public boolean getIsActive(){return this.isActive;}
+    public void setCurrentCard(int currentCard)
+    {
+        this.currentCard = currentCard;
+    }
 
+    public int getCurrentCard()
+    {
+        return this.currentCard;
+    }
 
+    public boolean getIsActive()
+    {
+        return this.isActive;
+    }
 
-    public void setCardStatusList(ArrayList<CardStatus> cardStatusList) {
+    public void setCardStatusList(ArrayList<CardStatus> cardStatusList)
+    {
         this.cardStatusList = cardStatusList;
     }
 
-    public ArrayList<CardStatus> getCardStatusList() {
-        return cardStatusList;
+    public ArrayList<CardStatus> getCardStatusList() throws NullPointerException
+    {
+        if (this.cardStatusList == null)
+        {
+            throw new NullPointerException("CardStatusList was not set.");
+        }
+        return this.cardStatusList;
     }
 
     //methods
@@ -78,7 +94,7 @@ public class LearningSession
      *
      * It decreases the CardKnowledgeLevel and turns to the next Card.
      */
-    public void cardUnKnown()
+    public void cardUnknown()
     {
         this.cardStatusList.get(this.currentCard).decreaseCardKnowledgeLevel();
         this.next();
@@ -90,11 +106,13 @@ public class LearningSession
      * Checks, if the current Card was the last Card of the Session. If so, it sets isActive to false.
      * If not, it increases currentCard by one.
      */
-    public void next(){
-        if(this.currentCard == this.cardStatusList.size()){
+    public void next()
+    {
+        if(this.currentCard == this.cardStatusList.size())
+        {
             this.isActive = false;
         }
-        else{
+        else {
             this.currentCard++;
         }
     }

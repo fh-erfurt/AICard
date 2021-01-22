@@ -16,19 +16,33 @@ public class CardList
     private static final Logger logger = Logger.getLogger(CardList.class.getName());
     
     // MEMBER VARIABLES
+    /**
+     * A list of Cards.
+     */
     private ArrayList<Card> cardList;
+    /**
+     * The current listIndex.
+     */
     private int listIndex;
 
     
     // CONSTRUCTORS
+
+    /**
+     * Constructs a CardList containing only an empty ArrayList.
+     */
     public CardList()
     {
         this(new ArrayList<Card>());
     }
 
-    public CardList(ArrayList<Card> _newCardList)
+    /**
+     * Constructor which constructs a CardList on the basis of an existing ArrayList of Cards.
+     * @param newCardList
+     */
+    public CardList(ArrayList<Card> newCardList)
     {
-        this.cardList = _newCardList;
+        this.cardList = newCardList;
         this.listIndex = 0;
     }
     
@@ -43,9 +57,9 @@ public class CardList
         return this.cardList;
     }
     
-    public void setCardList(ArrayList<Card> _newCardList)
+    public void setCardList(ArrayList<Card> newCardList)
     {
-        this.cardList = _newCardList;
+        this.cardList = newCardList;
     }
     
     public int getListIndex()
@@ -53,18 +67,18 @@ public class CardList
         return listIndex;
     }
     
-    public void setListIndex(int _newListIndex)
+    public void setListIndex(int newListIndex)
     {
-        this.listIndex = _newListIndex;
+        this.listIndex = newListIndex;
     }
     
     
     // METHODS
-    public void addToList(Card _newCard)
+    public void addToList(Card newCard)
     {
         if(getListLength() < 200)
         {
-            this.cardList.add(_newCard);
+            this.cardList.add(newCard);
         }
         else
         {
@@ -76,25 +90,26 @@ public class CardList
     /**Removes Card Object from list
      * is overloaded
      *
-     * @param _Card
+     * @param Card Card that should be removed
      */
-    public void removeFromList(Card _Card)
+    public void removeFromList(Card Card)
     {
-        this.cardList.remove(_Card);
+        this.cardList.remove(Card);
     }
     
     /**Removes Card Object from list
      * is overloaded
      *
-     * @param _Index
+     * @param Index index of the Card that should be removed.
      */
-    public void removeFromList(int _Index)
+    public void removeFromList(int Index)
     {
-        this.cardList.remove(_Index);
+        this.cardList.remove(Index);
     }
     
     /**
      * Gets a Card via the current value of ListIndex pointer
+     *
      * @return Card from list
      * @throws NullPointerException
      */
@@ -108,26 +123,26 @@ public class CardList
         return this.cardList.get(listIndex);
     }
     
-    /**Method to get a Card from the list by _Index
+    /**Method to get a Card from the list by index
      *
-     * @param _Index expects Index of the required Card in the list
+     * @param index expects index of the required Card in the list
      * @return Card from list
      * @throws NullPointerException
-     * @throws Exception if _Index is too big or small to be a ListIndex
+     * @throws Exception if index is too big or small to be a ListIndex
      */
-    public Card getCardByIndex(int _Index) throws NullPointerException, Exception
+    public Card getCardByIndex(int index) throws NullPointerException, Exception
     {
-        if((_Index < this.cardList.size()) && (0 <= _Index))
+        if((index < this.cardList.size()) && (0 <= index))
         {
-            if(this.cardList.get(_Index) == null)
+            if(this.cardList.get(index) == null)
             {
-                throw new NullPointerException("No Card set on ListIndex: " + _Index);
+                throw new NullPointerException("No Card set on ListIndex: " + index);
             }
     
-            return this.cardList.get(_Index);
+            return this.cardList.get(index);
         }
         
-        throw new Exception("Index out of bounce. Index: " + _Index);
+        throw new Exception("index out of bounce. index: " + index);
     }
     
     
