@@ -39,7 +39,7 @@
     ``` 
     //TODO -> insert Image!
     ```
-- packages must always be lower case
+- packages must be lower case
     - packages in java and test folder must mirror each other
 ## Statements
 
