@@ -117,8 +117,15 @@ public abstract class Account
     
     public void createNewOwnedLearnSet(String _title, String _description, Faculty _faculty)
     {
-        ownedLearningSets.add(new LearnSetAbo(new LearnSet(_title,_description,_faculty)));
+        try
+        {
+            ownedLearningSets.add(new LearnSetAbo(new LearnSet(_title, _description, _faculty)));
+        }
+        catch (Exception e){
+        //Do something here ;)
+        }
     }
+
     
     public void deleteFromOwnedLearningSetsByIndex(int _index)
     {

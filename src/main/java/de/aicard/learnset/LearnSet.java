@@ -261,6 +261,7 @@ public class LearnSet
                 double updatedEvaluation = getEvaluation() * getNumberOfEvaluations();
                 updatedEvaluation = updatedEvaluation - evaluationToDelete;
                 decreaseNumberOfEvaluations();
+                //ToDo check if new number of Evaluations is 0 now -> creates Problems when deleting the last Evaluation
                 updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
                 setEvaluation(updatedEvaluation);
             }
