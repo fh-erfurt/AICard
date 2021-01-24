@@ -1,6 +1,7 @@
 package de.aicard.account;
 
 import de.aicard.card.Card;
+import de.aicard.card.TextFile;
 import de.aicard.learnset.CardList;
 import de.aicard.card.CardStatus;
 import de.aicard.enums.CardKnowledgeLevel;
@@ -46,14 +47,14 @@ public class LearnSetAbo
      *
      *
      *
-     * @param _learnSet The LearnSet to which the Account subscribes.
+     * @param learnSet The LearnSet to which the Account subscribes.
      */
-    public LearnSetAbo(LearnSet _learnSet) throws NullPointerException, Exception
+    public LearnSetAbo(LearnSet learnSet) throws NullPointerException, Exception
     {
-        learnSet = _learnSet;
-        learnSetStatus = State.NEW;
-        cardStatus = new ArrayList<CardStatus>();
-        evaluation = -1;
+        this.learnSet = learnSet;
+        this.learnSetStatus = State.NEW;
+        this.cardStatus = new ArrayList<CardStatus>();
+        this.evaluation = -1;
 
         for(int i = 0; i<learnSet.getCardList().getListLength(); i++)
         {
@@ -65,12 +66,12 @@ public class LearnSetAbo
 
     public State getLearnSetStatus()
     {
-        return learnSetStatus;
+        return this.learnSetStatus;
     }
 
     public LearnSet getLearnSet()
     {
-        return learnSet;
+        return this.learnSet;
     }
 
     public int get_evaluation()
@@ -80,7 +81,7 @@ public class LearnSetAbo
 
     public ArrayList<CardStatus> getCardStatus()
     {
-        return cardStatus;
+        return this.cardStatus;
     }
 
     //setter
@@ -143,12 +144,11 @@ public class LearnSetAbo
     private ArrayList<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel level)
     {
         ArrayList<CardStatus> result = new ArrayList<CardStatus>();
-
         for(int i=0; i<(this.cardStatus.size()); i++){
-            CardStatus status = this.cardStatus.get(i);
-            if (status.getCardKnowledgeLevel() == level){
-                result.add(status);
+            if (cardStatus.get(i).getCardKnowledgeLevel() == level){
+                result.add(cardStatus.get(i));
             }
+
         }
         return result;
     }
@@ -175,7 +175,7 @@ public class LearnSetAbo
             {
                 for(int i = 0; i< lowestLevelList.size(); i++)
                 {
-                    while (resultCardStatusList.size()<numOfCards)
+                    if (resultCardStatusList.size()<numOfCards)
                     {
                         resultCardStatusList.add(lowestLevelList.get(i));
                     }

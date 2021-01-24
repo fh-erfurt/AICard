@@ -14,26 +14,40 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static de.aicard.enums.CardKnowledgeLevel.NOINFORMATION;
+
+/**
+ * Tests the functions of the Class LearnSetAbo
+ *
+ * @Author Daniel Michel
+ */
 
 public class LearnSetAboTest
 {
-    public LearnSet getTestLearnSet()
+    /**
+     * This is a helper function for many tests.
+     *
+     *
+     * @return: a LearnSet to run further tests on.
+     */
+    public static LearnSet getTestLearnSet()
     {
 
         String learnSetTitle = "Title";
         String learnSetDescription = "Description of my Learnset";
         Faculty faculty = Faculty.AppliedComputerScience;
         CardList cardList = new CardList();
-        TextFile front = new TextFile();
-        TextFile back = new TextFile();
-        Card card = null;
+        ArrayList<TextFile> front = new ArrayList<>();
+        ArrayList<TextFile> back = new ArrayList<>();
+        ArrayList<Card> card = new ArrayList<Card>();
         for(int i = 0; i<20;i++)
         {
-            front.setTextData("Front of card " + i);
-            back.setTextData("Back of card " + i);
-            card = new Card(front, back);
-            cardList.addToList(card);
+            front.add(new TextFile("Front of card " + i));
+            back.add(new TextFile("Back of card " + i));
+            card.add(i, new Card(front.get(i), back.get(i)));
+            cardList.addToList(card.get(i));
         }
 
         Account learnSetOwner = new Student("mail", "password", "name", "a student", 3, Faculty.AppliedComputerScience);
@@ -53,24 +67,37 @@ public class LearnSetAboTest
         try
         {
             LearnSetAbo abo = new LearnSetAbo(learnSet);
-            //then: The Status of the LearnSet should be new, in the LearnSet should be the 20 Cards of
-            //the TestLearnSet, we should have access to the CardContent of all the Cards,
-            // the CardStatus should be NOINFORMATION
-
+            //then: The Status of the LearnSet should be new
             Assertions.assertEquals(State.NEW, abo.getLearnSetStatus());
-            Assertions.assertEquals(NOINFORMATION, abo.getCardStatus().get(19).getCardKnowledgeLevel());
+
+            //then: in the LearnSet of the Abo should be the 20 Cards of the TestLearnSet
             TextFile backOfCard = (TextFile) (abo.getLearnSet().getCardList().getCardByIndex(19).getCardBack());
             Assertions.assertEquals("Back of card 19", backOfCard.getTextData());
 
-        }
-        catch(Exception e){
-            System.out.println("Offenbar macht die CardList Probleme.");
-        }
+            //then: the same is true for the Cards in the CardStatusList of the LearnSetAbo
+            Assertions.assertEquals(20, abo.getCardStatus().size());
 
+            TextFile backOfSameCard = (TextFile) (abo.getCardStatus().get(19).getCard().getCardBack());
+            Assertions.assertEquals("Back of card 19", backOfSameCard.getTextData());
+
+            //then: the cards of the same index in the learnSet and the CardStatusList should be really exactly the same
+            Assertions.assertEquals(abo.getLearnSet().getCardList().getCardByIndex(3), abo.getCardStatus().get(3).getCard());
+
+            // the CardStatus of any Card should be NOINFORMATION
+            Assertions.assertEquals(NOINFORMATION, abo.getCardStatus().get(19).getCardKnowledgeLevel());
+
+        } catch (NullPointerException e)
+        {
+            System.out.println("this is a nullpointer Exeption" + e);
+        } catch (Exception e)
+        {
+            System.out.println("Offenbar macht die CardList Probleme." + e);
+        }
     }
 
     @Test
-    public void testCreatingAndDeletingEvaluation(){
+    public void testCreatingAndDeletingEvaluation()
+    {
         //given: Our TestLearnSet and an abo of it
         LearnSet learnSet = getTestLearnSet();
         try

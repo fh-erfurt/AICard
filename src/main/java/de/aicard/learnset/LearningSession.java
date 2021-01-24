@@ -108,7 +108,7 @@ public class LearningSession
      */
     public void next()
     {
-        if(this.currentCard == this.cardStatusList.size())
+        if(this.currentCard == (this).cardStatusList.size()-1)
         {
             this.isActive = false;
         }
