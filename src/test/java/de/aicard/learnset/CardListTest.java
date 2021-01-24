@@ -9,6 +9,12 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+/**
+ * Test class for all the functions of CardList
+ *
+ * @author Martin Kühlborn
+ */
+
 public class CardListTest
 {
     private static final Logger logger = Logger.getLogger(CardList.class.getName());
@@ -16,21 +22,24 @@ public class CardListTest
     @Test
     public void testingCardListConstructors()
     {
-        // Before
+        // Given: Two empty Cards
         Card Card1 = new Card();
         Card Card2 = new Card();
-        
+
+        //when: creating two CardLists: one with an ArrayList of the two Cards, one without parameters
         ArrayList CardArrayList = new ArrayList<>();
         CardArrayList.add(Card1);
         CardArrayList.add(Card2);
         
         CardList CardList1 = new CardList(CardArrayList);
         CardList CardList2 = new CardList();
+
+        //when: adding the Cards to the empty List
         CardList2.getCardList().add(Card1);
         CardList2.getCardList().add(Card2);
     
     
-        // Testing
+        //then: the Cards in the Lists should be identically
         try
         {
             Assertions.assertEquals(Card2, CardList1.getCardByIndex(1));
@@ -41,14 +50,14 @@ public class CardListTest
         
         }
 
-    
+        //then: the current Card Pointer/Index in the CardList points to the first Card.
         Assertions.assertEquals(Card1, CardList1.getCurrentCard());
         Assertions.assertEquals(Card1, CardList2.getCurrentCard());
         
     }
     
     @Test
-    public void testingCardListEditability()
+    public void testingCardListEdibility()
     {
         // Before
         Card Card1 = new Card();
@@ -129,7 +138,8 @@ public class CardListTest
         Assertions.assertEquals(200, testCardList.getListLength());
     }
     
-    @Test void testingRemoveFromCardList()
+    @Test
+    void testingRemoveFromCardList()
     {
         // before
         CardList testCardList = new CardList();

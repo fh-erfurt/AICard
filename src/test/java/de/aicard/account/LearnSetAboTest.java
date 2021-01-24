@@ -1,75 +1,92 @@
 package de.aicard.account;
 
-import de.aicard.card.Card;
-import de.aicard.card.CardContent;
 import de.aicard.card.TextFile;
-import de.aicard.enums.CardKnowledgeLevel;
-import de.aicard.enums.Faculty;
-import de.aicard.learnset.CardList;
+import de.aicard.enums.State;
 import de.aicard.learnset.LearnSet;
-import de.aicard.learnset.LearningSession;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LearnSetAboTest {
+import static de.aicard.enums.CardKnowledgeLevel.NOINFORMATION;
+import static de.aicard.learnset.LearnSetTest.getTestLearnSet;
+
+/**
+ * Tests the functions of the Class LearnSetAbo
+ *
+ * @Author Daniel Michel
+ */
+
+public class LearnSetAboTest
+{
+
+
     @Test
-    public void testingCreatingLearnSetAbo()
+    public void testCreatingLearnSetAbo()
     {
-        //given
-        LearnSet learnSet = new LearnSet("testSet", "test Description", Faculty.AppliedComputerScience);
-        Card card = null;
-        CardContent front = null;
-        CardContent back = null;
-        //learnSet.createCardList(); //TODO maybe add emty CardList by default constructor?
-        CardList testList = learnSet.getCardList();
-        for(int i = 0; i<20; i++){
-            card = new Card();
-            front = new TextFile("Vorderseite von Karte " + i);
-            back = new TextFile("Rückseite von Karte " + i);
-            card.setCardFront(front);
-            card.setCardBack(back);
-            testList.addToList(card);
+        //given: A learnset with a cardlist of 20 cards.
+
+        LearnSet learnSet = getTestLearnSet();
+
+        //when: creating an abo of this learnset
+        try
+        {
+            LearnSetAbo abo = new LearnSetAbo(learnSet);
+            //then: The Status of the LearnSet should be new
+            Assertions.assertEquals(State.NEW, abo.getLearnSetStatus());
+
+            //then: in the LearnSet of the Abo should be the 20 Cards of the TestLearnSet
+            TextFile backOfCard = (TextFile) (abo.getLearnSet().getCardList().getCardByIndex(19).getCardBack());
+            Assertions.assertEquals("Back of card 19", backOfCard.getTextData());
+
+            //then: the same is true for the Cards in the CardStatusList of the LearnSetAbo
+            Assertions.assertEquals(20, abo.getCardStatus().size());
+
+            TextFile backOfSameCard = (TextFile) (abo.getCardStatus().get(19).getCard().getCardBack());
+            Assertions.assertEquals("Back of card 19", backOfSameCard.getTextData());
+
+            //then: the cards of the same index in the learnSet and the CardStatusList should be really exactly the same
+            Assertions.assertEquals(abo.getLearnSet().getCardList().getCardByIndex(3), abo.getCardStatus().get(3).getCard());
+
+            // the CardStatus of any Card should be NOINFORMATION
+            Assertions.assertEquals(NOINFORMATION, abo.getCardStatus().get(19).getCardKnowledgeLevel());
+
+        } catch (NullPointerException e)
+        {
+            System.out.println("this is a nullpointer Exeption" + e);
+        } catch (Exception e)
+        {
+            System.out.println("Offenbar macht die CardList Probleme." + e);
         }
+    }
 
-        LearnSetAbo abo = new LearnSetAbo(learnSet);
+    @Test
+    public void testCreatingAndDeletingEvaluation()
+    {
+        //given: Our TestLearnSet and an abo of it
+        LearnSet learnSet = getTestLearnSet();
+        try
+        {
+            LearnSetAbo abo = new LearnSetAbo(learnSet);
 
-        //when
-        CardKnowledgeLevel level = abo.getM_cardStatus().get(4).getCardKnowledgeLevel();
-        String frontText = ((TextFile) abo.getM_cardStatus().get(4).getCard().getCardFront()).getTextData();
-        //then
-        //Assertions.assertEquals(CardKnowledgeLevel.NOINFORMATION, level, "The level never changed");
-        Assertions.assertEquals("Vorderseite von Karte 4", frontText);
+            //when: we are giving an evaluation to the learnset.
 
-        //this part test creation of learning session
-        //given
+            abo.set_evaluation(5);
 
-        //The learnset has 20 cards. in LearningSession 1 should be the first 10 cards. (0-9)
-        int numOfCards = 10;
-        LearningSession session = abo.createLearningSession(numOfCards);
-        while(session.getIsActive()){
-            session.cardKnown();
+            //then: it is the only evaluation of the learnSet
+
+            Assertions.assertEquals(1, learnSet.getNumberOfEvaluations());
+            Assertions.assertEquals(5, learnSet.getEvaluation());
+
+            //when: deleting the evaluation
+            abo.delete_evaluation();
+
+            //then: should be deleted in LearnSet too.
+            Assertions.assertEquals(0, learnSet.getNumberOfEvaluations());
+            Assertions.assertEquals(0, learnSet.getEvaluation());
         }
-
-        //then
-        //All cards that where in the LearningSession where known, thus the knowledgelevel was raised.
-        //The knowledgelevel of card 9 should now be
-        try{
-            Assertions.assertEquals(CardKnowledgeLevel.SOMEINFORMATION, learnSet.getCardList().getCardByIndex(9));
-        }catch(Exception e){
-            System.out.println("Hupsi, den Index gabs wohl nicht...");
+        catch (Exception e){
+            //oh no!!
+            System.out.println("OOPs. something went wrong.");
         }
-
-
-        //The second LearningSession consists of only 5 cards. It is expected that the next five cards
-        //are picked (10-14)
-        int alsoANumberofCards = 5;
-        LearningSession nextsession = abo.createLearningSession(alsoANumberofCards);
-        while(session.getIsActive()) {
-            session.cardKnown();
-        }
-
-
-
 
     }
 
