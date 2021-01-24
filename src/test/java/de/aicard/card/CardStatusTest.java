@@ -5,6 +5,11 @@ import de.aicard.enums.CardKnowledgeLevel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Provides test of functionalities of the CardStatus class
+ *
+ * @author: Martin Kühlborn
+ */
 public class CardStatusTest
 {
     @Test
