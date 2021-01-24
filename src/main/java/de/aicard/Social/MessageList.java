@@ -6,9 +6,23 @@ import java.util.ArrayList;
 
 public class MessageList {
 
+    /*
+    Todo Eine Liste, die nur aus einer Liste besteht, macht den Code nur unnötig kompliziert. Also: Klasse löschen und
+    gleich mit ArrayList<Message> arbeiten, wo wir es brauchen, oder das Ding braucht mehr Funktionen.
+
+    Beispiel:
+
+    Zugriff auf Kommentar in commentList in LearnSet ohne diese Klasse:
+
+    myLearnSet.getCommentList().get(i);
+
+    und mit dieser Klasse:
+
+    myLearnSet.getCommentList().get_messageList().get(i);
+
+    */
+
     private ArrayList<Message> messagelist;
-
-
 
     //Constructor
 

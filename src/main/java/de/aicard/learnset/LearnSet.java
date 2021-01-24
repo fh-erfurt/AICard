@@ -263,8 +263,12 @@ public class LearnSet
                 double updatedEvaluation = this.evaluations * this.numberOfEvaluations;
                 updatedEvaluation = updatedEvaluation - evaluationToDelete;
                 decreaseNumberOfEvaluations();
-                //ToDo check if new number of Evaluations is 0 now -> creates Problems when deleting the last Evaluation
-                updatedEvaluation = updatedEvaluation / this.numberOfEvaluations;
+
+                if(this.numberOfEvaluations != 0)
+                {
+                    updatedEvaluation = updatedEvaluation / this.numberOfEvaluations;
+                }
+
                 this.evaluations = updatedEvaluation;
             }
             catch (Exception e)
