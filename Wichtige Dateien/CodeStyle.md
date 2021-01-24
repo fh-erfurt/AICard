@@ -36,14 +36,43 @@
     SportsCarTest.java  // not: TestsportsCardtesting.java
     ``` 
     - their location must be in the same package structure in the test branch as the implementation
-    ``` 
-    //TODO -> insert Image!
-    ```
-- packages must be lower case
+    
+- package names must be lower case
     - packages in java and test folder must mirror each other
-## Statements
 
 ## Layout
+- Block Layout for curly brackets
+    ```
+    public class TestClass
+    {
+        if (1 < 0)
+        {
+            // Do something
+        }
+    
+        for (int index = 0; index < 10 ; index++)
+        {
+            // Do something
+        }
+    
+    }
+    ```
 
 ## Comments
-
+- every class must have a comment with its description and its author in JavaDocStyle
+- every membervariable must have a comment explaining its use in JavaDocStyle
+- complex methods must be commented in JavaDocStyle 
+- short comments in methods are appreciated 
+- TODO comments are appreciated
+    ```
+    /**
+    * JavaDocStyle comment example
+    * 
+    * @auther: 
+    */
+    
+    // short comment example
+    
+    
+    // TODO: example
+    ```
