@@ -11,6 +11,8 @@ import de.aicard.learnset.LearningSession;
 
 import java.util.ArrayList;
 
+//TODO LearnSetAbo and LearningSession belong logically together, thus they should be in the same package.
+
 /**
  * Provides a LearnSet with further, account-specific information and is thus always embedded
  * into an account. The further information provided by the LearnSetAbo are an ArrayList of

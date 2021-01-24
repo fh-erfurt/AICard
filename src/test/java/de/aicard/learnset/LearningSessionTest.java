@@ -1,13 +1,13 @@
 package de.aicard.learnset;
 
 import de.aicard.account.LearnSetAbo;
-import de.aicard.account.LearnSetAboTest;
 import de.aicard.card.Card;
-import de.aicard.card.CardContent;
 import de.aicard.card.TextFile;
 import de.aicard.enums.CardKnowledgeLevel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static de.aicard.learnset.LearnSetTest.getTestLearnSet;
 
 /**
  * This class tests the functions of the class LearningSessionTests
@@ -22,7 +22,7 @@ public class LearningSessionTest
     public void testingCreatingLearningSession()
     {
         //given: Our TestLearnSet and an Abo of it.
-        LearnSet learnSet = LearnSetAboTest.getTestLearnSet();
+        LearnSet learnSet = getTestLearnSet();
         try
         {
             LearnSetAbo abo = new LearnSetAbo(learnSet);
@@ -47,31 +47,38 @@ public class LearningSessionTest
     }
 
     @Test
-    public void testingWorkingInSessions(){
+    public void testingWorkingInSessions()
+    {
         //given: our testLearnSet
-        LearnSet set = LearnSetAboTest.getTestLearnSet();
-        try{
+        LearnSet set = getTestLearnSet();
+        try
+        {
             //also given: A LearnSetAbo of the testLearnSet and a Session of 5 Cards (as tested above)
             LearnSetAbo abo = new LearnSetAbo(set);
             int numOfCards = 5;
             LearningSession session = abo.createLearningSession(numOfCards);
 
             //when: we know all even cards in the Session
-            while(session.getIsActive()){
-                if(session.getCurrentCard()%2 == 0){
+            while(session.getIsActive())
+            {
+                if(session.getCurrentCard()%2 == 0)
+                {
                     session.cardKnown();
                 }
-                else{
+                else
+                    {
                     session.cardUnknown();
                 }
             }
 
             //then: CardKnowLedgeLevel of Card 0, 2 and 4 of the LearnSetAbo should be SOMEINFORMATION
-            for(int i = 0; i<numOfCards; i++){
-                if(i==0 || i==2 || i==4){
+            for(int i = 0; i<numOfCards; i++)
+            {
+                if(i==0 || i==2 || i==4)
+                {
                     Assertions.assertEquals(CardKnowledgeLevel.SOMEINFORMATION,abo.getCardStatus().get(i).getCardKnowledgeLevel());
                 }
-                else{
+                else {
                     Assertions.assertEquals(CardKnowledgeLevel.NOINFORMATION,abo.getCardStatus().get(i).getCardKnowledgeLevel());
                 }
             }

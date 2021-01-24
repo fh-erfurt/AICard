@@ -1,22 +1,13 @@
 package de.aicard.account;
 
-import de.aicard.card.Card;
-import de.aicard.card.CardContent;
-import de.aicard.card.CardStatus;
 import de.aicard.card.TextFile;
-import de.aicard.enums.CardKnowledgeLevel;
-import de.aicard.enums.Faculty;
 import de.aicard.enums.State;
-import de.aicard.learnset.CardList;
 import de.aicard.learnset.LearnSet;
-import de.aicard.learnset.LearningSession;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static de.aicard.enums.CardKnowledgeLevel.NOINFORMATION;
+import static de.aicard.learnset.LearnSetTest.getTestLearnSet;
 
 /**
  * Tests the functions of the Class LearnSetAbo
@@ -26,35 +17,7 @@ import static de.aicard.enums.CardKnowledgeLevel.NOINFORMATION;
 
 public class LearnSetAboTest
 {
-    /**
-     * This is a helper function for many tests.
-     *
-     *
-     * @return: a LearnSet to run further tests on.
-     */
-    public static LearnSet getTestLearnSet()
-    {
 
-        String learnSetTitle = "Title";
-        String learnSetDescription = "Description of my Learnset";
-        Faculty faculty = Faculty.AppliedComputerScience;
-        CardList cardList = new CardList();
-        ArrayList<TextFile> front = new ArrayList<>();
-        ArrayList<TextFile> back = new ArrayList<>();
-        ArrayList<Card> card = new ArrayList<Card>();
-        for(int i = 0; i<20;i++)
-        {
-            front.add(new TextFile("Front of card " + i));
-            back.add(new TextFile("Back of card " + i));
-            card.add(i, new Card(front.get(i), back.get(i)));
-            cardList.addToList(card.get(i));
-        }
-
-        Account learnSetOwner = new Student("mail", "password", "name", "a student", 3, Faculty.AppliedComputerScience);
-        LearnSet learnSet = new LearnSet(learnSetTitle, learnSetDescription, faculty, cardList, learnSetOwner);
-
-        return learnSet;
-    }
 
     @Test
     public void testCreatingLearnSetAbo()
@@ -118,8 +81,7 @@ public class LearnSetAboTest
 
             //then: should be deleted in LearnSet too.
             Assertions.assertEquals(0, learnSet.getNumberOfEvaluations());
-            //ToDo test again when problem in LearnSet solved
-            //Assertions.assertEquals(0, learnSet.getEvaluation());
+            Assertions.assertEquals(0, learnSet.getEvaluation());
         }
         catch (Exception e){
             //oh no!!
