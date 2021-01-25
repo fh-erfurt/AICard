@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Assertions;
 import java.util.ArrayList;
 public class MessageListTest {
 
-    public void TestAddRemoveMessage()
+    public void testAddRemoveMessage()
     {
         MessageList messageList = new MessageList();
-        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
-        Message msg1 = new Message("this is message1",Std);
-        Message msg2 = new Message("this is message2",Std);
-        Message msg3 = new Message("this is message3",Std);
+        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Message msg1 = new Message("this is message1",std);
+        Message msg2 = new Message("this is message2",std);
+        Message msg3 = new Message("this is message3",std);
 
         messageList.addMessage(msg1);
         messageList.addMessage(msg2);
@@ -29,13 +29,13 @@ public class MessageListTest {
     }
 
 
-    public void TestGetNumberMessages()
+    public void testGetNumberMessages()
     {
         MessageList messageList = new MessageList();
-        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
-        Message msg1 = new Message("this is message1",Std);
-        Message msg2 = new Message("this is message2",Std);
-        Message msg3 = new Message("this is message3",Std);
+        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Message msg1 = new Message("this is message1",std);
+        Message msg2 = new Message("this is message2",std);
+        Message msg3 = new Message("this is message3",std);
 
         messageList.addMessage(msg1);
         messageList.addMessage(msg2);

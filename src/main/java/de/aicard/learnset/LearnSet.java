@@ -359,7 +359,7 @@ public class LearnSet
     
     public void removeMessageByMessage(Message messageToRemove)
     {
-        if(commentList.get_messagelist().contains(messageToRemove))
+        if(commentList.getMessageList().contains(messageToRemove))
         {
             this.commentList.removeMessage(messageToRemove);
         }

@@ -7,7 +7,10 @@ import de.aicard.account.Account;
 import de.aicard.account.AccountList;
 import de.aicard.enums.Visibility;
 import de.aicard.learnset.LearnSet;
-
+/**
+the class group was supposed to be where students share their Learnsets to discuss them, functionalities will be
+ added later to make that possible
+ * */
 public class Group {
     //might be implemented later... maybe... next semester...
 
@@ -20,50 +23,50 @@ public class Group {
     //Constructor
 
 
-    public Group(String _name , Visibility _publicity, Account _creator){
-        this.name = _name;
+    public Group(String newName , Visibility newPublicity, Account newCreator){
+        this.name = newName;
         this.members = new AccountList();
-        this.members.addPerson(_creator);
-        this.publicity = _publicity;
+        this.members.addPerson(newCreator);
+        this.publicity = newPublicity ;
 
     }
 
     //Setter & getter
 
-    public String get_name() {
-        return name;
+    public String getName() {
+        return this.name;
     }
-    public void set_name(String _name) {
-        this.name = _name;
-    }
-
-    public AccountList get_members() {
-        return members;
-    }
-    public void set_members(AccountList _acclist) {
-        this.members = _acclist;
+    public void setName(String newName) {
+        this.name = newName;
     }
 
-    public Visibility get_publicity() {
-        return publicity;
+    public AccountList getMembers() {
+        return this.members;
     }
-    public void set_publicity(Visibility _vis) {
-        this.publicity = _vis;
+    public void setMembers(AccountList newMembers) {
+        this.members = newMembers;
+    }
+
+    public Visibility getPublicity() {
+        return this.publicity;
+    }
+    public void setPublicity(Visibility newVisibility) {
+        this.publicity = newVisibility;
     }
 
 //functions
     public Account getGroupCreator(){
-        return members.getPerson(0);
+        return this.members.getPerson(0);
     }
 
-    public void addToGroup(Account _acc){
+    public void addToGroup(Account newMember){
 
-    members.addPerson(_acc);
+    this.members.addPerson(newMember);
 }
 
 
-     public void removefromGroup(Account _acc){
-        members.removePerson(_acc);
+     public void removeFromGroup(Account oldMember){
+        this.members.removePerson(oldMember);
 }
 
 }

@@ -9,29 +9,29 @@ public class AccountListTest {
     @Test
     public void testAddRemoveFromAccountList()
     {
-        AccountList AccList1 = new AccountList();
+        AccountList accList1 = new AccountList();
 
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Student Std1 = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Professor prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Student std1 = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
 
-        AccList1.addPerson(Prof1);
-        AccList1.addPerson(Std1);
+        accList1.addPerson(prof1);
+        accList1.addPerson(std1);
 
-        AccountList AccList2 = new AccountList();
+        AccountList accList2 = new AccountList();
 
-        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Professor Prof3 = new Professor("Prof2@fh-erfurt.de","adminProf2","Prof2","Professor2", AcademicGrade.ACADEMIC_COUNCIL);
-        Student Std2 = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
-        Student Std3 = new Student("Std2@fh-erfurt.de","adminStd2","Std2","Student2", 3, Faculty.Architecture);
+        Professor prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof3 = new Professor("Prof2@fh-erfurt.de","adminProf2","Prof2","Professor2", AcademicGrade.ACADEMIC_COUNCIL);
+        Student std2 = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Student std3 = new Student("Std2@fh-erfurt.de","adminStd2","Std2","Student2", 3, Faculty.Architecture);
 
-        AccList2.addPerson(Prof2);
-        AccList2.addPerson(Std2);
-        AccList2.addPerson(Prof3);
-        AccList2.addPerson(Std3);
-        AccList2.removePerson(Prof3);
-        AccList2.removePerson(Std3);
+        accList2.addPerson(prof2);
+        accList2.addPerson(std2);
+        accList2.addPerson(prof3);
+        accList2.addPerson(std3);
+        accList2.removePerson(prof3);
+        accList2.removePerson(std3);
 
-        Assertions.assertEquals(AccList1, AccList2);
+        Assertions.assertEquals(accList1, accList2);
 
     }
 

@@ -1,60 +1,55 @@
 package de.aicard.Social;
 import de.aicard.Social.Message;
 import de.aicard.account.Account;
-
 import java.util.ArrayList;
+
+/** this class is used to group messages in a list */
 
 public class MessageList {
 
-    /*
-    Todo Eine Liste, die nur aus einer Liste besteht, macht den Code nur unnötig kompliziert. Also: Klasse löschen und
-    gleich mit ArrayList<Message> arbeiten, wo wir es brauchen, oder das Ding braucht mehr Funktionen.
-
-    Beispiel:
-
-    Zugriff auf Kommentar in commentList in LearnSet ohne diese Klasse:
-
-    myLearnSet.getCommentList().get(i);
-
-    und mit dieser Klasse:
-
-    myLearnSet.getCommentList().get_messageList().get(i);
-
-    */
-
-    private ArrayList<Message> messagelist;
+    private ArrayList<Message> messageList;
 
     //Constructor
 
-    public MessageList(){ messagelist = new ArrayList<Message>(); }
-    public MessageList(String _message, Account _account)
+    public MessageList(){ messageList = new ArrayList<Message>(); }
+    public MessageList(String newMessage, Account newSender)
     {
-        messagelist = new ArrayList<Message>();
-        this.addMessage(new Message(_message,_account));
+        messageList = new ArrayList<Message>();
+        this.addMessage(new Message(newMessage,newSender));
     }
 
     //Setter & getter
 
-    public ArrayList<Message> get_messagelist() {
-        return messagelist;
+    public ArrayList<Message> getMessageList() throws NullPointerException
+    {
+        if(this.messageList == null)
+        {
+            throw new NullPointerException("No messages were set.");
+        }
+
+        return this.messageList;
     }
-    public void set_messagelist(ArrayList<Message> _messageList) {
-        this.messagelist = _messageList;
+    public void setMessagelist(ArrayList<Message> newMessageList) {
+        this.messageList = newMessageList;
     }
 
     // functions
 
-    public void addMessage(Message _message)
+    public void addMessage(Message newMessage)
     {
-        messagelist.add(_message);
+        this.messageList.add(newMessage);
     }
 
-    public void removeMessage(Message _message)
+    public void removeMessage(Message oldMessage)
     {
-        messagelist.remove(_message);
+        this.messageList.remove(oldMessage);
     }
 
     public int getNumberMessages(){
-        return messagelist.size();
+        return this.messageList.size();
+    }
+    public boolean containMessage (Message theMessage)
+    {
+        return (this.messageList.contains(theMessage));
     }
 }

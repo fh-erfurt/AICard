@@ -7,55 +7,65 @@ import de.aicard.enums.Visibility;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-
+/**
+ * The class message is used to store informations about a message  */
 public class Message {
 
     private String message;
     private Account sender;
     private LocalDateTime time;
     private int likes;
-    private AccountList likedby ;
+    private AccountList likedBy  ;
     //constructor
-    public Message(String _message, Account _sender){
+    public Message(String newMessage, Account newSender){
 
-        message = _message;
-        sender = _sender;
+        message = newMessage;
+        sender = newSender;
         time = LocalDateTime.now();
         likes = 0;
-        likedby = null;
+        likedBy = null;
 
     }
     //Setter & getter
 
-    public String get_message() {
-        return message;
+    public String getMessage()
+    {
+        return this.message;
     }
-    public void set_message(String _message) {
-        this.message = _message;
+    public void setMessage(String newMessage) {
+        this.message = newMessage;
     }
-    public int get_likes() {
-        return likes;
+    public int getLikes()
+    {
+        return this.likes;
     }
-    public void set_likes (int _number){this.likes = _number;}
-    public AccountList get_likedby(){ return likedby;}
-    public void set_likedby (AccountList _likedby) {this.likedby = _likedby;}
-    public LocalDateTime get_time() {
-        return time;
+    public void setLikes (int number){this.likes = number;}
+    public AccountList getLikedBy() throws  NullPointerException
+    {
+        if(this.likedBy == null)
+        {
+            throw new NullPointerException("message was liked by nobody.");
+        }
+        return this.likedBy;
+    }
+    public void setLikedby (AccountList newLikedBy) {this.likedBy = newLikedBy;}
+    public LocalDateTime getTime() {
+        return this.time;
     }
 
     //functions
 
-    public void raise_likes(){
+    public void raiseLikes(){
         this.likes += 1;
     }
-    public void newliker (Account _account){
-        likedby.addPerson(_account);
+    public void newLiker (Account newLiker){
+        this.likedBy.addPerson(newLiker);
     }
-    public void remove_Like(){
+    public void removeLike(){
         this.likes -= 1;
     }
-    public void lostliker (Account _account){
-        likedby.removePerson(_account);
+    public void lostLiker (Account minusLiker){
+        this.likedBy.removePerson(minusLiker);
     }
 
 }

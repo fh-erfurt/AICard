@@ -12,22 +12,22 @@ import org.junit.jupiter.api.Test;
 public class GroupTest {
 
     @Test
-    public void TestAddToGroup()
+    public void testAddToGroup()
     {
-        AccountList accountlist = new AccountList();
-        AccountList accountlist2 = new AccountList();
+        AccountList accountList = new AccountList();
+        AccountList accountList2 = new AccountList();
 
-        Student Std1 = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Student std1 = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Professor prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
 
-        accountlist2.addPerson(Std1);
-        accountlist2.addPerson(Prof1);
+        accountList2.addPerson(std1);
+        accountList2.addPerson(prof1);
 
-        accountlist.addPerson(Std1);
-        Group group = new Group("group1", Visibility.PUBLIC,Std1);
-        group.addToGroup(Prof1);
+        accountList.addPerson(std1);
+        Group group = new Group("group1", Visibility.PUBLIC,std1);
+        group.addToGroup(prof1);
 
-        Assertions.assertEquals(accountlist2, group.get_members());
+        Assertions.assertEquals(accountList2, group.getMembers());
 
     }
 

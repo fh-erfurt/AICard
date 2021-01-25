@@ -1,61 +1,79 @@
 package de.aicard.Social;
 import de.aicard.account.Account;
 import de.aicard.account.AccountList;
-
+/**
+Class Chat has 2 Attributes chatHistory where the messages from all particiants are stored
+ and participants where the participants are stored
+ Participants can be added to the Chat but only after adding the creator
+ the Chat history can be cleared
+ messages can be sent , for that we need the account and a message
+ messages can be removed from the chat history
+ */
 public class Chat {
 
-private MessageList chathistory;
+private MessageList chatHistory;
 private AccountList participants ;
 
     //Constructor
 
     public Chat()
-    { chathistory = new MessageList();
+    { chatHistory = new MessageList();
     participants = new AccountList();
     }
-    public Chat(Account _participant,Account _creator, String _message)
+    public Chat(Account newParticipant,Account newCreator, String newMessage)
     {
-        chathistory = new MessageList(_message, _creator);
+        chatHistory = new MessageList(newMessage, newCreator);
         participants = new AccountList();
-        participants.addPerson(_creator);
-        participants.addPerson(_participant);
+        this.participants.addPerson(newCreator);
+        this.participants.addPerson(newParticipant);
 
     }
     //Setter & getter
 
-    public MessageList get_chathistory() { return chathistory; }
-    public void set_chathistory(MessageList _chathistory) {
-        this.chathistory = _chathistory;
+    public MessageList getChatHistory() throws NullPointerException
+    {
+        if(this.chatHistory == null)
+        {
+            throw new NullPointerException("chathistory does not exist.");
+        }
+            return this.chatHistory;
     }
 
-    public AccountList get_participants() { return participants; }
-    public void set_participants(AccountList _participant) {
-        this.participants = _participant;
+    public void setChatHistory(MessageList newChathistory) {
+        this.chatHistory = newChathistory;
+    }
+
+    public AccountList getParticipants()
+    {
+        return this.participants;
+    }
+    public void setParticipants(AccountList newParticipant) {
+        this.participants = newParticipant;
     }
 
     //Functions
-    public void addParticipant(Account _participant){
-        this.participants.addPerson(_participant);
+    public void addParticipant(Account newParticipant){
+        this.participants.addPerson(newParticipant);
     }
 
     public Account getChatCreator(){
-        return participants.getPerson(0);
+        return this.participants.getPerson(0);
     }
 
     public void clearHistory(){
-        this.chathistory = new MessageList();
+        this.chatHistory = new MessageList();
     }
 
     // chats
 
-    public void sendmessage(String _message, Account _sender) {
-     Message message = new Message(_message, _sender);
-     this.chathistory.addMessage(message);
+    public void sendMessage(String newMessage, Account newSender) {
+     Message messageToSend = new Message(newMessage, newSender);
+     this.chatHistory.addMessage(messageToSend);
     }
 
-    public void removemessage (Message _message){
+    public void removeMessage (Message oldMessage){
 
-        this.chathistory.removeMessage(_message);
+        this.chatHistory.removeMessage(oldMessage);
     }
 
 

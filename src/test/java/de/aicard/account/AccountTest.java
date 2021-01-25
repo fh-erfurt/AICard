@@ -142,7 +142,7 @@ public class AccountTest
         boolean x = false;
         Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
         Message msg1 = new Message("this is message1",Std); // liked message
-        msg1.newliker(Std);
+        msg1.newLiker(Std);
         Message msg2 = new Message("this is message2",Std);// not liked message
         if ((!Std.likeMessage(msg1) == true) && (Std.likeMessage(msg2) == true)) {  x= true;}
         return x;
@@ -152,7 +152,7 @@ public class AccountTest
         boolean x = false;
         Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
         Message msg1 = new Message("this is message1",Std); // liked message
-        msg1.newliker(Std);
+        msg1.newLiker(Std);
         Message msg2 = new Message("this is message2",Std);// not liked message
         if ((Std.dislikeMessage(msg1) == true) && (!Std.dislikeMessage(msg2) == true)) {  x= true;}
         return x;

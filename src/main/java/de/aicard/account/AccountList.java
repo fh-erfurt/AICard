@@ -5,57 +5,57 @@ import java.util.Arrays;
 
 public class AccountList {
 
-    private ArrayList<Account> accountlist;
+    private ArrayList<Account> accountList;
 
     //Constructor
 
-    public AccountList(){ accountlist = new ArrayList<Account>(); }
-    public AccountList(ArrayList<Account> _accList)
+    public AccountList(){ accountList = new ArrayList<Account>(); }
+    public AccountList(ArrayList<Account> newAccountList)
     {
-        this.accountlist = new ArrayList<Account>();
-        this.accountlist = _accList;
+        this.accountList = new ArrayList<Account>();
+        this.accountList = newAccountList;
     }
     //todo mach hier array list übergeben tun.
 // ?? xD
 
     //Setter & getter
 
-    public ArrayList<Account> get_accountlist() {
-        return accountlist;
+    public ArrayList<Account> getAccountlist() {
+        return accountList;
     }
 
-    public void set_accountlist(ArrayList<Account> _accList) {
-        this.accountlist = _accList;
+    public void setAccountlist(ArrayList<Account> newAccountList) {
+        this.accountList = newAccountList;
     }
 
 
     //functions
 
-    public void addPerson(Account _acc)
+    public void addPerson(Account newAccount)
     {
-        accountlist.add(_acc);
+        accountList.add(newAccount);
     }
 
-    public void removePerson(Account _acc)
+    public void removePerson(Account oldAccount)
     {
-        accountlist.remove(_acc);
+        accountList.remove(oldAccount);
     }
-    public void removePerson(int _acc)
+    public void removePerson(int oldAccount)
     {
-        accountlist.remove(_acc);
+        accountList.remove(oldAccount);
     }
 
     public int getNumberPersons(){
-        return accountlist.size();
+        return accountList.size();
     }
 
-    public Account getPerson(int _number){
-        return this.accountlist.get(_number);
+    public Account getPerson(int number){
+        return this.accountList.get(number);
     }
 
-    public boolean contain (Account _acc){
+    public boolean contain (Account anAccount){
 
-        return (this.accountlist.contains(_acc));
+        return (this.accountList.contains(anAccount));
     }
 
 }
