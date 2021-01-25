@@ -40,9 +40,9 @@ public abstract class Account
         return email;
     }
     
-    public void setEmail(String email)
+    public void setEmail(String _email)
     {
-        this.email = email;
+        this.email = _email;
     }
     
     public String getPassword()
@@ -50,9 +50,9 @@ public abstract class Account
         return password;
     }
     
-    public void setPassword(String password)
+    public void setPassword(String _password)
     {
-        this.password = password;
+        this.password = _password;
     }
     
     public String getName()
@@ -60,9 +60,9 @@ public abstract class Account
         return name;
     }
     
-    public void setName(String name)
+    public void setName(String _name)
     {
-        this.name = name;
+        this.name = _name;
     }
     
     public String getDescription()
@@ -70,9 +70,9 @@ public abstract class Account
         return description;
     }
     
-    public void setDescription(String description)
+    public void setDescription(String _description)
     {
-        this.description = description;
+        this.description = _description;
     }
     
     public List<LearnSetAbo> getOwnLearnSets()
@@ -201,8 +201,6 @@ public abstract class Account
      */
     
     //Methods
-    // TODO: Login + Signin Methode(Mit RegEx oder similar abgleich auf validität)), Reset Password
-    //TODO signIn = Constructor in Subclassen?
 
     //TODO Chat class?
     public boolean likeMessage(Message _message) {
@@ -216,5 +214,33 @@ public abstract class Account
         if ((_message.get_likedby()).contain(this))
         { _message.remove_Like(); _message.lostliker(this); return true;}
         else{return false;}
+    }
+    //TODO signIn = Constructor in Subclassen?
+    //TODO (Mit RegEx oder similar abgleich auf validität)) --> setEmail?
+
+    public void login(String _email, String _password)
+    {
+        String email = getEmail();
+        String password = getPassword();
+
+        if (email == _email && password == _password)
+        {
+            System.out.print("login was successful");
+            return;
+        }
+        else
+        {
+            System.out.print("login failed");
+        }
+    }
+
+    public void resetPassword(String _email, String _password)
+    {
+        String email = getEmail();
+
+        if (email == _email)
+        {
+            setPassword(_password);
+        }
     }
 }
