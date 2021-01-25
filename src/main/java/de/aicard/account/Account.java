@@ -2,14 +2,19 @@ package de.aicard.account;
 
 import de.aicard.Social.Chat;
 import de.aicard.Social.Message;
-import de.aicard.Social.Group;
 import de.aicard.Social.MessageList;
-import de.aicard.enums.Visibility;
 import de.aicard.enums.Faculty;
 import de.aicard.learnset.LearnSet;
 
 import java.util.List;
 
+/**
+ * is the stencil for the subclasses Professor and Student
+ * contains basic attributes of and account, who get more specific in the subclasses
+ * Provides the user with the functionalities to personalize their account
+ *
+ * @Author Antonio Blechschmidt
+ */
 
 public abstract class Account
 {
@@ -24,7 +29,6 @@ public abstract class Account
     protected List<LearnSetAbo> favoriteSets;
     protected AccountList friends;
     protected List<Chat> chats;
-    protected List<Group> groups;
     
     
     //Constructor CreateAccount
@@ -86,15 +90,11 @@ public abstract class Account
         return this.chats;
     }
 
-    public List<Group> getGroups()
-    {
-        return this.groups;
-    }
-    
+
     /**
      * Setter for ArrayLists are not Required
      */
-    
+
     /*
      * public void setOwnedLearningSets(ArrayList<LearnSet> _NewLearningSets)
      * {
@@ -182,24 +182,6 @@ public abstract class Account
     public void removeFriend(int _friend){ this.friends.removePerson(_friend);
     }
 
-
-    //groups
-
-    public void createGroup(String _name , Visibility _publicity){
-        this.groups.add( new Group(_name,_publicity,this)); //constructor von group;
-    }
-
-    public void joinGroup(Group _group){
-        if(_group.get_publicity() == Visibility.PUBLIC) {
-            this.groups.add(_group);
-        }
-    }
-
-
-    public void leaveGroup(Group _group){
-        this.groups.remove(_group);
-    }
-
     public boolean likeMessage(Message _message) {
         if (!(_message.get_likedby()).contain(this))
         { _message.raise_likes(); _message.newliker(this); return true; }
@@ -211,9 +193,9 @@ public abstract class Account
         else{return false;}
     }
 
-    public void editMessage(Message _message, String message)
+    public void editMessage(Message _message, String _editedMessage)
     {
-        _message.set_message(message);
+        _message.set_message(_editedMessage);
     }
 
     public void deleteMessage (Message _message, MessageList _messagelist)
