@@ -24,6 +24,7 @@
     getNumberOfCars();          // not: GetNumberOfCars();
     calculateEverageSales();    // not: Calculateeveragesales();
     ``` 
+- Paramenter have NO _underline
 ## Files and Folders
 - Java file names must be PascalCase
     ```
@@ -68,7 +69,7 @@
     /**
     * JavaDocStyle comment example
     * 
-    * @auther: 
+    * @author: 
     */
     
     // short comment example
