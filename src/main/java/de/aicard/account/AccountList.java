@@ -2,7 +2,7 @@ package de.aicard.account;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/** this class is used to group accounts in a list */
 public class AccountList {
 
     private ArrayList<Account> accountList;
@@ -15,8 +15,7 @@ public class AccountList {
         this.accountList = new ArrayList<Account>();
         this.accountList = newAccountList;
     }
-    //todo mach hier array list übergeben tun.
-// ?? xD
+
 
     //Setter & getter
 

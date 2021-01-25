@@ -8,7 +8,10 @@ import de.aicard.enums.Faculty;
 import de.aicard.enums.Visibility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+/**
+ the class GroupTest was supposed to run tests for the Group class it will be implemented as soon as all the functionalities from Group
+ are implemented
+ * */
 public class GroupTest {
 
     @Test
