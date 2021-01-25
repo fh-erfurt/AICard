@@ -24,7 +24,10 @@
     getNumberOfCars();          // not: GetNumberOfCars();
     calculateEverageSales();    // not: Calculateeveragesales();
     ``` 
-- Paramenter have NO _underline
+- Parametes must start with an _underline
+    ```
+   public void methodeName(_Parameter);
+  ```
 ## Files and Folders
 - Java file names must be PascalCase
     ```
