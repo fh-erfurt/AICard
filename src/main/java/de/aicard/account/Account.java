@@ -25,13 +25,13 @@ public abstract class Account
     protected String password;
     protected String name;
     protected String description;
-    protected List<LearnSetAbo> ownedLearningSets;
-    protected List<LearnSetAbo> favoriteSets;
+    protected List<LearnSetAbo> ownLearnSets;
+    protected List<LearnSetAbo> favoriteLearnSets;
     protected AccountList friends;
     protected List<Chat> chats;
     
     
-    //Constructor CreateAccount
+    //no Constructor cause abstract, Constructor in subclasses Professor and Student
 
     
     //Setter + Getter
@@ -75,9 +75,9 @@ public abstract class Account
         this.description = description;
     }
     
-    public List<LearnSetAbo> getOwnedLearningSets()
+    public List<LearnSetAbo> getOwnLearnSets()
     {
-        return this.ownedLearningSets;
+        return this.ownLearnSets;
     }
     
     public AccountList getFriends()
@@ -94,79 +94,74 @@ public abstract class Account
     /**
      * Setter for ArrayLists are not Required
      */
-
-    /*
-     * public void setOwnedLearningSets(ArrayList<LearnSet> _NewLearningSets)
-     * {
-     *   this.ownedLearningSets = _NewLearningSets;
-     * }
-     *
-     *
-     * public void setFavoriteSets (ArrayList<LearnSet> (_NewFavoriteSets)
-     * {
-     *   this.favoriteSets = _NewFavoriteSets;
-     * }
-     *
-     * */
     
     //Advanced Getter, Setter and Delete for ArrayLists
-    public LearnSetAbo getOwnedLearnSetAboByPosition(int _position)
+
+    //ownLearnAboSet
+
+    public LearnSetAbo getOwnLearnSetByPosition(int _position)
     {
-        return ownedLearningSets.get(_position);
+        return ownLearnSets.get(_position);
     }
-    
-    public void createNewOwnedLearnSet(String _title, String _description, Faculty _faculty)
+
+    /**Create a new LearnSetAbo with a new LearnSet
+     * puts the new LearnSetAbo in ownLearnSets
+     *
+     * @param _title        |
+     * @param _description  | provided Imformation for the Constructor of LearnSet
+     * @param _faculty      |
+     */
+    public void createNewOwnLearnSet(String _title, String _description, Faculty _faculty)
     {
         try
         {
-            ownedLearningSets.add(new LearnSetAbo(new LearnSet(_title, _description, _faculty)));
+            ownLearnSets.add(new LearnSetAbo(new LearnSet(_title, _description, _faculty)));
         }
         catch (Exception e){
-        //Do something here ;)
+        // Do something here ;)
         }
     }
 
-    
-    public void deleteFromOwnedLearningSetsByIndex(int _index)
+    public void deleteOwnLearnSetsByIndex(int _index)
     {
-        this.ownedLearningSets.remove(_index);
+        this.ownLearnSets.remove(_index);
     }
     
-    public void deleteFromOwnedLearningSetsLastElement()
+    public void deleteOwnLearnSetByLastElement()
     {
-        this.ownedLearningSets.remove(this.ownedLearningSets.size() - 1);
+        this.ownLearnSets.remove(this.ownLearnSets.size() - 1);
     }
     
-    public void deleteAllFromOwnedLearningSets()
+    public void deleteAllOwnLearnSets()
     {
-        this.ownedLearningSets.clear();
+        this.ownLearnSets.clear();
     }
 
-    //favorites
+    //favoriteLearnSets
     
     public LearnSetAbo getFavoriteSetByPosition(int _position)
     {
-        return this.favoriteSets.get(_position);
+        return this.favoriteLearnSets.get(_position);
     }
     
-    public void addNewFavoriteSets(LearnSetAbo _favoriteSet)
+    public void addNewFavoriteSet(LearnSetAbo _favoriteSet)
     {
-        this.favoriteSets.add(_favoriteSet);
+        this.favoriteLearnSets.add(_favoriteSet);
     }
     
-    public void deleteFromFavoriteSetsByIndex(int _index)
+    public void deleteFavoriteSetByIndex(int _index)
     {
-        this.favoriteSets.remove(_index);
+        this.favoriteLearnSets.remove(_index);
     }
     
-    public void deleteFromFavoriteSetsLastElement()
+    public void deleteFavoriteSetByLastElement()
     {
-        this.favoriteSets.remove(this.favoriteSets.size() - 1);
+        this.favoriteLearnSets.remove(this.favoriteLearnSets.size() - 1);
     }
     
-    public void deleteAllFromFavoriteSets()
+    public void deleteAllFavoriteSets()
     {
-        this.favoriteSets.clear();
+        this.favoriteLearnSets.clear();
     }
 
     //friends
@@ -182,22 +177,13 @@ public abstract class Account
     public void removeFriend(int _friend){ this.friends.removePerson(_friend);
     }
 
-    public boolean likeMessage(Message _message) {
-        if (!(_message.get_likedby()).contain(this))
-        { _message.raise_likes(); _message.newliker(this); return true; }
-        else{return false;}
-    }
-    public boolean dislikeMessage(Message _message){
-        if ((_message.get_likedby()).contain(this))
-        { _message.remove_Like(); _message.lostliker(this); return true;}
-        else{return false;}
-    }
-
+    //chats
+    //TODO Chat class?
     public void editMessage(Message _message, String _editedMessage)
     {
         _message.set_message(_editedMessage);
     }
-
+    //TODO Chat class?
     public void deleteMessage (Message _message, MessageList _messagelist)
     {
         _messagelist.removeMessage(_message);
@@ -215,6 +201,20 @@ public abstract class Account
      */
     
     //Methods
-    // TODO: Login + Signin Methode(Mit RegEx oder similar abgleich auf validität)), Reset Password,
+    // TODO: Login + Signin Methode(Mit RegEx oder similar abgleich auf validität)), Reset Password
+    //TODO signIn = Constructor in Subclassen?
 
+    //TODO Chat class?
+    public boolean likeMessage(Message _message) {
+        if (!(_message.get_likedby()).contain(this))
+        { _message.raise_likes(); _message.newliker(this); return true; }
+        else{return false;}
+    }
+
+    //TODO Chat class?
+    public boolean dislikeMessage(Message _message){
+        if ((_message.get_likedby()).contain(this))
+        { _message.remove_Like(); _message.lostliker(this); return true;}
+        else{return false;}
+    }
 }
