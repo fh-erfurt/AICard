@@ -18,39 +18,39 @@ public class AccountTest
         {
             LearnSetAbo LearnSetAbo1 = new LearnSetAbo(new LearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience));
             LearnSetAbo LearnSetAbo2 = new LearnSetAbo(new LearnSet());
-
-
-
+            
+            
+            
             //test createNewOwnedLearnSet and getOwnedLearnSetAboByPosition
             Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
             Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo1);
-
+            
             //test deleteFromOwnedLearningSetsByIndex
             Prof1.deleteOwnLearnSetsByIndex(0);
             Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo2);
-
+            
             //setup for deleteFromOwnedLearningSetsLastElement()
             Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
             Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
-
+            
             //test deleteFromOwnedLearningSetsLastElement()
             Prof1.deleteOwnLearnSetByLastElement();
             Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(-1), LearnSetAbo1);
-
+            
             //setup for deleteAllFromOwnedLearningSets()
             Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
-
+            
             //test deleteAllFromOwnedLearningSets()
             Prof1.deleteAllOwnLearnSets();
             Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo2);
-
+            
         }
         catch (Exception e){
-        //OH NO! we have to do something!
-         }
-
+            //OH NO! we have to do something!
+        }
+        
     }
-
+    
     @Test
     void testFavoriteLearnSetManipulation()
     {
@@ -59,31 +59,31 @@ public class AccountTest
         Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
         Prof2.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
         Prof2.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
-
+        
         //test addNewFavoriteSets() and getFavoriteSetByPosition()
         Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(0));//TODO wie werden alle public Sets angezeigt
         Assertions.assertEquals(Prof1.getFavoriteSetByPosition(0), Prof2.getOwnLearnSetByPosition(0));
-
+        
         //test deleteFromOwnedLearningSetsByIndex
         Prof1.deleteFavoriteSetByIndex(0);
         Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), null);
-
+        
         //setup for deleteFromOwnedLearningSetsLastElement()
         Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(0));
         Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(1));
-
+        
         //test deleteFromOwnedLearningSetsLastElement()
         Prof1.deleteFavoriteSetByLastElement();
         Assertions.assertEquals(Prof1.getFavoriteSetByPosition(-1), Prof2.getOwnLearnSetByPosition(0));
-
+        
         //setup for deleteAllFromOwnedLearningSets()
         Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(1));
-
+        
         //test deleteAllFromOwnedLearningSets()
         Prof1.deleteAllFavoriteSets();
         Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), null);
     }
-
+    
     @Test
     void testFriendManipulation()
     {
@@ -91,52 +91,52 @@ public class AccountTest
         Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
         Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
         Professor Prof3 = new Professor("Prof@fh-erfurt.de","adminProf","Prof3","Professor3", AcademicGrade.UNIVERSITY_PROFESSOR);
-
+        
         //test addFriend()
         Prof1.addFriend(Prof2);
         Assertions.assertEquals(Prof1.getFriends(), Prof2);
-
+        
         //test removeFriend()
         Prof1.removeFriend(Prof2);
         Assertions.assertEquals(Prof1.getFriends(), null);
-
+        
         //setup for removeFriendByIndex()
         Prof1.addFriend(Prof2);
         Prof1.addFriend(Prof3);
-
+        
         //test removeFriendByIndex()
         Prof1.removeFriend(1);
         Assertions.assertEquals(Prof1.getFriends(), Prof2);
-
+        
     }
-/**
-    @Test
-    void testGroupManipulation()
-    {
-        //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.A);
-        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.A);
-        Prof1.createGroup();
-        Prof2.createGroup();
-
-        //test createGroup() and leaveGroup()
-        Prof1.leaveGroup(Prof1.getGroups());
-        Assertions.assertEquals(Prof1.getGroups(), null);
-
-        //test joinGroup() negetiv
-        Prof1.joinGroup(Group _group);
-        Assertions.assertEquals(Prof1.getGroups(), null);
-        //test joinGroup() positiv
-        //TODO weiß nicht wie ich in Group den Status ändere von Prof2
-        Prof1.joinGroup(Group _group);
-    }
-**/
+    /**
+     @Test
+     void testGroupManipulation()
+     {
+     //setup
+     Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.A);
+     Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.A);
+     Prof1.createGroup();
+     Prof2.createGroup();
+     
+     //test createGroup() and leaveGroup()
+     Prof1.leaveGroup(Prof1.getGroups());
+     Assertions.assertEquals(Prof1.getGroups(), null);
+     
+     //test joinGroup() negetiv
+     Prof1.joinGroup(Group _group);
+     Assertions.assertEquals(Prof1.getGroups(), null);
+     //test joinGroup() positiv
+     //TODO weiß nicht wie ich in Group den Status ändere von Prof2
+     Prof1.joinGroup(Group _group);
+     }
+     **/
     @Test
     void testChatManipulation()
     {
         //TODO verstehe nicht die Chatzugriffe in Account
     }
-
+    
     boolean testLikeMessage()
     {
         boolean x = false;

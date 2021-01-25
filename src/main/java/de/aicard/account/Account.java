@@ -2,14 +2,19 @@ package de.aicard.account;
 
 import de.aicard.Social.Chat;
 import de.aicard.Social.Message;
-import de.aicard.Social.Group;
 import de.aicard.Social.MessageList;
-import de.aicard.enums.Visibility;
 import de.aicard.enums.Faculty;
 import de.aicard.learnset.LearnSet;
 
 import java.util.List;
 
+/**
+ * is the stencil for the subclasses Professor and Student
+ * contains basic attributes of and account, who get more specific in the subclasses
+ * Provides the user with the functionalities to personalize their account
+ *
+ * @Author Antonio Blechschmidt
+ */
 
 public abstract class Account
 {
@@ -20,15 +25,14 @@ public abstract class Account
     protected String password;
     protected String name;
     protected String description;
-    protected List<LearnSetAbo> ownedLearningSets;
-    protected List<LearnSetAbo> favoriteSets;
+    protected List<LearnSetAbo> ownLearnSets;
+    protected List<LearnSetAbo> favoriteLearnSets;
     protected AccountList friends;
     protected List<Chat> chats;
-    protected List<Group> groups;
     
     
-    //Constructor CreateAccount
-
+    //no Constructor cause abstract, Constructor in subclasses Professor and Student
+    
     
     //Setter + Getter
     public String getEmail()
@@ -36,9 +40,9 @@ public abstract class Account
         return email;
     }
     
-    public void setEmail(String email)
+    public void setEmail(String _email)
     {
-        this.email = email;
+        this.email = _email;
     }
     
     public String getPassword()
@@ -46,9 +50,9 @@ public abstract class Account
         return password;
     }
     
-    public void setPassword(String password)
+    public void setPassword(String _password)
     {
-        this.password = password;
+        this.password = _password;
     }
     
     public String getName()
@@ -56,9 +60,9 @@ public abstract class Account
         return name;
     }
     
-    public void setName(String name)
+    public void setName(String _name)
     {
-        this.name = name;
+        this.name = _name;
     }
     
     public String getDescription()
@@ -66,168 +70,177 @@ public abstract class Account
         return description;
     }
     
-    public void setDescription(String description)
+    public void setDescription(String _description)
     {
-        this.description = description;
+        this.description = _description;
     }
     
-    public List<LearnSetAbo> getOwnedLearningSets()
+    public List<LearnSetAbo> getOwnLearnSets()
     {
-        return this.ownedLearningSets;
+        return this.ownLearnSets;
     }
     
     public AccountList getFriends()
     {
         return this.friends;
     }
-
+    
     public List<Chat> getChats()
     {
         return this.chats;
     }
-
-    public List<Group> getGroups()
-    {
-        return this.groups;
-    }
+    
     
     /**
      * Setter for ArrayLists are not Required
      */
     
-    /*
-     * public void setOwnedLearningSets(ArrayList<LearnSet> _NewLearningSets)
-     * {
-     *   this.ownedLearningSets = _NewLearningSets;
-     * }
-     *
-     *
-     * public void setFavoriteSets (ArrayList<LearnSet> (_NewFavoriteSets)
-     * {
-     *   this.favoriteSets = _NewFavoriteSets;
-     * }
-     *
-     * */
-    
     //Advanced Getter, Setter and Delete for ArrayLists
-    public LearnSetAbo getOwnedLearnSetAboByPosition(int _position)
+    
+    //ownLearnAboSet
+    
+    public LearnSetAbo getOwnLearnSetByPosition(int _position)
     {
-        return ownedLearningSets.get(_position);
+        return ownLearnSets.get(_position);
     }
     
-    public void createNewOwnedLearnSet(String _title, String _description, Faculty _faculty)
+    /**Create a new LearnSetAbo with a new LearnSet
+     * puts the new LearnSetAbo in ownLearnSets
+     *
+     * @param _title        |
+     * @param _description  | provided Imformation for the Constructor of LearnSet
+     * @param _faculty      |
+     */
+    public void createNewOwnLearnSet(String _title, String _description, Faculty _faculty)
     {
         try
         {
-            ownedLearningSets.add(new LearnSetAbo(new LearnSet(_title, _description, _faculty)));
+            ownLearnSets.add(new LearnSetAbo(new LearnSet(_title, _description, _faculty)));
         }
         catch (Exception e){
-        //Do something here ;)
+            // Do something here ;)
         }
     }
-
     
-    public void deleteFromOwnedLearningSetsByIndex(int _index)
+    public void deleteOwnLearnSetsByIndex(int _index)
     {
-        this.ownedLearningSets.remove(_index);
+        this.ownLearnSets.remove(_index);
     }
     
-    public void deleteFromOwnedLearningSetsLastElement()
+    public void deleteOwnLearnSetByLastElement()
     {
-        this.ownedLearningSets.remove(this.ownedLearningSets.size() - 1);
+        this.ownLearnSets.remove(this.ownLearnSets.size() - 1);
     }
     
-    public void deleteAllFromOwnedLearningSets()
+    public void deleteAllOwnLearnSets()
     {
-        this.ownedLearningSets.clear();
+        this.ownLearnSets.clear();
     }
-
-    //favorites
+    
+    //favoriteLearnSets
     
     public LearnSetAbo getFavoriteSetByPosition(int _position)
     {
-        return this.favoriteSets.get(_position);
+        return this.favoriteLearnSets.get(_position);
     }
     
-    public void addNewFavoriteSets(LearnSetAbo _favoriteSet)
+    public void addNewFavoriteSet(LearnSetAbo _favoriteSet)
     {
-        this.favoriteSets.add(_favoriteSet);
+        this.favoriteLearnSets.add(_favoriteSet);
     }
     
-    public void deleteFromFavoriteSetsByIndex(int _index)
+    public void deleteFavoriteSetByIndex(int _index)
     {
-        this.favoriteSets.remove(_index);
+        this.favoriteLearnSets.remove(_index);
     }
     
-    public void deleteFromFavoriteSetsLastElement()
+    public void deleteFavoriteSetByLastElement()
     {
-        this.favoriteSets.remove(this.favoriteSets.size() - 1);
+        this.favoriteLearnSets.remove(this.favoriteLearnSets.size() - 1);
     }
     
-    public void deleteAllFromFavoriteSets()
+    public void deleteAllFavoriteSets()
     {
-        this.favoriteSets.clear();
+        this.favoriteLearnSets.clear();
     }
-
+    
     //friends
-
-    public void addFriend(Account newFriend){
-        this.friends.addPerson(newFriend);
+    
+    public void addFriend(Account _friend){
+        this.friends.addPerson(_friend);
     }
-
-    public void removeFriend(Account oldFriend){
-        this.friends.removePerson(oldFriend);
+    
+    public void removeFriend(Account _friend){
+        this.friends.removePerson(_friend);
     }
-
-    public void removeFriend(int oldFriend){ this.friends.removePerson(oldFriend);
+    
+    public void removeFriend(int _friend){ this.friends.removePerson(_friend);
     }
-
-
-    //groups
-
-    public void createGroup(String groupName , Visibility groupPublicity){
-        this.groups.add( new Group(groupName,groupPublicity,this)); //constructor von group;
-    }
-
-    public void joinGroup(Group theGroup){
-        if(theGroup.getPublicity() == Visibility.PUBLIC) {
-            this.groups.add(theGroup);
-        }
-    }
-
-
-    public void leaveGroup(Group oldGroup){
-        this.groups.remove(oldGroup);
-    }
-
-    public boolean likeMessage(Message theMessage) {
-        if (!(theMessage.getLikedBy()).contain(this))
-        { theMessage.raiseLikes(); theMessage.newLiker(this); return true; }
-        else{return false;}
-    }
-    public boolean dislikeMessage(Message theMessage){
-        if ((theMessage.getLikedBy()).contain(this))
-        { theMessage.removeLike(); theMessage.lostLiker(this); return true;}
-        else{return false;}
-    }
-
-    public void editMessage(Message theMessage, String newMessage)
+    
+    //chats
+    //TODO Chat class?
+    public void editMessage(Message _message, String _editedMessage)
     {
-        theMessage.setMessage(newMessage);
+        _message.setMessage(_editedMessage);
     }
-
-    public void deleteMessage (Message theMessage, MessageList messageList)
+    //TODO Chat class?
+    public void deleteMessage (Message _message, MessageList _messagelist)
     {
-        messageList.removeMessage(theMessage);
+        _messagelist.removeMessage(_message);
+    }
+    
+    public void deleteChat(Chat _chat)
+    {
+        this.chats.remove(_chat);
+    }
+    /*
+    public void leaveGroup(int _index){
+        this.groups.remove(_index);
     }
 
-    public void deleteChat(Chat theChat)
-{
-    this.chats.remove(theChat);
-}
-
+     */
     
     //Methods
-    // TODO: Login + Signin Methode(Mit RegEx oder similar abgleich auf validität)), Reset Password,
-
+    
+    //TODO Chat class?
+    public boolean likeMessage(Message _message) {
+        if (!(_message.getLikedBy()).contain(this))
+        { _message.raiseLikes(); _message.newLiker(this); return true; }
+        else{return false;}
+    }
+    
+    //TODO Chat class?
+    public boolean dislikeMessage(Message _message){
+        if ((_message.getLikedBy()).contain(this))
+        { _message.removeLike(); _message.lostLiker(this); return true;}
+        else{return false;}
+    }
+    //TODO signIn = Constructor in Subclassen?
+    //TODO (Mit RegEx oder similar abgleich auf validität)) --> setEmail?
+    
+    public void login(String _email, String _password)
+    {
+        String email = getEmail();
+        String password = getPassword();
+        
+        if (email == _email && password == _password)
+        {
+            System.out.print("login was successful");
+            return;
+        }
+        else
+        {
+            System.out.print("login failed");
+        }
+    }
+    
+    public void resetPassword(String _email, String _password)
+    {
+        String email = getEmail();
+        
+        if (email == _email)
+        {
+            setPassword(_password);
+        }
+    }
 }

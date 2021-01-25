@@ -21,7 +21,6 @@ public class Student extends Account{
         this.favoriteLearnSets = new ArrayList<LearnSetAbo>();
         this.friends = new AccountList();
         this.chats = new ArrayList<Chat>();
-        this.groups = new ArrayList<Group>();
         this.semester  = _semester;
         this.faculty = _faculty;
 
