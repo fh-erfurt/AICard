@@ -1,0 +1,12 @@
+de\aicard\learnset\LearnSetTest.class
+de\aicard\card\CardContentTest.class
+de\aicard\card\CardStatusTest.class
+de\aicard\learnset\CardListTest.class
+de\aicard\account\LearnSetAboTest.class
+de\aicard\learnset\LearningSessionTest.class
+de\aicard\account\AccountTest.class
+de\aicard\Social\MessageTest.class
+de\aicard\account\AccountListTest.class
+de\aicard\Social\GroupTest.class
+de\aicard\card\CardTest.class
+de\aicard\Social\MessageListTest.class

@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: de.aicard.account.AccountListTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.015 s <<< FAILURE! - in de.aicard.account.AccountListTest
+testAddRemoveFromAccountList  Time elapsed: 0.011 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <de.aicard.account.AccountList@29f69090> but was: <de.aicard.account.AccountList@568bf312>
+	at de.aicard.account.AccountListTest.testAddRemoveFromAccountList(AccountListTest.java:34)
+

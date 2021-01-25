@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: de.aicard.account.AccountTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in de.aicard.account.AccountTest
+testFavoriteLearnSetManipulation  Time elapsed: 0 s  <<< ERROR!
+java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at de.aicard.account.AccountTest.testFavoriteLearnSetManipulation(AccountTest.java:70)
+
+testFriendManipulation  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <de.aicard.account.AccountList@6295d394> but was: <de.aicard.account.Professor@475e586c>
+	at de.aicard.account.AccountTest.testFriendManipulation(AccountTest.java:98)
+
+testCreatedLearnSetManipulation  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <de.aicard.learnset.LearnSetAbo@657c8ad9> but was: <de.aicard.learnset.LearnSetAbo@436a4e4b>
+	at de.aicard.account.AccountTest.testCreatedLearnSetManipulation(AccountTest.java:27)
+
