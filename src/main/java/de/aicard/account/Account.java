@@ -171,61 +171,67 @@ public abstract class Account
 
     //friends
 
-    public void addFriend(Account newFriend){
-        this.friends.addPerson(newFriend);
+    public void addFriend(Account _friend){
+        this.friends.addPerson(_friend);
     }
 
-    public void removeFriend(Account oldFriend){
-        this.friends.removePerson(oldFriend);
+    public void removeFriend(Account _friend){
+        this.friends.removePerson(_friend);
     }
 
-    public void removeFriend(int oldFriend){ this.friends.removePerson(oldFriend);
+    public void removeFriend(int _friend){ this.friends.removePerson(_friend);
     }
 
 
     //groups
 
-    public void createGroup(String groupNname , Visibility groupPublicity){
-        this.groups.add( new Group(groupNname,groupPublicity,this)); //constructor von group;
+    public void createGroup(String _name , Visibility _publicity){
+        this.groups.add( new Group(_name,_publicity,this)); //constructor von group;
     }
 
-    public void joinGroup(Group theGroup){
-        if(theGroup.getPublicity() == Visibility.PUBLIC) {
-            this.groups.add(theGroup);
+    public void joinGroup(Group _group){
+        if(_group.get_publicity() == Visibility.PUBLIC) {
+            this.groups.add(_group);
         }
     }
 
 
-    public void leaveGroup(Group oldGroup){
-        this.groups.remove(oldGroup);
+    public void leaveGroup(Group _group){
+        this.groups.remove(_group);
     }
 
-    public boolean likeMessage(Message theMessage) {
-        if (!(theMessage.getLikedBy()).contain(this))
-        { theMessage.raiseLikes(); theMessage.newLiker(this); return true; }
+    public boolean likeMessage(Message _message) {
+        if (!(_message.get_likedby()).contain(this))
+        { _message.raise_likes(); _message.newliker(this); return true; }
         else{return false;}
     }
-    public boolean dislikeMessage(Message theMessage){
-        if ((theMessage.getLikedBy()).contain(this))
-        { theMessage.removeLike(); theMessage.lostLiker(this); return true;}
+    public boolean dislikeMessage(Message _message){
+        if ((_message.get_likedby()).contain(this))
+        { _message.remove_Like(); _message.lostliker(this); return true;}
         else{return false;}
     }
 
-    public void editMessage(Message theMessage, String newMessage)
+    public void editMessage(Message _message, String message)
     {
-        theMessage.setMessage(newMessage);
+        _message.set_message(message);
     }
 
-    public void deleteMessage (Message theMessage, MessageList messageList)
+    public void deleteMessage (Message _message, MessageList _messagelist)
     {
-        messageList.removeMessage(theMessage);
+        _messagelist.removeMessage(_message);
     }
 
-    public void deleteChat(Chat theChat)
+    public void deleteChat(Chat _chat)
 {
-    this.chats.remove(theChat);
+    this.chats.remove(_chat);
 }
+    /*
+    public void leaveGroup(int _index){
+        this.groups.remove(_index);
+    }
 
+     */
+    
     //Methods
     // TODO: Login + Signin Methode(Mit RegEx oder similar abgleich auf validität)), Reset Password,
 

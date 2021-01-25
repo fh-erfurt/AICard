@@ -22,27 +22,27 @@ public class AccountTest
 
 
             //test createNewOwnedLearnSet and getOwnedLearnSetAboByPosition
-            Prof1.createNewOwnedLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
-            Assertions.assertEquals(Prof1.getOwnedLearnSetAboByPosition(0), LearnSetAbo1);
+            Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
+            Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo1);
 
             //test deleteFromOwnedLearningSetsByIndex
-            Prof1.deleteFromOwnedLearningSetsByIndex(0);
-            Assertions.assertEquals(Prof1.getOwnedLearnSetAboByPosition(0), LearnSetAbo2);
+            Prof1.deleteOwnLearnSetsByIndex(0);
+            Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo2);
 
             //setup for deleteFromOwnedLearningSetsLastElement()
-            Prof1.createNewOwnedLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
-            Prof1.createNewOwnedLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
+            Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
+            Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
 
             //test deleteFromOwnedLearningSetsLastElement()
-            Prof1.deleteFromOwnedLearningSetsLastElement();
-            Assertions.assertEquals(Prof1.getOwnedLearnSetAboByPosition(-1), LearnSetAbo1);
+            Prof1.deleteOwnLearnSetByLastElement();
+            Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(-1), LearnSetAbo1);
 
             //setup for deleteAllFromOwnedLearningSets()
-            Prof1.createNewOwnedLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
+            Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
 
             //test deleteAllFromOwnedLearningSets()
-            Prof1.deleteAllFromOwnedLearningSets();
-            Assertions.assertEquals(Prof1.getOwnedLearnSetAboByPosition(0), LearnSetAbo2);
+            Prof1.deleteAllOwnLearnSets();
+            Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo2);
 
         }
         catch (Exception e){
@@ -57,31 +57,31 @@ public class AccountTest
         //setup
         Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
         Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Prof2.createNewOwnedLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
-        Prof2.createNewOwnedLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
+        Prof2.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
+        Prof2.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
 
         //test addNewFavoriteSets() and getFavoriteSetByPosition()
-        Prof1.addNewFavoriteSets(Prof2.getOwnedLearnSetAboByPosition(0));//TODO wie werden alle public Sets angezeigt
-        Assertions.assertEquals(Prof1.getFavoriteSetByPosition(0), Prof2.getOwnedLearnSetAboByPosition(0));
+        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(0));//TODO wie werden alle public Sets angezeigt
+        Assertions.assertEquals(Prof1.getFavoriteSetByPosition(0), Prof2.getOwnLearnSetByPosition(0));
 
         //test deleteFromOwnedLearningSetsByIndex
-        Prof1.deleteFromFavoriteSetsByIndex(0);
-        Assertions.assertEquals(Prof1.getOwnedLearnSetAboByPosition(0), null);
+        Prof1.deleteFavoriteSetByIndex(0);
+        Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), null);
 
         //setup for deleteFromOwnedLearningSetsLastElement()
-        Prof1.addNewFavoriteSets(Prof2.getOwnedLearnSetAboByPosition(0));
-        Prof1.addNewFavoriteSets(Prof2.getOwnedLearnSetAboByPosition(1));
+        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(0));
+        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(1));
 
         //test deleteFromOwnedLearningSetsLastElement()
-        Prof1.deleteFromFavoriteSetsLastElement();
-        Assertions.assertEquals(Prof1.getFavoriteSetByPosition(-1), Prof2.getOwnedLearnSetAboByPosition(0));
+        Prof1.deleteFavoriteSetByLastElement();
+        Assertions.assertEquals(Prof1.getFavoriteSetByPosition(-1), Prof2.getOwnLearnSetByPosition(0));
 
         //setup for deleteAllFromOwnedLearningSets()
-        Prof1.addNewFavoriteSets(Prof2.getOwnedLearnSetAboByPosition(1));
+        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(1));
 
         //test deleteAllFromOwnedLearningSets()
-        Prof1.deleteAllFromFavoriteSets();
-        Assertions.assertEquals(Prof1.getOwnedLearnSetAboByPosition(0), null);
+        Prof1.deleteAllFavoriteSets();
+        Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), null);
     }
 
     @Test

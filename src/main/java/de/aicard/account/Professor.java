@@ -17,8 +17,8 @@ public class Professor extends Account{
         this.password = _password;
         this.name = _name;
         this.description = _description;
-        this.ownedLearningSets = new ArrayList<LearnSetAbo>();
-        this.favoriteSets = new ArrayList<LearnSetAbo>();
+        this.ownLearnSets = new ArrayList<LearnSetAbo>();
+        this.favoriteLearnSets = new ArrayList<LearnSetAbo>();
         this.friends = new AccountList();
         this.chats = new ArrayList<Chat>();
         this.groups = new ArrayList<Group>();
