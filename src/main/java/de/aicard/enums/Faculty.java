@@ -2,21 +2,19 @@ package de.aicard.enums;
 
 public enum Faculty{
 
-    //Todo fix this.
-
-    AppliedComputerScience,
-    Architecture,
-    CivilEngineering,
-    ManagementAndLeadershipInEarlyChildhoodEducation,
-    BusinessAdministration,
-    ForestryAndEcosystemManagement,
-    Horticulture,
-    BuildingServicesEngineering,
-    LandscapeArchitecture,
-    EarlyChildhoodEducation,
-    SocialWork,
-    UrbanAndSpatialPlanningFoundations,
-    RailwayEngineering,
-    EnergyEngineering,
-    TrafficTransportationAndLogisticsEngineering
+    APPLIED_COMPUTER_SCIENCE,
+    ARCHITECTURE,
+    CIVIL_ENGINEERING,
+    MANAGEMENT_AND_LEADERSHIP_IN_EARLY_CHILDHOOD_EDUCATION,
+    BUSINESS_ADMINISTRATION,
+    FORESTRY_AND_ECOSYSTEM_MANAGEMENT,
+    HORTICULTURE,
+    BUILDING_SERVICES_ENGINEERING,
+    LANDSCAPE_ARCHITECTURE,
+    EARLY_CHILDHOOD_EDUCATION,
+    SOCIAL_WORK,
+    URBAN_AND_SPATIAL_PLANNING_FOUNDATIONS,
+    RAILWAY_ENGINEERING,
+    ENERGY_ENGINEERING,
+    TRAFFIC_TRANSPORTATION_AND_LOGISTICS_ENGINEERING
 }

@@ -1,6 +1,5 @@
 package de.aicard.learnset;
 
-import de.aicard.account.LearnSetAbo;
 import de.aicard.card.Card;
 import de.aicard.card.TextFile;
 import de.aicard.enums.CardKnowledgeLevel;

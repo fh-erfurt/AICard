@@ -3,6 +3,7 @@ package de.aicard.account;
 import de.aicard.card.TextFile;
 import de.aicard.enums.State;
 import de.aicard.learnset.LearnSet;
+import de.aicard.learnset.LearnSetAbo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

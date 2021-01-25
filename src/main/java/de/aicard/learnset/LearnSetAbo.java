@@ -1,17 +1,11 @@
-package de.aicard.account;
+package de.aicard.learnset;
 
-import de.aicard.card.Card;
-import de.aicard.card.TextFile;
-import de.aicard.learnset.CardList;
 import de.aicard.card.CardStatus;
 import de.aicard.enums.CardKnowledgeLevel;
 import de.aicard.enums.State;
-import de.aicard.learnset.LearnSet;
-import de.aicard.learnset.LearningSession;
 
 import java.util.ArrayList;
 
-//TODO LearnSetAbo and LearningSession belong logically together, thus they should be in the same package.
 
 /**
  * Provides a LearnSet with further, account-specific information and is thus always embedded
@@ -53,6 +47,7 @@ public class LearnSetAbo
      */
     public LearnSetAbo(LearnSet learnSet) throws NullPointerException, Exception
     {
+        //ToDo Visibility prüfen, bevor LearnSetAbo erstellt wird
         this.learnSet = learnSet;
         this.learnSetStatus = State.NEW;
         this.cardStatus = new ArrayList<CardStatus>();
@@ -76,7 +71,7 @@ public class LearnSetAbo
         return this.learnSet;
     }
 
-    public int get_evaluation()
+    public int getEvaluation()
     {
         return this.evaluation;
     }

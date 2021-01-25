@@ -1,8 +1,8 @@
 package de.aicard.account;
 
 import de.aicard.Social.Chat;
-import de.aicard.Social.Group;
 import de.aicard.enums.Faculty;
+import de.aicard.learnset.LearnSetAbo;
 
 import java.util.ArrayList;
 

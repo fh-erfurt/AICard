@@ -32,7 +32,7 @@ public class LearnSetTest
 
         String learnSetTitle = "Title";
         String learnSetDescription = "Description of my Learnset";
-        Faculty faculty = Faculty.AppliedComputerScience;
+        Faculty faculty = Faculty.APPLIED_COMPUTER_SCIENCE;
         CardList cardList = new CardList();
         ArrayList<TextFile> front = new ArrayList<>();
         ArrayList<TextFile> back = new ArrayList<>();
@@ -45,7 +45,7 @@ public class LearnSetTest
             cardList.addToList(card.get(i));
         }
 
-        Account learnSetOwner = new Student("mail", "password", "name", "a student", 3, Faculty.AppliedComputerScience);
+        Account learnSetOwner = new Student("mail", "password", "name", "a student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
         LearnSet learnSet = new LearnSet(learnSetTitle, learnSetDescription, faculty, cardList, learnSetOwner);
 
         return learnSet;
@@ -98,7 +98,7 @@ public class LearnSetTest
         //given: a testLearnSet and three accounts
         LearnSet learnSet = getTestLearnSet();
         Account professor = new Professor("mail", "password", "Prof A", "Just a professor", AcademicGrade.JUNIOR_PROFESSOR);
-        Account student = new Student("mail", "password", "hanz", "A productive student", 25, Faculty.Architecture);
+        Account student = new Student("mail", "password", "hanz", "A productive student", 25, Faculty.ARCHITECTURE);
         Account myOwnerStudent = learnSet.getOwner();
 
         //when: adding those Accounts as admins to the LearnSet

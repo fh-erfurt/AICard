@@ -29,29 +29,15 @@ public class LearnSet
     private String description;
     private Faculty faculty;
     private CardList cardList;
-    private MessageList commentList;
+    private MessageList commentList; //Todo durch ArrayList ersetzen
     private Account owner;
     private Visibility visibility;
     private ArrayList<Account> adminList;
     private double evaluations;
     private int numberOfEvaluations;
 
-    //ToDo Visibility prüfen, bevor LearnSetAbo erstellt wird
-        // why? visibility interresiert doch nur beim anzeigen und nicht beim anlegen
-    //ToDo Funktion, dass maximal 200 Karten angelegt werden können
-        // Done at CardList->addToList()
-    //ToDo Wo wird LearnSet Status geändert?
-        // LearnSet hat keinen Status, sondern LearnSetAbo?
-
     // CONSTRUCTORS
-    //ToDo brauchen wir wirklich so viele Construktoren?
-    //  -> NEIN!!1! aber ich habe die Construktoren so erstellt, wie die Test der anderen Klassen ware
-    //  => Sinnvoll sind nur Konstruktoren, bei denen mindestens Faculty und Owner übergeben wird (vielleicht auch title)
-    public LearnSet()
-    {
-        this(null, null, null, new CardList(), null);
-    }
-    
+
     public LearnSet(CardList newCardList)
     {
         this(null, null, null, newCardList, null);

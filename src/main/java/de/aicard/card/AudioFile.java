@@ -25,14 +25,6 @@ public class AudioFile implements CardContent
     
     // CONSTRUCTORS
 
-    //Todo do we really need this? maybe we should rather force the users to directly create the
-    //todo full content by uploading the file directly on the page and then creating the CardContent
-    //todo by clicking ok?
-    public AudioFile()
-    {
-        this(null, null);
-    }
-
     /**
      * Constructor of an AudioFile. Sets isPlaying to false assigns an audio file and a title to
      * the member variables.
@@ -91,7 +83,6 @@ public class AudioFile implements CardContent
     
     
     // Methods
-    //ToDo what do we do with the returned String? -> Put reason why it exists in documentation (both methods)
     public String pauseAudioData()
     {
         isPlaying = false;

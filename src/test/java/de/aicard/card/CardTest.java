@@ -46,11 +46,7 @@ class CardTest
     public void testingCardWithAllFileTypes()
     {
         //given: 4 empty Cards. 4 CardContents (1 Text, 1 Picture, 1 Audio, 1 Video)
-        Card testCardText = new Card();
-        Card testCardPicture = new Card();
-        Card testCardAudio = new Card();
-        Card testCardVideo = new Card();
-        
+        //Todo umschreiben
         String testCardTextData = "I'm TextData";
         String testCardPictureData = "I'm PictureData";
         String testCardAudioData = "I'm AudioData";
@@ -58,20 +54,25 @@ class CardTest
         String testCardVideoData = "I'm VideoData";
         String testCardVideoTitle = "I'm VideoTitle";
 
+        //when: setting the front and back of the Cards to the wanted content of different types
 
-        //when: setting the front of the Cards to the wanted content of different types
+        Card testCardText = new Card((CardContent) new TextFile(testCardTextData), (CardContent) new TextFile(testCardTextData));
+        Card testCardPicture = new Card((CardContent) new PictureFile(testCardPictureData), (CardContent) new PictureFile(testCardPictureData));
+        Card testCardAudio = new Card((CardContent) new AudioFile(testCardAudioData, testCardAudioTitle), (CardContent) new AudioFile(testCardAudioData, testCardAudioTitle));
+        Card testCardVideo = new Card((CardContent) new VideoFile(testCardVideoData, testCardVideoTitle), (CardContent) new VideoFile(testCardVideoData, testCardVideoTitle));
+        
+
+
+
+
         //then: we can access this content via the Card (Tests for all 4 CardContent types)
-        testCardText.setCardFront((CardContent) new TextFile(testCardTextData));
         Assertions.assertEquals(testCardTextData,((TextFile)testCardText.getCardFront()).getTextData());
-        
-        testCardPicture.setCardFront((CardContent) new PictureFile(testCardPictureData));
+
         Assertions.assertEquals(testCardPictureData, ((PictureFile) testCardPicture.getCardFront()).getPictureData());
-        
-        testCardAudio.setCardFront((CardContent) new AudioFile(testCardAudioData, testCardAudioTitle));
+
         Assertions.assertEquals(testCardAudioData,((AudioFile) testCardAudio.getCardFront()).getAudioData());
         Assertions.assertEquals(testCardAudioTitle, ((AudioFile) testCardAudio.getCardFront()).getTitle());
         
-        testCardVideo.setCardFront((CardContent) new VideoFile(testCardVideoData, testCardVideoTitle));
         Assertions.assertEquals(testCardVideoData,((VideoFile) testCardVideo.getCardFront()).getVideoData());
         Assertions.assertEquals(testCardVideoTitle, ((VideoFile) testCardVideo.getCardFront()).getTitle());
     }

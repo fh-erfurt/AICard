@@ -22,11 +22,6 @@ public class PictureFile implements CardContent
     
     
     // CONSTRUCTORS
-    //Todo Do we need this
-    public PictureFile()
-    {
-        this(null);
-    }
     
     public PictureFile(String newPictureData)
     {

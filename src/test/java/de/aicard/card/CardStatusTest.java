@@ -16,7 +16,7 @@ public class CardStatusTest
     public void testingCardKnowledgeLevelIncreaseAndDecrease()
     {
         // before
-        Card testCard = new Card();
+        Card testCard = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
         CardStatus testCardStatus = new CardStatus(testCard);
         
         // testing
@@ -35,7 +35,7 @@ public class CardStatusTest
     public void testingCardKnowledgeLevelReset()
     {
         // before
-        Card testCard = new Card();
+        Card testCard = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
         CardStatus testCardStatus = new CardStatus(testCard);
         // testing
         testCardStatus.increaseCardKnowledgeLevel();

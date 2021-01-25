@@ -15,12 +15,6 @@ public class Card
     
     
     // CONSTRUCTORS
-    //ToDo same question as in AudioFile: why not force user to directly put content into the card Object?
-
-    public Card()
-    {
-        new Card(null, null);
-    }
     
     public Card(CardContent newCardFront, CardContent newCardBack)
     {

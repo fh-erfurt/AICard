@@ -4,6 +4,7 @@ import de.aicard.Social.Message;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
 import de.aicard.learnset.LearnSet;
+import de.aicard.learnset.LearnSetAbo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,13 +17,13 @@ public class AccountTest
         Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
         try
         {
-            LearnSetAbo LearnSetAbo1 = new LearnSetAbo(new LearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience));
-            LearnSetAbo LearnSetAbo2 = new LearnSetAbo(new LearnSet());
+            LearnSetAbo LearnSetAbo1 = new LearnSetAbo(new LearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE));
+            LearnSetAbo LearnSetAbo2 = new LearnSetAbo(new LearnSet("Mehr IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE));
             
             
             
             //test createNewOwnedLearnSet and getOwnedLearnSetAboByPosition
-            Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
+            Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
             Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo1);
             
             //test deleteFromOwnedLearningSetsByIndex
@@ -30,15 +31,15 @@ public class AccountTest
             Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo2);
             
             //setup for deleteFromOwnedLearningSetsLastElement()
-            Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
-            Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
+            Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
+            Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
             
             //test deleteFromOwnedLearningSetsLastElement()
             Prof1.deleteOwnLearnSetByLastElement();
             Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(-1), LearnSetAbo1);
             
             //setup for deleteAllFromOwnedLearningSets()
-            Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
+            Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
             
             //test deleteAllFromOwnedLearningSets()
             Prof1.deleteAllOwnLearnSets();
@@ -57,11 +58,11 @@ public class AccountTest
         //setup
         Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
         Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Prof2.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.AppliedComputerScience);
-        Prof2.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.AppliedComputerScience);
+        Prof2.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
+        Prof2.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
         
         //test addNewFavoriteSets() and getFavoriteSetByPosition()
-        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(0));//TODO wie werden alle public Sets angezeigt
+        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(0));
         Assertions.assertEquals(Prof1.getFavoriteSetByPosition(0), Prof2.getOwnLearnSetByPosition(0));
         
         //test deleteFromOwnedLearningSetsByIndex
@@ -109,7 +110,7 @@ public class AccountTest
         Assertions.assertEquals(Prof1.getFriends(), Prof2);
         
     }
-    /**
+    /*
      @Test
      void testGroupManipulation()
      {
@@ -127,20 +128,20 @@ public class AccountTest
      Prof1.joinGroup(Group _group);
      Assertions.assertEquals(Prof1.getGroups(), null);
      //test joinGroup() positiv
-     //TODO weiß nicht wie ich in Group den Status ändere von Prof2
      Prof1.joinGroup(Group _group);
      }
      **/
+
     @Test
     void testChatManipulation()
     {
-        //TODO verstehe nicht die Chatzugriffe in Account
+        //TODO Tests schreiben
     }
     
     boolean testLikeMessage()
     {
         boolean x = false;
-        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
         Message msg1 = new Message("this is message1",Std); // liked message
         msg1.newLiker(Std);
         Message msg2 = new Message("this is message2",Std);// not liked message
@@ -150,7 +151,7 @@ public class AccountTest
     boolean testdislikeMessage()
     {
         boolean x = false;
-        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
         Message msg1 = new Message("this is message1",Std); // liked message
         msg1.newLiker(Std);
         Message msg2 = new Message("this is message2",Std);// not liked message

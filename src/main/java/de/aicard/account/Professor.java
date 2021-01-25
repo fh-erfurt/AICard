@@ -1,8 +1,8 @@
 package de.aicard.account;
 
 import de.aicard.Social.Chat;
-import de.aicard.Social.Group;
 import de.aicard.enums.AcademicGrade;
+import de.aicard.learnset.LearnSetAbo;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,6 @@ public class Professor extends Account{
 
     }
 
-    //todo getter und setter für academic grade -- die 8 probleme kommen durch die set und get Methoden
     public AcademicGrade getAcademicGrade() {
         return academicGrade;
     }

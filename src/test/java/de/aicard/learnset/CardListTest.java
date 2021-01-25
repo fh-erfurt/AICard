@@ -23,8 +23,8 @@ public class CardListTest
     public void testingCardListConstructors()
     {
         // Given: Two empty Cards
-        Card Card1 = new Card();
-        Card Card2 = new Card();
+        Card Card1 = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
+        Card Card2 = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
 
         //when: creating two CardLists: one with an ArrayList of the two Cards, one without parameters
         ArrayList CardArrayList = new ArrayList<>();
@@ -60,8 +60,8 @@ public class CardListTest
     public void testingCardListEdibility()
     {
         // Before
-        Card Card1 = new Card();
-        Card Card2 = new Card();
+        Card Card1 = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
+        Card Card2 = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
         
         CardList CardList1 = new CardList();
         CardList1.addToList(Card1);
@@ -92,9 +92,9 @@ public class CardListTest
     public void testingCardListGetNextPrevious()
     {
         // Before
-        Card Card1 = new Card();
-        Card Card2 = new Card();
-        Card Card3 = new Card();
+        Card Card1 = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
+        Card Card2 = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
+        Card Card3 = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
     
         CardList CardList1 = new CardList();
         CardList1.addToList(Card1);
@@ -131,10 +131,10 @@ public class CardListTest
         CardList testCardList = new CardList();
         for(int index = 0; index < 200; index++)
         {
-            testCardList.addToList(new Card());
+            testCardList.addToList(new Card((CardContent) new TextFile(), (CardContent) new TextFile()));
         }
         
-        testCardList.addToList(new Card());
+        testCardList.addToList(new Card((CardContent) new TextFile(), (CardContent) new TextFile()));
         Assertions.assertEquals(200, testCardList.getListLength());
     }
     
@@ -143,8 +143,8 @@ public class CardListTest
     {
         // before
         CardList testCardList = new CardList();
-        Card testCard1 = new Card();
-        Card testCard2 = new Card();
+        Card testCard1 = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
+        Card testCard2 = new Card((CardContent) new TextFile(), (CardContent) new TextFile());
         
         testCardList.addToList(testCard1);
         testCardList.addToList(testCard2);

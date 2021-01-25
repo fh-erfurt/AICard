@@ -4,7 +4,6 @@ import de.aicard.account.Student;
 import de.aicard.enums.Faculty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import de.aicard.Social.Message;
 
 
 public class MessageTest {
@@ -12,7 +11,7 @@ public class MessageTest {
     @Test
 
     public void testRaiseLikes() {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.AppliedComputerScience);
+        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
         Message msg1 = new Message("this is a message",std);
         msg1.setLikes(3);
 

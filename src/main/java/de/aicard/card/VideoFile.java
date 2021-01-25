@@ -24,11 +24,6 @@ public class VideoFile implements CardContent
     private String title;
     
     // CONSTRUCTORS
-    //ToDo do we need this?
-    public VideoFile()
-    {
-        this(null, null);
-    }
 
     /**
      * Constructor of a VideoFile. Sets isPlaying to false assigns an audio file and a title to
@@ -88,7 +83,6 @@ public class VideoFile implements CardContent
     
     
     // METHODS
-    //ToDo Sinn von dem String begründen.
     public String pauseVideoData()
     {
         this.isPlaying = false;

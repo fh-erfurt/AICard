@@ -2,9 +2,9 @@ package de.aicard.account;
 
 import de.aicard.Social.Chat;
 import de.aicard.Social.Message;
-import de.aicard.Social.MessageList;
 import de.aicard.enums.Faculty;
 import de.aicard.learnset.LearnSet;
+import de.aicard.learnset.LearnSetAbo;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public abstract class Account
     protected String description;
     protected List<LearnSetAbo> ownLearnSets;
     protected List<LearnSetAbo> favoriteLearnSets;
-    protected AccountList friends;
+    protected AccountList friends; //Todo durch ArrayList ersetzen
     protected List<Chat> chats;
     
     
@@ -177,46 +177,27 @@ public abstract class Account
     public void removeFriend(int _friend){ this.friends.removePerson(_friend);
     }
     
-    //chats
-    //TODO Chat class?
-    public void editMessage(Message _message, String _editedMessage)
-    {
-        _message.setMessage(_editedMessage);
-    }
-    //TODO Chat class?
-    public void deleteMessage (Message _message, MessageList _messagelist)
-    {
-        _messagelist.removeMessage(_message);
-    }
-    
     public void deleteChat(Chat _chat)
     {
         this.chats.remove(_chat);
     }
-    /*
-    public void leaveGroup(int _index){
-        this.groups.remove(_index);
-    }
-
-     */
     
     //Methods
-    
-    //TODO Chat class?
+
     public boolean likeMessage(Message _message) {
         if (!(_message.getLikedBy()).contain(this))
         { _message.raiseLikes(); _message.newLiker(this); return true; }
         else{return false;}
     }
-    
-    //TODO Chat class?
+
     public boolean dislikeMessage(Message _message){
         if ((_message.getLikedBy()).contain(this))
         { _message.removeLike(); _message.lostLiker(this); return true;}
         else{return false;}
     }
-    //TODO signIn = Constructor in Subclassen?
-    //TODO (Mit RegEx oder similar abgleich auf validität)) --> setEmail?
+
+    //TODO signIn = Constructor in Subclassen? √
+    //TODO (Mit RegEx oder similar abgleich auf validität)) --> setEmail? √
     
     public void login(String _email, String _password)
     {

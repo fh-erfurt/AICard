@@ -9,6 +9,7 @@ Class Chat has 2 Attributes chatHistory where the messages from all particiants 
  messages can be sent , for that we need the account and a message
  messages can be removed from the chat history
  */
+//ToDo MessageList und AccountList durch ArrayList ersetzen
 public class Chat {
 
 private MessageList chatHistory;
