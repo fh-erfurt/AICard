@@ -46,7 +46,6 @@ class CardTest
     public void testingCardWithAllFileTypes()
     {
         //given: 4 empty Cards. 4 CardContents (1 Text, 1 Picture, 1 Audio, 1 Video)
-        //Todo umschreiben
         String testCardTextData = "I'm TextData";
         String testCardPictureData = "I'm PictureData";
         String testCardAudioData = "I'm AudioData";
@@ -62,9 +61,6 @@ class CardTest
         Card testCardVideo = new Card((CardContent) new VideoFile(testCardVideoData, testCardVideoTitle), (CardContent) new VideoFile(testCardVideoData, testCardVideoTitle));
         
 
-
-
-
         //then: we can access this content via the Card (Tests for all 4 CardContent types)
         Assertions.assertEquals(testCardTextData,((TextFile)testCardText.getCardFront()).getTextData());
 
@@ -72,7 +68,7 @@ class CardTest
 
         Assertions.assertEquals(testCardAudioData,((AudioFile) testCardAudio.getCardFront()).getAudioData());
         Assertions.assertEquals(testCardAudioTitle, ((AudioFile) testCardAudio.getCardFront()).getTitle());
-        
+
         Assertions.assertEquals(testCardVideoData,((VideoFile) testCardVideo.getCardFront()).getVideoData());
         Assertions.assertEquals(testCardVideoTitle, ((VideoFile) testCardVideo.getCardFront()).getTitle());
     }

@@ -152,8 +152,7 @@ public class LearnSetTest
         learnSet.addMessage(message3);
 
         //then: the messages can be accessed
-        //TODO write this test when we decided about future of MessageList
-        //Assertions.assertEquals("Message 1", learnSet.getCommentList().);
+        Assertions.assertEquals("Message 1", learnSet.getCommentList().get(0).getMessage());
 
 
     

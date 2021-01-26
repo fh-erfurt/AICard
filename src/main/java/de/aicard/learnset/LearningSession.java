@@ -1,10 +1,7 @@
 package de.aicard.learnset;
 
 
-import de.aicard.card.Card;
 import de.aicard.card.CardStatus;
-import de.aicard.enums.CardKnowledgeLevel;
-
 import java.util.ArrayList;
 
 /**

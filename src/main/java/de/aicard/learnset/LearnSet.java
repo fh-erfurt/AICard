@@ -29,7 +29,7 @@ public class LearnSet
     private String description;
     private Faculty faculty;
     private CardList cardList;
-    private MessageList commentList; //Todo durch ArrayList ersetzen
+    private ArrayList<Message> commentList;
     private Account owner;
     private Visibility visibility;
     private ArrayList<Account> adminList;
@@ -59,7 +59,7 @@ public class LearnSet
         description = _newDescription;
         faculty = _newFaculty;
         cardList = _newCardList;
-        commentList = new MessageList();
+        commentList = new ArrayList<Message>();
         owner = _newOwner;
         visibility = Visibility.PRIVATE;
         adminList = new ArrayList<Account>();
@@ -124,7 +124,7 @@ public class LearnSet
         this.cardList = _newCardList;
     }
     
-    public MessageList getCommentList() throws NullPointerException
+    public ArrayList<Message> getCommentList() throws NullPointerException
     {
         if(commentList == null)
         {
@@ -133,7 +133,7 @@ public class LearnSet
         return this.commentList;
     }
     
-    public void setCommentList(MessageList _newCommentList)
+    public void setCommentList(ArrayList<Message> _newCommentList)
     {
         this.commentList = _newCommentList;
     }
@@ -340,14 +340,14 @@ public class LearnSet
     * */
     public void addMessage(Message _newMessage)
     {
-        this.commentList.addMessage(_newMessage);
+        this.commentList.add(_newMessage);
     }
     
     public void removeMessageByMessage(Message _messageToRemove)
     {
-        if(commentList.getMessageList().contains(_messageToRemove))
+        if(commentList.contains(_messageToRemove))
         {
-            this.commentList.removeMessage(_messageToRemove);
+            this.commentList.remove(_messageToRemove);
         }
         else
         {

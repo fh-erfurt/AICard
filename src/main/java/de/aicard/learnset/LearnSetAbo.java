@@ -47,7 +47,7 @@ public class LearnSetAbo
      */
     public LearnSetAbo(LearnSet _learnSet) throws NullPointerException, Exception
     {
-        //ToDo Visibility prüfen, bevor LearnSetAbo erstellt wird
+
         this.learnSet = _learnSet;
         this.learnSetStatus = State.NEW;
         this.cardStatus = new ArrayList<CardStatus>();
@@ -57,6 +57,7 @@ public class LearnSetAbo
         {
             cardStatus.add(new CardStatus(learnSet.getCardList().getCardByIndex(i)));
         }
+
     }
 
     //getter
