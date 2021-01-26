@@ -27,7 +27,7 @@ public abstract class Account
     protected String description;
     protected List<LearnSetAbo> ownLearnSets;
     protected List<LearnSetAbo> favoriteLearnSets;
-    protected AccountList friends; //Todo durch ArrayList ersetzen
+    protected List<Account> friends; //Todo durch ArrayList ersetzen
     protected List<Chat> chats;
     
     
@@ -80,7 +80,7 @@ public abstract class Account
         return this.ownLearnSets;
     }
     
-    public AccountList getFriends()
+    public List<Account> getFriends()
     {
         return this.friends;
     }
@@ -99,9 +99,9 @@ public abstract class Account
     
     //ownLearnAboSet
     
-    public LearnSetAbo getOwnLearnSetByPosition(int _position)
+    public LearnSetAbo getOwnLearnSetByIndex(int _index)
     {
-        return ownLearnSets.get(_position);
+        return ownLearnSets.get(_index);
     }
     
     /**Create a new LearnSetAbo with a new LearnSet
@@ -139,44 +139,51 @@ public abstract class Account
     
     //favoriteLearnSets
     
-    public LearnSetAbo getFavoriteSetByPosition(int _position)
+    public LearnSetAbo getFavoriteLearnSetByIndex(int _index)
     {
-        return this.favoriteLearnSets.get(_position);
+        return this.favoriteLearnSets.get(_index);
     }
     
-    public void addNewFavoriteSet(LearnSetAbo _favoriteSet)
+    public void addNewFavoriteLearnSet(LearnSetAbo _favoriteSet)
     {
         this.favoriteLearnSets.add(_favoriteSet);
     }
     
-    public void deleteFavoriteSetByIndex(int _index)
+    public void deleteFavoriteLearnSetByIndex(int _index)
     {
         this.favoriteLearnSets.remove(_index);
     }
     
-    public void deleteFavoriteSetByLastElement()
+    public void deleteFavoriteLearnSetByLastElement()
     {
         this.favoriteLearnSets.remove(this.favoriteLearnSets.size() - 1);
     }
     
-    public void deleteAllFavoriteSets()
+    public void deleteAllFavoriteLearnSets()
     {
         this.favoriteLearnSets.clear();
     }
     
     //friends
-    
+
+    public Account getFriendByIndex(int _index)
+    {
+        return this.friends.get(_index);
+    }
+
     public void addFriend(Account _friend){
-        this.friends.addPerson(_friend);
+        this.friends.add(_friend);
     }
     
     public void removeFriend(Account _friend){
-        this.friends.removePerson(_friend);
+        this.friends.remove(_friend);
     }
     
-    public void removeFriend(int _friend){ this.friends.removePerson(_friend);
+    public void removeFriend(int _friend){ this.friends.remove(_friend);
     }
-    
+
+    //Chat
+
     public void deleteChat(Chat _chat)
     {
         this.chats.remove(_chat);
@@ -184,6 +191,7 @@ public abstract class Account
     
     //Methods
 
+    //TODO clickLike
     public boolean likeMessage(Message _message) {
         if (!(_message.getLikedBy()).contain(this))
         { _message.raiseLikes(); _message.newLiker(this); return true; }
@@ -199,19 +207,18 @@ public abstract class Account
     //TODO signIn = Constructor in Subclassen? √
     //TODO (Mit RegEx oder similar abgleich auf validität)) --> setEmail? √
     
-    public void login(String _email, String _password)
+    public String login(String _email, String _password)
     {
         String email = getEmail();
         String password = getPassword();
         
-        if (email == _email && password == _password)
+        if (email.equals(_email) && password.equals(_password))
         {
-            System.out.print("login was successful");
-            return;
+            return "login was successful";
         }
         else
         {
-            System.out.print("login failed");
+            return "login failed";
         }
     }
     
@@ -219,7 +226,7 @@ public abstract class Account
     {
         String email = getEmail();
         
-        if (email == _email)
+        if (email.equals(_email))
         {
             setPassword(_password);
         }

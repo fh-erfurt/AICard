@@ -24,11 +24,11 @@ public class AccountTest
             
             //test createNewOwnedLearnSet and getOwnedLearnSetAboByPosition
             Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
-            Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo1);
+            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(0), LearnSetAbo1);
             
             //test deleteFromOwnedLearningSetsByIndex
             Prof1.deleteOwnLearnSetsByIndex(0);
-            Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo2);
+            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(0), LearnSetAbo2);
             
             //setup for deleteFromOwnedLearningSetsLastElement()
             Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
@@ -36,14 +36,14 @@ public class AccountTest
             
             //test deleteFromOwnedLearningSetsLastElement()
             Prof1.deleteOwnLearnSetByLastElement();
-            Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(-1), LearnSetAbo1);
+            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(-1), LearnSetAbo1);
             
             //setup for deleteAllFromOwnedLearningSets()
             Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
             
             //test deleteAllFromOwnedLearningSets()
             Prof1.deleteAllOwnLearnSets();
-            Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), LearnSetAbo2);
+            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(0), LearnSetAbo2);
             
         }
         catch (Exception e){
@@ -62,27 +62,27 @@ public class AccountTest
         Prof2.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
         
         //test addNewFavoriteSets() and getFavoriteSetByPosition()
-        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(0));
-        Assertions.assertEquals(Prof1.getFavoriteSetByPosition(0), Prof2.getOwnLearnSetByPosition(0));
+        Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(0));
+        Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(0), Prof2.getOwnLearnSetByIndex(0));
         
         //test deleteFromOwnedLearningSetsByIndex
-        Prof1.deleteFavoriteSetByIndex(0);
-        Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), null);
+        Prof1.deleteFavoriteLearnSetByIndex(0);
+        Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
         
         //setup for deleteFromOwnedLearningSetsLastElement()
-        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(0));
-        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(1));
+        Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(0));
+        Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(1));
         
         //test deleteFromOwnedLearningSetsLastElement()
-        Prof1.deleteFavoriteSetByLastElement();
-        Assertions.assertEquals(Prof1.getFavoriteSetByPosition(-1), Prof2.getOwnLearnSetByPosition(0));
+        Prof1.deleteFavoriteLearnSetByLastElement();
+        Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(-1), Prof2.getOwnLearnSetByIndex(0));
         
         //setup for deleteAllFromOwnedLearningSets()
-        Prof1.addNewFavoriteSet(Prof2.getOwnLearnSetByPosition(1));
+        Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(1));
         
         //test deleteAllFromOwnedLearningSets()
-        Prof1.deleteAllFavoriteSets();
-        Assertions.assertEquals(Prof1.getOwnLearnSetByPosition(0), null);
+        Prof1.deleteAllFavoriteLearnSets();
+        Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
     }
     
     @Test
@@ -93,13 +93,13 @@ public class AccountTest
         Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
         Professor Prof3 = new Professor("Prof@fh-erfurt.de","adminProf","Prof3","Professor3", AcademicGrade.UNIVERSITY_PROFESSOR);
         
-        //test addFriend()
+        //test addFriend() and getFriendByIndex()
         Prof1.addFriend(Prof2);
-        Assertions.assertEquals(Prof1.getFriends(), Prof2);
+        Assertions.assertEquals(Prof1.getFriendByIndex(1), Prof2);
         
         //test removeFriend()
         Prof1.removeFriend(Prof2);
-        Assertions.assertEquals(Prof1.getFriends(), null);
+        Assertions.assertNull(Prof1.getFriendByIndex(1));
         
         //setup for removeFriendByIndex()
         Prof1.addFriend(Prof2);
@@ -107,7 +107,7 @@ public class AccountTest
         
         //test removeFriendByIndex()
         Prof1.removeFriend(1);
-        Assertions.assertEquals(Prof1.getFriends(), Prof2);
+        Assertions.assertEquals(Prof1.getFriendByIndex(1), Prof2);
         
     }
     /*
@@ -145,17 +145,17 @@ public class AccountTest
         Message msg1 = new Message("this is message1",Std); // liked message
         msg1.newLiker(Std);
         Message msg2 = new Message("this is message2",Std);// not liked message
-        if ((!Std.likeMessage(msg1) == true) && (Std.likeMessage(msg2) == true)) {  x= true;}
+        if (!Std.likeMessage(msg1) && Std.likeMessage(msg2)) {  x= true;}
         return x;
     }
     boolean testdislikeMessage()
     {
         boolean x = false;
         Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",Std); // liked message
-        msg1.newLiker(Std);
-        Message msg2 = new Message("this is message2",Std);// not liked message
-        if ((Std.dislikeMessage(msg1) == true) && (!Std.dislikeMessage(msg2) == true)) {  x= true;}
+        Message msg1 = new Message("this is message1",Std);
+        msg1.newLiker(Std);// likes message
+        Message msg2 = new Message("this is message2",Std);// undo likes message
+        if (Std.dislikeMessage(msg1) && !Std.dislikeMessage(msg2)) {  x= true;}
         return x;
     }
 }
