@@ -5,7 +5,7 @@ import de.aicard.Social.Message;
 import de.aicard.enums.Faculty;
 import de.aicard.enums.Visibility;
 import de.aicard.account.Account;
-import de.aicard.Social.MessageList;
+
 import java.util.ArrayList;
 import java.util.logging.Logger;
 

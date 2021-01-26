@@ -1,10 +1,8 @@
 package de.aicard.Social;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import de.aicard.account.Account;
-import de.aicard.account.AccountList;
 import de.aicard.enums.Visibility;
 import de.aicard.learnset.LearnSet;
 /**

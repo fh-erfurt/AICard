@@ -1,6 +1,5 @@
 package de.aicard.Social;
 import de.aicard.account.Account;
-import de.aicard.account.AccountList;
 
 import java.util.ArrayList;
 

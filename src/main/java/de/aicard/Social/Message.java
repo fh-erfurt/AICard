@@ -1,8 +1,6 @@
 package de.aicard.Social;
 
 import de.aicard.account.Account;
-import de.aicard.account.AccountList;
-import de.aicard.enums.Visibility;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

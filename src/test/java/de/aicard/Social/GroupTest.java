@@ -1,7 +1,6 @@
 package de.aicard.Social;
 
 import de.aicard.account.Account;
-import de.aicard.account.AccountList;
 import de.aicard.account.Professor;
 import de.aicard.account.Student;
 import de.aicard.enums.AcademicGrade;
