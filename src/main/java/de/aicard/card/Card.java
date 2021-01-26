@@ -16,10 +16,10 @@ public class Card
     
     // CONSTRUCTORS
     
-    public Card(CardContent newCardFront, CardContent newCardBack)
+    public Card(CardContent _newCardFront, CardContent _newCardBack)
     {
-        this.cardFront = newCardFront;
-        this.cardBack  = newCardBack ;
+        this.cardFront = _newCardFront;
+        this.cardBack  = _newCardBack ;
     }
     
     
@@ -34,9 +34,9 @@ public class Card
         return this.cardFront;
     }
     
-    public void setCardFront(CardContent newCardFront)
+    public void setCardFront(CardContent _newCardFront)
     {
-        this.cardFront = newCardFront;
+        this.cardFront = _newCardFront;
     }
     
     public CardContent getCardBack() throws NullPointerException

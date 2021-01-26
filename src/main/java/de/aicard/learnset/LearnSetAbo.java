@@ -43,12 +43,12 @@ public class LearnSetAbo
      *
      *
      *
-     * @param learnSet The LearnSet to which the Account subscribes.
+     * @param _learnSet The LearnSet to which the Account subscribes.
      */
-    public LearnSetAbo(LearnSet learnSet) throws NullPointerException, Exception
+    public LearnSetAbo(LearnSet _learnSet) throws NullPointerException, Exception
     {
         //ToDo Visibility prüfen, bevor LearnSetAbo erstellt wird
-        this.learnSet = learnSet;
+        this.learnSet = _learnSet;
         this.learnSetStatus = State.NEW;
         this.cardStatus = new ArrayList<CardStatus>();
         this.evaluation = -1;
@@ -83,19 +83,19 @@ public class LearnSetAbo
 
     //setter
 
-    public void setLearnSetStatus(State learnSetStatus)
+    public void setLearnSetStatus(State _learnSetStatus)
     {
-        this.learnSetStatus = learnSetStatus;
+        this.learnSetStatus = _learnSetStatus;
     }
 
-    public void setLearnSet(LearnSet learnSet)
+    public void setLearnSet(LearnSet _learnSet)
     {
-        this.learnSet = learnSet;
+        this.learnSet = _learnSet;
     }
 
-    public void setCardStatus(ArrayList<CardStatus> cardStatus)
+    public void setCardStatus(ArrayList<CardStatus> _cardStatus)
     {
-        this.cardStatus = cardStatus;
+        this.cardStatus = _cardStatus;
     }
 
     /**
@@ -105,15 +105,15 @@ public class LearnSetAbo
      * If so, this evaluation is deleted. Then, the member-variable m_evaluation is set to the
      * value of the new evaluation, and the evaluation is added to the LearnSet.
      *
-     * @param evaluation Evaluation, the Account wants to give to the LearnSet.
+     * @param _evaluation Evaluation, the Account wants to give to the LearnSet.
      */
-    public void set_evaluation(int evaluation)
+    public void set_evaluation(int _evaluation)
     {
         if(this.evaluation != -1)
         {
             this.learnSet.deleteEvaluation(this.evaluation);
         }
-        this.evaluation = evaluation;
+        this.evaluation = _evaluation;
         this.learnSet.addEvaluation(evaluation);
     }
 
@@ -135,14 +135,14 @@ public class LearnSetAbo
      * Checks the KnowLedgeLevel of all Cards in the List. Puts the CardStatus with the
      * wanted level in a new ArrayList of CardStatus. Returns this List.
      *
-     * @param level The CardKnowledgeLevel we are looking for
+     * @param _level The CardKnowledgeLevel we are looking for
      * @return A List of all CardStatus in the LearnSetAbo with the CardKnowledgeLevel level
      */
-    private ArrayList<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel level)
+    private ArrayList<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel _level)
     {
         ArrayList<CardStatus> result = new ArrayList<CardStatus>();
         for(int i=0; i<(this.cardStatus.size()); i++){
-            if (cardStatus.get(i).getCardKnowledgeLevel() == level){
+            if (cardStatus.get(i).getCardKnowledgeLevel() == _level){
                 result.add(cardStatus.get(i));
             }
 
@@ -157,11 +157,11 @@ public class LearnSetAbo
      * (lowest level first) and fills a new ArrayList of CardStatus with the CardStatus of the
      * lowest level, until there are as many CardStatus in the List as wanted.
      *
-     * @param numOfCards The number of CardStatus we want in the returned ArrayList.
+     * @param _numOfCards The number of CardStatus we want in the returned ArrayList.
      * @return List of the size _numOfCards, consists of the CardStatus in the LearnSetAbo with the
      * lowest CardKnowledgeLevel.
      */
-    private ArrayList<CardStatus> createCardStatusListForSession(int numOfCards)
+    private ArrayList<CardStatus> createCardStatusListForSession(int _numOfCards)
     {
         ArrayList<CardStatus> resultCardStatusList = new ArrayList<CardStatus>();
 
@@ -172,13 +172,13 @@ public class LearnSetAbo
             {
                 for(int i = 0; i< lowestLevelList.size(); i++)
                 {
-                    if (resultCardStatusList.size()<numOfCards)
+                    if (resultCardStatusList.size()<_numOfCards)
                     {
                         resultCardStatusList.add(lowestLevelList.get(i));
                     }
                 }
             }
-            if (resultCardStatusList.size()==numOfCards) break;
+            if (resultCardStatusList.size()==_numOfCards) break;
         }
 
         return resultCardStatusList;
@@ -190,13 +190,13 @@ public class LearnSetAbo
      * First, it gets a List of the CardStatus in the LearnSetAbo of the lowest CardKnowledgeLevel.
      * Then, it constructs a LearnSet of this CardStatus ArrayList.
      *
-     * @param numOfCards how many Cards should be asked for in the LearningSession
+     * @param _numOfCards how many Cards should be asked for in the LearningSession
      * @return  The created LearningSession.
      */
-    public LearningSession createLearningSession(int numOfCards)
+    public LearningSession createLearningSession(int _numOfCards)
     {
 
-        ArrayList<CardStatus> sessionList = createCardStatusListForSession(numOfCards);
+        ArrayList<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
         return new LearningSession(sessionList);
 
 

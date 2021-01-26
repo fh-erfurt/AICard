@@ -37,19 +37,19 @@ public class LearningSession
      *
      * sets currentCard to 0 and isActive to true.
      *
-     * @param cardStatusList The List for the LearningSession.
+     * @param _cardStatusList The List for the LearningSession.
      */
-    public LearningSession(ArrayList<CardStatus> cardStatusList)
+    public LearningSession(ArrayList<CardStatus> _cardStatusList)
     {
-        this.cardStatusList = cardStatusList;
+        this.cardStatusList = _cardStatusList;
         this.currentCard = 0;
         this.isActive = true;
     }
 
     //setter & getter
-    public void setCurrentCard(int currentCard)
+    public void setCurrentCard(int _currentCard)
     {
-        this.currentCard = currentCard;
+        this.currentCard = _currentCard;
     }
 
     public int getCurrentCard()
@@ -62,9 +62,9 @@ public class LearningSession
         return this.isActive;
     }
 
-    public void setCardStatusList(ArrayList<CardStatus> cardStatusList)
+    public void setCardStatusList(ArrayList<CardStatus> _cardStatusList)
     {
-        this.cardStatusList = cardStatusList;
+        this.cardStatusList = _cardStatusList;
     }
 
     public ArrayList<CardStatus> getCardStatusList() throws NullPointerException

@@ -29,14 +29,14 @@ public class AudioFile implements CardContent
      * Constructor of an AudioFile. Sets isPlaying to false assigns an audio file and a title to
      * the member variables.
      *
-     * @param newAudioData  Audio File to initialise audioData
-     * @param newTitle  String to initialize title
+     * @param _newAudioData  Audio File to initialise audioData
+     * @param _newTitle  String to initialize title
      */
-    public AudioFile(String newAudioData, String newTitle)
+    public AudioFile(String _newAudioData, String _newTitle)
     {
         this.isPlaying = false;
-        this.audioData = newAudioData;
-        this.title     = newTitle;
+        this.audioData = _newAudioData;
+        this.title     = _newTitle;
     }
     
     
@@ -51,19 +51,20 @@ public class AudioFile implements CardContent
         return this.audioData;
     }
     
-    public void setAudioData(String newAudioData)
+    public void setAudioData(String _newAudioData)
     {
-        this.audioData = newAudioData;
+        this.audioData = _newAudioData;
     }
     
     public boolean getIsPlaying()
     {
         return this.isPlaying;
     }
+
     
-    public void setIsPlaying(boolean newIsPlaying)
+    public void setIsPlaying(boolean _newIsPlaying)
     {
-        this.isPlaying = newIsPlaying;
+        this.isPlaying = _newIsPlaying;
     }
     
     public String getTitle() throws NullPointerException
@@ -76,9 +77,9 @@ public class AudioFile implements CardContent
         return this.title;
     }
     
-    public void setTitle(String newTitle)
+    public void setTitle(String _newTitle)
     {
-        this.title = newTitle;
+        this.title = _newTitle;
     }
     
     

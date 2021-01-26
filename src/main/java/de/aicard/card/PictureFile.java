@@ -23,9 +23,9 @@ public class PictureFile implements CardContent
     
     // CONSTRUCTORS
     
-    public PictureFile(String newPictureData)
+    public PictureFile(String _newPictureData)
     {
-        this.pictureData = newPictureData;
+        this.pictureData = _newPictureData;
     }
     
     // GETTER + SETTER
@@ -39,9 +39,9 @@ public class PictureFile implements CardContent
         return this.pictureData;
     }
     
-    public void setPictureData(String newPictureData)
+    public void setPictureData(String _newPictureData)
     {
-        this.pictureData = newPictureData;
+        this.pictureData = _newPictureData;
     }
     
     public String getTitle() throws NullPointerException
@@ -54,8 +54,8 @@ public class PictureFile implements CardContent
         return this.title;
     }
     
-    public void setTitle(String newTitle)
+    public void setTitle(String _newTitle)
     {
-        this.title = newTitle;
+        this.title = _newTitle;
     }
 }

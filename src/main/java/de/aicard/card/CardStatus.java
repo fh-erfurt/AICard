@@ -33,12 +33,12 @@ public class CardStatus
      *
      * Assigns the lowest CardKnowledgeLevel (NOINFORMATION) to the member cardKnowledgeLevel.
      *
-     * @param newCard the Card to which the status belongs.
+     * @param _newCard the Card to which the status belongs.
      */
-    public CardStatus(Card newCard)
+    public CardStatus(Card _newCard)
     {
         this.cardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
-        this.card = newCard;
+        this.card = _newCard;
     }
     
     
@@ -48,9 +48,9 @@ public class CardStatus
         return card;
     }
     
-    public void setCard(Card newCard)
+    public void setCard(Card _newCard)
     {
-        this.card = newCard;
+        this.card = _newCard;
     }
 
     public CardKnowledgeLevel getCardKnowledgeLevel()

@@ -29,14 +29,14 @@ public class VideoFile implements CardContent
      * Constructor of a VideoFile. Sets isPlaying to false assigns an audio file and a title to
      * the member variables.
      *
-     * @param newVideoData  Video file to initialise audioData
-     * @param newTitle  String to initialize title
+     * @param _newVideoData  Video file to initialise audioData
+     * @param _newTitle  String to initialize title
      */
-    public VideoFile(String newVideoData, String newTitle)
+    public VideoFile(String _newVideoData, String _newTitle)
     {
-        this.videoData = newVideoData;
+        this.videoData = _newVideoData;
         this.isPlaying = false;
-        this.title     = newTitle;
+        this.title     = _newTitle;
     }
     
     
@@ -51,9 +51,9 @@ public class VideoFile implements CardContent
         return this.videoData;
     }
     
-    public void setVideoData(String newVideoData)
+    public void setVideoData(String _newVideoData)
     {
-        this.videoData = newVideoData;
+        this.videoData = _newVideoData;
     }
     
     public boolean getIsPlaying()
@@ -61,9 +61,9 @@ public class VideoFile implements CardContent
         return this.isPlaying;
     }
     
-    public void setIsPlaying(boolean newIsPlaying)
+    public void setIsPlaying(boolean _newIsPlaying)
     {
-        this.isPlaying = newIsPlaying;
+        this.isPlaying = _newIsPlaying;
     }
     
     public String getTitle() throws NullPointerException
@@ -76,9 +76,9 @@ public class VideoFile implements CardContent
         return this.title;
     }
     
-    public void setTitle(String newTitle)
+    public void setTitle(String _newTitle)
     {
-        this.title = newTitle;
+        this.title = _newTitle;
     }
     
     

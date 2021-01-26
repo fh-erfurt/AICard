@@ -38,29 +38,29 @@ public class LearnSet
 
     // CONSTRUCTORS
 
-    public LearnSet(CardList newCardList)
+    public LearnSet(CardList _newCardList)
     {
-        this(null, null, null, newCardList, null);
+        this(null, null, null, _newCardList, null);
     }
     
-    public LearnSet(String newTitle, Faculty newFaculty, CardList newCardList, Account newOwner)
+    public LearnSet(String _newTitle, Faculty _newFaculty, CardList _newCardList, Account _newOwner)
     {
-        this(newTitle, null, newFaculty, newCardList, newOwner);
+        this(_newTitle, null, _newFaculty, _newCardList, _newOwner);
     }
     
-    public LearnSet(String newTitle, String newDescription, Faculty newFaculty)
+    public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty)
     {
-        this(newTitle, newDescription, newFaculty, new CardList(), null);
+        this(_newTitle, _newDescription, _newFaculty, new CardList(), null);
     }
     
-    public LearnSet(String newTitle, String newDescription, Faculty newFaculty, CardList newCardList, Account newOwner)
+    public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty, CardList _newCardList, Account _newOwner)
     {
-        title = newTitle;
-        description = newDescription;
-        faculty = newFaculty;
-        cardList = newCardList;
+        title = _newTitle;
+        description = _newDescription;
+        faculty = _newFaculty;
+        cardList = _newCardList;
         commentList = new MessageList();
-        owner = newOwner;
+        owner = _newOwner;
         visibility = Visibility.PRIVATE;
         adminList = new ArrayList<Account>();
         evaluations = 0;
@@ -77,9 +77,9 @@ public class LearnSet
         return this.title;
     }
     
-    public void setTitle(String newTitle)
+    public void setTitle(String _newTitle)
     {
-        this.title = newTitle;
+        this.title = _newTitle;
     }
     
     public String getDescription() throws NullPointerException
@@ -91,9 +91,9 @@ public class LearnSet
         return this.description;
     }
     
-    public void setDescription(String newDescription)
+    public void setDescription(String _newDescription)
     {
-        this.description = newDescription;
+        this.description = _newDescription;
     }
     
     public Faculty getFaculty() throws NullPointerException
@@ -105,9 +105,9 @@ public class LearnSet
         return this.faculty;
     }
     
-    public void setFaculty(Faculty newFaculty)
+    public void setFaculty(Faculty _newFaculty)
     {
-        this.faculty = newFaculty;
+        this.faculty = _newFaculty;
     }
     
     public CardList getCardList() throws NullPointerException
@@ -119,9 +119,9 @@ public class LearnSet
         return this.cardList;
     }
     
-    public void setCardList(CardList newCardList)
+    public void setCardList(CardList _newCardList)
     {
-        this.cardList = newCardList;
+        this.cardList = _newCardList;
     }
     
     public MessageList getCommentList() throws NullPointerException
@@ -133,9 +133,9 @@ public class LearnSet
         return this.commentList;
     }
     
-    public void setCommentList(MessageList newCommentList)
+    public void setCommentList(MessageList _newCommentList)
     {
-        this.commentList = newCommentList;
+        this.commentList = _newCommentList;
     }
     
     public Account getOwner() throws NullPointerException
@@ -147,9 +147,9 @@ public class LearnSet
         return this.owner;
     }
     
-    public void setOwner(Account newOwner)
+    public void setOwner(Account _newOwner)
     {
-        this.owner = newOwner;
+        this.owner = _newOwner;
     }
     
     public Visibility getVisibility() throws NullPointerException
@@ -161,9 +161,9 @@ public class LearnSet
         return this.visibility;
     }
     
-    public void setVisibility(Visibility newVisibility)
+    public void setVisibility(Visibility _newVisibility)
     {
-        this.visibility = newVisibility;
+        this.visibility = _newVisibility;
     }
     
     public ArrayList<Account> getAdmins() throws NullPointerException
@@ -175,9 +175,9 @@ public class LearnSet
         return this.adminList;
     }
     
-    public void setAdmins(ArrayList<Account> newAdmins)
+    public void setAdmins(ArrayList<Account> _newAdmins)
     {
-        this.adminList = newAdmins;
+        this.adminList = _newAdmins;
     }
     
     public double getEvaluation()
@@ -185,9 +185,9 @@ public class LearnSet
         return this.evaluations;
     }
     
-    public void setEvaluation(double newEvaluation)
+    public void setEvaluation(double _newEvaluation)
     {
-        this.evaluations = newEvaluation;
+        this.evaluations = _newEvaluation;
     }
     
     public int getNumberOfEvaluations()
@@ -195,9 +195,9 @@ public class LearnSet
         return this.numberOfEvaluations;
     }
     
-    public void setNumberOfEvaluations(int newNumberOfEvaluations)
+    public void setNumberOfEvaluations(int _newNumberOfEvaluations)
     {
-        this.numberOfEvaluations = newNumberOfEvaluations;
+        this.numberOfEvaluations = _newNumberOfEvaluations;
     }
     
  
@@ -216,19 +216,19 @@ public class LearnSet
     
     /**Add a new Evaluation and calculates the new average
      *
-     * @param newEvaluation int value that in used to calculate new average Evaluation
+     * @param _newEvaluation int value that in used to calculate new average Evaluation
      */
-    public void addEvaluation(int newEvaluation)
+    public void addEvaluation(int _newEvaluation)
     {
         if(getNumberOfEvaluations() == 0)
         {
-            setEvaluation(newEvaluation);
+            setEvaluation(_newEvaluation);
             increaseNumberOfEvaluations();
         }
         else
         {
             double updatedEvaluation = getEvaluation() * getNumberOfEvaluations();
-            updatedEvaluation = updatedEvaluation + newEvaluation;
+            updatedEvaluation = updatedEvaluation + _newEvaluation;
             increaseNumberOfEvaluations();
             updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
             setEvaluation(updatedEvaluation);
@@ -238,16 +238,16 @@ public class LearnSet
     /**
      * Deletes an existing evaluation and calculates the new average.
      *
-     * @param evaluationToDelete
+     * @param _evaluationToDelete
      */
-    public void deleteEvaluation(int evaluationToDelete)
+    public void deleteEvaluation(int _evaluationToDelete)
     {
         if(this.numberOfEvaluations > 0)
         {
             try
             {
                 double updatedEvaluation = this.evaluations * this.numberOfEvaluations;
-                updatedEvaluation = updatedEvaluation - evaluationToDelete;
+                updatedEvaluation = updatedEvaluation - _evaluationToDelete;
                 decreaseNumberOfEvaluations();
 
                 if(this.numberOfEvaluations != 0)
@@ -286,11 +286,11 @@ public class LearnSet
     * Admin
     *
     * */
-    public void addAdmin(Account newAdmin)
+    public void addAdmin(Account _newAdmin)
     {
-        if(!adminList.contains(newAdmin))
+        if(!adminList.contains(_newAdmin))
         {
-            this.adminList.add(newAdmin);
+            this.adminList.add(_newAdmin);
         }
         else
         {
@@ -302,13 +302,13 @@ public class LearnSet
      * Removes Admin from adminList by Index
      * is overloaded
      *
-     * @param indexToRemove
+     * @param _indexToRemove
      */
-    public void removeAdmin(int indexToRemove)
+    public void removeAdmin(int _indexToRemove)
     {
-        if(indexToRemove <= adminList.size() && 0 <= indexToRemove)
+        if(_indexToRemove <= adminList.size() && 0 <= _indexToRemove)
         {
-            this.adminList.remove(indexToRemove);
+            this.adminList.remove(_indexToRemove);
         }
         else
         {
@@ -320,13 +320,13 @@ public class LearnSet
      * Removes Admin from adminList by Account
      * is overloaded
      *
-     * @param accountToRemove
+     * @param _accountToRemove
      */
-    public void removeAdmin(Account accountToRemove)
+    public void removeAdmin(Account _accountToRemove)
     {
-        if(adminList.contains(accountToRemove))
+        if(adminList.contains(_accountToRemove))
         {
-            this.adminList.remove(accountToRemove);
+            this.adminList.remove(_accountToRemove);
         }
         else
         {
@@ -338,16 +338,16 @@ public class LearnSet
     * Messages
     *
     * */
-    public void addMessage(Message newMessage)
+    public void addMessage(Message _newMessage)
     {
-        this.commentList.addMessage(newMessage);
+        this.commentList.addMessage(_newMessage);
     }
     
-    public void removeMessageByMessage(Message messageToRemove)
+    public void removeMessageByMessage(Message _messageToRemove)
     {
-        if(commentList.getMessageList().contains(messageToRemove))
+        if(commentList.getMessageList().contains(_messageToRemove))
         {
-            this.commentList.removeMessage(messageToRemove);
+            this.commentList.removeMessage(_messageToRemove);
         }
         else
         {

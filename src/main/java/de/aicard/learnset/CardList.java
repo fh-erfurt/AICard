@@ -38,11 +38,11 @@ public class CardList
 
     /**
      * Constructor which constructs a CardList on the basis of an existing ArrayList of Cards.
-     * @param newCardList
+     * @param _newCardList
      */
-    public CardList(ArrayList<Card> newCardList)
+    public CardList(ArrayList<Card> _newCardList)
     {
-        this.cardList = newCardList;
+        this.cardList = _newCardList;
         this.listIndex = 0;
     }
     
@@ -57,9 +57,9 @@ public class CardList
         return this.cardList;
     }
     
-    public void setCardList(ArrayList<Card> newCardList)
+    public void setCardList(ArrayList<Card> _newCardList)
     {
-        this.cardList = newCardList;
+        this.cardList = _newCardList;
     }
     
     public int getListIndex()
@@ -67,18 +67,18 @@ public class CardList
         return listIndex;
     }
     
-    public void setListIndex(int newListIndex)
+    public void setListIndex(int _newListIndex)
     {
-        this.listIndex = newListIndex;
+        this.listIndex = _newListIndex;
     }
     
     
     // METHODS
-    public void addToList(Card newCard)
+    public void addToList(Card _newCard)
     {
         if(getListLength() < 200)
         {
-            this.cardList.add(newCard);
+            this.cardList.add(_newCard);
         }
         else
         {
@@ -90,21 +90,21 @@ public class CardList
     /**Removes Card Object from list
      * is overloaded
      *
-     * @param Card Card that should be removed
+     * @param _card Card that should be removed
      */
-    public void removeFromList(Card Card)
+    public void removeFromList(Card _card)
     {
-        this.cardList.remove(Card);
+        this.cardList.remove(_card);
     }
     
     /**Removes Card Object from list
      * is overloaded
      *
-     * @param Index index of the Card that should be removed.
+     * @param _index index of the Card that should be removed.
      */
-    public void removeFromList(int Index)
+    public void removeFromList(int _index)
     {
-        this.cardList.remove(Index);
+        this.cardList.remove(_index);
     }
     
     /**
@@ -125,24 +125,24 @@ public class CardList
     
     /**Method to get a Card from the list by index
      *
-     * @param index expects index of the required Card in the list
+     * @param _index expects index of the required Card in the list
      * @return Card from list
      * @throws NullPointerException
      * @throws Exception if index is too big or small to be a ListIndex
      */
-    public Card getCardByIndex(int index) throws NullPointerException, Exception
+    public Card getCardByIndex(int _index) throws NullPointerException, Exception
     {
-        if((index < this.cardList.size()) && (0 <= index))
+        if((_index < this.cardList.size()) && (0 <= _index))
         {
-            if(this.cardList.get(index) == null)
+            if(this.cardList.get(_index) == null)
             {
-                throw new NullPointerException("No Card set on ListIndex: " + index);
+                throw new NullPointerException("No Card set on ListIndex: " + _index);
             }
     
-            return this.cardList.get(index);
+            return this.cardList.get(_index);
         }
         
-        throw new Exception("index out of bounce. index: " + index);
+        throw new Exception("index out of bounce. index: " + _index);
     }
     
     
