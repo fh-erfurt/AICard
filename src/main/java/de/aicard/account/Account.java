@@ -193,13 +193,13 @@ public abstract class Account
 
     //TODO clickLike
     public boolean likeMessage(Message _message) {
-        if (!(_message.getLikedBy()).contain(this))
+        if (!(_message.getLikedBy()).contains(this))
         { _message.raiseLikes(); _message.newLiker(this); return true; }
         else{return false;}
     }
 
     public boolean dislikeMessage(Message _message){
-        if ((_message.getLikedBy()).contain(this))
+        if ((_message.getLikedBy()).contains(this))
         { _message.removeLike(); _message.lostLiker(this); return true;}
         else{return false;}
     }

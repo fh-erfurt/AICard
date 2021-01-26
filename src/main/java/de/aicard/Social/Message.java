@@ -15,12 +15,12 @@ public class Message {
     private Account sender;
     private LocalDateTime time;
     private int likes;
-    private AccountList likedBy  ;
+    private ArrayList<Account> likedBy  ;
     //constructor
-    public Message(String newMessage, Account newSender){
+    public Message(String _newMessage, Account _newSender){
 
-        message = newMessage;
-        sender = newSender;
+        message = _newMessage;
+        sender = _newSender;
         time = LocalDateTime.now();
         likes = 0;
         likedBy = null;
@@ -32,15 +32,15 @@ public class Message {
     {
         return this.message;
     }
-    public void setMessage(String newMessage) {
-        this.message = newMessage;
+    public void setMessage(String _newMessage) {
+        this.message = _newMessage;
     }
     public int getLikes()
     {
         return this.likes;
     }
-    public void setLikes (int number){this.likes = number;}
-    public AccountList getLikedBy() throws  NullPointerException
+    public void setLikes (int _number){this.likes = _number;}
+    public ArrayList<Account> getLikedBy() throws  NullPointerException
     {
         if(this.likedBy == null)
         {
@@ -48,7 +48,7 @@ public class Message {
         }
         return this.likedBy;
     }
-    public void setLikedby (AccountList newLikedBy) {this.likedBy = newLikedBy;}
+    public void setLikedby (ArrayList<Account> _newLikedBy) {this.likedBy = _newLikedBy;}
     public LocalDateTime getTime() {
         return this.time;
     }
@@ -58,14 +58,14 @@ public class Message {
     public void raiseLikes(){
         this.likes += 1;
     }
-    public void newLiker (Account newLiker){
-        this.likedBy.addPerson(newLiker);
+    public void newLiker (Account _newLiker){
+        this.likedBy.add(_newLiker);
     }
     public void removeLike(){
         this.likes -= 1;
     }
-    public void lostLiker (Account minusLiker){
-        this.likedBy.removePerson(minusLiker);
+    public void lostLiker (Account _minusLiker){
+        this.likedBy.remove(_minusLiker);
     }
 
 }

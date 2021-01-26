@@ -141,21 +141,21 @@ public class AccountTest
     boolean testLikeMessage()
     {
         boolean x = false;
-        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",Std); // liked message
-        msg1.newLiker(Std);
-        Message msg2 = new Message("this is message2",Std);// not liked message
-        if (!Std.likeMessage(msg1) && Std.likeMessage(msg2)) {  x= true;}
+        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
+        Message msg1 = new Message("this is message1",std); // liked message
+        msg1.newLiker(std);
+        Message msg2 = new Message("this is message2",std);// not liked message
+        if (!std.likeMessage(msg1) && std.likeMessage(msg2)) {  x= true;}
         return x;
     }
     boolean testdislikeMessage()
     {
         boolean x = false;
-        Student Std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",Std);
-        msg1.newLiker(Std);// likes message
-        Message msg2 = new Message("this is message2",Std);// undo likes message
-        if (Std.dislikeMessage(msg1) && !Std.dislikeMessage(msg2)) {  x= true;}
+        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
+        Message msg1 = new Message("this is message1",std);
+        msg1.newLiker(std);// likes message
+        Message msg2 = new Message("this is message2",std);// undo likes message
+        if (std.dislikeMessage(msg1) && !std.dislikeMessage(msg2)) {  x= true;}
         return x;
     }
 }

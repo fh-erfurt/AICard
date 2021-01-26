@@ -16,18 +16,18 @@ public class Group {
 
 
     private String name;
-    private AccountList members;
+    private ArrayList<Account> members;
     private Visibility publicity;
     private ArrayList<LearnSet> groupLearnSets;
 
     //Constructor
 
 
-    public Group(String newName , Visibility newPublicity, Account newCreator){
-        this.name = newName;
-        this.members = new AccountList();
-        this.members.addPerson(newCreator);
-        this.publicity = newPublicity ;
+    public Group(String _newName , Visibility _newPublicity, Account _newCreator){
+        this.name = _newName;
+        this.members = new ArrayList<Account>();
+        this.members.add(_newCreator);
+        this.publicity = _newPublicity ;
 
     }
 
@@ -36,37 +36,37 @@ public class Group {
     public String getName() {
         return this.name;
     }
-    public void setName(String newName) {
-        this.name = newName;
+    public void setName(String _newName) {
+        this.name = _newName;
     }
 
-    public AccountList getMembers() {
+    public ArrayList<Account> getMembers() {
         return this.members;
     }
-    public void setMembers(AccountList newMembers) {
-        this.members = newMembers;
+    public void setMembers(ArrayList<Account> _newMembers) {
+        this.members = _newMembers;
     }
 
     public Visibility getPublicity() {
         return this.publicity;
     }
-    public void setPublicity(Visibility newVisibility) {
-        this.publicity = newVisibility;
+    public void setPublicity(Visibility _newVisibility) {
+        this.publicity = _newVisibility;
     }
 
 //functions
     public Account getGroupCreator(){
-        return this.members.getPerson(0);
+        return this.members.get(0);
     }
 
-    public void addToGroup(Account newMember){
+    public void addToGroup(Account _newMember){
 
-    this.members.addPerson(newMember);
+    this.members.add(_newMember);
 }
 
 
-     public void removeFromGroup(Account oldMember){
-        this.members.removePerson(oldMember);
+     public void removeFromGroup(Account _oldMember){
+        this.members.remove(_oldMember);
 }
 
 }
