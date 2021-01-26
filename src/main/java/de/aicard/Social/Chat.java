@@ -34,12 +34,8 @@ private ArrayList<Account> participants ;
     }
     //Setter & getter
 
-    public ArrayList<Message> getChatHistory() throws NullPointerException
+    public ArrayList<Message> getChatHistory()
     {
-        if(this.chatHistory == null)
-        {
-            throw new NullPointerException("chathistory does not exist.");
-        }
             return this.chatHistory;
     }
 

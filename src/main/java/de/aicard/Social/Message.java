@@ -38,12 +38,8 @@ public class Message {
         return this.likes;
     }
     public void setLikes (int _number){this.likes = _number;}
-    public ArrayList<Account> getLikedBy() throws  NullPointerException
+    public ArrayList<Account> getLikedBy()
     {
-        if(this.likedBy == null)
-        {
-            throw new NullPointerException("message was liked by nobody.");
-        }
         return this.likedBy;
     }
     public void setLikedby (ArrayList<Account> _newLikedBy) {this.likedBy = _newLikedBy;}

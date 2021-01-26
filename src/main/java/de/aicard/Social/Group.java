@@ -10,7 +10,6 @@ the class group was supposed to be where students share their Learnsets to discu
  added later to make that possible
  * */
 public class Group {
-    //might be implemented later... maybe... next semester...
 
 
     private String name;
@@ -52,7 +51,7 @@ public class Group {
         this.publicity = _newVisibility;
     }
 
-//functions
+    //functions
     public Account getGroupCreator(){
         return this.members.get(0);
     }

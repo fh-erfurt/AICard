@@ -197,6 +197,31 @@ public abstract class Account
     //Methods
 
     //TODO clickLike
+    public String clickToLike (Message _message)
+    {
+
+        if(likeMessage(_message))
+        {
+            return "you liked this message";
+        }
+        else
+        {
+            return "you already liked this message";
+        }
+    }
+    public String clickToDislike (Message _message)
+    {
+
+        if(dislikeMessage(_message))
+        {
+            return "you disliked this message";
+        }
+        else
+        {
+            return "you can't dislike this message";
+        }
+    }
+
     public boolean likeMessage(Message _message) {
         if (!(_message.getLikedBy()).contains(this))
         { _message.raiseLikes(); _message.newLiker(this); return true; }
