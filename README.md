@@ -1,4 +1,3 @@
 # AICard
-[![Build Status](https://github.com/fh-erfurt/aiCard/workflows/Java CI with Maven/badge.svg)](https://github.com/fh-erfurt/aiCard/actions)
-
+![Java CI with Maven](https://github.com/fh-erfurt/aiCard/workflows/Java%20CI%20with%20Maven/badge.svg)
 ##Dokumentation
