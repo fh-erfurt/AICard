@@ -146,6 +146,11 @@ public abstract class Account
     
     public void addNewFavoriteLearnSet(LearnSetAbo _favoriteSet)
     {
+        //Todo hier auf Visibility von LearnSet prüfen. In LearnSetAbo haben wir nicht die Info,
+        //welcher Account das abonniert. Dafür müsste das Abo aber direkt hier erstellt werden.
+        //Also LearnSet als Parameter und dann new LearnSetAbo(_favoriteSet).
+        //können wir auch gerne morgen Abend zusammen schreiben oder ich setze mich mit deinem
+        //ok dran. ~Daniel
         this.favoriteLearnSets.add(_favoriteSet);
     }
     
