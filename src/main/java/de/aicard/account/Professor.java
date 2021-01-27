@@ -1,5 +1,11 @@
 package de.aicard.account;
 
+/**
+ * extends the account class
+ * additional variable academicGrade
+ * @author: Clemens Berger
+ */
+
 import de.aicard.Social.Chat;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.learnset.LearnSetAbo;
