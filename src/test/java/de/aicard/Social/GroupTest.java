@@ -1,3 +1,5 @@
+
+
 package de.aicard.Social;
 
 import de.aicard.account.Account;
@@ -11,10 +13,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-/**
+/*
  the class GroupTest was supposed to run tests for the Group class it will be implemented as soon as all the functionalities from Group
  are implemented
- * */
+
 public class GroupTest {
 
     @Test
@@ -38,3 +40,4 @@ public class GroupTest {
     }
 
 }
+*/

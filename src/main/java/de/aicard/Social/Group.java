@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import de.aicard.account.Account;
 import de.aicard.enums.Visibility;
 import de.aicard.learnset.LearnSet;
-/**
+/*
 the class group was supposed to be where students share their Learnsets to discuss them, functionalities will be
  added later to make that possible
- * */
+
 public class Group {
 
 
@@ -67,3 +67,4 @@ public class Group {
 }
 
 }
+*/
