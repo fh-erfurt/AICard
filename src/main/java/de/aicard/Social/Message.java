@@ -21,7 +21,7 @@ public class Message {
         sender = _newSender;
         time = LocalDateTime.now();
         likes = 0;
-        likedBy = null;
+        likedBy = new ArrayList<Account>();
 
     }
     //Setter & getter

@@ -76,5 +76,8 @@ private ArrayList<Account> participants ;
         this.chatHistory.remove(_oldMessage);
     }
 
+    public void removeMessageByIndex (int _oldMessage){
 
+        this.chatHistory.remove(_oldMessage);
+    }
 }
