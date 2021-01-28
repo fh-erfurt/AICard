@@ -190,12 +190,48 @@ public abstract class Account
 
     //Chat
 
+/** deleteChat is a function that deletes a chat(which is the argument of the function ) from the chats list
+ *  @Author  Semlali Amine
+ *  */
+
     public void deleteChat(Chat _chat)
     {
         this.chats.remove(_chat);
     }
     
     //Methods
+
+    /** likeMessage is a function that adds a like to a message(which is the argument of the function).
+     * if the person who wants to like has not liked this message yet and
+     * to check if the person liked the message, there is an arraylist called likedBy that contains the persons who already liked.
+     * the function returns true if the person was able to like the message otherwise it returns false
+     * @Author Semlali Amine
+     *   */
+
+    public boolean likeMessage(Message _message)
+    {
+        if (!(_message.getLikedBy()).contains(this))
+        { _message.raiseLikes(); _message.newLiker(this); return true; }
+        else{return false;}
+    }
+
+    /** dislikeMessage is a function that removes a like from a message(which is the argument of the function).
+     *  if the person who wants to dislike has already liked this message and
+     *  to check if the person liked the message, there is an arraylist called likedBy that contains the persons who already liked.
+     * the function returns true if the person was able to dislike the message otherwise it returns false
+     * @Author Semlali Amine
+     *   */
+
+    public boolean dislikeMessage(Message _message)
+    {
+        if ((_message.getLikedBy()).contains(this))
+        { _message.removeLike(); _message.lostLiker(this); return true;}
+        else{return false;}
+    }
+    /** clickToLike is a function that runs the likeMessage
+     * the function returns two statements depending on whether the message was liked or not
+     * @Author Semlali Amine
+     *   */
 
     //TODO clickLike
     public String clickToLike (Message _message)
@@ -210,6 +246,11 @@ public abstract class Account
             return "you already liked this message";
         }
     }
+    /** clickToDislike is a function that runs the dislikeMessage
+     * the function returns two statements depending on whether the message was disliked or not
+     * @Author Semlali Amine
+     *   */
+
     public String clickToDislike (Message _message)
     {
 
@@ -223,17 +264,7 @@ public abstract class Account
         }
     }
 
-    public boolean likeMessage(Message _message) {
-        if (!(_message.getLikedBy()).contains(this))
-        { _message.raiseLikes(); _message.newLiker(this); return true; }
-        else{return false;}
-    }
 
-    public boolean dislikeMessage(Message _message){
-        if ((_message.getLikedBy()).contains(this))
-        { _message.removeLike(); _message.lostLiker(this); return true;}
-        else{return false;}
-    }
 
     public String login(String _email, String _password)
     {

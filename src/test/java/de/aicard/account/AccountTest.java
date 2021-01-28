@@ -8,6 +8,12 @@ import de.aicard.learnset.LearnSetAbo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for the functions of Account
+ *
+ * @author Antonio Blechschmidt, Semlali Amine
+ */
+
 public class AccountTest
 {
     @Test

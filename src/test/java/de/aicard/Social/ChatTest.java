@@ -11,6 +11,13 @@ import de.aicard.Social.Chat;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for the functions of Chat
+ *
+ * @author Semlali Amine
+ */
+
+
 class ChatTest {
 
 
