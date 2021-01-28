@@ -74,9 +74,11 @@ public class Message {
             likedBy.add(_account);
         }
     }
-
-    //public int getLikes()
+/*
+    public int getLikes()
     {
         return likedBy.size();
     }
+
+ */
 }

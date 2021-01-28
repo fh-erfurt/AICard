@@ -72,19 +72,19 @@ public class AccountTest
         Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(0));
         Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(0), Prof2.getOwnLearnSetByIndex(0));
         
-        //test deleteFromOwnedLearningSetsByIndex
+        //test deleteFromOwnLearningSetsByIndex
         Prof1.deleteFavoriteLearnSetByIndex(0);
         Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
         
-        //setup for deleteFromOwnedLearningSetsLastElement()
+        //setup for deleteFromOwnLearningSetsLastElement()
         Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(0));
         Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(1));
         
-        //test deleteFromOwnedLearningSetsLastElement()
+        //test deleteFromOwnLearningSetsLastElement()
         Prof1.deleteFavoriteLearnSetByLastElement();
         Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(-1), Prof2.getOwnLearnSetByIndex(0));
         
-        //setup for deleteAllFromOwnedLearningSets()
+        //setup for deleteAllFromOwnLearningSets()
         Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(1));
         
         //test deleteAllFromOwnedLearningSets()
