@@ -12,7 +12,7 @@ public class Message {
     private String message;
     private Account sender;
     private LocalDateTime time;
-    private int likes;
+    private int likes;  //TODO size(likedBy) -> likes redundant? umsetzung unten
     private ArrayList<Account> likedBy  ;
     //constructor
     public Message(String _newMessage, Account _newSender){
@@ -62,4 +62,21 @@ public class Message {
         this.likedBy.remove(_minusLiker);
     }
 
+    public void clickLike(Account _account) //todo clickLike und getLikes ersetzten raiseLikes, newLiker, removeLike und lostLiker
+                                            //todo spart uns int like und zugriff in account
+    {
+        if(likedBy.contains(_account))
+        {
+            likedBy.remove(_account);
+        }
+        else
+        {
+            likedBy.add(_account);
+        }
+    }
+
+    //public int getLikes()
+    {
+        return likedBy.size();
+    }
 }

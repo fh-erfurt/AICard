@@ -39,7 +39,8 @@ public abstract class Account
     {
         return email;
     }
-    
+
+    //todo regex
     public void setEmail(String _email)
     {
         this.email = _email;
@@ -234,9 +235,6 @@ public abstract class Account
         else{return false;}
     }
 
-    //TODO signIn = Constructor in Subclassen? √
-    //TODO (Mit RegEx oder similar abgleich auf validität)) --> setEmail? √
-    
     public String login(String _email, String _password)
     {
         String email = getEmail();
