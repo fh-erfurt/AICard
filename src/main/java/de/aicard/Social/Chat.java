@@ -80,4 +80,5 @@ private ArrayList<Account> participants ;
 
         this.chatHistory.remove(_oldMessage);
     }
+    //TODO Chat in Participant Account schreiben
 }

@@ -27,7 +27,7 @@ public abstract class Account
     protected String description;
     protected List<LearnSetAbo> ownLearnSets;
     protected List<LearnSetAbo> favoriteLearnSets;
-    protected List<Account> friends; //Todo durch ArrayList ersetzen
+    protected List<Account> friends;
     protected List<Chat> chats;
     
     
@@ -190,12 +190,57 @@ public abstract class Account
 
     //Chat
 
-    public void deleteChat(Chat _chat)
+    private boolean isAlreadyInChatWith(Account _account)
+    {
+        for (Chat chat:this.chats)
+        {
+            if(chat.getParticipants().contains(_account))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addNewChat(Account _account)
+    {
+        if(!isAlreadyInChatWith(_account))
+        {
+            chats.add(new Chat(_account, this, "")); //TODO Message notwendig?
+        }
+    }
+
+    public void deleteChat(int _chat)
     {
         this.chats.remove(_chat);
     }
     
     //Methods
+
+    public String login(String _email, String _password)
+    {
+        String email = getEmail();
+        String password = getPassword();
+
+        if (email.equals(_email) && password.equals(_password))
+        {
+            return "login was successful";
+        }
+        else
+        {
+            return "login failed";
+        }
+    }
+
+    public void resetPassword(String _email, String _password)
+    {
+        String email = getEmail();
+
+        if (email.equals(_email))
+        {
+            setPassword(_password);
+        }
+    }
 
     //TODO clickLike
     public String clickToLike (Message _message)
@@ -235,28 +280,5 @@ public abstract class Account
         else{return false;}
     }
 
-    public String login(String _email, String _password)
-    {
-        String email = getEmail();
-        String password = getPassword();
-        
-        if (email.equals(_email) && password.equals(_password))
-        {
-            return "login was successful";
-        }
-        else
-        {
-            return "login failed";
-        }
-    }
-    
-    public void resetPassword(String _email, String _password)
-    {
-        String email = getEmail();
-        
-        if (email.equals(_email))
-        {
-            setPassword(_password);
-        }
-    }
+
 }

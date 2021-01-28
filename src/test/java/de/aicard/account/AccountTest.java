@@ -1,5 +1,6 @@
 package de.aicard.account;
 
+import de.aicard.Social.Chat;
 import de.aicard.Social.Message;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
@@ -18,7 +19,7 @@ public class AccountTest
         try
         {
             LearnSetAbo LearnSetAbo1 = new LearnSetAbo(new LearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE));
-            LearnSetAbo LearnSetAbo2 = new LearnSetAbo(new LearnSet("Mehr IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE));
+
             
             
             
@@ -28,7 +29,7 @@ public class AccountTest
             
             //test deleteFromOwnedLearningSetsByIndex
             Prof1.deleteOwnLearnSetsByIndex(0);
-            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(0), LearnSetAbo2);
+            Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
             
             //setup for deleteFromOwnedLearningSetsLastElement()
             Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
@@ -43,7 +44,7 @@ public class AccountTest
             
             //test deleteAllFromOwnedLearningSets()
             Prof1.deleteAllOwnLearnSets();
-            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(0), LearnSetAbo2);
+            Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
             
         }
         catch (Exception e){
@@ -135,8 +136,35 @@ public class AccountTest
     @Test
     void testChatManipulation()
     {
-        //TODO Tests schreiben
+        //setup
+        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
+
+        //test addNewChat()
+        Prof1.addNewChat(Prof2);
+        Assertions.assertEquals(Prof1.chats.get(1), Prof2.chats.get(1));
+
+        //test addNewChat()
+        Prof1.deleteChat(1);
+        Assertions.assertNull(Prof1.chats);
     }
+
+    @Test
+    void testLoginandPasswordchange()
+    {
+        //setup
+        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
+
+        //test login()
+        Assertions.assertEquals(Prof1.login("Prof@fh-erfurt.de", "adminProf"), "login was successful");
+        Assertions.assertEquals(Prof1.login("Prof@fh-erfurt.de", "adminProf123"), "login failed"); //wrong password
+        Assertions.assertEquals(Prof1.login("Prof@fh-erfurt.com", "adminProf"), "login failed");//wrong email
+
+        //test resetPassword
+        Prof1.resetPassword("Prof@fh-erfurt.de", "adminProf123");
+        Assertions.assertEquals(Prof1.getPassword(), "adminProf123");
+    }
+
     @Test
     void testLikeMessage()
     {
