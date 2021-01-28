@@ -154,12 +154,12 @@ public class AccountTest
         Assertions.assertEquals(Prof1.chats.get(0), Prof2.chats.get(0));
 
         //test addNewChat()
-        Prof1.deleteChat(1);
+        Prof1.deleteChat(0);
         Assertions.assertTrue(Prof1.chats.isEmpty());
     }
 
     @Test
-    void testLoginandPasswordchange()
+    void testLoginandPasswordChange()
     {
         //setup
         Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);

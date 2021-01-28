@@ -40,8 +40,12 @@ private ArrayList<Account> participants ;
         participants = new ArrayList<Account>();
         this.participants.add(_newCreator);
         this.participants.add(_newParticipant);
-        for(Account participant:participants){
-            participant.addChat(this);
+        for(Account participant:participants)
+        {
+            if (!(participant == _newCreator))// invites ever participant without creator to chat
+            {
+                participant.addChat(this);
+            }
         }
 
     }
