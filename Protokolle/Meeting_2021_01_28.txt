@@ -1,0 +1,32 @@
+Meeting
+
+Datum:28.01.2021
+Uhrzeit:19 Uhr
+
+Nächstes Treffen:
+
+Teilnehmer:
+    Amine Semlali
+    Clemens Berger
+    Daniel Michel 
+    Martin Kühlborn (Protokollant)
+    Antonio Blechschmidt
+
+
+Inhalt:
+	PowerPoint Präsentation
+	Problemen fixen im Test 
+
+Aufgabe:
+	@all:
+		Ideen für Präsetation
+	@Amine:
+		
+	@Clemens:
+		DIAGRAMME ! ! !!!
+	@Daniel:
+		
+	@Martin:
+		
+	@Antonio:
+		Account und AccountTest fixen
