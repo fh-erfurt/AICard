@@ -195,7 +195,7 @@ public abstract class Account
     {
         for (Chat chat:this.chats)
         {
-            if(chat.getParticipants().contains(_account))
+            if(chat.getParticipants().contains(_account) && chat.getParticipants().size() == 2)//todo in Chatklasse
             {
                 return true;
             }
