@@ -9,6 +9,8 @@ import de.aicard.learnset.LearnSetAbo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.logging.Logger;
+
 /**
  * Test class for the functions of Account
  *
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 public class AccountTest
 {
+    //private static final Logger logger = Logger.getLogger(Account.class.);
     @Test
     void testCreatedLearnSetManipulation()
     {
@@ -31,8 +34,8 @@ public class AccountTest
             
             //test createNewOwnedLearnSet and getOwnedLearnSetAboByPosition
             Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
-            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(0), LearnSetAbo1);
-            
+            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(1), LearnSetAbo1);
+
             //test deleteFromOwnedLearningSetsByIndex
             Prof1.deleteOwnLearnSetsByIndex(0);
             Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
@@ -74,7 +77,7 @@ public class AccountTest
         
         //test deleteFromOwnLearningSetsByIndex
         Prof1.deleteFavoriteLearnSetByIndex(0);
-        Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
+        Assertions.assertTrue(Prof1.favoriteLearnSets.isEmpty());
         
         //setup for deleteFromOwnLearningSetsLastElement()
         Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(0));
@@ -82,14 +85,14 @@ public class AccountTest
         
         //test deleteFromOwnLearningSetsLastElement()
         Prof1.deleteFavoriteLearnSetByLastElement();
-        Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(-1), Prof2.getOwnLearnSetByIndex(0));
+        Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(Prof1.favoriteLearnSets.size()-1), Prof2.getOwnLearnSetByIndex(0));
         
         //setup for deleteAllFromOwnLearningSets()
         Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(1));
         
         //test deleteAllFromOwnedLearningSets()
         Prof1.deleteAllFavoriteLearnSets();
-        Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
+        Assertions.assertTrue(Prof1.favoriteLearnSets.isEmpty());
     }
     
     @Test
@@ -102,19 +105,19 @@ public class AccountTest
         
         //test addFriend() and getFriendByIndex()
         Prof1.addFriend(Prof2);
-        Assertions.assertEquals(Prof1.getFriendByIndex(1), Prof2);
+        Assertions.assertEquals(Prof1.getFriendByIndex(0), Prof2);
         
         //test removeFriend()
         Prof1.removeFriend(Prof2);
-        Assertions.assertNull(Prof1.getFriendByIndex(1));
+        Assertions.assertTrue(Prof1.friends.isEmpty());
         
         //setup for removeFriendByIndex()
         Prof1.addFriend(Prof2);
         Prof1.addFriend(Prof3);
         
         //test removeFriendByIndex()
-        Prof1.removeFriend(1);
-        Assertions.assertEquals(Prof1.getFriendByIndex(1), Prof2);
+        Prof1.removeFriend(0);
+        Assertions.assertEquals(Prof1.getFriendByIndex(0), Prof3);
         
     }
     /*
@@ -148,11 +151,11 @@ public class AccountTest
 
         //test addNewChat()
         Prof1.addNewChat(Prof2);
-        Assertions.assertEquals(Prof1.chats.get(1), Prof2.chats.get(1));
+        Assertions.assertEquals(Prof1.chats.get(0), Prof2.chats.get(0));
 
         //test addNewChat()
         Prof1.deleteChat(1);
-        Assertions.assertNull(Prof1.chats);
+        Assertions.assertTrue(Prof1.chats.isEmpty());
     }
 
     @Test

@@ -6,6 +6,7 @@ import de.aicard.enums.Faculty;
 import de.aicard.learnset.LearnSet;
 import de.aicard.learnset.LearnSetAbo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,8 +26,8 @@ public abstract class Account
     protected String password;
     protected String name;
     protected String description;
-    protected List<LearnSetAbo> ownLearnSets;
-    protected List<LearnSetAbo> favoriteLearnSets;
+    protected ArrayList<LearnSetAbo> ownLearnSets;
+    protected ArrayList<LearnSetAbo> favoriteLearnSets;
     protected List<Account> friends; //Todo durch ArrayList ersetzen
     protected List<Chat> chats;
     
@@ -204,7 +205,7 @@ public abstract class Account
 
     public void addNewChat(Account _account)
     {
-        if(!isAlreadyInChatWith(_account))
+        if (!isAlreadyInChatWith(_account))
         {
             chats.add(new Chat(_account, this, "")); //TODO Message notwendig?
         }
