@@ -214,7 +214,8 @@ public abstract class Account
     public void addChat(Chat _chat){
         this.chats.add(_chat);
     }
-/** deleteChat is a function that deletes a chat(which is the argument of the function ) from the chats list
+
+/** deleteChat is a function that deletes a chat from the chats list
  *  @Author  Semlali Amine
  *  */
 
@@ -252,10 +253,43 @@ public abstract class Account
         { _message.removeLike(); _message.lostLiker(this); return true;}
         else{return false;}
     }
+
     /** clickToLike is a function that runs the likeMessage
      * the function returns two statements depending on whether the message was liked or not
      * @Author Semlali Amine
      *   */
+
+    //TODO clickLike
+    public String clickToLike (Message _message)
+    {
+
+        if(likeMessage(_message))
+        {
+            return "you liked this message";
+        }
+        else
+        {
+            return "you already liked this message";
+        }
+    }
+
+    /** clickToDislike is a function that runs the dislikeMessage
+     * the function returns two statements depending on whether the message was disliked or not
+     * @Author Semlali Amine
+     *   */
+
+    public String clickToDislike (Message _message)
+    {
+
+        if(dislikeMessage(_message))
+        {
+            return "you disliked this message";
+        }
+        else
+        {
+            return "you can't dislike this message";
+        }
+    }
 
     public String login(String _email, String _password)
     {
@@ -282,36 +316,8 @@ public abstract class Account
         }
     }
 
-    //TODO clickLike
-    public String clickToLike (Message _message)
-    {
 
-        if(likeMessage(_message))
-        {
-            return "you liked this message";
-        }
-        else
-        {
-            return "you already liked this message";
-        }
-    }
-    /** clickToDislike is a function that runs the dislikeMessage
-     * the function returns two statements depending on whether the message was disliked or not
-     * @Author Semlali Amine
-     *   */
 
-    public String clickToDislike (Message _message)
-    {
-
-        if(dislikeMessage(_message))
-        {
-            return "you disliked this message";
-        }
-        else
-        {
-            return "you can't dislike this message";
-        }
-    }
 
 
 
