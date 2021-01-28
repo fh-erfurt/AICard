@@ -210,6 +210,10 @@ public abstract class Account
             chats.add(new Chat(_account, this, "")); //TODO Message notwendig?
         }
     }
+
+    public void addChat(Chat _chat){
+        this.chats.add(_chat);
+    }
 /** deleteChat is a function that deletes a chat(which is the argument of the function ) from the chats list
  *  @Author  Semlali Amine
  *  */
