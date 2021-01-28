@@ -8,9 +8,7 @@ import de.aicard.enums.Faculty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import de.aicard.Social.Chat;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChatTest {
@@ -50,7 +48,7 @@ class ChatTest {
         ArrayList<Message> chatHistoryFake = new ArrayList<Message>();
         Message msg1 = new Message("this is a message1",std);
         chatHistoryFake.add(msg1);
-        Assertions.assertEquals(chat.getChatHistory(), chatHistoryFake);
+        Assertions.assertEquals(chat.getChatHistory().size(), chatHistoryFake.size());
     }
 
 
