@@ -75,11 +75,8 @@ public class Message {
         }
     }
 
-    /*
-        public int getLikes()
+    //public int getLikes()
     {
         return likedBy.size();
     }
-
-     */
 }

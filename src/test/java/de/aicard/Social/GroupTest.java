@@ -17,6 +17,8 @@ import java.util.ArrayList;
  the class GroupTest was supposed to run tests for the Group class it will be implemented as soon as all the functionalities from Group
  are implemented
 
+ @Author Amine Semlali
+
 public class GroupTest {
 
     @Test

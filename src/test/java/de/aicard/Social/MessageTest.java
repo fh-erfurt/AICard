@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+/**
+ * Test class for the functions of Message
+ *
+ * @author Semlali Amine
+ */
 
 public class MessageTest {
 
