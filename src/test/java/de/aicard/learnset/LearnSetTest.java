@@ -8,6 +8,7 @@ import de.aicard.card.Card;
 import de.aicard.card.TextFile;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
+import de.aicard.enums.Visibility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +47,7 @@ public class LearnSetTest
         }
 
         Account learnSetOwner = new Student("mail", "password", "name", "a student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        LearnSet learnSet = new LearnSet(learnSetTitle, learnSetDescription, faculty, cardList, learnSetOwner);
+        LearnSet learnSet = new LearnSet(learnSetTitle, learnSetDescription, faculty, cardList, learnSetOwner, Visibility.PUBLIC);
 
         return learnSet;
     }
