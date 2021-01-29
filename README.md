@@ -46,7 +46,7 @@ Diese Funktion wurde jedoch nicht umgesetzt, da die Gruppe sich dazu entschied, 
 Gänzlich verabschiedet haben wir uns von dieser Funktion jedoch noch nicht - eventuell erfolgt eine Implementierung in Java 2.
 Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskommentiert und alle vorhandenen Klassen wurden so gestaltet, dass eine Erweiterung des Gesamtsystems um eine Gruppen-Funktion ohne weiteres möglich ist. 
 
-![img_2.png](img_2.png)
+![img_5.png](img_5.png)
 
 ###Codestyle
 - The gaol of this document is to ensure a consistent CodeStyle throughout the project
