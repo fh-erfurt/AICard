@@ -203,7 +203,7 @@ public abstract class Account
     {
         for (Chat chat:this.chats)
         {
-            if(chat.getParticipants().contains(_account) && chat.getParticipants().size() == 2)//todo in Chatklasse
+            if(chat.getParticipants().contains(_account) && chat.getParticipants().size() == 2)
             {
                 return true;
             }
@@ -215,7 +215,7 @@ public abstract class Account
     {
         if (!isAlreadyInChatWith(_account))
         {
-            chats.add(new Chat(_account, this, "")); //TODO Message notwendig?
+            chats.add(new Chat(_account, this, "Hallo "+ _account.getName() +", von "+ this.getName()));
         }
     }
 
