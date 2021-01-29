@@ -8,6 +8,7 @@ package de.aicard.account;
 
 import de.aicard.Social.Chat;
 import de.aicard.enums.Faculty;
+import de.aicard.learnset.LearnSet;
 import de.aicard.learnset.LearnSetAbo;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class Student extends Account{
         this.password = _password;
         this.name = _name;
         this.description = _description;
-        this.ownLearnSets = new ArrayList<LearnSetAbo>();
+        this.ownLearnSets = new ArrayList<LearnSet>();
         this.favoriteLearnSets = new ArrayList<LearnSetAbo>();
         this.friends = new ArrayList<Account>();
         this.chats = new ArrayList<Chat>();

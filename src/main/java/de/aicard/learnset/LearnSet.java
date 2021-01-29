@@ -40,20 +40,20 @@ public class LearnSet
 
     public LearnSet(CardList _newCardList)
     {
-        this(null, null, null, _newCardList, null);
+        this(null, null, null, _newCardList, null, Visibility.PRIVATE);
     }
     
     public LearnSet(String _newTitle, Faculty _newFaculty, CardList _newCardList, Account _newOwner)
     {
-        this(_newTitle, null, _newFaculty, _newCardList, _newOwner);
+        this(_newTitle, null, _newFaculty, _newCardList, _newOwner, Visibility.PRIVATE);
     }
     
     public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty)
     {
-        this(_newTitle, _newDescription, _newFaculty, new CardList(), null);
+        this(_newTitle, _newDescription, _newFaculty, new CardList(), null, Visibility.PRIVATE);
     }
     
-    public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty, CardList _newCardList, Account _newOwner)
+    public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty, CardList _newCardList, Account _newOwner, Visibility _visibility)
     {
         title = _newTitle;
         description = _newDescription;
@@ -61,7 +61,7 @@ public class LearnSet
         cardList = _newCardList;
         commentList = new ArrayList<Message>();
         owner = _newOwner;
-        visibility = Visibility.PRIVATE;
+        visibility = _visibility;
         adminList = new ArrayList<Account>();
         evaluations = 0;
         numberOfEvaluations = 0;
@@ -353,6 +353,31 @@ public class LearnSet
         {
             logger.warning("messageToRemove is not part of commentList");
         }
+    }
+
+    public boolean isAuthorizedToAddLearnSet(Account _account)
+    {
+        switch (this.visibility)
+        {
+            case PUBLIC:
+                return true;
+
+            case PRIVATE:
+                if (this.getOwner()==_account)
+                {
+                    return true;
+                }
+                break;
+
+            case PROTECTED:
+                if (this.getOwner().getFriends().contains(_account))
+                {
+                    return true;
+                }
+                break;
+
+            }
+        return false;
     }
     
 }

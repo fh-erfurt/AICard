@@ -1,11 +1,9 @@
 package de.aicard.account;
 
-import de.aicard.Social.Chat;
-import de.aicard.Social.Message;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
+import de.aicard.enums.Visibility;
 import de.aicard.learnset.LearnSet;
-import de.aicard.learnset.LearnSetAbo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,50 +14,39 @@ import java.util.logging.Logger;
  *
  * @author Antonio Blechschmidt, Semlali Amine
  */
-
+//todo variabel kleinschreiben
 public class AccountTest
 {
     //private static final Logger logger = Logger.getLogger(Account.class.);
     @Test
-    void testCreatedLearnSetManipulation()
+    void testOwnLearnSetManipulation()
     {
         //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
-        try
-        {
-            LearnSetAbo LearnSetAbo1 = new LearnSetAbo(new LearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE));
+        Professor prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
 
-            
-            
-            
-            //test createNewOwnedLearnSet and getOwnedLearnSetAboByPosition
-            Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
-            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(1), LearnSetAbo1);
+        LearnSet learnSet1 = new LearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
 
-            //test deleteFromOwnedLearningSetsByIndex
-            Prof1.deleteOwnLearnSetsByIndex(0);
-            Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
-            
-            //setup for deleteFromOwnedLearningSetsLastElement()
-            Prof1.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
-            Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
-            
-            //test deleteFromOwnedLearningSetsLastElement()
-            Prof1.deleteOwnLearnSetByLastElement();
-            Assertions.assertEquals(Prof1.getOwnLearnSetByIndex(-1), LearnSetAbo1);
-            
-            //setup for deleteAllFromOwnedLearningSets()
-            Prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
-            
-            //test deleteAllFromOwnedLearningSets()
-            Prof1.deleteAllOwnLearnSets();
-            Assertions.assertNull(Prof1.getOwnLearnSetByIndex(0));
-            
-        }
-        catch (Exception e){
-            //OH NO! we have to do something!
-        }
-        
+
+        prof1.ownLearnSets.add(learnSet1);
+
+        //test deleteFromOwnedLearningSetsByIndex
+        prof1.deleteOwnLearnSetsByIndex(0);
+        Assertions.assertTrue(prof1.ownLearnSets.isEmpty());
+
+        //setup for deleteFromOwnedLearningSetsLastElement()
+        prof1.ownLearnSets.add(learnSet1);
+        prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE, Visibility.PUBLIC);
+
+        //test deleteFromOwnedLearningSetsLastElement()
+        prof1.deleteOwnLearnSetByLastElement();
+        Assertions.assertEquals(prof1.getOwnLearnSetByIndex(prof1.ownLearnSets.size()-1), learnSet1);
+
+        //setup for deleteAllFromOwnedLearningSets()
+        prof1.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE, Visibility.PUBLIC);
+
+        //test deleteAllFromOwnedLearningSets()
+        prof1.deleteAllOwnLearnSets();
+        Assertions.assertTrue(prof1.ownLearnSets.isEmpty());
     }
     
     @Test
@@ -68,12 +55,12 @@ public class AccountTest
         //setup
         Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
         Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Prof2.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
-        Prof2.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE);
+        Prof2.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE, Visibility.PUBLIC);
+        Prof2.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE, Visibility.PUBLIC);
         
         //test addNewFavoriteSets() and getFavoriteSetByPosition()
         Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(0));
-        Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(0), Prof2.getOwnLearnSetByIndex(0));
+        Assertions.assertEquals(Prof2.getOwnLearnSetByIndex(0), Prof1.getFavoriteLearnSetByIndex(0).getLearnSet());
         
         //test deleteFromOwnLearningSetsByIndex
         Prof1.deleteFavoriteLearnSetByIndex(0);
@@ -85,7 +72,7 @@ public class AccountTest
         
         //test deleteFromOwnLearningSetsLastElement()
         Prof1.deleteFavoriteLearnSetByLastElement();
-        Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(Prof1.favoriteLearnSets.size()-1), Prof2.getOwnLearnSetByIndex(0));
+        Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(Prof1.favoriteLearnSets.size()-1).getLearnSet(), Prof2.getOwnLearnSetByIndex(0));
         
         //setup for deleteAllFromOwnLearningSets()
         Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(1));
@@ -175,55 +162,17 @@ public class AccountTest
     }
 
     @Test
-    void testLikeMessage()
+    void testMessageLikeManipulation()
     {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std); // liked message
-        msg1.newLiker(std);
-        Message msg2 = new Message("this is message2",std);// not liked message
+        Professor prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
+        prof1.addNewChat(prof2);
+        prof2.getChats().get(0).sendMessage("Hello",prof1);
 
-        Assertions.assertEquals(true, (!std.likeMessage(msg1) && std.likeMessage(msg2)));
-    }
-    @Test
-    void testdislikeMessage()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);
-        msg1.newLiker(std);// liked message
-        Message msg2 = new Message("this is message2",std);// not liked message
-
-        Assertions.assertEquals(true,(std.dislikeMessage(msg1) && !std.dislikeMessage(msg2)));
-    }
-    @Test
-    void testClickToDislike1()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);
-        msg1.newLiker(std);// liked message
-
-        Assertions.assertEquals("you disliked this message",std.clickToDislike(msg1));
-    }
-    @Test
-    void testClickToDislike2()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);// not liked message
-        Assertions.assertEquals("you can't dislike this message",std.clickToDislike(msg1));
-    }
-    @Test
-    void testClickToLike1()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);
-        msg1.newLiker(std);// liked message
-
-        Assertions.assertEquals("you already liked this message",std.clickToLike(msg1));
-    }
-    @Test
-    void testClickToLike2()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);// not liked message
-        Assertions.assertEquals("you liked this message",std.clickToLike(msg1));
+        //test clickLike
+        prof1.clicksLikeOfMessage(0,1); //likes Message of Prof2
+        Assertions.assertEquals(prof1.getChats().get(0).getChatHistory().get(1).getLikes(),1);
+        prof2.clicksLikeOfMessage(0,1); // likes own Message
+        Assertions.assertEquals(prof1.getChats().get(0).getChatHistory().get(1).getLikes(),2);
     }
 }

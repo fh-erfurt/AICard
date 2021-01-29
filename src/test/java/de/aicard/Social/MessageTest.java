@@ -19,32 +19,20 @@ import java.util.ArrayList;
 public class MessageTest {
 
     @Test
+    public void testLikeManipulation() {
+        //setup
+        Student std1 = new Student("Std@fh-erfurt.de", "adminStd", "Std1", "Student1", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
+        Student std2 = new Student("Std@fh-erfurt.de", "adminStd", "Std2", "Student2", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
+        Message message1 = new Message("Hello", std1);
 
-    public void testRaiseAndRemoveLikes() {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is a message",std);
-        msg1.setLikes(2);
-
-        Message msg2 = new Message("this is a message",std);
-        msg2.raiseLikes();
-        msg2.raiseLikes();
-        msg2.raiseLikes();
-        msg2.removeLike();
-
-        Assertions.assertEquals(msg1.getLikes(), msg2.getLikes());
+        //test clickLike
+        message1.clickLike(std1);   //likes Message
+        Assertions.assertEquals(message1.getLikes(), 1);
+        message1.clickLike(std2);   //likes Message
+        Assertions.assertEquals(message1.getLikes(), 2);
+        message1.clickLike(std1);   //undo like Message
+        Assertions.assertEquals(message1.getLikes(), 1);
+        message1.clickLike(std2);   // undo like Message
+        Assertions.assertEquals(message1.getLikes(), 0);
     }
-    @Test
-
-    public void testNewLikerAndLostLiker() {
-        Professor prof = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is a message",std);
-        ArrayList<Account> accountList = new ArrayList<Account>();
-        accountList.add(std);
-        msg1.newLiker(prof);
-        msg1.newLiker(std);
-        msg1.lostLiker(prof);
-        Assertions.assertEquals(msg1.getLikedBy(), accountList);
-    }
-
 }

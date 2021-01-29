@@ -1,10 +1,11 @@
 package de.aicard.account;
 
 import de.aicard.Social.Chat;
-import de.aicard.Social.Message;
 import de.aicard.enums.Faculty;
-import de.aicard.learnset.LearnSet;
+import de.aicard.enums.Visibility;
+import de.aicard.learnset.CardList;
 import de.aicard.learnset.LearnSetAbo;
+import de.aicard.learnset.LearnSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public abstract class Account
     protected String password;
     protected String name;
     protected String description;
-    protected ArrayList<LearnSetAbo> ownLearnSets;
+    protected ArrayList<LearnSet> ownLearnSets;
     protected ArrayList<LearnSetAbo> favoriteLearnSets;
     protected List<Account> friends; //Todo durch ArrayList ersetzen
     protected List<Chat> chats;
@@ -77,7 +78,7 @@ public abstract class Account
         this.description = _description;
     }
     
-    public List<LearnSetAbo> getOwnLearnSets()
+    public List<LearnSet> getOwnLearnSets()
     {
         return this.ownLearnSets;
     }
@@ -101,7 +102,7 @@ public abstract class Account
     
     //ownLearnAboSet
     
-    public LearnSetAbo getOwnLearnSetByIndex(int _index)
+    public LearnSet getOwnLearnSetByIndex(int _index)
     {
         return ownLearnSets.get(_index);
     }
@@ -113,11 +114,13 @@ public abstract class Account
      * @param _description  | provided Imformation for the Constructor of LearnSet
      * @param _faculty      |
      */
-    public void createNewOwnLearnSet(String _title, String _description, Faculty _faculty)
+    public void createNewOwnLearnSet(String _title, String _description, Faculty _faculty, Visibility _visibility)
     {
         try
         {
-            ownLearnSets.add(new LearnSetAbo(new LearnSet(_title, _description, _faculty)));
+            LearnSet newLearnSet = new LearnSet(_title, _description, _faculty,new CardList(),this,_visibility);
+            this.ownLearnSets.add(newLearnSet);
+            this.addNewFavoriteLearnSet(newLearnSet);
         }
         catch (Exception e){
             // Do something here ;)
@@ -146,14 +149,19 @@ public abstract class Account
         return this.favoriteLearnSets.get(_index);
     }
     
-    public void addNewFavoriteLearnSet(LearnSetAbo _favoriteSet)
+    public void addNewFavoriteLearnSet(LearnSet _favoriteSet)
     {
-        //Todo hier auf Visibility von LearnSet prüfen. In LearnSetAbo haben wir nicht die Info,
-        //welcher Account das abonniert. Dafür müsste das Abo aber direkt hier erstellt werden.
-        //Also LearnSet als Parameter und dann new LearnSetAbo(_favoriteSet).
-        //können wir auch gerne morgen Abend zusammen schreiben oder ich setze mich mit deinem
-        //ok dran. ~Daniel
-        this.favoriteLearnSets.add(_favoriteSet);
+        if(_favoriteSet.isAuthorizedToAddLearnSet(this))
+        {
+            try
+            {
+                this.favoriteLearnSets.add(new LearnSetAbo(_favoriteSet));
+            }
+            catch (Exception e)
+            {
+                //todo logger
+            }
+        }
     }
     
     public void deleteFavoriteLearnSetByIndex(int _index)
@@ -214,7 +222,8 @@ public abstract class Account
     public void addChat(Chat _chat){
         this.chats.add(_chat);
     }
-/** deleteChat is a function that deletes a chat(which is the argument of the function ) from the chats list
+
+/** deleteChat is a function that deletes a chat from the chats list
  *  @Author  Semlali Amine
  *  */
 
@@ -225,37 +234,10 @@ public abstract class Account
     
     //Methods
 
-    /** likeMessage is a function that adds a like to a message(which is the argument of the function).
-     * if the person who wants to like has not liked this message yet and
-     * to check if the person liked the message, there is an arraylist called likedBy that contains the persons who already liked.
-     * the function returns true if the person was able to like the message otherwise it returns false
-     * @Author Semlali Amine
-     *   */
-
-    public boolean likeMessage(Message _message)
+    public void clicksLikeOfMessage(int _chatIndex ,int _messageIndex) // todo ok?
     {
-        if (!(_message.getLikedBy()).contains(this))
-        { _message.raiseLikes(); _message.newLiker(this); return true; }
-        else{return false;}
+        this.getChats().get(_chatIndex).getChatHistory().get(_messageIndex).clickLike(this);
     }
-
-    /** dislikeMessage is a function that removes a like from a message(which is the argument of the function).
-     *  if the person who wants to dislike has already liked this message and
-     *  to check if the person liked the message, there is an arraylist called likedBy that contains the persons who already liked.
-     * the function returns true if the person was able to dislike the message otherwise it returns false
-     * @Author Semlali Amine
-     *   */
-
-    public boolean dislikeMessage(Message _message)
-    {
-        if ((_message.getLikedBy()).contains(this))
-        { _message.removeLike(); _message.lostLiker(this); return true;}
-        else{return false;}
-    }
-    /** clickToLike is a function that runs the likeMessage
-     * the function returns two statements depending on whether the message was liked or not
-     * @Author Semlali Amine
-     *   */
 
     public String login(String _email, String _password)
     {
@@ -282,36 +264,8 @@ public abstract class Account
         }
     }
 
-    //TODO clickLike
-    public String clickToLike (Message _message)
-    {
 
-        if(likeMessage(_message))
-        {
-            return "you liked this message";
-        }
-        else
-        {
-            return "you already liked this message";
-        }
-    }
-    /** clickToDislike is a function that runs the dislikeMessage
-     * the function returns two statements depending on whether the message was disliked or not
-     * @Author Semlali Amine
-     *   */
 
-    public String clickToDislike (Message _message)
-    {
-
-        if(dislikeMessage(_message))
-        {
-            return "you disliked this message";
-        }
-        else
-        {
-            return "you can't dislike this message";
-        }
-    }
 
 
 
