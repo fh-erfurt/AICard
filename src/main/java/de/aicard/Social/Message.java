@@ -37,7 +37,6 @@ public class Message {
         message = _newMessage;
         sender = _newSender;
         time = LocalDateTime.now();
-        likes = 0;
         likedBy = new ArrayList<Account>();
 
     }
@@ -53,13 +52,6 @@ public class Message {
     {
         this.message = _newMessage;
     }
-
-    public int getLikes()
-    {
-        return this.likes;
-    }
-
-    public void setLikes (int _number){this.likes = _number;}
 
     /**
      * The function getLikedBy is used to get the list of the persons that liked the message
@@ -86,22 +78,8 @@ public class Message {
      *
      * @Author Amine Semlali
      * */
-
-    public void raiseLikes(){
-        this.likes += 1;
-    }
-    public void newLiker (Account _newLiker){
-        this.likedBy.add(_newLiker);
-    }
-    public void removeLike(){
-        this.likes -= 1;
-    }
-    public void lostLiker (Account _minusLiker){
-        this.likedBy.remove(_minusLiker);
-    }
-
-    public void clickLike(Account _account) //todo clickLike und getLikes ersetzten raiseLikes, newLiker, removeLike und lostLiker
-                                            //todo spart uns int like und zugriff in account
+    //todo beschreibung anpassen
+    public void clickLike(Account _account)
     {
         if(likedBy.contains(_account))
         {
@@ -112,11 +90,11 @@ public class Message {
             likedBy.add(_account);
         }
     }
-/*
+
     public int getLikes()
     {
         return likedBy.size();
     }
 
- */
+
 }

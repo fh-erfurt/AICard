@@ -175,55 +175,17 @@ public class AccountTest
     }
 
     @Test
-    void testLikeMessage()
+    void testMessageLikeManipulation()
     {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std); // liked message
-        msg1.newLiker(std);
-        Message msg2 = new Message("this is message2",std);// not liked message
+        Professor prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
+        prof1.addNewChat(prof2);
+        prof2.getChats().get(0).sendMessage("Hello",prof1);
 
-        Assertions.assertEquals(true, (!std.likeMessage(msg1) && std.likeMessage(msg2)));
-    }
-    @Test
-    void testdislikeMessage()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);
-        msg1.newLiker(std);// liked message
-        Message msg2 = new Message("this is message2",std);// not liked message
-
-        Assertions.assertEquals(true,(std.dislikeMessage(msg1) && !std.dislikeMessage(msg2)));
-    }
-    @Test
-    void testClickToDislike1()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);
-        msg1.newLiker(std);// liked message
-
-        Assertions.assertEquals("you disliked this message",std.clickToDislike(msg1));
-    }
-    @Test
-    void testClickToDislike2()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);// not liked message
-        Assertions.assertEquals("you can't dislike this message",std.clickToDislike(msg1));
-    }
-    @Test
-    void testClickToLike1()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);
-        msg1.newLiker(std);// liked message
-
-        Assertions.assertEquals("you already liked this message",std.clickToLike(msg1));
-    }
-    @Test
-    void testClickToLike2()
-    {
-        Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Message msg1 = new Message("this is message1",std);// not liked message
-        Assertions.assertEquals("you liked this message",std.clickToLike(msg1));
+        //test clickLike
+        prof1.clicksLikeOfMessage(0,1); //likes Message of Prof2
+        Assertions.assertEquals(prof1.getChats().get(0).getChatHistory().get(1).getLikes(),1);
+        prof2.clicksLikeOfMessage(0,1); // likes own Message
+        Assertions.assertEquals(prof1.getChats().get(0).getChatHistory().get(1).getLikes(),2);
     }
 }
