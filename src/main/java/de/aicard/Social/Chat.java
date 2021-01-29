@@ -30,7 +30,7 @@ private ArrayList<Account> participants ;
      * @param _newParticipant the person that receives the first message and is the second on the participants list
      * @param _newMessage the message to send
      *
-     * @Author Semlali Amine
+     * @author Semlali Amine
      */
 
     public Chat(Account _newParticipant,Account _newCreator, String _newMessage)
@@ -77,7 +77,7 @@ private ArrayList<Account> participants ;
     -messages can be sent , for that we need the account and the message to create the object Message and then add it to the chat history
     -messages can be removed from the chat history, with the help of an index argument or the actual Message object argument
 
- * @Author Semlali Amine
+ * @author Semlali Amine
  */
 
     public void addParticipant(Account _newParticipant)

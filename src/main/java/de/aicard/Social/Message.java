@@ -27,7 +27,7 @@ public class Message {
      *
      * likes are initialized to 0  and time is the time the message was sent
      *
-     * @Author Amine Semlali
+     * @author Amine Semlali
      */
 
     //constructor
@@ -56,7 +56,7 @@ public class Message {
     /**
      * The function getLikedBy is used to get the list of the persons that liked the message
      *
-     * @Author Amine Semlali
+     * @author Amine Semlali
      * */
     public ArrayList<Account> getLikedBy()
     {
@@ -76,7 +76,7 @@ public class Message {
      * the functions raiseLikes and removeLike are used to add or remove a like from a message
      * the functions newLiker and lostLiker are used to add or remove a person from the likedBy list which is a list of persons that liked the message
      *
-     * @Author Amine Semlali
+     * @author Amine Semlali
      * */
     //todo beschreibung anpassen
     public void clickLike(Account _account)
