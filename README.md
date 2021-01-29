@@ -1,7 +1,7 @@
 # AICard
 [![Java CI with Maven](https://github.com/fh-erfurt/aiCard/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/fh-erfurt/aiCard/actions)
 
-##Dokumentation
+## Dokumentation
 Als Gruppenprojekt für die Veranstaltungen Java 1 und Java 2 wurde bzw. wird das im Weiteren beschriebene 
 Multiuser-Lernkartensystem implementiert.
 
@@ -9,7 +9,7 @@ Multiuser-Lernkartensystem implementiert.
 <summary> Allgemeine Projektübersicht </summary>
 <br>
 
-###Projektteam
+### Projektteam
 Das Team besteht aus 5 Mitgliedern, alle aus der Vertiefungsrichtung Ingenieursinformatik:
 * **Clemens Berger** - [Profil](https://github.com/ClemensESB)
 * **Antonio Blechschmidt** - [Profil](https://github.com/AntonioBlechschmidt)
@@ -17,11 +17,11 @@ Das Team besteht aus 5 Mitgliedern, alle aus der Vertiefungsrichtung Ingenieursi
 * **Daniel Michel** - [Profil](https://github.com/DanielMichel350)
 * **Amine Semlali** - [Profil](https://github.com/AmineSemlali)
 
-###JavaDoc
+### JavaDoc
 
 HIER LINK EINFÜGEN!!
 
-###Projektbeschreibung
+### Projektbeschreibung
 Ziel des Projektes ist es, ein Multiuser-Kartenlernsystem für Studierende und Lehrende als Pilotprojekt an der FH Erfurt
 zu entwickeln. Um das System nutzen zu können, müssen die Studierenden und Lehrenden einen Account erstellen. Hierzu
 sind die Angaben Hochschul-Email und Passwort zwingend erforderlich, da diese zum Login benötigt werden. Studierende
@@ -48,7 +48,7 @@ Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskomme
 
 ![img_5.png](img_5.png)
 
-###Codestyle
+### Codestyle
 - The gaol of this document is to ensure a consistent CodeStyle throughout the project
 - Violations of this CodyStyle are allowed if it enhances readability
 
@@ -152,12 +152,12 @@ gewährleisten hier in verkürzter Version nur mit Klassennamen realisiert ist:
 Die zentralen Entscheidungen, die zu diesem Ergebnis geführt haben, werden im Folgenden, geordnet nach Packages, dokumentiert.
 Für die Dokumentation der konkreten Implementierung der Klassen ist bitte die unter Allgemeine Projektübersicht verlinkte JavaDoc sowie der Code selbst zu konsultieren.
 
-###Enums
+### Enums
 Das Package Enums kam im Arbeitsprojekt als Package neu hinzu. Ursprünglich war geplant, die Enums funktional an die Packages
 anzugliedern, wo sie benötigt werden. Wir haben uns jedoch dazu entschieden, alle Enums in ein eigenes Package auszulagern, 
 da dies die Projektstruktur übersichtlicher gestaltet.
 
-###Account
+### Account
 Das Package Account erfüllt die Funktion der Nutzerverwaltung. Von Anfang an klar war, dass für diese Aufgabe drei Klassen zentral sind:
 die Klasse Account, und, da es in einem Hochschul-Lernsystem zwei Typen von Accounts geben muss, die beiden Subklassen Professor und Student, 
 die die Grundfunktionalitäten von Account erben, jedoch Besonderheiten für Lehrende und Lernende abbilden können.
@@ -168,19 +168,19 @@ Entsprechend könnten LearnSetAbo sowie LearningSession ebenso gut im Package Ac
 Die Gruppe entschied sich dennoch dazu, beide Klassen in das Package LearnSet zu inkludieren, um alle direkt mit dem LearnSet
 zusammenhängenden Klassen, die die Funktion des Anlegens und Lernens von Inhalten erfüllen, zentral in einem Package zu haben. 
 
-###Learnset
+### Learnset
 Die im vorherigen Abschnitt begründete Entscheidung führt dazu, dass das Package Learnset mehr Funktionen beinhaltet, nämlich all diejenigen, 
 die unmittelbar mit der Funktionalität "Lernen" unseres Lernkartensystems zusammenhängen.
 Dies beinhaltet auch die Klasse CardList, die in allen anderen Klassen des Package lernsets benötigt wird. Sie ist eine Liste von Karten,
 angereichert durch einen Index, der erhöht und verringert werden kann, und so die aktuelle Karte anzeigt,
 beispielsweise die Karte, die gerade in einer LearningSession angezeigt wird.
 
-###Card
+### Card
 Wenn auch zum Lernbereich gehörend, haben wir uns dazu entschlossen, alle Funktionalitäten, die direkt mit einzelnen Karten zusammenhängen,
 in ein weiteres Package auszulagern, um die einzelnen Packages kompakt zu halten. Bis auf die Auslagerung der Enums stand dieses Package in seinem
 Umfang von Anfang an.
 
-###Social
+### Social
 Im Package Social mussten am meisten Entscheidungen getroffen werden, auch, weil von Anfang an der Fokus unserer Arbeit
 auf dem Bereich des Lernens lag und weniger auf dem Bereich der Interaktion zwischen Accounts. Dennoch konnten wir letztendlich 
 auch aus diesem Bereich einige Funktionalitäten implementieren, wie Chats und dem Kommentieren von LearnSets. Von anderen
