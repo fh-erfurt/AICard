@@ -10,6 +10,7 @@ Multiuser-Lernkartensystem implementiert.
 <details>
 <summary>Projektteam</summary>
 <br>
+
 Das Team besteht aus 5 Mitgliedern, alle aus der Vertiefungsrichtung Ingenieursinformatik:
 * **Clemens Berger** - [Profil](https://github.com/ClemensESB)
 * **Antonio Blechschmidt** - [Profil](https://github.com/AntonioBlechschmidt)
@@ -151,9 +152,10 @@ Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskomme
 <details>
 <summary>Verwendete Programme</summary>
 <br>
+
 * [IntelliJ](https://www.jetbrains.com/de-de/idea/) - IDE für JAVA
 * [Discord](https://discord.com/) - Gruppenchat und Meetings
-* [WebEx)(https://www.webex.com/de/index.html) - Meetings, wenn der geteilte Bildschirm eine bessere Auflösung haben sollte
+* [WebEx](https://www.webex.com/de/index.html) - Meetings, wenn der geteilte Bildschirm eine bessere Auflösung haben sollte
 * [lucidchart](https://www.lucidchart.com) - Erstellung von Diagrammen
 * [Office](https://www.office.com/) - Erstellung von Präsentationen
 * [GitHub](https://github.com/) - Versionsverwaltung
