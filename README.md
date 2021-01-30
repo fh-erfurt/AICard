@@ -56,7 +56,7 @@ Diese Funktion wurde jedoch nicht umgesetzt, da die Gruppe sich dazu entschied, 
 Gänzlich verabschiedet haben wir uns von dieser Funktion jedoch noch nicht - eventuell erfolgt eine Implementierung in Java 2.
 Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskommentiert und alle vorhandenen Klassen wurden so gestaltet, dass eine Erweiterung des Gesamtsystems um eine Gruppen-Funktion ohne weiteres möglich ist. 
 
-![img_5.png](img_5.png)
+![img_5.png](doc/Pictures/business_use_case.png)
 </details>
 
 <details>
@@ -171,12 +171,12 @@ es musste geklärt werden, wie die Klassen in Packages aufgeteilt werden sollen 
 Die finale Struktur, die zum Zeitpunkt der Abgabe des Projekts für Java 1 vorliegt, ist das Ergebnis dieses Prozesses,
 der mit folgendem Klassendiagramm, das auch in der Zwischenpräsentation des Projektes vorgestellt wurde, begann:
 
-![img_3.png](img_3.png)
+![img_3.png](doc/Pictures/class_diagram_old.png)
 
 Am (vorläufigen) Ende dieses Prozesses steht nun das folgende Klassendiagramm, welches um eine bessere Übersicht zu
 gewährleisten hier in verkürzter Version nur mit Klassennamen realisiert ist:
 
-![img_4.png](img_4.png)
+![img_4.png](doc/Pictures/class_diagram_new.png)
 
 Die zentralen Entscheidungen, die zu diesem Ergebnis geführt haben, werden im Folgenden, geordnet nach Packages, dokumentiert.
 Für die Dokumentation der konkreten Implementierung der Klassen ist bitte die unter Allgemeine Projektübersicht verlinkte JavaDoc sowie der Code selbst zu konsultieren.
