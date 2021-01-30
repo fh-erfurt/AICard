@@ -266,3 +266,639 @@ um die gemeisamen Veranstaltungen herum auf dem Campus trifft, ist dies eine bes
 - Wir brauchen keine Sanktionen: wir hatten uns zu Beginn des Projektes, entgegen den Empfehlungen von Seiten des Dozenten,
   dazu entschieden, keine Sanktionen festzulegen. Hieran haben wir bis zum Ende festgehalten und haben gute Erfahrungen gemacht.
 </details>
+
+### Protokolle
+
+<details>
+<summary>Meeting 5. November 2020</summary>
+<br>
+
+Protokoll
+
+Meeting
+
+Datum:05.11.20
+Uhrzeit:18:00-19:20 Uhr
+
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel
+Martin Kühlborn
+Antonio Blechschmidt (Protokollant)
+
+
+Inhalt:
+regelmäßige Treffen Donnerstag 19 Uhr
+keine Sanktionen für negative Verhalten, Überlegungen übe ein Belohnungssytem
+Codstyle wird grob übernommen von Herr Sahms C++ Codestyle
+Themenbesprechung:
+Zahnarztorganisationssoftware
+Burgerladenbestellsoftware
+Karteikartensystem (gewähltes Thema)
+Name für Projekt: aiCard
+erstellen des Repository
+testen der Funktionalitäten in GitHub
+
+
+Aufgaben:
+alle Mitglieder:
+GitHub und IntelliJ zum laufen bringen
+Beschreibung schreiben
+Amine:
+-
+Clemens:
+-
+Daniel:
+-
+Martin:
+Codestyle Sheet organisieren
+Antonio:
+Protokoll auf GitHub hochladen
+</details>
+
+<details>
+<summary>Meeting 12. November 2020</summary>
+<br>
+Protokoll
+
+Meeting
+
+Datum:12.11.20
+Uhrzeit:19:00 - 21:30Uhr
+
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel (Zukunfts Protokoll)
+Martin Kühlborn (Protokollant)
+Antonio Blechschmidt (verspätet)
+
+
+Inhalt:
+Projektbeschreibung überarbeiten und Festlegung der Projektideen
+Erstellung der PowerPoint für die Präsentation am 16.11.20
+
+
+Aufgaben:
+alle Mitglieder:
+
+    Amine:
+        -Präsentation Folie 6
+    Clemens:
+        -Präsentation Folie 3
+    Daniel:
+        -Description verschönern 
+		-Präsentation Folie 4
+    Martin:
+		-Präsentation Folie 5
+    Antonio:
+		-Präsentation Folie 1 und 2
+
+
+</details>
+
+
+
+<details>
+<summary>Meeting 19. November 2020</summary>
+<br>
+Protokoll
+
+Meeting
+
+Datum:19.11.20
+Uhrzeit:19:00 - 22:00Uhr
+
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger (Protokollant)
+Daniel Michel (Verspätet)
+Martin Kühlborn
+Antonio Blechschmidt
+
+
+Inhalt:
+Klassen und Methoden Identifikation
+
+
+Aufgaben:
+alle Mitglieder:
+Die denken Nach und Atmen
+
+    Amine:
+        Hat Link für UML Diagramm
+        Card
+    Clemens:
+        Skipper
+    Daniel:
+        LearnSet
+    Martin:
+		Account
+    Antonio:
+		LearningSession
+
+
+</details>
+
+<details>
+<summary>Meeting 26. November 2020</summary>
+<br>
+Protokoll
+
+Meeting
+
+Datum: 26.11.2020
+Uhrzeit: 19:00
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel (Protokoll)
+Martin Kühlborn
+Antonio Blechschmidt
+
+Inhalt:
+- Aktueller Stand Klassen
+- Skipper-Problem
+- Dokumentation
+- Ziele bis nächste Woche
+
+Status:
+- LearnSet Status: Status, wenn nicht neu: Prozentzahl wird angezeigt
+
+Dokumentation:
+- 1. Foliensatz, Seite 14
+
+Optionaler Termin bei Problemen: Montag Abend
+
+ToDo:
+- Klassen aufeinander abstimmen
+- @Daniel Konstruktor LearnSet bezüglich State überarbeiten
+- @Clemens neue Klasse CardList
+- @all Code dokumentieren
+- @Daniel Enums auslagern
+- @Daniel Nachfragen, ob Rücksprache mit Dozent möglich
+
+</details>
+
+<details>
+<summary>Meeting 3. Dezember 2020</summary>
+<br>
+Protokoll Meeting
+
+Datum: 03.12.2020
+Uhrzeit: 19:00
+
+Teilnehmer:
+Amine Semlali (Protokoll)
+Clemens Berger
+Daniel Michel
+Martin Kühlborn
+Antonio Blechschmidt
+
+Inhalt:
+- Änderung Stand Klassen : Constructor Learnset ändern
+- Fragen
+- Ziele bis nächster Montag
+
+Fragen für Montag :
+-	Datenbank implementieren ?
+-	Wie viele Klassen brauchen wir für 5 Personen ??
+-	Jeweils eine Klasse für Vorder- und Rückseite der Karte ?
+-	Fotos auf Karten ?
+-   Welche Kriterien/Themen gibt es für die Zwischenpräsentation?
+-   Enums als Klasse so ok?
+
+ToDo: bis Montag 07.12.2020
+- @Martin : Enum Klasse (Studiengänge)
+- @alle : sich informieren über Logger Klasse + Test Fälle schreiben
+-  sich über UML Diagramm informieren (wie macht man das richtig)
+
+</details>
+
+<details>
+<summary>Meeting 7. Dezember 2020</summary>
+<br>
+Protokoll
+
+Meeting
+
+Datum:07.12.2020
+Uhrzeit:19:00-21:30 Uhr
+
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel
+Martin Kühlborn
+Antonio Blechschmidt (Protokollant)
+
+
+Inhalt:
+Diskusion neue Klassen
+(EnumKlassen)
+State
+CardKnowledgeLevel
+Fakultäten
+Studiengänge
+(abstrakte)Karteninhalt - Superklasse der MedienKlassen
+TextKartenSeite
+AudioKartenSeite
+BildKartenSeite
+VideoKartenSeite
+(abstrakte)AccountKlasse aufspalten
+Student - Semester
+Dozent - Administrative Funktionen
+ChatKlasse mit ArrayKommentare
+KommentareKlasse - für CardSets, Cards
+LearningGroupKlasse - alle Können karten erstellen
+LearnSet AccountArray für eine Whitelist
+CardProgress - Knowlegdelevel, Status Auslagern in eine Klasse die Accountgebundene Card/Cardset festhält
+Array mit Knowlegdelevel
+Array mit Status
+KlassenDiagramm in lucidchart (https://lucid.app/lucidchart/c7963545-5f00-46cf-94dc-b8bf282ebe30/edit?shared=true&page=HWEp-vi-RSFO#?folder_id=home&browser=icon )
+
+
+
+Aufgaben:
+alle Mitglieder:
+Use-Cases überlegen
+Amine:
+Card
+Clemens:
+Learnset und Cardlist
+Daniel:
+Roter Bereich in lucidchard
+Martin:
+Gelber Bereich in lucidchard
+Antonio:
+LearningSeason
+</details>
+
+<details>
+<summary>Meeting 10. Dezember 2020</summary>
+<br>
+Protokoll
+
+Meeting
+
+Datum:12+13.12.2020
+Uhrzeit:19:00-21:00 Uhr
+
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel
+Martin Kühlborn	(Protokollant)
+Antonio Blechschmidt
+
+
+Inhalt:
+Präsentation erstellen für Zwischenpräsentation
+
+
+Amine:
+Card(6+7)
+Antonio:
+Lernsets(8+9)
+Clemens:
+Account(4+5, 12)
+Martin:
+Einleitung (1,2,3)
+Daniel:
+Chats(10+11)
+
+@all:
+Sonntag 19:00Uhr treffen und Präsentation durchsprechen
+</details>
+
+<details>
+<summary>Meeting 17. Dezember 2020</summary>
+<br>
+Protokoll
+
+Datum: 17. Dez 2020
+Uhrzeit: 19:17 Uhr bis 19:47 Uhr
+
+Anwesend: Alle :)
+
+Themenverteilung:
+CardStatus, Card und das rechts davon: Martin
+LearnSet, LearnSetAbo, LearningSession: Daniel
+Account, Student, Professor: Clemens
+AccountList, Groups, LearnSetAbo: Amine
+Antonio: Dokumentation
+
+Code-Review-Kreis: Martin-> Daniel -> Clemens -> Amine -> Martin
+
+und Antonio rewied alles
+
+Nächste Meetings: Mittwochs, 19 Uhr
+
+</details>
+
+<details>
+<summary>Meeting 23. Dezember 2020</summary>
+<br>
+Protokoll
+
+Meeting
+
+Datum:23.12.2020
+Uhrzeit:19:00-19:38 Uhr
+
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger (Protokollant)
+Daniel Michel
+Martin Kühlborn
+Antonio Blechschmidt
+
+
+Inhalt:
+LearnSetAbo
+Problembesprechung
+
+
+Aufgaben:
+alle Mitglieder:
+-
+Amine:
+-Message MessageList
+Clemens:
+-
+Daniel:
+-
+Martin:
+-
+Antonio:
+-
+</details>
+
+<details>
+<summary>Meeting 30. Dezember 2020</summary>
+<br>
+Protokoll
+
+Meeting
+
+Datum:30.12.2020
+Uhrzeit:19:00-19:38 Uhr
+
+
+Teilnehmer:
+Amine Semlali (Protokollant)
+Clemens Berger
+Daniel Michel
+Martin Kühlborn
+Antonio Blechschmidt
+
+
+Inhalt:
+
+Tests schreiben
+Klassen vervollständigen
+
+
+Aufgaben:
+
+    alle Mitglieder: Eigene Klassen vervollständigen
+
+    Amine: Tests für AccountList, Group, Chat, MessageList, Message
+
+    Clemens: prüfen ob unser Code folgt die Javacode conventions, Erweiterung der Beschreibung
+
+    Daniel: Tests für Learningsession und Learnsetabo
+
+    Martin: Tests für Cardlist, Cardstatus und Learnset
+
+    Antonio: Tests für Account und Funktionen
+
+</details>
+
+<details>
+<summary>Meeting 7. Januar 2021</summary>
+<br>
+Meeting
+
+Datum:07.01.2021
+Uhrzeit:19 Uhr
+
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel
+Martin Kühlborn
+Antonio Blechschmidt (Protokollant)
+
+
+Inhalt:
+besprechen von Problemen
+überarbeiten von Klassen anhand von fehlschlagenden Tests
+account.creategroup() 2. Constructer
+leanset.learnset() parameter übergeben
+owner von Account übergeben
+LearnsetAbo int für Evaluation
+
+Aufgaben:
+alle Mitglieder:
+m_ für alle Member
+Test schreiben
+Amine:
+-
+Clemens:
+-
+Daniel:
+
+    Martin:
+
+    Antonio:
+
+</details>
+
+<details>
+<summary>Meeting 14. Januar 2020</summary>
+<br>
+Meeting
+
+Datum:14.01.2021
+Uhrzeit:19 Uhr
+
+Nächstes Treffen: Montag, 18.01.2021 19:00UHR
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel
+Martin Kühlborn (Protokollant)
+Antonio Blechschmidt
+
+
+Inhalt:
+Problembehandlung Chat
+Gruppe wird nach hinten verschoben
+
+
+
+Ideen für die Dokumentation:
+Löschbare Nachrichten im Chat
+
+
+Aufgaben:
+alle Mitglieder:
+- TODOS in eingenen Klassen bearbeiten
+- Bei Gettern NullPointerExceptioons hinzufügen
+-
+Amine:
+-
+Clemens:
+-
+Daniel:
+
+    Martin:
+
+    Antonio:
+</details>
+<details>
+<summary>Meeting 18. Januar 2021</summary>
+<br>
+Meeting
+
+Datum:18.01.2021
+Uhrzeit:19 Uhr
+
+Nächstes Treffen:
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel (Protokollant)
+Martin Kühlborn
+Antonio Blechschmidt
+
+
+Inhalt:
+Dokumentation
+
+Funktionalitäten, die wir noch brauchen:
+- generelle Suchfunktion
+
+Aufgabe:
+
+Clemens überarbeitet die Klassen in Doku.
+alle anderen: ToDos abarbeiten, Fehler in Tests beheben, weitere Tests schreiben, Code-Dokumentation in Englisch und
+Java-Code-Standard
+</details>
+
+<details>
+<summary>Meeting 21. Januar 2021</summary>
+Meeting
+
+Datum:18.01.2021
+Uhrzeit:19 Uhr
+
+Nächstes Treffen:
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel (Protokollant)
+Martin Kühlborn
+Antonio Blechschmidt
+
+
+Inhalt:
+Dokumentation
+
+Funktionalitäten, die wir noch brauchen:
+- generelle Suchfunktion
+
+Aufgabe:
+
+Clemens überarbeitet die Klassen in Doku.
+alle anderen: ToDos abarbeiten, Fehler in Tests beheben, weitere Tests schreiben, Code-Dokumentation in Englisch und
+Java-Code-Standard
+</details>
+
+<details>
+<summary>Meeting 25. Januar 2021</summary>
+<br>
+Meeting
+
+Datum:25.01.2021
+Uhrzeit:19 Uhr
+
+Nächstes Treffen: Donnerstag, 28.01.2021 19:00UHR
+
+Teilnehmer:
+Amine Semlali (Protokollant)
+Clemens Berger
+Daniel Michel
+Martin Kühlborn
+Antonio Blechschmidt
+
+Inhalt:
+To Do reviews
+Code review
+
+
+
+Aufgaben:
+alle Mitglieder:
+
+Argumente von Funktionen mit _ anfangen
+Eigene Klassen anpassen
+Tests schreiben
+Todos bearbeiten
+Codestyle respektieren
+Klassendiagramm updaten
+Dokumentation
+
+</details>
+
+<details>
+<summary>Meeting 28. Januar 2021</summary>
+<br>
+Meeting
+
+Datum:28.01.2021
+Uhrzeit:19 Uhr
+
+Nächstes Treffen:
+
+Teilnehmer:
+Amine Semlali
+Clemens Berger
+Daniel Michel
+Martin Kühlborn (Protokollant)
+Antonio Blechschmidt
+
+
+Inhalt:
+PowerPoint Präsentation
+Problemen fixen im Test
+
+Aufgabe:
+@all:
+Ideen für Präsetation
+@Amine:
+
+	@Clemens:
+		DIAGRAMME ! ! !!!
+	@Daniel:
+		
+	@Martin:
+		
+	@Antonio:
+		Account und AccountTest fixen
+</details>
+
+
