@@ -5,23 +5,32 @@
 Als Gruppenprojekt für die Veranstaltungen Java 1 und Java 2 wurde bzw. wird das im Weiteren beschriebene 
 Multiuser-Lernkartensystem implementiert.
 
-<details>
-<summary> Allgemeine Projektübersicht </summary>
-<br>
+### Allgemeine Projektübersicht
 
-### Projektteam
+<details>
+<summary>Projektteam</summary>
+<br>
 Das Team besteht aus 5 Mitgliedern, alle aus der Vertiefungsrichtung Ingenieursinformatik:
 * **Clemens Berger** - [Profil](https://github.com/ClemensESB)
 * **Antonio Blechschmidt** - [Profil](https://github.com/AntonioBlechschmidt)
 * **Martin Kühlborn** - [Profil](https://github.com/KhbrnDev)
 * **Daniel Michel** - [Profil](https://github.com/DanielMichel350)
 * **Amine Semlali** - [Profil](https://github.com/AmineSemlali)
+</details>
 
-### JavaDoc
-
+<details>
+<summary>JavaDoc</summary>
+<br>
 HIER LINK EINFÜGEN!!
 
-### Projektbeschreibung
+</details>
+
+
+
+<details>
+<summary>Projektbeschreibung</summary>
+<br>
+
 Ziel des Projektes ist es, ein Multiuser-Kartenlernsystem für Studierende und Lehrende als Pilotprojekt an der FH Erfurt
 zu entwickeln. Um das System nutzen zu können, müssen die Studierenden und Lehrenden einen Account erstellen. Hierzu
 sind die Angaben Hochschul-Email und Passwort zwingend erforderlich, da diese zum Login benötigt werden. Studierende
@@ -47,8 +56,13 @@ Gänzlich verabschiedet haben wir uns von dieser Funktion jedoch noch nicht - ev
 Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskommentiert und alle vorhandenen Klassen wurden so gestaltet, dass eine Erweiterung des Gesamtsystems um eine Gruppen-Funktion ohne weiteres möglich ist. 
 
 ![img_5.png](img_5.png)
+</details>
 
-### Codestyle
+<details>
+<summary>Codestyle</summary>
+<br>
+
+
 - The gaol of this document is to ensure a consistent CodeStyle throughout the project
 - Violations of this CodyStyle are allowed if it enhances readability
 
@@ -132,14 +146,27 @@ Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskomme
   
   
     ```
+</details>
+
+<details>
+<summary>Verwendete Programme</summary>
+<br>
+* [IntelliJ](https://www.jetbrains.com/de-de/idea/) - IDE für JAVA
+* [Discord](https://discord.com/) - Gruppenchat und Meetings
+* [WebEx)(https://www.webex.com/de/index.html) - Meetings, wenn der geteilte Bildschirm eine bessere Auflösung haben sollte
+* [lucidchart](https://www.lucidchart.com) - Erstellung von Diagrammen
+* [Office](https://www.office.com/) - Erstellung von Präsentationen
+* [GitHub](https://github.com/) - Versionsverwaltung
 
 </details>
+
+### Zentrale Architekturentscheidungen
 <details>
-<summary> Zentrale Architekturentscheidungen </summary>
+<summary> Übersicht </summary>
 <br>
-Im laufe der Projektarbeit mussten in der Gruppe viele Entscheidungen getroffen werden hinsichtlich der Architektur des Systems,
+Im Laufe der Projektarbeit mussten in der Gruppe viele Entscheidungen getroffen werden hinsichtlich der Architektur des Systems,
 es musste geklärt werden, wie die Klassen in Packages aufgeteilt werden sollen und welche Funktionalität in welcher Klasse am besten aufgehoben ist.
-Die Finale Struktur, die zum Zeitpunkt der Abgabe des Projekts für Java 1 vorliegt, ist das Ergebnis dieses Prozesses,
+Die finale Struktur, die zum Zeitpunkt der Abgabe des Projekts für Java 1 vorliegt, ist das Ergebnis dieses Prozesses,
 der mit folgendem Klassendiagramm, das auch in der Zwischenpräsentation des Projektes vorgestellt wurde, begann:
 
 ![img_3.png](img_3.png)
@@ -151,13 +178,19 @@ gewährleisten hier in verkürzter Version nur mit Klassennamen realisiert ist:
 
 Die zentralen Entscheidungen, die zu diesem Ergebnis geführt haben, werden im Folgenden, geordnet nach Packages, dokumentiert.
 Für die Dokumentation der konkreten Implementierung der Klassen ist bitte die unter Allgemeine Projektübersicht verlinkte JavaDoc sowie der Code selbst zu konsultieren.
+</details>
 
-### Enums
+<details>
+<summary>Enums</summary>
+<br>
 Das Package Enums kam im Arbeitsprojekt als Package neu hinzu. Ursprünglich war geplant, die Enums funktional an die Packages
 anzugliedern, wo sie benötigt werden. Wir haben uns jedoch dazu entschieden, alle Enums in ein eigenes Package auszulagern, 
 da dies die Projektstruktur übersichtlicher gestaltet.
+</details>
 
-### Account
+<details>
+<summary>Account</summary>
+<br>
 Das Package Account erfüllt die Funktion der Nutzerverwaltung. Von Anfang an klar war, dass für diese Aufgabe drei Klassen zentral sind:
 die Klasse Account, und, da es in einem Hochschul-Lernsystem zwei Typen von Accounts geben muss, die beiden Subklassen Professor und Student, 
 die die Grundfunktionalitäten von Account erben, jedoch Besonderheiten für Lehrende und Lernende abbilden können.
@@ -167,20 +200,28 @@ wie der akutelle Lernstand, ist. Eine LearningSession wird ebenfalls immer aus e
 Entsprechend könnten LearnSetAbo sowie LearningSession ebenso gut im Package Account enthalten sein. 
 Die Gruppe entschied sich dennoch dazu, beide Klassen in das Package LearnSet zu inkludieren, um alle direkt mit dem LearnSet
 zusammenhängenden Klassen, die die Funktion des Anlegens und Lernens von Inhalten erfüllen, zentral in einem Package zu haben. 
+</details>
 
-### Learnset
+<details>
+<summary>Learnset</summary>
+<br>
 Die im vorherigen Abschnitt begründete Entscheidung führt dazu, dass das Package Learnset mehr Funktionen beinhaltet, nämlich all diejenigen, 
 die unmittelbar mit der Funktionalität "Lernen" unseres Lernkartensystems zusammenhängen.
 Dies beinhaltet auch die Klasse CardList, die in allen anderen Klassen des Package lernsets benötigt wird. Sie ist eine Liste von Karten,
 angereichert durch einen Index, der erhöht und verringert werden kann, und so die aktuelle Karte anzeigt,
 beispielsweise die Karte, die gerade in einer LearningSession angezeigt wird.
 
-### Card
+</details>
+<details>
+<summary>Card</summary>
 Wenn auch zum Lernbereich gehörend, haben wir uns dazu entschlossen, alle Funktionalitäten, die direkt mit einzelnen Karten zusammenhängen,
 in ein weiteres Package auszulagern, um die einzelnen Packages kompakt zu halten. Bis auf die Auslagerung der Enums stand dieses Package in seinem
 Umfang von Anfang an.
+</details>
 
-### Social
+<details>
+<summary>Social</summary>
+<br>
 Im Package Social mussten am meisten Entscheidungen getroffen werden, auch, weil von Anfang an der Fokus unserer Arbeit
 auf dem Bereich des Lernens lag und weniger auf dem Bereich der Interaktion zwischen Accounts. Dennoch konnten wir letztendlich 
 auch aus diesem Bereich einige Funktionalitäten implementieren, wie Chats und dem Kommentieren von LearnSets. Von anderen
@@ -189,5 +230,37 @@ Funktion, Gruppen zu bilden, innerhalb eines Semesters nicht so möglich gewesen
 Und wir trennten uns von zwei weiteren Klassen, die ursprünglich im Package Social enthalten waren: MessageList und AccountList.
 Hier stellten wir während der Implementierung fest: wir brauchen diese Klassen nicht, denn wir hatten an diese Klassen keine
 Anforderungen, die nicht auch die Java eigene Klasse ArrayList erfüllen würde. Die logische Konsequenz war es, diese Klassen aus unserem Projekt zu löschen.
+</details>
 
+
+### Lessons Learned
+
+Der Entstehungsprozess dieses Projektes wurde auch begleitet von einem kontinuierlichen Lernprozess aller Gruppenmitglieder.
+Da wir mit unterschiedlichen Vorkenntnissen in das Projekt starteten, konnten wir vor allem auch viel voneinander lernen.
+Unsere Lessons Learned seien hier kurz zusammengefasst, gegliedert in den fachlichen Bereich und den sozialen Bereich.
+
+<details>
+<summary> 
+Fachliche Lessons Learned
+</summary>
+- Die größte Schwierigkeit bei diesem Projekt war das Umdenken von einer datenbankbasierten Logik: An der FH Erfurt lernen 
+wir Softwaretechnik am Beispiel von Datenbanken, und mit diesem Denkmuster startete auch unsere Gruppe in das Projekt.
+- Wir haben Java gelernt: trotz unterschiedlicher Vorkenntnisse haben am Ende doch alle etwas dazugelernt und ihre Kenntnisse
+  in Java vertiefen können.
+- Tests helfen sehr bei der Programmierung.
+- Wir haben GitHub gelernt: Anfangs hatten wir einige Probleme beim Arbeiten mit GitHub, die wir jedoch alle gemeinsam lösen konnten.
+</details>
+<details>
+<summary>
+Soziale Lessons Learned
+</summary>
+- Gruppenarbeit ist kompliziert, weil es viel Reden und Abstimmungen erfordert. Gerade im Online-Semester, wenn man sich nicht sowieso 
+um die gemeisamen Veranstaltungen herum auf dem Campus trifft, ist dies eine besondere Herausforderung, die wir gemeinsam gemeistert haben.
+- Wo viel miteinander geredet wird, ist eine gute und eindeutige Protokollführung sehr wichtig, damit Entscheidungen klar 
+  dokumentiert sind.
+- Wir sind mit Problemen nie alleine: egal welche (fachlichen) Probleme auftraten, es fand sich immer (mindestens) ein
+  anderes Gruppenmitglied, das Abhilfe schaffen konnte. Egal, ob während den gemeinsamen Meetings oder einfach so zwischendurch
+      in unserem Gruppenchat.
+- Wir brauchen keine Sanktionen: wir hatten uns zu Beginn des Projektes, entgegen den Empfehlungen von Seiten des Dozenten,
+  dazu entschieden, keine Sanktionen festzulegen. Hieran haben wir bis zum Ende festgehalten und haben gute Erfahrungen gemacht.
 </details>
