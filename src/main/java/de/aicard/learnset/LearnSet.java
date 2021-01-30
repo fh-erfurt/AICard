@@ -370,7 +370,7 @@ public class LearnSet
                 break;
 
             case PROTECTED:
-                if (this.getOwner().getFriends().contains(_account))
+                if (this.getOwner().getFriends().contains(_account) || this.getOwner()==_account)
                 {
                     return true;
                 }

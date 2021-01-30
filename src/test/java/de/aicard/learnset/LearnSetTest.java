@@ -159,5 +159,45 @@ public class LearnSetTest
     
     }
 
+    @Test
+    public void testAuthorizationCheck(){
+        //given: 3 Learnsets: one public, one protected, one private
+        LearnSet publicLearnSet = getTestLearnSet();
+        publicLearnSet.setVisibility(Visibility.PUBLIC);
+
+        LearnSet protectedLearnSet = getTestLearnSet();
+        protectedLearnSet.setVisibility(Visibility.PROTECTED);
+
+        LearnSet privateLearnSet = getTestLearnSet();
+        privateLearnSet.setVisibility(Visibility.PRIVATE);
+
+        //also given: some Accounts
+
+        Account ownerOfPublicLearnSet = publicLearnSet.getOwner();
+        Account ownerOfProtectedLearnSet = protectedLearnSet.getOwner();
+        Account ownerOfPrivateLearnSet = privateLearnSet.getOwner();
+        Account friendOfAll = new Student("mail", "password", "friend", "A friend", 2, Faculty.APPLIED_COMPUTER_SCIENCE);
+        ownerOfPublicLearnSet.addFriend(friendOfAll);
+        ownerOfProtectedLearnSet.addFriend(friendOfAll);
+        ownerOfPrivateLearnSet.addFriend(friendOfAll);
+        Account allAlone = new Student("mail", "password", "no friend", "has no friends", 2, Faculty.APPLIED_COMPUTER_SCIENCE);
+
+        //then: allAlone is only authorised to subscribe to the public LearnSet
+        Assertions.assertTrue(publicLearnSet.isAuthorizedToAddLearnSet(allAlone));
+        Assertions.assertFalse(protectedLearnSet.isAuthorizedToAddLearnSet(allAlone));
+        Assertions.assertFalse(privateLearnSet.isAuthorizedToAddLearnSet(allAlone));
+
+        //then: friendOfAll is authorised to subscribe to the public and the protected LearnSet
+        Assertions.assertTrue(publicLearnSet.isAuthorizedToAddLearnSet(friendOfAll));
+        Assertions.assertTrue(protectedLearnSet.isAuthorizedToAddLearnSet(friendOfAll));
+        Assertions.assertFalse(privateLearnSet.isAuthorizedToAddLearnSet(friendOfAll));
+
+        //then: the owner of the LearnSets are authorized to add their own Learnsets
+        Assertions.assertTrue(publicLearnSet.isAuthorizedToAddLearnSet(ownerOfPublicLearnSet));
+        Assertions.assertTrue(protectedLearnSet.isAuthorizedToAddLearnSet(ownerOfProtectedLearnSet));
+        Assertions.assertTrue(privateLearnSet.isAuthorizedToAddLearnSet(ownerOfPrivateLearnSet));
+
+    }
+
 
 }
