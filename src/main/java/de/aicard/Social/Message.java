@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * the message its self - the sender - the time it was sent - the number of likes and the people who liked this message as a list
  *
  *
- * @Author Amine Semlali
+ * @author Amine Semlali
  * */
 
 public class Message {
@@ -17,7 +17,6 @@ public class Message {
     private String message;
     private Account sender;
     private LocalDateTime time;
-    private int likes;  //TODO size(likedBy) -> likes redundant? umsetzung unten
     private ArrayList<Account> likedBy  ;
 
     /**
@@ -73,12 +72,13 @@ public class Message {
     //functions
 
     /**
-     * the functions raiseLikes and removeLike are used to add or remove a like from a message
-     * the functions newLiker and lostLiker are used to add or remove a person from the likedBy list which is a list of persons that liked the message
+     * the function clickLike checks if a person is in the list of those who liked the message
+     * if the person liked the message, his name is removed from the list (dislike)
+     * if the person didn't like the message,his name is added to the list (like)
      *
      * @author Amine Semlali
      * */
-    //todo beschreibung anpassen
+
     public void clickLike(Account _account)
     {
         if(likedBy.contains(_account))
@@ -90,7 +90,11 @@ public class Message {
             likedBy.add(_account);
         }
     }
-
+    /**
+     * the function getLikes return the number of likes that a message has
+     *
+     * @author Amine Semlali
+     * */
     public int getLikes()
     {
         return likedBy.size();

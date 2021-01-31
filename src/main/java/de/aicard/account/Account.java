@@ -15,7 +15,7 @@ import java.util.List;
  * contains basic attributes of and account, who get more specific in the subclasses
  * Provides the user with the functionalities to personalize their account
  *
- * @Author Antonio Blechschmidt
+ * @author Antonio Blechschmidt
  */
 
 public abstract class Account
@@ -29,7 +29,7 @@ public abstract class Account
     protected String description;
     protected ArrayList<LearnSet> ownLearnSets;
     protected ArrayList<LearnSetAbo> favoriteLearnSets;
-    protected List<Account> friends; //Todo durch ArrayList ersetzen
+    protected List<Account> friends;
     protected List<Chat> chats;
     
     
@@ -42,7 +42,6 @@ public abstract class Account
         return email;
     }
 
-    //todo regex
     public void setEmail(String _email)
     {
         this.email = _email;
@@ -113,6 +112,7 @@ public abstract class Account
      * @param _title        |
      * @param _description  | provided Imformation for the Constructor of LearnSet
      * @param _faculty      |
+     * @param _visibility   |
      */
     public void createNewOwnLearnSet(String _title, String _description, Faculty _faculty, Visibility _visibility)
     {
@@ -159,7 +159,7 @@ public abstract class Account
             }
             catch (Exception e)
             {
-                //todo logger
+
             }
         }
     }
@@ -199,6 +199,9 @@ public abstract class Account
 
     //Chat
 
+    /** isAlreadyInChatWith is a function that checks if there is an existent chat with a person
+     *  @author  Semlali Amine
+     *  */
     private boolean isAlreadyInChatWith(Account _account)
     {
         for (Chat chat:this.chats)
@@ -210,7 +213,9 @@ public abstract class Account
         }
         return false;
     }
-
+    /** after checking if there is no existent chat with a person, a new chat is created with that person and is added to the chat list
+     *  @author  Semlali Amine
+     *  */
     public void addNewChat(Account _account)
     {
         if (!isAlreadyInChatWith(_account))
@@ -224,7 +229,7 @@ public abstract class Account
     }
 
 /** deleteChat is a function that deletes a chat from the chats list
- *  @Author  Semlali Amine
+ *  @author  Semlali Amine
  *  */
 
     public void deleteChat(int _chat)
@@ -233,12 +238,26 @@ public abstract class Account
     }
     
     //Methods
+    /**
+     * the function clicksLikeOfMessage is used on a specific message to like or dislike it
+     *
+     * clickLike checks if a person is in the list of those who liked the message
+     * if this account liked the message, his name is removed from the list (dislike)
+     * if this account didn't like the message,his name is added to the list (like)
+     *
+     * @author Amine Semlali
+     * */
 
-    public void clicksLikeOfMessage(int _chatIndex ,int _messageIndex) // todo ok?
+    public void clicksLikeOfMessage(int _chatIndex ,int _messageIndex)
     {
         this.getChats().get(_chatIndex).getChatHistory().get(_messageIndex).clickLike(this);
     }
 
+    /**Checks User for valid login data
+     *
+     * @param _email        |
+     * @param _password     | if both are right user will be logged in
+     */
     public String login(String _email, String _password)
     {
         String email = getEmail();
@@ -253,14 +272,18 @@ public abstract class Account
             return "login failed";
         }
     }
-
-    public void resetPassword(String _email, String _password)
+    /**Checks User for valid login data
+     *
+     * @param _email            | if right password will be changed to new password
+     * @param _newPassword      | new password
+     */
+    public void resetPassword(String _email, String _newPassword)
     {
         String email = getEmail();
 
         if (email.equals(_email))
         {
-            setPassword(_password);
+            setPassword(_newPassword);
         }
     }
 

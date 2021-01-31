@@ -52,7 +52,7 @@ des Weiteren die Möglichkeit, LearnSets zu kommentieren und sie zu bewerten.
 
 <br>
 Ursprünglich wurde darüber hinaus überlegt, dem System eine Funktion hinzuzufügen, die es den Accouts ermöglicht, Gruppen mit anderen Accounts zu bilden und hierüber gemeinsam LearnSets zu erstellen.
-Diese Funktion wurde jedoch nicht umgesetzt, da die Gruppe sich dazu entschied, lieder einen Fokus auf die Qualität der Kernfunktionen des Kartenlernsystems zu legen.
+Diese Funktion wurde jedoch nicht umgesetzt, da die Gruppe sich dazu entschied, lieber einen Fokus auf die Qualität der Kernfunktionen des Kartenlernsystems zu legen.
 Gänzlich verabschiedet haben wir uns von dieser Funktion jedoch noch nicht - eventuell erfolgt eine Implementierung in Java 2.
 Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskommentiert und alle vorhandenen Klassen wurden so gestaltet, dass eine Erweiterung des Gesamtsystems um eine Gruppen-Funktion ohne weiteres möglich ist. 
 
@@ -95,7 +95,7 @@ Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskomme
 <br>
 
 
-- The gaol of this document is to ensure a consistent CodeStyle throughout the project
+- The goal of this document is to ensure a consistent CodeStyle throughout the project
 - Violations of this CodyStyle are allowed if it enhances readability
 
 #### Naming conventions
@@ -160,7 +160,7 @@ Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskomme
 
 #### Comments
 - every class must have a comment with its description and its author in JavaDocStyle
-- every membervariable must have a comment explaining its use in JavaDocStyle
+- every member variable must have a comment explaining its use in JavaDocStyle
 - complex methods must be commented in JavaDocStyle
 - short comments in methods are appreciated
 - TODO comments are appreciated

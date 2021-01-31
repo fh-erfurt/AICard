@@ -14,7 +14,6 @@ import java.util.logging.Logger;
  *
  * @author Antonio Blechschmidt, Semlali Amine
  */
-//todo variabel kleinschreiben
 public class AccountTest
 {
     //private static final Logger logger = Logger.getLogger(Account.class.);
@@ -53,58 +52,58 @@ public class AccountTest
     void testFavoriteLearnSetManipulation()
     {
         //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Prof2.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE, Visibility.PUBLIC);
-        Prof2.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE, Visibility.PUBLIC);
+        Professor prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
+        prof2.createNewOwnLearnSet("IT", "This is an IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE, Visibility.PUBLIC);
+        prof2.createNewOwnLearnSet("IT", "This is the second IT Learnset", Faculty.APPLIED_COMPUTER_SCIENCE, Visibility.PUBLIC);
         
         //test addNewFavoriteSets() and getFavoriteSetByPosition()
-        Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(0));
-        Assertions.assertEquals(Prof2.getOwnLearnSetByIndex(0), Prof1.getFavoriteLearnSetByIndex(0).getLearnSet());
+        prof1.addNewFavoriteLearnSet(prof2.getOwnLearnSetByIndex(0));
+        Assertions.assertEquals(prof2.getOwnLearnSetByIndex(0), prof1.getFavoriteLearnSetByIndex(0).getLearnSet());
         
         //test deleteFromOwnLearningSetsByIndex
-        Prof1.deleteFavoriteLearnSetByIndex(0);
-        Assertions.assertTrue(Prof1.favoriteLearnSets.isEmpty());
+        prof1.deleteFavoriteLearnSetByIndex(0);
+        Assertions.assertTrue(prof1.favoriteLearnSets.isEmpty());
         
         //setup for deleteFromOwnLearningSetsLastElement()
-        Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(0));
-        Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(1));
+        prof1.addNewFavoriteLearnSet(prof2.getOwnLearnSetByIndex(0));
+        prof1.addNewFavoriteLearnSet(prof2.getOwnLearnSetByIndex(1));
         
         //test deleteFromOwnLearningSetsLastElement()
-        Prof1.deleteFavoriteLearnSetByLastElement();
-        Assertions.assertEquals(Prof1.getFavoriteLearnSetByIndex(Prof1.favoriteLearnSets.size()-1).getLearnSet(), Prof2.getOwnLearnSetByIndex(0));
+        prof1.deleteFavoriteLearnSetByLastElement();
+        Assertions.assertEquals(prof1.getFavoriteLearnSetByIndex(prof1.favoriteLearnSets.size()-1).getLearnSet(), prof2.getOwnLearnSetByIndex(0));
         
         //setup for deleteAllFromOwnLearningSets()
-        Prof1.addNewFavoriteLearnSet(Prof2.getOwnLearnSetByIndex(1));
+        prof1.addNewFavoriteLearnSet(prof2.getOwnLearnSetByIndex(1));
         
         //test deleteAllFromOwnedLearningSets()
-        Prof1.deleteAllFavoriteLearnSets();
-        Assertions.assertTrue(Prof1.favoriteLearnSets.isEmpty());
+        prof1.deleteAllFavoriteLearnSets();
+        Assertions.assertTrue(prof1.favoriteLearnSets.isEmpty());
     }
     
     @Test
     void testFriendManipulation()
     {
         //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Professor Prof3 = new Professor("Prof@fh-erfurt.de","adminProf","Prof3","Professor3", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof3 = new Professor("Prof@fh-erfurt.de","adminProf","Prof3","Professor3", AcademicGrade.UNIVERSITY_PROFESSOR);
         
         //test addFriend() and getFriendByIndex()
-        Prof1.addFriend(Prof2);
-        Assertions.assertEquals(Prof1.getFriendByIndex(0), Prof2);
+        prof1.addFriend(prof2);
+        Assertions.assertEquals(prof1.getFriendByIndex(0), prof2);
         
         //test removeFriend()
-        Prof1.removeFriend(Prof2);
-        Assertions.assertTrue(Prof1.friends.isEmpty());
+        prof1.removeFriend(prof2);
+        Assertions.assertTrue(prof1.friends.isEmpty());
         
         //setup for removeFriendByIndex()
-        Prof1.addFriend(Prof2);
-        Prof1.addFriend(Prof3);
+        prof1.addFriend(prof2);
+        prof1.addFriend(prof3);
         
         //test removeFriendByIndex()
-        Prof1.removeFriend(0);
-        Assertions.assertEquals(Prof1.getFriendByIndex(0), Prof3);
+        prof1.removeFriend(0);
+        Assertions.assertEquals(prof1.getFriendByIndex(0), prof3);
         
     }
     /*
@@ -133,32 +132,32 @@ public class AccountTest
     void testChatManipulation()
     {
         //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
-        Professor Prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof2 = new Professor("Prof@fh-erfurt.de","adminProf","Prof2","Professor2", AcademicGrade.UNIVERSITY_PROFESSOR);
 
         //test addNewChat()
-        Prof1.addNewChat(Prof2);
-        Assertions.assertEquals(Prof1.chats.get(0), Prof2.chats.get(0));
+        prof1.addNewChat(prof2);
+        Assertions.assertEquals(prof1.chats.get(0), prof2.chats.get(0));
 
         //test addNewChat()
-        Prof1.deleteChat(0);
-        Assertions.assertTrue(Prof1.chats.isEmpty());
+        prof1.deleteChat(0);
+        Assertions.assertTrue(prof1.chats.isEmpty());
     }
 
     @Test
     void testLoginandPasswordChange()
     {
         //setup
-        Professor Prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof1 = new Professor("Prof@fh-erfurt.de","adminProf","Prof1","Professor1", AcademicGrade.UNIVERSITY_PROFESSOR);
 
         //test login()
-        Assertions.assertEquals(Prof1.login("Prof@fh-erfurt.de", "adminProf"), "login was successful");
-        Assertions.assertEquals(Prof1.login("Prof@fh-erfurt.de", "adminProf123"), "login failed"); //wrong password
-        Assertions.assertEquals(Prof1.login("Prof@fh-erfurt.com", "adminProf"), "login failed");//wrong email
+        Assertions.assertEquals(prof1.login("Prof@fh-erfurt.de", "adminProf"), "login was successful");
+        Assertions.assertEquals(prof1.login("Prof@fh-erfurt.de", "adminProf123"), "login failed"); //wrong password
+        Assertions.assertEquals(prof1.login("Prof@fh-erfurt.com", "adminProf"), "login failed");//wrong email
 
         //test resetPassword
-        Prof1.resetPassword("Prof@fh-erfurt.de", "adminProf123");
-        Assertions.assertEquals(Prof1.getPassword(), "adminProf123");
+        prof1.resetPassword("Prof@fh-erfurt.de", "adminProf123");
+        Assertions.assertEquals(prof1.getPassword(), "adminProf123");
     }
 
     @Test
