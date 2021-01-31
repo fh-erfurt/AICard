@@ -4,10 +4,9 @@ import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
 import de.aicard.enums.Visibility;
 import de.aicard.learnset.LearnSet;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.logging.Logger;
 
 /**
  * Test class for the functions of Account
@@ -16,7 +15,6 @@ import java.util.logging.Logger;
  */
 public class AccountTest
 {
-    //private static final Logger logger = Logger.getLogger(Account.class.);
     @Test
     void testOwnLearnSetManipulation()
     {
@@ -106,6 +104,8 @@ public class AccountTest
         Assertions.assertEquals(prof1.getFriendByIndex(0), prof3);
         
     }
+    
+    //might be added later
     /*
      @Test
      void testGroupManipulation()

@@ -3,8 +3,11 @@ package de.aicard.learnset;
 import de.aicard.card.Card;
 import de.aicard.card.TextFile;
 import de.aicard.enums.CardKnowledgeLevel;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.logging.Logger;
 
 import static de.aicard.learnset.LearnSetTest.getTestLearnSet;
 
@@ -13,10 +16,9 @@ import static de.aicard.learnset.LearnSetTest.getTestLearnSet;
  *
  * @Author Daniel Michel
  */
-
 public class LearningSessionTest
 {
-
+    private static final Logger logger = Logger.getLogger(LearningSessionTest.class.getName());
     @Test
     public void testingCreatingLearningSession()
     {
@@ -34,13 +36,11 @@ public class LearningSessionTest
 
             TextFile cardBack = (TextFile) session.getCardStatusList().get(4).getCard().getCardBack();
             Assertions.assertEquals("Back of card 4", cardBack.getTextData() );
-
-
+            
         }
         catch(Exception e)
         {
-            //we're all gonna die.
-            System.out.println("Strange things are happening...");
+            logger.warning("Strange things are happening... " + e.getMessage());
         }
 
     }
@@ -65,7 +65,7 @@ public class LearningSessionTest
                     session.cardKnown();
                 }
                 else
-                    {
+                {
                     session.cardUnknown();
                 }
             }
@@ -107,8 +107,9 @@ public class LearningSessionTest
             Assertions.assertEquals(aboCard7, sessionCard4);
 
         }
-        catch (Exception e){
-            System.out.println("An exeption: " + e);
+        catch (Exception e)
+        {
+            logger.warning("An exception occured: " + e.getMessage());
         }
     }
 }

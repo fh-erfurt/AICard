@@ -1,27 +1,20 @@
 package de.aicard.Social;
 
-import de.aicard.account.Account;
 import de.aicard.account.Professor;
 import de.aicard.account.Student;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import de.aicard.Social.Chat;
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for the functions of Chat
  *
  * @author Semlali Amine
  */
-
-
-class ChatTest {
-
-
-
+class ChatTest
+{
     @Test
     void getChatCreator()
     {
@@ -57,6 +50,5 @@ class ChatTest {
         chatHistoryFake.add(msg1);
         Assertions.assertEquals(chat.getChatHistory().size(), chatHistoryFake.size());
     }
-
-
+    
 }

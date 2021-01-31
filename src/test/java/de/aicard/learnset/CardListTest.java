@@ -2,10 +2,8 @@ package de.aicard.learnset;
 
 import de.aicard.card.*;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -14,7 +12,6 @@ import java.util.logging.Logger;
  *
  * @author Martin Kühlborn
  */
-
 public class CardListTest
 {
     private static final Logger logger = Logger.getLogger(CardList.class.getName());
@@ -47,7 +44,7 @@ public class CardListTest
         }
         catch(Exception e)
         {
-        
+            logger.warning(e.getMessage());
         }
 
         //then: the current Card Pointer/Index in the CardList points to the first Card.
@@ -81,7 +78,7 @@ public class CardListTest
         }
         catch(Exception e)
         {
-
+            logger.warning(e.getMessage());
         }
 
 
@@ -110,7 +107,7 @@ public class CardListTest
         }
         catch(Exception e)
         {
-
+            logger.warning(e.getMessage());
         }
 
         

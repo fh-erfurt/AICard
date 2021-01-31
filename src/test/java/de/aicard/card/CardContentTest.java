@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test;
  * @author Daniel Michel
  *
  */
-
-public class CardContentTest {
-
+public class CardContentTest
+{
     @Test
-    public void testIsPlaying(){
+    public void testIsPlaying()
+    {
         //given: an AudioFile and a VideoFile
 
         AudioFile audio = new AudioFile("audioContent", "audioTitle");

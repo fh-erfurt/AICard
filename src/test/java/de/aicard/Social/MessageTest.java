@@ -1,13 +1,12 @@
 package de.aicard.Social;
 
-import de.aicard.account.Account;
 import de.aicard.account.Professor;
 import de.aicard.account.Student;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 
 /**
@@ -16,10 +15,11 @@ import java.util.ArrayList;
  * @author Semlali Amine
  */
 
-public class MessageTest {
-
+public class MessageTest
+{
     @Test
-    public void testLikeManipulation() {
+    public void testLikeManipulation()
+    {
         //setup
         Student std1 = new Student("Std@fh-erfurt.de", "adminStd", "Std1", "Student1", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
         Student std2 = new Student("Std@fh-erfurt.de", "adminStd", "Std2", "Student2", 3, Faculty.APPLIED_COMPUTER_SCIENCE);

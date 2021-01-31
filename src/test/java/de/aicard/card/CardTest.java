@@ -1,14 +1,13 @@
 package de.aicard.card;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 /**
  * Class for testing all functionality of the CardClass
  *
  * @author: Martin Kühlborn, (Daniel Michel)
  */
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 class CardTest
 {
     @Test
@@ -38,9 +37,7 @@ class CardTest
         //then: the value of CardFront and CardBack are the edited Strings
         Assertions.assertEquals(expectedTestData1, ((TextFile) testCard.getCardFront()).getTextData());
         Assertions.assertEquals(expectedTestData2, ((TextFile) testCard.getCardBack()).getTextData());
-    
     }
-    
     
     @Test
     public void testingCardWithAllFileTypes()
@@ -60,7 +57,7 @@ class CardTest
         Card testCardAudio = new Card((CardContent) new AudioFile(testCardAudioData, testCardAudioTitle), (CardContent) new AudioFile(testCardAudioData, testCardAudioTitle));
         Card testCardVideo = new Card((CardContent) new VideoFile(testCardVideoData, testCardVideoTitle), (CardContent) new VideoFile(testCardVideoData, testCardVideoTitle));
         
-
+        
         //then: we can access this content via the Card (Tests for all 4 CardContent types)
         Assertions.assertEquals(testCardTextData,((TextFile)testCardText.getCardFront()).getTextData());
 

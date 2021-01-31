@@ -4,22 +4,21 @@ import de.aicard.card.TextFile;
 import de.aicard.enums.State;
 import de.aicard.learnset.LearnSet;
 import de.aicard.learnset.LearnSetAbo;
+import static de.aicard.enums.CardKnowledgeLevel.NOINFORMATION;
+import static de.aicard.learnset.LearnSetTest.getTestLearnSet;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static de.aicard.enums.CardKnowledgeLevel.NOINFORMATION;
-import static de.aicard.learnset.LearnSetTest.getTestLearnSet;
+
 
 /**
  * Tests the functions of the Class LearnSetAbo
  *
  * @Author Daniel Michel
  */
-
 public class LearnSetAboTest
 {
-
-
     @Test
     public void testCreatingLearnSetAbo()
     {
@@ -50,10 +49,12 @@ public class LearnSetAboTest
             // the CardStatus of any Card should be NOINFORMATION
             Assertions.assertEquals(NOINFORMATION, abo.getCardStatus().get(19).getCardKnowledgeLevel());
 
-        } catch (NullPointerException e)
+        }
+        catch (NullPointerException e)
         {
             System.out.println("this is a nullpointer Exeption" + e);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             System.out.println("Offenbar macht die CardList Probleme." + e);
         }

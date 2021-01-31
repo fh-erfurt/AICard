@@ -9,9 +9,9 @@ import de.aicard.card.TextFile;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.enums.Faculty;
 import de.aicard.enums.Visibility;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 
 /**
@@ -30,7 +30,6 @@ public class LearnSetTest
      */
     public static LearnSet getTestLearnSet()
     {
-
         String learnSetTitle = "Title";
         String learnSetDescription = "Description of my Learnset";
         Faculty faculty = Faculty.APPLIED_COMPUTER_SCIENCE;
