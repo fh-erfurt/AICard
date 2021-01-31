@@ -60,6 +60,37 @@ Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskomme
 </details>
 
 <details>
+<summary>Use-Case-Diagramme</summary>
+
+#### Account
+
+![img.png](doc/Pictures/UseCaseAccount_1.png)
+
+![img_1.png](doc/Pictures/UseCaseAccount_2.png)
+
+#### Card
+
+![img_2.png](doc/Pictures/UseCaseCard.png)
+
+#### Learnset
+
+![img_3.png](doc/Pictures/UseCaseLearnset.png)
+
+![img_4.png](doc/Pictures/UseCaseLearnset_2.png)
+
+#### Social
+
+![img_5.png](doc/Pictures/UseCaseChat.png)
+
+(noch) nicht implementiert:
+
+![img_6.png](doc/Pictures/UseCaseGroup_1.png)
+
+![img_7.png](doc/Pictures/UseCaseGroup_2.png)
+
+</details>
+
+<details>
 <summary>Codestyle</summary>
 <br>
 
