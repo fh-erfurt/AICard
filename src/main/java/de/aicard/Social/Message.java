@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * the message its self - the sender - the time it was sent - the number of likes and the people who liked this message as a list
  *
  *
- * @Author Amine Semlali
+ * @author Amine Semlali
  * */
 
 public class Message {
@@ -17,7 +17,6 @@ public class Message {
     private String message;
     private Account sender;
     private LocalDateTime time;
-    private int likes;  //TODO size(likedBy) -> likes redundant? umsetzung unten
     private ArrayList<Account> likedBy  ;
 
     /**
