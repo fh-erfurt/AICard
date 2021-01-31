@@ -4,7 +4,7 @@ package de.aicard.card;
  * Provides a 2 sided Card(front and back) for CardList and CardStatus
  * connects trough CardContent (Interface) to the different filetypes
  *
- * @author: Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 public class Card
 {

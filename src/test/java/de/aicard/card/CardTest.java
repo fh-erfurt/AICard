@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing all functionality of the CardClass
  *
- * @author: Martin Kühlborn, (Daniel Michel)
+ * @author Martin Kuehlborn, (Daniel Michel)
  */
 class CardTest
 {

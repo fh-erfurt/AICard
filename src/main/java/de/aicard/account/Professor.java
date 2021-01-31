@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * extends the account class
  * additional variable academicGrade
- * @author: Clemens Berger
+ * @author Clemens Berger
  */
 public class Professor extends Account
 {

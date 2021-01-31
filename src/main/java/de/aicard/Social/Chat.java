@@ -9,7 +9,7 @@ Class Chat has 2 Attributes chatHistory where the messages from all participants
  and participants where the participants are stored
  Participants can be added to the Chat but only after adding the creator
 
- @Author Semlali Amine
+ @author Semlali Amine
  */
 public class Chat
 {

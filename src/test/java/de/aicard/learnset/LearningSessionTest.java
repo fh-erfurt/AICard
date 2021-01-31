@@ -14,7 +14,7 @@ import static de.aicard.learnset.LearnSetTest.getTestLearnSet;
 /**
  * This class tests the functions of the class LearningSessionTests
  *
- * @Author Daniel Michel
+ * @author Daniel Michel
  */
 public class LearningSessionTest
 {

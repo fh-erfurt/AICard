@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * the state of the LearnSet, the LearnSet itself and the evaluation the Account has given
  * the LearnSet.
  *
- * @Author Daniel Michel
+ * @author Daniel Michel
  */
 public class LearnSetAbo
 {
@@ -38,8 +38,6 @@ public class LearnSetAbo
 
     /**
      * Constructor of the LearnSetAbo
-     *
-     *
      *
      * @param _learnSet The LearnSet to which the Account subscribes.
      */

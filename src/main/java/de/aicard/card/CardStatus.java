@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  * Provides current CardStatus of a Card
  * Shows and edits CardKnowledgeLevel of any Account who has the Card in a LearnSetAbo
  *
- * @author: Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 public class CardStatus
 {

@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"de.aicard.account"},{"l":"de.aicard.card"},{"l":"de.aicard.enums"},{"l":"de.aicard.learnset"},{"l":"de.aicard.Social"}]

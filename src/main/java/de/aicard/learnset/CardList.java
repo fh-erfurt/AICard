@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 /**
  * Provides CardList with Cards and a Pointer to the current ListIndex
  *
- * @author: Martin Kühlborn, Clemens Berger
+ * @author Martin Kuehlborn, Clemens Berger
  */
 public class CardList
 {

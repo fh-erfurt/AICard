@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * Test class for all the functions of CardList
  *
- * @author Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 public class CardListTest
 {

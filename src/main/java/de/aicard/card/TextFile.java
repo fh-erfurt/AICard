@@ -3,7 +3,7 @@ package de.aicard.card;
 /**
  * Provides an TextFile as String for side of a card
  *
- * @author: Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 public class TextFile implements CardContent
 {

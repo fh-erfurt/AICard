@@ -5,7 +5,7 @@ package de.aicard.card;
  * Currently using placeholder Strings
  * Will be real Audio in Java 2
  *
- * @author: Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 public class AudioFile implements CardContent
 {

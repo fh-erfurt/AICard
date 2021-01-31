@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * Owner(Account who created the LearnSet), Admins(Accounts who can edit the LearnSet)
  * Visibility(to show the LearnSet to all Account, to Faculty and Friends or only to Owner)
  *
- * @author: Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 public class LearnSet
 {

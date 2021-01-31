@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * extends the account class
  * additional variables semester and faculty
- * @author: Clemens Berger
+ * @author Clemens Berger
  */
 public class Student extends Account
 {

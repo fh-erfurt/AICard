@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Provides test of functionalities of the CardStatus class
  *
- * @author: Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 public class CardStatusTest
 {

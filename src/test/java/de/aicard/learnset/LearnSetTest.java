@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Test class for all the functions of LearnSet
  *
- * @author: Martin Kühlborn, Daniel Michel
+ * @author Martin Kuehlborn, Daniel Michel
  */
 public class LearnSetTest
 {
@@ -26,7 +26,7 @@ public class LearnSetTest
      * This is a helper function for many tests.
      *
      *
-     * @return: a LearnSet to run further tests on.
+     * @return a LearnSet to run further tests on.
      */
     public static LearnSet getTestLearnSet()
     {

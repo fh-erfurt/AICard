@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 /**
  * Tests the functions of the Class LearnSetAbo
  *
- * @Author Daniel Michel
+ * @author Daniel Michel
  */
 public class LearnSetAboTest
 {

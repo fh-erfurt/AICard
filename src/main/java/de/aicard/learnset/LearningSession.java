@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Provides a ArrayList of CardStatus, so that the Account can Learn the Cards. Also safes information
  * about which Card is the Card currently shown and if the Session is active (or already finished).
  *
- * @Author Daniel Michel
+ * @author Daniel Michel
  */
 public class LearningSession
 {
