@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
  * the class CardTest
  *
  * @author Daniel Michel
- *
  */
 public class CardContentTest
 {
@@ -40,7 +39,6 @@ public class CardContentTest
         //then: both are not playing
         Assertions.assertEquals(false, audio.getIsPlaying());
         Assertions.assertEquals(false, video.getIsPlaying());
-
-
+        
     }
 }

@@ -2,14 +2,17 @@ package de.aicard.account;
 
 import de.aicard.card.TextFile;
 import de.aicard.enums.State;
+import de.aicard.learnset.CardList;
 import de.aicard.learnset.LearnSet;
 import de.aicard.learnset.LearnSetAbo;
 import static de.aicard.enums.CardKnowledgeLevel.NOINFORMATION;
 import static de.aicard.learnset.LearnSetTest.getTestLearnSet;
 
+import de.aicard.learnset.LearningSessionTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.logging.Logger;
 
 
 /**
@@ -19,6 +22,7 @@ import org.junit.jupiter.api.Test;
  */
 public class LearnSetAboTest
 {
+    private static final Logger logger = Logger.getLogger(LearnSetAboTest.class.getName());
     @Test
     public void testCreatingLearnSetAbo()
     {
@@ -52,11 +56,11 @@ public class LearnSetAboTest
         }
         catch (NullPointerException e)
         {
-            System.out.println("this is a nullpointer Exeption" + e);
+            logger.warning("this is a nullpointer Exeption" + e);
         }
         catch (Exception e)
         {
-            System.out.println("Offenbar macht die CardList Probleme." + e);
+            logger.warning("Offenbar macht die CardList Probleme." + e);
         }
     }
 
@@ -85,9 +89,9 @@ public class LearnSetAboTest
             Assertions.assertEquals(0, learnSet.getNumberOfEvaluations());
             Assertions.assertEquals(0, learnSet.getEvaluation());
         }
-        catch (Exception e){
-            //oh no!!
-            System.out.println("OOPs. something went wrong.");
+        catch (Exception e)
+        {
+            logger.warning("OOPs. something went wrong.");
         }
 
     }
