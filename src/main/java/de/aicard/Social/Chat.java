@@ -42,9 +42,9 @@ private ArrayList<Account> participants ;
         this.participants.add(_newParticipant);
         for(Account participant:participants)
         {
-            if (!(participant == _newCreator))// invites ever participant without creator to chat
+            if (!(participant == _newCreator))// invites every participant without creator to chat
             {
-                participant.addChat(this); //todo : creator soll auch in seiner chat liste dieser chat haben
+                participant.addChat(this);
             }
         }
 
@@ -71,7 +71,7 @@ private ArrayList<Account> participants ;
 
     //Functions
 /**
-    -participants can be added to the chat with the function addParticipant and this chat must be added to participant's chat list
+    -participants can be added to the chat with the function addParticipant
     -the function getChatCreator is used to get the chat creator which is the first in the participants list
     -the Chat history can be cleared with the function clearHistory
     -messages can be sent , for that we need the account and the message to create the object Message and then add it to the chat history
@@ -83,7 +83,7 @@ private ArrayList<Account> participants ;
     public void addParticipant(Account _newParticipant)
     {
         this.participants.add(_newParticipant);
-        _newParticipant.addChat(this);
+
     }
 
     public Account getChatCreator()

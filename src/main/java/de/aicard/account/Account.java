@@ -199,6 +199,9 @@ public abstract class Account
 
     //Chat
 
+    /** isAlreadyInChatWith is a function that checks if there is an existent chat with a person
+     *  @Author  Semlali Amine
+     *  */
     private boolean isAlreadyInChatWith(Account _account)
     {
         for (Chat chat:this.chats)
@@ -210,7 +213,9 @@ public abstract class Account
         }
         return false;
     }
-
+    /** after checking if there is no existent chat with a person, a new chat is created with that person and is added to the chat list
+     *  @Author  Semlali Amine
+     *  */
     public void addNewChat(Account _account)
     {
         if (!isAlreadyInChatWith(_account))
@@ -233,8 +238,17 @@ public abstract class Account
     }
     
     //Methods
+    /**
+     * the function clicksLikeOfMessage is used on a specific message to like or dislike it
+     *
+     * clickLike checks if a person is in the list of those who liked the message
+     * if this account liked the message, his name is removed from the list (dislike)
+     * if this account didn't like the message,his name is added to the list (like)
+     *
+     * @author Amine Semlali
+     * */
 
-    public void clicksLikeOfMessage(int _chatIndex ,int _messageIndex) // todo ok?
+    public void clicksLikeOfMessage(int _chatIndex ,int _messageIndex)
     {
         this.getChats().get(_chatIndex).getChatHistory().get(_messageIndex).clickLike(this);
     }
