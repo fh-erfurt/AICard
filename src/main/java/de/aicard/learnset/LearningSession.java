@@ -1,7 +1,7 @@
 package de.aicard.learnset;
 
-
 import de.aicard.card.CardStatus;
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +10,6 @@ import java.util.ArrayList;
  *
  * @Author Daniel Michel
  */
-
 public class LearningSession
 {
     //attributes

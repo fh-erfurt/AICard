@@ -1,6 +1,7 @@
 package de.aicard.enums;
 
-public enum CardKnowledgeLevel {
+public enum CardKnowledgeLevel
+{
         NOINFORMATION,
         SOMEINFORMATION,
         KNOW,

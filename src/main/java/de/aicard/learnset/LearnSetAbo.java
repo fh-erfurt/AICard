@@ -6,7 +6,6 @@ import de.aicard.enums.State;
 
 import java.util.ArrayList;
 
-
 /**
  * Provides a LearnSet with further, account-specific information and is thus always embedded
  * into an account. The further information provided by the LearnSetAbo are an ArrayList of
@@ -16,7 +15,6 @@ import java.util.ArrayList;
  *
  * @Author Daniel Michel
  */
-
 public class LearnSetAbo
 {
     /**
@@ -60,7 +58,7 @@ public class LearnSetAbo
 
     }
 
-    //getter
+    //getter + setter
 
     public State getLearnSetStatus()
     {
@@ -81,8 +79,6 @@ public class LearnSetAbo
     {
         return this.cardStatus;
     }
-
-    //setter
 
     public void setLearnSetStatus(State _learnSetStatus)
     {
@@ -146,7 +142,6 @@ public class LearnSetAbo
             if (cardStatus.get(i).getCardKnowledgeLevel() == _level){
                 result.add(cardStatus.get(i));
             }
-
         }
         return result;
     }

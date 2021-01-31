@@ -1,6 +1,7 @@
 package de.aicard.enums;
 
-public enum AcademicGrade {
+public enum AcademicGrade
+{
     UNIVERSITY_PROFESSOR,
     UNIVERSITY_LECTURER,
     JUNIOR_PROFESSOR,
@@ -9,4 +10,4 @@ public enum AcademicGrade {
     SCIENTIFIC_ASSISTANT,
     RESEARCH_ASSISTANT,
     STUDENT_ASSISTANT
-    }
+}

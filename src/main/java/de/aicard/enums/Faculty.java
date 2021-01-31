@@ -1,7 +1,7 @@
 package de.aicard.enums;
 
-public enum Faculty{
-
+public enum Faculty
+{
     APPLIED_COMPUTER_SCIENCE,
     ARCHITECTURE,
     CIVIL_ENGINEERING,

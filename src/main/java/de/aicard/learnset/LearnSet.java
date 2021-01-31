@@ -1,6 +1,5 @@
 package de.aicard.learnset;
 
-
 import de.aicard.Social.Message;
 import de.aicard.enums.Faculty;
 import de.aicard.enums.Visibility;
@@ -8,7 +7,6 @@ import de.aicard.account.Account;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
-
 
 /**
  * Provides CardList with additional information:
@@ -26,13 +24,37 @@ public class LearnSet
  
     // MEMBER VARIABLES
     private String title;
+    
+    /**
+     * Short Text Description about the LearnSet content
+     */
     private String description;
+    
+    /**
+     * Which Faculty is the LearnSet acquainted with
+     */
     private Faculty faculty;
     private CardList cardList;
     private ArrayList<Message> commentList;
+    
+    /**
+     * The Account who created and owns the LearnSet
+     */
     private Account owner;
+    
+    /**
+     * Visibility for Accounts who are not the owner
+     */
     private Visibility visibility;
+    
+    /**
+     * List of people who can edit the learnset
+     */
     private ArrayList<Account> adminList;
+    
+    /**
+     * Average evaluation of a LearnSet
+     */
     private double evaluations;
     private int numberOfEvaluations;
 

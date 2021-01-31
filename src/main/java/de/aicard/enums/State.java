@@ -1,6 +1,7 @@
 package de.aicard.enums;
 
-public enum State{
+public enum State
+{
     NEW,
     PROCESSING,
     LEARNED

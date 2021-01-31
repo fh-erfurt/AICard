@@ -1,11 +1,5 @@
 package de.aicard.account;
 
-/**
- * extends the account class
- * additional variable academicGrade
- * @author: Clemens Berger
- */
-
 import de.aicard.Social.Chat;
 import de.aicard.enums.AcademicGrade;
 import de.aicard.learnset.LearnSet;
@@ -13,9 +7,13 @@ import de.aicard.learnset.LearnSetAbo;
 
 import java.util.ArrayList;
 
-public class Professor extends Account{
-
-
+/**
+ * extends the account class
+ * additional variable academicGrade
+ * @author: Clemens Berger
+ */
+public class Professor extends Account
+{
     private AcademicGrade academicGrade;
 
     public Professor(String _email, String _password, String _name, String _description, AcademicGrade _academic)
@@ -29,14 +27,15 @@ public class Professor extends Account{
         this.friends = new ArrayList<Account>();
         this.chats = new ArrayList<Chat>();
         this.academicGrade = _academic;
-
     }
 
-    public AcademicGrade getAcademicGrade() {
+    public AcademicGrade getAcademicGrade()
+    {
         return academicGrade;
     }
 
-    public void setAcademicGrade(AcademicGrade academicGrade) {
+    public void setAcademicGrade(AcademicGrade academicGrade)
+    {
         this.academicGrade = academicGrade;
     }
 

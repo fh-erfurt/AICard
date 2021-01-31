@@ -24,10 +24,9 @@ public class CardList
      * The current listIndex.
      */
     private int listIndex;
-
+    
     
     // CONSTRUCTORS
-
     /**
      * Constructs a CardList containing only an empty ArrayList.
      */
