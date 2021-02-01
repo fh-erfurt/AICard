@@ -22,7 +22,8 @@ Das Team besteht aus 5 Mitgliedern, alle aus der Vertiefungsrichtung Ingenieursi
 <details>
 <summary>JavaDoc</summary>
 <br>
-HIER LINK EINFÜGEN!!
+
+[Hier](doc/JavaDoc/index.html) geht es zu unserer JavaDoc.
 
 </details>
 
