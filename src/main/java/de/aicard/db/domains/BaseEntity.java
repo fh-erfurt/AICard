@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
 @Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 @RequiredArgsConstructor
 public abstract class BaseEntity {
 
