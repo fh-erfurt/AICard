@@ -1,12 +1,17 @@
 package de.aicard.account;
 
 import de.aicard.Social.Chat;
+import de.aicard.db.domains.BaseEntity;
 import de.aicard.enums.Faculty;
 import de.aicard.enums.Visibility;
 import de.aicard.learnset.CardList;
 import de.aicard.learnset.LearnSetAbo;
 import de.aicard.learnset.LearnSet;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -18,11 +23,13 @@ import java.util.logging.Logger;
  *
  * @author Antonio Blechschmidt
  */
-public abstract class Account
+@Entity
+public abstract class Account extends BaseEntity
 {
     //Logger
     private static final Logger logger = Logger.getLogger(Account.class.getName());
     //Attribute
+    protected long id;
     protected String email;
     protected String password;
     protected String name;
