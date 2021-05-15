@@ -1,5 +1,13 @@
 package de.aicard.card;
 
+import de.aicard.db.domains.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+
 /**
  * Provides an PictureFile for side of a card
  * Currently using placeholder Strings
@@ -7,7 +15,12 @@ package de.aicard.card;
  *
  * @author Martin Kuehlborn
  */
-public class PictureFile implements CardContent
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class PictureFile extends BaseEntity implements CardContent
 {
 
     // MEMBER VARIABLES

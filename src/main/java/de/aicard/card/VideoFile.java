@@ -1,5 +1,14 @@
 package de.aicard.card;
 
+import de.aicard.db.domains.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.eclipse.persistence.annotations.SerializedConverter;
+
+import javax.persistence.Entity;
+
 /**
  * Provides an VideoFile for side of a card that can be played and paused
  * Currently using placeholder Strings
@@ -7,7 +16,12 @@ package de.aicard.card;
  *
  * @author Martin Kuehlborn
  */
-public class VideoFile implements CardContent
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class VideoFile extends BaseEntity implements CardContent
 {
     // MEMBER VARIABLES
     /**

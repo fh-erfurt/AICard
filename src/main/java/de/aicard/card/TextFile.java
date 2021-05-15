@@ -1,11 +1,24 @@
 package de.aicard.card;
 
+import de.aicard.db.domains.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+
 /**
  * Provides an TextFile as String for side of a card
  *
  * @author Martin Kuehlborn
  */
-public class TextFile implements CardContent
+@Entity
+@Getter
+@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+public class TextFile extends BaseEntity implements CardContent
 {
     // MEMBER VARIABLES
     private String testData;
