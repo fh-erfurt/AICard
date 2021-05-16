@@ -3,6 +3,7 @@ package de.aicard.db.storages;
 import de.aicard.Social.Chat;
 import de.aicard.Social.Message;
 import de.aicard.account.Account;
+import de.aicard.card.AudioFile;
 import de.aicard.db.core.H2Controller;
 import de.aicard.db.domains.BaseEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +21,8 @@ public class MessageRepository extends BaseRepository<Message> {
     }
 
     public Optional<Message> findBy(Account sender){
-        TypedQuery<Message> query =  entityManager.createQuery("SELECT message FROM" + Message.class.getCanonicalName() +
-                " message WHERE message.sender = :sender",Message.class);
+        TypedQuery<Message> query =  entityManager.createQuery("SELECT message FROM " + Message.class.getCanonicalName() +
+                " message WHERE message.sender = :sender" ,Message.class);
 
         query.setParameter("sender",sender);
 
