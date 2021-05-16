@@ -1,7 +1,18 @@
 package de.aicard.Social;
 
 import de.aicard.account.Account;
+import de.aicard.db.domains.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -12,11 +23,21 @@ import java.util.ArrayList;
  *
  * @author Amine Semlali
  */
-public class Message
+
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class Message extends BaseEntity
 {
+
     private String message;
+    @OneToOne
     private Account sender;
     private LocalDateTime time;
+    @OneToMany
     private ArrayList<Account> likedBy  ;
 
     //constructor

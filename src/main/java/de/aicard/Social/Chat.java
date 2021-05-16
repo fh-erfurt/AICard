@@ -1,7 +1,18 @@
 package de.aicard.Social;
 
 import de.aicard.account.Account;
+import de.aicard.db.domains.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 
 /**
@@ -11,19 +22,19 @@ Class Chat has 2 Attributes chatHistory where the messages from all participants
 
  @author Semlali Amine
  */
-public class Chat
-{
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Chat extends BaseEntity
+{
+    @OneToMany
     private ArrayList<Message> chatHistory;
+    @OneToMany
     private ArrayList<Account> participants ;
 
-    //Constructor
-
-    public Chat()
-    {
-        chatHistory = new ArrayList<Message>();
-        participants = new ArrayList<Account>();
-    }
 
     /**
      * Constructor of a Chat.
@@ -87,7 +98,15 @@ public class Chat
         this.participants.add(_newParticipant);
 
     }
-
+    public String chatHasParticipant(String _name) {
+        String stmt = "";
+        for (Account a : this.participants)
+            if (a.getName().equals(_name))
+            {
+                stmt = "true";
+            }
+        return stmt;
+    }
     public Account getChatCreator()
     {
         return this.participants.get(0);
