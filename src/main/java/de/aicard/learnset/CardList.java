@@ -1,7 +1,9 @@
 package de.aicard.learnset;
 
 import de.aicard.card.Card;
+import de.aicard.db.domains.BaseEntity;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -10,7 +12,8 @@ import java.util.logging.Logger;
  *
  * @author Martin Kuehlborn, Clemens Berger
  */
-public class CardList
+@Entity
+public class CardList extends BaseEntity
 {
     // CLASS VARIABLES
     private static final Logger logger = Logger.getLogger(CardList.class.getName());

@@ -1,10 +1,13 @@
 package de.aicard.learnset;
 
 import de.aicard.card.CardStatus;
+import de.aicard.db.domains.BaseEntity;
 import de.aicard.enums.CardKnowledgeLevel;
 import de.aicard.enums.State;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
+import java.util.Base64;
 
 /**
  * Provides a LearnSet with further, account-specific information and is thus always embedded
@@ -15,7 +18,8 @@ import java.util.ArrayList;
  *
  * @author Daniel Michel
  */
-public class LearnSetAbo
+@Entity
+public class LearnSetAbo extends BaseEntity
 {
     /**
      * The member-variable m_cardStatus is an ArrayList of CardStatus. It contains a CardStatus

@@ -1,10 +1,12 @@
 package de.aicard.learnset;
 
 import de.aicard.Social.Message;
+import de.aicard.db.domains.BaseEntity;
 import de.aicard.enums.Faculty;
 import de.aicard.enums.Visibility;
 import de.aicard.account.Account;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -17,7 +19,8 @@ import java.util.logging.Logger;
  *
  * @author Martin Kuehlborn
  */
-public class LearnSet
+@Entity
+public class LearnSet extends BaseEntity
 {
     // CLASS VARIABLES
     private static final Logger logger = Logger.getLogger(LearnSet.class.getName());
