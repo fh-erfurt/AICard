@@ -6,7 +6,7 @@
 <title>Message</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-01-31">
-<meta name="description" content="declaration: package: de.aicard.Social, class: Message">
+<meta name="description" content="declaration: package: de.aicard.domains.Social, class: Message">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.css" title="Style">
@@ -84,12 +84,12 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.aicard.Social</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.aicard.domains.Social</a></div>
 <h1 title="Class Message" class="title">Class Message</h1>
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">de.aicard.Social.Message</div>
+<div class="inheritance">de.aicard.domains.Social.Message</div>
 </div>
 <section class="description">
 <hr>
@@ -122,7 +122,7 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#likedBy">likedBy</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -132,7 +132,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../account/Account.html" title="class in de.aicard.account">Account</a></code></td>
+<td class="colFirst"><code>private <a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sender">sender</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -163,8 +163,8 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,de.aicard.account.Account)">Message</a></span>&#8203;(java.lang.String&nbsp;_newMessage,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newSender)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,de.aicard.domains.account.Account)">Message</a></span>&#8203;(java.lang.String&nbsp;_newMessage,
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newSender)</code></th>
 <td class="colLast">
 <div class="block">Constructor of a Message.</div>
 </td>
@@ -194,7 +194,7 @@ extends java.lang.Object</pre>
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#clickLike(de.aicard.account.Account)">clickLike</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_account)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#clickLike(de.aicard.domains.account.Account)">clickLike</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_account)</code></th>
 <td class="colLast">
 <div class="block">the function clickLike checks if a person is in the list of those who liked the message
  if the person liked the message, his name is removed from the list (dislike)
@@ -202,7 +202,7 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLikedBy()">getLikedBy</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The function getLikedBy is used to get the list of the persons that liked the message</div>
@@ -227,7 +227,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLikedby(java.util.ArrayList)">setLikedby</a></span>&#8203;(java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;&nbsp;_newLikedBy)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLikedby(java.util.ArrayList)">setLikedby</a></span>&#8203;(java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;&nbsp;_newLikedBy)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i6">
@@ -266,7 +266,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <section class="detail">
 <h3><a id="sender">sender</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="../account/Account.html" title="class in de.aicard.account">Account</a></span>&nbsp;<span class="memberName">sender</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a></span>&nbsp;<span class="memberName">sender</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -278,7 +278,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <section class="detail">
 <h3><a id="likedBy">likedBy</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</span>&nbsp;<span class="memberName">likedBy</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</span>&nbsp;<span class="memberName">likedBy</span></div>
 </section>
 </li>
 </ul>
@@ -293,9 +293,9 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;(java.lang.String,de.aicard.account.Account)">Message</a></h3>
+<h3><a id="&lt;init&gt;(java.lang.String,de.aicard.domains.account.Account)">Message</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">Message</span>&#8203;(<span class="arguments">java.lang.String&nbsp;_newMessage,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newSender)</span></div>
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newSender)</span></div>
 <div class="block">Constructor of a Message.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -331,14 +331,14 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getLikedBy()">getLikedBy</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</span>&nbsp;<span class="memberName">getLikedBy</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</span>&nbsp;<span class="memberName">getLikedBy</span>()</div>
 <div class="block">The function getLikedBy is used to get the list of the persons that liked the message</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="setLikedby(java.util.ArrayList)">setLikedby</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setLikedby</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;&nbsp;_newLikedBy)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setLikedby</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;&nbsp;_newLikedBy)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -349,8 +349,8 @@ extends java.lang.Object</pre>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="clickLike(de.aicard.account.Account)">clickLike</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">clickLike</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_account)</span></div>
+<h3><a id="clickLike(de.aicard.domains.account.Account)">clickLike</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">clickLike</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_account)</span></div>
 <div class="block">the function clickLike checks if a person is in the list of those who liked the message
  if the person liked the message, his name is removed from the list (dislike)
  if the person didn't like the message,his name is added to the list (like)</div>
