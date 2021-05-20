@@ -1,5 +1,5 @@
-de.aicard.account
-de.aicard.card
-de.aicard.enums
-de.aicard.learnset
-de.aicard.Social
+de.aicard.domains.account
+de.aicard.domains.card
+de.aicard.domains.enums
+de.aicard.domains.learnset
+de.aicard.domains.Social

@@ -1,0 +1,13 @@
+package de.aicard.domains.enums;
+
+public enum AcademicGrade
+{
+    UNIVERSITY_PROFESSOR,
+    UNIVERSITY_LECTURER,
+    JUNIOR_PROFESSOR,
+    JUNIOR_LECTURER,
+    ACADEMIC_COUNCIL,
+    SCIENTIFIC_ASSISTANT,
+    RESEARCH_ASSISTANT,
+    STUDENT_ASSISTANT
+}

@@ -6,7 +6,7 @@
 <title>LearnSet</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-01-31">
-<meta name="description" content="declaration: package: de.aicard.learnset, class: LearnSet">
+<meta name="description" content="declaration: package: de.aicard.domains.learnset, class: LearnSet">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.css" title="Style">
@@ -84,12 +84,12 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.aicard.learnset</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.aicard.domains.learnset</a></div>
 <h1 title="Class LearnSet" class="title">Class LearnSet</h1>
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">de.aicard.learnset.LearnSet</div>
+<div class="inheritance">de.aicard.domains.learnset.LearnSet</div>
 </div>
 <section class="description">
 <hr>
@@ -125,19 +125,19 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#adminList">adminList</a></span></code></th>
 <td class="colLast">
 <div class="block">List of people who can edit the learnset</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="CardList.html" title="class in de.aicard.learnset">CardList</a></code></td>
+<td class="colFirst"><code>private <a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cardList">cardList</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#commentList">commentList</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -156,7 +156,7 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a></code></td>
+<td class="colFirst"><code>private <a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#faculty">faculty</a></span></code></th>
 <td class="colLast">
 <div class="block">Which Faculty is the LearnSet acquainted with</div>
@@ -173,7 +173,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../account/Account.html" title="class in de.aicard.account">Account</a></code></td>
+<td class="colFirst"><code>private <a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#owner">owner</a></span></code></th>
 <td class="colLast">
 <div class="block">The Account who created and owns the LearnSet</div>
@@ -185,7 +185,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../enums/Visibility.html" title="enum in de.aicard.enums">Visibility</a></code></td>
+<td class="colFirst"><code>private <a href="../enums/Visibility.html" title="enum in de.aicard.domains.enums">Visibility</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visibility">visibility</a></span></code></th>
 <td class="colLast">
 <div class="block">Visibility for Accounts who are not the owner</div>
@@ -213,29 +213,29 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(de.aicard.learnset.CardList)">LearnSet</a></span>&#8203;(<a href="CardList.html" title="class in de.aicard.learnset">CardList</a>&nbsp;_newCardList)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(de.aicard.domains.learnset.CardList)">LearnSet</a></span>&#8203;(<a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a>&nbsp;_newCardList)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,de.aicard.enums.Faculty,de.aicard.learnset.CardList,de.aicard.account.Account)">LearnSet</a></span>&#8203;(java.lang.String&nbsp;_newTitle,
-<a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a>&nbsp;_newFaculty,
-<a href="CardList.html" title="class in de.aicard.learnset">CardList</a>&nbsp;_newCardList,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newOwner)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,de.aicard.enums.Faculty,de.aicard.domains.learnset.CardList,de.aicard.domains.account.Account)">LearnSet</a></span>&#8203;(java.lang.String&nbsp;_newTitle,
+<a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a>&nbsp;_newFaculty,
+<a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a>&nbsp;_newCardList,
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newOwner)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.String,de.aicard.enums.Faculty)">LearnSet</a></span>&#8203;(java.lang.String&nbsp;_newTitle,
 java.lang.String&nbsp;_newDescription,
-<a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a>&nbsp;_newFaculty)</code></th>
+<a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a>&nbsp;_newFaculty)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.String,de.aicard.enums.Faculty,de.aicard.learnset.CardList,de.aicard.account.Account,de.aicard.enums.Visibility)">LearnSet</a></span>&#8203;(java.lang.String&nbsp;_newTitle,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.String,de.aicard.enums.Faculty,de.aicard.domains.learnset.CardList,de.aicard.domains.account.Account,de.aicard.enums.Visibility)">LearnSet</a></span>&#8203;(java.lang.String&nbsp;_newTitle,
 java.lang.String&nbsp;_newDescription,
-<a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a>&nbsp;_newFaculty,
-<a href="CardList.html" title="class in de.aicard.learnset">CardList</a>&nbsp;_newCardList,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newOwner,
-<a href="../enums/Visibility.html" title="enum in de.aicard.enums">Visibility</a>&nbsp;_visibility)</code></th>
+<a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a>&nbsp;_newFaculty,
+<a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a>&nbsp;_newCardList,
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newOwner,
+<a href="../enums/Visibility.html" title="enum in de.aicard.domains.enums">Visibility</a>&nbsp;_visibility)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -263,7 +263,7 @@ java.lang.String&nbsp;_newDescription,
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addAdmin(de.aicard.account.Account)">addAdmin</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newAdmin)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addAdmin(de.aicard.domains.account.Account)">addAdmin</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newAdmin)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i1">
@@ -275,7 +275,7 @@ java.lang.String&nbsp;_newDescription,
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addMessage(de.aicard.Social.Message)">addMessage</a></span>&#8203;(<a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&nbsp;_newMessage)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addMessage(de.aicard.domains.Social.Message)">addMessage</a></span>&#8203;(<a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_newMessage)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i3">
@@ -296,17 +296,17 @@ java.lang.String&nbsp;_newDescription,
 </td>
 </tr>
 <tr class="altColor" id="i6">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAdmins()">getAdmins</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i7">
-<td class="colFirst"><code><a href="CardList.html" title="class in de.aicard.learnset">CardList</a></code></td>
+<td class="colFirst"><code><a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCardList()">getCardList</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i8">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCommentList()">getCommentList</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -321,7 +321,7 @@ java.lang.String&nbsp;_newDescription,
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i11">
-<td class="colFirst"><code><a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a></code></td>
+<td class="colFirst"><code><a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFaculty()">getFaculty</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -331,7 +331,7 @@ java.lang.String&nbsp;_newDescription,
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i13">
-<td class="colFirst"><code><a href="../account/Account.html" title="class in de.aicard.account">Account</a></code></td>
+<td class="colFirst"><code><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOwner()">getOwner</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -341,7 +341,7 @@ java.lang.String&nbsp;_newDescription,
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i15">
-<td class="colFirst"><code><a href="../enums/Visibility.html" title="enum in de.aicard.enums">Visibility</a></code></td>
+<td class="colFirst"><code><a href="../enums/Visibility.html" title="enum in de.aicard.domains.enums">Visibility</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVisibility()">getVisibility</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -352,7 +352,7 @@ java.lang.String&nbsp;_newDescription,
 </tr>
 <tr class="rowColor" id="i17">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isAuthorizedToAddLearnSet(de.aicard.account.Account)">isAuthorizedToAddLearnSet</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_account)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isAuthorizedToAddLearnSet(de.aicard.domains.account.Account)">isAuthorizedToAddLearnSet</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_account)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i18">
@@ -365,7 +365,7 @@ java.lang.String&nbsp;_newDescription,
 </tr>
 <tr class="rowColor" id="i19">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAdmin(de.aicard.account.Account)">removeAdmin</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_accountToRemove)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAdmin(de.aicard.domains.account.Account)">removeAdmin</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_accountToRemove)</code></th>
 <td class="colLast">
 <div class="block">Removes Admin from adminList by Account
  is overloaded</div>
@@ -373,22 +373,22 @@ java.lang.String&nbsp;_newDescription,
 </tr>
 <tr class="altColor" id="i20">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeMessageByMessage(de.aicard.Social.Message)">removeMessageByMessage</a></span>&#8203;(<a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&nbsp;_messageToRemove)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeMessageByMessage(de.aicard.domains.Social.Message)">removeMessageByMessage</a></span>&#8203;(<a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_messageToRemove)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i21">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAdmins(java.util.ArrayList)">setAdmins</a></span>&#8203;(java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;&nbsp;_newAdmins)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAdmins(java.util.ArrayList)">setAdmins</a></span>&#8203;(java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;&nbsp;_newAdmins)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i22">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCardList(de.aicard.learnset.CardList)">setCardList</a></span>&#8203;(<a href="CardList.html" title="class in de.aicard.learnset">CardList</a>&nbsp;_newCardList)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCardList(de.aicard.domains.learnset.CardList)">setCardList</a></span>&#8203;(<a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a>&nbsp;_newCardList)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i23">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCommentList(java.util.ArrayList)">setCommentList</a></span>&#8203;(java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&gt;&nbsp;_newCommentList)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCommentList(java.util.ArrayList)">setCommentList</a></span>&#8203;(java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;&nbsp;_newCommentList)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i24">
@@ -403,7 +403,7 @@ java.lang.String&nbsp;_newDescription,
 </tr>
 <tr class="altColor" id="i26">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setFaculty(de.aicard.enums.Faculty)">setFaculty</a></span>&#8203;(<a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a>&nbsp;_newFaculty)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setFaculty(de.aicard.enums.Faculty)">setFaculty</a></span>&#8203;(<a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a>&nbsp;_newFaculty)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i27">
@@ -413,7 +413,7 @@ java.lang.String&nbsp;_newDescription,
 </tr>
 <tr class="altColor" id="i28">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setOwner(de.aicard.account.Account)">setOwner</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newOwner)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setOwner(de.aicard.domains.account.Account)">setOwner</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newOwner)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i29">
@@ -423,7 +423,7 @@ java.lang.String&nbsp;_newDescription,
 </tr>
 <tr class="altColor" id="i30">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setVisibility(de.aicard.enums.Visibility)">setVisibility</a></span>&#8203;(<a href="../enums/Visibility.html" title="enum in de.aicard.enums">Visibility</a>&nbsp;_newVisibility)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setVisibility(de.aicard.enums.Visibility)">setVisibility</a></span>&#8203;(<a href="../enums/Visibility.html" title="enum in de.aicard.domains.enums">Visibility</a>&nbsp;_newVisibility)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -470,40 +470,40 @@ java.lang.String&nbsp;_newDescription,
 <li class="blockList">
 <section class="detail">
 <h3><a id="faculty">faculty</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a></span>&nbsp;<span class="memberName">faculty</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a></span>&nbsp;<span class="memberName">faculty</span></div>
 <div class="block">Which Faculty is the LearnSet acquainted with</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="cardList">cardList</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="CardList.html" title="class in de.aicard.learnset">CardList</a></span>&nbsp;<span class="memberName">cardList</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a></span>&nbsp;<span class="memberName">cardList</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="commentList">commentList</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&gt;</span>&nbsp;<span class="memberName">commentList</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;</span>&nbsp;<span class="memberName">commentList</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="owner">owner</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="../account/Account.html" title="class in de.aicard.account">Account</a></span>&nbsp;<span class="memberName">owner</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a></span>&nbsp;<span class="memberName">owner</span></div>
 <div class="block">The Account who created and owns the LearnSet</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="visibility">visibility</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="../enums/Visibility.html" title="enum in de.aicard.enums">Visibility</a></span>&nbsp;<span class="memberName">visibility</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType"><a href="../enums/Visibility.html" title="enum in de.aicard.domains.enums">Visibility</a></span>&nbsp;<span class="memberName">visibility</span></div>
 <div class="block">Visibility for Accounts who are not the owner</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="adminList">adminList</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</span>&nbsp;<span class="memberName">adminList</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</span>&nbsp;<span class="memberName">adminList</span></div>
 <div class="block">List of people who can edit the learnset</div>
 </section>
 </li>
@@ -532,17 +532,17 @@ java.lang.String&nbsp;_newDescription,
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;(de.aicard.learnset.CardList)">LearnSet</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">LearnSet</span>&#8203;(<span class="arguments"><a href="CardList.html" title="class in de.aicard.learnset">CardList</a>&nbsp;_newCardList)</span></div>
+<h3><a id="&lt;init&gt;(de.aicard.domains.learnset.CardList)">LearnSet</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">LearnSet</span>&#8203;(<span class="arguments"><a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a>&nbsp;_newCardList)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;(java.lang.String,de.aicard.enums.Faculty,de.aicard.learnset.CardList,de.aicard.account.Account)">LearnSet</a></h3>
+<h3><a id="&lt;init&gt;(java.lang.String,de.aicard.enums.Faculty,de.aicard.domains.learnset.CardList,de.aicard.domains.account.Account)">LearnSet</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">LearnSet</span>&#8203;(<span class="arguments">java.lang.String&nbsp;_newTitle,
-<a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a>&nbsp;_newFaculty,
-<a href="CardList.html" title="class in de.aicard.learnset">CardList</a>&nbsp;_newCardList,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newOwner)</span></div>
+<a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a>&nbsp;_newFaculty,
+<a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a>&nbsp;_newCardList,
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newOwner)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -550,18 +550,18 @@ java.lang.String&nbsp;_newDescription,
 <h3><a id="&lt;init&gt;(java.lang.String,java.lang.String,de.aicard.enums.Faculty)">LearnSet</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">LearnSet</span>&#8203;(<span class="arguments">java.lang.String&nbsp;_newTitle,
 java.lang.String&nbsp;_newDescription,
-<a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a>&nbsp;_newFaculty)</span></div>
+<a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a>&nbsp;_newFaculty)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;(java.lang.String,java.lang.String,de.aicard.enums.Faculty,de.aicard.learnset.CardList,de.aicard.account.Account,de.aicard.enums.Visibility)">LearnSet</a></h3>
+<h3><a id="&lt;init&gt;(java.lang.String,java.lang.String,de.aicard.enums.Faculty,de.aicard.domains.learnset.CardList,de.aicard.domains.account.Account,de.aicard.enums.Visibility)">LearnSet</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">LearnSet</span>&#8203;(<span class="arguments">java.lang.String&nbsp;_newTitle,
 java.lang.String&nbsp;_newDescription,
-<a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a>&nbsp;_newFaculty,
-<a href="CardList.html" title="class in de.aicard.learnset">CardList</a>&nbsp;_newCardList,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newOwner,
-<a href="../enums/Visibility.html" title="enum in de.aicard.enums">Visibility</a>&nbsp;_visibility)</span></div>
+<a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a>&nbsp;_newFaculty,
+<a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a>&nbsp;_newCardList,
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newOwner,
+<a href="../enums/Visibility.html" title="enum in de.aicard.domains.enums">Visibility</a>&nbsp;_visibility)</span></div>
 </section>
 </li>
 </ul>
@@ -611,7 +611,7 @@ java.lang.String&nbsp;_newDescription,
 <li class="blockList">
 <section class="detail">
 <h3><a id="getFaculty()">getFaculty</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a></span>&nbsp;<span class="memberName">getFaculty</span>()
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a></span>&nbsp;<span class="memberName">getFaculty</span>()
                    throws <span class="exceptions">java.lang.NullPointerException</span></div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -622,13 +622,13 @@ java.lang.String&nbsp;_newDescription,
 <li class="blockList">
 <section class="detail">
 <h3><a id="setFaculty(de.aicard.enums.Faculty)">setFaculty</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setFaculty</span>&#8203;(<span class="arguments"><a href="../enums/Faculty.html" title="enum in de.aicard.enums">Faculty</a>&nbsp;_newFaculty)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setFaculty</span>&#8203;(<span class="arguments"><a href="../enums/Faculty.html" title="enum in de.aicard.domains.enums">Faculty</a>&nbsp;_newFaculty)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCardList()">getCardList</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="CardList.html" title="class in de.aicard.learnset">CardList</a></span>&nbsp;<span class="memberName">getCardList</span>()
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a></span>&nbsp;<span class="memberName">getCardList</span>()
                      throws <span class="exceptions">java.lang.NullPointerException</span></div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -638,14 +638,14 @@ java.lang.String&nbsp;_newDescription,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="setCardList(de.aicard.learnset.CardList)">setCardList</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setCardList</span>&#8203;(<span class="arguments"><a href="CardList.html" title="class in de.aicard.learnset">CardList</a>&nbsp;_newCardList)</span></div>
+<h3><a id="setCardList(de.aicard.domains.learnset.CardList)">setCardList</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setCardList</span>&#8203;(<span class="arguments"><a href="CardList.html" title="class in de.aicard.domains.learnset">CardList</a>&nbsp;_newCardList)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCommentList()">getCommentList</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&gt;</span>&nbsp;<span class="memberName">getCommentList</span>()
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;</span>&nbsp;<span class="memberName">getCommentList</span>()
                                             throws <span class="exceptions">java.lang.NullPointerException</span></div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -656,13 +656,13 @@ java.lang.String&nbsp;_newDescription,
 <li class="blockList">
 <section class="detail">
 <h3><a id="setCommentList(java.util.ArrayList)">setCommentList</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setCommentList</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&gt;&nbsp;_newCommentList)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setCommentList</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;&nbsp;_newCommentList)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getOwner()">getOwner</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../account/Account.html" title="class in de.aicard.account">Account</a></span>&nbsp;<span class="memberName">getOwner</span>()
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a></span>&nbsp;<span class="memberName">getOwner</span>()
                  throws <span class="exceptions">java.lang.NullPointerException</span></div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -672,14 +672,14 @@ java.lang.String&nbsp;_newDescription,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="setOwner(de.aicard.account.Account)">setOwner</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setOwner</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newOwner)</span></div>
+<h3><a id="setOwner(de.aicard.domains.account.Account)">setOwner</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setOwner</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newOwner)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getVisibility()">getVisibility</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../enums/Visibility.html" title="enum in de.aicard.enums">Visibility</a></span>&nbsp;<span class="memberName">getVisibility</span>()
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../enums/Visibility.html" title="enum in de.aicard.domains.enums">Visibility</a></span>&nbsp;<span class="memberName">getVisibility</span>()
                          throws <span class="exceptions">java.lang.NullPointerException</span></div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -690,13 +690,13 @@ java.lang.String&nbsp;_newDescription,
 <li class="blockList">
 <section class="detail">
 <h3><a id="setVisibility(de.aicard.enums.Visibility)">setVisibility</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setVisibility</span>&#8203;(<span class="arguments"><a href="../enums/Visibility.html" title="enum in de.aicard.enums">Visibility</a>&nbsp;_newVisibility)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setVisibility</span>&#8203;(<span class="arguments"><a href="../enums/Visibility.html" title="enum in de.aicard.domains.enums">Visibility</a>&nbsp;_newVisibility)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getAdmins()">getAdmins</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</span>&nbsp;<span class="memberName">getAdmins</span>()
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</span>&nbsp;<span class="memberName">getAdmins</span>()
                                        throws <span class="exceptions">java.lang.NullPointerException</span></div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -707,7 +707,7 @@ java.lang.String&nbsp;_newDescription,
 <li class="blockList">
 <section class="detail">
 <h3><a id="setAdmins(java.util.ArrayList)">setAdmins</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setAdmins</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;&nbsp;_newAdmins)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setAdmins</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;&nbsp;_newAdmins)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -781,8 +781,8 @@ java.lang.String&nbsp;_newDescription,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="addAdmin(de.aicard.account.Account)">addAdmin</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addAdmin</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newAdmin)</span></div>
+<h3><a id="addAdmin(de.aicard.domains.account.Account)">addAdmin</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addAdmin</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newAdmin)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -799,8 +799,8 @@ java.lang.String&nbsp;_newDescription,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="removeAdmin(de.aicard.account.Account)">removeAdmin</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeAdmin</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_accountToRemove)</span></div>
+<h3><a id="removeAdmin(de.aicard.domains.account.Account)">removeAdmin</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeAdmin</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_accountToRemove)</span></div>
 <div class="block">Removes Admin from adminList by Account
  is overloaded</div>
 <dl>
@@ -811,20 +811,20 @@ java.lang.String&nbsp;_newDescription,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="addMessage(de.aicard.Social.Message)">addMessage</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addMessage</span>&#8203;(<span class="arguments"><a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&nbsp;_newMessage)</span></div>
+<h3><a id="addMessage(de.aicard.domains.Social.Message)">addMessage</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addMessage</span>&#8203;(<span class="arguments"><a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_newMessage)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="removeMessageByMessage(de.aicard.Social.Message)">removeMessageByMessage</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeMessageByMessage</span>&#8203;(<span class="arguments"><a href="../Social/Message.html" title="class in de.aicard.Social">Message</a>&nbsp;_messageToRemove)</span></div>
+<h3><a id="removeMessageByMessage(de.aicard.domains.Social.Message)">removeMessageByMessage</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeMessageByMessage</span>&#8203;(<span class="arguments"><a href="../Social/Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_messageToRemove)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="isAuthorizedToAddLearnSet(de.aicard.account.Account)">isAuthorizedToAddLearnSet</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isAuthorizedToAddLearnSet</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_account)</span></div>
+<h3><a id="isAuthorizedToAddLearnSet(de.aicard.domains.account.Account)">isAuthorizedToAddLearnSet</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isAuthorizedToAddLearnSet</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_account)</span></div>
 </section>
 </li>
 </ul>

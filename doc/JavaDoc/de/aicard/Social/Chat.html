@@ -6,7 +6,7 @@
 <title>Chat</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-01-31">
-<meta name="description" content="declaration: package: de.aicard.Social, class: Chat">
+<meta name="description" content="declaration: package: de.aicard.domains.Social, class: Chat">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.css" title="Style">
@@ -84,12 +84,12 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.aicard.Social</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">de.aicard.domains.Social</a></div>
 <h1 title="Class Chat" class="title">Class Chat</h1>
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">de.aicard.Social.Chat</div>
+<div class="inheritance">de.aicard.domains.Social.Chat</div>
 </div>
 <section class="description">
 <hr>
@@ -123,12 +123,12 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.Social">Message</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#chatHistory">chatHistory</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#participants">participants</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -158,8 +158,8 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(de.aicard.account.Account,de.aicard.account.Account,java.lang.String)">Chat</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newParticipant,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newCreator,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(de.aicard.domains.account.Account,de.aicard.domains.account.Account,java.lang.String)">Chat</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newParticipant,
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newCreator,
 java.lang.String&nbsp;_newMessage)</code></th>
 <td class="colLast">
 <div class="block">Constructor of a Chat.</div>
@@ -190,7 +190,7 @@ java.lang.String&nbsp;_newMessage)</code></th>
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addParticipant(de.aicard.account.Account)">addParticipant</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newParticipant)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addParticipant(de.aicard.domains.account.Account)">addParticipant</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newParticipant)</code></th>
 <td class="colLast">
 <div class="block">-participants can be added to the chat with the function addParticipant
         -the function getChatCreator is used to get the chat creator which is the first in the participants list
@@ -205,23 +205,23 @@ java.lang.String&nbsp;_newMessage)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code><a href="../account/Account.html" title="class in de.aicard.account">Account</a></code></td>
+<td class="colFirst"><code><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getChatCreator()">getChatCreator</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i3">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.Social">Message</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getChatHistory()">getChatHistory</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getParticipants()">getParticipants</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeMessage(de.aicard.Social.Message)">removeMessage</a></span>&#8203;(<a href="Message.html" title="class in de.aicard.Social">Message</a>&nbsp;_oldMessage)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeMessage(de.aicard.domains.Social.Message)">removeMessage</a></span>&#8203;(<a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_oldMessage)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i6">
@@ -231,18 +231,18 @@ java.lang.String&nbsp;_newMessage)</code></th>
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessage(java.lang.String,de.aicard.account.Account)">sendMessage</a></span>&#8203;(java.lang.String&nbsp;_newMessage,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newSender)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessage(java.lang.String,de.aicard.domains.account.Account)">sendMessage</a></span>&#8203;(java.lang.String&nbsp;_newMessage,
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newSender)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setChatHistory(java.util.ArrayList)">setChatHistory</a></span>&#8203;(java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.Social">Message</a>&gt;&nbsp;_newChatHistory)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setChatHistory(java.util.ArrayList)">setChatHistory</a></span>&#8203;(java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;&nbsp;_newChatHistory)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setParticipants(java.util.ArrayList)">setParticipants</a></span>&#8203;(java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;&nbsp;_newParticipant)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setParticipants(java.util.ArrayList)">setParticipants</a></span>&#8203;(java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;&nbsp;_newParticipant)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -270,13 +270,13 @@ java.lang.String&nbsp;_newMessage)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="chatHistory">chatHistory</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.Social">Message</a>&gt;</span>&nbsp;<span class="memberName">chatHistory</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;</span>&nbsp;<span class="memberName">chatHistory</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="participants">participants</a></h3>
-<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</span>&nbsp;<span class="memberName">participants</span></div>
+<div class="memberSignature"><span class="modifiers">private</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</span>&nbsp;<span class="memberName">participants</span></div>
 </section>
 </li>
 </ul>
@@ -297,9 +297,9 @@ java.lang.String&nbsp;_newMessage)</code></th>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;(de.aicard.account.Account,de.aicard.account.Account,java.lang.String)">Chat</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">Chat</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newParticipant,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newCreator,
+<h3><a id="&lt;init&gt;(de.aicard.domains.account.Account,de.aicard.domains.account.Account,java.lang.String)">Chat</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">Chat</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newParticipant,
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newCreator,
 java.lang.String&nbsp;_newMessage)</span></div>
 <div class="block">Constructor of a Chat.</div>
 <dl>
@@ -323,31 +323,31 @@ java.lang.String&nbsp;_newMessage)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getChatHistory()">getChatHistory</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.Social">Message</a>&gt;</span>&nbsp;<span class="memberName">getChatHistory</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;</span>&nbsp;<span class="memberName">getChatHistory</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="setChatHistory(java.util.ArrayList)">setChatHistory</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setChatHistory</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.Social">Message</a>&gt;&nbsp;_newChatHistory)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setChatHistory</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&gt;&nbsp;_newChatHistory)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getParticipants()">getParticipants</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;</span>&nbsp;<span class="memberName">getParticipants</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;</span>&nbsp;<span class="memberName">getParticipants</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="setParticipants(java.util.ArrayList)">setParticipants</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setParticipants</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&gt;&nbsp;_newParticipant)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setParticipants</span>&#8203;(<span class="arguments">java.util.ArrayList&lt;<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&gt;&nbsp;_newParticipant)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="addParticipant(de.aicard.account.Account)">addParticipant</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addParticipant</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newParticipant)</span></div>
+<h3><a id="addParticipant(de.aicard.domains.account.Account)">addParticipant</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addParticipant</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newParticipant)</span></div>
 <div class="block">-participants can be added to the chat with the function addParticipant
         -the function getChatCreator is used to get the chat creator which is the first in the participants list
         -the Chat history can be cleared with the function clearHistory
@@ -358,7 +358,7 @@ java.lang.String&nbsp;_newMessage)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getChatCreator()">getChatCreator</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../account/Account.html" title="class in de.aicard.account">Account</a></span>&nbsp;<span class="memberName">getChatCreator</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a></span>&nbsp;<span class="memberName">getChatCreator</span>()</div>
 </section>
 </li>
 <li class="blockList">
@@ -369,15 +369,15 @@ java.lang.String&nbsp;_newMessage)</span></div>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="sendMessage(java.lang.String,de.aicard.account.Account)">sendMessage</a></h3>
+<h3><a id="sendMessage(java.lang.String,de.aicard.domains.account.Account)">sendMessage</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">sendMessage</span>&#8203;(<span class="arguments">java.lang.String&nbsp;_newMessage,
-<a href="../account/Account.html" title="class in de.aicard.account">Account</a>&nbsp;_newSender)</span></div>
+<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newSender)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="removeMessage(de.aicard.Social.Message)">removeMessage</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeMessage</span>&#8203;(<span class="arguments"><a href="Message.html" title="class in de.aicard.Social">Message</a>&nbsp;_oldMessage)</span></div>
+<h3><a id="removeMessage(de.aicard.domains.Social.Message)">removeMessage</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeMessage</span>&#8203;(<span class="arguments"><a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_oldMessage)</span></div>
 </section>
 </li>
 <li class="blockList">
