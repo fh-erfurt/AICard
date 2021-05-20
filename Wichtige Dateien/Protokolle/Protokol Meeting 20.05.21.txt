@@ -1,0 +1,13 @@
+Meeting Protokol 20.05.21 18 Uhr
+
+Ablauf
+Stand des Projekts
+Aufgaben bis Präsentation
+	Front-end Martin, Antonio (Fr)
+	Spring & Test Clemens, Amine, Daniel (Sa Meeting 15 uhr)
+	    Account Clemens
+	    Social Amine
+	    Rest Daniel ( kann Zeug noch abgeben)
+
+nächstes Meeting Montag 15Uhr
+	
