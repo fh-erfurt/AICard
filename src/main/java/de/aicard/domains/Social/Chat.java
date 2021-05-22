@@ -76,14 +76,14 @@ public class Chat extends BaseEntity
         this.participants.add(_newParticipant);
 
     }
-    public String chatHasParticipant(String _name) {
-        String stmt = "";
+    public boolean chatHasParticipant(String _name) {
+
         for (Account a : this.participants)
             if (a.getName().equals(_name))
             {
-                stmt = "true";
+                return true;
             }
-        return stmt;
+        return false;
     }
     public Account getChatCreator()
     {
