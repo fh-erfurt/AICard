@@ -43,6 +43,7 @@ class ChatRepositoryTest {
         Assertions.assertThat(result)
                 .isNotNull()
                 .isGreaterThan(0);
+
     }
 
 
@@ -84,11 +85,11 @@ class ChatRepositoryTest {
 
 
         //WHEN
-        Optional <List<Chat>> result = repository.findBy("student3");
+        Optional <Chat> result = repository.findBy("student3");
 
         //THEN
         Assertions.assertThat(result).isNotNull().isNotEmpty();
-        Assertions.assertThat(result.get()).contains(givenChat2);
+        Assertions.assertEquals(result.get(),givenChat2);
 
     }
 

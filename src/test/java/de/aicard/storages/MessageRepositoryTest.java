@@ -82,10 +82,10 @@ class MessageRepositoryTest {
         repository.save(givenMessage1);
         repository.save(givenMessage2);
 
-        Optional<List<Message>> result = repository.findBy("student1");
+        Optional<Message> result = repository.findBy("student1");
 
         Assertions.assertThat(result).isNotNull().isNotEmpty();
-        Assertions.assertThat(result.get()).contains(givenMessage1);
+        Assertions.assertEquals(result.get(),givenMessage1);
 
     }
     @Test
