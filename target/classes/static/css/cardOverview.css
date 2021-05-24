@@ -1,0 +1,93 @@
+/* --- General --- */
+header{
+    width: 100%;
+    height: 50px;
+    background-color: aqua;
+    margin: 0;
+}
+
+footer{
+    width: 100%;
+    height: 50px;
+    background-color: aqua;
+    
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+/* --- for current HTML page --- */
+
+.cardOverview{
+    width: 80%;
+    min-height: 20rem;
+    background-color: red;
+    margin: auto;
+    padding: 1rem;
+}
+
+.cardOverview > .learnset-info{
+    background-color: bisque;
+    width: 90%;
+    min-height: 20rem;
+    margin: auto;
+    padding: 1rem;
+
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-areas: 'leftside rightside';
+}
+
+.cardOverview > .learnset-info > .left-side{
+    background-color: gray;
+    grid-area: leftside;
+}
+
+.cardOverview > .learnset-info > .right-side{
+    background-color: lightskyblue;
+    grid-area: rightside;
+}
+
+.cardOverview .right-side  input{
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    margin-top: 1rem;
+}
+
+/* --- CARDS --- */
+
+.cardOverview > .cards{
+    background-color: blue;
+    margin: auto;
+    padding: 1rem;
+    width: 90%;
+    margin-top: 1rem;
+}
+
+.cardOverview >.cards > .card{
+    
+    background-color: lightpink;
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+.cardOverview .card form{
+    display: grid;
+    grid-template-columns: 45% 45% 5% 5%;
+
+}
+
+.cardOverview .card form input{
+    width: 90%;
+}
+
+.cards .add-card{
+    margin: 1rem 0;
+    background-color: lightpink;
+    text-align: center;
+    padding: 1rem;
+}
