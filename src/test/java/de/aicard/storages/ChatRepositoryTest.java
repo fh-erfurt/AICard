@@ -40,13 +40,11 @@ class ChatRepositoryTest {
         Long result = repository.save(givenChat);
 
         // THEN
-        Assertions.assertThat(result)
-                .isNotNull()
-                .isGreaterThan(0);
+        Assertions.assertTrue(result != 0 && result >0);
 
     }
 
-
+/*
     @Test
     void findAll() {
         // GIVEN
@@ -98,4 +96,6 @@ class ChatRepositoryTest {
     {
 
     }
+
+*/
 }

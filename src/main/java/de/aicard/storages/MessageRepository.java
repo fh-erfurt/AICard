@@ -19,9 +19,10 @@ public class MessageRepository extends BaseRepository<Message> {
 
     public Optional<Message> findBy(String sender){
         TypedQuery<Message> query =  entityManager.createQuery("SELECT message FROM " + Message.class.getCanonicalName() +
-                " message WHERE message.sender.getName() = :name" ,Message.class);
+                " message WHERE message.sender.getName() = '" + sender + "'" ,Message.class);
 
-        query.setParameter("name",sender);
+        //query.setParameter("name", sender);
+
 
         List<Message> loaded = query.getResultList();
         if(loaded.isEmpty()){

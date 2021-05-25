@@ -19,9 +19,9 @@ public class ChatRepository extends BaseRepository<Chat>{
     public Optional<Chat> findBy(String participant)
     {
         TypedQuery<Chat> query =  entityManager.createQuery("SELECT chat FROM " + Chat.class.getCanonicalName() +
-                " chat WHERE chat.chatHasParticipant( :participant )= true ", Chat.class);
+                " chat WHERE chat.chatHasParticipant( " + participant + " )= true ", Chat.class);
 
-        query.setParameter("participant",participant);
+        //query.setParameter("participant",participant);
 
         List<Chat> loaded = query.getResultList();
         if(loaded.isEmpty()){
