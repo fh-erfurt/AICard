@@ -11,6 +11,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
 Class Chat has 2 Attributes chatHistory where the messages from all participants are stored
@@ -28,9 +29,9 @@ Class Chat has 2 Attributes chatHistory where the messages from all participants
 public class Chat extends BaseEntity
 {
     @OneToMany
-    private ArrayList<Message> chatHistory;
+    private List<Message> chatHistory;
     @OneToMany
-    private ArrayList<Account> participants ;
+    private List<Account> participants ;
 
 
     /**

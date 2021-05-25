@@ -26,12 +26,10 @@ public class CardStatus extends BaseEntity
     /**
      * Provides information on how well the user has already learned the card content.
      */
-    @Column
     private CardKnowledgeLevel cardKnowledgeLevel;
     /**
      * The card to which the Object belongs.
      */
-    @Column
     @OneToOne
     private Card card;
     

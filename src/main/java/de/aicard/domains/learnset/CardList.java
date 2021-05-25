@@ -5,6 +5,7 @@ import de.aicard.domains.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -23,7 +24,7 @@ public class CardList extends BaseEntity
      * A list of Cards.
      */
     @OneToMany
-    private ArrayList<Card> cardList;
+    public List<Card> cardList;
     /**
      * The current listIndex.
      */
@@ -43,14 +44,14 @@ public class CardList extends BaseEntity
      * Constructor which constructs a CardList on the basis of an existing ArrayList of Cards.
      * @param _newCardList
      */
-    public CardList(ArrayList<Card> _newCardList)
+    public CardList(List<Card> _newCardList)
     {
         this.cardList = _newCardList;
         this.listIndex = 0;
     }
     
     // GETTER + SETTER
-    public ArrayList<Card> getCardList() throws NullPointerException
+    public List<Card> getCardList() throws NullPointerException
     {
         if(this.cardList == null)
         {

@@ -1,25 +1,32 @@
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\account\Account.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\enums\State.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\enums\CardKnowledgeLevel.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\learnset\LearningSession.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\account\AccountList.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\card\TextFile.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\enums\AcademicGrade.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\Social\Group.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\account\Professor.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\learnset\LearnSetAbo.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\card\Card.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\account\Student.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\Social\MessageList.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\Social\Chat.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\card\PictureFile.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\enums\Visibility.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\card\AudioFile.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\card\CardContent.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\card\VideoFile.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\learnset\LearnSet.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\Social\Message.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\enums\Faculty.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\Main.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\card\CardStatus.java
-D:\Fachhochschule\Programm Projekte\javaProject\aiCard\src\main\java\de\aicard\learnset\CardList.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\card\CardContent.java
+C:\FH\aiCard\src\main\java\de\aicard\storages\AudioFileRepository.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\learnset\LearningSession.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\enums\Faculty.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\account\Account.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\enums\CardKnowledgeLevel.java
+C:\FH\aiCard\src\main\java\de\aicard\storages\BaseRepository.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\enums\State.java
+C:\FH\aiCard\src\main\java\de\aicard\storages\TextFileRepository.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\learnset\CardList.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\card\AudioFile.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\Social\Message.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\account\Student.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\Social\Group.java
+C:\FH\aiCard\src\main\java\de\aicard\storages\MessageRepository.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\card\TextFile.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\card\CardStatus.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\card\PictureFile.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\Social\Chat.java
+C:\FH\aiCard\src\main\java\de\aicard\storages\PictureFileRepository.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\learnset\LearnSet.java
+C:\FH\aiCard\src\main\java\de\aicard\storages\ChatRepository.java
+C:\FH\aiCard\src\main\java\de\aicard\storages\AccountRepository.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\card\VideoFile.java
+C:\FH\aiCard\src\main\java\de\aicard\core\H2Controller.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\card\Card.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\learnset\LearnSetAbo.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\enums\AcademicGrade.java
+C:\FH\aiCard\src\main\java\de\aicard\storages\VideoFileRepository.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\enums\Visibility.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\BaseEntity.java
+C:\FH\aiCard\src\main\java\de\aicard\domains\account\Professor.java

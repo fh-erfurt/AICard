@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class message is used to store informations about a message which are :
@@ -36,7 +37,7 @@ public class Message extends BaseEntity
     private Account sender;
     private LocalDateTime time;
     @OneToMany
-    private ArrayList<Account> likedBy  ;
+    private List<Account> likedBy  ;
 
     //constructor
     
@@ -74,7 +75,7 @@ public class Message extends BaseEntity
      *
      * @author Amine Semlali
      */
-    public ArrayList<Account> getLikedBy()
+    public List<Account> getLikedBy()
     {
         return this.likedBy;
     }

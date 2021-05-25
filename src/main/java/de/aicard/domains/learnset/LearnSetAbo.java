@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides a LearnSet with further, account-specific information and is thus always embedded
@@ -32,7 +33,7 @@ public class LearnSetAbo extends BaseEntity
      * for each Card in the LearnSet m_learnSet.
      */
     @ManyToMany
-    private ArrayList<CardStatus> cardStatus;
+    private List<CardStatus> cardStatus;
     /**
      * The status of the LearnSet of the Account.
      */
