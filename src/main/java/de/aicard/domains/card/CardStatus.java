@@ -31,7 +31,7 @@ public class CardStatus extends BaseEntity
     /**
      * The card to which the Object belongs.
      */
-    @Column
+    
     @OneToOne
     private Card card;
     

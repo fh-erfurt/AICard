@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides a ArrayList of CardStatus, so that the Account can Learn the Cards. Also safes information
@@ -32,7 +33,7 @@ public class LearningSession extends BaseEntity
      * information of the Cards, saved in an ArrayList of CardStatus.
      */
     @OneToMany
-    private ArrayList<CardStatus> cardStatusList;
+    private List<CardStatus> cardStatusList;
     /**
      * Information, wheather the Session is active (there is at least one other card to learn in the List)
      */
@@ -46,7 +47,7 @@ public class LearningSession extends BaseEntity
      *
      * @param _cardStatusList The List for the LearningSession.
      */
-    public LearningSession(ArrayList<CardStatus> _cardStatusList)
+    public LearningSession(List<CardStatus> _cardStatusList)
     {
         this.cardStatusList = _cardStatusList;
         this.currentCard = 0;
@@ -55,7 +56,7 @@ public class LearningSession extends BaseEntity
 
     //setter & getter
 
-    public ArrayList<CardStatus> getCardStatusList() throws NullPointerException
+    public List<CardStatus> getCardStatusList() throws NullPointerException
     {
         if (this.cardStatusList == null)
         {

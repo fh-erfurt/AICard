@@ -5,6 +5,7 @@ import de.aicard.domains.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -23,7 +24,7 @@ public class CardList extends BaseEntity
      * A list of Cards.
      */
     @OneToMany
-    private ArrayList<Card> cardList;
+    private List<Card> cardList;
     /**
      * The current listIndex.
      */
@@ -50,7 +51,7 @@ public class CardList extends BaseEntity
     }
     
     // GETTER + SETTER
-    public ArrayList<Card> getCardList() throws NullPointerException
+    public List<Card> getCardList() throws NullPointerException
     {
         if(this.cardList == null)
         {

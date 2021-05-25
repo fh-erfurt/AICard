@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides a LearnSet with further, account-specific information and is thus always embedded
@@ -32,7 +33,7 @@ public class LearnSetAbo extends BaseEntity
      * for each Card in the LearnSet m_learnSet.
      */
     @ManyToMany
-    private ArrayList<CardStatus> cardStatus;
+    private List<CardStatus> cardStatus;
     /**
      * The status of the LearnSet of the Account.
      */
@@ -58,7 +59,7 @@ public class LearnSetAbo extends BaseEntity
 
         this.learnSet = _learnSet;
         this.learnSetStatus = State.NEW;
-        this.cardStatus = new ArrayList<CardStatus>();
+        this.cardStatus = new ArrayList<>();
         this.evaluation = -1;
 
         for(int i = 0; i<learnSet.getCardList().getListLength(); i++)
@@ -110,9 +111,9 @@ public class LearnSetAbo extends BaseEntity
      * @param _level The CardKnowledgeLevel we are looking for
      * @return A List of all CardStatus in the LearnSetAbo with the CardKnowledgeLevel level
      */
-    private ArrayList<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel _level)
+    private List<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel _level)
     {
-        ArrayList<CardStatus> result = new ArrayList<CardStatus>();
+        List<CardStatus> result = new ArrayList<>();
         for(int i=0; i<(this.cardStatus.size()); i++){
             if (cardStatus.get(i).getCardKnowledgeLevel() == _level){
                 result.add(cardStatus.get(i));
@@ -132,13 +133,13 @@ public class LearnSetAbo extends BaseEntity
      * @return List of the size _numOfCards, consists of the CardStatus in the LearnSetAbo with the
      * lowest CardKnowledgeLevel.
      */
-    private ArrayList<CardStatus> createCardStatusListForSession(int _numOfCards)
+    private List<CardStatus> createCardStatusListForSession(int _numOfCards)
     {
-        ArrayList<CardStatus> resultCardStatusList = new ArrayList<CardStatus>();
+        List<CardStatus> resultCardStatusList = new ArrayList<>();
 
         for (CardKnowledgeLevel level : CardKnowledgeLevel.values())
         {
-            ArrayList<CardStatus> lowestLevelList = getCardStatusOfKnowledgeLevel(level);
+            List<CardStatus> lowestLevelList = getCardStatusOfKnowledgeLevel(level);
             if(lowestLevelList != null)
             {
                 for(int i = 0; i< lowestLevelList.size(); i++)
@@ -167,7 +168,7 @@ public class LearnSetAbo extends BaseEntity
     public LearningSession createLearningSession(int _numOfCards)
     {
 
-        ArrayList<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
+        List<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
         return new LearningSession(sessionList);
 
 

@@ -1,3 +1,7 @@
+
+# Database file from H2
+*.db
+
 # Compiled class file
 *.class
 

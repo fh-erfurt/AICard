@@ -16,7 +16,7 @@ public class AccountRepository extends BaseRepository<Account> {
         }
 
         public Optional<Account> findBy(String name){
-            TypedQuery<Account> query =  entityManager.createQuery("SELECT account FROM" + Account.class.getCanonicalName() + " account WHERE account.name = :name",Account.class);
+            TypedQuery<Account> query =  entityManager.createQuery("SELECT account FROM " + Account.class.getCanonicalName() + " account WHERE account.name = :name",Account.class);
             query.setParameter("name",name);
             List<Account> loaded = query.getResultList();
             if(loaded.isEmpty()){

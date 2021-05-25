@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -48,7 +49,7 @@ public class LearnSet extends BaseEntity
     @OneToOne
     private CardList cardList;
     @OneToMany
-    private ArrayList<Message> commentList;
+    private List<Message> commentList;
     
     /**
      * The Account who created and owns the LearnSet
@@ -65,7 +66,7 @@ public class LearnSet extends BaseEntity
      * List of people who can edit the learnset
      */
     @OneToMany
-    private ArrayList<Account> adminList;
+    private List<Account> adminList;
     
     /**
      * Average evaluation of a LearnSet
@@ -96,10 +97,10 @@ public class LearnSet extends BaseEntity
         description = _newDescription;
         faculty = _newFaculty;
         cardList = _newCardList;
-        commentList = new ArrayList<Message>();
+        commentList = new ArrayList<>();
         owner = _newOwner;
         visibility = _visibility;
-        adminList = new ArrayList<Account>();
+        adminList = new ArrayList<>();
         evaluations = 0;
         numberOfEvaluations = 0;
     }
@@ -141,7 +142,7 @@ public class LearnSet extends BaseEntity
         return this.cardList;
     }
     
-    public ArrayList<Message> getCommentList() throws NullPointerException
+    public List<Message> getCommentList() throws NullPointerException
     {
         if(commentList == null)
         {
@@ -168,7 +169,7 @@ public class LearnSet extends BaseEntity
         return this.visibility;
     }
     
-    public ArrayList<Account> getAdmins() throws NullPointerException
+    public List<Account> getAdmins() throws NullPointerException
     {
         if(adminList == null)
         {
