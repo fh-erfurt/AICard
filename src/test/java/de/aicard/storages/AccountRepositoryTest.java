@@ -71,6 +71,6 @@ public class AccountRepositoryTest
         Optional<Account> result = repository.findBy("Markus Mustermann");
 
         Assertions.assertTrue(result.isPresent());
-        Assertions.assertSame(result.get().getName(),"Markus Mustermann");
+        Assertions.assertEquals(result.get().getName(),"Markus Mustermann");
     }
 }

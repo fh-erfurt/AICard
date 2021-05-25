@@ -27,7 +27,6 @@ import java.util.ArrayList;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Message extends BaseEntity
 {
 

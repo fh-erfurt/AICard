@@ -29,7 +29,7 @@ public abstract class BaseRepository <E extends BaseEntity>{
     }
 
     public List<E> findAll(){
-        return entityManager.createQuery("SELECT entity FROM " + type.getCanonicalName()).getResultList();
+        return entityManager.createQuery("SELECT entity FROM " + type.getCanonicalName() + " entity").getResultList();
     }
 
     public void delete(E entity){
