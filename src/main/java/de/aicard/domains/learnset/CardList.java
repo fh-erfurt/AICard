@@ -2,6 +2,9 @@ package de.aicard.domains.learnset;
 
 import de.aicard.domains.card.Card;
 import de.aicard.domains.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +16,11 @@ import java.util.logging.Logger;
  *
  * @author Martin Kuehlborn, Clemens Berger
  */
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
+
 public class CardList extends BaseEntity
 {
     // CLASS VARIABLES
@@ -24,7 +31,7 @@ public class CardList extends BaseEntity
      * A list of Cards.
      */
     @OneToMany
-    public List<Card> cardList;
+    public List<Card> listOfCards;
     /**
      * The current listIndex.
      */
@@ -46,34 +53,19 @@ public class CardList extends BaseEntity
      */
     public CardList(List<Card> _newCardList)
     {
-        this.cardList = _newCardList;
+        this.listOfCards = _newCardList;
         this.listIndex = 0;
     }
     
     // GETTER + SETTER
-    public List<Card> getCardList() throws NullPointerException
+    public List<Card> getListOfCards() throws NullPointerException
     {
-        if(this.cardList == null)
+        if(this.listOfCards == null)
         {
             throw new NullPointerException("CardList was not set.");
         }
         
-        return this.cardList;
-    }
-    
-    public void setCardList(ArrayList<Card> _newCardList)
-    {
-        this.cardList = _newCardList;
-    }
-    
-    public int getListIndex()
-    {
-        return listIndex;
-    }
-    
-    public void setListIndex(int _newListIndex)
-    {
-        this.listIndex = _newListIndex;
+        return this.listOfCards;
     }
     
     
@@ -82,7 +74,7 @@ public class CardList extends BaseEntity
     {
         if(getListLength() < 200)
         {
-            this.cardList.add(_newCard);
+            this.listOfCards.add(_newCard);
     }
         else
         {
@@ -98,7 +90,7 @@ public class CardList extends BaseEntity
      */
     public void removeFromList(Card _card)
     {
-        this.cardList.remove(_card);
+        this.listOfCards.remove(_card);
     }
     
     /**Removes Card Object from list
@@ -108,7 +100,7 @@ public class CardList extends BaseEntity
      */
     public void removeFromList(int _index)
     {
-        this.cardList.remove(_index);
+        this.listOfCards.remove(_index);
     }
     
     /**
@@ -119,12 +111,12 @@ public class CardList extends BaseEntity
      */
     public Card getCurrentCard() throws NullPointerException
     {
-        if(this.cardList.get(listIndex) == null)
+        if(this.listOfCards.get(listIndex) == null)
         {
             throw new NullPointerException("No Card set on current ListIndex: " + listIndex);
         }
         
-        return this.cardList.get(listIndex);
+        return this.listOfCards.get(listIndex);
     }
     
     /**Method to get a Card from the list by index
@@ -136,14 +128,14 @@ public class CardList extends BaseEntity
      */
     public Card getCardByIndex(int _index) throws NullPointerException, Exception
     {
-        if((_index < this.cardList.size()) && (0 <= _index))
+        if((_index < this.listOfCards.size()) && (0 <= _index))
         {
-            if(this.cardList.get(_index) == null)
+            if(this.listOfCards.get(_index) == null)
             {
                 throw new NullPointerException("No Card set on ListIndex: " + _index);
             }
     
-            return this.cardList.get(_index);
+            return this.listOfCards.get(_index);
         }
         
         throw new Exception("index out of bounce. index: " + _index);
@@ -153,7 +145,7 @@ public class CardList extends BaseEntity
 
     public int getListLength()
     {
-        return this.cardList.size();
+        return this.listOfCards.size();
     }
 
     // METHODS
@@ -163,7 +155,7 @@ public class CardList extends BaseEntity
      */
     public void next()
     {
-        if (this.listIndex < this.cardList.size() - 1)
+        if (this.listIndex < this.listOfCards.size() - 1)
         {
            this.listIndex++;
         }

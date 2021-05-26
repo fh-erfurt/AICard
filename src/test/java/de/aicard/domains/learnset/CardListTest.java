@@ -32,8 +32,8 @@ public class CardListTest
         CardList CardList2 = new CardList();
 
         //when: adding the Cards to the empty List
-        CardList2.getCardList().add(Card1);
-        CardList2.getCardList().add(Card2);
+        CardList2.getListOfCards().add(Card1);
+        CardList2.getListOfCards().add(Card2);
     
     
         //then: the Cards in the Lists should be identically
