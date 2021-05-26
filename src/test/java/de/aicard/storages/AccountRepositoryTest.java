@@ -9,6 +9,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +21,20 @@ import java.util.Optional;
  *
  * @author Clemens Berger
  */
+@DataJpaTest
 public class AccountRepositoryTest
 {
-    AccountRepository repository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @BeforeEach
     public void beforeEach() {
-        repository = new AccountRepository();
+
     }
 
     @AfterEach
     public void afterEach() {
-        repository.deleteAll();
+        accountRepository.deleteAll();
     }
 
    // String _email, String _password, String _name, String _description,int _semester,Faculty _faculty)
@@ -40,10 +44,11 @@ public class AccountRepositoryTest
         Account given = new Student("student@mail.de","1234","Markus Mustermann","ich bin sehr bescheiden",3,Faculty.APPLIED_COMPUTER_SCIENCE);
 
         // WHEN
-        Long result = repository.save(given);
+        Account result = accountRepository.save(given);
+        Long resultID = result.getId();
 
         // THEN
-        Assertions.assertTrue(result != null && result > 0);
+        Assertions.assertTrue(resultID != null && resultID > 0);
     }
 //String _email, String _password, String _name, String _description, AcademicGrade _academic
     @Test
@@ -52,23 +57,25 @@ public class AccountRepositoryTest
         Account given2 = new Professor("prof@mail.de","5678","Marion Winters","bin ein Lehrer",AcademicGrade.UNIVERSITY_PROFESSOR);
 
         List<Long> idsOfPersisted = new ArrayList<>();
-        idsOfPersisted.add(repository.save(given1));
-        idsOfPersisted.add(repository.save(given2));
+        Account saved1 = accountRepository.save(given1);
+        Account saved2 = accountRepository.save(given2);
+        idsOfPersisted.add(saved1.getId());
+        idsOfPersisted.add(saved2.getId());
 
-        List<Account> result = repository.findAll();
+        List<Account> result = accountRepository.findAll();
 
         Assertions.assertTrue(result != null && !result.isEmpty());
         Assertions.assertFalse(idsOfPersisted.isEmpty());
     }
     @Test
-    void findbyName(){
+    void findByName(){
         Account given1 = new Student("student@mail.de","1234","Markus Mustermann","ich bin ein anderer",3,Faculty.APPLIED_COMPUTER_SCIENCE);
         Account given2 = new Professor("prof@mail.de","5678","Marion Winters","bin ein Lehrer",AcademicGrade.UNIVERSITY_PROFESSOR);
 
-        repository.save(given1);
-        repository.save(given2);
+        accountRepository.save(given1);
+        accountRepository.save(given2);
 
-        Optional<Account> result = repository.findBy("Markus Mustermann");
+        Optional<Account> result = accountRepository.findByName("Markus Mustermann");
 
         Assertions.assertTrue(result.isPresent());
         Assertions.assertEquals(result.get().getName(),"Markus Mustermann");

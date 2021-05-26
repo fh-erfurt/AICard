@@ -2,14 +2,11 @@ package de.aicard.storages;
 
 import de.aicard.domains.card.TextFile;
 import de.aicard.core.H2Controller;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public class TextFileRepository extends BaseRepository<TextFile>
+public interface TextFileRepository extends JpaRepository<TextFile, Long>
 {
-    public TextFileRepository()
-    {
-        super(H2Controller.getManager().getEntityManager(), TextFile.class);
-    }
-    
+
 }
 

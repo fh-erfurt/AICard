@@ -1,15 +1,9 @@
 package de.aicard.storages;
 
-import de.aicard.core.H2Controller;
 import de.aicard.domains.card.CardStatus;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Slf4j
-public class CardStatusRepository extends BaseRepository<CardStatus>
+public interface CardStatusRepository extends JpaRepository<CardStatus, Long>
 {
 
-    public CardStatusRepository()
-    {
-        super(H2Controller.getManager().getEntityManager(), CardStatus.class);
-    }
 }

@@ -1,13 +1,28 @@
 -------------------------------------------------------------------------------
 Test set: de.aicard.storages.ChatRepositoryTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.008 s <<< FAILURE! - in de.aicard.storages.ChatRepositoryTest
-save  Time elapsed: 0.007 s  <<< ERROR!
-org.eclipse.persistence.exceptions.PersistenceUnitLoadingException: 
+Tests run: 4, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.157 s <<< FAILURE! - in de.aicard.storages.ChatRepositoryTest
+findByParticipantName  Time elapsed: 0.068 s  <<< ERROR!
+javax.persistence.RollbackException: Error while committing the transaction
+	at de.aicard.storages.ChatRepositoryTest.findByParticipantName(ChatRepositoryTest.java:81)
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: de.aicard.domains.Social.Message
+	at de.aicard.storages.ChatRepositoryTest.findByParticipantName(ChatRepositoryTest.java:81)
+Caused by: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: de.aicard.domains.Social.Message
+	at de.aicard.storages.ChatRepositoryTest.findByParticipantName(ChatRepositoryTest.java:81)
 
-Exception Description: An exception was thrown while searching for persistence archives with ClassLoader: jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44
-Internal Exception: java.lang.NullPointerException
-	at de.aicard.storages.ChatRepositoryTest.beforeEach(ChatRepositoryTest.java:21)
-Caused by: java.lang.NullPointerException
-	at de.aicard.storages.ChatRepositoryTest.beforeEach(ChatRepositoryTest.java:21)
+findAll  Time elapsed: 0.043 s  <<< ERROR!
+javax.persistence.RollbackException: Error while committing the transaction
+	at de.aicard.storages.ChatRepositoryTest.findAll(ChatRepositoryTest.java:59)
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: de.aicard.domains.Social.Message
+	at de.aicard.storages.ChatRepositoryTest.findAll(ChatRepositoryTest.java:59)
+Caused by: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: de.aicard.domains.Social.Message
+	at de.aicard.storages.ChatRepositoryTest.findAll(ChatRepositoryTest.java:59)
+
+save  Time elapsed: 0.041 s  <<< ERROR!
+javax.persistence.RollbackException: Error while committing the transaction
+	at de.aicard.storages.ChatRepositoryTest.save(ChatRepositoryTest.java:40)
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: de.aicard.domains.Social.Message
+	at de.aicard.storages.ChatRepositoryTest.save(ChatRepositoryTest.java:40)
+Caused by: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: de.aicard.domains.Social.Message
+	at de.aicard.storages.ChatRepositoryTest.save(ChatRepositoryTest.java:40)
 

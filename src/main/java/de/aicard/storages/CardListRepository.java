@@ -1,10 +1,8 @@
 package de.aicard.storages;
 
-import de.aicard.core.H2Controller;
 import de.aicard.domains.learnset.CardList;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public class CardListRepository extends BaseRepository<CardList>{
-    public CardListRepository(){
-        super(H2Controller.getManager().getEntityManager(), CardList.class);
-    }
+public interface CardListRepository extends JpaRepository<CardList, Long> {
+
 }

@@ -2,30 +2,13 @@ package de.aicard.storages;
 
 import de.aicard.domains.card.VideoFile;
 import de.aicard.core.H2Controller;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-public class VideoFileRepository  extends BaseRepository<VideoFile>
+public interface VideoFileRepository  extends JpaRepository<VideoFile, Long>
 {
-    public VideoFileRepository()
-    {
-        super(H2Controller.getManager().getEntityManager(), VideoFile.class);
-    }
-    
-    public Optional<VideoFile> findBy(String title)
-    {
-        TypedQuery<VideoFile> query = entityManager.createQuery("SELECT videofile FROM " + VideoFile.class.getCanonicalName() +
-                                                                        " videofile WHERE videofile.title = :title" , VideoFile.class);
-        query.setParameter("title", title);
-        
-        List<VideoFile> loaded = query.getResultList();
-        if(loaded.isEmpty())
-        {
-            return Optional.empty();
-        }
-        
-        return Optional.of(loaded.get(0));
-    }
+    Optional<VideoFile> findByTitle(String title);
 }

@@ -1,13 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: de.aicard.storages.MessageRepositoryTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.009 s <<< FAILURE! - in de.aicard.storages.MessageRepositoryTest
-save  Time elapsed: 0.009 s  <<< ERROR!
-org.eclipse.persistence.exceptions.PersistenceUnitLoadingException: 
-
-Exception Description: An exception was thrown while searching for persistence archives with ClassLoader: jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44
-Internal Exception: java.lang.NullPointerException
-	at de.aicard.storages.MessageRepositoryTest.beforeEach(MessageRepositoryTest.java:25)
-Caused by: java.lang.NullPointerException
-	at de.aicard.storages.MessageRepositoryTest.beforeEach(MessageRepositoryTest.java:25)
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.04 s <<< FAILURE! - in de.aicard.storages.MessageRepositoryTest
+save  Time elapsed: 0.04 s  <<< ERROR!
+javax.persistence.RollbackException: Error while committing the transaction
+	at de.aicard.storages.MessageRepositoryTest.save(MessageRepositoryTest.java:39)
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : de.aicard.domains.Social.Message.sender -> de.aicard.domains.account.Account
+	at de.aicard.storages.MessageRepositoryTest.save(MessageRepositoryTest.java:39)
+Caused by: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : de.aicard.domains.Social.Message.sender -> de.aicard.domains.account.Account
+	at de.aicard.storages.MessageRepositoryTest.save(MessageRepositoryTest.java:39)
 
