@@ -4,14 +4,11 @@ import de.aicard.domains.Social.Chat;
 import de.aicard.domains.Social.Message;
 import de.aicard.domains.account.Student;
 import de.aicard.domains.enums.Faculty;
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+
 
 
 class MessageRepositoryTest {
