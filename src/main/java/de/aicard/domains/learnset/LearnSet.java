@@ -97,10 +97,10 @@ public class LearnSet extends BaseEntity
         description = _newDescription;
         faculty = _newFaculty;
         cardList = _newCardList;
-        commentList = new ArrayList<Message>();
+        commentList = new ArrayList<>();
         owner = _newOwner;
         visibility = _visibility;
-        adminList = new ArrayList<Account>();
+        adminList = new ArrayList<>();
         evaluations = 0;
         numberOfEvaluations = 0;
     }

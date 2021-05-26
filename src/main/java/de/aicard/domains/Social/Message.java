@@ -28,7 +28,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Message extends BaseEntity
 {
 
@@ -55,7 +54,7 @@ public class Message extends BaseEntity
         message = _newMessage;
         sender = _newSender;
         time = LocalDateTime.now();
-        likedBy = new ArrayList<Account>();
+        likedBy = new ArrayList<>();
     }
 
     //Setter & getter
@@ -80,7 +79,7 @@ public class Message extends BaseEntity
         return this.likedBy;
     }
 
-    public void setLikedby (ArrayList<Account> _newLikedBy)
+    public void setLikedby (List<Account> _newLikedBy)
     {
         this.likedBy = _newLikedBy;
     }

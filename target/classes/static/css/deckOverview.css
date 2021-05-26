@@ -1,0 +1,147 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+ :root {
+    --fontColor: black;
+}
+
+html {
+    background: rgb(31, 9, 92);
+    background: linear-gradient(126deg, rgb(31, 9, 92) 0%, rgba(9, 9, 121, 1) 25%, rgb(55, 166, 189) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: var(--fontColor);
+    display: list-item;
+}
+
+body>* {
+    width: 100%;
+}
+
+a {
+    color: var(--fontColor);
+}
+
+.header *,
+.footer * {
+    color: white;
+}
+
+.header {
+    height: 60px;
+    position: relative;
+}
+
+.pageContent {
+    min-height: calc(100vh - 60px - 40px);
+}
+
+.footer {
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.header * {
+    display: inline-block;
+    height: 100%;
+    text-align: center;
+    line-height: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.header ul {
+    position: relative;
+    left: 50%;
+    transform: translate(-100%, 0);
+}
+
+.logIn {
+    float: right;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    max-width: 1300px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 30px;
+    gap: 20px;
+}
+
+.gridItem {
+    position: relative;
+    width: 250px;
+    height: 300px;
+    border-radius: 20px;
+    justify-self: center;
+    align-self: center;
+    background-color: white;
+    overflow: hidden;
+}
+
+.gridItem>* {
+    position: absolute;
+    padding: 10px;
+}
+
+.deckName {
+    top: 0px;
+    font-size: 30px;
+}
+
+.cardCount,
+.deckStatus {
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.edit,
+.learn {
+    bottom: 0px;
+    width: 50%;
+    height: 50px;
+    text-align: center;
+}
+
+.deckStatus {
+    right: 0px;
+}
+
+.edit {
+    background-color: tomato;
+}
+
+.learn {
+    right: 0px;
+    background-color: turquoise;
+}
+
+.newGridItem {
+    border: 5px solid;
+    background: none;
+    color: white;
+}
+
+.newGridItem p {
+    height: 100%;
+    width: 100%;
+    line-height: 300px;
+    text-align: center;
+    font-size: 200px;
+}

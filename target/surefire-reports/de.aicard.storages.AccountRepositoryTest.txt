@@ -1,0 +1,31 @@
+-------------------------------------------------------------------------------
+Test set: de.aicard.storages.AccountRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.42 s <<< FAILURE! - in de.aicard.storages.AccountRepositoryTest
+findAll  Time elapsed: 0.393 s  <<< ERROR!
+org.eclipse.persistence.exceptions.PersistenceUnitLoadingException: 
+
+Exception Description: An exception was thrown while searching for persistence archives with ClassLoader: jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44
+Internal Exception: java.lang.NullPointerException
+	at de.aicard.storages.AccountRepositoryTest.beforeEach(AccountRepositoryTest.java:28)
+Caused by: java.lang.NullPointerException
+	at de.aicard.storages.AccountRepositoryTest.beforeEach(AccountRepositoryTest.java:28)
+
+save  Time elapsed: 0.013 s  <<< ERROR!
+org.eclipse.persistence.exceptions.PersistenceUnitLoadingException: 
+
+Exception Description: An exception was thrown while searching for persistence archives with ClassLoader: jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44
+Internal Exception: java.lang.NullPointerException
+	at de.aicard.storages.AccountRepositoryTest.beforeEach(AccountRepositoryTest.java:28)
+Caused by: java.lang.NullPointerException
+	at de.aicard.storages.AccountRepositoryTest.beforeEach(AccountRepositoryTest.java:28)
+
+findbyName  Time elapsed: 0.013 s  <<< ERROR!
+org.eclipse.persistence.exceptions.PersistenceUnitLoadingException: 
+
+Exception Description: An exception was thrown while searching for persistence archives with ClassLoader: jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44
+Internal Exception: java.lang.NullPointerException
+	at de.aicard.storages.AccountRepositoryTest.beforeEach(AccountRepositoryTest.java:28)
+Caused by: java.lang.NullPointerException
+	at de.aicard.storages.AccountRepositoryTest.beforeEach(AccountRepositoryTest.java:28)
+

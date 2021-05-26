@@ -17,16 +17,17 @@ public class MessageRepository extends BaseRepository<Message> {
         super(H2Controller.getManager().getEntityManager(), Message.class);
     }
 
-    public Optional<List<Message>> findBy(String sender){
+    public Optional<Message> findBy(String sender){
         TypedQuery<Message> query =  entityManager.createQuery("SELECT message FROM " + Message.class.getCanonicalName() +
-                " message WHERE message.sender.getName() = :name" ,Message.class);
+                " message WHERE message.sender.getName() = '" + sender + "'" ,Message.class);
 
-        query.setParameter("name",sender);
+        //query.setParameter("name", sender);
+
 
         List<Message> loaded = query.getResultList();
         if(loaded.isEmpty()){
             return Optional.empty();
         }
-        return Optional.of(loaded);
+        return Optional.of(loaded.get(0));
     }
 }

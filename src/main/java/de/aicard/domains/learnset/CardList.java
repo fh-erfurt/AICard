@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 @Setter
 @AllArgsConstructor
 @Entity
-
 public class CardList extends BaseEntity
 {
     // CLASS VARIABLES
@@ -58,6 +57,7 @@ public class CardList extends BaseEntity
     }
     
     // GETTER + SETTER
+
     public List<Card> getListOfCards() throws NullPointerException
     {
         if(this.listOfCards == null)

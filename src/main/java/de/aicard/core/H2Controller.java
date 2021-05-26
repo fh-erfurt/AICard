@@ -19,7 +19,7 @@ public class H2Controller {
 
     public static H2Controller getManager() {
         if (Objects.isNull(instance)){
-            instance = new H2Controller(Persistence.createEntityManagerFactory("de.aicard.jpa"));
+             instance = new H2Controller(Persistence.createEntityManagerFactory("de.aicard.jpa"));
         }
         return instance;
     }

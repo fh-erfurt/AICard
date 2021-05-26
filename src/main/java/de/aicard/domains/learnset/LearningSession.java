@@ -47,7 +47,7 @@ public class LearningSession extends BaseEntity
      *
      * @param _cardStatusList The List for the LearningSession.
      */
-    public LearningSession(ArrayList<CardStatus> _cardStatusList)
+    public LearningSession(List<CardStatus> _cardStatusList)
     {
         this.cardStatusList = _cardStatusList;
         this.currentCard = 0;

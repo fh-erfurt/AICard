@@ -16,17 +16,17 @@ public class ChatRepository extends BaseRepository<Chat>{
         super(H2Controller.getManager().getEntityManager(), Chat.class);
     }
 
-    public Optional<List<Chat>> findBy(String participant)
+    public Optional<Chat> findBy(String participant)
     {
         TypedQuery<Chat> query =  entityManager.createQuery("SELECT chat FROM " + Chat.class.getCanonicalName() +
-                " chat WHERE chat.chatHasParticipant(:participant) = true ",Chat.class);
+                " chat WHERE chat.chatHasParticipant( " + participant + " )= true ", Chat.class);
 
-        query.setParameter("participant",participant);
+        //query.setParameter("participant",participant);
 
         List<Chat> loaded = query.getResultList();
         if(loaded.isEmpty()){
             return Optional.empty();
         }
-        return Optional.of(loaded);
+        return Optional.of(loaded.get(0));
     }
 }
