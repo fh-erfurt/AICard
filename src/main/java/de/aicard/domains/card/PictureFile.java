@@ -1,9 +1,12 @@
 package de.aicard.domains.card;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 /**
@@ -14,8 +17,11 @@ import javax.persistence.Entity;
  * @author Martin Kuehlborn
  */
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@DiscriminatorValue( value = "picturefile")
 public class PictureFile extends CardContent
 {
 
