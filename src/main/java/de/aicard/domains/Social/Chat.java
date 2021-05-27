@@ -9,6 +9,7 @@ import lombok.Setter;
 
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class Chat extends BaseEntity
 {
     @OneToMany
     private List<Message> chatHistory;
-    @OneToMany
+    @ManyToMany
     private List<Account> participants ;
 
 
