@@ -25,7 +25,7 @@ public class PersistenceConfiguration {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:aicard;DB_CLOSE_DELAY=-1");
+        dataSource.setUrl("jdbc:h2:file:./database/aicard;DB_CLOSE_DELAY=-1");
         dataSource.setUsername("sa");
 
         return dataSource;
@@ -47,7 +47,7 @@ public class PersistenceConfiguration {
     }
     Properties additionalProperties(){
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 
         return properties;

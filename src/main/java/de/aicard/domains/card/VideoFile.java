@@ -1,10 +1,11 @@
 package de.aicard.domains.card;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * Provides an VideoFile for side of a card that can be played and paused
@@ -15,7 +16,9 @@ import javax.persistence.Entity;
  */
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
+@Setter
+@Getter
+@DiscriminatorValue( value = "videofile")
 public class VideoFile extends CardContent
 {
     // MEMBER VARIABLES

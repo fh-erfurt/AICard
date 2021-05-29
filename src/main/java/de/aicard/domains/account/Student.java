@@ -42,5 +42,4 @@ public class Student extends Account
         this.faculty = _faculty;
     }
     
-
 }
