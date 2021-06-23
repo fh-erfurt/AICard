@@ -10,16 +10,14 @@
     --fontColor: black;
 }
 
-html {
+body {
     background: rgb(31, 9, 92);
     background: linear-gradient(126deg, rgb(31, 9, 92) 0%, rgba(9, 9, 121, 1) 25%, rgb(55, 166, 189) 100%);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     height: 100%;
     width: 100%;
-}
-
-body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
     color: var(--fontColor);
@@ -30,22 +28,37 @@ body>* {
     width: 100%;
 }
 
+.btn:hover,
+.btn:focus {
+    background: rgb(106, 119, 235);
+    transition: 0.5s;
+}
+
 a {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    width: 100%;
     color: var(--fontColor);
 }
 
 .header *,
 .footer * {
     color: white;
+    position: relative;
 }
 
 .header {
     height: 60px;
-    position: relative;
+    position: fixed;
+    top: 0;
 }
 
 .pageContent {
-    min-height: calc(100vh - 60px - 40px);
+    position: relative;
+    margin-top: 160px;
+    margin-bottom: 50px;
+    min-height: calc(100vh - 40px - 160px - 50px);
 }
 
 .footer {
@@ -61,6 +74,10 @@ a {
     line-height: 60px;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.header>* {
+    position: relative;
 }
 
 .header ul {
@@ -80,8 +97,8 @@ a {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    padding: 30px;
     gap: 20px;
+    row-gap: 100px;
 }
 
 .gridItem {
@@ -97,18 +114,19 @@ a {
 
 .gridItem>* {
     position: absolute;
-    padding: 10px;
 }
 
 .deckName {
     top: 0px;
     font-size: 30px;
+    padding: 10px;
 }
 
 .cardCount,
 .deckStatus {
     top: 50%;
     transform: translate(0, -50%);
+    padding: 10px;
 }
 
 .edit,
@@ -117,6 +135,7 @@ a {
     width: 50%;
     height: 50px;
     text-align: center;
+    line-height: 50px;
 }
 
 .deckStatus {
