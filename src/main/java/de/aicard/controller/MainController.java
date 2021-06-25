@@ -10,4 +10,10 @@ public class MainController {
         public String welcome() {
             return "index";
         }
+
+        @GetMapping("/index")
+        public String notWelcome(){
+            return "index";
+        }
+
 }

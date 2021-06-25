@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" th:href="@{/css/cardOverview.css}">-->
+    <link rel="stylesheet" th:href="@{css/registration.css}">
+    <link rel="stylesheet" th:href="@{css/general.css}">
+</head>
+
+<body>
+
+<!--<select id="academicGrade">
+    <option th:each="academicGrade : ${errorModel}"
+            th:text="${academicGrade}">
+    </option>
+</select>-->
+
+
+<div class="header">
+    <label class="logo"><a href="">aiCard</a></label>
+    <ul>
+        <!-- NavBar -->
+        <li>
+            <a href="">Home</a>
+        </li>
+        <li>
+            <a href="">Decks</a>
+        </li>
+        <li>
+            <a href="">Profil</a>
+        </li>
+    </ul>
+    <label class="logIn"><a href="">Log-In</a></label>
+</div>
+<div class="pageContent">
+    <div class="registration">
+        <form method="POST" id="loginform" th:action="@{/accountLogin}" th:object="${account}">
+            <p class="head">Anmeldung</p>
+            <input th:field="*{email} "type="email" value="" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="inputtext content-align-mid">
+            <input th:field="*{password}" type="password" id="password" name="password" placeholder="Passwort" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passwort'" class="inputtext content-align-mid">
+            <input type="submit" name="submit" id="loginbutton" value="anmelden" class="button content-align-mid">
+        </form>
+        <p class="registrationLink">
+            <a href="registration.html">registrieren</a>
+        </p>
+    </div>
+</div>
+<div class="footer"><a href="">Impressum</a></div>
+</body>
+
+</html>

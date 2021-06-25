@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+<select>
+    <option value="professor">Professor</option>
+    <option value="student">Student</option>
+</select>
+
+
+<form th:action="@{/createNewProfessor}" th:object="${newProfessor}" method="POST">
+
+    <label for="email">E-Mail</label>
+    <input th:field="*{email}" id="email" type="email" class="" >
+
+    <label for="name">Name</label>
+    <input th:field="*{name}" id="name" type="text" class="">
+
+    <label for="description">description</label>
+    <input th:field="*{description}" id="description" type="" class="">
+
+    <label for="password1">password</label>
+    <input th:field="*{password}" id="password1" type="password" class="">
+
+    <label for="password2">password</label>
+    <input id="password2" type="" class="">
+
+
+    <label for="academicGrade">academicGrade</label>
+    <select id="academicGrade" th:field="*{academicGrade}">
+        <option th:each="academicGrade : ${T(de.aicard.domains.enums.AcademicGrade).values()}"
+                th:text="${academicGrade}"
+                th:value="${academicGrade}">
+        </option>
+
+        <!--<option th:value="'UNIVERSITY_PROFESSOR'" >UNIVERSITY_PROFESSOR</option>
+        <option th:value="'UNIVERSITY_LECTURER'" >UNIVERSITY_LECTURER</option>
+        <option th:value="'JUNIOR_PROFESSOR'" >JUNIOR_PROFESSOR</option>
+        <option th:value="'JUNIOR_LECTURER'" >JUNIOR_LECTURER</option>
+        <option th:value="'ACADEMIC_COUNCIL'" >ACADEMIC_COUNCIL</option>
+        <option th:value="'SCIENTIFIC_ASSISTANT'" >SCIENTIFIC_ASSISTANT</option>
+        <option th:value="'RESEARCH_ASSISTANT'" >RESEARCH_ASSISTANT</option>
+        <option th:value="'STUDENT_ASSISTANT'" >STUDENT_ASSISTANT</option>-->
+    </select>
+
+    <input type="submit">
+</form>
+
+Hier müssen sie sich Anmelden
+</body>
+</html>

@@ -8,9 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
+import java.util.Spliterator;
 
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Optional<Account> findByName(String name);
+    Optional<Account> findByEmail(String email);
+
 }
