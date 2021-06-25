@@ -1,4 +1,6 @@
 
+target/
+
 # Database file from H2
 *.db
 

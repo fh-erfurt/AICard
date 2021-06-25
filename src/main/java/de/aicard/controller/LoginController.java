@@ -45,7 +45,7 @@ public class LoginController {
     @PostMapping("createNewProfessor")
     public String createNewProfessor(@ModelAttribute("newProfessor") Professor newProfessor, Model model) throws NoSuchAlgorithmException
     {
-        ErrorModel errorModel = new ErrorModel();
+       // ErrorModel errorModel = new ErrorModel();
         List<String> errors = new ArrayList<>();
 
         Pattern pattern = Pattern.compile(patternReg);
@@ -70,16 +70,17 @@ public class LoginController {
             return "redirect:index";
         } else {
             if (!matcher.matches()) {
-                errorModel.getErrorMessages().add("Passwort entspricht nicht den Passwortrichtlinien");
+                errors.add("Passwort entspricht nicht den Passwortrichtlinien");
                 System.out.println("password not matched");
             }
             if (!matchingEntries.isEmpty()) {
                 //TODO: DAS GEHT SO ABER NICHT! DOCH!
-                errorModel.getErrorMessages().add("Ein Account mit diser E-Mail Adresse existiert bereits");
+                errors.add("Ein Account mit diser E-Mail Adresse existiert bereits");
                 System.out.println("entry exists");
             }
             errors.add("Anmeldung Fehlgeschlagen");
-
+            
+            model.addAttribute("errorList",errors);
 
             return "signUp";
         }
