@@ -1,10 +1,8 @@
 package de.aicard.controller;
 
-import com.fasterxml.jackson.databind.deser.DataFormatReaders;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.account.Professor;
 import de.aicard.domains.account.Student;
-import de.aicard.error.ErrorModel;
 import de.aicard.storages.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import javax.servlet.http.HttpSession;
-import javax.swing.text.html.Option;
 import javax.xml.bind.DatatypeConverter;
 import java.util.List;
 import java.util.Optional;
