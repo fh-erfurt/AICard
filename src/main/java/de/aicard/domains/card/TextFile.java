@@ -21,7 +21,7 @@ public class TextFile extends CardContent
 {
     // MEMBER VARIABLES
     @Column
-    private String testData;
+    private String textData;
 
 
     // CONSTRUCTORS
@@ -32,22 +32,22 @@ public class TextFile extends CardContent
     
     public TextFile(String _newTextData)
     {
-        this.testData = _newTextData;
+        this.textData = _newTextData;
     }
     
     // GETTER + SETTER
     public String getTextData() throws NullPointerException
     {
-        if(this.testData == null)
+        if(this.textData == null)
         {
             throw new NullPointerException("TextData was not set.");
         }
         
-        return this.testData;
+        return this.textData;
     }
     
     public void setTextData(String _newTextData)
     {
-        this.testData = _newTextData;
+        this.textData = _newTextData;
     }
 }
