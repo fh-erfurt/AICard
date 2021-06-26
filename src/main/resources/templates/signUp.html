@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<table th:if="${#lists.isEmpty(errorList)}">
+<table th:if="${!#lists.isEmpty(errorList)}">
     <tbody>
         <tr th:each="error : ${errorList}">
             <td><span th:text="${error}"> Title </span></td>
