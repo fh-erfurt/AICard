@@ -7,39 +7,35 @@
 </head>
 <body>
 
-<table>
-    <thead>
-    <tr>
-        <th> TextFileID </th>
-        <th> Content </th>
-    </tr>
-    </thead>
+<table th:if="${#lists.isEmpty(errorList)}">
     <tbody>
-    <tr th:if="${#lists.isEmpty(errorList)}">
-        <td colspan="2"> No TextFiles Available </td>
-    </tr>
-    <tr th:each="error : ${errorList}">
-        <td><span th:text="${error}"> Title </span></td>
-    </tr>
+        <tr th:each="error : ${errorList}">
+            <td><span th:text="${error}"> Title </span></td>
+        </tr>
     </tbody>
 </table>
 
-<form th:action="@{/createNewProfessor}" th:object="${newProfessor}" method="POST">
+<form id="signUp-professor" th:action="@{/createNewProfessor}" th:object="${newProfessor}" method="POST">
 
-    <label for="email">E-Mail</label>
-    <input th:field="*{email}" id="email" type="email" class="" >
+    <label for="emailProfessor">E-Mail</label>
+    <input th:field="*{email}" id="emailProfessor" type="email" class="" >
+    <br>
 
-    <label for="name">Name</label>
-    <input th:field="*{name}" id="name" type="text" class="">
+    <label for="nameProfessor">Name</label>
+    <input th:field="*{name}" id="nameProfessor" type="text" class="">
+    <br>
 
-    <label for="description">description</label>
-    <input th:field="*{description}" id="description" type="" class="">
+    <label for="descriptionProfessor">description</label>
+    <input th:field="*{description}" id="descriptionProfessor" type="" class="">
+    <br>
 
-    <label for="password1">password</label>
-    <input th:field="*{password}" id="password1" type="password" class="">
+    <label for="passwordProfessor1">password</label>
+    <input th:field="*{password}" id="passwordProfessor1" type="password" class="">
+    <br>
 
-    <label for="password2">password</label>
-    <input id="password2" type="" class="">
+    <label for="passwordProfessor2">password</label>
+    <input id="passwordProfessor2" type="" class="">
+    <br>
 
 
     <label for="academicGrade">academicGrade</label>
@@ -58,10 +54,65 @@
         <option th:value="'RESEARCH_ASSISTANT'" >RESEARCH_ASSISTANT</option>
         <option th:value="'STUDENT_ASSISTANT'" >STUDENT_ASSISTANT</option>-->
     </select>
+    <br>
 
     <input type="submit">
 </form>
 
-Hier müssen sie sich Anmelden
+<br>
+<hr>
+<br>
+<hr>
+<br>
+<hr>
+
+<form id="signUp-student" th:action="@{/createNewStudent}" th:object="${newStudent}" method="POST">
+
+    <label for="email">E-Mail</label>
+    <input th:field="*{email}" id="email" type="email" class="" >
+    <br>
+
+    <label for="name">Name</label>
+    <input th:field="*{name}" id="name" type="text" class="">
+    <br>
+
+    <label for="description">description</label>
+    <input th:field="*{description}" id="description" type="text" class="">
+    <br>
+
+    <label for="semester">Semester</label>
+    <input th:field="*{semester}" id="semester" type="number" class="">
+    <br>
+
+    <label for="passwordStudent1">password</label>
+    <input th:field="*{password}" id="passwordStudent1" type="password" class="">
+    <br>
+
+    <label for="passwordStudent2">password</label>
+    <input id="passwordStudent2" type="password" class="">
+    <br>
+
+
+    <label for="faculty">Faculty</label>
+    <select id="faculty" th:field="*{faculty}">
+        <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
+                th:text="${faculty}"
+                th:value="${faculty}">
+        </option>
+
+        <!--<option th:value="'UNIVERSITY_PROFESSOR'" >UNIVERSITY_PROFESSOR</option>
+        <option th:value="'UNIVERSITY_LECTURER'" >UNIVERSITY_LECTURER</option>
+        <option th:value="'JUNIOR_PROFESSOR'" >JUNIOR_PROFESSOR</option>
+        <option th:value="'JUNIOR_LECTURER'" >JUNIOR_LECTURER</option>
+        <option th:value="'ACADEMIC_COUNCIL'" >ACADEMIC_COUNCIL</option>
+        <option th:value="'SCIENTIFIC_ASSISTANT'" >SCIENTIFIC_ASSISTANT</option>
+        <option th:value="'RESEARCH_ASSISTANT'" >RESEARCH_ASSISTANT</option>
+        <option th:value="'STUDENT_ASSISTANT'" >STUDENT_ASSISTANT</option>-->
+    </select>
+    <br>
+
+    <input type="submit">
+</form>
+
 </body>
 </html>

@@ -33,12 +33,13 @@ public class LoginController {
     public String signUp(Model model) {
 
         model.addAttribute("newProfessor", new Professor());
+        model.addAttribute("newStudent", new Student());
 
         return "signUp";
     }
 
     @PostMapping("createNewProfessor")
-    public String createNewProfessor(@ModelAttribute("newProfessor") Professor newProfessor, Model model) throws NoSuchAlgorithmException
+    public String createNewProfessor(@ModelAttribute("newProfessor") Professor newProfessor,@ModelAttribute("newStudent") Student newStudent, Model model) throws NoSuchAlgorithmException
     {
        // ErrorModel errorModel = new ErrorModel();
         List<String> errors = new ArrayList<>();
@@ -83,25 +84,46 @@ public class LoginController {
 
 
     @PostMapping("createNewStudent")
-    public String createNewStudent(@ModelAttribute("newStudent") Student newStudent, Model model) {
-        Pattern pattern = Pattern.compile(patternReg, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(newStudent.getPassword());
-        String studentPassword = newStudent.getPassword();
-        String studentMail = newStudent.getEmail();
-        Optional<Account> matchingEntries = accountRepository.findByEmail(studentMail);
+    public String createNewStudent(@ModelAttribute("newProfessor") Professor newProfessor,@ModelAttribute("newStudent") Student newStudent, Model model) throws NoSuchAlgorithmException
+    {
+        // List to return prossible entry errors to user
+        List<String> errors = new ArrayList<>();
+    
+        Pattern pattern = Pattern.compile(patternReg);
+        String password = newStudent.getPassword();
+        Matcher matcher = pattern.matcher(password);
+        String studentEmail = newStudent.getEmail();
+        Optional<Account> matchingEntries = accountRepository.findByEmail(studentEmail);
+    
+        //creating md5 hash
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(password.getBytes());
+        byte[] digest = md.digest();
+        String hashedPassword = DatatypeConverter.printHexBinary(digest);
+        newStudent.setPassword(hashedPassword);
+        System.out.println(newStudent.getPassword());
+        System.out.println(matchingEntries.isEmpty());
+        System.out.println(matcher.matches());
+        //end hashing
+    
         if (matchingEntries.isEmpty() && matcher.matches()) {
             accountRepository.save(newStudent);
             return "redirect:index";
         } else {
-            if (!matcher.find()) {
-                model.addAttribute("invalidPassword", "Passwort entspricht nicht den Passwortrichtlinien");
+            if (!matcher.matches()) {
+                errors.add("Passwort entspricht nicht den Passwortrichtlinien");
+                System.out.println("password not matched");
             }
             if (!matchingEntries.isEmpty()) {
                 //TODO: DAS GEHT SO ABER NICHT! DOCH!
-                model.addAttribute("accountAllreadyExists", "Ein Account mit diser E-Mail Adresse existiert bereits");
+                errors.add("Ein Account mit diser E-Mail Adresse existiert bereits");
+                System.out.println("entry exists");
             }
-            model.addAttribute("signupError", "Anmeldung Fehlgeschlagen");
-            return "redirect:signUp";
+            errors.add("Anmeldung Fehlgeschlagen");
+        
+            model.addAttribute("errorList",errors);
+        
+            return "signUp";
         }
     }
 
