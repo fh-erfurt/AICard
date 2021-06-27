@@ -7,9 +7,7 @@ import de.aicard.storages.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -37,7 +35,29 @@ public class LoginController {
 
         return "signUp";
     }
-
+    
+    
+//    // http://localhost:8080/signUp/data@Test.sql
+//    // request works if data.sql is uncommented
+//    @GetMapping("/signUp/{email}")
+//    public String signUpEmailTest(@PathVariable("email") String email, Model model)
+//    {
+//        List<String> errors = new ArrayList<>();
+//        Optional<Account> user = accountRepository.findByEmail(email);
+//        if(!user.isEmpty())
+//        {
+//            errors.add(user.get().getEmail());
+//            errors.add(user.get().getName());
+//            errors.add(user.get().getPassword());
+//        }
+//
+//        model.addAttribute("errorList",errors);
+//        model.addAttribute("newProfessor", new Professor());
+//        model.addAttribute("newStudent", new Student());
+//
+//        return "signUp";
+//    }
+    
     @PostMapping("createNewProfessor")
     public String createNewProfessor(@ModelAttribute("newProfessor") Professor newProfessor,@ModelAttribute("newStudent") Student newStudent, Model model) throws NoSuchAlgorithmException
     {
