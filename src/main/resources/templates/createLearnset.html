@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  <h1>Create Learnset</h1>
+  <br>
+
+  <form id="createLearnset" th:action="@{/createLearnset}" th:object="${newLearnset}" method="POST">
+
+    <label for="learnsetTitle">Titel</label>
+    <input th:field="*{title}" id="learnsetTitle" type="text" class="" >
+    <br>
+
+    <label for="learnsetDescription">Beschreibung</label>
+    <textarea th:field="*{description}"name="learnsetDescription" id="learnsetDescription" cols="30" rows="10"></textarea>
+    <br>
+
+
+    <label for="learnsetFaculty">Fakultät</label>
+    <select id="learnsetFaculty" th:field="*{faculty}">
+        <option th:each="facu : ${T(de.aicard.domains.enums.Faculty).values()}"
+                th:text="${facu}"
+                th:value="${facu}">
+        </option>
+    </select>
+    <br>
+
+    <label for="learnsetVisibility">Sichtbarkeit</label>
+    <select id="learnsetVisibility" th:field="*{visibility}">
+        <option th:each="visi : ${T(de.aicard.domains.enums.Visibility).values()}"
+                th:text="${visi}"
+                th:value="${visi}">
+        </option>
+    </select>
+    <br>
+    
+<!-- TODO: not sure about this one yet -->
+    <!-- <label for="learnsetAdmins">Administratoren</label>
+    <input th:field="*{ad}" id="leansetTitle" type="text" class="" >
+    <th:block th:each="admin : ${admin}">
+      <input type="checkbox" name="learnsetAdmins" th:value="${admin}"/>
+       <label th:text="${}"></label>
+     </th:block> -->
+
+    <input type="submit">
+</form>
+
+
+</body>
+</html>
