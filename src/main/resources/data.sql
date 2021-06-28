@@ -1,1 +1,2 @@
---insert into account (id, type ,description, email, name, password, academicgrade) VALUES (1,'professor', 'data.sqlTEST', 'data@Test.sql', 'TestName', 'DATASQLTESTpw', 0);
+--insert into account (id, type ,description, email, name, --password, ACADEMICGRADE) VALUES (1,'professor', 'data.sqlTEST', 'data@Test.sql', 'TestName', 'DATASQLTESTpw', 0);
+;
