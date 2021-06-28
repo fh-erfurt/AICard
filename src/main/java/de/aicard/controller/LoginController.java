@@ -1,5 +1,6 @@
 package de.aicard.controller;
 
+import de.aicard.config.Session;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.account.Professor;
 import de.aicard.domains.account.Student;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,6 +17,9 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 import java.util.List;
 import java.util.Optional;
@@ -148,16 +153,19 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String login(Model model)
+    public String login(Model model, HttpServletRequest request,HttpServletResponse response)
     {
-//ihr könnt natürlich weitermachen // TODO: nein! // <-- dreist
+        //delete the session
+        Cookie[] cookies = request.getCookies();
+        response.addCookie(Session.delSession(cookies));
+        //end of deleting
         model.addAttribute("account", new Professor());
 
         return "login";
     }
 
     @PostMapping("/accountLogin")
-    public String accountLogin(@ModelAttribute("account") Professor account, Model model) throws NoSuchAlgorithmException {
+    public String accountLogin(@ModelAttribute("account") Professor account,HttpServletResponse response, Model model) throws NoSuchAlgorithmException {
         Optional<Account> accountFromDB = accountRepository.findByEmail(account.getEmail());
         System.out.println(account.getPassword());
         if(accountFromDB.isEmpty())
@@ -179,6 +187,10 @@ public class LoginController {
 
         if (accountFromDB.get().getPassword().equals(hashedPassword))
         {
+            //set a session
+            Session newSession = new Session(String.valueOf(accountFromDB.get().getId()));
+            Cookie session = newSession.setSession();
+            response.addCookie(session);
             // anmeldung bestätigen
             // Session Token speichern
             // gibts das oder einfach cookie? sicherlich...
@@ -190,5 +202,9 @@ public class LoginController {
         return "login";
 
     }
+
+
+
+
 
 }
