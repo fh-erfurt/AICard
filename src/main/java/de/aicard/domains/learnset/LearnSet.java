@@ -106,78 +106,78 @@ public class LearnSet extends BaseEntity
     }
     
     // GETTER + SETTER
-    public String getTitle() throws NullPointerException
-    {
-        if(title == null)
-        {
-            throw new NullPointerException("LearnSet Title was not set.");
-        }
-        return this.title;
-    }
-    
-    public String getDescription() throws NullPointerException
-    {
-        if(description == null)
-        {
-            throw new NullPointerException("LearnSet Description was not set.");
-        }
-        return this.description;
-    }
-    
-    public Faculty getFaculty() throws NullPointerException
-    {
-        if (faculty == null)
-        {
-            throw new NullPointerException("LearnSet Faculty was not set.");
-        }
-        return this.faculty;
-    }
-    
-    public CardList getCardList() throws NullPointerException
-    {
-        if(cardList == null)
-        {
-            throw new NullPointerException("LearnSet CardList was not set.");
-        }
-        return this.cardList;
-    }
-    
-    public List<Message> getCommentList() throws NullPointerException
-    {
-        if(commentList == null)
-        {
-            throw new NullPointerException("LearnSet CommentList was not set.");
-        }
-        return this.commentList;
-    }
-    
-    public Account getOwner() throws NullPointerException
-    {
-        if(owner == null)
-        {
-            throw new NullPointerException("LearnSet Owner was not set.");
-        }
-        return this.owner;
-    }
-    
-    public Visibility getVisibility() throws NullPointerException
-    {
-        if(visibility == null)
-        {
-            throw new NullPointerException("LearnSet Visibility was not set.");
-        }
-        return this.visibility;
-    }
-    
-    public List<Account> getAdmins() throws NullPointerException
-    {
-        if(adminList == null)
-        {
-            throw new NullPointerException("LearnSet AdminList was not set.");
-        }
-        return this.adminList;
-    }
-    
+//    public String getTitle() throws NullPointerException
+//    {
+//        if(title == null)
+//        {
+//            throw new NullPointerException("LearnSet Title was not set.");
+//        }
+//        return this.title;
+//    }
+//
+//    public String getDescription() throws NullPointerException
+//    {
+//        if(description == null)
+//        {
+//            throw new NullPointerException("LearnSet Description was not set.");
+//        }
+//        return this.description;
+//    }
+//
+//    public Faculty getFaculty() throws NullPointerException
+//    {
+//        if (faculty == null)
+//        {
+//            throw new NullPointerException("LearnSet Faculty was not set.");
+//        }
+//        return this.faculty;
+//    }
+//
+//    public CardList getCardList() throws NullPointerException
+//    {
+//        if(cardList == null)
+//        {
+//            throw new NullPointerException("LearnSet CardList was not set.");
+//        }
+//        return this.cardList;
+//    }
+//
+//    public List<Message> getCommentList() throws NullPointerException
+//    {
+//        if(commentList == null)
+//        {
+//            throw new NullPointerException("LearnSet CommentList was not set.");
+//        }
+//        return this.commentList;
+//    }
+//
+//    public Account getOwner() throws NullPointerException
+//    {
+//        if(owner == null)
+//        {
+//            throw new NullPointerException("LearnSet Owner was not set.");
+//        }
+//        return this.owner;
+//    }
+//
+//    public Visibility getVisibility() throws NullPointerException
+//    {
+//        if(visibility == null)
+//        {
+//            throw new NullPointerException("LearnSet Visibility was not set.");
+//        }
+//        return this.visibility;
+//    }
+//
+//    public List<Account> getAdmins() throws NullPointerException
+//    {
+//        if(adminList == null)
+//        {
+//            throw new NullPointerException("LearnSet AdminList was not set.");
+//        }
+//        return this.adminList;
+//    }
+//
     // METHODS
     
     public void createCardList()

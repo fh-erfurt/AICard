@@ -107,31 +107,31 @@ public class LearnSetTest
         learnSet.addAdmin(myOwnerStudent);
 
         //then: those accounts are in exactly this order in the admin array of the learnset
-        Assertions.assertEquals(professor, learnSet.getAdmins().get(0));
-        Assertions.assertEquals(student, learnSet.getAdmins().get(1));
-        Assertions.assertEquals(myOwnerStudent, learnSet.getAdmins().get(2));
+        Assertions.assertEquals(professor, learnSet.getAdminList().get(0));
+        Assertions.assertEquals(student, learnSet.getAdminList().get(1));
+        Assertions.assertEquals(myOwnerStudent, learnSet.getAdminList().get(2));
 
         //when: trying to add one of those accounts again as admin
         learnSet.addAdmin(professor);
         //then: it is not added
-        Assertions.assertEquals(3, learnSet.getAdmins().size());
+        Assertions.assertEquals(3, learnSet.getAdminList().size());
 
         //when: removing the first admin account (professor) by index
         learnSet.removeAdmin(0);
         //then: the other two admins and only those remain in the adminList
-        Assertions.assertEquals(student, learnSet.getAdmins().get(0));
-        Assertions.assertEquals(myOwnerStudent, learnSet.getAdmins().get(1));
+        Assertions.assertEquals(student, learnSet.getAdminList().get(0));
+        Assertions.assertEquals(myOwnerStudent, learnSet.getAdminList().get(1));
 
         //when: removing student as admin
         learnSet.removeAdmin(student);
         //then: only myOwnerStudent remains in the adminList
-        Assertions.assertEquals(1, learnSet.getAdmins().size());
-        Assertions.assertEquals(myOwnerStudent, learnSet.getAdmins().get(0));
+        Assertions.assertEquals(1, learnSet.getAdminList().size());
+        Assertions.assertEquals(myOwnerStudent, learnSet.getAdminList().get(0));
 
         //when: removing the last account as admin
         learnSet.removeAdmin(myOwnerStudent);
         //then: the AdminList is Empty
-        Assertions.assertEquals(true, learnSet.getAdmins().isEmpty());
+        Assertions.assertEquals(true, learnSet.getAdminList().isEmpty());
 
     }
     
