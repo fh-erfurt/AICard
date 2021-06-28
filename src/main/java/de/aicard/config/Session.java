@@ -36,4 +36,18 @@ public class Session {
             }
         return null;
     }
+    
+    public static String getCookieContent(Cookie cookies[], String cookieName)
+    {
+        if (cookies != null)
+            for (Cookie cookie : cookies)
+            {
+                if (cookie.getName().equals(cookieName))
+                {
+                    System.out.println(cookie.getValue());
+                    return cookie.getValue();
+                }
+            }
+        return "No Cookies found";
+    }
 }
