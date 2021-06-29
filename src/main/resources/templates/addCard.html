@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<form method="POST" id="addCardForm" th:action="@{/addCard}">
+
+  <label for="cardFront">E-Mail</label>
+  <input id="cardFront" name="cardFrontText"  type="text" class="" >
+  <br>
+
+  <label for="cardBack">E-Mail</label>
+  <input name="cardBackText" id="cardBack" type="text" class="" >
+  <br>
+
+  <button>Submit</button>
+</form>
+
+</body>
+</html>

@@ -1,21 +1,25 @@
 package de.aicard.controller;
 
+import de.aicard.config.Session;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.account.Student;
+import de.aicard.domains.card.Card;
+import de.aicard.domains.card.TextFile;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.storages.AccountRepository;
+import de.aicard.storages.CardRepository;
 import de.aicard.storages.LearnSetRepository;
-import jdk.dynalink.linker.LinkerServices;
+
+
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static de.aicard.config.Session.delSession;
 import static de.aicard.config.Session.getCookieContent;
 
 @Controller
@@ -33,6 +38,9 @@ public class LearnSetController
     
     @Autowired
     AccountRepository accountRepository;
+    
+    @Autowired
+    CardRepository cardRepository;
     
     
     
@@ -50,7 +58,7 @@ public class LearnSetController
     public String postCreateLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, HttpServletRequest request, HttpServletResponse response)
     {
         //TODO: get id from Cookie, save Learnset with user as Owner and Owner as first person in adminList
-        String accountID = getCookieContent(request.getCookies(), "javaSession");
+        String accountID = getCookieContent(request.getCookies());
         List<Account> accountList = accountRepository.findAllById(Long.parseLong(accountID));
         if(accountList.size() == 1)
         {
@@ -70,7 +78,7 @@ public class LearnSetController
     @GetMapping("/exampleCardOverview")
     public String getExampleCardOverview(Model model ,HttpServletRequest request,HttpServletResponse response)
     {
-        String accountID = getCookieContent(request.getCookies(), "javaSession");
+        String accountID = getCookieContent(request.getCookies());
         List<Account> accountList = accountRepository.findAllById(Long.parseLong(accountID));
         if(accountList.size() == 1)
         {
@@ -99,8 +107,10 @@ public class LearnSetController
     public String getCardOverview(@PathVariable Long id,HttpServletRequest request,HttpServletResponse response, Model model)
     {
         Optional<LearnSet> learnSet =  learnSetRepository.findById(id);
-        String cookieValue = getCookieContent(request.getCookies(), "javaSession");
+        String cookieValue = getCookieContent(request.getCookies());
         List<Account> accounts = accountRepository.findAllById(Long.parseLong(cookieValue));
+        //System.out.println("account Faculty " + accounts.get(0).getFaculty());
+        //System.out.println("Set Faculty " + learnSet.get().getFaculty());
         
         if(learnSet.get().getVisibility() == Visibility.PUBLIC ||
                 learnSet.get().getVisibility() == Visibility.PRIVATE &&
@@ -109,6 +119,10 @@ public class LearnSetController
                                     accounts.get(0).getFaculty() == learnSet.get().getFaculty())
         {
             model.addAttribute("learnSet", learnSetRepository.findById(id));
+            
+            // get Card Models
+            //cardRepository.findAllByLearnsetId();
+            
             System.out.println(learnSetRepository.findById(id).get().getTitle());
             
             return "cardOverview";
@@ -117,10 +131,30 @@ public class LearnSetController
         {
             return "redirect:/index";
         }
+    }
+    
+    
+    @PostMapping("/addCard")
+    public String postAddCard(HttpServletRequest request, @RequestParam("cardFrontText") String cardFrontText, @RequestParam("cardBackText") String cardBackText)
+    {
+        // need information about which LearnSet has to be edited
+        String cookieContent =  getCookieContent(request.getCookies());
         
+        System.out.println("Card Front Text : " + cardFrontText);
+        System.out.println("Card Back Text : " + cardBackText);
+        
+        return "redirect:index";
     }
     
 
+    @GetMapping("/addCard")
+    public String getAddCard(Model model)
+    {
+        // we currently only support TextFiles, other Files will be implemented later
+        model.addAttribute("newCard", new Card(new TextFile(), new TextFile()));
+        
+        return "addCard";
+    }
     
     
 }

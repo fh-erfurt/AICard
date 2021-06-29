@@ -37,7 +37,7 @@ public class Session {
         return null;
     }
     
-    public static String getCookieContent(Cookie cookies[], String cookieName)
+    public static String getCookieContent(Cookie cookies[])
     {
         if (cookies != null)
             for (Cookie cookie : cookies)
