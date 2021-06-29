@@ -29,7 +29,7 @@ public class Session {
         if (cookies != null)
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("javaSession")) {
-                    System.out.println(cookie.getValue());
+//                    System.out.println(cookie.getValue());
                     cookie.setMaxAge(0);
                     return cookie;
                 }
@@ -44,7 +44,7 @@ public class Session {
             {
                 if (cookie.getName().equals(cookieName))
                 {
-                    System.out.println(cookie.getValue());
+//                    System.out.println(cookie.getValue());
                     return cookie.getValue();
                 }
             }

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/css/deckOverview.css">
+    <link rel="stylesheet" th:href="@{css/deckOverview.css}">
 </head>
 
 <body>
@@ -24,16 +25,44 @@
         <label class="logIn"><a href="">Log-In</a></label>
     </div>
     <div class="pageContent">
+
+        <p style="color:white">Meine LearnSets</p>
+        <div   class="gridContainer">
+            <!-- display:grid 3 Spalten -->
+
+            <div class="gridItem newGridItem">
+                <a th:href="@{/createLearnset}">
+                    <p>+</p>
+                </a>
+            </div>
+
+            <!-- weitere gridItmes werden dynamisch geladen -->
+            <div th:each="adminLearnSets : ${learnSetListAdmin}"  class="gridItem">
+                <div th:text="${adminLearnSets.title}" class="deckName"></div>
+                <div th:text="${adminLearnSets.getCardList().getListLength()}" class="cardCount">count: </div>
+<!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
+                <div class="btn edit">
+                    <a href="">edit</a>
+                </div>
+                <div class="btn learn">
+                    <a href="">learn</a>
+                </div>
+            </div>
+
+        </div>
+
+
+<!--        Folowed LearnSets-->
+        <p style="color:white">followed LearnSets</p>
         <div class="gridContainer">
             <!-- display:grid 3 Spalten -->
-            <div class="gridItem newGridItem">
-                <p>+</p>
-            </div>
+
+
             <!-- weitere gridItmes werden dynamisch geladen -->
-            <div class="gridItem">
-                <div class="deckName">deck0</div>
-                <div class="cardCount">count:20</div>
-                <div class="deckStatus">status: learning</div>
+            <div th:each="followedLearnSet : ${learnSetListFollowed}"  class="gridItem">
+                <div th:text="${followedLearnSet.title}" class="deckName"></div>
+                <div th:text="${followedLearnSet.getCardList().getListLength()}" class="cardCount">count: </div>
+                <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
                 <div class="btn edit">
                     <a href="">edit</a>
                 </div>
@@ -41,51 +70,9 @@
                     <a href="">learn</a>
                 </div>
             </div>
-            <div class="gridItem">
-                <div class="deckName">deck1</div>
-                <div class="cardCount">count: 30</div>
-                <div class="deckStatus">status: learning</div>
-                <div class="btn edit">
-                    <a href="">edit</a>
-                </div>
-                <div class="btn learn">
-                    <a href="">learn</a>
-                </div>
-            </div>
-            <div class="gridItem">
-                <div class="deckName">deck2</div>
-                <div class="cardCount">count: 30</div>
-                <div class="deckStatus">status: learning</div>
-                <div class="btn edit">
-                    <a href="">edit</a>
-                </div>
-                <div class="btn learn">
-                    <a href="">learn</a>
-                </div>
-            </div>
-            <div class="gridItem">
-                <div class="deckName">deck3</div>
-                <div class="cardCount">count: 30</div>
-                <div class="deckStatus">status: learning</div>
-                <div class="btn edit">
-                    <a href="">edit</a>
-                </div>
-                <div class="btn learn">
-                    <a href="">learn</a>
-                </div>
-            </div>
-            <div class="gridItem">
-                <div class="deckName">deck4</div>
-                <div class="cardCount">count: 30</div>
-                <div class="deckStatus">status: learning</div>
-                <div class="btn edit">
-                    <a href="">edit</a>
-                </div>
-                <div class="btn learn">
-                    <a href="">learn</a>
-                </div>
-            </div>
+
         </div>
+
     </div>
     <div class="footer"><a href="">Impressum</a></div>
 </body>

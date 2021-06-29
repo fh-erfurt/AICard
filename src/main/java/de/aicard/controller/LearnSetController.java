@@ -33,8 +33,9 @@ public class LearnSetController
     AccountRepository accountRepository;
     
     
+    
     @GetMapping("/createLearnset")
-    public String signUp(Model model)
+    public String getCreateLearnset(Model model)
     {
         // check if user is logged in -> else; send to index
         
@@ -44,7 +45,7 @@ public class LearnSetController
     }
     
     @PostMapping("/createLearnset")
-    public String createLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, HttpServletRequest request, HttpServletResponse response)
+    public String postCreateLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, HttpServletRequest request, HttpServletResponse response)
     {
         //TODO: get id from Cookie, save Learnset with user as Owner and Owner as first person in adminList
         String accountID = getCookieContent(request.getCookies(), "javaSession");
@@ -61,8 +62,40 @@ public class LearnSetController
             learnSetRepository.save(newLearnset);
         }
         
-        return "index";
+        return "redirect:index";
     }
     
+    @GetMapping("/exampleCardOverview")
+    public String getExampleCardOverview(Model model ,HttpServletRequest request,HttpServletResponse response)
+    {
+        String accountID = getCookieContent(request.getCookies(), "javaSession");
+        List<Account> accountList = accountRepository.findAllById(Long.parseLong(accountID));
+        if(accountList.size() == 1)
+        {
     
+            List<LearnSet> learnSetListAdmin = learnSetRepository.findAdminLearnsets(Long.parseLong(accountID));
+            List<LearnSet> learnSetListFollowed = learnSetRepository.findFollwedLearnsets(Long.parseLong(accountID));
+            System.out.println(learnSetListAdmin.size());
+            if(learnSetListAdmin.size() >= 1 || learnSetListFollowed.size() >= 1 ){
+                for(LearnSet learnSet : learnSetListAdmin){
+                    System.out.println("Admin: "+learnSet.getTitle());
+                }
+                for(LearnSet learnSet : learnSetListFollowed){
+                    System.out.println("Followed: "+learnSet.getTitle());
+                }
+            }
+            model.addAttribute("learnSetListAdmin", learnSetListAdmin);
+            model.addAttribute("learnSetListFollowed", learnSetListFollowed);
+        }
+        
+        return "exampleCardOverview";
+    }
+
+    
+    
+    @GetMapping("cardOverview")
+    public String getCardOverview(Model model)
+    {
+        return "cardOverview";
+    }
 }

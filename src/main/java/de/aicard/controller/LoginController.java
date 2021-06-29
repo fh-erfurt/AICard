@@ -156,8 +156,8 @@ public class LoginController {
     public String login(Model model, HttpServletRequest request,HttpServletResponse response)
     {
         //delete the session
-        Cookie[] cookies = request.getCookies();
-        response.addCookie(Session.delSession(cookies));
+        //Cookie[] cookies = request.getCookies();
+        //response.addCookie(Session.delSession(cookies));
         //end of deleting
         model.addAttribute("account", new Professor());
 
