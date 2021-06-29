@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="de"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>aiCard</title>
-    <link rel="stylesheet" th:href="@{css/cardOverview.css}">
-    
-</head>
+
+<head th:replace="fragments/head :: head"></head>
+
 <body>
     <header>
         Ich bin 1 Footer
@@ -16,24 +13,23 @@
         
         <h1>Card Overview</h1>
 
-        <div class="learnset-info">
+        <div  class="learnset-info">
         
-            <div class="left-side">
+            <div th:object="${learnSet}" class="left-side">
 
-                <h2>
-                    SoftwareTechnik 2
-                </h2>
-        
+                <h2  th:text="${learnSet.get().getTitle()}"> </h2>
+
                 <h4>Beschreibung</h4>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis, dicta. Nesciunt ipsam nam, temporibus blanditiis amet eaque sed suscipit odio. Ex, et! Odit rerum non officiis sapiente porro quis laboriosam.
+                <p  th:text="${learnSet.get().getDescription()}">
                 </p>
 
-                <h4>
-                    Administratoren
-                </h4>
-                <label for="owner">Erstellt von XYZ Name</label>
-        
+                <div th:each=" admin : ${learnSet.get().getAdminList()}">
+                    <h4 th:text="${admin.getEmail()}"> </h4>
+                </div>
+
+                <p th:text="${learnSet.get().getOwner().getEmail()}">
+
+                </p>
             </div>
         
             <div class="right-side">

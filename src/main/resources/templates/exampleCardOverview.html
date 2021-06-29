@@ -2,10 +2,7 @@
 <html lang="de"
       xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{css/deckOverview.css}">
-</head>
+<head th:replace="fragments/head :: head"></head>
 
 <body>
     <div class="header">
@@ -37,12 +34,12 @@
             </div>
 
             <!-- weitere gridItmes werden dynamisch geladen -->
-            <div th:each="adminLearnSets : ${learnSetListAdmin}"  class="gridItem">
-                <div th:text="${adminLearnSets.title}" class="deckName"></div>
-                <div th:text="${adminLearnSets.getCardList().getListLength()}" class="cardCount">count: </div>
+            <div th:each="adminLearnSet : ${learnSetListAdmin}"  class="gridItem">
+                <div th:text="${adminLearnSet.title}" class="deckName"></div>
+                <div th:text="${adminLearnSet.getCardList().getListLength()}" class="cardCount">count: </div>
 <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
                 <div class="btn edit">
-                    <a href="">edit</a>
+                    <a th:href="@{'/cardOverview/' + ${adminLearnSet.getId()}}">edit</a>
                 </div>
                 <div class="btn learn">
                     <a href="">learn</a>
