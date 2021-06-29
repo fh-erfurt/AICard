@@ -97,7 +97,7 @@ public class LearnSetTest
     {
         //given: a testLearnSet and three accounts
         LearnSet learnSet = getTestLearnSet();
-        Account professor = new Professor("mail", "password", "Prof A", "Just a professor", AcademicGrade.JUNIOR_PROFESSOR);
+        Account professor = new Professor("mail", "password", "Prof A", "Just a professor", AcademicGrade.JUNIOR_PROFESSOR,Faculty.APPLIED_COMPUTER_SCIENCE);
         Account student = new Student("mail", "password", "hanz", "A productive student", 25, Faculty.ARCHITECTURE);
         Account myOwnerStudent = learnSet.getOwner();
 
@@ -141,7 +141,7 @@ public class LearnSetTest
         //given: a learnSet, 2 accounts and 3 messages
         LearnSet learnSet = getTestLearnSet();
         Student student = (Student) learnSet.getOwner();
-        Professor professor = new Professor("mail", "password", "Prof A", "Just a professor", AcademicGrade.JUNIOR_PROFESSOR);
+        Professor professor = new Professor("mail", "password", "Prof A", "Just a professor", AcademicGrade.JUNIOR_PROFESSOR,Faculty.APPLIED_COMPUTER_SCIENCE);
         Message message1 = new Message("Message 1", student);
         Message message2 = new Message("Message 2", professor);
         Message message3 = new Message("Message 3", student);

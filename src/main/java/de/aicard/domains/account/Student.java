@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class Student extends Account
 {
     private int semester;
-    private Faculty faculty;
+    
 
     public Student(String _email, String _password, String _name, String _description,int _semester,Faculty _faculty)
     {

@@ -19,7 +19,7 @@ class ChatTest
     void getChatCreator()
     {
         Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Professor prof = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR,Faculty.APPLIED_COMPUTER_SCIENCE);
         Chat chat = new Chat(prof,std,"this is a message");
         Assertions.assertEquals(chat.getChatCreator(), std);
     }
@@ -28,7 +28,7 @@ class ChatTest
     void clearHistory()
     {
         Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Professor prof = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR,Faculty.APPLIED_COMPUTER_SCIENCE);
         Chat chat = new Chat(prof,std,"this is a message1");
         chat.sendMessage("this is a message2", prof);
         chat.clearHistory();
@@ -40,7 +40,7 @@ class ChatTest
     void sendAndRemoveMessage()
     {
         Student std = new Student("Std@fh-erfurt.de","adminStd","Std","Student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
-        Professor prof = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR);
+        Professor prof = new Professor("Prof@fh-erfurt.de","adminProf","Prof","Professor", AcademicGrade.UNIVERSITY_PROFESSOR,Faculty.APPLIED_COMPUTER_SCIENCE);
 
         Chat chat = new Chat(prof,std,"this is a message1");
         chat.sendMessage("this is a message2", prof);
