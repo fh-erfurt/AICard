@@ -5,22 +5,8 @@
 <head th:replace="fragments/head :: head"></head>
 
 <body>
-    <div class="header">
-        <label class="logo"><a href="">aiCard</a></label>
-        <ul>
-            <!-- NavBar -->
-            <li>
-                <a href="">Home</a>
-            </li>
-            <li>
-                <a href="">Decks</a>
-            </li>
-            <li>
-                <a href="">Profil</a>
-            </li>
-        </ul>
-        <label class="logIn"><a href="">Log-In</a></label>
-    </div>
+    <div th:replace="fragments/header :: header"></div>
+
     <div class="pageContent">
 
         <p style="color:white">Meine LearnSets</p>

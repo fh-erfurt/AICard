@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="de"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Sign Up</title>
-</head>
+<head th:replace="fragments/head :: head"></head>
 <body>
+    <div th:replace="fragments/header :: header"></div>
+
 
 <table th:if="${!#lists.isEmpty(errorList)}">
     <tbody>

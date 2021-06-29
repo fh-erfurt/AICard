@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+<div th:fragment="header" class="header">
+    <label class="logo"><a href="">aiCard</a></label>
+    <ul>
+        <!-- NavBar -->
+        <li>
+            <a th:href="@{/index}">Home</a>
+        </li>
+        <li>
+            <a th:href="@{/exampleCardOverview}">Decks</a>
+        </li>
+        <li>
+            <a href="">Profil</a>
+        </li>
+    </ul>
+    <label class="logIn"><a th:href="@{/login}">Log-In</a></label>
+</div>
+

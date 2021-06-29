@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <!--    <link rel="stylesheet" th:href="@{/css/cardOverview.css}">-->
-    <link rel="stylesheet" th:href="@{css/registration.css}">
-    <link rel="stylesheet" th:href="@{css/general.css}">
-</head>
+<head th:replace="fragments/head :: head"></head>
 
 <body>
+    <div th:replace="fragments/header :: header"></div>
 
 <!--<select id="academicGrade">
     <option th:each="academicGrade : ${errorModel}"
