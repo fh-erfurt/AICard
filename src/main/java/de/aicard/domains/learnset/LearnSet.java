@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -46,15 +47,17 @@ public class LearnSet extends BaseEntity
      * Which Faculty is the LearnSet acquainted with
      */
     private Faculty faculty;
-    @OneToOne
+    
+    @OneToOne(cascade = CascadeType.ALL)
     private CardList cardList;
-    @OneToMany
+    
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Message> commentList;
     
     /**
      * The Account who created and owns the LearnSet
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Account owner;
     
     /**
@@ -65,7 +68,7 @@ public class LearnSet extends BaseEntity
     /**
      * List of people who can edit the learnset
      */
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Account> adminList;
     
     /**
