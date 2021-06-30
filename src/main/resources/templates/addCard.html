@@ -7,13 +7,17 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<form method="POST" id="addCardForm" th:action="@{/addCard}">
+<br>
+<br>
+<br>
 
-  <label for="cardFront">E-Mail</label>
+<form method="POST" id="addCardForm" th:action="@{'/addCard/' + ${id}}">
+
+  <label for="cardFront">Vorderseite</label>
   <input id="cardFront" name="cardFrontText"  type="text" class="" >
   <br>
 
-  <label for="cardBack">E-Mail</label>
+  <label for="cardBack">Rückseite</label>
   <input name="cardBackText" id="cardBack" type="text" class="" >
   <br>
 

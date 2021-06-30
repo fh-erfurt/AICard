@@ -35,25 +35,25 @@ public class LearnSetController
 {
     @Autowired
     LearnSetRepository learnSetRepository;
-    
+
     @Autowired
     AccountRepository accountRepository;
-    
+
     @Autowired
     CardRepository cardRepository;
-    
-    
-    
+
+
+
     @GetMapping("/createLearnset")
     public String getCreateLearnset(Model model)
     {
         // check if user is logged in -> else; send to index
-        
+
         model.addAttribute("newLearnset", new LearnSet());
-        
+
         return "createLearnset";
     }
-    
+
     @PostMapping("/createLearnset")
     public String postCreateLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, HttpServletRequest request, HttpServletResponse response)
     {
@@ -68,13 +68,13 @@ public class LearnSetController
             newLearnset.addAdmin(accountList.get(0));
             newLearnset.setCardList(new CardList());
             newLearnset.setCommentList(new ArrayList<>());
-    
+
             learnSetRepository.save(newLearnset);
         }
         
-        return "redirect:index";
+        return "redirect:cardOverview/" + newLearnset.getId();
     }
-    
+
     @GetMapping("/exampleCardOverview")
     public String getExampleCardOverview(Model model ,HttpServletRequest request,HttpServletResponse response)
     {
@@ -82,7 +82,7 @@ public class LearnSetController
         List<Account> accountList = accountRepository.findAllById(Long.parseLong(accountID));
         if(accountList.size() == 1)
         {
-    
+
             List<LearnSet> learnSetListAdmin = learnSetRepository.findAdminLearnsets(Long.parseLong(accountID));
             List<LearnSet> learnSetListFollowed = learnSetRepository.findFollwedLearnsets(Long.parseLong(accountID));
 //            System.out.println(learnSetListAdmin.size());
@@ -97,21 +97,22 @@ public class LearnSetController
             model.addAttribute("learnSetListAdmin", learnSetListAdmin);
             model.addAttribute("learnSetListFollowed", learnSetListFollowed);
         }
-        
+
         return "exampleCardOverview";
     }
 
-    
-    
+
+
     @GetMapping("cardOverview/{id}")
     public String getCardOverview(@PathVariable Long id,HttpServletRequest request,HttpServletResponse response, Model model)
     {
+        //muckt
         Optional<LearnSet> learnSet =  learnSetRepository.findById(id);
         String cookieValue = getCookieContent(request.getCookies());
         List<Account> accounts = accountRepository.findAllById(Long.parseLong(cookieValue));
         //System.out.println("account Faculty " + accounts.get(0).getFaculty());
         //System.out.println("Set Faculty " + learnSet.get().getFaculty());
-        
+
         if(learnSet.get().getVisibility() == Visibility.PUBLIC ||
                 learnSet.get().getVisibility() == Visibility.PRIVATE &&
                         learnSet.get().getAdminList().contains(accounts.get(0)) ||
@@ -119,10 +120,10 @@ public class LearnSetController
                                     accounts.get(0).getFaculty() == learnSet.get().getFaculty())
         {
             model.addAttribute("learnSet", learnSetRepository.findById(id));
-            
+            model.addAttribute("cardList", learnSet.get().getCardList().getListOfCards());
             // get Card Models
             //cardRepository.findAllByLearnsetId();
-            
+
             System.out.println(learnSetRepository.findById(id).get().getTitle());
             
             return "cardOverview";
@@ -132,29 +133,47 @@ public class LearnSetController
             return "redirect:/index";
         }
     }
-    
-    
-    @PostMapping("/addCard")
-    public String postAddCard(HttpServletRequest request, @RequestParam("cardFrontText") String cardFrontText, @RequestParam("cardBackText") String cardBackText)
+
+
+    @PostMapping("/addCard/{learnSetId}")
+    public String postAddCard(@PathVariable Long learnSetId, HttpServletRequest request,
+                              @RequestParam("cardFrontText") String cardFrontText,
+                              @RequestParam("cardBackText") String cardBackText)
     {
         // need information about which LearnSet has to be edited
         String cookieContent =  getCookieContent(request.getCookies());
+
+        Card newCard = new Card(new TextFile(cardFrontText), new TextFile(cardBackText));
+        
+        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetId);
+        
+        if (learnSet.isPresent())
+        {
+            learnSet.get().getCardList().addToList(newCard);
+            learnSetRepository.save(learnSet.get());
+        }
+        else
+        {
+            System.out.println("no learnset");
+        }
+        
         
         System.out.println("Card Front Text : " + cardFrontText);
         System.out.println("Card Back Text : " + cardBackText);
-        
-        return "redirect:index";
-    }
-    
 
-    @GetMapping("/addCard")
-    public String getAddCard(Model model)
+        return "redirect:/cardOverview/" + learnSetId;
+    }
+
+
+    @GetMapping("/addCard/{id}")
+    public String getAddCard(@PathVariable Long id, Model model)
     {
         // we currently only support TextFiles, other Files will be implemented later
         model.addAttribute("newCard", new Card(new TextFile(), new TextFile()));
-        
+        model.addAttribute("id", id);
+
         return "addCard";
     }
-    
-    
+
+
 }

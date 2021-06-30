@@ -45,7 +45,6 @@
             <div th:each="followedLearnSet : ${learnSetListFollowed}"  class="gridItem">
                 <div th:text="${followedLearnSet.title}" class="deckName"></div>
                 <div th:text="${followedLearnSet.getCardList().getListLength()}" class="cardCount">count: </div>
-                <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
                 <div class="btn edit">
                     <a href="">edit</a>
                 </div>

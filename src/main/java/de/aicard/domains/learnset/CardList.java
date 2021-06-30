@@ -29,7 +29,7 @@ public class CardList extends BaseEntity
     /**
      * A list of Cards.
      */
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Card> listOfCards;
     /**
      * The current listIndex.

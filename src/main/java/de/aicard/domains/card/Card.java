@@ -4,6 +4,7 @@ import de.aicard.domains.BaseEntity;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.lang.reflect.Method;
 
 /**
  * Provides a 2 sided Card(front and back) for CardList and CardStatus
@@ -17,9 +18,9 @@ public class Card extends BaseEntity
 {
 
     // MEMBER VARIABLES
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private CardContent cardFront;
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     private CardContent cardBack;
     
     
@@ -27,6 +28,7 @@ public class Card extends BaseEntity
     
     public Card(CardContent _newCardFront, CardContent _newCardBack)
     {
+        
         this.cardFront = _newCardFront;
         this.cardBack  = _newCardBack ;
     }
@@ -57,6 +59,7 @@ public class Card extends BaseEntity
         
         return this.cardBack;
     }
+    
     
     public void setCardBack(CardContent newCardBack)
     {

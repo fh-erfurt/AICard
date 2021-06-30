@@ -4,7 +4,7 @@
 
 <head th:replace="fragments/head :: head"></head>
 
-<body>
+<body th:object="${learnSet}" >
     <div th:replace="fragments/header :: header"></div>
 
     <section class="cardOverview">
@@ -13,7 +13,7 @@
 
         <div  class="learnset-info">
 
-            <div th:object="${learnSet}" class="left-side">
+            <div  class="left-side">
 
                 <h2 id="kase" th:text="${learnSet.get().getTitle()}"> </h2>
 
@@ -46,20 +46,23 @@
             </h2>
 <!--            TODO: get all Cards to this current LearnSet-->
 <!--            <div th:each="card : ${cardList}"   class="Card">-->
-<!--                <form th:object="${Card}" th:method="POST" th:action="@{/cardEdit}">-->
-<!--                    <input th:field="*{cardFront}" type="text" name="front">-->
-<!--                    <input th:field="*{cardBack}" type="text" name="back">-->
+<!--                <span th:if="${card instanceof T(my.project.Cat)}" th:text="A cat"></span>-->
+
+                <!--                <form th:object="${Card}" th:method="POST" th:action="@{/cardEdit}">-->
+<!--                    <input th:value="${card.getCardFront()}" th:field="*{cardFront}" type="text" name="front">-->
+<!--                    <input th:value="${card.getCardBack().}" th:field="*{cardBack}" type="text" name="back">-->
 <!--                    <input th:field="${card.getId()}" type="hidden">-->
 <!--                    <button th:type="submit">save</button>-->
 <!--                </form>-->
 <!--            </div>-->
-<!--        </div>-->
-
-        <div className="add-card">
-                <a th:href="/addCard">add Card</a>
-<!--            <button style="width:100px;height: 20px;" id="add"></button>-->
         </div>
 
+            <div className="add-card">
+                <a th:href="@{'/addCard/' + ${learnSet.get().getId()}}">add Card</a>
+<!--            <button style="width:100px;height: 20px;" id="add"></button>-->
+            </div>
+
+        </div>
 
     </section>
 
