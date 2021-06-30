@@ -30,7 +30,7 @@ body>* {
 
 .btn:hover,
 .btn:focus {
-    background: rgb(106, 119, 235);
+    background-color: darken(black, 25%);
     transition: 0.5s;
 }
 
@@ -40,6 +40,11 @@ a {
     height: 100%;
     width: 100%;
     color: var(--fontColor);
+    text-decoration: underline currentColor;
+}
+
+a:hover {
+    text-decoration: underline solid currentColor 2px;
 }
 
 .header *,
@@ -88,4 +93,32 @@ a {
 
 .logIn {
     float: right;
+}
+
+.left {
+    position: absolute;
+    left: 0px;
+    width: 50%;
+}
+
+.right {
+    position: absolute;
+    left: 50%;
+    width: 50%;
+}
+
+.whiteBG {
+    background-color: white;
+}
+
+.pannel {
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.btnPlaceHolder {
+    position: relative;
+    height: 50px;
+    width: 100%;
 }

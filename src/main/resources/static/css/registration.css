@@ -4,7 +4,7 @@
     top: 50%;
     transform: translate(-50%, 0);
     width: 400px;
-    height: 500px;
+    min-height: 300px;
     border-radius: 20px;
     background-color: white;
     overflow: hidden;
@@ -15,6 +15,17 @@ form>* {
     padding: 10px;
 }
 
+form p,
+form .inputtext {
+    display: list-item;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
 .button {
     position: absolute;
     right: 0px;
@@ -23,10 +34,13 @@ form>* {
     width: 50%;
     height: 50px;
     text-align: center;
-    line-height: 50px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
 }
 
-.registrationLink {
+.registrationLink,
+.registrationLink:visited {
     position: absolute;
     left: 0px;
     bottom: 0px;
@@ -34,4 +48,9 @@ form>* {
     height: 50px;
     text-align: center;
     line-height: 50px;
+    text-decoration: underline currentColor;
+}
+
+.registrationLink:hover {
+    text-decoration: underline solid currentColor 2px;
 }

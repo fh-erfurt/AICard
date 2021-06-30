@@ -6,27 +6,26 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-<!--<select id="academicGrade">
+    <!--<select id="academicGrade">
     <option th:each="academicGrade : ${errorModel}"
             th:text="${academicGrade}">
     </option>
 </select>-->
 
 
-<div class="pageContent">
-    <div class="registration">
-        <form method="POST" id="loginform" th:action="@{/accountLogin}" th:object="${account}">
-            <p class="head">Anmeldung</p>
-            <input th:field="*{email} "type="email" value="" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="inputtext content-align-mid">
-            <input th:field="*{password}" type="password" id="password" name="password" placeholder="Passwort" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passwort'" class="inputtext content-align-mid">
-            <input type="submit" name="submit" id="loginbutton" value="anmelden" class="button content-align-mid">
-        </form>
-        <p class="registrationLink">
-            <a href="registration.html">registrieren</a>
-        </p>
+    <div class="pageContent">
+        <div class="registration">
+            <form method="POST" id="loginform" th:action="@{/accountLogin}" th:object="${account}">
+                <p class="head">Anmeldung</p>
+                <input th:field="*{email} " type="email" value="" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="inputtext">
+                <input th:field="*{password}" type="password" id="password" name="password" placeholder="Passwort" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passwort'" class="inputtext">
+                <input type="submit" name="submit" id="loginbutton" value="anmelden" class="button btn">
+            </form>
+            <div class="btnPlaceHolder"></div>
+            <a class="registrationLink" href="registration.html">registrieren</a>
+        </div>
     </div>
-</div>
-<div class="footer"><a href="">Impressum</a></div>
+    <div class="footer"><a href="">Impressum</a></div>
 </body>
 
 </html>
