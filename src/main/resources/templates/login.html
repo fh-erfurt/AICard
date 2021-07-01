@@ -21,6 +21,15 @@
                 <input th:field="*{password}" type="password" id="password" name="password" placeholder="Passwort" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passwort'" class="inputtext">
                 <input type="submit" name="submit" id="loginbutton" value="anmelden" class="button btn">
             </form>
+<!--            Error Messages-->
+            <table th:if="${!#lists.isEmpty(errorList)}">
+                <tbody>
+                <tr th:each="error : ${errorList}">
+                    <td><span th:text="${error}"> Title </span></td>
+                </tr>
+                </tbody>
+            </table>
+<!--            End of Error Messages-->
             <div class="btnPlaceHolder"></div>
             <a class="registrationLink" href="registration.html">registrieren</a>
         </div>
