@@ -15,34 +15,38 @@ import java.lang.reflect.Method;
  */
 public class CardContentTest
 {
-    @Test
-    public void testIsPlaying()
-    {
-        //given: an AudioFile and a VideoFile
-    
-        AudioFile audio = new AudioFile("audioContent", "audioTitle");
-        VideoFile video = new VideoFile("videoContent", "video");
-
-        //when: we do nothing
-        //then: both are not playing
-        Assertions.assertEquals(false, audio.getIsPlaying());
-        Assertions.assertEquals(false, video.getIsPlaying());
-
-        //when: we play both files
-        audio.playAudioData();
-        video.playVideoData();
-        //then: it is playing
-        Assertions.assertEquals(true, audio.getIsPlaying());
-        Assertions.assertEquals(true, video.getIsPlaying());
-
-        //when: we pause both files
-        audio.pauseAudioData();
-        video.pauseVideoData();
-        //then: both are not playing
-        Assertions.assertEquals(false, audio.getIsPlaying());
-        Assertions.assertEquals(false, video.getIsPlaying());
-        
-    }
+//    @Test
+//    public void testIsPlaying()
+//    {
+//        //given: an AudioFile and a VideoFile
+//
+//        AudioFile audio = new AudioFile("audioContent", "audioTitle");
+//        VideoFile video = new VideoFile("videoContent", "video");
+//
+//
+//
+//
+//
+//        //when: we do nothing
+//        //then: both are not playing
+//        Assertions.assertEquals(false, audio.getIsPlaying());
+//        Assertions.assertEquals(false, video.getIsPlaying());
+//
+//        //when: we play both files
+//        audio.playAudioData();
+//        video.playVideoData();
+//        //then: it is playing
+//        Assertions.assertEquals(true, audio.getIsPlaying());
+//        Assertions.assertEquals(true, video.getIsPlaying());
+//
+//        //when: we pause both files
+//        audio.pauseAudioData();
+//        video.pauseVideoData();
+//        //then: both are not playing
+//        Assertions.assertEquals(false, audio.getIsPlaying());
+//        Assertions.assertEquals(false, video.getIsPlaying());
+//
+//    }
     
 
 }

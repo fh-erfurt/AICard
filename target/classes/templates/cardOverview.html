@@ -1,40 +1,35 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>aiCard</title>
-    <link rel="stylesheet" href="../static/css/cardOverview.css">
-    
-</head>
-<body>
-    <header>
-        Ich bin 1 Footer
-    </header>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body th:object="${learnSet}" >
+    <div th:replace="fragments/header :: header"></div>
 
     <section class="cardOverview">
-        
+
         <h1>Card Overview</h1>
 
-        <div class="learnset-info">
-        
-            <div class="left-side">
+        <div  class="learnset-info">
 
-                <h2>
-                    SoftwareTechnik 2
-                </h2>
-        
+            <div  class="left-side">
+
+                <h2 id="kase" th:text="${learnSet.get().getTitle()}"> </h2>
+
                 <h4>Beschreibung</h4>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis, dicta. Nesciunt ipsam nam, temporibus blanditiis amet eaque sed suscipit odio. Ex, et! Odit rerum non officiis sapiente porro quis laboriosam.
+                <p  th:text="${learnSet.get().getDescription()}">
                 </p>
 
-                <h4>
-                    Administratoren
-                </h4>
-                <label for="owner">Erstellt von XYZ Name</label>
-        
+                <div th:each=" admin : ${learnSet.get().getAdminList()}">
+                    <h4 th:text="${admin.getEmail()}"> </h4>
+                </div>
+
+                <p th:text="${learnSet.get().getOwner().getEmail()}">
+
+                </p>
             </div>
-        
+
             <div class="right-side">
                 <form method="POST">
                     <input type="button" value="X">
@@ -45,122 +40,34 @@
             </div>
         </div>
 
-        <div class="cards">
-            
+        <div id="addCard" class="cards">
             <h2>
                 Karten
             </h2>
-            <div class="card">
+<!--            TODO: get all Cards to this current LearnSet-->
+<!--            <div th:each="card : ${cardList}"   class="Card">-->
+<!--                <span th:if="${card instanceof T(my.project.Cat)}" th:text="A cat"></span>-->
 
-                <form method="POST">
+                <!--                <form th:object="${Card}" th:method="POST" th:action="@{/cardEdit}">-->
+<!--                    <input th:value="${card.getCardFront()}" th:field="*{cardFront}" type="text" name="front">-->
+<!--                    <input th:value="${card.getCardBack().}" th:field="*{cardBack}" type="text" name="back">-->
+<!--                    <input th:field="${card.getId()}" type="hidden">-->
+<!--                    <button th:type="submit">save</button>-->
+<!--                </form>-->
+<!--            </div>-->
+        </div>
 
-                    <div class="question">
-                        <input type="text" value="TestFrage" required>
-                    </div>
-                    
-                    <div class="answer">
-                        <input type="text" value="Das ist die Antwort auf die TestFrage" required>
-                    </div>
-                    
-                    <div class="file">
-                        <button>+</button>
-                    </div>
-
-                    <div class="delete">
-                        <button>X</button>
-                    </div>
-                
-                </form>
-                
+            <div className="add-card">
+                <a th:href="@{'/addCard/' + ${learnSet.get().getId()}}">add Card</a>
+<!--            <button style="width:100px;height: 20px;" id="add"></button>-->
             </div>
 
-            <div class="card">
-
-                <form method="POST">
-
-                    <div class="question">
-                        <input type="text" value="TestFrage" required>
-                    </div>
-                    
-                    <div class="answer">
-                        <input type="text" value="Das ist die Antwort auf die TestFrage" required>
-                    </div>
-                    
-                    <div class="file">
-                        <button>+</button>
-                    </div>
-
-                    <div class="delete">
-                        <button>X</button>
-                    </div>
-                
-                </form>
-                
-            </div>
-
-            <div class="card">
-
-                <form method="POST">
-
-                    <div class="question">
-                        <input type="text" value="TestFrage" required>
-                    </div>
-                    
-                    <div class="answer">
-                        <input type="text" value="Das ist die Antwort auf die TestFrage" required>
-                    </div>
-                    
-                    <div class="file">
-                        <button>+</button>
-                    </div>
-
-                    <div class="delete">
-                        <button>X</button>
-                    </div>
-                
-                </form>
-                
-            </div>
-
-            <div class="card">
-
-                <form method="POST">
-
-                    <div class="question">
-                        <input type="text" value="TestFrage" required>
-                    </div>
-                    
-                    <div class="answer">
-                        <input type="text" value="Das ist die Antwort auf die TestFrage" required>
-                    </div>
-                    
-                    <div class="file">
-                        <button>+</button>
-                    </div>
-
-                    <div class="delete">
-                        <button>X</button>
-                    </div>
-                
-                </form>
-                
-            </div>
-
-
-            <div class="add-card">
-                
-                <pre>
-*---*
-| + |
-*---*
-                </pre>
-            </div>
         </div>
 
     </section>
 
     <footer>
-        Ich bin 1 Header, spaß, bin footer
+<!--        <script th:inline="javascript" th:src="@{/js/old_addCard.js}"></script>-->
     </footer>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class Card extends BaseEntity
     {
         
         this.cardFront = _newCardFront;
-        this.cardBack  = _newCardBack ;
+        this.cardBack  = _newCardBack;
     }
     
     
@@ -59,7 +59,8 @@ public class Card extends BaseEntity
         
         return this.cardBack;
     }
-    
+
+
     
     public void setCardBack(CardContent newCardBack)
     {

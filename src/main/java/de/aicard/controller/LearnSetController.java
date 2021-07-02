@@ -2,9 +2,8 @@ package de.aicard.controller;
 
 import de.aicard.config.Session;
 import de.aicard.domains.account.Account;
-import de.aicard.domains.account.Student;
 import de.aicard.domains.card.Card;
-import de.aicard.domains.card.TextFile;
+import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
@@ -14,15 +13,12 @@ import de.aicard.storages.CardRepository;
 import de.aicard.storages.LearnSetRepository;
 
 
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -171,9 +167,15 @@ public class LearnSetController
     @GetMapping("/addCard/{learnSetID}")
     public String getAddCard(@PathVariable Long learnSetID, HttpServletRequest request  ,Model model)
     {
+<<<<<<< Updated upstream
         Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
         
         if(learnSet.isPresent())
+=======
+        // we currently only support TextFiles, other Files will be implemented later
+        model.addAttribute("newCard", new Card(new CardContent(), new CardContent()));
+        if(learnSetRepository.findById(learnSetID).isPresent())
+>>>>>>> Stashed changes
         {
             // if should work without the first comparison but not sure
             if(/*learnSet.get().getOwner().getId() == Long.parseLong(Session.getSessionValue(request.getCookies()))
