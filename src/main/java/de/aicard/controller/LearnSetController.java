@@ -167,26 +167,23 @@ public class LearnSetController
     @GetMapping("/addCard/{learnSetID}")
     public String getAddCard(@PathVariable Long learnSetID, HttpServletRequest request  ,Model model)
     {
-<<<<<<< Updated upstream
+
         Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
         
         if(learnSet.isPresent())
-=======
-        // we currently only support TextFiles, other Files will be implemented later
-        model.addAttribute("newCard", new Card(new CardContent(), new CardContent()));
-        if(learnSetRepository.findById(learnSetID).isPresent())
->>>>>>> Stashed changes
         {
-            // if should work without the first comparison but not sure
-            if(/*learnSet.get().getOwner().getId() == Long.parseLong(Session.getSessionValue(request.getCookies()))
-            ||*/ learnSet.get().getAdminList().contains(accountRepository.findById(Long.parseLong(Session.getSessionValue(request.getCookies()))).get()))
+            if(learnSetRepository.findById(learnSetID).isPresent())
             {
-                model.addAttribute("learnSetID", learnSetID);
-                return "addCard";
+                if (learnSet.get().getAdminList().contains(accountRepository.findById(Long.parseLong(Session.getSessionValue(request.getCookies()))).get()))
+                {
+                    model.addAttribute("learnSetID", learnSetID);
+                    return "addCard";
+                }
             }
         }
         return "redirect:/index";
     }
+    
     
     @PostMapping("/addCard/{learnSetID}")
     @ResponseBody
