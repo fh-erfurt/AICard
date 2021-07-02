@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -146,11 +147,10 @@ public class LearnSetController
         //System.out.println("Set Faculty " + learnSet.get().getFaculty());
         
         // ach scheißdrauf
-        if (learnSet.isPresent() && ( learnSet.get().getVisibility() == Visibility.PUBLIC ||
-                learnSet.get().getVisibility() == Visibility.PRIVATE &&
-                        learnSet.get().getAdminList().contains(accounts.get(0)) ||
-                            learnSet.get().getVisibility() == Visibility.PROTECTED &&
-                                    accounts.get(0).getFaculty() == learnSet.get().getFaculty()))
+        if (learnSet.isPresent() && (
+            learnSet.get().getVisibility() == Visibility.PUBLIC ||
+            learnSet.get().getVisibility() == Visibility.PRIVATE && learnSet.get().getAdminList().contains(accounts.get(0)) ||
+            learnSet.get().getVisibility() == Visibility.PROTECTED && accounts.get(0).getFaculty() == learnSet.get().getFaculty()))
         {
             model.addAttribute("learnSet", learnSetRepository.findById(id));
             model.addAttribute("cardList", learnSet.get().getCardList().getListOfCards());
@@ -166,49 +166,47 @@ public class LearnSetController
             return "redirect:/index";
         }
     }
-
     
-//    @PostMapping("/addCard/{learnSetId}")
-//    public String postAddCard(@PathVariable Long learnSetId, HttpServletRequest request,
-//                              @RequestParam("cardFrontText") String cardFrontText,
-//                              @RequestParam("cardBackText") String cardBackText)
-//    {
-//        // need information about which LearnSet has to be edited
-//        String cookieContent =  getCookieContent(request.getCookies());
-//
-//        Card newCard = new Card(new TextFile(cardFrontText), new TextFile(cardBackText));
-//
-//        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetId);
-//
-//        if (learnSet.isPresent())
-//        {
-//            learnSet.get().getCardList().addToList(newCard);
-//            learnSetRepository.save(learnSet.get());
-//        }
-//        else
-//        {
-//            System.out.println("no learnset");
-//        }
-//
-//
-//        System.out.println("Card Front Text : " + cardFrontText);
-//        System.out.println("Card Back Text : " + cardBackText);
-//
-//        return "redirect:/cardOverview/" + learnSetId;
-//    }
-
 
     @GetMapping("/addCard/{learnSetID}")
-    public String getAddCard(@PathVariable Long learnSetID, Model model)
+    public String getAddCard(@PathVariable Long learnSetID, HttpServletRequest request  ,Model model)
     {
-        // we currently only support TextFiles, other Files will be implemented later
-        model.addAttribute("newCard", new Card(new TextFile(), new TextFile()));
-        if(learnSetRepository.findById(learnSetID).isPresent())
+        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
+        
+        if(learnSet.isPresent())
         {
-            model.addAttribute("learnSetID", learnSetID);
-            return "addCard";
+            // if should work without the first comparison but not sure
+            if(/*learnSet.get().getOwner().getId() == Long.parseLong(Session.getSessionValue(request.getCookies()))
+            ||*/ learnSet.get().getAdminList().contains(accountRepository.findById(Long.parseLong(Session.getSessionValue(request.getCookies()))).get()))
+            {
+                model.addAttribute("learnSetID", learnSetID);
+                return "addCard";
+            }
         }
         return "redirect:/index";
+    }
+    
+    @PostMapping("/addCard/{learnSetID}")
+    @ResponseBody
+    public ModelAndView postAddCard(
+            
+            @PathVariable Long learnSetID, HttpServletRequest request, Model model)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
+    
+        if(learnSet.isPresent())
+        {
+            if(learnSet.get().getAdminList().contains(accountRepository.findById(Long.parseLong(Session.getSessionValue(request.getCookies()))).get()))
+            {
+                // we are here if the learnSet exists and the Owner or an Admin is logged in
+                
+                
+            }
+        }
+        
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
 
