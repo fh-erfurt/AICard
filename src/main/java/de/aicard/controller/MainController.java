@@ -16,11 +16,5 @@ public class MainController {
         public String notWelcome(){
             return "index";
         }
-    
-    @GetMapping("/saveFile")
-    public String getSaveFile(Model model)
-    {
-        
-        return "saveFile";
-    }
+
 }

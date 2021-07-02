@@ -11,7 +11,7 @@
 <br>
 <br>
 
-<form method="POST" id="addCardForm" th:action="@{'/addCard/' + ${learnSetID}}">
+<form enctype="multipart/form-data" method="POST" id="addCardForm" th:action="@{'/addCard/' + ${learnSetID}}">
   <table>
     <tr>
 <!--      CardFront-->

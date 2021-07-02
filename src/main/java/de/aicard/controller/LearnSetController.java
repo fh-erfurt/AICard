@@ -2,6 +2,9 @@ package de.aicard.controller;
 
 import de.aicard.config.Session;
 import de.aicard.domains.account.Account;
+import de.aicard.domains.card.Card;
+import de.aicard.domains.card.CardContent;
+import de.aicard.domains.enums.DataTyp;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
@@ -15,11 +18,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -161,50 +170,6 @@ public class LearnSetController
         }
     }
     
-
-    @GetMapping("/addCard/{learnSetID}")
-    public String getAddCard(@PathVariable Long learnSetID, HttpServletRequest request  ,Model model)
-    {
-        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
-        
-        if(learnSet.isPresent())
-        {
-            if(learnSetRepository.findById(learnSetID).isPresent())
-            {
-                if (learnSet.get().getAdminList().contains(accountRepository.findById(Long.parseLong(Session.getSessionValue(request.getCookies()))).get()))
-                {
-                    model.addAttribute("learnSetID", learnSetID);
-                    return "addCard";
-                }
-            }
-        }
-        return "redirect:/index";
-    }
-    
-    
-    @PostMapping("/addCard/{learnSetID}")
-    @ResponseBody
-    public ModelAndView postAddCard(
-            
-            @PathVariable Long learnSetID, HttpServletRequest request, Model model,
-            @RequestParam("cardFrontTextFileInput") String cardFrontTextFileInput )
-    {
-        ModelAndView modelAndView = new ModelAndView();
-        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
-    
-        if(learnSet.isPresent())
-        {
-            if(learnSet.get().getAdminList().contains(accountRepository.findById(Long.parseLong(Session.getSessionValue(request.getCookies()))).get()))
-            {
-                // we are here if the learnSet exists and the Owner or an Admin is logged in
-                
-                
-            }
-        }
-        
-        modelAndView.setViewName("index");
-        return modelAndView;
-    }
 
 
 }
