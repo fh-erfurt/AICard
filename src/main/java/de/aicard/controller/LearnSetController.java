@@ -9,10 +9,12 @@ import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.storages.AccountRepository;
+import de.aicard.storages.CardListRepository;
 import de.aicard.storages.CardRepository;
 import de.aicard.storages.LearnSetRepository;
 
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +41,9 @@ public class LearnSetController
 
     @Autowired
     CardRepository cardRepository;
+    
+    @Autowired
+    CardListRepository cardListRepository;
 
 
 
@@ -103,40 +108,66 @@ public class LearnSetController
         return "exampleCardOverview";
     }
 
-
-    // TODO : work in progress; problems showing each File of each Card of the LearnSet
+    
 //    @GetMapping("cardOverview/{id}")
-//    public String getCardOverview(@PathVariable Long id,HttpServletRequest request,HttpServletResponse response, Model model)
+//    @ResponseBody
+//    public String getCardoverviewRest(@PathVariable Long id, HttpServletResponse response, HttpServletRequest request)
 //    {
-//        //muckt
-//        Optional<LearnSet> learnSet =  learnSetRepository.findById(id);
-//        String cookieValue = getCookieContent(request.getCookies());
-//        List<Account> accounts = accountRepository.findAllById(Long.parseLong(cookieValue));
-//        //System.out.println("account Faculty " + accounts.get(0).getFaculty());
-//        //System.out.println("Set Faculty " + learnSet.get().getFaculty());
+//        JSONArray jsonArray = new JSONArray();
 //
-//        if(learnSet.get().getVisibility() == Visibility.PUBLIC ||
-//                learnSet.get().getVisibility() == Visibility.PRIVATE &&
-//                        learnSet.get().getAdminList().contains(accounts.get(0)) ||
-//                            learnSet.get().getVisibility() == Visibility.PROTECTED &&
-//                                    accounts.get(0).getFaculty() == learnSet.get().getFaculty())
+//        Optional<LearnSet> learnSet = learnSetRepository.findById(id);
+//        if(learnSet.get() != null)
 //        {
-//            model.addAttribute("learnSet", learnSetRepository.findById(id));
-//            model.addAttribute("cardList", learnSet.get().getCardList().getListOfCards());
-//            // get Card Models
-//            //cardRepository.findAllByLearnsetId();
+//            for ( Card card :  learnSet.get().getCardList().getListOfCards())
+//            {
+//                String path = System.getProperty("user.dir");
+//                path = path + "\\\\cardFiles";
+//                path = path.replace("\\", "\\\\");
+//                System.out.println(path);
+////                jsonArray.add(card);
+//            }
 //
-//            System.out.println(learnSetRepository.findById(id).get().getTitle());
-//
-//            return "cardOverview";
 //        }
-//        else
-//        {
-//            return "redirect:/index";
-//        }
+//        return jsonArray.toString();
 //    }
-//
-//
+
+    
+    // TODO : work in progress; problems showing each File of each Card of the LearnSet
+    @GetMapping("cardOverview/{id}")
+    public String getCardOverview(@PathVariable Long id,HttpServletRequest request,HttpServletResponse response, Model model)
+    {
+        Optional<LearnSet> learnSet =  learnSetRepository.findById(id);
+        String cookieValue = Session.getSessionValue(request.getCookies());
+        if(cookieValue == null){
+            return "redirect:login";
+        }
+        List<Account> accounts = accountRepository.findAllById(Long.parseLong(cookieValue));
+        //System.out.println("account Faculty " + accounts.get(0).getFaculty());
+        //System.out.println("Set Faculty " + learnSet.get().getFaculty());
+        
+        // ach scheißdrauf
+        if (learnSet.isPresent() && ( learnSet.get().getVisibility() == Visibility.PUBLIC ||
+                learnSet.get().getVisibility() == Visibility.PRIVATE &&
+                        learnSet.get().getAdminList().contains(accounts.get(0)) ||
+                            learnSet.get().getVisibility() == Visibility.PROTECTED &&
+                                    accounts.get(0).getFaculty() == learnSet.get().getFaculty()))
+        {
+            model.addAttribute("learnSet", learnSetRepository.findById(id));
+            model.addAttribute("cardList", learnSet.get().getCardList().getListOfCards());
+            // get Card Models
+            //cardRepository.findAllByLearnsetId();
+
+            System.out.println(learnSetRepository.findById(id).get().getTitle());
+
+            return "cardOverview";
+        }
+        else
+        {
+            return "redirect:/index";
+        }
+    }
+
+    
 //    @PostMapping("/addCard/{learnSetId}")
 //    public String postAddCard(@PathVariable Long learnSetId, HttpServletRequest request,
 //                              @RequestParam("cardFrontText") String cardFrontText,
@@ -167,14 +198,17 @@ public class LearnSetController
 //    }
 
 
-    @GetMapping("/addCard/{id}")
-    public String getAddCard(@PathVariable Long id, Model model)
+    @GetMapping("/addCard/{learnSetID}")
+    public String getAddCard(@PathVariable Long learnSetID, Model model)
     {
         // we currently only support TextFiles, other Files will be implemented later
         model.addAttribute("newCard", new Card(new TextFile(), new TextFile()));
-        model.addAttribute("id", id);
-
-        return "addCard";
+        if(learnSetRepository.findById(learnSetID).isPresent())
+        {
+            model.addAttribute("learnSetID", learnSetID);
+            return "addCard";
+        }
+        return "redirect:/index";
     }
 
 
