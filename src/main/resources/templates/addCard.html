@@ -11,15 +11,108 @@
 <br>
 <br>
 
-<form method="POST" id="addCardForm" th:action="@{'/addCard/' + ${id}}">
+<form method="POST" id="addCardForm" th:action="@{'/addCard/' + ${learnSetID}}">
+  <table>
+    <tr>
+<!--      CardFront-->
+      <td>
+        <h3>CardFront</h3>
+        <br>
+        <select name="cardFrontType" id="cardFrontType">
+          <option selected="selected" value="TextFile">TextFile</option>
+          <option value="AudioFile">AudioFile</option>
+          <option value="PictureFile">PictureFile</option>
+          <option value="VideoFile">VideoFile</option>
+        </select>
 
-  <label for="cardFront">Vorderseite</label>
-  <input id="cardFront" name="cardFrontText"  type="text" class="" >
-  <br>
+        <div id="textFileFrontInput">
+          <label for="cardFrontTextFileInput">TextFile</label>
+          <br>
+          <input type="text" id="cardFrontTextFileInput" name="cardFrontTextFileInput">
+        </div>
 
-  <label for="cardBack">Rückseite</label>
-  <input name="cardBackText" id="cardBack" type="text" class="" >
-  <br>
+        <div style="display: none" id="pictureFileFrontInput">
+          <label for="cardFrontPictureFileTitle">PictureFile</label>
+          <br>
+          <input type="text" id="cardFrontPictureFileTitle" name="cardFrontPictureFileTitle">
+          <br>
+          <input type="file" id="cardFrontPictureFileInput" name="cardFrontPictureFileInput" accept="image/*">
+        </div>
+
+        <div style="display: none" id="videoFileFrontInput">
+          <label for="cardFrontVideoFileTitle">VideoFile</label>
+          <br>
+          <input type="text" id="cardFrontVideoFileTitle" name="cardFrontVideoFileTitle">
+          <br>
+          <input type="file" id="cardFrontVideoFileInput" name="cardFrontVideoFileInput" accept="video/*">
+        </div>
+
+        <div style="display: none" id="audioFileFrontInput">
+          <label for="cardFrontAudioFileTitle">AudioFile</label>
+          <br>
+          <input type="text" id="cardFrontAudioFileTitle" name="cardFrontAudioFileTitle">
+          <br>
+          <input type="file" id="cardFrontAudioFileInput" name="cardFrontAudioFileInput" accept="audio/*">
+        </div>
+
+      </td>
+
+<!--      CardBack-->
+      <td>
+        <h3>CardBack</h3>
+        <br>
+        <select name="cardBackType" id="cardBackType">
+          <option selected="selected" value="TextFile">TextFile</option>
+          <option value="AudioFile">AudioFile</option>
+          <option value="PictureFile">PictureFile</option>
+          <option value="VideoFile">VideoFile</option>
+        </select>
+
+        <div id="textFileBackInput">
+          <label for="cardBackTextFileInput">TextFile</label>
+          <br>
+          <input type="text" id="cardBackTextFileInput" name="cardBackTextFileInput">
+        </div>
+
+        <div style="display: none" id="pictureFileBackInput">
+          <label for="cardBackPictureFileTitle">PictureFile</label>
+          <br>
+          <input type="text" id="cardBackPictureFileTitle" name="cardBackPictureFileTitle">
+          <br>
+          <input type="file" id="cardBackPictureFileInput" name="cardBackPictureFileInput" accept="image/*">
+        </div>
+
+        <div style="display: none" id="videoFileBackInput">
+          <label for="cardBackVideoFileTitle">VideoFile</label>
+          <br>
+          <input type="text" id="cardBackVideoFileTitle" name="cardBackVideoFileTitle">
+          <br>
+          <input type="file" id="cardBackVideoFileInput" name="cardBackVideoFileInput" accept="video/*">
+        </div>
+
+        <div style="display: none" id="audioFileBackInput">
+          <label for="cardBackAudioFileTitle">AudioFile</label>
+          <br>
+          <input type="text" id="cardBackAudioFileTitle" name="cardBackAudioFileTitle">
+          <br>
+          <input type="file" id="cardBackAudioFileInput" name="cardBackAudioFileInput" accept="audio/*">
+        </div>
+
+      </td>
+    </tr>
+  </table>
+
+<!--  <br>-->
+
+<!--  <input id="cardFront" name="cardFrontText"  type="text" class="" >-->
+<!--  <br>-->
+
+<!--  <br>-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  <label for="cardBack">Rückseite</label>-->
+<!--  <input name="cardBackText" id="cardBack" type="text" class="" >-->
+<!--  <br>-->
 
   <button>Submit</button>
 </form>
