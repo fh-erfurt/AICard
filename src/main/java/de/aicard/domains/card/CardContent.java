@@ -26,7 +26,7 @@ public class CardContent extends BaseEntity
 {
     @Column
     private String title;
-    @Column
+    @Column(length = 512)
     private String data;
     @Column
     private DataTyp type;
