@@ -73,11 +73,11 @@ public class AddCardController
             @RequestParam(value = "cardBackAudioFileTitle", required = false) String cardBackAudioFileTitle, @RequestParam(value = "cardBackAudioFileInput", required = false) MultipartFile cardBackAudioFileInput
     )throws IOException
     {
-        // if cardFiles Folder doesnt exist, create it!
-        if(! Files.exists(Path.of(System.getProperty("user.dir") + "\\cardFiles")))
-        {
-            Files.createDirectory(Path.of(System.getProperty("user.dir") + "\\cardFiles"));
-        }
+//        // if cardFiles Folder doesnt exist, create it!
+//        if(! Files.exists(Path.of(System.getProperty("user.dir") + "\\cardFiles")))
+//        {
+//            Files.createDirectory(Path.of(System.getProperty("user.dir") + "\\cardFiles"));
+//        }
         
         // --- Logic start ---
         ModelAndView modelAndView = new ModelAndView();
@@ -92,8 +92,8 @@ public class AddCardController
                 Card card = new Card();
                 CardContent cardContentFront = new CardContent();
                 CardContent cardContentBack = new CardContent();
-                String cardFrontFilePath = System.getProperty("user.dir") + "\\cardFiles\\";
-                String cardBackFilePath = System.getProperty("user.dir") + "\\cardFiles\\";
+                String cardFrontFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\learnSetImages\\";
+                String cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\learnSetImages\\";
     
                 // --- --- -- --- ---
                 // --- Card Front ---

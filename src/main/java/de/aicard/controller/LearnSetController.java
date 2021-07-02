@@ -156,10 +156,24 @@ public class LearnSetController
             learnSet.get().getVisibility() == Visibility.PROTECTED && accounts.get(0).getFaculty() == learnSet.get().getFaculty()))
         {
             model.addAttribute("learnSet", learnSetRepository.findById(id));
-            model.addAttribute("cardList", learnSet.get().getCardList().getListOfCards());
-            // get Card Models
-            //cardRepository.findAllByLearnsetId();
-
+            List<Card> cardListList = learnSet.get().getCardList().getListOfCards();
+            String filePath = "/images/learnSetImages/";
+            for ( Card card : cardListList)
+            {
+                if(card.getCardFront().getType() != DataTyp.TextFile)
+                {
+                    card.getCardFront().setData(filePath + card.getCardFront().getData());
+                }
+    
+    
+                if(card.getCardBack().getType() != DataTyp.TextFile)
+                {
+                    card.getCardBack().setData(filePath + card.getCardBack().getData());
+                }
+            }
+            
+            model.addAttribute("cardList", cardListList);
+            
             System.out.println(learnSetRepository.findById(id).get().getTitle());
 
             return "cardOverview";

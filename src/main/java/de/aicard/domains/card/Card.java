@@ -1,7 +1,10 @@
 package de.aicard.domains.card;
 
 import de.aicard.domains.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.lang.reflect.Method;
@@ -14,6 +17,8 @@ import java.lang.reflect.Method;
  */
 @Entity
 @NoArgsConstructor
+@Setter
+@Getter
 public class Card extends BaseEntity
 {
 
@@ -35,35 +40,35 @@ public class Card extends BaseEntity
     
     
     // GETTER + SETTER
-    public CardContent getCardFront() throws NullPointerException
-    {
-        if(this.cardFront == null)
-        {
-            throw new NullPointerException("CardFront not was not set.");
-        }
-        
-        return this.cardFront;
-    }
-    
-    public void setCardFront(CardContent _newCardFront)
-    {
-        this.cardFront = _newCardFront;
-    }
-    
-    public CardContent getCardBack() throws NullPointerException
-    {
-        if(this.cardBack == null)
-        {
-            throw new NullPointerException("CardBack was not set.");
-        }
-        
-        return this.cardBack;
-    }
-
-
-    
-    public void setCardBack(CardContent newCardBack)
-    {
-        this.cardBack = newCardBack;
-    }
+//    public CardContent getCardFront() throws NullPointerException
+//    {
+//        if(this.cardFront == null)
+//        {
+//            throw new NullPointerException("CardFront not was not set.");
+//        }
+//
+//        return this.cardFront;
+//    }
+//
+//    public void setCardFront(CardContent _newCardFront)
+//    {
+//        this.cardFront = _newCardFront;
+//    }
+//
+//    public CardContent getCardBack() throws NullPointerException
+//    {
+//        if(this.cardBack == null)
+//        {
+//            throw new NullPointerException("CardBack was not set.");
+//        }
+//
+//        return this.cardBack;
+//    }
+//
+//
+//
+//    public void setCardBack(CardContent newCardBack)
+//    {
+//        this.cardBack = newCardBack;
+//    }
 }
