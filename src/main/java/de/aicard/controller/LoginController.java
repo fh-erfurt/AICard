@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
@@ -32,13 +30,13 @@ public class LoginController {
     @Autowired
     AccountRepository accountRepository;
 
-    @GetMapping("/signUp")
-    public String signUp(Model model) {
+    @GetMapping("/registration")
+    public String registration(Model model) {
 
         model.addAttribute("newProfessor", new Professor());
         model.addAttribute("newStudent", new Student());
 
-        return "signUp";
+        return "registration";
     }
 
 
@@ -105,7 +103,7 @@ public class LoginController {
 
             model.addAttribute("errorList",errors);
 
-            return "signUp";
+            return "registration";
         }
     }
 
@@ -150,7 +148,7 @@ public class LoginController {
 
             model.addAttribute("errorList",errors);
 
-            return "signUp";
+            return "registration";
         }
     }
 

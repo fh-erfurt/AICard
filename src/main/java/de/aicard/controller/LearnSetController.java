@@ -2,8 +2,6 @@ package de.aicard.controller;
 
 import de.aicard.config.Session;
 import de.aicard.domains.account.Account;
-import de.aicard.domains.card.Card;
-import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
@@ -84,8 +82,8 @@ public class LearnSetController
         return "redirect:/login";
     }
 
-    @GetMapping("/exampleCardOverview")
-    public String getExampleCardOverview(Model model ,HttpServletRequest request,HttpServletResponse response)
+    @GetMapping("/learnSets")
+    public String getLearnSets(Model model ,HttpServletRequest request,HttpServletResponse response)
     {
         // check if user is logged in -> else: send to Login
         String accountID = Session.getSessionValue(request.getCookies());
@@ -102,7 +100,7 @@ public class LearnSetController
                 model.addAttribute("learnSetListFollowed", learnSetListFollowed);
             }
         }
-        return "exampleCardOverview";
+        return "learnSets";
     }
 
     
@@ -167,7 +165,6 @@ public class LearnSetController
     @GetMapping("/addCard/{learnSetID}")
     public String getAddCard(@PathVariable Long learnSetID, HttpServletRequest request  ,Model model)
     {
-
         Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
         
         if(learnSet.isPresent())
@@ -189,7 +186,8 @@ public class LearnSetController
     @ResponseBody
     public ModelAndView postAddCard(
             
-            @PathVariable Long learnSetID, HttpServletRequest request, Model model)
+            @PathVariable Long learnSetID, HttpServletRequest request, Model model,
+            @RequestParam("cardFrontTextFileInput") String cardFrontTextFileInput )
     {
         ModelAndView modelAndView = new ModelAndView();
         Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
