@@ -96,34 +96,19 @@
                             <source th:src="${card.getCardBack().getData()}" type="video/mp4" > <!--type="?"-->
                         </video>
                     </div>
+
                 </div> <!--End Switch-->
 
-
-
             </div>
-<!--            TODO: get all Cards to this current LearnSet-->
-<!--            <div th:each="card : ${cardList}"   class="Card">-->
-<!--                <span th:if="${card instanceof T(my.project.Cat)}" th:text="A cat"></span>-->
 
-                <!--                <form th:object="${Card}" th:method="POST" th:action="@{/cardEdit}">-->
-<!--                    <input th:value="${card.getCardFront()}" th:field="*{cardFront}" type="text" name="front">-->
-<!--                    <input th:value="${card.getCardBack().}" th:field="*{cardBack}" type="text" name="back">-->
-<!--                    <input th:field="${card.getId()}" type="hidden">-->
-<!--                    <button th:type="submit">save</button>-->
-<!--                </form>-->
-<!--            </div>-->
 
             <div className="add-card">
                 <a th:href="@{'/addCard/' + ${learnSet.get().getId()}}">add Card</a>
-<!--            <button style="width:100px;height: 20px;" id="add"></button>-->
             </div>
 
         </div>
 
     </section>
 
-    <footer>
-<!--        <script th:inline="javascript" th:src="@{/js/old_addCard.js}"></script>-->
-    </footer>
 </body>
 </html>

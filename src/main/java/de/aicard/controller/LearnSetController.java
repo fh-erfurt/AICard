@@ -15,12 +15,15 @@ import de.aicard.storages.LearnSetRepository;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.activation.FileTypeMap;
 import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -143,7 +146,7 @@ public class LearnSetController
         Optional<LearnSet> learnSet =  learnSetRepository.findById(id);
         String cookieValue = Session.getSessionValue(request.getCookies());
         if(cookieValue == null){
-            return "redirect:login";
+            return "redirect:/login";
         }
         List<Account> accounts = accountRepository.findAllById(Long.parseLong(cookieValue));
         //System.out.println("account Faculty " + accounts.get(0).getFaculty());
@@ -155,17 +158,18 @@ public class LearnSetController
             learnSet.get().getVisibility() == Visibility.PRIVATE && learnSet.get().getAdminList().contains(accounts.get(0)) ||
             learnSet.get().getVisibility() == Visibility.PROTECTED && accounts.get(0).getFaculty() == learnSet.get().getFaculty()))
         {
+            // TODO : check if the CardContentFile exists; what should I do if it doesnt?
             model.addAttribute("learnSet", learnSetRepository.findById(id));
             List<Card> cardListList = learnSet.get().getCardList().getListOfCards();
-            String filePath = "/images/learnSetImages/";
+            String filePath = "/learnSetImage/";
             for ( Card card : cardListList)
             {
                 if(card.getCardFront().getType() != DataTyp.TextFile)
                 {
                     card.getCardFront().setData(filePath + card.getCardFront().getData());
                 }
-    
-    
+
+
                 if(card.getCardBack().getType() != DataTyp.TextFile)
                 {
                     card.getCardBack().setData(filePath + card.getCardBack().getData());
@@ -182,6 +186,14 @@ public class LearnSetController
         {
             return "redirect:/index";
         }
+    }
+    
+    // getImagesForLearnSet
+    @GetMapping("/learnSetImage/{fileName}")
+    public ResponseEntity<byte[]> getImage(@PathVariable("fileName") String fileName) throws IOException
+    {
+        File img = new File(System.getProperty("user.dir") + "\\cardFiles\\" + fileName);
+        return ResponseEntity.ok().contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(img))).body(Files.readAllBytes(img.toPath()));
     }
     
 
