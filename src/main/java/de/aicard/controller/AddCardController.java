@@ -93,7 +93,7 @@ public class AddCardController
                 CardContent cardContentFront = new CardContent();
                 CardContent cardContentBack = new CardContent();
                 String cardFrontFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\learnSetImages\\";
-                String cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\learnSetImages\\";
+
     
                 // --- --- -- --- ---
                 // --- Card Front ---
@@ -130,7 +130,9 @@ public class AddCardController
                         errors.add("Keine Datei hochgeladen");
                     }
                 }
-    
+                //Audio
+                //TODO: correct paths for audio front
+                //cardFrontFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\audio\\learnSetAudio\\";
                 if (cardFrontType.equals(DataTyp.AudioFile.name()))
                 {
                     cardContentFront.setTitle(cardFrontAudioFileTitle);
@@ -144,29 +146,36 @@ public class AddCardController
                         cardFrontFilePath = cardFrontFilePath.replace("\\", "\\\\");
                         File newFile = new File(cardFrontFilePath);
                         cardFrontAudioFileInput.transferTo(newFile);
-    
                         cardContentFront.setData(fileName);
     
                         // todo: not working for type audio
-//                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-//                        String fileType = mimetype.split("/")[0];
-//                        if(fileType.equals("audio"))
-//                        {
-//                            cardContentFront.setData(fileName);
-//
-//                        }
-//                        else
-//                        {
-//                            newFile.delete();
-//                            errors.add("Falscher Dateityp für PictureFile");
-//                        }
+                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile); //  keine ahnung was das hier soll
+                        //System.out.println("mimetype "+mimetype);
+                        //String fileType = mimetype.split("/")[0];
+
+                        //System.out.println("Filetype Audio "+fileType);
+                        String fileType = cardFrontAudioFileInput.getContentType().split("/")[0];
+
+
+                        if(fileType.equals("audio"))
+                        {
+                            System.out.println("Audio erkannt "+cardFrontAudioFileInput.getOriginalFilename());
+                            cardContentFront.setData(fileName);
+                            // jetzt wird die datei gespeichert oder was
+                        }
+                        else
+                        {
+                            newFile.delete();
+                            errors.add("Falscher Dateityp für Audio");
+                        }
                     }
                     else
                     {
                         errors.add("Keine Datei hochgeladen");
                     }
                 }
-    
+                //Video
+                //cardFrontFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\video\\learnSetVideo\\";
                 if (cardFrontType.equals(DataTyp.VideoFile.name()))
                 {
                     cardContentFront.setTitle(cardFrontVideoFileTitle);
@@ -184,25 +193,27 @@ public class AddCardController
                         cardContentFront.setData(fileName);
     
                         // todo: not working for type video
-//                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-//                        String fileType = mimetype.split("/")[0];
-//                        if(fileType.equals("video"))
-//                        {
-//                            cardContentFront.setData(fileName);
-//
-//                        }
-//                        else
-//                        {
-//                            newFile.delete();
-//                            errors.add("Falscher Dateityp für PictureFile");
-//                        }
+                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
+                        //String fileType = mimetype.split("/")[0]; // ?? warum machst du das hier
+                        System.out.println(cardFrontVideoFileInput.getContentType());
+                        String fileType = cardFrontVideoFileInput.getContentType().split("/")[0];
+                        if(fileType.equals("video"))
+                        {
+                            System.out.println("Video erkannt "+cardFrontVideoFileInput.getOriginalFilename());
+                            cardContentFront.setData(fileName);
+                        }
+                        else
+                        {
+                            newFile.delete();
+                            errors.add("Falscher Dateityp für PictureFile");
+                        }
                     }
                     else
                     {
                         errors.add("Keine Datei hochgeladen");
                     }
                 }
-    
+                //Text
                 if (cardFrontType.equals(DataTyp.TextFile.name()))
                 {
                     if (cardFrontTextFileInput != null && !cardFrontTextFileInput.isEmpty())
@@ -219,6 +230,7 @@ public class AddCardController
                 // --- --- -- --- ---
                 // --- Card Back ---
                 // --- --- -- --- ---
+                String cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\learnSetImages\\";
                 if (cardBackType.equals(DataTyp.PictureFile.name()))
                 {
                     cardContentBack.setTitle(cardBackPictureFileTitle);
@@ -237,6 +249,7 @@ public class AddCardController
                         String fileType = mimetype.split("/")[0];
                         if (fileType.equals("image"))
                         {
+
                             cardContentBack.setData(fileName);
     
                         }
@@ -251,7 +264,7 @@ public class AddCardController
                         errors.add("Keine Datei hochgeladen");
                     }
                 }
-    
+                //cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\audio\\learnSetAudio\\";
                 if (cardBackType.equals(DataTyp.AudioFile.name()))
                 {
                     cardContentBack.setTitle(cardBackAudioFileTitle);
@@ -268,18 +281,19 @@ public class AddCardController
     
                         cardContentBack.setData(fileName);
 
-//                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-//                        String fileType = mimetype.split("/")[0];
-//                        if(fileType.equals("image"))
-//                        {
-//                            cardContentBack.setData(fileName);
-//
-//                        }
-//                        else
-//                        {
-//                            newFile.delete();
-//                            errors.add("Falscher Dateityp für PictureFile");
-//                        }
+                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
+                        //String fileType = mimetype.split("/")[0];
+                        String fileType = cardBackAudioFileInput.getContentType().split("/")[0];
+                        if(fileType.equals("image"))
+                        {
+                            System.out.println("Audio erkannt "+cardBackAudioFileInput.getOriginalFilename());
+                            cardContentBack.setData(fileName);
+                        }
+                        else
+                        {
+                            newFile.delete();
+                            errors.add("Falscher Dateityp für PictureFile");
+                        }
                     }
                     else
                     {
@@ -287,7 +301,8 @@ public class AddCardController
                     }
     
                 }
-    
+                // Video Back
+                //cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\video\\learnSetVideo\\";
                 if (cardBackType.equals(DataTyp.VideoFile.name()))
                 {
                     cardContentBack.setTitle(cardBackVideoFileTitle);
@@ -304,18 +319,20 @@ public class AddCardController
     
                         cardContentBack.setData(fileName);
 
-//                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-//                        String fileType = mimetype.split("/")[0];
-//                        if(fileType.equals("video"))
-//                        {
-//                            cardContentBack.setData(fileName);
-//
-//                        }
-//                        else
-//                        {
-//                            newFile.delete();
-//                            errors.add("Falscher Dateityp für PictureFile");
-//                        }
+                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
+                        //String fileType = mimetype.split("/")[0];
+                        String fileType = cardBackVideoFileInput.getContentType().split("/")[0];
+                        //System.out.println(fileType);
+                        if(fileType.equals("video"))
+                        {
+                            System.out.println("Video erkannt "+cardBackVideoFileInput.getOriginalFilename());
+                            cardContentBack.setData(fileName);
+                        }
+                        else
+                        {
+                            newFile.delete();
+                            errors.add("Falscher Dateityp für PictureFile");
+                        }
                     }
                     else
                     {
@@ -350,8 +367,6 @@ public class AddCardController
                 }
             }
         }
-        
-        
         modelAndView.setViewName("redirect:/index");
         return modelAndView;
     }
