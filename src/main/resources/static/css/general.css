@@ -30,7 +30,7 @@ body>* {
 
 .btn:hover,
 .btn:focus {
-    background-color: darken(black, 25%);
+    background-color: hsl(204, 100%, 64%);
     transition: 0.5s;
 }
 
@@ -121,4 +121,12 @@ a:hover {
     position: relative;
     height: 50px;
     width: 100%;
+}
+
+.head {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
 }

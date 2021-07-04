@@ -44,30 +44,71 @@
             <h2>
                 Karten
             </h2>
-<!--            TODO: get all Cards to this current LearnSet-->
-<!--            <div th:each="card : ${cardList}"   class="Card">-->
-<!--                <span th:if="${card instanceof T(my.project.Cat)}" th:text="A cat"></span>-->
 
-                <!--                <form th:object="${Card}" th:method="POST" th:action="@{/cardEdit}">-->
-<!--                    <input th:value="${card.getCardFront()}" th:field="*{cardFront}" type="text" name="front">-->
-<!--                    <input th:value="${card.getCardBack().}" th:field="*{cardBack}" type="text" name="back">-->
-<!--                    <input th:field="${card.getId()}" type="hidden">-->
-<!--                    <button th:type="submit">save</button>-->
-<!--                </form>-->
-<!--            </div>-->
-        </div>
+            <div th:each="card : ${cardList}"  class ="Card">
+                <div th:switch="${card.getCardFront().getType().name()}">
+                    <div>
+                        <p th:case="TextFile" th:text="${card.getCardFront().getData()}"></p>
+                    </div>
+
+                    <div th:case="PictureFile">
+                        <p  th:text="${card.getCardFront().getData()}"></p>
+                        <p th:text="${card.getCardFront().getTitle()}"></p>
+                        <img th:src="${card.getCardFront().getData()}">
+                    </div>
+
+                    <div th:case="AudioFile">
+                        <p th:text="${card.getCardFront().getTitle()}"></p>
+                        <audio controls>
+                            <source th:src="${card.getCardFront().getData()}" type="audio/mpeg"> <!--type="?"-->
+                        </audio>
+                    </div>
+
+                    <div th:case="VideoFile">
+                        <p th:text="${card.getCardFront().getTitle()}" ></p>
+                        <video width="400" controls>
+                            <source th:src="${card.getCardFront().getData()}" type="video/mp4" > <!--type="?"-->
+                        </video>
+                    </div>
+                </div> <!--End Switch-->
+
+                <div th:switch="${card.getCardBack().getType().name()}">
+                    <div>
+                        <p th:case="TextFile" th:text="${card.getCardBack().getData()}"></p>
+                    </div>
+
+                    <div th:case="PictureFile">
+                        <p  th:text="${card.getCardBack().getData()}"></p>
+                        <p th:text="${card.getCardBack().getTitle()}"></p>
+                        <img th:src="${card.getCardBack().getData()}">
+                    </div>
+
+                    <div th:case="AudioFile">
+                        <p th:text="${card.getCardBack().getTitle()}"></p>
+                        <audio controls>
+                            <source th:src="${card.getCardBack().getData()}" type="audio/mpeg"> <!--type="?"-->
+                        </audio>
+                    </div>
+
+                    <div th:case="VideoFile">
+                        <p th:text="${card.getCardBack().getTitle()}" ></p>
+                        <video width="400" controls>
+                            <source th:src="${card.getCardBack().getData()}" type="video/mp4" > <!--type="?"-->
+                        </video>
+                    </div>
+
+                </div> <!--End Switch-->
+
+            </div>
+
 
             <div className="add-card">
                 <a th:href="@{'/addCard/' + ${learnSet.get().getId()}}">add Card</a>
-<!--            <button style="width:100px;height: 20px;" id="add"></button>-->
             </div>
 
         </div>
 
     </section>
 
-    <footer>
-<!--        <script th:inline="javascript" th:src="@{/js/old_addCard.js}"></script>-->
-    </footer>
 </body>
 </html>
