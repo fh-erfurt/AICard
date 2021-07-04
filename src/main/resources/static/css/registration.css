@@ -1,7 +1,12 @@
+.registrationGrid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+}
+
 .registration {
     position: relative;
     left: 50%;
-    top: 50%;
     transform: translate(-50%, 0);
     width: 400px;
     min-height: 300px;
@@ -10,20 +15,15 @@
     overflow: hidden;
 }
 
-form>* {
-    position: relative;
-    padding: 10px;
-}
-
-form p,
-form .inputtext {
+.inputtext,
+select {
     display: list-item;
+    padding: 10px;
     left: 50%;
     transform: translate(-50%, 0);
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
     width: 80%;
+    overflow: auto;
 }
 
 .button {
@@ -53,4 +53,19 @@ form .inputtext {
 
 .registrationLink:hover {
     text-decoration: underline solid currentColor 2px;
+}
+
+.registrationElement {
+    position: relative;
+    display: list-item;
+    padding: 10px;
+}
+
+.registrationElement>* {
+    position: relative;
+    display: list-item;
+}
+
+form div label {
+    left: 10%;
 }
