@@ -54,14 +54,14 @@ public class AccountController {
         Optional<Account> oldAccount = accountRepository.findById(theAccount.getId());
         String accountEmail = theAccount.getEmail();
         Optional<Account> matchingEntries = accountRepository.findByEmail(accountEmail);
-        if (matchingEntries.isPresent() && matchingEntries.getId() != oldAccount.getId()) {
+        if (matchingEntries.isPresent() && matchingEntries.get().getId() != oldAccount.get().getId()) {
 
             errors.add("Ein Account mit diser E-Mail Adresse existiert bereits");
             System.out.println("Ein Account mit diser E-Mail Adresse existiert bereits");
             model.addAttribute("errorList",errors);
             return "editAccount";
         }
-        oldAccount.setEmail(accountEmail);
+        oldAccount.get().setEmail(accountEmail);
 
 
         Pattern pattern = Pattern.compile(patternReg);
@@ -79,12 +79,12 @@ public class AccountController {
             model.addAttribute("errorList",errors);
             return "editAccount";
         }
-        oldAccount.setPassword(hashedPassword);
-        oldAccount.setName(theAccount.getName());
-        oldAccount.setDescription(theAccount.getDescription());
-        oldAccount.setFaculty(theAccount.getFaculty());
+        oldAccount.get().setPassword(hashedPassword);
+        oldAccount.get().setName(theAccount.getName());
+        oldAccount.get().setDescription(theAccount.getDescription());
+        oldAccount.get().setFaculty(theAccount.getFaculty());
 
-        accountRepository.save(oldAccount);
+        accountRepository.save(oldAccount.get());
         return "profile";
     }
 
