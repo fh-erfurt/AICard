@@ -24,6 +24,8 @@ public interface AccountRepository extends JpaRepository<Account, Long>
     Professor findProfessorById(Long id);
     Optional<Account> findByName(String name);
     Optional<Account> findByEmail(String email);
+
+
     
     // is used to determain what if Account is Student or Professor
     List<Account> findAllById(Long id);
