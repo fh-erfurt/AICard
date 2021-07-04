@@ -29,7 +29,7 @@ select {
 .button {
     position: absolute;
     right: 0;
-    background-color: turquoise;
+    background-color: hsl(174, 72%, 56%);
     bottom: 0;
     width: 50%;
     height: 50px;
