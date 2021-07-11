@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="pageContent">
+
+    <br>
+    <br>
+    <br>
+
+    <button th:if="${userIsLoggedIn}"><a th:href="@{/updateProfile}">Account Bearbeiten</a></button>
+
+    <div th:switch="${professorAcademicGrade != null}">
+        <h1 th:case="${true}">Account Professor</h1>
+        <h1 th:case="${false}">Account Student</h1>
+    </div>
+
+    <h2 th:text="'Name ' + ${account.getName()}"></h2>
+    <h4>Beschreibung</h4>
+    <p th:text="${account.getDescription()}"></p>
+    <h4>Fakultät</h4>
+    <p th:text="${account.getFaculty()}"></p>
+    <div th:if="${professorAcademicGrade != null}" class="">
+        <h4>Academic Grade</h4>
+        <p th:text="${professorAcademicGrade}"></p>
+    </div>
+    <div th:if="${professorAcademicGrade == null}" class="">
+        <h4>Semester</h4>
+        <p th:text="${studentSemester}"></p>
+    </div>
+
+
+    <p style="color:white"><p th:text="${account.getName()} + '\'s'"></p> LearnSets</p>
+
+        <!-- weitere gridItmes werden dynamisch geladen -->
+
+
+
+
+    <!--        Folowed LearnSets-->
+    <p style="color:white"><p th:text="${account.getName()} + '\'s'"></p> followed LearnSets</p>
+
+
+</div>
+<div class="footer"><a href="">Impressum</a></div>
 </body>
+
 </html>

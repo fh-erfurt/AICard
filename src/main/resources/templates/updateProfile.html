@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="pageContent">
+
+  <br>
+  <br>
+
+  <h1>Account Update Seite</h1>
+
+
+  <form th:if="${professorAcademicGrade != null}" id="signUp-professor" th:action="@{/updateAccount}" th:object="${account}" method="POST">
+
+    Professor
+    <div class="registrationElement">
+      <label for="emailProfessor">Email</label>
+      <input th:field="*{email}" id="emailProfessor" type="email" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="nameProfessor">Name</label>
+      <input  th:field="*{name}" id="nameProfessor" type="text" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="descriptionProfessor">Beschreibung</label>
+      <input  th:field="*{description}" id="descriptionProfessor" type="" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="passwordProfessor1">Passwort</label>
+      <input th:field="*{password}" id="passwordProfessor1" type="password" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="passwordProfessor2">Passwort bestätigen</label>
+      <input id="passwordProfessor2" type="" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="facultyProfessor">Fakukltät</label>
+      <select id="facultyProfessor" th:field="*{faculty}">
+        <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
+                th:text="${faculty}"
+                th:value="${faculty}"
+                th:selected="${account.getFaculty()}">
+        </option>
+      </select>
+    </div>
+
+    <div class="registrationElement">
+      <label for="academicGrade">Akademischer Grad</label>
+      <select id="academicGrade" name="academicGrade">
+        <option th:each="academicGrade : ${T(de.aicard.domains.enums.AcademicGrade).values()}"
+                th:text="${academicGrade}"
+                th:value="${academicGrade}"
+                th:selected="${professorAcademicGrade}">
+        </option>
+      </select>
+    </div>
+
+    <div class="btnPlaceHolder"></div>
+    <input type="submit" class="button btn">
+  </form>
+
+
+  <form th:if="${professorAcademicGrade == null}" id="signUp-student" th:action="@{/updateAccount}" th:object="${account}" method="POST">
+    Student
+    <div class="registrationElement">
+      <label for="email">Email</label>
+      <input  th:field="*{email}" id="email" type="email" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="name">Name</label>
+      <input  th:field="*{name}" id="name" type="text" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="description">Beschreibung</label>
+      <input  th:field="*{description}" id="description" type="text" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="passwordStudent1">Passwort</label>
+      <input th:field="*{password}" id="passwordStudent1" type="password" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="passwordStudent2">Passwort bestätigen</label>
+      <input id="passwordStudent2" type="password" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="semester">Semester</label>
+      <input  th:field="${studentSemester}" name="studentSemester" id="semester" type="number" class="inputtext">
+    </div>
+
+    <div class="registrationElement">
+      <label for="facultyStudent">Fakultät</label>
+      <select id="facultyStudent" th:field="*{faculty}">
+        <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
+                th:text="${faculty}"
+                th:value="${faculty}"
+                th:selected="${account.getFaculty()}">
+        </option>
+      </select>
+    </div>
+
+
+    <div class="btnPlaceHolder"></div>
+    <input type="submit" class="button btn">
+  </form>
+
+</div>
+<div class="footer"><a href="">Impressum</a></div>
+</body>
+
+</html>
