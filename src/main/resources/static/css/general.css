@@ -28,10 +28,13 @@ body>* {
     width: 100%;
 }
 
-.btn:hover,
-.btn:focus {
-    background-color: hsl(204, 100%, 64%);
-    transition: 0.5s;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-align: center;
 }
 
 a {
@@ -95,9 +98,14 @@ a:hover {
     float: right;
 }
 
+.bottom {
+    position: absolute;
+    bottom: 0;
+}
+
 .left {
     position: absolute;
-    left: 0px;
+    left: 0;
     width: 50%;
 }
 
@@ -112,15 +120,57 @@ a:hover {
 }
 
 .pannel {
+    position: relative;
     border-radius: 20px;
     overflow: hidden;
-    padding: 10px;
+}
+
+.transparentPannel {
+    border: 5px solid;
+    background: none;
+    color: white;
+}
+
+.transparentPannel a {
+    height: 100%;
+    width: 100%;
+    color: white;
+    line-height: 300px;
+    text-align: center;
+    font-size: 200px;
+}
+
+.btnContainer {
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    left: 0;
+    height: 50px;
+    width: 100%;
+}
+
+.btn {
+    position: relative;
+    width: 100%;
+    background-color: hsl(174, 72%, 56%);
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: hsl(204, 100%, 64%);
+    transition: 0.5s;
 }
 
 .btnPlaceHolder {
     position: relative;
     height: 50px;
     width: 100%;
+    visibility: hidden;
 }
 
 .head {

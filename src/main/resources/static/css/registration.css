@@ -26,19 +26,6 @@ select {
     overflow: auto;
 }
 
-.button {
-    position: absolute;
-    right: 0;
-    background-color: hsl(174, 72%, 56%);
-    bottom: 0;
-    width: 50%;
-    height: 50px;
-    text-align: center;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-}
-
 .registrationLink,
 .registrationLink:visited {
     position: absolute;
