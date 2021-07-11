@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html lang="de"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/head :: head"></head>
 
-<body th:object="${learnSet}" >
+<body th:object="${learnSet}">
     <div th:replace="fragments/header :: header"></div>
+    <div class="pageContent">
 
-    <section class="cardOverview">
+        <div class="learnset-info whiteBG pannel">
 
-        <h1>Card Overview</h1>
-
-        <div  class="learnset-info">
-
-            <div  class="left-side">
-
+            <div class="">
+                <h1>Card Overview</h1>
                 <h2 id="kase" th:text="${learnSet.get().getTitle()}"> </h2>
 
                 <h4>Beschreibung</h4>
-                <p  th:text="${learnSet.get().getDescription()}">
+                <p th:text="${learnSet.get().getDescription()}">
                 </p>
 
                 <div th:each=" admin : ${learnSet.get().getAdminList()}">
@@ -29,30 +25,27 @@
 
                 </p>
             </div>
-
-            <div class="right-side">
-                <form method="POST">
-                    <input type="button" value="X">
-                    <input type="button" value="EDIT">
-                    <input type="button" value="COMMENTS">
-                </form>
-
-            </div>
+            <form method="POST" class="btnContainer">
+                <input type="button" value="X" class="btn redBtn">
+                <input type="button" value="EDIT" class="btn yellowBtn">
+                <input type="button" value="COMMENTS" class="btn blueBtn">
+            </form>
+            <div class="btnPlaceHolder"></div>
         </div>
 
         <div id="addCard" class="cards">
-            <h2>
-                Karten
-            </h2>
+            <div className="add-card" class="pannel transparentPannel">
+                <a th:href="@{'/addCard/' + ${learnSet.get().getId()}}">+</a>
+            </div>
 
-            <div th:each="card : ${cardList}"  class ="Card">
-                <div th:switch="${card.getCardFront().getType().name()}">
+            <div th:each="card : ${cardList}" class="card whiteBG pannel">
+                <div th:switch="${card.getCardFront().getType().name()}" class=cardOFront>
                     <div>
                         <p th:case="TextFile" th:text="${card.getCardFront().getData()}"></p>
                     </div>
 
                     <div th:case="PictureFile">
-                        <p  th:text="${card.getCardFront().getData()}"></p>
+                        <p th:text="${card.getCardFront().getData()}"></p>
                         <p th:text="${card.getCardFront().getTitle()}"></p>
                         <img th:src="${card.getCardFront().getData()}">
                     </div>
@@ -65,20 +58,21 @@
                     </div>
 
                     <div th:case="VideoFile">
-                        <p th:text="${card.getCardFront().getTitle()}" ></p>
+                        <p th:text="${card.getCardFront().getTitle()}"></p>
                         <video width="400" controls>
                             <source th:src="${card.getCardFront().getData()}" type="video/mp4" > <!--type="?"-->
                         </video>
                     </div>
-                </div> <!--End Switch-->
+                </div>
+                <!--End Switch-->
 
-                <div th:switch="${card.getCardBack().getType().name()}">
+                <div th:switch="${card.getCardBack().getType().name()}" class=cardOBack>
                     <div>
                         <p th:case="TextFile" th:text="${card.getCardBack().getData()}"></p>
                     </div>
 
                     <div th:case="PictureFile">
-                        <p  th:text="${card.getCardBack().getData()}"></p>
+                        <p th:text="${card.getCardBack().getData()}"></p>
                         <p th:text="${card.getCardBack().getTitle()}"></p>
                         <img th:src="${card.getCardBack().getData()}">
                     </div>
@@ -91,24 +85,21 @@
                     </div>
 
                     <div th:case="VideoFile">
-                        <p th:text="${card.getCardBack().getTitle()}" ></p>
+                        <p th:text="${card.getCardBack().getTitle()}"></p>
                         <video width="400" controls>
                             <source th:src="${card.getCardBack().getData()}" type="video/mp4" > <!--type="?"-->
                         </video>
                     </div>
 
-                </div> <!--End Switch-->
+                </div>
+                <!--End Switch-->
 
-            </div>
-
-
-            <div className="add-card">
-                <a th:href="@{'/addCard/' + ${learnSet.get().getId()}}">add Card</a>
             </div>
 
         </div>
 
-    </section>
-
+    </div>
+    <div class="footer"><a href="">Impressum</a></div>
 </body>
+
 </html>
