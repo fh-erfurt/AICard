@@ -9,7 +9,7 @@
 
         <div class="learnset-info whiteBG pannel">
 
-            <div class="left-side">
+            <div class="">
                 <h1>Card Overview</h1>
                 <h2 id="kase" th:text="${learnSet.get().getTitle()}"> </h2>
 
@@ -26,9 +26,9 @@
                 </p>
             </div>
             <form method="POST" class="btnContainer">
-                <input type="button" value="X" class="btn">
-                <input type="button" value="EDIT" class="btn">
-                <input type="button" value="COMMENTS" class="btn">
+                <input type="button" value="X" class="btn redBtn">
+                <input type="button" value="EDIT" class="btn yellowBtn">
+                <input type="button" value="COMMENTS" class="btn blueBtn">
             </form>
             <div class="btnPlaceHolder"></div>
         </div>

@@ -18,38 +18,38 @@
         <div class="registrationGrid">
 
             <div class="registration">
-                <div class="registrationElement">
+                <div class="formListElement">
                     <label class="head">Registration für Professoren</label>
                 </div>
 
                 <form id="signUp-professor" th:action="@{/createNewProfessor}" th:object="${newProfessor}" method="POST">
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="emailProfessor">Email</label>
                         <input th:field="*{email}" id="emailProfessor" type="email" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="nameProfessor">Name</label>
                         <input th:field="*{name}" id="nameProfessor" type="text" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="descriptionProfessor">Beschreibung</label>
                         <input th:field="*{description}" id="descriptionProfessor" type="" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="passwordProfessor1">Passwort</label>
                         <input th:field="*{password}" id="passwordProfessor1" type="password" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="passwordProfessor2">Passwort bestätigen</label>
                         <input id="passwordProfessor2" type="" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="facultyProfessor">Fakukltät</label>
                         <select id="facultyProfessor" th:field="*{faculty}">
                         <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
@@ -59,7 +59,7 @@
                     </select>
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="academicGrade">Akademischer Grad</label>
                         <select id="academicGrade" th:field="*{academicGrade}">
                         <option th:each="academicGrade : ${T(de.aicard.domains.enums.AcademicGrade).values()}"
@@ -70,48 +70,48 @@
                     </div>
 
                     <div class="btnPlaceHolder"></div>
-                    <input type="submit" class="button btn">
+                    <input type="submit" class="btn blueBtn">
                 </form>
             </div>
 
 
             <div class="registration">
-                <div class="registrationElement">
+                <div class="formListElement">
                     <label class="head">Registration für Studierende</label>
                 </div>
 
                 <form id="signUp-student" th:action="@{/createNewStudent}" th:object="${newStudent}" method="POST">
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="email">Email</label>
                         <input th:field="*{email}" id="email" type="email" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="name">Name</label>
                         <input th:field="*{name}" id="name" type="text" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="description">Beschreibung</label>
                         <input th:field="*{description}" id="description" type="text" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="semester">Semester</label>
                         <input th:field="*{semester}" id="semester" type="number" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="passwordStudent1">Passwort</label>
                         <input th:field="*{password}" id="passwordStudent1" type="password" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="passwordStudent2">Passwort bestätigen</label>
                         <input id="passwordStudent2" type="password" class="inputtext">
                     </div>
 
-                    <div class="registrationElement">
+                    <div class="formListElement">
                         <label for="facultyStudent">Fakultät</label>
                         <select id="facultyStudent" th:field="*{faculty}">
                         <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="btnPlaceHolder"></div>
-                    <input type="submit" class="button btn">
+                    <input type="submit" class="btn blueBtn">
                 </form>
             </div>
         </div>

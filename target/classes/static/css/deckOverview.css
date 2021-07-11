@@ -136,25 +136,8 @@ a {
     right: 0px;
 }
 
-.edit {
-    background-color: tomato;
-}
-
-.learn {
-    right: 0px;
-    background-color: hsl(174, 72%, 56%);
-}
-
-.newGridItem {
-    border: 5px solid;
-    background: none;
-    color: white;
-}
-
-.newGridItem p {
-    height: 100%;
-    width: 100%;
-    line-height: 300px;
-    text-align: center;
-    font-size: 200px;
+.createLearnset .pannel {
+    width: 80%;
+    left: 50%;
+    transform: translate(-50%, 0);
 }

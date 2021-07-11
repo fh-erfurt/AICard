@@ -152,17 +152,41 @@ a:hover {
 .btn {
     position: relative;
     width: 100%;
-    background-color: hsl(174, 72%, 56%);
     height: 50px;
+    background-color: none;
     text-align: center;
     font-size: 18px;
     border: none;
     cursor: pointer;
 }
 
-.btn:hover,
-.btn:focus {
-    background-color: hsl(204, 100%, 64%);
+.blueBtn {
+    background-color: hsl(174, 72%, 56%);
+}
+
+.redBtn {
+    background-color: hsl(9, 100%, 64%);
+}
+
+.yellowBtn {
+    background-color: hsl(54, 77%, 75%);
+}
+
+.blueBtn:hover,
+.blueBtn:focus {
+    background-color: rgb(52, 153, 221);
+    transition: 0.5s;
+}
+
+.redBtn:hover,
+.redBtn:focus {
+    background-color: hsl(9, 69%, 48%);
+    transition: 0.5s;
+}
+
+.yellowBtn:hover,
+.yellowBtn:focus {
+    background-color: hsl(49, 82%, 59%);
     transition: 0.5s;
 }
 

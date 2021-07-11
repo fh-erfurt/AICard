@@ -136,11 +136,8 @@ a {
     right: 0px;
 }
 
-.edit {
-    background-color: tomato;
-}
-
-.learn {
-    right: 0px;
-    background-color: hsl(174, 72%, 56%);
+.createLearnset .pannel {
+    width: 80%;
+    left: 50%;
+    transform: translate(-50%, 0);
 }

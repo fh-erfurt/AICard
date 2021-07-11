@@ -15,22 +15,25 @@
 
     <div class="pageContent">
         <div class="registration">
-            <div class="registrationElement">
+            <div class="formListElement">
                 <label class="head">Anmeldung</label>
             </div>
 
             <form method="POST" id="loginform" th:action="@{/accountLogin}" th:object="${account}">
-                <div class="registrationElement">
+                <div class="formListElement">
                     <label>Email</label>
                     <input th:field="*{email} " type="email" value="" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="inputtext">
                 </div>
 
-                <div class="registrationElement">
+                <div class="formListElement">
                     <label>Passwort</label>
                     <input th:field="*{password}" type="password" id="password" name="password" placeholder="Passwort" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passwort'" class="inputtext">
                 </div>
+                <div class="btnContainer bottom">
 
-                <input type="submit" name="submit" id="loginbutton" value="anmelden" class="button btn">
+                    <div class="btn"><a class="registrationLink" th:href="@{/registration}">registrieren</a></div>
+                    <input type="submit" name="submit" id="loginbutton" value="anmelden" class="btn blueBtn">
+                </div>
             </form>
             <!--            Error Messages-->
             <table th:if="${!#lists.isEmpty(errorList)}">
@@ -41,8 +44,8 @@
                 </tbody>
             </table>
             <!--            End of Error Messages-->
+
             <div class="btnPlaceHolder"></div>
-            <a class="registrationLink" th:href="@{/registration}">registrieren</a>
         </div>
     </div>
     <div class="footer"><a href="">Impressum</a></div>
