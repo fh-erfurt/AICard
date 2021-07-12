@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="pageContent">
+
+        <p style="color:white">Meine LearnSets</p>
+        <div class="gridContainer">
+            <!-- display:grid 3 Spalten -->
+
+            <div class="pannel gridItem transparentPannel">
+                <a th:href="@{/createLearnset}">
+                +
+                </a>
+            </div>
+
+            <!-- weitere gridItmes werden dynamisch geladen -->
+            <div th:each="adminLearnSet : ${learnSetListAdmin}" class="gridItem">
+                <div th:text="${adminLearnSet.title}" class="deckName"></div>
+                <div th:text="${adminLearnSet.getCardList().getListLength()}" class="cardCount">count: </div>
+                <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
+                <div class="btn edit">
+                    <a th:href="@{'/cardOverview/' + ${adminLearnSet.getId()}}">edit</a>
+                </div>
+                <div class="btn learn">
+                    <a href="">learn</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!--        Folowed LearnSets-->
+        <p style="color:white">followed LearnSets</p>
+        <div class="gridContainer">
+            <!-- display:grid 3 Spalten -->
+
+
+            <!-- weitere gridItmes werden dynamisch geladen -->
+            <div th:each="followedLearnSet : ${learnSetListFollowed}" class="gridItem">
+                <div th:text="${followedLearnSet.title}" class="deckName"></div>
+                <div th:text="${followedLearnSet.getCardList().getListLength()}" class="cardCount">count: </div>
+                <div class="btn edit">
+                    <a href="">edit</a>
+                </div>
+                <div class="btn learn">
+                    <a href="">learn</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="footer"><a href="">Impressum</a></div>
+</body>
+
+</html>

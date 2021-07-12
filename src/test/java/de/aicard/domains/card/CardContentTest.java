@@ -3,6 +3,8 @@ package de.aicard.domains.card;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Method;
+
 /**
  * Class to test the functionalities of the CardContent-Child-Classes
  *
@@ -13,32 +15,38 @@ import org.junit.jupiter.api.Test;
  */
 public class CardContentTest
 {
-    @Test
-    public void testIsPlaying()
-    {
-        //given: an AudioFile and a VideoFile
+//    @Test
+//    public void testIsPlaying()
+//    {
+//        //given: an AudioFile and a VideoFile
+//
+//        AudioFile audio = new AudioFile("audioContent", "audioTitle");
+//        VideoFile video = new VideoFile("videoContent", "video");
+//
+//
+//
+//
+//
+//        //when: we do nothing
+//        //then: both are not playing
+//        Assertions.assertEquals(false, audio.getIsPlaying());
+//        Assertions.assertEquals(false, video.getIsPlaying());
+//
+//        //when: we play both files
+//        audio.playAudioData();
+//        video.playVideoData();
+//        //then: it is playing
+//        Assertions.assertEquals(true, audio.getIsPlaying());
+//        Assertions.assertEquals(true, video.getIsPlaying());
+//
+//        //when: we pause both files
+//        audio.pauseAudioData();
+//        video.pauseVideoData();
+//        //then: both are not playing
+//        Assertions.assertEquals(false, audio.getIsPlaying());
+//        Assertions.assertEquals(false, video.getIsPlaying());
+//
+//    }
+    
 
-        AudioFile audio = new AudioFile("audioContent", "audioTitle");
-        VideoFile video = new VideoFile("videoContent", "videoTitle");
-
-        //when: we do nothing
-        //then: both are not playing
-        Assertions.assertEquals(false, audio.getIsPlaying());
-        Assertions.assertEquals(false, video.getIsPlaying());
-
-        //when: we play both files
-        audio.playAudioData();
-        video.playVideoData();
-        //then: it is playing
-        Assertions.assertEquals(true, audio.getIsPlaying());
-        Assertions.assertEquals(true, video.getIsPlaying());
-
-        //when: we pause both files
-        audio.pauseAudioData();
-        video.pauseVideoData();
-        //then: both are not playing
-        Assertions.assertEquals(false, audio.getIsPlaying());
-        Assertions.assertEquals(false, video.getIsPlaying());
-        
-    }
 }

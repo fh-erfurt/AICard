@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
 <body>
-  New Ikndex asdasdasd TEST
+    <div th:replace="fragments/header :: header"></div>
+    <div class="pageContent">
+        <div class="pannel left whiteBG">
+            <label class="head">pannel 0</label>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint nobis placeat corporis corrupti ut rerum animi eum modi expedita natus unde totam necessitatibus, magni facere voluptate officiis maiores, ea dolorum!</p>
+            <div class="btnPlaceHolder"></div>
+        </div>
+        <div class="pannel right whiteBG">
+            <label class="head">pannel 1</label>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint nobis placeat corporis corrupti ut rerum animi eum modi expedita natus unde totam necessitatibus, magni facere voluptate officiis maiores, ea dolorum!</p>
+            <div class="btnPlaceHolder"></div>
+        </div>
+    </div>
+    <div class="footer"><a href="">Impressum</a></div>
 </body>
+
 </html>

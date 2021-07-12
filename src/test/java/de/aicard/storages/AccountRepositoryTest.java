@@ -54,7 +54,7 @@ public class AccountRepositoryTest
     @Test
     void findAll(){
         Account given1 = new Student("student@mail.de","1234","Markus Mustermann","ich bin ein anderer",3,Faculty.APPLIED_COMPUTER_SCIENCE);
-        Account given2 = new Professor("prof@mail.de","5678","Marion Winters","bin ein Lehrer",AcademicGrade.UNIVERSITY_PROFESSOR);
+        Account given2 = new Professor("prof@mail.de","5678","Marion Winters","bin ein Lehrer",AcademicGrade.UNIVERSITY_PROFESSOR,Faculty.APPLIED_COMPUTER_SCIENCE);
 
         List<Long> idsOfPersisted = new ArrayList<>();
         Account saved1 = accountRepository.save(given1);
@@ -70,7 +70,7 @@ public class AccountRepositoryTest
     @Test
     void findByName(){
         Account given1 = new Student("student@mail.de","1234","Markus Mustermann","ich bin ein anderer",3,Faculty.APPLIED_COMPUTER_SCIENCE);
-        Account given2 = new Professor("prof@mail.de","5678","Marion Winters","bin ein Lehrer",AcademicGrade.UNIVERSITY_PROFESSOR);
+        Account given2 = new Professor("prof@mail.de","5678","Marion Winters","bin ein Lehrer",AcademicGrade.UNIVERSITY_PROFESSOR,Faculty.APPLIED_COMPUTER_SCIENCE);
 
         accountRepository.save(given1);
         accountRepository.save(given2);

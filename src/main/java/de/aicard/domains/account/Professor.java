@@ -2,6 +2,7 @@ package de.aicard.domains.account;
 
 import de.aicard.domains.Social.Chat;
 import de.aicard.domains.enums.AcademicGrade;
+import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
 import lombok.Getter;
@@ -28,7 +29,7 @@ public class Professor extends Account
     
     private AcademicGrade academicGrade;
 
-    public Professor(String _email, String _password, String _name, String _description, AcademicGrade _academic)
+    public Professor(String _email, String _password, String _name, String _description, AcademicGrade _academic, Faculty _faculty)
     {
         this.email = _email;
         this.password = _password;
@@ -39,6 +40,7 @@ public class Professor extends Account
         this.friends = new ArrayList<Account>();
         this.chats = new ArrayList<Chat>();
         this.academicGrade = _academic;
+        this.faculty = _faculty;
     }
 
 }

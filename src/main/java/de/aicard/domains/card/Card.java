@@ -1,9 +1,13 @@
 package de.aicard.domains.card;
 
 import de.aicard.domains.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.lang.reflect.Method;
 
 /**
  * Provides a 2 sided Card(front and back) for CardList and CardStatus
@@ -13,13 +17,15 @@ import javax.persistence.*;
  */
 @Entity
 @NoArgsConstructor
+@Setter
+@Getter
 public class Card extends BaseEntity
 {
 
     // MEMBER VARIABLES
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private CardContent cardFront;
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     private CardContent cardBack;
     
     
@@ -27,39 +33,42 @@ public class Card extends BaseEntity
     
     public Card(CardContent _newCardFront, CardContent _newCardBack)
     {
+        
         this.cardFront = _newCardFront;
-        this.cardBack  = _newCardBack ;
+        this.cardBack  = _newCardBack;
     }
     
     
     // GETTER + SETTER
-    public CardContent getCardFront() throws NullPointerException
-    {
-        if(this.cardFront == null)
-        {
-            throw new NullPointerException("CardFront not was not set.");
-        }
-        
-        return this.cardFront;
-    }
-    
-    public void setCardFront(CardContent _newCardFront)
-    {
-        this.cardFront = _newCardFront;
-    }
-    
-    public CardContent getCardBack() throws NullPointerException
-    {
-        if(this.cardBack == null)
-        {
-            throw new NullPointerException("CardBack was not set.");
-        }
-        
-        return this.cardBack;
-    }
-    
-    public void setCardBack(CardContent newCardBack)
-    {
-        this.cardBack = newCardBack;
-    }
+//    public CardContent getCardFront() throws NullPointerException
+//    {
+//        if(this.cardFront == null)
+//        {
+//            throw new NullPointerException("CardFront not was not set.");
+//        }
+//
+//        return this.cardFront;
+//    }
+//
+//    public void setCardFront(CardContent _newCardFront)
+//    {
+//        this.cardFront = _newCardFront;
+//    }
+//
+//    public CardContent getCardBack() throws NullPointerException
+//    {
+//        if(this.cardBack == null)
+//        {
+//            throw new NullPointerException("CardBack was not set.");
+//        }
+//
+//        return this.cardBack;
+//    }
+//
+//
+//
+//    public void setCardBack(CardContent newCardBack)
+//    {
+//        this.cardBack = newCardBack;
+//    }
 }

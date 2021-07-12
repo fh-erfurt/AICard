@@ -28,12 +28,6 @@ body>* {
     width: 100%;
 }
 
-.btn:hover,
-.btn:focus {
-    background: rgb(106, 119, 235);
-    transition: 0.5s;
-}
-
 a {
     display: inline-block;
     position: relative;
@@ -142,25 +136,8 @@ a {
     right: 0px;
 }
 
-.edit {
-    background-color: tomato;
-}
-
-.learn {
-    right: 0px;
-    background-color: turquoise;
-}
-
-.newGridItem {
-    border: 5px solid;
-    background: none;
-    color: white;
-}
-
-.newGridItem p {
-    height: 100%;
-    width: 100%;
-    line-height: 300px;
-    text-align: center;
-    font-size: 200px;
+.createLearnset .pannel {
+    width: 80%;
+    left: 50%;
+    transform: translate(-50%, 0);
 }

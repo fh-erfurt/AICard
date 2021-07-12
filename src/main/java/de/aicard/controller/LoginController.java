@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
@@ -32,16 +30,16 @@ public class LoginController {
     @Autowired
     AccountRepository accountRepository;
 
-    @GetMapping("/signUp")
-    public String signUp(Model model) {
+    @GetMapping("/registration")
+    public String registration(Model model) {
 
         model.addAttribute("newProfessor", new Professor());
         model.addAttribute("newStudent", new Student());
 
-        return "signUp";
+        return "registration";
     }
-    
-    
+
+
 //    // http://localhost:8080/signUp/data@Test.sql
 //    // request works if data.sql is uncommented
 //    @GetMapping("/signUp/{email}")
@@ -62,11 +60,13 @@ public class LoginController {
 //
 //        return "signUp";
 //    }
-    
+
     @PostMapping("createNewProfessor")
-    public String createNewProfessor(@ModelAttribute("newProfessor") Professor newProfessor,@ModelAttribute("newStudent") Student newStudent, Model model) throws NoSuchAlgorithmException
+    public String createNewProfessor(@ModelAttribute("newProfessor") Professor newProfessor,
+                                     @ModelAttribute("newStudent") Student newStudent,
+                                     Model model) throws NoSuchAlgorithmException
     {
-       // ErrorModel errorModel = new ErrorModel();
+        // List of possible errors to return to user
         List<String> errors = new ArrayList<>();
 
         Pattern pattern = Pattern.compile(patternReg);
@@ -100,10 +100,10 @@ public class LoginController {
                 System.out.println("entry exists");
             }
             errors.add("Anmeldung Fehlgeschlagen");
-            
+
             model.addAttribute("errorList",errors);
 
-            return "signUp";
+            return "registration";
         }
     }
 
@@ -113,13 +113,13 @@ public class LoginController {
     {
         // List to return prossible entry errors to user
         List<String> errors = new ArrayList<>();
-    
+
         Pattern pattern = Pattern.compile(patternReg);
         String password = newStudent.getPassword();
         Matcher matcher = pattern.matcher(password);
         String studentEmail = newStudent.getEmail();
         Optional<Account> matchingEntries = accountRepository.findByEmail(studentEmail);
-    
+
         //creating md5 hash
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(password.getBytes());
@@ -130,7 +130,7 @@ public class LoginController {
         System.out.println(matchingEntries.isEmpty());
         System.out.println(matcher.matches());
         //end hashing
-    
+
         if (matchingEntries.isEmpty() && matcher.matches()) {
             accountRepository.save(newStudent);
             return "redirect:index";
@@ -145,37 +145,43 @@ public class LoginController {
                 System.out.println("entry exists");
             }
             errors.add("Anmeldung Fehlgeschlagen");
-        
+
             model.addAttribute("errorList",errors);
-        
-            return "signUp";
+
+            return "registration";
         }
     }
 
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request,HttpServletResponse response)
     {
-        //delete the session
-        Cookie[] cookies = request.getCookies();
-        response.addCookie(Session.delSession(cookies));
-        //end of deleting
+        // if user is logged in -> log him out
+        response.addCookie(Session.delSession(request.getCookies()));
         model.addAttribute("account", new Professor());
 
         return "login";
     }
 
     @PostMapping("/accountLogin")
-    public String accountLogin(@ModelAttribute("account") Professor account,HttpServletResponse response, Model model) throws NoSuchAlgorithmException {
+    public String accountLogin(@ModelAttribute("account") Professor account,
+                               HttpServletResponse response, HttpServletRequest request,
+                               Model model) throws NoSuchAlgorithmException
+    {
+        // List of possible errors to return to user
+        List<String> errors = new ArrayList<>();
+        
         Optional<Account> accountFromDB = accountRepository.findByEmail(account.getEmail());
         System.out.println(account.getPassword());
+        
         if(accountFromDB.isEmpty())
         {
-            // Account with this EMail doesnt exists
-            //model.addAttribute(); // write ErrorMessage for User
-            System.out.println("model.addAttribute(); // write ErrorMessage for User");
+            // send error Message to user
+            errors.add("Es existiert kein Account mit dieser EMail-Adresse");
+            model.addAttribute("errorList",errors);
             return "login";
         }
 
+        // hashing password input to compare to password in database
         String password = account.getPassword();
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(password.getBytes());
@@ -187,18 +193,14 @@ public class LoginController {
 
         if (accountFromDB.get().getPassword().equals(hashedPassword))
         {
-            //set a session
-            Session newSession = new Session(String.valueOf(accountFromDB.get().getId()));
-            Cookie session = newSession.setSession();
-            response.addCookie(session);
-            // anmeldung bestätigen
-            // Session Token speichern
-            // gibts das oder einfach cookie? sicherlich...
-            System.out.println("gibts das oder einfach cookie? sicherlich...");
+            // add userID to SessionCookie
+            response.addCookie(Session.addSessionValue(request.getCookies(), String.valueOf(accountFromDB.get().getId())));
             return "redirect:index";
         }
+        // send error Message to user
+        errors.add("Email oder Passwort nicht korrekt");
+        model.addAttribute("errorList",errors);
         System.out.println("write error Message that Email or Password were incorrect and return to Login");
-        // write error Message that Email or Password were incorrect and return to Login
         return "login";
 
     }

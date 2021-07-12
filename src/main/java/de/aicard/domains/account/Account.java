@@ -35,6 +35,7 @@ public abstract class Account extends BaseEntity
     protected String password;
     protected String name;
     protected String description;
+    protected Faculty faculty;
     
     @Setter(AccessLevel.NONE)
     @ManyToMany

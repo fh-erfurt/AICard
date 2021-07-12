@@ -9,9 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -46,15 +44,17 @@ public class LearnSet extends BaseEntity
      * Which Faculty is the LearnSet acquainted with
      */
     private Faculty faculty;
-    @OneToOne
+    
+    @OneToOne(cascade = CascadeType.ALL)
     private CardList cardList;
-    @OneToMany
+    
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Message> commentList;
     
     /**
      * The Account who created and owns the LearnSet
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Account owner;
     
     /**
@@ -65,7 +65,7 @@ public class LearnSet extends BaseEntity
     /**
      * List of people who can edit the learnset
      */
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Account> adminList;
     
     /**
@@ -106,78 +106,78 @@ public class LearnSet extends BaseEntity
     }
     
     // GETTER + SETTER
-    public String getTitle() throws NullPointerException
-    {
-        if(title == null)
-        {
-            throw new NullPointerException("LearnSet Title was not set.");
-        }
-        return this.title;
-    }
-    
-    public String getDescription() throws NullPointerException
-    {
-        if(description == null)
-        {
-            throw new NullPointerException("LearnSet Description was not set.");
-        }
-        return this.description;
-    }
-    
-    public Faculty getFaculty() throws NullPointerException
-    {
-        if (faculty == null)
-        {
-            throw new NullPointerException("LearnSet Faculty was not set.");
-        }
-        return this.faculty;
-    }
-    
-    public CardList getCardList() throws NullPointerException
-    {
-        if(cardList == null)
-        {
-            throw new NullPointerException("LearnSet CardList was not set.");
-        }
-        return this.cardList;
-    }
-    
-    public List<Message> getCommentList() throws NullPointerException
-    {
-        if(commentList == null)
-        {
-            throw new NullPointerException("LearnSet CommentList was not set.");
-        }
-        return this.commentList;
-    }
-    
-    public Account getOwner() throws NullPointerException
-    {
-        if(owner == null)
-        {
-            throw new NullPointerException("LearnSet Owner was not set.");
-        }
-        return this.owner;
-    }
-    
-    public Visibility getVisibility() throws NullPointerException
-    {
-        if(visibility == null)
-        {
-            throw new NullPointerException("LearnSet Visibility was not set.");
-        }
-        return this.visibility;
-    }
-    
-    public List<Account> getAdmins() throws NullPointerException
-    {
-        if(adminList == null)
-        {
-            throw new NullPointerException("LearnSet AdminList was not set.");
-        }
-        return this.adminList;
-    }
-    
+//    public String getTitle() throws NullPointerException
+//    {
+//        if(title == null)
+//        {
+//            throw new NullPointerException("LearnSet Title was not set.");
+//        }
+//        return this.title;
+//    }
+//
+//    public String getDescription() throws NullPointerException
+//    {
+//        if(description == null)
+//        {
+//            throw new NullPointerException("LearnSet Description was not set.");
+//        }
+//        return this.description;
+//    }
+//
+//    public Faculty getFaculty() throws NullPointerException
+//    {
+//        if (faculty == null)
+//        {
+//            throw new NullPointerException("LearnSet Faculty was not set.");
+//        }
+//        return this.faculty;
+//    }
+//
+//    public CardList getCardList() throws NullPointerException
+//    {
+//        if(cardList == null)
+//        {
+//            throw new NullPointerException("LearnSet CardList was not set.");
+//        }
+//        return this.cardList;
+//    }
+//
+//    public List<Message> getCommentList() throws NullPointerException
+//    {
+//        if(commentList == null)
+//        {
+//            throw new NullPointerException("LearnSet CommentList was not set.");
+//        }
+//        return this.commentList;
+//    }
+//
+//    public Account getOwner() throws NullPointerException
+//    {
+//        if(owner == null)
+//        {
+//            throw new NullPointerException("LearnSet Owner was not set.");
+//        }
+//        return this.owner;
+//    }
+//
+//    public Visibility getVisibility() throws NullPointerException
+//    {
+//        if(visibility == null)
+//        {
+//            throw new NullPointerException("LearnSet Visibility was not set.");
+//        }
+//        return this.visibility;
+//    }
+//
+//    public List<Account> getAdmins() throws NullPointerException
+//    {
+//        if(adminList == null)
+//        {
+//            throw new NullPointerException("LearnSet AdminList was not set.");
+//        }
+//        return this.adminList;
+//    }
+//
     // METHODS
     
     public void createCardList()

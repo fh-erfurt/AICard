@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="pageContent">
+        <div class="createLearnset">
+            <div class="whiteBG pannel">
+                <h1>Create Learnset</h1>
+
+                <form id="createLearnset" th:action="@{/createLearnset}" th:object="${newLearnset}" method="POST">
+                    <div class="formListElement">
+                        <label for="learnsetTitle">Titel</label>
+                        <input th:field="*{title}" id="learnsetTitle" type="text" class="">
+                    </div>
+
+                    <div class="formListElement">
+                        <label for="learnsetDescription">Beschreibung</label>
+                        <textarea th:field="*{description}" name="learnsetDescription" id="learnsetDescription" cols="30" rows="10"></textarea>
+                    </div>
+
+                    <div class="formListElement">
+                        <label for="learnsetFaculty">Fakultät</label>
+                        <select id="learnsetFaculty" th:field="*{faculty}">
+                  <option th:each="facu : ${T(de.aicard.domains.enums.Faculty).values()}"
+                          th:text="${facu}"
+                          th:value="${facu}">
+                  </option>
+                </select>
+                    </div>
+
+                    <div class="formListElement">
+                        <label for="learnsetVisibility">Sichtbarkeit</label>
+                        <select id="learnsetVisibility" th:field="*{visibility}">
+                   <option  th:each="visi : ${T(de.aicard.domains.enums.Visibility).values()}"
+                            th:text="${visi}"
+                            th:value="${visi}">
+                  </option>
+              </select>
+                    </div>
+
+
+                    <!-- TODO: not sure about this one yet -->
+                    <!-- <label for="learnsetAdmins">Administratoren</label>
+    <input th:field="*{ad}" id="leansetTitle" type="text" class="" >
+    <th:block th:each="admin : ${admin}">
+      <input type="checkbox" name="learnsetAdmins" th:value="${admin}"/>
+       <label th:text="${}"></label>
+     </th:block> -->
+                    <div class="btnContainer">
+                        <input type="submit" class="btn blueBtn">
+                    </div>
+                    <div class="btnPlaceHolder"></div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

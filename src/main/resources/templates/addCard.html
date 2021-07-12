@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="pageContent">
+        <div class="createCard">
+            <div class="whiteBG pannel">
+
+                <form enctype="multipart/form-data" method="POST" id="addCardForm" th:action="@{'/addCard/' + ${learnSetID}}">
+                    <div class="cardSites">
+                        <div>
+                            <h3>CardFront</h3>
+                            <div class="formListElement">
+                                <select name="cardFrontType" id="cardFrontType">
+          <option selected="selected" value="TextFile">TextFile</option>
+          <option value="AudioFile">AudioFile</option>
+          <option value="PictureFile">PictureFile</option>
+          <option value="VideoFile">VideoFile</option>
+        </select>
+                            </div>
+                            <div id="textFileFrontInput" class="formListElement">
+                                <label for="cardFrontTextFileInput">TextFile</label>
+                                <br>
+                                <textarea type="text" id="cardFrontTextFileInput" name="cardFrontTextFileInput" maxlength="512"></textarea>
+                            </div>
+
+                            <div style="display: none" id="pictureFileFrontInput" class="formListElement">
+                                <label for="cardFrontPictureFileTitle">PictureFile</label>
+                                <br>
+                                <input type="text" id="cardFrontPictureFileTitle" name="cardFrontPictureFileTitle">
+                                <br>
+                                <input type="file" id="cardFrontPictureFileInput" name="cardFrontPictureFileInput" accept="image/*">
+                            </div>
+
+                            <div style="display: none" id="videoFileFrontInput" class="formListElement">
+                                <label for="cardFrontVideoFileTitle">VideoFile</label>
+                                <br>
+                                <input type="text" id="cardFrontVideoFileTitle" name="cardFrontVideoFileTitle">
+                                <br>
+                                <input type="file" id="cardFrontVideoFileInput" name="cardFrontVideoFileInput" accept="video/*">
+                            </div>
+
+                            <div style="display: none" id="audioFileFrontInput" class="formListElement">
+                                <label for="cardFrontAudioFileTitle">AudioFile</label>
+                                <br>
+                                <input type="text" id="cardFrontAudioFileTitle" name="cardFrontAudioFileTitle">
+                                <br>
+                                <input type="file" id="cardFrontAudioFileInput" name="cardFrontAudioFileInput" accept="audio/*">
+                            </div>
+
+                        </div>
+
+                        <!--      CardBack-->
+                        <div>
+                            <h3>CardBack</h3>
+                            <div class="formListElement">
+                                <select name="cardBackType" id="cardBackType">
+          <option selected="selected" value="TextFile">TextFile</option>
+          <option value="AudioFile">AudioFile</option>
+          <option value="PictureFile">PictureFile</option>
+          <option value="VideoFile">VideoFile</option>
+        </select>
+                            </div>
+
+                            <div id="textFileBackInput" class="formListElement">
+                                <label for="cardBackTextFileInput">TextFile</label>
+                                <br>
+                                <textarea maxlength="512" type="text" id="cardBackTextFileInput" name="cardBackTextFileInput"></textarea>
+                            </div>
+
+                            <div style="display: none" id="pictureFileBackInput" class="formListElement">
+                                <label for="cardBackPictureFileTitle">PictureFile</label>
+                                <br>
+                                <input type="text" id="cardBackPictureFileTitle" name="cardBackPictureFileTitle">
+                                <br>
+                                <input type="file" id="cardBackPictureFileInput" name="cardBackPictureFileInput" accept="image/*">
+                            </div>
+
+                            <div style="display: none" id="videoFileBackInput" class="formListElement">
+                                <label for="cardBackVideoFileTitle">VideoFile</label>
+                                <br>
+                                <input type="text" id="cardBackVideoFileTitle" name="cardBackVideoFileTitle">
+                                <br>
+                                <input type="file" id="cardBackVideoFileInput" name="cardBackVideoFileInput" accept="video/*">
+                            </div>
+
+                            <div style="display: none" id="audioFileBackInput" class="formListElement">
+                                <label for="cardBackAudioFileTitle">AudioFile</label>
+                                <br>
+                                <input type="text" id="cardBackAudioFileTitle" name="cardBackAudioFileTitle">
+                                <br>
+                                <input type="file" id="cardBackAudioFileInput" name="cardBackAudioFileInput" accept="audio/*">
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--  <br>-->
+
+                    <!--  <input id="cardFront" name="cardFrontText"  type="text" class="" >-->
+                    <!--  <br>-->
+
+                    <!--  <br>-->
+                    <!--  <br>-->
+                    <!--  <br>-->
+                    <!--  <label for="cardBack">Rückseite</label>-->
+                    <!--  <input name="cardBackText" id="cardBack" type="text" class="" >-->
+                    <!--  <br>-->
+                    <div class="btnContainer bottom">
+                        <button class="btn blueBtn">Submit</button>
+                    </div>
+                    <div class="btnPlaceHolder"></div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
