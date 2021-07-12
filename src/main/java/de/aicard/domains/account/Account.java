@@ -31,6 +31,8 @@ public abstract class Account extends BaseEntity
     //Logger
     private static final Logger logger = Logger.getLogger(Account.class.getName());
     //Attribute
+    
+    @Column(unique = true)
     protected String email;
     protected String password;
     protected String name;
