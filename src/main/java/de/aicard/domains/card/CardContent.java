@@ -1,7 +1,7 @@
 package de.aicard.domains.card;
 
 import de.aicard.domains.BaseEntity;
-import de.aicard.domains.enums.DataTyp;
+import de.aicard.domains.enums.DataType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +29,6 @@ public class CardContent extends BaseEntity
     @Column(length = 512)
     private String data;
     @Column
-    private DataTyp type;
+    private DataType type;
 
 }

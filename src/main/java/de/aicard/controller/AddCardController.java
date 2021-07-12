@@ -3,7 +3,7 @@ package de.aicard.controller;
 import de.aicard.config.Session;
 import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardContent;
-import de.aicard.domains.enums.DataTyp;
+import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.storages.AccountRepository;
 import de.aicard.storages.LearnSetRepository;
@@ -86,6 +86,7 @@ public class AddCardController
         
         if(learnSet.isPresent())
         {
+            // TODO : simplify this into a loop or a Service with a loop -> no code repetition
             if (learnSet.get().getAdminList().contains(accountRepository.findById(Long.parseLong(Session.getSessionValue(request.getCookies()))).get()))
             {
                 // we are here if the learnSet exists and the Owner or an Admin is logged in
@@ -99,10 +100,10 @@ public class AddCardController
                 // --- --- -- --- ---
                 // --- Card Front ---
                 // --- --- -- --- ---
-                if (cardFrontType.equals(DataTyp.PictureFile.name()))
+                if (cardFrontType.equals(DataType.PictureFile.name()))
                 {
                     cardContentFront.setTitle(cardFrontPictureFileTitle);
-                    cardContentFront.setType(DataTyp.PictureFile);
+                    cardContentFront.setType(DataType.PictureFile);
     
                     if (cardFrontPictureFileInput != null && ! cardFrontPictureFileInput.isEmpty())
                     {
@@ -134,10 +135,10 @@ public class AddCardController
                 //Audio
                 //TODO: correct paths for audio front
                 //cardFrontFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\audio\\learnSetAudio\\";
-                if (cardFrontType.equals(DataTyp.AudioFile.name()))
+                if (cardFrontType.equals(DataType.AudioFile.name()))
                 {
                     cardContentFront.setTitle(cardFrontAudioFileTitle);
-                    cardContentFront.setType(DataTyp.AudioFile);
+                    cardContentFront.setType(DataType.AudioFile);
     
                     if (cardFrontAudioFileInput != null && ! cardFrontAudioFileInput.isEmpty())
                     {
@@ -177,10 +178,10 @@ public class AddCardController
                 }
                 //Video
                 //cardFrontFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\video\\learnSetVideo\\";
-                if (cardFrontType.equals(DataTyp.VideoFile.name()))
+                if (cardFrontType.equals(DataType.VideoFile.name()))
                 {
                     cardContentFront.setTitle(cardFrontVideoFileTitle);
-                    cardContentFront.setType(DataTyp.VideoFile);
+                    cardContentFront.setType(DataType.VideoFile);
     
                     if (cardFrontVideoFileInput != null && ! cardFrontVideoFileInput.isEmpty())
                     {
@@ -215,12 +216,12 @@ public class AddCardController
                     }
                 }
                 //Text
-                if (cardFrontType.equals(DataTyp.TextFile.name()))
+                if (cardFrontType.equals(DataType.TextFile.name()))
                 {
                     if (cardFrontTextFileInput != null && !cardFrontTextFileInput.isEmpty())
                     {
                         cardContentFront.setData(cardFrontTextFileInput);
-                        cardContentFront.setType(DataTyp.TextFile);
+                        cardContentFront.setType(DataType.TextFile);
                     }
                     else
                     {
@@ -233,10 +234,10 @@ public class AddCardController
                 // --- --- -- --- ---
                 String cardBackFilePath = System.getProperty("user.dir") + "\\cardFiles\\";
 //                String cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\learnSetImages\\";
-                if (cardBackType.equals(DataTyp.PictureFile.name()))
+                if (cardBackType.equals(DataType.PictureFile.name()))
                 {
                     cardContentBack.setTitle(cardBackPictureFileTitle);
-                    cardContentBack.setType(DataTyp.PictureFile);
+                    cardContentBack.setType(DataType.PictureFile);
     
                     if (cardBackPictureFileInput != null && ! cardBackPictureFileInput.isEmpty())
                     {
@@ -267,10 +268,10 @@ public class AddCardController
                     }
                 }
                 //cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\audio\\learnSetAudio\\";
-                if (cardBackType.equals(DataTyp.AudioFile.name()))
+                if (cardBackType.equals(DataType.AudioFile.name()))
                 {
                     cardContentBack.setTitle(cardBackAudioFileTitle);
-                    cardContentBack.setType(DataTyp.AudioFile);
+                    cardContentBack.setType(DataType.AudioFile);
     
                     if (cardBackAudioFileInput != null && ! cardBackAudioFileInput.isEmpty())
                     {
@@ -305,10 +306,10 @@ public class AddCardController
                 }
                 // Video Back
                 //cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\video\\learnSetVideo\\";
-                if (cardBackType.equals(DataTyp.VideoFile.name()))
+                if (cardBackType.equals(DataType.VideoFile.name()))
                 {
                     cardContentBack.setTitle(cardBackVideoFileTitle);
-                    cardContentBack.setType(DataTyp.VideoFile);
+                    cardContentBack.setType(DataType.VideoFile);
     
                     if (cardBackVideoFileInput != null && ! cardBackVideoFileInput.isEmpty())
                     {
@@ -343,12 +344,12 @@ public class AddCardController
                 }
     
     
-                if (cardBackType.equals(DataTyp.TextFile.name()))
+                if (cardBackType.equals(DataType.TextFile.name()))
                 {
                     if(cardBackTextFileInput != null && !cardBackTextFileInput.isEmpty())
                     {
                         cardContentBack.setData(cardBackTextFileInput);
-                        cardContentBack.setType(DataTyp.TextFile);
+                        cardContentBack.setType(DataType.TextFile);
                     }
                     else
                     {

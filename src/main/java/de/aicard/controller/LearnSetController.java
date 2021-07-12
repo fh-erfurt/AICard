@@ -4,7 +4,7 @@ import de.aicard.config.Session;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardContent;
-import de.aicard.domains.enums.DataTyp;
+import de.aicard.domains.enums.DataType;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
@@ -164,13 +164,13 @@ public class LearnSetController
             String filePath = "/learnSetImage/";
             for ( Card card : cardListList)
             {
-                if(card.getCardFront().getType() != DataTyp.TextFile)
+                if(card.getCardFront().getType() != DataType.TextFile)
                 {
                     card.getCardFront().setData(filePath + card.getCardFront().getData());
                 }
 
 
-                if(card.getCardBack().getType() != DataTyp.TextFile)
+                if(card.getCardBack().getType() != DataType.TextFile)
                 {
                     card.getCardBack().setData(filePath + card.getCardBack().getData());
                 }
