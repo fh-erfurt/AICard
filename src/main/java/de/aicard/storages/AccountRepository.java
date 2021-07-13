@@ -17,8 +17,6 @@ import java.util.Spliterator;
 
 public interface AccountRepository extends JpaRepository<Account, Long>
 {
-    @Query(nativeQuery = true, value = "SELECT * FROM ACCOUN")
-    List<Account> findAccount();
     
     Student findStudentById(Long id);
     Professor findProfessorById(Long id);

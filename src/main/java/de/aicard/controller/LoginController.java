@@ -6,6 +6,7 @@ import de.aicard.domains.account.Professor;
 import de.aicard.domains.account.Student;
 import de.aicard.storages.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +30,14 @@ public class LoginController {
 
     @Autowired
     AccountRepository accountRepository;
+    
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
+    
     @GetMapping("/registration")
-    public String registration(Model model) {
+    public String registration(Model model)
+    {
 
         model.addAttribute("newProfessor", new Professor());
         model.addAttribute("newStudent", new Student());
@@ -39,27 +45,15 @@ public class LoginController {
         return "registration";
     }
 
+    // TODO : nach erfolgreicher Registriebrung zu /login weiterleiten und email ggf. vorladen?
+    // TODO : in registriebrung nicht zwisch
+    @GetMapping("/login")
+    public String getLogin()
+    {
+        return "login";
+    }
 
-//    // http://localhost:8080/signUp/data@Test.sql
-//    // request works if data.sql is uncommented
-//    @GetMapping("/signUp/{email}")
-//    public String signUpEmailTest(@PathVariable("email") String email, Model model)
-//    {
-//        List<String> errors = new ArrayList<>();
-//        Optional<Account> user = accountRepository.findByEmail(email);
-//        if(!user.isEmpty())
-//        {
-//            errors.add(user.get().getEmail());
-//            errors.add(user.get().getName());
-//            errors.add(user.get().getPassword());
-//        }
-//
-//        model.addAttribute("errorList",errors);
-//        model.addAttribute("newProfessor", new Professor());
-//        model.addAttribute("newStudent", new Student());
-//
-//        return "signUp";
-//    }
+    
 
     @PostMapping("createNewProfessor")
     public String createNewProfessor(@ModelAttribute("newProfessor") Professor newProfessor,
@@ -69,26 +63,21 @@ public class LoginController {
         // List of possible errors to return to user
         List<String> errors = new ArrayList<>();
 
+        // check if Password is Strong enough
         Pattern pattern = Pattern.compile(patternReg);
         String password = newProfessor.getPassword();
         Matcher matcher = pattern.matcher(password);
+        
+        // prepare for check if account with this email already exists
         String profMail = newProfessor.getEmail();
         Optional<Account> matchingEntries = accountRepository.findByEmail(profMail);
-
-        //creating md5 hash
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(password.getBytes());
-        byte[] digest = md.digest();
-        String hashedPassword = DatatypeConverter.printHexBinary(digest);
-        newProfessor.setPassword(hashedPassword);
-        System.out.println(newProfessor.getPassword());
-        System.out.println(matchingEntries.isEmpty());
-        System.out.println(matcher.matches());
-        //end hashing
-
+        
+        // endcode password
+        newProfessor.setPassword(passwordEncoder.encode(newProfessor.getPassword()));
+        
         if (matchingEntries.isEmpty() && matcher.matches()) {
             accountRepository.save(newProfessor);
-            return "redirect:index";
+            return "redirect:/login";
         } else {
             if (!matcher.matches()) {
                 errors.add("Passwort entspricht nicht den Passwortrichtlinien");
@@ -111,25 +100,19 @@ public class LoginController {
     @PostMapping("createNewStudent")
     public String createNewStudent(@ModelAttribute("newProfessor") Professor newProfessor,@ModelAttribute("newStudent") Student newStudent, Model model) throws NoSuchAlgorithmException
     {
-        // List to return prossible entry errors to user
         List<String> errors = new ArrayList<>();
-
+    
+        // check if Password is Strong enough
         Pattern pattern = Pattern.compile(patternReg);
         String password = newStudent.getPassword();
         Matcher matcher = pattern.matcher(password);
-        String studentEmail = newStudent.getEmail();
-        Optional<Account> matchingEntries = accountRepository.findByEmail(studentEmail);
-
-        //creating md5 hash
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(password.getBytes());
-        byte[] digest = md.digest();
-        String hashedPassword = DatatypeConverter.printHexBinary(digest);
-        newStudent.setPassword(hashedPassword);
-        System.out.println(newStudent.getPassword());
-        System.out.println(matchingEntries.isEmpty());
-        System.out.println(matcher.matches());
-        //end hashing
+    
+        // prepare for check if account with this email already exists
+        String studMail = newStudent.getEmail();
+        Optional<Account> matchingEntries = accountRepository.findByEmail(studMail);
+    
+        // endcode password
+        newStudent.setPassword(passwordEncoder.encode(newStudent.getPassword()));
 
         if (matchingEntries.isEmpty() && matcher.matches()) {
             accountRepository.save(newStudent);
@@ -151,62 +134,6 @@ public class LoginController {
             return "registration";
         }
     }
-
-    @GetMapping("/login")
-    public String login(Model model, HttpServletRequest request,HttpServletResponse response)
-    {
-        // if user is logged in -> log him out
-        response.addCookie(Session.delSession(request.getCookies()));
-        model.addAttribute("account", new Professor());
-
-        return "login";
-    }
-
-    @PostMapping("/accountLogin")
-    public String accountLogin(@ModelAttribute("account") Professor account,
-                               HttpServletResponse response, HttpServletRequest request,
-                               Model model) throws NoSuchAlgorithmException
-    {
-        // List of possible errors to return to user
-        List<String> errors = new ArrayList<>();
-        
-        Optional<Account> accountFromDB = accountRepository.findByEmail(account.getEmail());
-        System.out.println(account.getPassword());
-        
-        if(accountFromDB.isEmpty())
-        {
-            // send error Message to user
-            errors.add("Es existiert kein Account mit dieser EMail-Adresse");
-            model.addAttribute("errorList",errors);
-            return "login";
-        }
-
-        // hashing password input to compare to password in database
-        String password = account.getPassword();
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(password.getBytes());
-        byte[] digest = md.digest();
-        String hashedPassword = DatatypeConverter.printHexBinary(digest);
-
-        System.out.println(accountFromDB.get().getPassword());
-        System.out.println(hashedPassword);
-
-        if (accountFromDB.get().getPassword().equals(hashedPassword))
-        {
-            // add userID to SessionCookie
-            response.addCookie(Session.addSessionValue(request.getCookies(), String.valueOf(accountFromDB.get().getId())));
-            return "redirect:index";
-        }
-        // send error Message to user
-        errors.add("Email oder Passwort nicht korrekt");
-        model.addAttribute("errorList",errors);
-        System.out.println("write error Message that Email or Password were incorrect and return to Login");
-        return "login";
-
-    }
-
-
-
 
 
 }

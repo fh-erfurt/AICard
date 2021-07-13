@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -37,25 +38,31 @@ public class AccountController
      * @return
      */
     @GetMapping("/profile")
-    public String showMyProfile(Model model, HttpServletRequest request)
+    public String showMyProfile(Model model, HttpServletRequest request, Principal principal)
     {
-        if(Session.getSessionValue(request.getCookies()) != null)
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+        System.out.println(principal);
+        System.out.println(principal.getName());
+        
+        if( account.isPresent())
         {
-            return showProfile(Long.parseLong(Session.getSessionValue(request.getCookies())), model, request);
+            return showProfile(account.get().getId(), model, principal);
         }
+//        if(Session.getSessionValue(request.getCookies()) != null)
+//        {
+//            return showProfile(Long.parseLong(Session.getSessionValue(request.getCookies())), model, request);
+//        }
         
         return "redirect:/index";
     }
 
     @GetMapping("/profile/{userID}")
-    public String showProfile(@PathVariable("userID") Long userID, Model model,HttpServletRequest request)
+    public String showProfile(@PathVariable("userID") Long userID, Model model, Principal principal)
     {
         List<String> errors = new ArrayList<>();
         // only loggedIN users can see an account
         
-        String cookieValue = Session.getSessionValue(request.getCookies());
-        if(cookieValue != null)
-        {
+        
             Optional<Account> account = accountRepository.findById(userID);
             if(account.isPresent())
             {
@@ -70,14 +77,15 @@ public class AccountController
                 }
                 // if the the user which profile it is show a button to edit Profile
                 // TODO : this should be obsolete with SpringSec
-                if(Long.parseLong(cookieValue) == account.get().getId())
+                Optional<Account> account1 = accountRepository.findByEmail(principal.getName());
+                if(account1.get().getId().equals(userID))
                 {
                     model.addAttribute("userIsLoggedIn", true);
                 }
                 
                 return "profile";
             }
-        }
+        
         return "redirect:/index";
     }
     

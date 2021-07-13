@@ -59,10 +59,10 @@ public class LearnSetController
     {
         // check if user is logged in -> else: send to Login
         String sessionString = Session.getSessionValue(request.getCookies());
-        if(sessionString == null)
-        {
-            return "redirect:/login";
-        }
+//        if(sessionString == null)
+//        {
+//            return "redirect:/login";
+//        }
         
         model.addAttribute("newLearnset", new LearnSet());
         return "createLearnset";
