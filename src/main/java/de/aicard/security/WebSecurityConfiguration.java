@@ -35,6 +35,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
+        // TODO : Error Controller + 404 + 503
         http.authorizeRequests()
                 .antMatchers("/createLearnset", "/learnSets", "/profile", "/profile/**",
                              "/deckOverview/**").hasAnyRole("USER")

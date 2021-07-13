@@ -1,6 +1,6 @@
 package de.aicard.controller;
 
-import de.aicard.config.Session;
+import de.aicard.config.RegPattern;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.account.Professor;
 import de.aicard.domains.account.Student;
@@ -11,22 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.DatatypeConverter;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class LoginController {
-
-    private static final String patternReg = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
 
     @Autowired
     AccountRepository accountRepository;
@@ -63,8 +57,10 @@ public class LoginController {
         // List of possible errors to return to user
         List<String> errors = new ArrayList<>();
 
+        // TODO : write Method in RegPattern that checks if password String matches RegEx
+        // TODO : write RegEx method that checks Email for validity blalal
         // check if Password is Strong enough
-        Pattern pattern = Pattern.compile(patternReg);
+        Pattern pattern = Pattern.compile(RegPattern.getPatternReg());
         String password = newProfessor.getPassword();
         Matcher matcher = pattern.matcher(password);
         
@@ -103,7 +99,7 @@ public class LoginController {
         List<String> errors = new ArrayList<>();
     
         // check if Password is Strong enough
-        Pattern pattern = Pattern.compile(patternReg);
+        Pattern pattern = Pattern.compile(RegPattern.getPatternReg());
         String password = newStudent.getPassword();
         Matcher matcher = pattern.matcher(password);
     

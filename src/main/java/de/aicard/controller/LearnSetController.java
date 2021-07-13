@@ -1,9 +1,7 @@
 package de.aicard.controller;
 
-import de.aicard.config.Session;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
-import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
@@ -20,18 +18,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.activation.FileTypeMap;
-import javax.activation.MimetypesFileTypeMap;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -55,62 +48,47 @@ public class LearnSetController
 
 
     @GetMapping("/createLearnset")
-    public String getCreateLearnset(HttpServletRequest request, HttpServletResponse response, Model model)
+    public String getCreateLearnset(Model model)
     {
-        // check if user is logged in -> else: send to Login
-        String sessionString = Session.getSessionValue(request.getCookies());
-//        if(sessionString == null)
-//        {
-//            return "redirect:/login";
-//        }
-        
         model.addAttribute("newLearnset", new LearnSet());
         return "createLearnset";
     }
 
     @PostMapping("/createLearnset")
-    public String postCreateLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, HttpServletRequest request, HttpServletResponse response)
+    public String postCreateLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, Principal principal)
     {
-        String accountID = Session.getSessionValue(request.getCookies());
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+        
         // check if user is logged in -> else: send to Login
-        if(accountID != null)
+        if(account.isPresent())
         {
-            List<Account> accountList = accountRepository.findAllById(Long.parseLong(accountID));
-            if (accountList.size() == 1)
-            {
-                System.out.println(accountList.get(0).toString());
-                newLearnset.setOwner(accountList.get(0));
+                //System.out.println(account.get());
+                newLearnset.setOwner(account.get());
                 newLearnset.setAdminList(new ArrayList<>());
-                newLearnset.addAdmin(accountList.get(0));
+                newLearnset.addAdmin(account.get());
                 newLearnset.setCardList(new CardList());
                 newLearnset.setCommentList(new ArrayList<>());
     
                 learnSetRepository.save(newLearnset);
     
                 return "redirect:cardOverview/" + newLearnset.getId();
-            }
         }
     
         return "redirect:/login";
     }
 
     @GetMapping("/learnSets")
-    public String getLearnSets(Model model ,HttpServletRequest request,HttpServletResponse response)
+    public String getLearnSets(Model model ,Principal principal)
     {
         // check if user is logged in -> else: send to Login
-        String accountID = Session.getSessionValue(request.getCookies());
-        
-        if(accountID != null)
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+        if(account.isPresent())
         {
-            List<Account> accountList = accountRepository.findAllById(Long.parseLong(accountID));
-            if (accountList.size() == 1)
-            {
-                List<LearnSet> learnSetListAdmin = learnSetRepository.findAdminLearnsets(Long.parseLong(accountID));
-                List<LearnSet> learnSetListFollowed = learnSetRepository.findFollwedLearnsets(Long.parseLong(accountID));
-
-                model.addAttribute("learnSetListAdmin", learnSetListAdmin);
-                model.addAttribute("learnSetListFollowed", learnSetListFollowed);
-            }
+            List<LearnSet> learnSetListAdmin = learnSetRepository.findAdminLearnsets(account.get().getId());
+            List<LearnSet> learnSetListFollowed = learnSetRepository.findFollwedLearnsets(account.get().getId());
+            
+            model.addAttribute("learnSetListAdmin", learnSetListAdmin);
+            model.addAttribute("learnSetListFollowed", learnSetListFollowed);
         }
         return "learnSets";
     }
@@ -141,22 +119,19 @@ public class LearnSetController
     
     // TODO : work in progress; problems showing each File of each Card of the LearnSet
     @GetMapping("cardOverview/{id}")
-    public String getCardOverview(@PathVariable Long id,HttpServletRequest request,HttpServletResponse response, Model model)
+    public String getCardOverview(@PathVariable Long id,Principal principal, Model model)
     {
         Optional<LearnSet> learnSet =  learnSetRepository.findById(id);
-        String cookieValue = Session.getSessionValue(request.getCookies());
-        if(cookieValue == null){
-            return "redirect:/login";
-        }
-        List<Account> accounts = accountRepository.findAllById(Long.parseLong(cookieValue));
+        
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
         //System.out.println("account Faculty " + accounts.get(0).getFaculty());
         //System.out.println("Set Faculty " + learnSet.get().getFaculty());
         
         // ach scheißdrauf
-        if (learnSet.isPresent() && (
+        if (learnSet.isPresent() && account.isPresent() && (
             learnSet.get().getVisibility() == Visibility.PUBLIC ||
-            learnSet.get().getVisibility() == Visibility.PRIVATE && learnSet.get().getAdminList().contains(accounts.get(0)) ||
-            learnSet.get().getVisibility() == Visibility.PROTECTED && accounts.get(0).getFaculty() == learnSet.get().getFaculty()))
+            learnSet.get().getVisibility() == Visibility.PRIVATE && learnSet.get().getAdminList().contains(account.get()) ||
+            learnSet.get().getVisibility() == Visibility.PROTECTED && account.get().getFaculty() == learnSet.get().getFaculty()))
         {
             // TODO : check if the CardContentFile exists; what should I do if it doesnt?
             model.addAttribute("learnSet", learnSetRepository.findById(id));
