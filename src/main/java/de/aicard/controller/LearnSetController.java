@@ -108,8 +108,8 @@ public class LearnSetController
             learnSet.get().getVisibility() == Visibility.PRIVATE && learnSet.get().getAdminList().contains(account.get()) ||
             learnSet.get().getVisibility() == Visibility.PROTECTED && account.get().getFaculty() == learnSet.get().getFaculty()))
         {
-            // TODO : check if the CardContentFile exists; what should I do if it doesnt?
-            model.addAttribute("learnSet", learnSetRepository.findById(id));
+            // TODO : check if the CardContentFile exists; what should we do if it doesnt?
+            model.addAttribute("learnSet", learnSet.get());
             List<Card> cardListList = learnSet.get().getCardList().getListOfCards();
             String filePath = "/learnSetImage/";
             for ( Card card : cardListList)
@@ -132,10 +132,9 @@ public class LearnSetController
 
             return "cardOverview";
         }
-        else
-        {
-            return "redirect:/index";
-        }
+        
+        return "redirect:/index";
+        
     }
     
     // getImagesForLearnSet
@@ -147,7 +146,7 @@ public class LearnSetController
     }
     
     @GetMapping("/deleteCard/{id}")
-    public String deleteCard(@PathVariable("id") Long id, Principal principal)
+    public String getDeleteCard(@PathVariable("id") Long id, Principal principal)
     {
         Optional<Card> card = cardRepository.findById(id);
         Optional<LearnSet> learnSet =  learnSetRepository.getLearnSetByCardId(card.get().getId());
@@ -155,13 +154,87 @@ public class LearnSetController
         
         if(learnSet.isPresent() && account.isPresent() && learnSet.get().getAdminList().contains(account.get()))
         {
-            System.out.println(card.get().getId());
             
-            cardRepository.deleteById(card.get().getId(),card.get().getCardFront().getId(), card.get().getCardBack().getId());
+            
+            if(card.get().getCardFront().getType() != DataType.TextFile)
+            {
+                // TODO : sollte das in ein TryCatch oder so ähnlich?
+                File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.get().getCardFront().getData());
+                file.delete();
+            }
+            if(card.get().getCardBack().getType() != DataType.TextFile)
+            {
+                // TODO : sollte das in ein TryCatch oder so ähnlich?
+                File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.get().getCardBack().getData());
+                file.delete();
+            }
+    
+            learnSet.get().getCardList().removeFromList(card.get());
+            cardRepository.delete(card.get());
+//            cardRepository.deleteById(card.get().getId(),card.get().getCardFront().getId(), card.get().getCardBack().getId());
         }
         return "redirect:/cardOverview/" + learnSet.get().getId();
     }
     
+    @GetMapping("/editCard/{id}")
+    public String getEditCard(@PathVariable("id") Long id, Principal principal, Model model)
+    {
+        return "editCard";
+    }
+    
+    @GetMapping("/deleteLearnSet/{id}")
+    public String getDeleteLearnSet(@PathVariable("id") Long id, Principal principal)
+    {
+        Optional<LearnSet> learnSet =  learnSetRepository.findById(id);
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+    
+        if(learnSet.isPresent() && account.isPresent() && learnSet.get().getAdminList().contains(account.get()))
+        {
+            
+            // delete each cardFile from cardFile-Folder
+            for (Card card : learnSet.get().getCardList().getListOfCards())
+            {
+                if(card.getCardFront().getType() != DataType.TextFile)
+                {
+                    // TODO : sollte das in ein TryCatch oder so ähnlich?
+                    File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardFront().getData());
+                    file.delete();
+                }
+                if(card.getCardBack().getType() != DataType.TextFile)
+                {
+                    // TODO : sollte das in ein TryCatch oder so ähnlich?
+                    File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardBack().getData());
+                    file.delete();
+                }
+            }
+            
+            // delete every reference that exists to this learnset
+            List<Account> accountList = accountRepository.findAll();
+            for (Account account1 : accountList)
+            {
+                if(account1.getOwnLearnSets().contains(learnSet))
+                {
+                    account1.getOwnLearnSets().remove(learnSet);
+                }
+                if(account1.getFavoriteLearnSets().contains(learnSet))
+                {
+                    account1.getFavoriteLearnSets().remove(learnSet);
+                }
+                // TODO : falls ein LearnSetsAbo existiert, lösche diese referenz auch!
+            }
+            learnSet.get().setOwner(null);
+            learnSetRepository.delete(learnSet.get());
+        }
+        
+        return "redirect:/learnSets";
+    }
+    
+    @GetMapping("/editLearnSet/{id}")
+    public String getEditLearnSet(@PathVariable("id") Long id, Principal principal, Model model)
+    {
+        
+        return "editLearnSet";
+    }
     
 
 }

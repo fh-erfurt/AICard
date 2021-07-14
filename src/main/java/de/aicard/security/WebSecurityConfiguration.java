@@ -35,18 +35,22 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        // TODO : Error Controller + 404 + 503
+        // TODO : add Error Controller + 404 + 503
         http.authorizeRequests()
-                .antMatchers("/createLearnset", "/learnSets", "/profile", "/profile/**",
-                             "/deckOverview/**").hasAnyRole("USER")
+                .antMatchers("/addCard/*", "/cardOverview/**", "/createLearnset", "/deckOverview/**",
+                             "/editCard/**", "/editLearnSet/**", "/learnSets", "/profile", "/profile/**",
+                             "/updateProfile/**"
+                             // TODO : hier müssen alle seiten bzw getMethoden eingetragen werden
+                             ).hasAnyRole("USER")
                 
                 .antMatchers("/","/index", "/login", "/registration").permitAll()
+                
                 
                 .and()
                 .formLogin()
                     .loginPage("/login") // use GetMapping in LoginController
                     .usernameParameter("email").passwordParameter("password")
-                    .defaultSuccessUrl("/learnSets") // if Login was successful, go to Startpage
+                    .defaultSuccessUrl("/learnSets") // if Login was successful, go to learnSets
                     .permitAll()
                 
                 .and()
