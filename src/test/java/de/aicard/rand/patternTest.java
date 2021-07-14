@@ -22,6 +22,12 @@ public class patternTest {
         String emailFalse = "waid@K#alt.de";
         Assertions.assertFalse(RegPattern.emailMatches(emailFalse));
 
+        emailFalse = "waidK#alt.de";
+        Assertions.assertFalse(RegPattern.emailMatches(emailFalse));
+
+        String emailBW = "BwDLZDoberlugKirchhainStandortserviceStrausberg@bundeswehr.org";
+        Assertions.assertTrue(RegPattern.emailMatches(emailBW));
+
     }
 
 }
