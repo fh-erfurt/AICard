@@ -93,31 +93,6 @@ public class LearnSetController
         return "learnSets";
     }
 
-    
-//    @GetMapping("cardOverview/{id}")
-//    @ResponseBody
-//    public String getCardoverviewRest(@PathVariable Long id, HttpServletResponse response, HttpServletRequest request)
-//    {
-//        JSONArray jsonArray = new JSONArray();
-//
-//        Optional<LearnSet> learnSet = learnSetRepository.findById(id);
-//        if(learnSet.get() != null)
-//        {
-//            for ( Card card :  learnSet.get().getCardList().getListOfCards())
-//            {
-//                String path = System.getProperty("user.dir");
-//                path = path + "\\\\cardFiles";
-//                path = path.replace("\\", "\\\\");
-//                System.out.println(path);
-////                jsonArray.add(card);
-//            }
-//
-//        }
-//        return jsonArray.toString();
-//    }
-
-    
-    // TODO : work in progress; problems showing each File of each Card of the LearnSet
     @GetMapping("cardOverview/{id}")
     public String getCardOverview(@PathVariable Long id,Principal principal, Model model)
     {
@@ -171,6 +146,22 @@ public class LearnSetController
         return ResponseEntity.ok().contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(img))).body(Files.readAllBytes(img.toPath()));
     }
     
-
+    @GetMapping("/deleteCard/{id}")
+    public String deleteCard(@PathVariable("id") Long id, Principal principal)
+    {
+        Optional<Card> card = cardRepository.findById(id);
+        Optional<LearnSet> learnSet =  learnSetRepository.getLearnSetByCardId(card.get().getId());
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+        
+        if(learnSet.isPresent() && account.isPresent() && learnSet.get().getAdminList().contains(account.get()))
+        {
+            System.out.println(card.get().getId());
+            
+            cardRepository.deleteById(card.get().getId(),card.get().getCardFront().getId(), card.get().getCardBack().getId());
+        }
+        return "redirect:/cardOverview/" + learnSet.get().getId();
+    }
+    
+    
 
 }

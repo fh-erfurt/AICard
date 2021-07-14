@@ -57,25 +57,18 @@ public class LoginController {
         // List of possible errors to return to user
         List<String> errors = new ArrayList<>();
 
-        // TODO : write Method in RegPattern that checks if password String matches RegEx
-        // TODO : write RegEx method that checks Email for validity blalal
-        // check if Password is Strong enough
-        Pattern pattern = Pattern.compile(RegPattern.getPatternReg());
-        String password = newProfessor.getPassword();
-        Matcher matcher = pattern.matcher(password);
         
         // prepare for check if account with this email already exists
         String profMail = newProfessor.getEmail();
         Optional<Account> matchingEntries = accountRepository.findByEmail(profMail);
         
-        // endcode password
-        newProfessor.setPassword(passwordEncoder.encode(newProfessor.getPassword()));
-        
-        if (matchingEntries.isEmpty() && matcher.matches()) {
+        if (matchingEntries.isEmpty() && RegPattern.passMatches(newProfessor.getPassword()) && RegPattern.emailMatches(newProfessor.getEmail())) {
+            // endcode password
+            newProfessor.setPassword(passwordEncoder.encode(newProfessor.getPassword()));
             accountRepository.save(newProfessor);
             return "redirect:/login";
         } else {
-            if (!matcher.matches()) {
+            if (!RegPattern.passMatches(newProfessor.getPassword())) {
                 errors.add("Passwort entspricht nicht den Passwortrichtlinien");
                 System.out.println("password not matched");
             }
@@ -83,6 +76,10 @@ public class LoginController {
                 //TODO: DAS GEHT SO ABER NICHT! DOCH!
                 errors.add("Ein Account mit diser E-Mail Adresse existiert bereits");
                 System.out.println("entry exists");
+            }
+            
+            if(!RegPattern.emailMatches(newProfessor.getEmail())){
+                errors.add("die e-mail adresse ist ungültig");
             }
             errors.add("Anmeldung Fehlgeschlagen");
 
@@ -99,22 +96,20 @@ public class LoginController {
         List<String> errors = new ArrayList<>();
     
         // check if Password is Strong enough
-        Pattern pattern = Pattern.compile(RegPattern.getPatternReg());
-        String password = newStudent.getPassword();
-        Matcher matcher = pattern.matcher(password);
     
         // prepare for check if account with this email already exists
         String studMail = newStudent.getEmail();
         Optional<Account> matchingEntries = accountRepository.findByEmail(studMail);
     
-        // endcode password
-        newStudent.setPassword(passwordEncoder.encode(newStudent.getPassword()));
+        
 
-        if (matchingEntries.isEmpty() && matcher.matches()) {
+        if (matchingEntries.isEmpty() && RegPattern.passMatches(newStudent.getPassword()) && RegPattern.emailMatches(newStudent.getEmail()) ) {
+            // endcode password
+            newStudent.setPassword(passwordEncoder.encode(newStudent.getPassword()));
             accountRepository.save(newStudent);
             return "redirect:index";
         } else {
-            if (!matcher.matches()) {
+            if (!RegPattern.passMatches(newStudent.getPassword())) {
                 errors.add("Passwort entspricht nicht den Passwortrichtlinien");
                 System.out.println("password not matched");
             }
@@ -122,6 +117,9 @@ public class LoginController {
                 //TODO: DAS GEHT SO ABER NICHT! DOCH!
                 errors.add("Ein Account mit diser E-Mail Adresse existiert bereits");
                 System.out.println("entry exists");
+            }
+            if(!RegPattern.emailMatches(newStudent.getEmail())){
+                errors.add("die e-mail adresse ist ungültig");
             }
             errors.add("Anmeldung Fehlgeschlagen");
 

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface LearnSetRepository extends JpaRepository<LearnSet, Long>
@@ -30,4 +31,12 @@ public interface LearnSetRepository extends JpaRepository<LearnSet, Long>
             "WHERE al.ACCOUNT_ID = ?1")
     List<LearnSet> findFollwedLearnsets(Long accountID);
     
+    @Query(nativeQuery = true, value = "" +
+            "SELECT * "+
+            "FROM LEARNSET as ls " +
+            "JOIN CARDLIST_CARD as CC on ls.CARDLIST_ID = CC.CARDLIST_ID " +
+            "where cc.LISTOFCARDS_ID = ?1")
+    Optional<LearnSet> getLearnSetByCardId(Long cardId);
+    
+
 }

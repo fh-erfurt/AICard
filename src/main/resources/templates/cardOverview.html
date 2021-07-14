@@ -92,6 +92,7 @@
                             <source th:src="${card.getCardBack().getData()}" type="video/mp4" > <!--type="?"-->
                         </video>
                     </div>
+                    <a  class="btn redBtn" th:href="@{'/deleteCard/' + ${card.getId()}}" >Please Delete ME</a>
 
                 </div>
                 <!--End Switch-->
