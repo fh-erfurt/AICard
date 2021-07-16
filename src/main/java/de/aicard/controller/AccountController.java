@@ -1,34 +1,30 @@
 package de.aicard.controller;
 
-import de.aicard.config.Session;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.account.Professor;
 import de.aicard.domains.account.Student;
 import de.aicard.storages.AccountRepository;
+import de.aicard.storages.LearnSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
 import java.util.*;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.DatatypeConverter;
 
 @Controller
 public class AccountController
 {
-
-
     private static final String patternReg = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
 
     @Autowired
     AccountRepository accountRepository;
+    
+    @Autowired
+    LearnSetRepository learnSetRepository;
     
     /**
      * This shows the logged in users Profile, while calling showProfile() with the userID as PathVariable
@@ -37,25 +33,31 @@ public class AccountController
      * @return
      */
     @GetMapping("/profile")
-    public String showMyProfile(Model model, HttpServletRequest request)
+    public String showMyProfile(Model model, HttpServletRequest request, Principal principal)
     {
-        if(Session.getSessionValue(request.getCookies()) != null)
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+//        System.out.println(principal);
+//        System.out.println(principal.getName());
+        
+        if( account.isPresent())
         {
-            return showProfile(Long.parseLong(Session.getSessionValue(request.getCookies())), model, request);
+            return showProfile(account.get().getId(), model, principal);
         }
+//        if(Session.getSessionValue(request.getCookies()) != null)
+//        {
+//            return showProfile(Long.parseLong(Session.getSessionValue(request.getCookies())), model, request);
+//        }
         
         return "redirect:/index";
     }
 
     @GetMapping("/profile/{userID}")
-    public String showProfile(@PathVariable("userID") Long userID, Model model,HttpServletRequest request)
+    public String showProfile(@PathVariable("userID") Long userID, Model model, Principal principal)
     {
         List<String> errors = new ArrayList<>();
         // only loggedIN users can see an account
         
-        String cookieValue = Session.getSessionValue(request.getCookies());
-        if(cookieValue != null)
-        {
+        
             Optional<Account> account = accountRepository.findById(userID);
             if(account.isPresent())
             {
@@ -70,40 +72,39 @@ public class AccountController
                 }
                 // if the the user which profile it is show a button to edit Profile
                 // TODO : this should be obsolete with SpringSec
-                if(Long.parseLong(cookieValue) == account.get().getId())
+                Optional<Account> account1 = accountRepository.findByEmail(principal.getName());
+                if(account1.get().getId().equals(userID))
                 {
                     model.addAttribute("userIsLoggedIn", true);
                 }
                 
                 return "profile";
             }
-        }
+        
         return "redirect:/index";
     }
     
     @GetMapping("/updateProfile")
-    public String getUpdateProfile(HttpServletRequest request,Model model)
+    public String getUpdateProfile(Principal principal,Model model)
     {
-        String userIDfromCookie = Session.getSessionValue(request.getCookies());
-        if(userIDfromCookie != null)
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+        
+        if(account.isPresent())
         {
-            Optional<Account> account = accountRepository.findById(Long.parseLong(userIDfromCookie));
-            if(account.isPresent())
+            if(account.get() instanceof Professor)
             {
-                if(account.get() instanceof Professor)
-                {
-                    model.addAttribute("isProfessor", true);
-                    model.addAttribute("professorAcademicGrade", ((Professor)account.get()).getAcademicGrade());
-                }
-                else
-                {
-                    model.addAttribute("isProfessor", false);
-                    model.addAttribute("studentSemester", ((Student)account.get()).getSemester());
-                }
-                model.addAttribute("account", account.get());
-                return "updateProfile";
+                model.addAttribute("isProfessor", true);
+                model.addAttribute("professorAcademicGrade", ((Professor)account.get()).getAcademicGrade());
             }
+            else
+            {
+                model.addAttribute("isProfessor", false);
+                model.addAttribute("studentSemester", ((Student)account.get()).getSemester());
+            }
+            model.addAttribute("account", account.get());
+            return "updateProfile";
         }
+        
         return "redirect:/index";
     }
     

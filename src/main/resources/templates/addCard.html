@@ -24,6 +24,8 @@
                             <div id="textFileFrontInput" class="formListElement">
                                 <label for="cardFrontTextFileInput">TextFile</label>
                                 <br>
+                                <input type="text" id="cardFrontTextFileTitle" name="cardFrontTextFileTitle">
+                                <br>
                                 <textarea type="text" id="cardFrontTextFileInput" name="cardFrontTextFileInput" maxlength="512"></textarea>
                             </div>
 
@@ -58,15 +60,17 @@
                             <h3>CardBack</h3>
                             <div class="formListElement">
                                 <select name="cardBackType" id="cardBackType">
-          <option selected="selected" value="TextFile">TextFile</option>
-          <option value="AudioFile">AudioFile</option>
-          <option value="PictureFile">PictureFile</option>
-          <option value="VideoFile">VideoFile</option>
-        </select>
+                                  <option selected="selected" value="TextFile">TextFile</option>
+                                  <option value="AudioFile">AudioFile</option>
+                                  <option value="PictureFile">PictureFile</option>
+                                  <option value="VideoFile">VideoFile</option>
+                                </select>
                             </div>
 
                             <div id="textFileBackInput" class="formListElement">
                                 <label for="cardBackTextFileInput">TextFile</label>
+                                <br>
+                                <input type="text" id="cardBackTextFileTitle" name="cardBackTextFileTitle">
                                 <br>
                                 <textarea maxlength="512" type="text" id="cardBackTextFileInput" name="cardBackTextFileInput"></textarea>
                             </div>

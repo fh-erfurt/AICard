@@ -19,15 +19,20 @@
                 <label class="head">Anmeldung</label>
             </div>
 
-            <form method="POST" id="loginform" th:action="@{/accountLogin}" th:object="${account}">
+            <form method="POST" id="loginform" th:action="@{/login}">
+
+                <div th:if="${param.error}">
+                    Ungültiger Nutzername oder Password.
+                </div>
+
                 <div class="formListElement">
                     <label>Email</label>
-                    <input th:field="*{email} " type="email" value="" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="inputtext">
+                    <input type="email" value="" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="inputtext">
                 </div>
 
                 <div class="formListElement">
                     <label>Passwort</label>
-                    <input th:field="*{password}" type="password" id="password" name="password" placeholder="Passwort" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passwort'" class="inputtext">
+                    <input  type="password" id="password" name="password" placeholder="Passwort" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passwort'" class="inputtext">
                 </div>
                 <div class="btnContainer bottom">
 

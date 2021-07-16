@@ -1,13 +1,12 @@
 package de.aicard.controller;
 
-import de.aicard.config.Session;
+import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.storages.AccountRepository;
 import de.aicard.storages.LearnSetRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +15,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,19 +37,16 @@ public class AddCardController
     
     
     @GetMapping("/addCard/{learnSetID}")
-    public String getAddCard(@PathVariable Long learnSetID, HttpServletRequest request  , Model model)
+    public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model)
     {
         Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
-        
-        if(learnSet.isPresent())
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+        if(learnSet.isPresent() && account.isPresent())
         {
-            if(learnSetRepository.findById(learnSetID).isPresent())
+            if (learnSet.get().getAdminList().contains(account.get()))
             {
-                if (learnSet.get().getAdminList().contains(accountRepository.findById(Long.parseLong(Session.getSessionValue(request.getCookies()))).get()))
-                {
-                    model.addAttribute("learnSetID", learnSetID);
-                    return "addCard";
-                }
+                model.addAttribute("learnSetID", learnSetID);
+                return "addCard";
             }
         }
         return "redirect:/index";
@@ -61,13 +57,15 @@ public class AddCardController
     @ResponseBody
     public ModelAndView postAddCard(
             
-            @PathVariable Long learnSetID, HttpServletRequest request, Model model,
-            @RequestParam(value = "cardFrontTextFileInput", required = false) String cardFrontTextFileInput, @RequestParam("cardFrontType") String cardFrontType,
+            @PathVariable Long learnSetID,Principal principal, Model model,
+            @RequestParam("cardFrontType") String cardFrontType,
+            @RequestParam(value = "cardFrontTextFileTitle", required = false) String cardFrontTextFileTile, @RequestParam(value = "cardFrontTextFileInput", required = false) String cardFrontTextFileInput,
             @RequestParam(value = "cardFrontPictureFileTitle", required = false) String cardFrontPictureFileTitle, @RequestParam(value = "cardFrontPictureFileInput", required = false) MultipartFile cardFrontPictureFileInput,
             @RequestParam(value = "cardFrontVideoFileTitle", required = false) String cardFrontVideoFileTitle, @RequestParam(value = "cardFrontVideoFileInput", required = false) MultipartFile cardFrontVideoFileInput,
             @RequestParam(value = "cardFrontAudioFileTitle", required = false) String cardFrontAudioFileTitle, @RequestParam(value = "cardFrontAudioFileInput", required = false) MultipartFile cardFrontAudioFileInput,
-            
-            @RequestParam(value = "cardBackTextFileInput", required = false) String cardBackTextFileInput, @RequestParam("cardBackType") String cardBackType,
+
+            @RequestParam("cardBackType") String cardBackType,
+            @RequestParam(value = "cardBackTextFileTitle" , required = false) String cardBackTextFileTitle, @RequestParam(value = "cardBackTextFileInput", required = false) String cardBackTextFileInput,
             @RequestParam(value = "cardBackPictureFileTitle", required = false) String cardBackPictureFileTitle, @RequestParam(value = "cardBackPictureFileInput", required = false) MultipartFile cardBackPictureFileInput,
             @RequestParam(value = "cardBackVideoFileTitle", required = false) String cardBackVideoFileTitle, @RequestParam(value = "cardBackVideoFileInput", required = false) MultipartFile cardBackVideoFileInput,
             @RequestParam(value = "cardBackAudioFileTitle", required = false) String cardBackAudioFileTitle, @RequestParam(value = "cardBackAudioFileInput", required = false) MultipartFile cardBackAudioFileInput
@@ -83,11 +81,11 @@ public class AddCardController
         ModelAndView modelAndView = new ModelAndView();
         List<String> errors = new ArrayList<>();
         Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
-        
-        if(learnSet.isPresent())
+        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+        if(learnSet.isPresent() && account.isPresent())
         {
             // TODO : simplify this into a loop or a Service with a loop -> no code repetition
-            if (learnSet.get().getAdminList().contains(accountRepository.findById(Long.parseLong(Session.getSessionValue(request.getCookies()))).get()))
+            if (learnSet.get().getAdminList().contains(account.get()))
             {
                 // we are here if the learnSet exists and the Owner or an Admin is logged in
                 Card card = new Card();
@@ -220,6 +218,7 @@ public class AddCardController
                 {
                     if (cardFrontTextFileInput != null && !cardFrontTextFileInput.isEmpty())
                     {
+                        cardContentFront.setTitle(cardFrontTextFileTile);
                         cardContentFront.setData(cardFrontTextFileInput);
                         cardContentFront.setType(DataType.TextFile);
                     }
@@ -348,6 +347,7 @@ public class AddCardController
                 {
                     if(cardBackTextFileInput != null && !cardBackTextFileInput.isEmpty())
                     {
+                        cardContentBack.setTitle(cardBackTextFileTitle);
                         cardContentBack.setData(cardBackTextFileInput);
                         cardContentBack.setType(DataType.TextFile);
                     }
