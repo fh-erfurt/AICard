@@ -2,18 +2,15 @@ package de.aicard.security;
 
 import de.aicard.domains.Social.Chat;
 import de.aicard.domains.account.Account;
-import de.aicard.domains.account.Professor;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.ManyToMany;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;

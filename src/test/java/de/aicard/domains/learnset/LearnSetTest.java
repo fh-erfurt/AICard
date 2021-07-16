@@ -1,18 +1,5 @@
 package de.aicard.domains.learnset;
 
-import de.aicard.domains.Social.Message;
-import de.aicard.domains.account.Account;
-import de.aicard.domains.account.Professor;
-import de.aicard.domains.account.Student;
-import de.aicard.domains.card.Card;
-import de.aicard.domains.enums.AcademicGrade;
-import de.aicard.domains.enums.Faculty;
-import de.aicard.domains.enums.Visibility;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-
 /**
  * Test class for all the functions of LearnSet
  *

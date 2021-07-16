@@ -40,15 +40,7 @@
                     <input type="submit" name="submit" id="loginbutton" value="anmelden" class="btn blueBtn">
                 </div>
             </form>
-            <!--            Error Messages-->
-            <table th:if="${!#lists.isEmpty(errorList)}">
-                <tbody>
-                    <tr th:each="error : ${errorList}">
-                        <td><span th:text="${error}"> Title </span></td>
-                    </tr>
-                </tbody>
-            </table>
-            <!--            End of Error Messages-->
+
 
             <div class="btnPlaceHolder"></div>
         </div>

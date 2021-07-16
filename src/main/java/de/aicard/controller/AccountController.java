@@ -1,8 +1,6 @@
 package de.aicard.controller;
 
 import de.aicard.domains.account.Account;
-import de.aicard.domains.account.Professor;
-import de.aicard.domains.account.Student;
 import de.aicard.storages.AccountRepository;
 import de.aicard.storages.LearnSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,14 +60,7 @@ public class AccountController
             if(account.isPresent())
             {
                 model.addAttribute("account", account.get());
-                if(account.get() instanceof Professor)
-                {
-                    model.addAttribute("professorAcademicGrade", ((Professor)account.get()).getAcademicGrade());
-                }
-                else
-                {
-                    model.addAttribute("studentSemester", ((Student)account.get()).getSemester());
-                }
+                
                 // if the the user which profile it is show a button to edit Profile
                 // TODO : this should be obsolete with SpringSec
                 Optional<Account> account1 = accountRepository.findByEmail(principal.getName());
@@ -91,16 +82,6 @@ public class AccountController
         
         if(account.isPresent())
         {
-            if(account.get() instanceof Professor)
-            {
-                model.addAttribute("isProfessor", true);
-                model.addAttribute("professorAcademicGrade", ((Professor)account.get()).getAcademicGrade());
-            }
-            else
-            {
-                model.addAttribute("isProfessor", false);
-                model.addAttribute("studentSemester", ((Student)account.get()).getSemester());
-            }
             model.addAttribute("account", account.get());
             return "updateProfile";
         }

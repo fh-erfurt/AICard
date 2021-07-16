@@ -24,9 +24,8 @@ import java.util.logging.Logger;
 @Setter
 @Entity
 @Table
-@Inheritance( strategy = InheritanceType.SINGLE_TABLE )
-@DiscriminatorColumn( name="type" )
-public abstract class Account extends BaseEntity
+@NoArgsConstructor
+public class Account extends BaseEntity
 {
     //Logger
     private static final Logger logger = Logger.getLogger(Account.class.getName());
