@@ -4,6 +4,7 @@ import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.CardKnowledgeLevel;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -32,7 +33,7 @@ public class CardStatus extends BaseEntity
      * The card to which the Object belongs.
      */
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Card card;
     
     

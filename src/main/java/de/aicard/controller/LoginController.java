@@ -34,7 +34,7 @@ public class LoginController {
     }
 
     // TODO : nach erfolgreicher Registriebrung zu /login weiterleiten und email ggf. vorladen?
-    // TODO : in registriebrung nicht zwisch
+    // TODO : in registrieBrung nicht zwisch
     @GetMapping("/login")
     public String getLogin()
     {

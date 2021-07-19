@@ -43,7 +43,7 @@ public class MyUserDetails implements UserDetails
         this.description = account.getDescription();
         this.faculty = account.getFaculty();
         this.ownLearnSets = account.getOwnLearnSets();
-        this.favoriteLearnSets = account.getFavoriteLearnSets();
+        this.favoriteLearnSets = account.getLearnsetAbos();
         this.friends = account.getFriends();
         this.chats = account.getChats();
         this.authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));

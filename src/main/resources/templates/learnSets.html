@@ -19,15 +19,15 @@
             </div>
 
             <!-- weitere gridItmes werden dynamisch geladen -->
-            <div th:each="adminLearnSet : ${learnSetListAdmin}" class="gridItem">
-                <div th:text="${adminLearnSet.title}" class="deckName"></div>
-                <div th:text="${adminLearnSet.getCardList().getListLength()}" class="cardCount">count: </div>
+            <div th:each="ownAbo : ${ownLearnSetAbos}" class="gridItem">
+                <div th:text="${ownAbo.getLearnSet().title}" class="deckName"></div>
+                <div th:text="${ownAbo.getLearnSet().getCardList().getListLength()}" class="cardCount">count: </div>
                 <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
                 <div class="btn edit">
-                    <a th:href="@{'/cardOverview/' + ${adminLearnSet.getId()}}">edit</a>
+                    <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">edit</a>
                 </div>
                 <div class="btn learn">
-                    <a href="">learn</a>
+                    <a th:href="@{/}">learn</a>
                 </div>
             </div>
 
@@ -41,14 +41,14 @@
 
 
             <!-- weitere gridItmes werden dynamisch geladen -->
-            <div th:each="followedLearnSet : ${learnSetListFollowed}" class="gridItem">
-                <div th:text="${followedLearnSet.title}" class="deckName"></div>
-                <div th:text="${followedLearnSet.getCardList().getListLength()}" class="cardCount">count: </div>
+            <div th:each="favoriteLearnSetAbo : ${favoriteLearnSetAbos}" class="gridItem">
+                <div th:text="${favoriteLearnSetAbo.getLearnSet().title}" class="deckName"></div>
+                <div th:text="${favoriteLearnSetAbo.getLearnSet().getCardList().getListLength()}" class="cardCount">count: </div>
                 <div class="btn edit">
-                    <a href="">edit</a>
+                    <a href="">unfollow</a>
                 </div>
                 <div class="btn learn">
-                    <a href="">learn</a>
+                    <a th:href="@{'/learn/' + ${favoriteLearnSetAbo.getId()} + '/10' } ">learn</a>
                 </div>
             </div>
 

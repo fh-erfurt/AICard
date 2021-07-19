@@ -7,6 +7,7 @@ import de.aicard.domains.enums.State;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class LearnSetAbo extends BaseEntity
      * The member-variable m_cardStatus is an ArrayList of CardStatus. It contains a CardStatus
      * for each Card in the LearnSet m_learnSet.
      */
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<CardStatus> cardStatus;
     /**
      * The status of the LearnSet of the Account.
@@ -41,7 +42,7 @@ public class LearnSetAbo extends BaseEntity
     /**
      * The LearnSet the Account subscribed to.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private LearnSet learnSet;
     /**
      * The evaluation the Account has given to the LearnSet. If the Account has not yet given an
@@ -167,10 +168,8 @@ public class LearnSetAbo extends BaseEntity
      */
     public LearningSession createLearningSession(int _numOfCards)
     {
-
+        
         List<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
         return new LearningSession(sessionList);
-
-
     }
 }

@@ -6,10 +6,8 @@ import de.aicard.domains.enums.DataType;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
-import de.aicard.storages.AccountRepository;
-import de.aicard.storages.CardListRepository;
-import de.aicard.storages.CardRepository;
-import de.aicard.storages.LearnSetRepository;
+import de.aicard.domains.learnset.LearnSetAbo;
+import de.aicard.storages.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +42,9 @@ public class LearnSetController
     
     @Autowired
     CardListRepository cardListRepository;
-
+    
+    @Autowired
+    LearnSetAboRepository learnSetAboRepository;
 
 
     @GetMapping("/createLearnset")
@@ -68,8 +68,13 @@ public class LearnSetController
                 newLearnset.addAdmin(account.get());
                 newLearnset.setCardList(new CardList());
                 newLearnset.setCommentList(new ArrayList<>());
-    
-                learnSetRepository.save(newLearnset);
+           
+//                learnSetRepository.save(newLearnset);
+                account.get().getOwnLearnSets().add(newLearnset);
+                account.get().addNewFavoriteLearnSet(newLearnset);
+                LearnSetAbo abo = account.get().getLearnsetAbos().get(account.get().getLearnsetAbos().size()-1);
+                abo.setCardStatus(new ArrayList<>());
+                learnSetAboRepository.save(abo);
     
                 return "redirect:cardOverview/" + newLearnset.getId();
         }
@@ -84,11 +89,24 @@ public class LearnSetController
         Optional<Account> account = accountRepository.findByEmail(principal.getName());
         if(account.isPresent())
         {
-            List<LearnSet> learnSetListAdmin = learnSetRepository.findAdminLearnsets(account.get().getId());
-            List<LearnSet> learnSetListFollowed = learnSetRepository.findFollwedLearnsets(account.get().getId());
+            //List<LearnSet> learnSetListAdmin = learnSetRepository.findAdminLearnsets(account.get().getId());
+            //List<LearnSet> learnSetListFollowed = learnSetRepository.findFollwedLearnsets(account.get().getId());
+            List<LearnSetAbo> abos = account.get().getLearnsetAbos();
+            List<LearnSetAbo> ownLearnSetAbos = new ArrayList<LearnSetAbo>();
+            List<LearnSetAbo> favoriteLearnSetAbos = new ArrayList<LearnSetAbo>();
+//            List<LearnSetAbo> abos = learnSetAboRepository.findLearnSetAboByAccountId(account.get().getId());
+            for ( LearnSetAbo learnSetAbo : abos)
+            {
+                if(learnSetAbo.getLearnSet().getAdminList().contains(account.get())){
+                    ownLearnSetAbos.add(learnSetAbo);
+                }else{
+                    favoriteLearnSetAbos.add(learnSetAbo);
+                }
+            }
             
-            model.addAttribute("learnSetListAdmin", learnSetListAdmin);
-            model.addAttribute("learnSetListFollowed", learnSetListFollowed);
+            
+            model.addAttribute("ownLearnSetAbos", ownLearnSetAbos);
+            model.addAttribute("favoriteLearnSetAbos", favoriteLearnSetAbos);
         }
         return "learnSets";
     }
@@ -216,9 +234,9 @@ public class LearnSetController
                 {
                     account1.getOwnLearnSets().remove(learnSet);
                 }
-                if(account1.getFavoriteLearnSets().contains(learnSet))
+                if(account1.getLearnsetAbos().contains(learnSet))
                 {
-                    account1.getFavoriteLearnSets().remove(learnSet);
+                    account1.getLearnsetAbos().remove(learnSet);
                 }
                 // TODO : falls ein LearnSetsAbo existiert, lösche diese referenz auch!
             }

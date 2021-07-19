@@ -39,12 +39,13 @@ public class Account extends BaseEntity
     protected Faculty faculty;
     
     @Setter(AccessLevel.NONE)
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     protected List<LearnSet> ownLearnSets;
-    
+    // um festzustellen ob das Learnset von dem account ist wird durch die abos iteriert und die ownerid verglichen
+    // learnSet -> isAccountID in AdminList
     @Setter(AccessLevel.NONE)
-    @ManyToMany
-    protected List<LearnSetAbo> favoriteLearnSets;
+    @ManyToMany(cascade = CascadeType.ALL)
+    protected List<LearnSetAbo> learnsetAbos;
 
     @Setter(AccessLevel.NONE)
     @ManyToMany
@@ -113,7 +114,7 @@ public class Account extends BaseEntity
     
     public LearnSetAbo getFavoriteLearnSetByIndex(int _index)
     {
-        return this.favoriteLearnSets.get(_index);
+        return this.learnsetAbos.get(_index);
     }
     
     public void addNewFavoriteLearnSet(LearnSet _favoriteSet)
@@ -122,7 +123,7 @@ public class Account extends BaseEntity
         {
             try
             {
-                this.favoriteLearnSets.add(new LearnSetAbo(_favoriteSet));
+                this.learnsetAbos.add(new LearnSetAbo(_favoriteSet));
             }
             catch (Exception e)
             {
@@ -133,17 +134,17 @@ public class Account extends BaseEntity
     
     public void deleteFavoriteLearnSetByIndex(int _index)
     {
-        this.favoriteLearnSets.remove(_index);
+        this.learnsetAbos.remove(_index);
     }
     
     public void deleteFavoriteLearnSetByLastElement()
     {
-        this.favoriteLearnSets.remove(this.favoriteLearnSets.size() - 1);
+        this.learnsetAbos.remove(this.learnsetAbos.size() - 1);
     }
     
     public void deleteAllFavoriteLearnSets()
     {
-        this.favoriteLearnSets.clear();
+        this.learnsetAbos.clear();
     }
     
     //Friends
