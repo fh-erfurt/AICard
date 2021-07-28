@@ -39,7 +39,7 @@ public class Card extends BaseEntity
     }
     
     
-    // GETTER + SETTER
+//     GETTER + SETTER
 //    public CardContent getCardFront() throws NullPointerException
 //    {
 //        if(this.cardFront == null)
