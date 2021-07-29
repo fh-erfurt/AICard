@@ -1,5 +1,6 @@
 package de.aicard.domains.card;
 
+import de.aicard.domains.enums.DataType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,38 +16,18 @@ import java.lang.reflect.Method;
  */
 public class CardContentTest
 {
-//    @Test
-//    public void testIsPlaying()
-//    {
-//        //given: an AudioFile and a VideoFile
-//
-//        AudioFile audio = new AudioFile("audioContent", "audioTitle");
-//        VideoFile video = new VideoFile("videoContent", "video");
-//
-//
-//
-//
-//
-//        //when: we do nothing
-//        //then: both are not playing
-//        Assertions.assertEquals(false, audio.getIsPlaying());
-//        Assertions.assertEquals(false, video.getIsPlaying());
-//
-//        //when: we play both files
-//        audio.playAudioData();
-//        video.playVideoData();
-//        //then: it is playing
-//        Assertions.assertEquals(true, audio.getIsPlaying());
-//        Assertions.assertEquals(true, video.getIsPlaying());
-//
-//        //when: we pause both files
-//        audio.pauseAudioData();
-//        video.pauseVideoData();
-//        //then: both are not playing
-//        Assertions.assertEquals(false, audio.getIsPlaying());
-//        Assertions.assertEquals(false, video.getIsPlaying());
-//
-//    }
-    
+    @Test
+    public void testCardContent()
+    {
+        CardContent CardFront = new CardContent("title1","data1", DataType.TextFile);
 
+        String expectedData = "data1";
+        String expectedTitle = "title1";
+        DataType expectedDataType = DataType.TextFile;
+
+        Assertions.assertEquals(expectedData, ( CardFront.getData()));
+        Assertions.assertEquals(expectedTitle, (CardFront.getTitle()));
+        Assertions.assertEquals(expectedDataType, (CardFront.getType()));
+
+    }
 }

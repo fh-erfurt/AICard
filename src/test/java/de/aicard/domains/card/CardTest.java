@@ -2,7 +2,7 @@ package de.aicard.domains.card;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import de.aicard.domains.enums.DataType;
 /**
  * Class for testing all functionality of the CardClass
  *
@@ -10,90 +10,62 @@ import org.junit.jupiter.api.Test;
  */
 class CardTest
 {
-//    @Test
-//    public void testingCardFrontAndBackandEdibility()
-//    {
-//        //given: two TextFiles with testStrings as data
-//        String expectedTestData1 = "I'm testData1";
-//        String expectedTestData2 = "I'm testData2";
-//
-//        TextFile testTextFile1 = new TextFile(expectedTestData1);
-//        TextFile testTextFile2 = new TextFile(expectedTestData2);
-//
-//        //when: creating Card with the two TextFiles as front and back
-//        Card testCard = new Card((CardContent) testTextFile1, (CardContent) testTextFile2);
-//
-//        //then: the testStrings should be accessible via front and back of the Card
-//        Assertions.assertEquals(expectedTestData1, ((TextFile) testCard.getCardFront()).getTextData());
-//        Assertions.assertEquals(expectedTestData2, ((TextFile) testCard.getCardBack()).getTextData());
-//
-//        //when: editing the content of the front and back of the Card
-//        expectedTestData1 = "I'm edited1";
-//        expectedTestData2 = "I'm edited2";
-//
-//        ((TextFile) testCard.getCardFront()).setTextData(expectedTestData1);
-//        ((TextFile) testCard.getCardBack()).setTextData(expectedTestData2);
-//
-//        //then: the value of CardFront and CardBack are the edited Strings
-//        Assertions.assertEquals(expectedTestData1, ((TextFile) testCard.getCardFront()).getTextData());
-//        Assertions.assertEquals(expectedTestData2, ((TextFile) testCard.getCardBack()).getTextData());
-//    }
-//
-//    @Test
-//    public void testingCardWithAllFileTypes()
-//    {
-//        //given: 4 empty Cards. 4 CardContents (1 Text, 1 Picture, 1 Audio, 1 Video)
-//        String testCardTextData = "I'm TextData";
-//        String testCardPictureData = "I'm PictureData";
-//        String testCardAudioData = "I'm AudioData";
-//        String testCardAudioTitle = "I'm AudioTitle";
-//        String testCardVideoData = "I'm VideoData";
-//        String testCardVideoTitle = "I'm VideoTitle";
-//
-//        //when: setting the front and back of the Cards to the wanted content of different types
-//
-//        Card testCardText = new Card((CardContent) new TextFile(testCardTextData), (CardContent) new TextFile(testCardTextData));
-//        Card testCardPicture = new Card((CardContent) new PictureFile(testCardPictureData), (CardContent) new PictureFile(testCardPictureData));
-//        Card testCardAudio = new Card((CardContent) new AudioFile(testCardAudioData, testCardAudioTitle), (CardContent) new AudioFile(testCardAudioData, testCardAudioTitle));
-//        Card testCardVideo = new Card((CardContent) new VideoFile(testCardVideoData, testCardVideoTitle), (CardContent) new VideoFile(testCardVideoData, testCardVideoTitle));
-//
-//
-//        //then: we can access this content via the Card (Tests for all 4 CardContent types)
-//        Assertions.assertEquals(testCardTextData,((TextFile)testCardText.getCardFront()).getTextData());
-//
-//        Assertions.assertEquals(testCardPictureData, ((PictureFile) testCardPicture.getCardFront()).getPictureData());
-//
-//        Assertions.assertEquals(testCardAudioData,((AudioFile) testCardAudio.getCardFront()).getAudioData());
-//        Assertions.assertEquals(testCardAudioTitle, ((AudioFile) testCardAudio.getCardFront()).getTitle());
-//
-//        Assertions.assertEquals(testCardVideoData,((VideoFile) testCardVideo.getCardFront()).getVideoData());
-//        Assertions.assertEquals(testCardVideoTitle, ((VideoFile) testCardVideo.getCardFront()).getTitle());
-//    }
+    @Test
+    public void testingCardFrontAndBackandEdit()
+    {
+
+        CardContent CardFront = new CardContent("title1","data1",DataType.TextFile);
+        CardContent CardBack = new CardContent("title2","data2",DataType.TextFile);
+        Card testCard = new Card(CardFront,CardBack);
 
 
-//    @Test
-//    public void testCardSides(){
-//        String expectedTestData1 = "I'm testData1";
-//        String expectedTestData2 = "I'm testData2";
-//
-//        TextFile testTextFile1 = new TextFile(expectedTestData1,"Front");
-//        TextFile testTextFile2 = new TextFile(expectedTestData2,"Back");
-//
-//        Card testCard = new Card(testTextFile1,testTextFile2);
-//
-//        System.out.println(testCard.getCardFront().getData());
-//        System.out.println(testCard.getCardFront().getTitle());
-//        System.out.println(testCard.getCardBack().getData());
-//        System.out.println(testCard.getCardBack().getTitle());
-//
-//
-//        Assertions.assertEquals(testCard.getCardFront().getData(),expectedTestData1);
-//        Assertions.assertEquals(testCard.getCardBack().getData(),expectedTestData2);
-//    }
-//
-//    @Test
-//    public void testCardTypes(){
-//        String expectedData = "TestData1";
-//
-//    }
+        //given: two testStrings as data
+        String expectedFrontData = "data1";
+        String expectedBackData = "data2";
+        DataType expectedDataType = DataType.TextFile;
+
+        //then: the testStrings should be accessible via front and back of the Card
+
+        Assertions.assertEquals(expectedFrontData, ( testCard.getCardFront().getData()));
+        Assertions.assertEquals(expectedBackData, (testCard.getCardBack().getData()));
+        Assertions.assertEquals(expectedDataType, (testCard.getCardFront().getType()));
+        Assertions.assertEquals(expectedDataType, (testCard.getCardBack().getType()));
+
+        //when: editing the content of the front and back of the Card
+        expectedFrontData = "I'm edited1";
+        expectedBackData = "I'm edited2";
+
+        (testCard.getCardFront()).setData(expectedFrontData);
+        (testCard.getCardBack()).setData(expectedBackData);
+
+        //then: the value of CardFront and CardBack are the edited Strings
+        Assertions.assertEquals(expectedFrontData, (testCard.getCardFront()).getData());
+        Assertions.assertEquals(expectedBackData, (testCard.getCardBack()).getData());
+    }
+
+    @Test
+    public void testingCardWithAllFileTypes()
+    {
+
+     String CardTextDataFront = "textDataFront";
+     String CardPictureTitleBack = "title4";
+     DataType CardAudioTypeFront = DataType.AudioFile;
+     DataType CardVideoTypeBack = DataType.VideoFile;
+
+        //when: setting the front and back of the Cards to the wanted content of different types
+
+        Card testCardText = new Card(new CardContent("title1","textDataFront",DataType.TextFile), new CardContent("title2","textDataBack",DataType.TextFile));
+        Card testCardPicture = new Card(new CardContent("title3","pictureDataFront",DataType.PictureFile), new CardContent("title4","pictureDataBack",DataType.PictureFile));
+        Card testCardAudio = new Card(new CardContent("title5","audioDataFront",DataType.AudioFile), new CardContent("title6","audiDataBack",DataType.AudioFile));
+        Card testCardVideo = new Card(new CardContent("title7","videoDataFront",DataType.VideoFile), new CardContent("title8","videoDataBack",DataType.VideoFile));
+
+
+        //then: we can access this content via the Card (Tests for all 4 CardContent types)
+        Assertions.assertEquals(CardTextDataFront,(testCardText.getCardFront()).getData()); // access front data for text file
+        Assertions.assertEquals(CardPictureTitleBack, (testCardPicture.getCardBack()).getTitle()); // access back title for picture file
+        Assertions.assertEquals(CardAudioTypeFront, (testCardAudio.getCardFront()).getType()); // access front type for audio file
+        Assertions.assertEquals(CardVideoTypeBack, (testCardVideo.getCardBack()).getType()); // access back type for video file
+    }
+
+
 }
