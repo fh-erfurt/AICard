@@ -44,7 +44,7 @@ public class LearnSetTest
             cardList.addToList(card.get(i));
         }
 
-        Account learnSetOwner = new Student("mail", "password", "name", "a student", 3, Faculty.APPLIED_COMPUTER_SCIENCE);
+        Account learnSetOwner = new Account();
         LearnSet learnSet = new LearnSet(learnSetTitle, learnSetDescription, faculty, cardList, learnSetOwner, Visibility.PUBLIC);
 
         return learnSet;
@@ -96,8 +96,8 @@ public class LearnSetTest
     {
         //given: a testLearnSet and three accounts
         LearnSet learnSet = getTestLearnSet();
-        Account professor = new Professor("mail", "password", "Prof A", "Just a professor", AcademicGrade.JUNIOR_PROFESSOR,Faculty.APPLIED_COMPUTER_SCIENCE);
-        Account student = new Student("mail", "password", "hanz", "A productive student", 25, Faculty.ARCHITECTURE);
+        Account professor = new Account();
+        Account student = new Account();
         Account myOwnerStudent = learnSet.getOwner();
 
         //when: adding those Accounts as admins to the LearnSet
@@ -139,8 +139,8 @@ public class LearnSetTest
     {
         //given: a learnSet, 2 accounts and 3 messages
         LearnSet learnSet = getTestLearnSet();
-        Student student = (Student) learnSet.getOwner();
-        Professor professor = new Professor("mail", "password", "Prof A", "Just a professor", AcademicGrade.JUNIOR_PROFESSOR,Faculty.APPLIED_COMPUTER_SCIENCE);
+        Account student = learnSet.getOwner();
+        Account professor = new Account();
         Message message1 = new Message("Message 1", student);
         Message message2 = new Message("Message 2", professor);
         Message message3 = new Message("Message 3", student);
@@ -174,11 +174,11 @@ public class LearnSetTest
         Account ownerOfPublicLearnSet = publicLearnSet.getOwner();
         Account ownerOfProtectedLearnSet = protectedLearnSet.getOwner();
         Account ownerOfPrivateLearnSet = privateLearnSet.getOwner();
-        Account friendOfAll = new Student("mail", "password", "friend", "A friend", 2, Faculty.APPLIED_COMPUTER_SCIENCE);
+        Account friendOfAll = new Account();
         ownerOfPublicLearnSet.addFriend(friendOfAll);
         ownerOfProtectedLearnSet.addFriend(friendOfAll);
         ownerOfPrivateLearnSet.addFriend(friendOfAll);
-        Account allAlone = new Student("mail", "password", "no friend", "has no friends", 2, Faculty.APPLIED_COMPUTER_SCIENCE);
+        Account allAlone = new Account();
 
         //then: allAlone is only authorised to subscribe to the public LearnSet
         Assertions.assertTrue(publicLearnSet.isAuthorizedToAddLearnSet(allAlone));
