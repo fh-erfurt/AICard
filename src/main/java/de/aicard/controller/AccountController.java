@@ -1,6 +1,7 @@
 package de.aicard.controller;
 
 import de.aicard.domains.account.Account;
+import de.aicard.services.AccountService;
 import de.aicard.storages.AccountRepository;
 import de.aicard.storages.LearnSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.*;
 
@@ -18,12 +20,19 @@ public class AccountController
 {
     private static final String patternReg = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
 
+    private final AccountService accountService;
+
     @Autowired
     AccountRepository accountRepository;
     
     @Autowired
     LearnSetRepository learnSetRepository;
-    
+
+    @Autowired
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
+    }
+
     /**
      * This shows the logged in users Profile, while calling showProfile() with the userID as PathVariable
      * @param model
@@ -33,13 +42,9 @@ public class AccountController
     @GetMapping("/profile")
     public String showMyProfile(Model model, HttpServletRequest request, Principal principal)
     {
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-//        System.out.println(principal);
-//        System.out.println(principal.getName());
-        
-        if( account.isPresent())
+        if(accountService.accountExists(principal))
         {
-            return showProfile(account.get().getId(), model, principal);
+            return showProfile(accountService.getID(principal), model, principal);
         }
 //        if(Session.getSessionValue(request.getCookies()) != null)
 //        {
@@ -54,17 +59,14 @@ public class AccountController
     {
         List<String> errors = new ArrayList<>();
         // only loggedIN users can see an account
-        
-        
-            Optional<Account> account = accountRepository.findById(userID);
-            if(account.isPresent())
+
+            if(accountService.accountExists(userID))
             {
-                model.addAttribute("account", account.get());
+                model.addAttribute("account", accountService.getAccount(userID).get());
                 
                 // if the the user which profile it is show a button to edit Profile
                 // TODO : this should be obsolete with SpringSec
-                Optional<Account> account1 = accountRepository.findByEmail(principal.getName());
-                if(account1.get().getId().equals(userID))
+                if(accountService.isLoggedIn(principal, userID))
                 {
                     model.addAttribute("userIsLoggedIn", true);
                 }
@@ -78,57 +80,36 @@ public class AccountController
     @GetMapping("/updateProfile")
     public String getUpdateProfile(Principal principal,Model model)
     {
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-        
-        if(account.isPresent())
+        if(accountService.accountExists(principal))
         {
-            model.addAttribute("account", account.get());
+            model.addAttribute("account", accountService.getAccount(principal).get());
             return "updateProfile";
         }
         
         return "redirect:/index";
     }
+
     
-//    @PostMapping("/updateAccount")
-//    public String editAccount(@ModelAttribute("account") Account theAccount, Model model) throws NoSuchAlgorithmException {
-//
-//        List<String> errors = new ArrayList<>();
-//        Optional<Account> oldAccount = accountRepository.findById(theAccount.getId());
-//        String accountEmail = theAccount.getEmail();
-//        Optional<Account> matchingEntries = accountRepository.findByEmail(accountEmail);
-//        if (matchingEntries.isPresent() && matchingEntries.get().getId() != oldAccount.get().getId()) {
-//
-//            errors.add("Ein Account mit diser E-Mail Adresse existiert bereits");
-//            System.out.println("Ein Account mit diser E-Mail Adresse existiert bereits");
-//            model.addAttribute("errorList",errors);
-//            return "editAccount";
-//        }
-//        oldAccount.get().setEmail(accountEmail);
-//
-//
-//        Pattern pattern = Pattern.compile(patternReg);
-//        String password = theAccount.getPassword();
-//        Matcher matcher = pattern.matcher(password);
-//        //creating md5 hash
-//        MessageDigest md = MessageDigest.getInstance("MD5");
-//        md.update(password.getBytes());
-//        byte[] digest = md.digest();
-//        String hashedPassword = DatatypeConverter.printHexBinary(digest);
-//
-//        if (!matcher.matches()) {
-//            errors.add("Passwort entspricht nicht den Passwortrichtlinien");
-//            System.out.println("password not matched");
-//            model.addAttribute("errorList",errors);
-//            return "editAccount";
-//        }
-//        oldAccount.get().setPassword(hashedPassword);
-//        oldAccount.get().setName(theAccount.getName());
-//        oldAccount.get().setDescription(theAccount.getDescription());
-//        oldAccount.get().setFaculty(theAccount.getFaculty());
-//
-//        accountRepository.save(oldAccount.get());
-//        return "profile";
-//    }
+   @PostMapping("/updateAccount")
+   public String editAccount(@ModelAttribute("account") Account theAccount, Model model) throws NoSuchAlgorithmException {
+
+        //TODO: hier wird ID=NULL übergeben.
+       List<String> errors = new ArrayList<>();
+       try{
+           accountService.updateAccount(theAccount);
+       }
+       catch(IllegalStateException e){
+           errors.add(e.getMessage());
+           model.addAttribute("errorList",errors);
+       }
+
+       if(errors.isEmpty()){
+           return "profile";
+       }
+       else{
+           return "editAccount";
+       }
+   }
 
 
 }
