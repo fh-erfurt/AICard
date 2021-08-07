@@ -18,15 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class AccountController
 {
-    private static final String patternReg = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-
     private final AccountService accountService;
-
-    @Autowired
-    AccountRepository accountRepository;
-    
-    @Autowired
-    LearnSetRepository learnSetRepository;
 
     @Autowired
     public AccountController(AccountService accountService) {
@@ -62,7 +54,7 @@ public class AccountController
 
             if(accountService.accountExists(userID))
             {
-                model.addAttribute("account", accountService.getAccount(userID).get());
+                model.addAttribute("account", accountService.getAccount(userID));
                 
                 // if the the user which profile it is show a button to edit Profile
                 // TODO : this should be obsolete with SpringSec
@@ -82,7 +74,7 @@ public class AccountController
     {
         if(accountService.accountExists(principal))
         {
-            model.addAttribute("account", accountService.getAccount(principal).get());
+            model.addAttribute("account", accountService.getAccount(principal));
             return "updateProfile";
         }
         

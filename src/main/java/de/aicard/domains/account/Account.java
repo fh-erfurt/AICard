@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 @Entity
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 public class Account extends BaseEntity
 {
     //Logger
@@ -119,7 +120,7 @@ public class Account extends BaseEntity
     
     public void addNewFavoriteLearnSet(LearnSet _favoriteSet)
     {
-        if(_favoriteSet.isAuthorizedToAddLearnSet(this))
+        if(_favoriteSet.isAuthorizedToAccessLearnSet(this))
         {
             try
             {

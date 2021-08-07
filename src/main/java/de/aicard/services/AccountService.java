@@ -2,13 +2,12 @@ package de.aicard.services;
 
 import de.aicard.config.RegPattern;
 import de.aicard.domains.account.Account;
+import de.aicard.domains.learnset.LearnSet;
 import de.aicard.storages.AccountRepository;
-import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -76,8 +75,7 @@ public class AccountService {
     }
 
     public Boolean accountExists(Long ID){
-        Optional<Account> account = accountRepository.findById(ID);
-        return account.isPresent();
+        return accountRepository.existsById(ID);
     }
 
     public Long getID(Principal principal){
@@ -85,19 +83,19 @@ public class AccountService {
         return account.get().getId();
     }
 
-    public Optional<Account> getAccount(Long userID){
+    public Account getAccount(Long userID){
         Optional<Account>  account = accountRepository.findById(userID);
         if(account.isPresent()){
-            return account;
+            return account.get();
         }
         else return null;
 
     }
 
-    public Optional<Account> getAccount(Principal principal){
+    public Account getAccount(Principal principal){
         Optional<Account> account = accountRepository.findByEmail(principal.getName());
         if(account.isPresent()){
-            return account;
+            return account.get();
         }
         else return null;
 
@@ -105,5 +103,20 @@ public class AccountService {
 
     public Boolean isLoggedIn(Principal principal, Long ID){
         return getID(principal).equals(ID);
+    }
+
+    public Boolean isLoggedIn(Principal principal){
+        return (accountRepository.findByEmail(principal.getName())).isPresent();
+    }
+
+    public void saveAccount(Account account){
+        accountRepository.save(account);
+    }
+
+    public void addLearnSet(Account account, LearnSet learnSet){
+        account.getOwnLearnSets().add(learnSet);
+        account.addNewFavoriteLearnSet(learnSet);
+        //TODO: herausfinden, wie man darüber auch automatisch Abo speichern kann (oder geht das einfach so?)
+        saveAccount(account);
     }
 }

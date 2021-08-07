@@ -331,7 +331,7 @@ public class LearnSet extends BaseEntity
         }
     }
 
-    public boolean isAuthorizedToAddLearnSet(Account _account)
+    public boolean isAuthorizedToAccessLearnSet(Account _account)
     {
         switch (this.visibility)
         {

@@ -3,11 +3,13 @@ package de.aicard.controller;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
 import de.aicard.domains.enums.DataType;
-import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
-import de.aicard.storages.*;
+import de.aicard.services.AccountService;
+import de.aicard.services.CardService;
+import de.aicard.services.LearnSetAboService;
+import de.aicard.services.LearnSetService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,52 +33,38 @@ import java.util.Optional;
 @Controller
 public class LearnSetController
 {
-    @Autowired
-    LearnSetRepository learnSetRepository;
+    private final AccountService accountService;
+
+    private final LearnSetService learnSetService;
+
+    private final LearnSetAboService learnSetAboService;
+
+    private final CardService cardService;
 
     @Autowired
-    AccountRepository accountRepository;
-
-    @Autowired
-    CardRepository cardRepository;
-    
-    @Autowired
-    CardListRepository cardListRepository;
-    
-    @Autowired
-    LearnSetAboRepository learnSetAboRepository;
+    public LearnSetController(AccountService accountService, LearnSetService learnSetService, LearnSetAboService learnSetAboService, CardService cardService) {
+        this.accountService = accountService;
+        this.learnSetService = learnSetService;
+        this.learnSetAboService = learnSetAboService;
+        this.cardService = cardService;
+    }
 
 
     @GetMapping("/createLearnset")
     public String getCreateLearnset(Model model)
     {
-        model.addAttribute("newLearnset", new LearnSet());
+        //model.addAttribute("newLearnset", new LearnSet());
         return "createLearnset";
     }
 
     @PostMapping("/createLearnset")
-    public String postCreateLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, Principal principal)
+    public String postCreateLearnset(Model model, Principal principal)
     {
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-        
-        // check if user is logged in -> else: send to Login
-        if(account.isPresent())
-        {
-                //System.out.println(account.get());
-                newLearnset.setOwner(account.get());
-                newLearnset.setAdminList(new ArrayList<>());
-                newLearnset.addAdmin(account.get());
-                newLearnset.setCardList(new CardList());
-                newLearnset.setCommentList(new ArrayList<>());
-           
-//                learnSetRepository.save(newLearnset);
-                account.get().getOwnLearnSets().add(newLearnset);
-                account.get().addNewFavoriteLearnSet(newLearnset);
-                LearnSetAbo abo = account.get().getLearnsetAbos().get(account.get().getLearnsetAbos().size()-1);
-                abo.setCardStatus(new ArrayList<>());
-                learnSetAboRepository.save(abo);
-    
-                return "redirect:cardOverview/" + newLearnset.getId();
+        if(accountService.isLoggedIn(principal)){
+
+            Long id = learnSetService.createLearnSet(principal);
+//TODO: ERfolg prüfen
+            return "redirect:cardOverview/" + id;
         }
     
         return "redirect:/login";
@@ -86,18 +74,16 @@ public class LearnSetController
     public String getLearnSets(Model model ,Principal principal)
     {
         // check if user is logged in -> else: send to Login
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-        if(account.isPresent())
+        if(accountService.isLoggedIn(principal))
         {
-            //List<LearnSet> learnSetListAdmin = learnSetRepository.findAdminLearnsets(account.get().getId());
-            //List<LearnSet> learnSetListFollowed = learnSetRepository.findFollwedLearnsets(account.get().getId());
-            List<LearnSetAbo> abos = account.get().getLearnsetAbos();
+            //TODO: Das geht noch eleganter.
+            List<LearnSetAbo> abos = learnSetAboService.getLearnSetAbos(principal);
             List<LearnSetAbo> ownLearnSetAbos = new ArrayList<LearnSetAbo>();
             List<LearnSetAbo> favoriteLearnSetAbos = new ArrayList<LearnSetAbo>();
-//            List<LearnSetAbo> abos = learnSetAboRepository.findLearnSetAboByAccountId(account.get().getId());
+
             for ( LearnSetAbo learnSetAbo : abos)
             {
-                if(learnSetAbo.getLearnSet().getAdminList().contains(account.get())){
+                if(learnSetAbo.getLearnSet().getAdminList().contains(accountService.getAccount(principal))){
                     ownLearnSetAbos.add(learnSetAbo);
                 }else{
                     favoriteLearnSetAbos.add(learnSetAbo);
@@ -114,47 +100,22 @@ public class LearnSetController
     @GetMapping("cardOverview/{id}")
     public String getCardOverview(@PathVariable Long id,Principal principal, Model model)
     {
-        Optional<LearnSet> learnSet =  learnSetRepository.findById(id);
-        
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-        //System.out.println("account Faculty " + accounts.get(0).getFaculty());
-        //System.out.println("Set Faculty " + learnSet.get().getFaculty());
-        
+        String filePath = "/learnSetImage/";
         // ach scheißdrauf
-        if (learnSet.isPresent() && account.isPresent() && (
-            learnSet.get().getVisibility() == Visibility.PUBLIC ||
-            learnSet.get().getVisibility() == Visibility.PRIVATE && learnSet.get().getAdminList().contains(account.get()) ||
-            learnSet.get().getVisibility() == Visibility.PROTECTED && account.get().getFaculty() == learnSet.get().getFaculty()))
+        if (learnSetService.accountIsAuthorized(principal, id))
         {
             // TODO : check if the CardContentFile exists; what should we do if it doesnt?
-            model.addAttribute("learnSet", learnSet.get());
-            List<Card> cardListList = learnSet.get().getCardList().getListOfCards();
-            String filePath = "/learnSetImage/";
-            for ( Card card : cardListList)
-            {
-                if(card.getCardFront().getType() != DataType.TextFile)
-                {
-                    card.getCardFront().setData(filePath + card.getCardFront().getData());
-                }
-
-
-                if(card.getCardBack().getType() != DataType.TextFile)
-                {
-                    card.getCardBack().setData(filePath + card.getCardBack().getData());
-                }
+            CardList cardList = learnSetService.getCardList(id);
+            if(cardList != null){
+                model.addAttribute("learnSet", learnSetService.getLearnSetByLearnSetId(id));
+                List<Card> listOfCards = cardService.setCardData(filePath, cardList);
+                model.addAttribute("cardList", listOfCards);
+                return "cardOverview";
             }
-            
-            model.addAttribute("cardList", cardListList);
-            
-            System.out.println(learnSetRepository.findById(id).get().getTitle());
-
-            return "cardOverview";
         }
-        
         return "redirect:/index";
-        
     }
-    
+
     // getImagesForLearnSet
     @GetMapping("/learnSetImage/{fileName}")
     public ResponseEntity<byte[]> getImage(@PathVariable("fileName") String fileName) throws IOException
@@ -166,32 +127,13 @@ public class LearnSetController
     @GetMapping("/deleteCard/{id}")
     public String getDeleteCard(@PathVariable("id") Long id, Principal principal)
     {
-        Optional<Card> card = cardRepository.findById(id);
-        Optional<LearnSet> learnSet =  learnSetRepository.getLearnSetByCardId(card.get().getId());
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-        
-        if(learnSet.isPresent() && account.isPresent() && learnSet.get().getAdminList().contains(account.get()))
+        Long learnSetId =  learnSetService.getLearnSetIdByCardId(id);
+        if(learnSetService.isAdmin(principal, learnSetId))
         {
-            
-            
-            if(card.get().getCardFront().getType() != DataType.TextFile)
-            {
-                // TODO : sollte das in ein TryCatch oder so ähnlich?
-                File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.get().getCardFront().getData());
-                file.delete();
-            }
-            if(card.get().getCardBack().getType() != DataType.TextFile)
-            {
-                // TODO : sollte das in ein TryCatch oder so ähnlich?
-                File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.get().getCardBack().getData());
-                file.delete();
-            }
-    
-            learnSet.get().getCardList().removeFromList(card.get());
-            cardRepository.delete(card.get());
-//            cardRepository.deleteById(card.get().getId(),card.get().getCardFront().getId(), card.get().getCardBack().getId());
+            cardService.deleteCard(id);
+//
         }
-        return "redirect:/cardOverview/" + learnSet.get().getId();
+        return "redirect:/cardOverview/" + learnSetId;
     }
     
     @GetMapping("/editCard/{id}")
@@ -203,45 +145,13 @@ public class LearnSetController
     @GetMapping("/deleteLearnSet/{id}")
     public String getDeleteLearnSet(@PathVariable("id") Long id, Principal principal)
     {
-        Optional<LearnSet> learnSet =  learnSetRepository.findById(id);
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-    
-        if(learnSet.isPresent() && account.isPresent() && learnSet.get().getAdminList().contains(account.get()))
+        if(learnSetService.isAdmin(principal, id))
         {
             
-            // delete each cardFile from cardFile-Folder
-            for (Card card : learnSet.get().getCardList().getListOfCards())
-            {
-                if(card.getCardFront().getType() != DataType.TextFile)
-                {
-                    // TODO : sollte das in ein TryCatch oder so ähnlich?
-                    File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardFront().getData());
-                    file.delete();
-                }
-                if(card.getCardBack().getType() != DataType.TextFile)
-                {
-                    // TODO : sollte das in ein TryCatch oder so ähnlich?
-                    File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardBack().getData());
-                    file.delete();
-                }
-            }
-            
-            // delete every reference that exists to this learnset
-            List<Account> accountList = accountRepository.findAll();
-            for (Account account1 : accountList)
-            {
-                if(account1.getOwnLearnSets().contains(learnSet))
-                {
-                    account1.getOwnLearnSets().remove(learnSet);
-                }
-                if(account1.getLearnsetAbos().contains(learnSet))
-                {
-                    account1.getLearnsetAbos().remove(learnSet);
-                }
-                // TODO : falls ein LearnSetsAbo existiert, lösche diese referenz auch!
-            }
-            learnSet.get().setOwner(null);
-            learnSetRepository.delete(learnSet.get());
+            // delete all cards and corresponding cardFiles
+            //TODO: Prüfen, ob JPA das nicht automatisch macht.
+            cardService.deleteAllCardsFromLearnSet(id);
+            learnSetService.deleteLearnSet(id);
         }
         
         return "redirect:/learnSets";
