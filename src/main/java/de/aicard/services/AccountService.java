@@ -20,7 +20,7 @@ public class AccountService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public void createAccount(Account account){
+    public void createAccount(Account account) throws IllegalStateException{
         Optional<Account> matchingEntries = accountRepository.findByEmail(account.getEmail());
         if(matchingEntries.isEmpty()
                 && RegPattern.passMatches(account.getPassword())
@@ -42,7 +42,7 @@ public class AccountService {
         }
     }
 
-    public void updateAccount(Account account){
+    public void updateAccount(Account account) throws IllegalStateException{
         Optional<Account> oldAccount = accountRepository.findById(account.getId());
         String accountEmail = account.getEmail();
         Optional<Account> matchingEntries = accountRepository.findByEmail(accountEmail);
