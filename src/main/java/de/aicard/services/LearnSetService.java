@@ -23,12 +23,11 @@ public class LearnSetService {
         this.accountService = accountService;
     }
 
-
-    public Long createLearnSet(Principal principal) {
+    public Long createLearnSet(LearnSet learnSet, Principal principal) {
 
         if (accountService.accountExists(principal)) {
             Account account = accountService.getAccount(principal);
-            LearnSet newLearnset = new LearnSet();
+            LearnSet newLearnset = learnSet;
             newLearnset.setOwner(account);
             newLearnset.setAdminList(new ArrayList<>());
             newLearnset.addAdmin(account);

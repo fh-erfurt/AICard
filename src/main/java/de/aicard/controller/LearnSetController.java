@@ -53,16 +53,16 @@ public class LearnSetController
     @GetMapping("/createLearnset")
     public String getCreateLearnset(Model model)
     {
-        //model.addAttribute("newLearnset", new LearnSet());
+        model.addAttribute("newLearnset", new LearnSet());
         return "createLearnset";
     }
 
     @PostMapping("/createLearnset")
-    public String postCreateLearnset(Model model, Principal principal)
+    public String postCreateLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, Principal principal)
     {
         if(accountService.isLoggedIn(principal)){
 
-            Long id = learnSetService.createLearnSet(principal);
+            Long id = learnSetService.createLearnSet(newLearnset, principal);
 //TODO: ERfolg prüfen
             return "redirect:cardOverview/" + id;
         }

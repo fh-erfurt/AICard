@@ -18,7 +18,7 @@ public class CardService {
     private final LearnSetService learnSetService;
 
     @Autowired
-    public CardService(CardService cardService, LearnSetService learnSetService) {
+    public CardService(LearnSetService learnSetService) {
         this.learnSetService = learnSetService;
     }
 
