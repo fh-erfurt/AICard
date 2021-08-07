@@ -1,13 +1,17 @@
 package de.aicard.services;
 
 import de.aicard.domains.card.Card;
+import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.storages.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -16,10 +20,12 @@ public class CardService {
     CardRepository cardRepository;
 
     private final LearnSetService learnSetService;
+    private final CardContentService cardContentService;
 
     @Autowired
-    public CardService(LearnSetService learnSetService) {
+    public CardService(LearnSetService learnSetService, CardContentService cardContentService) {
         this.learnSetService = learnSetService;
+        this.cardContentService = cardContentService;
     }
 
     public List<Card> setCardData(String filePath, CardList cardList){
@@ -63,5 +69,116 @@ public class CardService {
             this.deleteCard(card.getId());
         }
     }
+
+
+    public Card addNewCard(String cardFrontType, String cardFrontTitel, String cardFrontInput, String cardBackType, String cardBackTitel, String cardBackInput){
+
+        Card card = new Card();
+        CardContent cardContentFront = null;
+        CardContent cardContentBack = null;
+
+        if(cardFrontInput != null && !cardFrontInput.isEmpty()
+        && cardBackInput != null && !cardBackInput.isEmpty()){
+            cardContentFront = cardContentService.getNewCardContent(cardFrontTitel, cardFrontInput, cardFrontType);
+            cardContentBack = cardContentService.getNewCardContent(cardBackTitel, cardBackInput, cardBackType);
+        }
+        else{
+            throw  new IllegalStateException("eine Texteingabe fehlt!");
+        }
+        card.setCardFront(cardContentFront);
+        card.setCardBack(cardContentBack);
+
+        cardRepository.save(card);
+
+        return card;
+
+    }
+
+    public Card addNewCard(String cardFrontType, String cardFrontTitel, MultipartFile cardFrontInput, String cardBackType, String cardBackTitel, String cardBackInput) throws IOException, IllegalStateException {
+       String cardFrontInputString = this.handleFileInput(cardFrontInput);
+       return this.addNewCard(cardFrontType, cardFrontTitel, cardFrontInputString, cardBackType, cardBackTitel, cardBackInput);
+    }
+
+    public Card addNewCard(String cardFrontType, String cardFrontTitel, String cardFrontInput, String cardBackType, String cardBackTitel, MultipartFile cardBackInput) throws IOException, IllegalStateException{
+        String cardBackInputString = this.handleFileInput(cardBackInput);
+        return this.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput, cardBackType, cardBackTitel, cardBackInputString);
+    }
+
+    public Card addNewCard(String cardFrontType, String cardFrontTitel, MultipartFile cardFrontInput, String cardBackType, String cardBackTitel, MultipartFile cardBackInput) throws IOException, IllegalStateException{
+        String cardFrontInputString = this.handleFileInput(cardFrontInput);
+        String cardBackInputString = this.handleFileInput(cardBackInput);
+        return this.addNewCard(cardFrontType, cardFrontTitel, cardFrontInputString, cardBackType, cardBackTitel, cardBackInputString);
+    }
+
+    public String getCorrectTitle(String cardFileType, String pictureTitle, String textTitle, String videoTitle, String audioTitle){
+        String cardTitle = null;
+        switch (cardFileType) {
+            case "PictureFile":
+                cardTitle = pictureTitle;
+                break;
+            case "TextFile":
+                cardTitle = textTitle;
+                break;
+            case "VideoFile":
+                cardTitle = videoTitle;
+                break;
+            case "AudioFile":
+                cardTitle = audioTitle;
+                break;
+        }
+        return cardTitle;
+    }
+
+    public MultipartFile getCorrectInput(String cardFileType, MultipartFile videoInput, MultipartFile pictureInput, MultipartFile audioInput){
+        MultipartFile fileInput = null;
+        switch (cardFileType) {
+            case "PictureFile":
+                fileInput = pictureInput;
+                break;
+            case "VideoFile":
+                fileInput = videoInput;
+                break;
+            case "AudioFile":
+                fileInput = audioInput;
+                break;
+        }
+        return fileInput;
+    }
+
+    public String handleFileInput(MultipartFile fileInput) throws IOException, IllegalStateException{
+        // todo: not working for type video
+        String filePath = System.getProperty("user.dir") + "\\cardFiles\\";
+        String cardFileInputPath = null;
+        if (fileInput != null && ! fileInput.isEmpty())
+        {
+            // file exists
+            String fileName = System.currentTimeMillis() + "_" + fileInput.getOriginalFilename();
+            String cardFrontFilePath = filePath + fileName;
+            cardFrontFilePath = cardFrontFilePath.replace("\\", "\\\\");
+            File newFile = new File(cardFrontFilePath);
+            fileInput.transferTo(newFile);
+
+            String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
+            String fileType = mimetype.split("/")[0];
+            if (fileType.equals("image"))
+            {
+                cardFileInputPath = fileName;
+
+            }
+            else
+            {
+                newFile.delete();
+                throw new IllegalStateException("Falscher Datentyp");
+            }
+        }
+        else
+        {
+            throw new IllegalStateException("Keine Datei hochgeladen");
+        }
+
+        return cardFileInputPath;
+    }
+
+
 
 }

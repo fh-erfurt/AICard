@@ -92,6 +92,17 @@ public class LearnSetService {
         }
     }
 
+    public void addCardToList(Long learnSetId, Card card){
+        if(learnSetExists(learnSetId)){
+            LearnSet learnSet = learnSetRepository.findById(learnSetId).get();
+
+            learnSet.getCardList().addToList(card);
+            learnSetRepository.save(learnSet);
+        }
+
+
+    }
+
     public void deleteLearnSet(Long id){
         LearnSet learnSet = this.getLearnSetByLearnSetId(id);
         //TODO: übernommen aus Controller. Bei gelegenheit prüfen, ob es auch ohne geht/ JPA Konfiguration checken:
