@@ -22,7 +22,7 @@ public class LoginController {
     }
     
     @GetMapping("/registration")
-    public String registration(Model model)
+    public String getRegistration(Model model)
     {
         model.addAttribute("newAccount", new Account());
 
@@ -32,7 +32,7 @@ public class LoginController {
     // TODO : nach erfolgreicher Registriebrung zu /login weiterleiten und email ggf. vorladen?
     // TODO : in registrieBrung nicht zwisch
     @GetMapping("/login")
-    public String getLogin()
+    public String getLogin(Model model)
     {
         return "login";
     }
@@ -40,21 +40,21 @@ public class LoginController {
     
 
     @PostMapping("/createAccount")
-    public String createAccount(@ModelAttribute("Account") Account newAccount, Model model)
+    public String postCreateAccount(@ModelAttribute("Account") Account newAccount, Model model)
     {
         // List of possible errors to return to user
         List<String> errors = new ArrayList<>();
-
         try{
             accountService.createAccount(newAccount);
-            return "redirect:/login";
+            return getLogin(model.addAttribute("registeredEmail", newAccount.getEmail()));
+//            return "redirect:/login";
         }
         catch (IllegalStateException e){
             //TODO: Dies ist eine Verzweiflungstat nachts um 11. bei Gelegenheit schöner machen.
             errors.add(e.getMessage());
             errors.add("Anmeldung Fehlgeschlagen");
             model.addAttribute("errorList",errors);
-            return "registration";
+            return getRegistration(model.addAttribute("errorList", errors));
         }
     }
 
