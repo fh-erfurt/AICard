@@ -93,20 +93,20 @@ public class CardService {
         return card;
 
     }
-
+    
     public Card addNewCard(String cardFrontType, String cardFrontTitel, MultipartFile cardFrontInput, String cardBackType, String cardBackTitel, String cardBackInput) throws IOException, IllegalStateException {
-       String cardFrontInputString = this.handleFileInput(cardFrontInput);
+       String cardFrontInputString = this.handleFileInput(cardFrontInput, cardFrontType);
        return this.addNewCard(cardFrontType, cardFrontTitel, cardFrontInputString, cardBackType, cardBackTitel, cardBackInput);
     }
 
     public Card addNewCard(String cardFrontType, String cardFrontTitel, String cardFrontInput, String cardBackType, String cardBackTitel, MultipartFile cardBackInput) throws IOException, IllegalStateException{
-        String cardBackInputString = this.handleFileInput(cardBackInput);
+        String cardBackInputString = this.handleFileInput(cardBackInput, cardBackType);
         return this.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput, cardBackType, cardBackTitel, cardBackInputString);
     }
 
     public Card addNewCard(String cardFrontType, String cardFrontTitel, MultipartFile cardFrontInput, String cardBackType, String cardBackTitel, MultipartFile cardBackInput) throws IOException, IllegalStateException{
-        String cardFrontInputString = this.handleFileInput(cardFrontInput);
-        String cardBackInputString = this.handleFileInput(cardBackInput);
+        String cardFrontInputString = this.handleFileInput(cardFrontInput, cardFrontType);
+        String cardBackInputString = this.handleFileInput(cardBackInput, cardBackType);
         return this.addNewCard(cardFrontType, cardFrontTitel, cardFrontInputString, cardBackType, cardBackTitel, cardBackInputString);
     }
 
@@ -144,9 +144,8 @@ public class CardService {
         }
         return fileInput;
     }
-
-    public String handleFileInput(MultipartFile fileInput) throws IOException, IllegalStateException{
-        // todo: not working for type video
+    
+    public String handleFileInput(MultipartFile fileInput,String expectedType) throws IOException, IllegalStateException{
         String filePath = System.getProperty("user.dir") + "\\cardFiles\\";
         String cardFileInputPath = null;
         if (fileInput != null && ! fileInput.isEmpty())
@@ -157,18 +156,24 @@ public class CardService {
             cardFrontFilePath = cardFrontFilePath.replace("\\", "\\\\");
             File newFile = new File(cardFrontFilePath);
             fileInput.transferTo(newFile);
-
-            String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-            String fileType = mimetype.split("/")[0];
-            if (fileType.equals("image"))
+            
+            
+//            String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
+//            String fileType = mimetype.split("/")[0];
+//            System.out.println("mimetype: " + mimetype);
+//            System.out.println("filetype:" + fileType);
+            String fileType  = fileInput.getContentType().split("/")[0];
+            System.out.println(expectedType);
+            if(expectedType.equals("VideoFile") && fileType.equals("video") ||
+               expectedType.equals("AudioFile") && fileType.equals("audio") ||
+               expectedType.equals("PictureFile") && fileType.equals("image"))
             {
                 cardFileInputPath = fileName;
-
             }
             else
             {
-                newFile.delete();
-                throw new IllegalStateException("Falscher Datentyp");
+               newFile.delete();
+               throw new IllegalStateException("Falscher Datentyp");
             }
         }
         else

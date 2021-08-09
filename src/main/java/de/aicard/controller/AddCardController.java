@@ -118,6 +118,11 @@ public class AddCardController {
             modelAndView.setViewName("redirect:/cardOverview/" + learnSetID);
             return modelAndView;
         } else {
+            for (String error: errors)
+            {
+                System.out.println(error);
+            }
+            // TODO : write errors to frontend -> viel spaß frontend team :)
             modelAndView.setViewName("redirect:/index");
             return modelAndView;
         }
