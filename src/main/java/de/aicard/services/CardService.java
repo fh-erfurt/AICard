@@ -49,7 +49,7 @@ public class CardService {
             Card card = cardRepository.findById(id).get();
             if(card.getCardFront().getType() != DataType.TextFile)
             {
-                // TODO : sollte das in ein TryCatch oder so ähnlich?
+                // TODO : sollte das in ein TryCatch oder so ähnlich? --> JA
                 File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardFront().getData());
                 file.delete();
             }
@@ -69,6 +69,7 @@ public class CardService {
             this.deleteCard(card.getId());
         }
     }
+    
 
 
     public Card addNewCard(String cardFrontType, String cardFrontTitel, String cardFrontInput, String cardBackType, String cardBackTitel, String cardBackInput){

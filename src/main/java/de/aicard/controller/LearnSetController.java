@@ -12,6 +12,7 @@ import de.aicard.services.LearnSetAboService;
 import de.aicard.services.LearnSetService;
 
 
+import de.aicard.storages.LearnSetAboRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -151,6 +152,7 @@ public class LearnSetController
             // delete all cards and corresponding cardFiles
             //TODO: Prüfen, ob JPA das nicht automatisch macht.
             cardService.deleteAllCardsFromLearnSet(id);
+            learnSetService.deleteAllAccountReferences(id);
             learnSetService.deleteLearnSet(id);
         }
         

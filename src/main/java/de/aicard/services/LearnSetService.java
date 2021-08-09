@@ -4,12 +4,15 @@ import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
+import de.aicard.storages.AccountRepository;
 import de.aicard.storages.LearnSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LearnSetService {
@@ -17,6 +20,9 @@ public class LearnSetService {
     LearnSetRepository learnSetRepository;
 
     private final AccountService accountService;
+    
+    @Autowired
+    public AccountRepository accountRepository;
 
     @Autowired
     public LearnSetService(AccountService accountService) {
@@ -49,8 +55,7 @@ public class LearnSetService {
     }
 
     public LearnSet getLearnSetByLearnSetId(Long learnSetId){
-        LearnSet learnSet = learnSetRepository.findById(learnSetId).get();
-        return learnSet;
+        return learnSetRepository.findById(learnSetId).get();
     }
 
     public Long getLearnSetIdByCardId(Long cardId){
@@ -109,6 +114,26 @@ public class LearnSetService {
         // sicherstellen, dass Owner nicht cascaded gelöscht wird, wenn man ihn drin lässt.
         learnSet.setOwner(null);
         learnSetRepository.deleteById(id);
+    }
+    
+    public void deleteAllAccountReferences(Long id){
+        Optional<LearnSet> toDel = learnSetRepository.findById(id);
+        List<Account> accountList = accountRepository.findAll();
+        if(toDel.isPresent()){
+            for (Account account1 : accountList)
+            {
+                if(account1.getOwnLearnSets().contains(toDel.get()))
+                {
+                    account1.getOwnLearnSets().remove(toDel.get());
+                }
+                if(account1.getLearnsetAbos().contains(toDel.get()))
+                {
+                    account1.getLearnsetAbos().remove(toDel.get());
+                }
+                // TODO : falls ein LearnSetsAbo existiert, lösche diese referenz auch!
+            }
+            toDel.get().setOwner(null);
+        }
     }
 
 }
