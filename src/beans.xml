@@ -6,8 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="Professor" class="de.aicard.domains.account.Professor"></bean>
-    <bean id="Student" class="de.aicard.domains.account.Student"></bean>
+    <bean id="Account" class="de.aicard.domains.account.Account"></bean>
     <bean id="Card" class="de.aicard.domains.card.Card"></bean>
     <bean id="CardContent" class="de.aicard.domains.card.CardContent"></bean>
     <bean id="CardStatus" class="de.aicard.domains.card.CardStatus"></bean>
@@ -28,6 +27,19 @@
     <bean id="LearnSetAboRepository" class="de.aicard.storages.LearnSetAboRepository" abstract="true"></bean>
     <bean id="LearnSetRepository" class="de.aicard.storages.LearnSetRepository" abstract="true"></bean>
     <bean id="MessageRepository" class="de.aicard.storages.MessageRepository" abstract="true"></bean>
+
+    <bean id="AccountController" class="de.aicard.controller.AccountController"></bean>
+    <bean id="AddCardController" class="de.aicard.controller.AddCardController"></bean>
+    <bean id="LearnSetController" class="de.aicard.controller.LearnSetController"></bean>
+    <bean id="LoginController" class="de.aicard.controller.LoginController"></bean>
+    <bean id="MainController" class="de.aicard.controller.MainController"></bean>
+
+    <bean id="AccountService" class="de.aicard.services.AccountService"></bean>
+    <bean id="CardContentService" class="de.aicard.services.CardContentService"></bean>
+    <bean id="CardListService" class="de.aicard.services.CardListService"></bean>
+    <bean id="CardService" class="de.aicard.services.CardService"></bean>
+    <bean id="LearnSetAboService" class="de.aicard.services.LearnSetAboService"></bean>
+    <bean id="LearnSetService" class="de.aicard.services.LearnSetService"></bean>
 
     <context:component-scan base-package="de.aicard"/>
 

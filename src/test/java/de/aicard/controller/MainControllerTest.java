@@ -1,35 +1,24 @@
 package de.aicard.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static de.aicard.controller.WebTestConfig.*;
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@WebMvcTest(MainController.class)
 class MainControllerTest{
 
-    private AiCardRequestBuilder requestBuilder;
+    @Autowired
     private MockMvc mockMvc;
-
-    @BeforeEach
-    void configureSystemUnderTest() {
-
-        MainController testedController = new MainController();
-        this.mockMvc = MockMvcBuilders
-                .standaloneSetup(testedController)
-                .setHandlerExceptionResolvers(exceptionResolver())
-                .setLocaleResolver(fixedLocaleResolver())
-                .setViewResolvers(htmlViewResolver())
-                .build();
-        requestBuilder = new AiCardRequestBuilder(mockMvc);
-    }
 
     @Test
     void shouldgetMainPage() throws Exception{
-        this.mockMvc.perform(get("/index")).andDo(print()).andExpect(view().name("index"));
+        this.mockMvc.perform(get("/")).andExpect(status().isOk()).
+                andExpect(content().string(containsString("/index")))
+        .andExpect(view().name("index"));
     }
 }
