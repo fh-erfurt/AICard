@@ -2,9 +2,15 @@ package de.aicard.services;
 
 import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardContent;
+import de.aicard.domains.card.CardStatus;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.CardList;
+import de.aicard.domains.learnset.LearnSetAbo;
+import de.aicard.domains.learnset.LearningSession;
 import de.aicard.storages.CardRepository;
+import de.aicard.storages.CardStatusRepository;
+import de.aicard.storages.LearnSetAboRepository;
+import de.aicard.storages.LearningSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +24,16 @@ import java.util.List;
 public class CardService {
     @Autowired
     CardRepository cardRepository;
+    
+    @Autowired
+    CardStatusRepository cardStatusRepository;
+    
+    @Autowired
+    LearningSessionRepository learningSessionRepository;
 
+    @Autowired
+    LearnSetAboRepository learnSetAboRepository;
+    
     private final LearnSetService learnSetService;
     private final CardContentService cardContentService;
 
@@ -59,6 +74,32 @@ public class CardService {
                 File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardBack().getData());
                 file.delete();
             }
+    
+            // delete every LearningSession with this CArd
+            List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAll();
+            for ( LearnSetAbo learnSetAbo : learnSetAbos)
+            {
+                if(learnSetAbo.getLearningSession()!=null)
+                {
+                    for (CardStatus cardStatus : learnSetAbo.getLearningSession().getCardStatusList())
+                    {
+                        if (cardStatus.getCard().equals(card))
+                        {
+                            LearningSession learningSession = learnSetAbo.getLearningSession();
+                            learnSetAbo.setLearningSession(null);
+                            learningSessionRepository.delete(learningSession);
+                        }
+                    }
+                }
+            }
+            
+            List<Long> cardStatusIds = cardStatusRepository.findCardStatusIdByCardId(id);
+            for (Long statusId:cardStatusIds)
+            {
+                cardStatusRepository.deleteCardStatusesByCardID(statusId);
+                cardStatusRepository.deleteCardStatusById(statusId);
+            }
+            
             learnSetService.removeCardFromList(card);
             cardRepository.deleteById(id);
         }

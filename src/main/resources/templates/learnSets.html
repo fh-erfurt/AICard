@@ -27,7 +27,7 @@
                     <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">edit</a>
                 </div>
                 <div class="btn learn">
-                    <a th:href="@{/}">learn</a>
+                    <a th:href="@{'/initializeLearningSession/' + ${ownAbo.getId()}}">learn</a>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                     <a href="">unfollow</a>
                 </div>
                 <div class="btn learn">
-                    <a th:href="@{'/learn/' + ${favoriteLearnSetAbo.getId()} + '/10' } ">learn</a>
+                    <a th:href="@{'/learn/' + ${favoriteLearnSetAbo.getId()}} ">learn</a>
                 </div>
             </div>
 

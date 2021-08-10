@@ -4,10 +4,7 @@ import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.CardKnowledgeLevel;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.logging.Logger;
 
 /**
@@ -48,6 +45,7 @@ public class CardStatus extends BaseEntity
      */
     public CardStatus(Card _newCard)
     {
+        System.out.println("setStatus");
         this.cardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
         this.card = _newCard;
     }
@@ -83,9 +81,11 @@ public class CardStatus extends BaseEntity
      */
     public void increaseCardKnowledgeLevel()
     {
+        System.out.println("wir sind in increaseCArdKnow.--...");
         switch (cardKnowledgeLevel)
         {
             case NOINFORMATION:
+                System.out.println("wir sind im Swtich" + cardKnowledgeLevel);
                 this.cardKnowledgeLevel = CardKnowledgeLevel.SOMEINFORMATION;
                 break;
             case SOMEINFORMATION:

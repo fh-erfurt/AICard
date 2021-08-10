@@ -35,6 +35,7 @@ public class LearnSetAbo extends BaseEntity
      */
     @ManyToMany(cascade = CascadeType.ALL)
     private List<CardStatus> cardStatus;
+    
     /**
      * The status of the LearnSet of the Account.
      */
@@ -44,11 +45,15 @@ public class LearnSetAbo extends BaseEntity
      */
     @ManyToOne(cascade = CascadeType.ALL)
     private LearnSet learnSet;
+    
     /**
      * The evaluation the Account has given to the LearnSet. If the Account has not yet given an
      * evaluation to the LearnSet, the variable m_evaluation has the value -1.
      */
     private int evaluation;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private LearningSession learningSession;
 
     /**
      * Constructor of the LearnSetAbo
@@ -57,7 +62,6 @@ public class LearnSetAbo extends BaseEntity
      */
     public LearnSetAbo(LearnSet _learnSet) throws NullPointerException, Exception
     {
-
         this.learnSet = _learnSet;
         this.learnSetStatus = State.NEW;
         this.cardStatus = new ArrayList<>();
@@ -170,6 +174,8 @@ public class LearnSetAbo extends BaseEntity
     {
         
         List<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
-        return new LearningSession(sessionList);
+        LearningSession newLearningSession = new LearningSession(sessionList);
+        this.learningSession = newLearningSession;
+        return newLearningSession;
     }
 }

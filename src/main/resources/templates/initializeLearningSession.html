@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+    <h1>Initialize Learning Session</h1>
+
+    <form th:action="@{'/initializeLearningSession/' + ${learnSetAboID}}" method="POST">
+        <select class="" th:name="cardCount">
+            <option value="10" selected>10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+        </select>
+        <button type="submit">Los gehts!</button>
+    </form>
+</body>
+</html>

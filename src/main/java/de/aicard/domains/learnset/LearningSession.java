@@ -74,6 +74,7 @@ public class LearningSession extends BaseEntity
      */
     public void cardKnown()
     {
+        System.out.println("currrentCardKnown:"+this.currentCard);
         this.cardStatusList.get(this.currentCard).increaseCardKnowledgeLevel();
         this.next();
     }
@@ -95,7 +96,7 @@ public class LearningSession extends BaseEntity
      * Checks, if the current Card was the last Card of the Session. If so, it sets isActive to false.
      * If not, it increases currentCard by one.
      */
-    public void next()
+    private void next()
     {
         if(this.currentCard == (this).cardStatusList.size()-1)
         {
