@@ -39,8 +39,10 @@ public class LearnSetService {
             newLearnset.addAdmin(account);
             newLearnset.setCardList(new CardList());
             newLearnset.setCommentList(new ArrayList<>());
+            
+            //TODO das ist zu implizit
             learnSetRepository.save(newLearnset);
-
+           
             accountService.addLearnSet(account, newLearnset);
 
             return newLearnset.getId();
@@ -89,6 +91,12 @@ public class LearnSetService {
             return this.getLearnSetByLearnSetId(learnSetID).getCardList();
         }
         return null;
+    }
+    
+    public void saveLearnSet(LearnSet learnset){
+        if(learnset != null){
+            learnSetRepository.save(learnset);
+        }
     }
 
     public void removeCardFromList(Card card){

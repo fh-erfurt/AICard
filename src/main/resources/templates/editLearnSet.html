@@ -12,16 +12,16 @@
     <div class="pageContent">
 
         <div class="">
-            <form id="updateLearnSet" th:action="@{/updateLearnSet}" th:object="${learnSet}" method="POST">
+            <form id="updateLearnSet" th:action="@{'/updateLearnSet/' + ${learnSetOld.getId()}} " th:object="${learnSetOld}" method="POST">
 
                 <div class="formListElement">
                     <label for="Title">Titel</label>
-                    <input th:field="*{title}" id="Title" type="text" value="help" class="inputtext" required>
+                    <input th:field="*{title}" id="Title" type="text"  class="inputtext" required>
                 </div>
 
                 <div class="formListElement">
                     <label for="description">description</label>
-                    <input th:field="*{description}" id="description" th:value="${learnSetOld.getDescription()}" type="text" class="inputtext" required>
+                    <input th:field="*{description}" id="description" type="text" class="inputtext" required>
                 </div>
 
                 <div class="formListElement">
@@ -29,7 +29,8 @@
                     <select id="learnsetFaculty" th:field="*{faculty}">
                         <option th:each="facu : ${T(de.aicard.domains.enums.Faculty).values()}"
                                 th:text="${facu}"
-                                th:value="${facu}">
+                                th:value="${facu}"
+                                th:selected="${learnSetOld.getFaculty().equals(facu)}">
                         </option>
                     </select>
                 </div>
@@ -39,7 +40,8 @@
                     <select id="learnsetVisibility" th:field="*{visibility}">
                         <option  th:each="visi : ${T(de.aicard.domains.enums.Visibility).values()}"
                                  th:text="${visi}"
-                                 th:value="${visi}">
+                                 th:value="${visi}"
+                                 th:selected="${learnSetOld.getVisibility().equals(visi)}">
                         </option>
                     </select>
                 </div>

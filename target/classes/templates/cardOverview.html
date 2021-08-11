@@ -102,12 +102,11 @@
                 </div>
                 <!--End Switch-->
                 </div>
-                <div th:switch="${isAdmin}" class="btnContainer bottom">
-                    <div th:case="true" class="btn blueBtn">
-                        <a class="btn blueBtn" th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>
-                    </div>
-                    <div th:case="true" class="btn blueBtn">
-                        <a class="btn redBtn" th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
+                <div th:switch="${isAdmin}" class="btnContainer botton">
+                    <div th:case="true" class="">
+                        <a style="display: inline" class="btn blueBtn" th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>
+                        <a style="display: inline" class="btn redBtn" th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
+
                     </div>
                 </div>
                 <div class="btnPlaceHolder"></div>

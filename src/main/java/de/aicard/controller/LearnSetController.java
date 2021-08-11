@@ -170,14 +170,35 @@ public class LearnSetController
     }
     
     @GetMapping("/editLearnSet/{id}")
-    public String getEditLearnSet(@PathVariable("id") Long id,@ModelAttribute("learnSet") LearnSet updatedLearnSet, Principal principal, Model model)
+    public String getEditLearnSet(@PathVariable("id") Long id, Principal principal, Model model)
     {
-        System.out.println("id: "+id);
+        
         LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(id);
 
         model.addAttribute("learnSetOld",learnSet);
 
         return "editLearnSet";
+    }
+    
+    @PostMapping("/updateLearnSet/{learnSetId}")
+    public String postUpdateLearnSet(@PathVariable("learnSetId") Long learnSetId ,@ModelAttribute("learnSetOld") LearnSet learnSet ,Principal principal)
+    {
+        
+        LearnSet learnSetOld = learnSetService.getLearnSetByLearnSetId(learnSetId);
+        Account account = accountService.getAccount(principal);
+        if(learnSetService.accountIsAuthorized(principal, learnSetOld.getId()) && learnSetOld.getOwner().equals(account))
+        {
+            if(learnSet != null && learnSet.getTitle() != null && learnSet.getDescription() != null && learnSet.getFaculty() != null && learnSet.getVisibility() != null)
+            {
+                learnSetOld.setTitle(learnSet.getTitle());
+                learnSetOld.setDescription(learnSet.getDescription());
+                learnSetOld.setFaculty(learnSet.getFaculty());
+                learnSetOld.setVisibility(learnSet.getVisibility());
+                learnSetService.saveLearnSet(learnSet);
+            }
+        }
+        
+        return "redirect:/cardOverview/" + learnSetId;
     }
     
     @GetMapping("/unfollowLearnSet/{followedLearnSetAboId}")
