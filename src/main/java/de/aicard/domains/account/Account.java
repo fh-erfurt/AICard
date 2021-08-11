@@ -2,6 +2,7 @@ package de.aicard.domains.account;
 
 import de.aicard.domains.Social.Chat;
 import de.aicard.domains.BaseEntity;
+import de.aicard.domains.card.Card;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
@@ -10,7 +11,7 @@ import de.aicard.domains.learnset.LearnSet;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -55,12 +56,25 @@ public class Account extends BaseEntity
     @Setter(AccessLevel.NONE)
     @ManyToMany
     protected List<Chat> chats;
-    
-    
-    //no Constructor cause abstract, Constructor in subclasses Professor and Student
-    
-    
-    
+
+
+
+    public Account(String _newEmail, String _newPassword, String _newName, String _newDescription , Faculty _newFaculty)
+    {
+        this.email = _newEmail;
+        this.password = _newPassword;
+        this.name = _newName;
+        this.description  =  _newDescription;
+        this.faculty = _newFaculty;
+        this.learnsetAbos = new ArrayList<LearnSetAbo>();
+        this.ownLearnSets = new ArrayList<LearnSet>();
+        this.friends = new ArrayList<Account>() ;
+        this.chats = new ArrayList<Chat>();
+    }
+
+
+
+
     /**
      * Setter for ArrayLists are not Required
      */

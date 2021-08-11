@@ -43,7 +43,7 @@ public class LearnSetTest
             cardList.addToList(card.get(i));
         }
 
-        Account learnSetOwner = new Account();
+        Account learnSetOwner = new Account("Account@fh-erfurt.de","adminAccount","Account","Descrip", Faculty.APPLIED_COMPUTER_SCIENCE);
         LearnSet learnSet = new LearnSet(learnSetTitle, learnSetDescription, faculty, cardList, learnSetOwner, Visibility.PUBLIC);
 
         return learnSet;
@@ -173,11 +173,11 @@ public class LearnSetTest
         Account ownerOfPublicLearnSet = publicLearnSet.getOwner();
         Account ownerOfProtectedLearnSet = protectedLearnSet.getOwner();
         Account ownerOfPrivateLearnSet = privateLearnSet.getOwner();
-        Account friendOfAll = new Account();
+        Account friendOfAll =  new Account("Friend@fh-erfurt.de","friendAccount","Friend","Descrip", Faculty.APPLIED_COMPUTER_SCIENCE);
         ownerOfPublicLearnSet.addFriend(friendOfAll);
         ownerOfProtectedLearnSet.addFriend(friendOfAll);
         ownerOfPrivateLearnSet.addFriend(friendOfAll);
-        Account allAlone = new Account();
+        Account allAlone =  new Account("noFriend@fh-erfurt.de","noFriendAccount","noFriend","Descrip", Faculty.APPLIED_COMPUTER_SCIENCE);
 
         //then: allAlone is only authorised to subscribe to the public LearnSet
         Assertions.assertTrue(publicLearnSet.isAuthorizedToAccessLearnSet(allAlone));
