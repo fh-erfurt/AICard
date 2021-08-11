@@ -23,12 +23,15 @@
                 <div th:text="${ownAbo.getLearnSet().title}" class="deckName"></div>
                 <div th:text="${ownAbo.getLearnSet().getCardList().getListLength()}" class="cardCount">count: </div>
                 <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
-                <div class="btn edit">
-                    <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">edit</a>
+                <div class="btnContainer bottom">
+                    <div class="btn yellowBtn">
+                        <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">edit</a>
+                    </div>
+                    <div class="btn blueBtn">
+                        <a th:href="@{'/initializeLearningSession/' + ${ownAbo.getId()}}">learn</a>
+                    </div>
                 </div>
-                <div class="btn learn">
-                    <a th:href="@{'/initializeLearningSession/' + ${ownAbo.getId()}}">learn</a>
-                </div>
+                <div class="btnPlaceHolder"></div>
             </div>
 
         </div>

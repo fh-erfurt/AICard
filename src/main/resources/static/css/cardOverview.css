@@ -29,7 +29,7 @@
 
 .cards>* {
     position: relative;
-    min-height: 50px;
+    height: 300px;
     width: 100%;
     margin-top: 30px;
 }
@@ -39,8 +39,6 @@
 }
 
 .card {
-    display: flex;
-    justify-content: space-evenly;
 }
 
 .createCard .pannel {
@@ -61,4 +59,17 @@
 
 .cardSites>div {
     margin: 10px 0;
+}
+
+.cardOBack,
+.cardOFront {
+    width: 45%;
+    max-height: 80%;
+}
+
+.cardOBack *,
+.cardOFront *{
+    width: 100%;
+    height: auto;
+    max-height: 50%;
 }
