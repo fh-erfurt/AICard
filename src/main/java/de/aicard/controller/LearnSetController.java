@@ -170,9 +170,13 @@ public class LearnSetController
     }
     
     @GetMapping("/editLearnSet/{id}")
-    public String getEditLearnSet(@PathVariable("id") Long id, Principal principal, Model model)
+    public String getEditLearnSet(@PathVariable("id") Long id,@ModelAttribute("learnSet") LearnSet updatedLearnSet, Principal principal, Model model)
     {
-        
+        System.out.println("id: "+id);
+        LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(id);
+
+        model.addAttribute("learnSetOld",learnSet);
+
         return "editLearnSet";
     }
     

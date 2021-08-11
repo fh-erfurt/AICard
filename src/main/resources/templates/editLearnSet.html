@@ -8,5 +8,50 @@
     <div th:replace="fragments/header :: header"></div>
 
   TODO : make edit learnset
+
+    <div class="pageContent">
+
+        <div class="">
+            <form id="updateLearnSet" th:action="@{/updateLearnSet}" th:object="${learnSet}" method="POST">
+
+                <div class="formListElement">
+                    <label for="Title">Titel</label>
+                    <input th:field="*{title}" id="Title" type="text" value="help" class="inputtext" required>
+                </div>
+
+                <div class="formListElement">
+                    <label for="description">description</label>
+                    <input th:field="*{description}" id="description" th:value="${learnSetOld.getDescription()}" type="text" class="inputtext" required>
+                </div>
+
+                <div class="formListElement">
+                    <label for="learnsetFaculty">Fakultät</label>
+                    <select id="learnsetFaculty" th:field="*{faculty}">
+                        <option th:each="facu : ${T(de.aicard.domains.enums.Faculty).values()}"
+                                th:text="${facu}"
+                                th:value="${facu}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="formListElement">
+                    <label for="learnsetVisibility">Sichtbarkeit</label>
+                    <select id="learnsetVisibility" th:field="*{visibility}">
+                        <option  th:each="visi : ${T(de.aicard.domains.enums.Visibility).values()}"
+                                 th:text="${visi}"
+                                 th:value="${visi}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="btnContainer">
+                    <input type="submit" class="btn blueBtn">
+                </div>
+                <div class="btnPlaceHolder"></div>
+
+            </form>
+        </div>
+
+    </div>
 </body>
 </html>
