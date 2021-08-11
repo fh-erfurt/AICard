@@ -43,6 +43,7 @@
             </div>
 
             <div th:each="card : ${cardList}" class="card whiteBG pannel">
+                <div class="cardSites">
                 <div th:switch="${card.getCardFront().getType().name()}" class=cardOFront>
                     <div th:case="TextFile">
                         <p th:text="${card.getCardFront().getTitle()}"></p>
@@ -97,16 +98,18 @@
                         </video>
                     </div>
 
-                    <div th:switch="${isAdmin}" class="btnContainer">
-                        <div th:case="true" class="">
-                            <a style="display: inline" class="btn blueBtn" th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>
-                            <a style="display: inline" class="btn redBtn" th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
 
-                        </div>
-                    </div>
-                    <div class="btnPlaceHolder"></div>
                 </div>
                 <!--End Switch-->
+                </div>
+                <div th:switch="${isAdmin}" class="btnContainer botton">
+                    <div th:case="true" class="">
+                        <a style="display: inline" class="btn blueBtn" th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>
+                        <a style="display: inline" class="btn redBtn" th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
+
+                    </div>
+                </div>
+                <div class="btnPlaceHolder"></div>
             </div>
 
 

@@ -61,15 +61,11 @@
     margin: 10px 0;
 }
 
-.cardOBack,
-.cardOFront {
-    width: 45%;
-    max-height: 80%;
+.card .cardSites{
+    height: 200px;
 }
 
-.cardOBack *,
-.cardOFront *{
-    width: 100%;
+.card .cardSites *{
     height: auto;
-    max-height: 50%;
+    width: 100%;
 }
