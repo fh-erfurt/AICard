@@ -42,7 +42,12 @@ public class LearnSetController
     private final LearnSetAboService learnSetAboService;
 
     private final CardService cardService;
-
+    
+    
+    @Autowired
+    public LearnSetAboRepository learnSetAboRepository;
+    
+    
     @Autowired
     public LearnSetController(AccountService accountService, LearnSetService learnSetService, LearnSetAboService learnSetAboService, CardService cardService) {
         this.accountService = accountService;
@@ -165,6 +170,19 @@ public class LearnSetController
     {
         
         return "editLearnSet";
+    }
+    
+    @GetMapping("/unfollowLearnSet/{followedLearnSetAboId}")
+    public String getFollowedLearnSetAboId(@PathVariable("followedLearnSetAboId") Long followedLearnSetAboId, Principal principal)
+    {
+        Account account = accountService.getAccount(principal);
+        Optional<LearnSetAbo> abo = learnSetAboRepository.findById(followedLearnSetAboId);
+        if(abo.isPresent()){
+            account.deleteFavoriteLearnSetByLearnSetAbo(abo.get());
+            accountService.saveAccount(account);
+        }
+        
+        return "redirect:/learnSets";
     }
     
 

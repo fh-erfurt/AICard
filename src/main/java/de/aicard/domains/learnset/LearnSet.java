@@ -346,8 +346,9 @@ public class LearnSet extends BaseEntity
                 break;
 
             case PROTECTED:
-                // TODO: sollte hier nicht auch auf FAculty geprüft werden?
-                if (this.getOwner().getFriends().contains(_account) || this.getOwner()==_account)
+                // TODO: wenn Freunde implementiert sind, sollte hier auch auf die Adminliste geprüft werden
+                if (this.getOwner().getFriends().contains(_account) || this.getOwner()==_account
+                    || this.getFaculty().equals(_account.getFaculty()))
                 {
                     return true;
                 }

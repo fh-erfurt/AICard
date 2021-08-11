@@ -86,7 +86,6 @@ public class LearningSessionController
     {
         
         Optional<LearnSetAbo> learnSetAbo =  learnSetAboRepository.findById(learnSetAboId);
-        System.out.println("presentAbo: "+learnSetAbo.isPresent());
         if(learnSetAbo.isPresent()){
             if(learnSetAbo.get().getLearningSession() != null){
                 LearningSession learningSession = learnSetAbo.get().getLearningSession();
@@ -97,7 +96,6 @@ public class LearningSessionController
             LearningSession learningSession = learnSetAbo.get().createLearningSession(cardCount);
             learnSetAboRepository.save( learnSetAbo.get());
             
-            System.out.println("learnSessionCount: "+learnSetAbo.get().getLearningSession().getCardStatusList().size());
             return "redirect:/learnCard/" + learnSetAbo.get().getId();
         }
         
@@ -112,7 +110,6 @@ public class LearningSessionController
         Optional<LearnSetAbo> learnSetAbo = learnSetAboRepository.findById(learnSetAboId);
         if(learnSetAbo.isPresent()){
             LearningSession learningSession = learnSetAbo.get().getLearningSession();
-            System.out.println("isNotEmpty: "  + !learningSession.getCardStatusList().isEmpty()) ;
             if(learningSession != null && !learningSession.getCardStatusList().isEmpty()){
                 //System.out.println("presentSession: "+learningSession);
                 int currentCardIndex = learningSession.getCurrentCard();
@@ -127,8 +124,6 @@ public class LearningSessionController
                 
                 model.addAttribute("card", updatedFilePathCard);
                 model.addAttribute("learnSetAboId", learnSetAbo.get().getId());
-                System.out.println("cardID: " + updatedFilePathCard.getId());
-                System.out.println("cardIndex: "+currentCardIndex);
                 return "/learnCard" /*+ learningSessionId*/;
             }
            
@@ -143,30 +138,20 @@ public class LearningSessionController
     {
         ModelAndView modelAndView = new ModelAndView();
         Optional<LearnSetAbo> learnSetAbo = learnSetAboRepository.findById(learnSetAboId);
-        System.out.println("AboId: "+learnSetAboId);
-        System.out.println("cardKnown: "+cardKnown);
-        System.out.println("isPresent: "+learnSetAbo.isPresent());
-        
         if(learnSetAbo.isPresent())
         {
             if(learnSetAbo.get().getLearningSession() != null)
             {
-                System.out.println("learningSession: "+learnSetAbo.get().getLearningSession());
                 LearningSession learningSession = learnSetAbo.get().getLearningSession();
-                System.out.println("currentCardPre: "+learningSession.getCurrentCard());
-                System.out.println("knowlegePRE: " + learningSession.getCardStatusList().get(learningSession.getCurrentCard()).getCardKnowledgeLevel());
                 if(cardKnown)
                 {
                     
                     learningSession.cardKnown();
-                    System.out.println("currentCard: "+learningSession.getCurrentCard());
                 }
                 else
                 {
                     learningSession.cardUnknown();
-                    System.out.println("currentCard: "+learningSession.getCurrentCard());
                 }
-                System.out.println("knowledge: "+learningSession.getCardStatusList().get(learningSession.getCurrentCard()-1).getCardKnowledgeLevel());
                 learnSetAboRepository.save(learnSetAbo.get());
                 if(learningSession.isActive())
                 {
@@ -177,7 +162,7 @@ public class LearningSessionController
             }
         }
         
-        modelAndView.setViewName("redirect:/index");
+        modelAndView.setViewName("redirect:/learnSets");
         return modelAndView;
 //        return "/index";
     }

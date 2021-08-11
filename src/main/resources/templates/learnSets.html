@@ -45,10 +45,10 @@
                 <div th:text="${favoriteLearnSetAbo.getLearnSet().title}" class="deckName"></div>
                 <div th:text="${favoriteLearnSetAbo.getLearnSet().getCardList().getListLength()}" class="cardCount">count: </div>
                 <div class="btn edit">
-                    <a href="">unfollow</a>
+                    <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">unfollow</a>
                 </div>
                 <div class="btn learn">
-                    <a th:href="@{'/learn/' + ${favoriteLearnSetAbo.getId()}} ">learn</a>
+                    <a th:href="@{'/initializeLearningSession/' + ${favoriteLearnSetAbo.getId()}}">learn</a>
                 </div>
             </div>
 

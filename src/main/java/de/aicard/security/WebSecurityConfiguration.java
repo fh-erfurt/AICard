@@ -39,7 +39,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
         http.authorizeRequests()
                 .antMatchers("/addCard/*", "/cardOverview/**", "/createLearnset", "/deckOverview/**",
                              "/editCard/**", "/editLearnSet/**", "/learnSets", "/profile", "/profile/**",
-                             "/updateProfile/**"
+                             "/updateProfile/**", "/learnSetShop", "/learnCard/**", "/initializeLearningSession/**"
                              // TODO : hier müssen alle seiten bzw getMethoden eingetragen werden
                              ).hasAnyRole("USER")
                 
@@ -64,9 +64,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     public PasswordEncoder getPasswordEncoder()
     {
         // TODO : Use an Encoder
-
         return new BCryptPasswordEncoder();// NoOpPasswordEncoder.getInstance();
-
     }
    
 }

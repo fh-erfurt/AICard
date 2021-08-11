@@ -35,7 +35,7 @@ public class LearnSetAbo extends BaseEntity
      */
     @ManyToMany(cascade = CascadeType.ALL)
     private List<CardStatus> cardStatus;
-    
+    //TODO: kann das weg?
     /**
      * The status of the LearnSet of the Account.
      */

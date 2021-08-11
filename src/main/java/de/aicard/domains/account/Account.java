@@ -147,6 +147,11 @@ public class Account extends BaseEntity
         }
     }
     
+    public void deleteFavoriteLearnSetByLearnSetAbo(LearnSetAbo _learnSetAbo)
+    {
+        this.getLearnsetAbos().remove(_learnSetAbo);
+    }
+    
     public void deleteFavoriteLearnSetByIndex(int _index)
     {
         this.learnsetAbos.remove(_index);
