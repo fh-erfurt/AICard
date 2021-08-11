@@ -10,8 +10,28 @@
 <div class="pageContent">
 
     <div class="">
+        <h2>Filter</h2>
+
+        <form th:action="learnSetShop" method="GET">
+            <div class="formListElement">
+                <label for="facultyProfessor">Fakukltät</label>
+                <select  name="faculty" id="facultyProfessor" required>
+                    <option value="duDoppelNull">Alle Fakultäten</option>
+                    <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
+                            th:text="${faculty}"
+                            th:value="${faculty}">
+                    </option>
+                </select>
+            </div>
+
+            <label for="learnSetTitle">LearnSetTitle SubString suche</label>
+            <input type="text" name="learnSetTitle" id="learnSetTitle">
+
+            <button type="submit">Filtern</button>
+        </form>
 
     </div>
+
 
     <div class="gridContainer">
     <!-- display:grid 3 Spalten -->
