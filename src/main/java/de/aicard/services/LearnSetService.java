@@ -55,12 +55,15 @@ public class LearnSetService {
     }
 
     public LearnSet getLearnSetByLearnSetId(Long learnSetId){
-        return learnSetRepository.findById(learnSetId).get();
+        return learnSetRepository.findById(learnSetId).orElse(null);
     }
-
+    
     public Long getLearnSetIdByCardId(Long cardId){
-        LearnSet learnSet = learnSetRepository.getLearnSetByCardId(cardId).get();
-        return learnSet.getId();
+        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(cardId);
+        if(learnSet.isPresent()){
+            return learnSet.get().getId();
+        }
+        return -1L;
     }
 
     public Boolean isAdmin(Principal principal, Long id){
@@ -91,7 +94,7 @@ public class LearnSetService {
     public void removeCardFromList(Card card){
         Long cardId = card.getId();
         Long learnSetId = this.getLearnSetIdByCardId(cardId);
-        if(learnSetRepository.existsById(learnSetId)){
+        if(learnSetId>=-1L && learnSetRepository.existsById(learnSetId)){
             LearnSet learnSet = learnSetRepository.findById(learnSetId).get();
             learnSet.getCardList().removeFromList(card);
         }

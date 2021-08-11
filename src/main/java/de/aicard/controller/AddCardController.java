@@ -3,6 +3,8 @@ package de.aicard.controller;
 import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.DataType;
+import de.aicard.domains.learnset.LearnSet;
+import de.aicard.services.AccountService;
 import de.aicard.services.CardService;
 import de.aicard.services.LearnSetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,13 @@ import java.util.List;
 public class AddCardController {
     private final LearnSetService learnSetService;
     private final CardService cardService;
+    private final AccountService accountService;
 
     @Autowired
-    public AddCardController(LearnSetService learnSetService, CardService cardService) {
+    public AddCardController(LearnSetService learnSetService, CardService cardService, AccountService accountService) {
         this.learnSetService = learnSetService;
         this.cardService = cardService;
+        this.accountService = accountService;
     }
 
     @GetMapping("/addCard/{learnSetID}")
@@ -69,7 +73,9 @@ public class AddCardController {
         List<String> errors = new ArrayList<>();
         Card newCard = null;
 
-        if (learnSetService.accountIsAuthorized(principal, learnSetID)) {
+        // TODO : überprüfe bei allen LernSet Änderungen ob der Account darauf zugriff hat
+        LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
+        if (learnSetService.accountIsAuthorized(principal, learnSetID) && learnSet != null && learnSet.getAdminList().contains(accountService.getAccount(principal))) {
             // we are here if the learnSet exists and the Owner or an Admin is logged in
             String cardFrontTitel = cardService.getCorrectTitle(cardFrontType, cardFrontPictureFileTitle,
                     cardFrontTextFileTile, cardFrontAudioFileTitle,

@@ -108,15 +108,19 @@ public class LearnSetController
     public String getCardOverview(@PathVariable Long id,Principal principal, Model model)
     {
         String filePath = "/learnSetImage/";
-        // ach scheißdrauf
+        
         if (learnSetService.accountIsAuthorized(principal, id))
         {
+            // check if user has rights! to editn Learnset
+            Boolean isAdmin =  learnSetService.getLearnSetByLearnSetId(id).getAdminList().contains(accountService.getAccount(principal));
+            System.out.println("isAdmin: "+isAdmin);
             // TODO : check if the CardContentFile exists; what should we do if it doesnt?
             CardList cardList = learnSetService.getCardList(id);
             if(cardList != null){
                 model.addAttribute("learnSet", learnSetService.getLearnSetByLearnSetId(id));
                 List<Card> listOfCards = cardService.setCardData(filePath, cardList);
                 model.addAttribute("cardList", listOfCards);
+                model.addAttribute("isAdmin", isAdmin);
                 return "cardOverview";
             }
         }
@@ -135,7 +139,7 @@ public class LearnSetController
     public String getDeleteCard(@PathVariable("id") Long id, Principal principal)
     {
         Long learnSetId =  learnSetService.getLearnSetIdByCardId(id);
-        if(learnSetService.isAdmin(principal, learnSetId))
+        if(learnSetId>=-1L && learnSetService.isAdmin(principal, learnSetId))
         {
             cardService.deleteCard(id);
 //

@@ -25,17 +25,21 @@
 
                 </p>
             </div>
-            <div class="btnContainer">
-                <a th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}" type="button" class="btn redBtn">X</a>
-                <a th:href="@{'/editLearnSet/' + ${learnSet.getId()}}" type="button" class="btn yellowBtn">EDIT</a>
+            <div th:switch="${isAdmin}"  class="btnContainer">
+
+                <div th:case="true" >
+                    <a style="display: inline" th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}" type="button" class="btn redBtn">X</a>
+                    <a style="display: inline" th:href="@{'/editLearnSet/' + ${learnSet.getId()}}" type="button" class="btn yellowBtn">EDIT</a>
+                </div>
+
                 <a type="button" class="btn blueBtn">COMMENTS</a>
             </div>
             <div class="btnPlaceHolder"></div>
         </div>
 
-        <div id="addCard" class="cards">
-            <div className="add-card" class="pannel transparentPannel">
-                <a th:href="@{'/addCard/' + ${learnSet.getId()}}">+</a>
+        <div th:switch="${isAdmin}" id="addCard" class="cards">
+            <div th:case="true" className="add-card" class="pannel transparentPannel">
+                <a  th:href="@{'/addCard/' + ${learnSet.getId()}}">+</a>
             </div>
 
             <div th:each="card : ${cardList}" class="card whiteBG pannel">
@@ -93,9 +97,12 @@
                         </video>
                     </div>
 
-                    <div class="btnContainer">
-                        <a class="btn blueBtn" th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>
-                        <a class="btn redBtn" th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
+                    <div th:switch="${isAdmin}" class="btnContainer">
+                        <div th:case="true" class="">
+                            <a style="display: inline" class="btn blueBtn" th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>
+                            <a style="display: inline" class="btn redBtn" th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
+
+                        </div>
                     </div>
                     <div class="btnPlaceHolder"></div>
                 </div>
