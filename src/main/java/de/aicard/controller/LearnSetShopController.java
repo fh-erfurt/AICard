@@ -4,6 +4,7 @@ import de.aicard.domains.account.Account;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
+import de.aicard.services.AccountService;
 import de.aicard.storages.AccountRepository;
 import de.aicard.storages.LearnSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,12 @@ public class LearnSetShopController
     
     @Autowired
     public AccountRepository accountRepository;
+
+    public final AccountService accountService;
+
+    LearnSetShopController(AccountService accountService){
+        this.accountService = accountService;
+    }
     
     
     @GetMapping("/learnSetShop")
@@ -36,7 +43,7 @@ public class LearnSetShopController
     {
         List<LearnSet> learnSets = learnSetRepository.findAll();
         List<LearnSet> frontEndLearnSets = new ArrayList<>();
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+        Optional<Account> account = accountService.getAccount(principal);
         if(!learnSets.isEmpty() && account.isPresent())
         {
             // check if Account can Access these LearnSets and if the Account follows already
@@ -47,16 +54,15 @@ public class LearnSetShopController
                     boolean inList = false;
                     for (LearnSetAbo learnSetAbo : account.get().getLearnsetAbos())
                     {
-                        if (learnSetAbo.getLearnSet().equals(learnset) && ! inList)
-                        {
+                        if (learnSetAbo.getLearnSet().equals(learnset)) {
                             inList = true;
+                            break;
                         }
                     }
-                    if (! inList)
+                    if (!inList)
                     {
                         frontEndLearnSets.add(learnset);
                     }
-    
                 }
             }
     
@@ -97,10 +103,12 @@ public class LearnSetShopController
                 frontEndLearnSets = helperLearnSets;
                 helperLearnSets = new ArrayList<>();
             }
-            
+            for (LearnSet learnSet:frontEndLearnSets) {
+                System.out.println("listLegth: "+learnSet.getCardList().getListLength());
+            }
             model.addAttribute("learnSetList",frontEndLearnSets);
         }
-        return"/learnSetShop";
+        return"learnSetShop";
     }
     
     @GetMapping("/followLearnSet/{learnSetId}")

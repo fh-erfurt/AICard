@@ -3,6 +3,7 @@ package de.aicard.services;
 import de.aicard.config.RegPattern;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.learnset.LearnSet;
+import de.aicard.domains.learnset.LearnSetAbo;
 import de.aicard.storages.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,26 +22,28 @@ public class AccountService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public void createAccount(Account account) throws IllegalStateException{
+    public Optional<Account> createAccount(Account account) throws IllegalStateException{
         Optional<Account> matchingEntries = accountRepository.findByEmail(account.getEmail());
+        Optional<Account> acc = Optional.empty();
         if(matchingEntries.isEmpty()
                 && RegPattern.passMatches(account.getPassword())
                 && RegPattern.emailMatches(account.getEmail())){
             //encode password
             account.setPassword(passwordEncoder.encode(account.getPassword()));
-            accountRepository.save(account);
+            acc = Optional.of(account);
         }
         else{
             if(!RegPattern.passMatches(account.getPassword())){
                 throw new IllegalStateException("Passwort entspricht nicht den Passwortrichtlinien");
             }
-            if(!matchingEntries.isEmpty()){
+            if(matchingEntries.isPresent()){
                 throw new IllegalStateException("Ein Account mit diser E-Mail Adresse existiert bereits");
             }
             if(!RegPattern.emailMatches(account.getEmail())){
                 throw new IllegalStateException("die e-mail adresse ist ungültig");
             }
         }
+        return(acc);
     }
 
     public void updateAccount(Account account) throws IllegalStateException{
@@ -53,7 +56,7 @@ public class AccountService {
         else if (!RegPattern.emailMatches(accountEmail)){
             throw new IllegalStateException("Bitte gib eine gültige E-Mail Adresse an.");
         }
-        oldAccount.get().setEmail(accountEmail);
+        oldAccount.ifPresent(value -> value.setEmail(accountEmail));
         if(RegPattern.passMatches(account.getPassword())){
             account.setPassword(passwordEncoder.encode(account.getPassword()));
         }
@@ -61,12 +64,12 @@ public class AccountService {
             throw new IllegalStateException("Das Passwort stimmt nicht mit den angegebenen Passwortrichtlinien überein");
         }
 
-
-        oldAccount.get().setName(account.getName());
-        oldAccount.get().setDescription(account.getDescription());
-        oldAccount.get().setFaculty(account.getFaculty());
-
-        accountRepository.save(oldAccount.get());
+        if(oldAccount.isPresent()) {
+            oldAccount.get().setName(account.getName());
+            oldAccount.get().setDescription(account.getDescription());
+            oldAccount.get().setFaculty(account.getFaculty());
+            accountRepository.save(oldAccount.get());
+        }
     }
 
     public Boolean accountExists(Principal principal){
@@ -84,21 +87,13 @@ public class AccountService {
         return account.get().getId();
     }
 
-    public Account getAccount(Long userID){
-        Optional<Account>  account = accountRepository.findById(userID);
-        if(account.isPresent()){
-            return account.get();
-        }
-        else return null;
+    public Optional<Account> getAccount(Long userID){
+        return  accountRepository.findById(userID);
 
     }
 
-    public Account getAccount(Principal principal){
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-        if(account.isPresent()){
-            return account.get();
-        }
-        else return null;
+    public Optional<Account> getAccount(Principal principal){
+        return accountRepository.findByEmail(principal.getName());
 
     }
 
@@ -114,10 +109,10 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public void addLearnSet(Account account, LearnSet learnSet){
-        account.getOwnLearnSets().add(learnSet);
-        account.addNewFavoriteLearnSet(learnSet);
-        //TODO: herausfinden, wie man darüber auch automatisch Abo speichern kann (oder geht das einfach so?)
-        saveAccount(account);
+    public void removeLearnSet(Account account, LearnSetAbo learnSetAbo){
+        account.getOwnLearnSets().remove(learnSetAbo.getLearnSet());
+        account.getLearnsetAbos().remove(learnSetAbo);
+        this.saveAccount(account);
     }
+
 }

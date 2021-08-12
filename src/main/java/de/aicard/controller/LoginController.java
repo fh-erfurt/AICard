@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class LoginController {
@@ -46,7 +47,8 @@ public class LoginController {
         // List of possible errors to return to user
         List<String> errors = new ArrayList<>();
         try{
-            accountService.createAccount(newAccount);
+            Optional<Account> account = accountService.createAccount(newAccount);
+            account.ifPresent(accountService::saveAccount);
             return getLogin(model.addAttribute("registeredEmail", newAccount.getEmail()));
 //            return "redirect:/login";
         }

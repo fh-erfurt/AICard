@@ -75,7 +75,7 @@ public class AddCardController {
 
         // TODO : überprüfe bei allen LernSet Änderungen ob der Account darauf zugriff hat
         LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
-        if (learnSetService.accountIsAuthorized(principal, learnSetID) && learnSet != null && learnSet.getAdminList().contains(accountService.getAccount(principal))) {
+        if (learnSetService.accountIsAuthorized(principal, learnSetID) && learnSet != null && accountService.getAccount(principal).isPresent() && learnSet.getAdminList().contains(accountService.getAccount(principal).get())) {
             // we are here if the learnSet exists and the Owner or an Admin is logged in
             String cardFrontTitel = cardService.getCorrectTitle(cardFrontType, cardFrontPictureFileTitle,
                     cardFrontTextFileTile, cardFrontAudioFileTitle,

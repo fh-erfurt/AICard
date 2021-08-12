@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -32,10 +33,10 @@ public class Message extends BaseEntity
 {
 
     private String message;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Account sender;
     private LocalDateTime time;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Account> likedBy  ;
 
     //constructor

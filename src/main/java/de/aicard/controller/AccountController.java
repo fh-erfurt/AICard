@@ -54,7 +54,10 @@ public class AccountController
 
             if(accountService.accountExists(userID))
             {
-                model.addAttribute("account", accountService.getAccount(userID));
+                if(accountService.getAccount(userID).isPresent()){
+                    model.addAttribute("account", accountService.getAccount(userID).get());
+                }
+
                 
                 // if the the user which profile it is show a button to edit Profile
                 // TODO : this should be obsolete with SpringSec

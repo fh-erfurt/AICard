@@ -50,11 +50,11 @@ public class Account extends BaseEntity
     protected List<LearnSetAbo> learnsetAbos;
 
     @Setter(AccessLevel.NONE)
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     protected List<Account> friends;
 
     @Setter(AccessLevel.NONE)
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     protected List<Chat> chats;
 
 
@@ -101,6 +101,8 @@ public class Account extends BaseEntity
         try
         {
             LearnSet newLearnSet = new LearnSet(_title, _description, _faculty,new CardList(),this,_visibility);
+            newLearnSet.setOwner(this);
+            newLearnSet.addAdmin(this);
             this.ownLearnSets.add(newLearnSet);
             this.addNewFavoriteLearnSet(newLearnSet);
         }
@@ -123,6 +125,10 @@ public class Account extends BaseEntity
     public void deleteAllOwnLearnSets()
     {
         this.ownLearnSets.clear();
+    }
+
+    public void deleteLearnSetAboByLearnSet(LearnSet learnSet){
+        this.learnsetAbos.removeIf(learnSetAbo -> learnSetAbo.getLearnSet().equals(learnSet));
     }
     
     //favoriteLearnSets

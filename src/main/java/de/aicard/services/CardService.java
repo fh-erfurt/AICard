@@ -6,19 +6,15 @@ import de.aicard.domains.card.CardStatus;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSetAbo;
-import de.aicard.domains.learnset.LearningSession;
-import de.aicard.storages.CardRepository;
-import de.aicard.storages.CardStatusRepository;
-import de.aicard.storages.LearnSetAboRepository;
-import de.aicard.storages.LearningSessionRepository;
+import de.aicard.storages.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardService {
@@ -33,16 +29,33 @@ public class CardService {
 
     @Autowired
     LearnSetAboRepository learnSetAboRepository;
-    
+
+    @Autowired
+    CardListRepository cardListRepository;
+
+    private final LearningSessionService learningSessionService;
     private final LearnSetService learnSetService;
     private final CardContentService cardContentService;
 
     @Autowired
-    public CardService(LearnSetService learnSetService, CardContentService cardContentService) {
+    public CardService(LearnSetService learnSetService, CardContentService cardContentService,LearningSessionService learningSessionService) {
+        this.learningSessionService = learningSessionService;
         this.learnSetService = learnSetService;
         this.cardContentService = cardContentService;
     }
 
+    public Card getCardById(Long cardId)
+    {
+        Optional<Card> card = cardRepository.findById(cardId);
+        if(card.isPresent())
+        {
+            return card.get();
+        }
+        else
+        {
+            return null;
+        }
+    }
     public List<Card> setCardData(String filePath, CardList cardList){
         List <Card> listOfCards = cardList.getListOfCards();
         for ( Card card : listOfCards)
@@ -62,6 +75,36 @@ public class CardService {
     public void deleteCard(Long id){
         if(cardRepository.existsById(id)){
             Card card = cardRepository.findById(id).get();
+            boolean hasSession = false;
+            Long learnSetId =  learnSetService.getLearnSetIdByCardId(id);
+            System.out.println("cardId: "+id);
+            List<LearnSetAbo> learnSetAboList = learnSetAboRepository.findAll();
+
+            System.out.println(" card0 = " + cardRepository.findById(id));
+            for(LearnSetAbo learnSetAbo : learnSetAboList)
+            {
+                for(int index = learnSetAbo.getCardStatus().size() -1; index >= 0; index--)
+                {
+                    CardStatus cardStatus = learnSetAbo.getCardStatus().get(index);
+                    if(cardStatus.getCard().equals(card))
+                    {
+                        if(learnSetAbo.getLearningSession()!=null)
+                        {
+                            learnSetAbo.getLearningSession().getCardStatusList().remove(cardStatus);
+                        }
+                        learnSetAbo.getCardStatus().remove(cardStatus);
+                        learnSetAbo.getLearnSet().getCardList().removeFromList(card);
+                        cardStatusRepository.delete(cardStatus);
+                        System.out.println(" card1 = " + cardRepository.findById(id));
+                        learnSetAboRepository.save(learnSetAbo);
+                        hasSession =true;
+                        System.out.println(" card2 = " + cardRepository.findById(id));
+                    }
+                }
+            }
+
+            System.out.println(" card3 = " + cardRepository.findById(id));
+            //delete data on card
             if(card.getCardFront().getType() != DataType.TextFile)
             {
                 // TODO : sollte das in ein TryCatch oder so ähnlich? --> JA
@@ -74,41 +117,25 @@ public class CardService {
                 File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardBack().getData());
                 file.delete();
             }
-    
-            // delete every LearningSession with this CArd
-            List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAll();
-            for ( LearnSetAbo learnSetAbo : learnSetAbos)
-            {
-                if(learnSetAbo.getLearningSession()!=null)
-                {
-                    for (CardStatus cardStatus : learnSetAbo.getLearningSession().getCardStatusList())
-                    {
-                        if (cardStatus.getCard().equals(card))
-                        {
-                            LearningSession learningSession = learnSetAbo.getLearningSession();
-                            learnSetAbo.setLearningSession(null);
-                            learningSessionRepository.delete(learningSession);
-                        }
-                    }
-                }
-            }
-            
-            List<Long> cardStatusIds = cardStatusRepository.findCardStatusIdByCardId(id);
-            for (Long statusId:cardStatusIds)
-            {
-                cardStatusRepository.deleteCardStatusesByCardID(statusId);
-                cardStatusRepository.deleteCardStatusById(statusId);
-            }
-            
+
+            System.out.println(" card4 = " + cardRepository.existsById(id));
+            // delete every LearningSession with this Card
+            System.out.println("card5: "+card.getId());
             learnSetService.removeCardFromList(card);
-            cardRepository.deleteById(id);
+            if(!hasSession){
+                cardRepository.deleteById(id);
+            }
         }
     }
 
     public void deleteAllCardsFromLearnSet(Long learnSetId){
-        for(Card card : learnSetService.getCardList(learnSetId).getListOfCards()){
-            this.deleteCard(card.getId());
+        CardList cardList = learnSetService.getCardList(learnSetId);
+        for(int i = (cardList.getListOfCards().size()-1); i>=0; i--){
+            this.deleteCard(cardList.getListOfCards().get(i).getId());
         }
+        System.out.println("cardlistlength: "+cardList.getListOfCards().size());
+        learnSetService.getLearnSetByLearnSetId(learnSetId).deleteCardlist();
+        cardListRepository.delete(cardList);
     }
     
 

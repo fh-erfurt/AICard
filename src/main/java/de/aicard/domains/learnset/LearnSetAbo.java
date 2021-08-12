@@ -1,5 +1,6 @@
 package de.aicard.domains.learnset;
 
+import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardStatus;
 import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.CardKnowledgeLevel;
@@ -177,5 +178,15 @@ public class LearnSetAbo extends BaseEntity
         LearningSession newLearningSession = new LearningSession(sessionList);
         this.learningSession = newLearningSession;
         return newLearningSession;
+    }
+
+
+    public boolean containsCard(Card card){
+        for (CardStatus cardStatus:this.cardStatus) {
+            if(cardStatus.getCard().equals(card)){
+                return true;
+            }
+        }
+        return false;
     }
 }

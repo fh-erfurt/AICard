@@ -64,9 +64,9 @@ public class LearningSessionController
                 boolean cardIsInCardStatusList = false;
                 for(CardStatus cardStatus : cardStatusList)
                 {
-                    if(cardStatus.getCard().equals(card))
-                    {
+                    if (cardStatus.getCard().equals(card)) {
                         cardIsInCardStatusList = true;
+                        break;
                     }
                 }
                 if(!cardIsInCardStatusList)
@@ -94,7 +94,7 @@ public class LearningSessionController
                 
             }
             LearningSession learningSession = learnSetAbo.get().createLearningSession(cardCount);
-            learnSetAboRepository.save( learnSetAbo.get());
+            learnSetAboRepository.save(learnSetAbo.get());
             
             return "redirect:/learnCard/" + learnSetAbo.get().getId();
         }

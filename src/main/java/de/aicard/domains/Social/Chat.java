@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -29,9 +30,9 @@ Class Chat has 2 Attributes chatHistory where the messages from all participants
 @Entity
 public class Chat extends BaseEntity
 {
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Message> chatHistory;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Account> participants ;
 
 
