@@ -6,6 +6,7 @@ import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
 import de.aicard.storages.AccountRepository;
+import de.aicard.storages.CardListRepository;
 import de.aicard.storages.LearnSetAboRepository;
 import de.aicard.storages.LearnSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,21 @@ public class LearnSetService {
     LearnSetRepository learnSetRepository;
 
     private final AccountService accountService;
+    private final LearningSessionService learningSessionService;
+    private final CardService cardService;
     
     @Autowired
     public AccountRepository accountRepository;
     @Autowired
     public LearnSetAboRepository learnSetAboRepository;
+    @Autowired
+    public CardListRepository cardListRepository;
 
     @Autowired
-    public LearnSetService(AccountService accountService) {
+    public LearnSetService(AccountService accountService,LearningSessionService learningSessionService,CardService cardService) {
         this.accountService = accountService;
+        this.learningSessionService = learningSessionService;
+        this.cardService = cardService;
     }
 
     public LearnSet createLearnSet(LearnSet learnSet, Account account)
@@ -45,14 +52,6 @@ public class LearnSetService {
 
     public LearnSet getLearnSetByLearnSetId(Long learnSetId){
         return learnSetRepository.findById(learnSetId).orElse(null);
-    }
-    
-    public Long getLearnSetIdByCardId(Long cardId){
-        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(cardId);
-        if(learnSet.isPresent()){
-            return learnSet.get().getId();
-        }
-        return -1L;
     }
 
     public Boolean isAdmin(Principal principal, Long id){
@@ -86,16 +85,6 @@ public class LearnSetService {
         }
     }
 
-    public void removeCardFromList(Card card){
-        Long cardId = card.getId();
-        Long learnSetId = this.getLearnSetIdByCardId(cardId);
-        if(learnSetId>=-1L && learnSetRepository.existsById(learnSetId)){
-            LearnSet learnSet = learnSetRepository.findById(learnSetId).get();
-            learnSet.getCardList().removeFromList(card);
-            learnSetRepository.save(learnSet);
-        }
-    }
-
     public void addCardToList(Long learnSetId, Card card){
         if(learnSetExists(learnSetId)){
             LearnSet learnSet = learnSetRepository.findById(learnSetId).get();
@@ -108,7 +97,7 @@ public class LearnSetService {
     }
 
     public void deleteLearnSet(Long id){
-//        LearnSet learnSet = this.getLearnSetByLearnSetId(id);
+        LearnSet learnSet = this.getLearnSetByLearnSetId(id);
         //TODO: übernommen aus Controller. Bei gelegenheit prüfen, ob es auch ohne geht/ JPA Konfiguration checken:
         // sicherstellen, dass Owner nicht cascaded gelöscht wird, wenn man ihn drin lässt.
         // owner/admin -> null
@@ -117,12 +106,34 @@ public class LearnSetService {
         // -> cardlist löschen
         // -> delete LearnSet
 
+        //sett list to null
+        learnSet.setAdminList(null);
+        learnSet.setOwner(null);
 
-//        learnSet.setOwner(null);
-//        learnSet.setAdminList(null);
-//        System.out.println("learnSetId: "+id);
+        List<Account> accounts = accountRepository.findAll();
+        //delete all learning Sessions based on this learnSet
+        learningSessionService.deleteLearningSessionsByLearnSet(learnSet);
+        //remove all LearnSetReferences in accounts
+        for (Account account:accounts) {
+            accountService.removeLearnSet(account,learnSet);
+            // TODO : nicht nur aus den Abos sondern auch aus Own Learnsets löschen? !? ?11 Elf
+        }
+        //delete all cards of the learnSet
+        List<Card> cardList = learnSet.getCardList().getListOfCards();
+        for (int i = cardList.size()-1;i>=0;i--) {
+            cardService.deleteCard(cardList.get(i));
+        }
+        //delete the cardlist
+        cardListRepository.delete(learnSet.getCardList());
+        //delete learnSet
+        learnSetRepository.delete(learnSet);
+        List<LearnSetAbo> abos = learnSetAboRepository.findAll();
+        for (LearnSetAbo abo:abos) {
+            if(abo.getLearnSet()==null && abo.getLearningSession()==null){
+                learnSetAboRepository.delete(abo);
+            }
+        }
 
-        learnSetRepository.deleteById(id);
     }
     
     public void deleteAllAccountReferences(Long id){

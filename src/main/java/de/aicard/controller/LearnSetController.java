@@ -88,7 +88,7 @@ public class LearnSetController
         if(accountService.isLoggedIn(principal))
         {
             //TODO: Das geht noch eleganter.
-            List<LearnSetAbo> abos = learnSetAboService.getLearnSetAbos(principal);
+            List<LearnSetAbo> abos = accountService.getLearnSetAbos(principal);
             List<LearnSetAbo> ownLearnSetAbos = new ArrayList<>();
             List<LearnSetAbo> favoriteLearnSetAbos = new ArrayList<>();
 
@@ -144,10 +144,12 @@ public class LearnSetController
     public String getDeleteCard(@PathVariable("id") Long id, Principal principal)
     {
 
-        if(learnSetService.isAdmin(principal, learnSetService.getLearnSetIdByCardId(id)))
+        if(learnSetService.isAdmin(principal, cardService.getLearnSetIdByCardId(id)))
         {
-            Long learnSetId = learnSetService.getLearnSetIdByCardId(id);
-            cardService.deleteCard(id);
+            Long learnSetId = cardService.getLearnSetIdByCardId(id);
+            Card card = cardService.getCardById(id);
+            cardService.deleteCard(card);
+            cardService.removeCardFromList(card);
 
             return "redirect:/cardOverview/" + learnSetId;
         }
@@ -169,14 +171,7 @@ public class LearnSetController
         {
             // delete all cards and corresponding cardFiles
             //TODO: Prüfen, ob JPA das nicht automatisch macht.
-
             learnSetService.deleteLearnSet(id);
-              //LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(id);
-//              learningSessionService.deleteLearningSessionsByLearnSet(learnSet);
-//            cardService.deleteAllCardsFromLearnSet(id);
-//            learnSetService.deleteAllAccountReferences(id);
-//            learnSetAboService.deleteLearnSetAbosByLearnSetId(id);
-//            learnSetService.deleteLearnSet(id);
         }
         
         return "redirect:/learnSets";

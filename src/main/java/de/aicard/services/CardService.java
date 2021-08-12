@@ -5,6 +5,7 @@ import de.aicard.domains.card.CardContent;
 import de.aicard.domains.card.CardStatus;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.CardList;
+import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
 import de.aicard.storages.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +34,15 @@ public class CardService {
     @Autowired
     CardListRepository cardListRepository;
 
+    @Autowired
+    LearnSetRepository learnSetRepository;
+
     private final LearningSessionService learningSessionService;
-    private final LearnSetService learnSetService;
     private final CardContentService cardContentService;
 
     @Autowired
-    public CardService(LearnSetService learnSetService, CardContentService cardContentService,LearningSessionService learningSessionService) {
+    public CardService(CardContentService cardContentService,LearningSessionService learningSessionService) {
         this.learningSessionService = learningSessionService;
-        this.learnSetService = learnSetService;
         this.cardContentService = cardContentService;
     }
 
@@ -72,11 +74,29 @@ public class CardService {
         return listOfCards;
     }
 
-    public void deleteCard(Long id){
+    public Long getLearnSetIdByCardId(Long cardId){
+        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(cardId);
+        if(learnSet.isPresent()){
+            return learnSet.get().getId();
+        }
+        return -1L;
+    }
+
+    public void removeCardFromList(Card card){
+        Long cardId = card.getId();
+        Long learnSetId = this.getLearnSetIdByCardId(cardId);
+        if(learnSetId>=-1L && learnSetRepository.existsById(learnSetId)){
+            LearnSet learnSet = learnSetRepository.findById(learnSetId).get();
+            learnSet.getCardList().removeFromList(card);
+            learnSetRepository.save(learnSet);
+        }
+    }
+
+
+    public void deleteCard(Card card){
+        Long id = card.getId();
         if(cardRepository.existsById(id)){
-            Card card = cardRepository.findById(id).get();
             boolean hasSession = false;
-            Long learnSetId =  learnSetService.getLearnSetIdByCardId(id);
             System.out.println("cardId: "+id);
             List<LearnSetAbo> learnSetAboList = learnSetAboRepository.findAll();
 
@@ -93,7 +113,12 @@ public class CardService {
                             learnSetAbo.getLearningSession().getCardStatusList().remove(cardStatus);
                         }
                         learnSetAbo.getCardStatus().remove(cardStatus);
-                        learnSetAbo.getLearnSet().getCardList().removeFromList(card);
+                        System.out.println("getCardList: "+learnSetAbo.getLearnSet());
+                        if(learnSetAbo.getLearnSet()!=null){
+                            learnSetAbo.getLearnSet().getCardList().removeFromList(card);
+                        }
+                        learnSetAbo.setCardStatus(null);
+                        learnSetAboRepository.save(learnSetAbo);
                         cardStatusRepository.delete(cardStatus);
                         System.out.println(" card1 = " + cardRepository.findById(id));
                         learnSetAboRepository.save(learnSetAbo);
@@ -121,24 +146,13 @@ public class CardService {
             System.out.println(" card4 = " + cardRepository.existsById(id));
             // delete every LearningSession with this Card
             System.out.println("card5: "+card.getId());
-            learnSetService.removeCardFromList(card);
+
             if(!hasSession){
+                this.removeCardFromList(card);
                 cardRepository.deleteById(id);
             }
         }
     }
-
-    public void deleteAllCardsFromLearnSet(Long learnSetId){
-        CardList cardList = learnSetService.getCardList(learnSetId);
-        for(int i = (cardList.getListOfCards().size()-1); i>=0; i--){
-            this.deleteCard(cardList.getListOfCards().get(i).getId());
-        }
-        System.out.println("cardlistlength: "+cardList.getListOfCards().size());
-        learnSetService.getLearnSetByLearnSetId(learnSetId).deleteCardlist();
-        cardListRepository.delete(cardList);
-    }
-    
-
 
     public Card addNewCard(String cardFrontType, String cardFrontTitel, String cardFrontInput, String cardBackType, String cardBackTitel, String cardBackInput){
 

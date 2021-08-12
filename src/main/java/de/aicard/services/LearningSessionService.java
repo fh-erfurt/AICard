@@ -32,9 +32,17 @@ public class LearningSessionService
         List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAllByLearnSetId(learnSet.getId());
         for (LearnSetAbo learnSetAbo : learnSetAbos) {
             LearningSession learningSession = learnSetAbo.getLearningSession();
+            System.out.println("learningSession1: "+learningSession);
             learnSetAbo.setLearningSession(null);
+            System.out.println("learningSession2: "+learningSession);
             learnSetAboRepository.save(learnSetAbo);
-            learningSessionRepository.delete(learningSession);
+            System.out.println("learningSession3: "+learningSession);
+            if(learningSession != null){
+                learningSession.setCardStatusList(null);
+                learningSessionRepository.delete(learningSession);
+                System.out.println("learningSession4: "+learningSession);
+            }
+
         }
     }
 }

@@ -90,6 +90,8 @@ public class LearningSessionController
             if(learnSetAbo.get().getLearningSession() != null){
                 LearningSession learningSession = learnSetAbo.get().getLearningSession();
                 learnSetAbo.get().setLearningSession(null);
+                learningSession.setCardStatusList(null);
+                //learningSessionRepository.save(learningSession);
                 learningSessionRepository.delete(learningSession);
                 
             }

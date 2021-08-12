@@ -14,30 +14,14 @@ import java.util.Optional;
 
 @Service
 public class LearnSetAboService {
+
     @Autowired
     LearnSetAboRepository learnSetAboRepository;
 
-    private final AccountService accountService;
 
     @Autowired
-    public LearnSetAboService(AccountService accountService) {
-        this.accountService = accountService;
-    }
+    public LearnSetAboService() {
 
-    public List<LearnSetAbo> getLearnSetAbos(Principal principal){
-
-        List<LearnSetAbo> erg = new ArrayList<>();
-        Optional<Account> account = accountService.getAccount(principal);
-        if(account.isPresent()){
-            erg = account.get().getLearnsetAbos();
-        }
-        return erg;
-    }
-
-    public void deleteLearnSetAbosByLearnSetId(Long id){
-
-
-        learnSetAboRepository.deleteAllByLearnSet(id);
     }
 
 }

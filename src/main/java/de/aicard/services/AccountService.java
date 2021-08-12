@@ -5,12 +5,16 @@ import de.aicard.domains.account.Account;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
 import de.aicard.storages.AccountRepository;
+import de.aicard.storages.LearnSetAboRepository;
+import de.aicard.storages.LearnSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +25,17 @@ public class AccountService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+
+    private final LearnSetAboService learnSetAboService;
+
+
+    @Autowired
+    public AccountService(LearnSetAboService learnSetAboService){
+        this.learnSetAboService=learnSetAboService;
+    }
+
+
 
     public Optional<Account> createAccount(Account account) throws IllegalStateException{
         Optional<Account> matchingEntries = accountRepository.findByEmail(account.getEmail());
@@ -109,10 +124,27 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public void removeLearnSet(Account account, LearnSetAbo learnSetAbo){
-        account.getOwnLearnSets().remove(learnSetAbo.getLearnSet());
-        account.getLearnsetAbos().remove(learnSetAbo);
+    public void removeLearnSet(Account account, LearnSet learnSet){
+        List<LearnSetAbo> abos = account.getLearnsetAbos();
+        for (int i= abos.size()-1;i>=0;i--) {
+            if(abos.get(i).getLearnSet().equals(learnSet)){
+                LearnSetAbo abo = abos.get(i);
+                abo.removeLearnSet();
+                account.removeLearnSetAbo(abo);
+            }
+        }
+        account.getOwnLearnSets().remove(learnSet);
         this.saveAccount(account);
+    }
+
+
+    public List<LearnSetAbo> getLearnSetAbos(Principal principal){
+        List<LearnSetAbo> erg = new ArrayList<>();
+        Optional<Account> account = this.getAccount(principal);
+        if(account.isPresent()){
+            erg = account.get().getLearnsetAbos();
+        }
+        return erg;
     }
 
 }

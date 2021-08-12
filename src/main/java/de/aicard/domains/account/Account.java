@@ -285,6 +285,9 @@ public class Account extends BaseEntity
         }
     }
 
+    public void removeLearnSetAbo(LearnSetAbo abo){
+        this.learnsetAbos.remove(abo);
+    }
 
 
 

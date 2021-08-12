@@ -189,4 +189,8 @@ public class LearnSetAbo extends BaseEntity
         }
         return false;
     }
+
+    public void removeLearnSet(){
+        this.learnSet = null;
+    }
 }

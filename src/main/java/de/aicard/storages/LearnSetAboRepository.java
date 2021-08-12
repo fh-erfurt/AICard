@@ -27,4 +27,9 @@ public interface LearnSetAboRepository extends JpaRepository<LearnSetAbo, Long> 
     @Transactional
     @Query(nativeQuery = true,value = "DELETE FROM LEARNSETABO WHERE LEARNSET_ID = :id ; ")
     void deleteAllByLearnSet(@Param("id") Long id);
+
+//    @Modifying
+//    @Transactional
+//    @Query(nativeQuery = true,value = "DELETE FROM LEARNSETABO WHERE ID = :id ; ")
+//    void deleteById(@Param("id") Long id);
 }

@@ -104,7 +104,7 @@ public class LearnSetShopController
                 helperLearnSets = new ArrayList<>();
             }
             for (LearnSet learnSet:frontEndLearnSets) {
-                System.out.println("listLegth: "+learnSet.getCardList().getListLength());
+                //System.out.println("listLegth: "+learnSet.getCardList().getListLength());
             }
             model.addAttribute("learnSetList",frontEndLearnSets);
         }
