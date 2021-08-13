@@ -61,6 +61,10 @@
     margin: 10px 0;
     width: 45%;
     height: 200px;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 
 .card .cardSites *{
