@@ -25,14 +25,21 @@
 
                 </p>
             </div>
-            <div th:switch="${isAdmin}"  class="btnContainer">
-
-                <div th:case="true" >
-                    <a style="display: inline" th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}" type="button" class="btn redBtn">X</a>
-                    <a style="display: inline" th:href="@{'/editLearnSet/' + ${learnSet.getId()}}" type="button" class="btn yellowBtn">EDIT</a>
+            <div th:switch="${isAdmin}">
+                <div th:case="true" class="btnContainer">
+                    <div class="btn redBtn">
+                        <a th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}">X</a>
+                    </div>
+                    <div class="btn yellowBtn">
+                        <a th:href="@{'/editLearnSet/' + ${learnSet.getId()}}">EDIT</a>
+                    </div>
+                    <a type="button" class="btn blueBtn">COMMENTS</a>
                 </div>
-
-                <a type="button" class="btn blueBtn">COMMENTS</a>
+                <div th:case="false" class="btnContainer">
+                  <div class="btn blueBtn">
+                    <a>COMMENTS</a>
+                  </div>
+                </div>
             </div>
             <div class="btnPlaceHolder"></div>
         </div>
@@ -102,11 +109,14 @@
                 </div>
                 <!--End Switch-->
                 </div>
-                <div th:switch="${isAdmin}" class="btnContainer botton">
-                    <div th:case="true" class="">
-                        <a style="display: inline" class="btn blueBtn" th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>
-                        <a style="display: inline" class="btn redBtn" th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
-
+                <div th:switch="${isAdmin}">
+                    <div class="btnContainer bottom" th:case="true">
+                        <div class="btn blueBtn">
+                            <a th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>
+                        </div>
+                        <div class="btn redBtn">
+                            <a  th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
+                        </div>
                     </div>
                 </div>
                 <div class="btnPlaceHolder"></div>
