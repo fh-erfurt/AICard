@@ -149,7 +149,7 @@ public class LearnSetController
             Long learnSetId = cardService.getLearnSetIdByCardId(id);
             Card card = cardService.getCardById(id);
             cardService.deleteCard(card);
-            cardService.removeCardFromList(card);
+            
 
             return "redirect:/cardOverview/" + learnSetId;
         }
@@ -202,7 +202,7 @@ public class LearnSetController
                 learnSetOld.setDescription(learnSet.getDescription());
                 learnSetOld.setFaculty(learnSet.getFaculty());
                 learnSetOld.setVisibility(learnSet.getVisibility());
-                learnSetService.saveLearnSet(learnSet);
+                learnSetService.saveLearnSet(learnSetOld);
             }
         }
         
@@ -210,13 +210,17 @@ public class LearnSetController
     }
     
     @GetMapping("/unfollowLearnSet/{followedLearnSetAboId}")
-    public String getFollowedLearnSetAboId(@PathVariable("followedLearnSetAboId") Long followedLearnSetAboId, Principal principal)
+    public String getUnfollowedLearnSetAboId(@PathVariable("followedLearnSetAboId") Long followedLearnSetAboId, Principal principal)
     {
         Optional<Account> account = accountService.getAccount(principal);
         Optional<LearnSetAbo> abo = learnSetAboRepository.findById(followedLearnSetAboId);
         if(account.isPresent() && abo.isPresent()){
-            account.get().deleteFavoriteLearnSetByLearnSetAbo(abo.get());
+            account.get().removeLearnSetAbo(abo.get());
             accountService.saveAccount(account.get());
+//            abo.get().setLearnSet(null);
+//            abo.get().getLearningSession().setCardStatusList(null);
+//            learnSetAboRepository.save(abo.get());
+            learnSetAboRepository.delete(abo.get());
         }
         
         return "redirect:/learnSets";

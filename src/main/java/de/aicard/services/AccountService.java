@@ -124,18 +124,18 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public void removeLearnSet(Account account, LearnSet learnSet){
-        List<LearnSetAbo> abos = account.getLearnsetAbos();
-        for (int i= abos.size()-1;i>=0;i--) {
-            if(abos.get(i).getLearnSet().equals(learnSet)){
-                LearnSetAbo abo = abos.get(i);
-                abo.removeLearnSet();
-                account.removeLearnSetAbo(abo);
-            }
-        }
-        account.getOwnLearnSets().remove(learnSet);
-        this.saveAccount(account);
-    }
+//    public void removeLearnSet(Account account, LearnSet learnSet){
+//        List<LearnSetAbo> abos = account.getLearnsetAbos();
+//        for (int i= abos.size()-1;i>=0;i--) {
+//            if(abos.get(i).getLearnSet().equals(learnSet)){
+//                LearnSetAbo abo = abos.get(i);
+//                abo.removeLearnSet();
+//                account.removeLearnSetAbo(abo);
+//            }
+//        }
+//        account.getOwnLearnSets().remove(learnSet);
+//        this.saveAccount(account);
+//    }
 
 
     public List<LearnSetAbo> getLearnSetAbos(Principal principal){

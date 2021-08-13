@@ -76,13 +76,14 @@ public class CardService {
 
     public Long getLearnSetIdByCardId(Long cardId){
         Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(cardId);
+        System.out.println("LearnSetIsPresent: "+learnSet.isPresent());
         if(learnSet.isPresent()){
             return learnSet.get().getId();
         }
         return -1L;
     }
 
-    public void removeCardFromList(Card card){
+    public void removeCardFromCardList(Card card){
         Long cardId = card.getId();
         Long learnSetId = this.getLearnSetIdByCardId(cardId);
         if(learnSetId>=-1L && learnSetRepository.existsById(learnSetId)){
@@ -92,65 +93,59 @@ public class CardService {
         }
     }
 
+    private void deleteCardContent(Card card){
+        if(card.getCardFront().getType() != DataType.TextFile)
+        {
+            // TODO : sollte das in ein TryCatch oder so ähnlich? --> JA
+            File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardFront().getData());
+            file.delete();
+        }
+        if(card.getCardBack().getType() != DataType.TextFile)
+        {
+            // TODO : sollte das in ein TryCatch oder so ähnlich?
+            File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardBack().getData());
+            file.delete();
+        }
+    }
+    
+    
 
     public void deleteCard(Card card){
         Long id = card.getId();
+        //löschen aus Cardlist in learnset
+        //löschen des CardStatus in allen abos
+        //
+        
         if(cardRepository.existsById(id)){
-            boolean hasSession = false;
-            System.out.println("cardId: "+id);
-            List<LearnSetAbo> learnSetAboList = learnSetAboRepository.findAll();
-
-            System.out.println(" card0 = " + cardRepository.findById(id));
-            for(LearnSetAbo learnSetAbo : learnSetAboList)
+            
+            Long learnSetId = this.getLearnSetIdByCardId(card.getId());
+            
+            
+            //funzt nich
+            
+            System.out.println("learnSetId: "+learnSetId);
+            List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAllByLearnSetId(learnSetId);
+            this.removeCardFromCardList(card);
+            System.out.println("countAbos: "+learnSetAbos.size());
+            System.out.println("before Loop");
+            int i = 0;
+            for (LearnSetAbo abo:learnSetAbos)
             {
-                for(int index = learnSetAbo.getCardStatus().size() -1; index >= 0; index--)
-                {
-                    CardStatus cardStatus = learnSetAbo.getCardStatus().get(index);
-                    if(cardStatus.getCard().equals(card))
-                    {
-                        if(learnSetAbo.getLearningSession()!=null)
-                        {
-                            learnSetAbo.getLearningSession().getCardStatusList().remove(cardStatus);
-                        }
-                        learnSetAbo.getCardStatus().remove(cardStatus);
-                        System.out.println("getCardList: "+learnSetAbo.getLearnSet());
-                        if(learnSetAbo.getLearnSet()!=null){
-                            learnSetAbo.getLearnSet().getCardList().removeFromList(card);
-                        }
-                        learnSetAbo.setCardStatus(null);
-                        learnSetAboRepository.save(learnSetAbo);
-                        cardStatusRepository.delete(cardStatus);
-                        System.out.println(" card1 = " + cardRepository.findById(id));
-                        learnSetAboRepository.save(learnSetAbo);
-                        hasSession =true;
-                        System.out.println(" card2 = " + cardRepository.findById(id));
-                    }
+                System.out.println("forAbo::"+i);
+                CardStatus status = abo.removeCardStatusByCard(card);
+                learnSetAboRepository.save(abo);
+                if(status != null){
+                    System.out.println("status not null");
+                    cardStatusRepository.delete(status);
                 }
+                i++;
             }
-
-            System.out.println(" card3 = " + cardRepository.findById(id));
+            System.out.println("after Loop");
+            
+            cardRepository.delete(card);
+            
             //delete data on card
-            if(card.getCardFront().getType() != DataType.TextFile)
-            {
-                // TODO : sollte das in ein TryCatch oder so ähnlich? --> JA
-                File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardFront().getData());
-                file.delete();
-            }
-            if(card.getCardBack().getType() != DataType.TextFile)
-            {
-                // TODO : sollte das in ein TryCatch oder so ähnlich?
-                File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardBack().getData());
-                file.delete();
-            }
-
-            System.out.println(" card4 = " + cardRepository.existsById(id));
-            // delete every LearningSession with this Card
-            System.out.println("card5: "+card.getId());
-
-            if(!hasSession){
-                this.removeCardFromList(card);
-                cardRepository.deleteById(id);
-            }
+            this.deleteCardContent(card);
         }
     }
 

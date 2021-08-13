@@ -43,7 +43,7 @@ public class LearnSetService {
     public LearnSet createLearnSet(LearnSet learnSet, Account account)
     {
         account.createNewOwnLearnSet(learnSet.getTitle(),learnSet.getDescription(),learnSet.getFaculty(),learnSet.getVisibility());
-        return account.getOwnLearnSets().get(account.getOwnLearnSets().size()-1);
+        return account.getLearnsetAbos().get(account.getLearnsetAbos().size()-1).getLearnSet();
     }
 
     public Boolean learnSetExists(Long id){
@@ -115,7 +115,7 @@ public class LearnSetService {
         learningSessionService.deleteLearningSessionsByLearnSet(learnSet);
         //remove all LearnSetReferences in accounts
         for (Account account:accounts) {
-            accountService.removeLearnSet(account,learnSet);
+            //accountService.removeLearnSet(account,learnSet);
             // TODO : nicht nur aus den Abos sondern auch aus Own Learnsets löschen? !? ?11 Elf
         }
         //delete all cards of the learnSet
@@ -136,18 +136,18 @@ public class LearnSetService {
 
     }
     
-    public void deleteAllAccountReferences(Long id){
-        Optional<LearnSet> toDel = learnSetRepository.findById(id);
-        List<Account> accountList = accountRepository.findAll();
-        if(toDel.isPresent()){
-            for (Account account1 : accountList)
-            {
-                account1.getOwnLearnSets().remove(toDel.get());
-                account1.deleteLearnSetAboByLearnSet(toDel.get());
-                // TODO : falls ein LearnSetsAbo existiert, lösche diese referenz auch!
-            }
-            toDel.get().setOwner(null);
-        }
-    }
+//    public void deleteAllAccountReferences(Long id){
+//        Optional<LearnSet> toDel = learnSetRepository.findById(id);
+//        List<Account> accountList = accountRepository.findAll();
+//        if(toDel.isPresent()){
+//            for (Account account1 : accountList)
+//            {
+//                account1.getOwnLearnSets().remove(toDel.get());
+//                account1.deleteLearnSetAboByLearnSet(toDel.get());
+//                // TODO : falls ein LearnSetsAbo existiert, lösche diese referenz auch!
+//            }
+//            toDel.get().setOwner(null);
+//        }
+//    }
 
 }

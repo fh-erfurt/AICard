@@ -42,7 +42,7 @@ public class MyUserDetails implements UserDetails
         this.name = account.getName();
         this.description = account.getDescription();
         this.faculty = account.getFaculty();
-        this.ownLearnSets = account.getOwnLearnSets();
+//        this.ownLearnSets = account.getOwnLearnSets();
         this.favoriteLearnSets = account.getLearnsetAbos();
         this.friends = account.getFriends();
         this.chats = account.getChats();

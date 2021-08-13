@@ -13,16 +13,10 @@ import java.util.List;
 
 public interface LearnSetAboRepository extends JpaRepository<LearnSetAbo, Long> {
     
+    @Query(nativeQuery = true,value = "SELECT * FROM LEARNSETABO WHERE LEARNSET_ID = :id ;")
+    List<LearnSetAbo> findAllByLearnSetId(@Param("id") Long learnSetId);
+
     
-    @Query(nativeQuery = true, value = "" +
-            "SELECT * " +
-            "FROM LEARNSETABO as l " +
-            "JOIN ACCOUNT_LEARNSETABO as AL on AL.FAVORITELEARNSETS_ID = l.ID "+
-            "WHERE id = ?1")
-    List<LearnSetAbo> findLearnSetAboByAccountId(Long accountID);
-
-    List<LearnSetAbo> findAllByLearnSetId(Long learnSetId);
-
     @Modifying
     @Transactional
     @Query(nativeQuery = true,value = "DELETE FROM LEARNSETABO WHERE LEARNSET_ID = :id ; ")

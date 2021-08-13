@@ -117,7 +117,7 @@ public class LearnSetShopController
         Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetId);
         Optional<Account> account = accountRepository.findByEmail(principal.getName());
         if(learnSet.isPresent() && account.isPresent()){
-            account.get().addNewFavoriteLearnSet(learnSet.get());
+            account.get().addLearnSetAbo(learnSet.get());
             accountRepository.save(account.get());
         }
         return "redirect:/learnSetShop";

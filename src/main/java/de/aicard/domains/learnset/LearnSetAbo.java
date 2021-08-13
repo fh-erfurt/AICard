@@ -44,7 +44,7 @@ public class LearnSetAbo extends BaseEntity
     /**
      * The LearnSet the Account subscribed to.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private LearnSet learnSet;
     
     /**
@@ -192,5 +192,23 @@ public class LearnSetAbo extends BaseEntity
 
     public void removeLearnSet(){
         this.learnSet = null;
+    }
+    
+    public CardStatus removeCardStatusByCard(Card card)
+    {
+        CardStatus erg = null;
+        System.out.println("removeCardStatus: "+erg+" "+card);
+        for (int i=this.cardStatus.size()-1;i>=0;i--)
+        {
+            System.out.println("for::"+i);
+            System.out.println("card: " + this.cardStatus.get(i).getCard());
+            if(this.cardStatus.get(i).getCard().equals(card)){
+                erg = cardStatus.get(i);
+                System.out.println("cardStatusIf: "+erg);
+                this.learningSession.getCardStatusList().remove(erg);
+                this.cardStatus.remove(i);
+            }
+        }
+        return erg;
     }
 }
