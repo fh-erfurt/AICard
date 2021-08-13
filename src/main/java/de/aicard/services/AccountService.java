@@ -66,28 +66,49 @@ public class AccountService {
         return(acc);
     }
 
-    public void updateAccount(Account account) throws IllegalStateException{
+    public void updateAccount(Account account,Optional<Account> friend) throws IllegalStateException{
         Optional<Account> oldAccount = accountRepository.findById(account.getId());
-        String accountEmail = account.getEmail();
-        Optional<Account> matchingEntries = accountRepository.findByEmail(accountEmail);
-        if (matchingEntries.isPresent() && matchingEntries.get().getId() != oldAccount.get().getId()) {
-            throw new IllegalStateException(("Ein Account mit dieser E-Mail Adresse existiert bereits"));
+        String accountEmail = "";
+        if(account.getEmail().isEmpty()){
+            accountEmail = oldAccount.get().getEmail();
+        }else{
+            accountEmail = account.getEmail();
         }
-        else if (!RegPattern.emailMatches(accountEmail)){
+        Optional<Account> matchingEntries = accountRepository.findByEmail(accountEmail);
+        
+        System.out.println("matching Entries: " + matchingEntries.isPresent());
+        
+        if (matchingEntries.isPresent() && !matchingEntries.get().getId().equals(oldAccount.get().getId()) ){
+            throw new IllegalStateException("Ein Account mit dieser E-Mail Adresse existiert bereits");
+        }
+        System.out.println("accountEmail: " + accountEmail);
+        if (!RegPattern.emailMatches(accountEmail) ){
             throw new IllegalStateException("Bitte gib eine gültige E-Mail Adresse an.");
         }
-        oldAccount.ifPresent(value -> value.setEmail(accountEmail));
-        if(RegPattern.passMatches(account.getPassword())){
-            account.setPassword(passwordEncoder.encode(account.getPassword()));
-        }
-        else{
+        if(!RegPattern.passMatches(account.getPassword()) && !account.getPassword().isEmpty()){
             throw new IllegalStateException("Das Passwort stimmt nicht mit den angegebenen Passwortrichtlinien überein");
         }
-
+        if(friend.isPresent() && friend.get().getId().equals(oldAccount.get().getId())){
+            throw new IllegalStateException("Der angegebene Account kann nicht hinzugefügt werden");
+        }
+        
+        if(!account.getPassword().isEmpty()) account.setPassword(passwordEncoder.encode(account.getPassword()));
+        
+        
+        if(oldAccount.isPresent()){
+            oldAccount.get().setEmail(accountEmail);
+        }
+        // TODO : im frontend mit JS überpüfen, ob die beiden Passwörter die gleichen sind und nur 1 an den Server schicken
         if(oldAccount.isPresent()) {
             oldAccount.get().setName(account.getName());
+            System.out.println(account.getDescription());
             oldAccount.get().setDescription(account.getDescription());
             oldAccount.get().setFaculty(account.getFaculty());
+            if(friend.isPresent() && !oldAccount.get().getFriends().contains(friend.get())){
+                oldAccount.get().addFriend(friend.get());
+            }
+            
+            //TODO Freundesliste mit überschreiben
             accountRepository.save(oldAccount.get());
         }
     }
@@ -110,6 +131,10 @@ public class AccountService {
     public Optional<Account> getAccount(Long userID){
         return  accountRepository.findById(userID);
 
+    }
+    
+    public Optional<Account> getAccount(String email){
+        return accountRepository.findByEmail(email);
     }
 
     public Optional<Account> getAccount(Principal principal){

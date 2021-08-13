@@ -4,10 +4,12 @@ import de.aicard.domains.account.Account;
 import de.aicard.services.AccountService;
 import de.aicard.storages.AccountRepository;
 import de.aicard.storages.LearnSetRepository;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
@@ -54,18 +56,8 @@ public class AccountController
 
             if(accountService.accountExists(userID))
             {
-                if(accountService.getAccount(userID).isPresent()){
-                    model.addAttribute("account", accountService.getAccount(userID).get());
-                }
-
-                
-                // if the the user which profile it is show a button to edit Profile
-                // TODO : this should be obsolete with SpringSec
-                if(accountService.isLoggedIn(principal, userID))
-                {
-                    model.addAttribute("userIsLoggedIn", true);
-                }
-                
+                model.addAttribute("verified", accountService.getAccount(principal).get().getId().equals(userID));
+                model.addAttribute("account", accountService.getAccount(userID).get());
                 return "profile";
             }
         
@@ -77,34 +69,72 @@ public class AccountController
     {
         if(accountService.accountExists(principal))
         {
-            model.addAttribute("account", accountService.getAccount(principal));
+            model.addAttribute("account", accountService.getAccount(principal).get());
             return "updateProfile";
         }
         
         return "redirect:/index";
     }
-
     
-   @PostMapping("/updateAccount")
-   public String editAccount(@ModelAttribute("account") Account theAccount, Model model) throws NoSuchAlgorithmException {
-
+    @ResponseBody
+    @PostMapping("/updateAccount")
+    public ModelAndView postUpdateAccount(@RequestParam(value="addFriendByEmail", required = false) String addFriendByEmail,
+                                    @ModelAttribute("account") Account theAccount, Model model,Principal principal) throws NoSuchAlgorithmException {
+    
+        System.out.println("request: "+addFriendByEmail);
         //TODO: hier wird ID=NULL übergeben.
-       List<String> errors = new ArrayList<>();
-       try{
-           accountService.updateAccount(theAccount);
-       }
-       catch(IllegalStateException e){
-           errors.add(e.getMessage());
-           model.addAttribute("errorList",errors);
-       }
-
-       if(errors.isEmpty()){
-           return "profile";
-       }
-       else{
-           return "editAccount";
-       }
-   }
+        List<String> errors = new ArrayList<>();
+        Account account = accountService.getAccount(principal).get();
+        if(account.getId().equals(theAccount.getId())){
+            try{
+                Optional<Account> friendAccount = accountService.getAccount(addFriendByEmail);
+                if(friendAccount.isEmpty() && !addFriendByEmail.isEmpty())
+                    throw new IllegalStateException("Der Account existiert nicht");
+                System.out.println("friendlist Exists: " + theAccount.getFriends());
+                
+                accountService.updateAccount(theAccount, friendAccount);
+            }
+            catch(IllegalStateException e){
+                errors.add(e.getMessage());
+            }
+            
+            
+            
+        }else {
+            errors.add("Du manipulatives Arschloch!");
+        }
+        model.addAttribute("errorList",errors);
+        model.addAttribute("account", account);
+        
+        ModelAndView modelAndView = new ModelAndView();
+        if(errors.isEmpty()){
+            
+            modelAndView.setViewName("redirect:/profile");
+            return modelAndView;
+        }
+        else{
+            modelAndView.setViewName("updateProfile");
+            modelAndView.addObject(model);
+            return modelAndView;
+            //            return "updateProfile";
+        }
+    }
+    
+    @GetMapping("/removeFriendFromFriendList/{friendId}")
+    public String getRemoveFriendFromFriendList(@PathVariable("friendId") Long friendId, Model model, Principal principal)
+    {
+        Optional<Account> account = accountService.getAccount(principal);
+        Optional<Account> friend = accountService.getAccount(friendId);
+        
+        if(account.isPresent() && friend.isPresent() && account.get().getFriends().contains(friend.get())){
+            account.get().removeFriend(friend.get());
+            accountService.saveAccount(account.get());
+        }
+        
+    
+        return "redirect:/profile";
+    
+    }
 
 
 }

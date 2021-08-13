@@ -14,8 +14,18 @@
 
   <h1>Account Update Seite</h1>
 
+  <table th:if="${!#lists.isEmpty(errorList)}">
+    <tbody>
+    <tr th:each="error : ${errorList}">
+      <td><span th:text="${error}"> Title </span></td>
+    </tr>
+    </tbody>
+  </table>
+
 
   <form id="signUp-professor" th:action="@{/updateAccount}" th:object="${account}" method="POST">
+
+    <input th:field="*{id}" type="number" hidden>
 
     Professor
     <div class="registrationElement">
@@ -30,7 +40,7 @@
 
     <div class="registrationElement">
       <label for="descriptionProfessor">Beschreibung</label>
-      <input  th:field="*{description}" id="descriptionProfessor" type="" class="inputtext">
+      <input  th:field="*{description}" id="descriptionProfessor" type="text" class="inputtext">
     </div>
 
     <div class="registrationElement">
@@ -54,58 +64,26 @@
       </select>
     </div>
 
+    <div class="registrationElement">
+      <label for="friendList">Friends</label>
+      <select id="friendList" th:field="*{friends}" multiple>
+        <option th:each="friend : ${account.getFriends()}"
+                th:text="${friend.getEmail()}"
+                th:value="${friend}" selected>
+        </option>
+      </select>
+    </div>
+
+    <div class="registrationElement">
+      <label for="addFriendByEmail">EMail angeben um als Freund hinzuzufügen</label>
+      <input id="addFriendByEmail" type="email" name="addFriendByEmail" class="inputtext">
+    </div>
+
+
     <div class="btnPlaceHolder"></div>
     <input type="submit" class="button btn">
   </form>
 
-
-<!--  <form th:if="${professorAcademicGrade == null}" id="signUp-student" th:action="@{/updateAccount}" th:object="${account}" method="POST">-->
-<!--    Student-->
-<!--    <div class="registrationElement">-->
-<!--      <label for="email">Email</label>-->
-<!--      <input  th:field="*{email}" id="email" type="email" class="inputtext">-->
-<!--    </div>-->
-
-<!--    <div class="registrationElement">-->
-<!--      <label for="name">Name</label>-->
-<!--      <input  th:field="*{name}" id="name" type="text" class="inputtext">-->
-<!--    </div>-->
-
-<!--    <div class="registrationElement">-->
-<!--      <label for="description">Beschreibung</label>-->
-<!--      <input  th:field="*{description}" id="description" type="text" class="inputtext">-->
-<!--    </div>-->
-
-<!--    <div class="registrationElement">-->
-<!--      <label for="passwordStudent1">Passwort</label>-->
-<!--      <input th:field="*{password}" id="passwordStudent1" type="password" class="inputtext">-->
-<!--    </div>-->
-
-<!--    <div class="registrationElement">-->
-<!--      <label for="passwordStudent2">Passwort bestätigen</label>-->
-<!--      <input id="passwordStudent2" type="password" class="inputtext">-->
-<!--    </div>-->
-
-<!--    <div class="registrationElement">-->
-<!--      <label for="semester">Semester</label>-->
-<!--      <input  th:field="${studentSemester}" name="studentSemester" id="semester" type="number" class="inputtext">-->
-<!--    </div>-->
-
-<!--    <div class="registrationElement">-->
-<!--      <label for="facultyStudent">Fakultät</label>-->
-<!--      <select id="facultyStudent" th:field="*{faculty}">-->
-<!--        <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"-->
-<!--                th:text="${faculty}"-->
-<!--                th:value="${faculty}"-->
-<!--                th:selected="${account.getFaculty()}">-->
-<!--        </option>-->
-<!--      </select>-->
-<!--    </div>-->
-
-
-<!--    <div class="btnPlaceHolder"></div>-->
-<!--    <input type="submit" class="button btn">-->
-<!--  </form>-->
 
 </div>
 <div class="footer"><a href="">Impressum</a></div>
