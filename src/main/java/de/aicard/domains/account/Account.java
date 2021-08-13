@@ -127,8 +127,15 @@ public class Account extends BaseEntity
 //        this.ownLearnSets.clear();
 //    }
 
-    public void deleteLearnSetAboByLearnSet(LearnSet learnSet){
-        this.learnsetAbos.removeIf(learnSetAbo -> learnSetAbo.getLearnSet().equals(learnSet));
+    public LearnSetAbo removeLearnSetAboByLearnSet(LearnSet learnSet){
+        for(int i = this.learnsetAbos.size()-1;i>=0;i--){
+            if(this.learnsetAbos.get(i).getLearnSet().equals(learnSet)){
+                LearnSetAbo abo = this.learnsetAbos.get(i);
+                this.learnsetAbos.remove(abo);
+                return abo;
+            }
+        }
+        return null;
     }
     
     //learnSetAbos

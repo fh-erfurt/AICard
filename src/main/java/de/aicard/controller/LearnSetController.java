@@ -44,6 +44,7 @@ public class LearnSetController
     private final CardService cardService;
 
     private final LearningSessionService learningSessionService;
+    
     @Autowired
     public LearnSetAboRepository learnSetAboRepository;
 
@@ -167,10 +168,11 @@ public class LearnSetController
     @GetMapping("/deleteLearnSet/{id}")
     public String getDeleteLearnSet(@PathVariable("id") Long id, Principal principal)
     {
-        if(learnSetService.isAdmin(principal, id))
+        if(learnSetService.isOwner(principal, id))
         {
             // delete all cards and corresponding cardFiles
             //TODO: Prüfen, ob JPA das nicht automatisch macht.
+            accountService.deleteLearnSetAbosByLearnSetId(id);
             learnSetService.deleteLearnSet(id);
         }
         

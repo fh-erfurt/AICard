@@ -62,6 +62,14 @@ public class LearnSetService {
             return false;
         }
     }
+    public Boolean isOwner(Principal principal,Long id){
+        if(this.learnSetExists(id) && accountService.accountExists(principal)){
+            return this.getLearnSetByLearnSetId(id).getOwner().equals(accountService.getAccount(principal).get());
+        }else{
+            return false;
+        }
+    }
+    
     //isPresent check
     public Boolean accountIsAuthorized(Principal principal, Long id){
         if(this.learnSetExists(id) && accountService.accountExists(principal)){
@@ -105,34 +113,38 @@ public class LearnSetService {
         // -> all cards löschen
         // -> cardlist löschen
         // -> delete LearnSet
-
-        //sett list to null
-        learnSet.setAdminList(null);
         learnSet.setOwner(null);
-
-        List<Account> accounts = accountRepository.findAll();
-        //delete all learning Sessions based on this learnSet
-        learningSessionService.deleteLearningSessionsByLearnSet(learnSet);
-        //remove all LearnSetReferences in accounts
-        for (Account account:accounts) {
-            //accountService.removeLearnSet(account,learnSet);
-            // TODO : nicht nur aus den Abos sondern auch aus Own Learnsets löschen? !? ?11 Elf
-        }
-        //delete all cards of the learnSet
-        List<Card> cardList = learnSet.getCardList().getListOfCards();
-        for (int i = cardList.size()-1;i>=0;i--) {
-            cardService.deleteCard(cardList.get(i));
-        }
-        //delete the cardlist
-        cardListRepository.delete(learnSet.getCardList());
-        //delete learnSet
+        learnSet.setAdminList(null);
         learnSetRepository.delete(learnSet);
-        List<LearnSetAbo> abos = learnSetAboRepository.findAll();
-        for (LearnSetAbo abo:abos) {
-            if(abo.getLearnSet()==null && abo.getLearningSession()==null){
-                learnSetAboRepository.delete(abo);
-            }
-        }
+        
+
+//        //sett list to null
+//        learnSet.setAdminList(null);
+//        learnSet.setOwner(null);
+//
+//        List<Account> accounts = accountRepository.findAll();
+//        //delete all learning Sessions based on this learnSet
+//        learningSessionService.deleteLearningSessionsByLearnSet(learnSet);
+//        //remove all LearnSetReferences in accounts
+//        for (Account account:accounts) {
+//            //accountService.removeLearnSet(account,learnSet);
+//            // TODO : nicht nur aus den Abos sondern auch aus Own Learnsets löschen? !? ?11 Elf
+//        }
+//        //delete all cards of the learnSet
+//        List<Card> cardList = learnSet.getCardList().getListOfCards();
+//        for (int i = cardList.size()-1;i>=0;i--) {
+//            cardService.deleteCard(cardList.get(i));
+//        }
+//        //delete the cardlist
+//        cardListRepository.delete(learnSet.getCardList());
+//        //delete learnSet
+//        learnSetRepository.delete(learnSet);
+//        List<LearnSetAbo> abos = learnSetAboRepository.findAll();
+//        for (LearnSetAbo abo:abos) {
+//            if(abo.getLearnSet()==null && abo.getLearningSession()==null){
+//                learnSetAboRepository.delete(abo);
+//            }
+//        }
 
     }
     

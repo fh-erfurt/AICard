@@ -8,7 +8,6 @@ import de.aicard.storages.AccountRepository;
 import de.aicard.storages.LearnSetAboRepository;
 import de.aicard.storages.LearnSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +25,19 @@ public class AccountService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    LearnSetRepository learnSetRepository;
 
-    private final LearnSetAboService learnSetAboService;
+    @Autowired
+    LearnSetAboRepository learnSetAboRepository;
+    
+    
+    
 
 
     @Autowired
-    public AccountService(LearnSetAboService learnSetAboService){
-        this.learnSetAboService=learnSetAboService;
+    public AccountService(){
+
     }
 
 
@@ -124,18 +129,19 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-//    public void removeLearnSet(Account account, LearnSet learnSet){
-//        List<LearnSetAbo> abos = account.getLearnsetAbos();
-//        for (int i= abos.size()-1;i>=0;i--) {
-//            if(abos.get(i).getLearnSet().equals(learnSet)){
-//                LearnSetAbo abo = abos.get(i);
-//                abo.removeLearnSet();
-//                account.removeLearnSetAbo(abo);
-//            }
-//        }
-//        account.getOwnLearnSets().remove(learnSet);
-//        this.saveAccount(account);
-//    }
+    public void deleteLearnSetAbosByLearnSetId(Long id){
+        List<Account> accounts = accountRepository.findAllAccountsByLearnsetIdInLearnSetAbo(id);
+        LearnSet learnSet = learnSetRepository.findById(id).get();
+        for (Account account : accounts)
+        {
+            LearnSetAbo learnSetAbo =  account.removeLearnSetAboByLearnSet(learnSet);
+            if(learnSetAbo != null)
+            {
+                this.saveAccount(account);
+                learnSetAboRepository.delete(learnSetAbo);
+            }
+        }
+    }
 
 
     public List<LearnSetAbo> getLearnSetAbos(Principal principal){
