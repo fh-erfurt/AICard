@@ -23,7 +23,6 @@ public class LearnSetService {
     LearnSetRepository learnSetRepository;
 
     private final AccountService accountService;
-    private final LearningSessionService learningSessionService;
     private final CardService cardService;
     
     @Autowired
@@ -34,9 +33,8 @@ public class LearnSetService {
     public CardListRepository cardListRepository;
 
     @Autowired
-    public LearnSetService(AccountService accountService,LearningSessionService learningSessionService,CardService cardService) {
+    public LearnSetService(AccountService accountService,CardService cardService) {
         this.accountService = accountService;
-        this.learningSessionService = learningSessionService;
         this.cardService = cardService;
     }
 
@@ -45,46 +43,35 @@ public class LearnSetService {
         account.createNewOwnLearnSet(learnSet.getTitle(),learnSet.getDescription(),learnSet.getFaculty(),learnSet.getVisibility());
         return account.getLearnsetAbos().get(account.getLearnsetAbos().size()-1).getLearnSet();
     }
+    
 
-    public Boolean learnSetExists(Long id){
-        return learnSetRepository.existsById(id);
+    public Optional<LearnSet> getLearnSetByLearnSetId(Long learnSetId){
+        return learnSetRepository.findById(learnSetId);
     }
 
-    public LearnSet getLearnSetByLearnSetId(Long learnSetId){
-        return learnSetRepository.findById(learnSetId).orElse(null);
+    public Boolean isAdmin(Account account, LearnSet learnSet)
+    {
+        if(learnSet != null && learnSet.getAdminList() != null){
+            return learnSet.getAdminList().contains(account);
+        }
+        return false;
     }
-
-    public Boolean isAdmin(Principal principal, Long id){
-        if (this.learnSetExists(id) && accountService.accountExists(principal) ){
-            return this.getLearnSetByLearnSetId(id).getAdminList().contains(accountService.getAccount(principal).get());
+    public Boolean isOwner(Account account,LearnSet learnSet){
+        if(learnSet != null && learnSet.getOwner() != null){
+            return learnSet.getOwner().equals(account);
         }
-        else{
-            return false;
-        }
-    }
-    public Boolean isOwner(Principal principal,Long id){
-        if(this.learnSetExists(id) && accountService.accountExists(principal)){
-            return this.getLearnSetByLearnSetId(id).getOwner().equals(accountService.getAccount(principal).get());
-        }else{
-            return false;
-        }
+        return false;
     }
     
     //isPresent check
-    public Boolean accountIsAuthorized(Principal principal, Long id){
-        if(this.learnSetExists(id) && accountService.accountExists(principal)){
-            return this.getLearnSetByLearnSetId(id).isAuthorizedToAccessLearnSet(accountService.getAccount(principal).get());
-        }
-        else{
+    public Boolean accountIsAuthorized(Account account,LearnSet learnSet)
+    {
+        if(learnSet != null)
+        {
+            return learnSet.isAuthorizedToAccessLearnSet(account);
+        }else {
             return false;
         }
-    }
-
-    public CardList getCardList(Long learnSetID){
-        if(this.learnSetExists(learnSetID)){
-            return this.getLearnSetByLearnSetId(learnSetID).getCardList();
-        }
-        return null;
     }
     
     public void saveLearnSet(LearnSet learnset){
@@ -93,19 +80,9 @@ public class LearnSetService {
         }
     }
 
-    public void addCardToList(Long learnSetId, Card card){
-        if(learnSetExists(learnSetId)){
-            LearnSet learnSet = learnSetRepository.findById(learnSetId).get();
-
-            learnSet.getCardList().addToList(card);
-            learnSetRepository.save(learnSet);
-        }
-
-
-    }
-
-    public void deleteLearnSet(Long id){
-        LearnSet learnSet = this.getLearnSetByLearnSetId(id);
+    public void deleteLearnSet(Long id)
+    {
+        Optional<LearnSet> learnSet = this.getLearnSetByLearnSetId(id);
         //TODO: übernommen aus Controller. Bei gelegenheit prüfen, ob es auch ohne geht/ JPA Konfiguration checken:
         // sicherstellen, dass Owner nicht cascaded gelöscht wird, wenn man ihn drin lässt.
         // owner/admin -> null
@@ -113,53 +90,9 @@ public class LearnSetService {
         // -> all cards löschen
         // -> cardlist löschen
         // -> delete LearnSet
-        learnSet.setOwner(null);
-        learnSet.setAdminList(null);
-        learnSetRepository.delete(learnSet);
-        
-
-//        //sett list to null
-//        learnSet.setAdminList(null);
-//        learnSet.setOwner(null);
-//
-//        List<Account> accounts = accountRepository.findAll();
-//        //delete all learning Sessions based on this learnSet
-//        learningSessionService.deleteLearningSessionsByLearnSet(learnSet);
-//        //remove all LearnSetReferences in accounts
-//        for (Account account:accounts) {
-//            //accountService.removeLearnSet(account,learnSet);
-//            // TODO : nicht nur aus den Abos sondern auch aus Own Learnsets löschen? !? ?11 Elf
-//        }
-//        //delete all cards of the learnSet
-//        List<Card> cardList = learnSet.getCardList().getListOfCards();
-//        for (int i = cardList.size()-1;i>=0;i--) {
-//            cardService.deleteCard(cardList.get(i));
-//        }
-//        //delete the cardlist
-//        cardListRepository.delete(learnSet.getCardList());
-//        //delete learnSet
-//        learnSetRepository.delete(learnSet);
-//        List<LearnSetAbo> abos = learnSetAboRepository.findAll();
-//        for (LearnSetAbo abo:abos) {
-//            if(abo.getLearnSet()==null && abo.getLearningSession()==null){
-//                learnSetAboRepository.delete(abo);
-//            }
-//        }
-
+        learnSet.get().setOwner(null);
+        learnSet.get().setAdminList(null);
+        learnSetRepository.delete(learnSet.get());
     }
-    
-//    public void deleteAllAccountReferences(Long id){
-//        Optional<LearnSet> toDel = learnSetRepository.findById(id);
-//        List<Account> accountList = accountRepository.findAll();
-//        if(toDel.isPresent()){
-//            for (Account account1 : accountList)
-//            {
-//                account1.getOwnLearnSets().remove(toDel.get());
-//                account1.deleteLearnSetAboByLearnSet(toDel.get());
-//                // TODO : falls ein LearnSetsAbo existiert, lösche diese referenz auch!
-//            }
-//            toDel.get().setOwner(null);
-//        }
-//    }
 
 }

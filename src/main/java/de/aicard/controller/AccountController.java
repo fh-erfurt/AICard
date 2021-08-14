@@ -34,17 +34,13 @@ public class AccountController
      * @return
      */
     @GetMapping("/profile")
-    public String showMyProfile(Model model, HttpServletRequest request, Principal principal)
+    public String showMyProfile(Model model, Principal principal)
     {
-        if(accountService.accountExists(principal))
+        Optional<Account> account = accountService.getAccount(principal);
+        if(account.isPresent())
         {
-            return showProfile(accountService.getID(principal), model, principal);
+            return showProfile(account.get().getId(), model, principal);
         }
-//        if(Session.getSessionValue(request.getCookies()) != null)
-//        {
-//            return showProfile(Long.parseLong(Session.getSessionValue(request.getCookies())), model, request);
-//        }
-        
         return "redirect:/index";
     }
 
@@ -53,11 +49,11 @@ public class AccountController
     {
         List<String> errors = new ArrayList<>();
         // only loggedIN users can see an account
-
-            if(accountService.accountExists(userID))
+        Optional<Account> account = accountService.getAccount(userID);
+            if(account.isPresent())
             {
                 model.addAttribute("verified", accountService.getAccount(principal).get().getId().equals(userID));
-                model.addAttribute("account", accountService.getAccount(userID).get());
+                model.addAttribute("account", account.get());
                 return "profile";
             }
         
@@ -67,9 +63,10 @@ public class AccountController
     @GetMapping("/updateProfile")
     public String getUpdateProfile(Principal principal,Model model)
     {
-        if(accountService.accountExists(principal))
+        Optional<Account> account = accountService.getAccount(principal);
+        if(account.isPresent())
         {
-            model.addAttribute("account", accountService.getAccount(principal).get());
+            model.addAttribute("account", account.get());
             return "updateProfile";
         }
         
@@ -82,42 +79,48 @@ public class AccountController
                                     @ModelAttribute("account") Account theAccount, Model model,Principal principal) throws NoSuchAlgorithmException {
     
         System.out.println("request: "+addFriendByEmail);
-        //TODO: hier wird ID=NULL übergeben.
-        List<String> errors = new ArrayList<>();
-        Account account = accountService.getAccount(principal).get();
-        if(account.getId().equals(theAccount.getId())){
-            try{
-                Optional<Account> friendAccount = accountService.getAccount(addFriendByEmail);
-                if(friendAccount.isEmpty() && !addFriendByEmail.isEmpty())
-                    throw new IllegalStateException("Der Account existiert nicht");
-                System.out.println("friendlist Exists: " + theAccount.getFriends());
-                
-                accountService.updateAccount(theAccount, friendAccount);
-            }
-            catch(IllegalStateException e){
-                errors.add(e.getMessage());
-            }
-            
-            
-            
-        }else {
-            errors.add("Du manipulatives Arschloch!");
-        }
-        model.addAttribute("errorList",errors);
-        model.addAttribute("account", account);
         
+        List<String> errors = new ArrayList<>();
         ModelAndView modelAndView = new ModelAndView();
-        if(errors.isEmpty()){
+        Optional<Account> account = accountService.getAccount(principal);
+        if(account.isPresent())
+        {
+            if(theAccount.getId().equals(account.get().getId())){
+                try{
+                    Optional<Account> friendAccount = accountService.getAccount(addFriendByEmail);
+                    if(friendAccount.isEmpty() && !addFriendByEmail.isEmpty())
+                        throw new IllegalStateException("Der Account existiert nicht");
+                    System.out.println("friendlist Exists: " + theAccount.getFriends());
+                    
+                    accountService.updateAccount(theAccount, friendAccount);
+                }
+                catch(IllegalStateException e){
+                    errors.add(e.getMessage());
+                }
+                
+                
+                
+            }else {
+                errors.add("Du manipulatives Arschloch!");
+            }
+            model.addAttribute("errorList",errors);
+            model.addAttribute("account", account.get());
             
-            modelAndView.setViewName("redirect:/profile");
-            return modelAndView;
+            
+            if(errors.isEmpty()){
+                
+                modelAndView.setViewName("redirect:/profile");
+                return modelAndView;
+            }
+            else{
+                modelAndView.setViewName("updateProfile");
+                modelAndView.addObject(model);
+                return modelAndView;
+            }
         }
-        else{
-            modelAndView.setViewName("updateProfile");
-            modelAndView.addObject(model);
-            return modelAndView;
-            //            return "updateProfile";
-        }
+        
+        modelAndView.setViewName("redirect:/logout");
+        return modelAndView;
     }
     
     @GetMapping("/removeFriendFromFriendList/{friendId}")

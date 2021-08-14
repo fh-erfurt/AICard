@@ -37,7 +37,7 @@ public class Message extends BaseEntity
     private Account sender;
     private LocalDateTime time;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Account> likedBy  ;
+    private List<Account> likedBy;
 
     //constructor
     
@@ -57,39 +57,7 @@ public class Message extends BaseEntity
         time = LocalDateTime.now();
         likedBy = new ArrayList<>();
     }
-
-    //Setter & getter
-
-    public String getMessage()
-    {
-        return this.message;
-    }
-
-    public void setMessage(String _newMessage)
-    {
-        this.message = _newMessage;
-    }
-
-    /**
-     * The function getLikedBy is used to get the list of the persons that liked the message
-     *
-     * @author Amine Semlali
-     */
-    public List<Account> getLikedBy()
-    {
-        return this.likedBy;
-    }
-
-    public void setLikedby (List<Account> _newLikedBy)
-    {
-        this.likedBy = _newLikedBy;
-    }
-
-    public LocalDateTime getTime()
-    {
-        return this.time;
-    }
-
+    
     //functions
 
     /**

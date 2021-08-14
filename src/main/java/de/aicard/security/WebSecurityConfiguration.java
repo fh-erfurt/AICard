@@ -39,7 +39,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
         http.authorizeRequests()
                 .antMatchers("/addCard/*", "/cardOverview/**", "/createLearnset", "/deckOverview/**",
                              "/editCard/**", "/editLearnSet/**", "/learnSets", "/profile", "/profile/**",
-                             "/updateProfile/**", "/learnSetShop", "/learnCard/**", "/initializeLearningSession/**"
+                             "/updateProfile/**", "/learnSetShop", "/learnCard/**", "/initializeLearningSession/**",
+                             "/comments/*"
                              // TODO : hier müssen alle seiten bzw getMethoden eingetragen werden
                              ).hasAnyRole("USER")
                 

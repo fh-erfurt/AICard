@@ -1,5 +1,6 @@
 package de.aicard.controller;
 
+import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.DataType;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.activation.MimetypesFileTypeMap;
+import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,6 +24,7 @@ import java.nio.file.Path;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AddCardController {
@@ -38,7 +41,10 @@ public class AddCardController {
 
     @GetMapping("/addCard/{learnSetID}")
     public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model) {
-        if (learnSetService.accountIsAuthorized(principal, learnSetID)) {
+        Optional<Account> account = accountService.getAccount(principal);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
+        
+        if (account.isPresent() && learnSet.isPresent() && learnSetService.accountIsAuthorized(account.get(), learnSet.get())) {
             model.addAttribute("learnSetID", learnSetID);
             return "addCard";
         }
@@ -74,8 +80,16 @@ public class AddCardController {
         Card newCard = null;
 
         // TODO : überprüfe bei allen LernSet Änderungen ob der Account darauf zugriff hat
-        LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
-        if (learnSetService.accountIsAuthorized(principal, learnSetID) && learnSet != null && accountService.getAccount(principal).isPresent() && learnSet.getAdminList().contains(accountService.getAccount(principal).get())) {
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
+        Optional<Account> account = accountService.getAccount(principal);
+        
+        if (account.isPresent() &&
+                learnSet.isPresent() &&
+                learnSetService.accountIsAuthorized(account.get(), learnSet.get()) &&
+                accountService.getAccount(principal).isPresent() &&
+                learnSet.get().getAdminList().contains(accountService.getAccount(principal).get()))
+        {
+            
             // we are here if the learnSet exists and the Owner or an Admin is logged in
             String cardFrontTitel = cardService.getCorrectTitle(cardFrontType, cardFrontPictureFileTitle,
                     cardFrontTextFileTile, cardFrontAudioFileTitle,
@@ -120,7 +134,9 @@ public class AddCardController {
 
         }
         if (errors.isEmpty()) {
-            learnSetService.addCardToList(learnSetID, newCard);
+            learnSet.get().getCardList().addToList(newCard);
+            learnSetService.saveLearnSet(learnSet.get());
+            
             modelAndView.setViewName("redirect:/cardOverview/" + learnSetID);
             return modelAndView;
         } else {

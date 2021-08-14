@@ -91,7 +91,6 @@ public class LearningSessionController
                 LearningSession learningSession = learnSetAbo.get().getLearningSession();
                 learnSetAbo.get().setLearningSession(null);
                 learningSession.setCardStatusList(null);
-                //learningSessionRepository.save(learningSession);
                 learningSessionRepository.delete(learningSession);
                 
             }

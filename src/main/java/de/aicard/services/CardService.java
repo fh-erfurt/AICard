@@ -37,12 +37,10 @@ public class CardService {
     @Autowired
     LearnSetRepository learnSetRepository;
 
-    private final LearningSessionService learningSessionService;
     private final CardContentService cardContentService;
 
     @Autowired
-    public CardService(CardContentService cardContentService,LearningSessionService learningSessionService) {
-        this.learningSessionService = learningSessionService;
+    public CardService(CardContentService cardContentService) {
         this.cardContentService = cardContentService;
     }
 

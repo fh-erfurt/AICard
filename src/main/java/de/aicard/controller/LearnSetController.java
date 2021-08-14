@@ -13,6 +13,7 @@ import de.aicard.services.*;
 
 import de.aicard.storages.CardStatusRepository;
 import de.aicard.storages.LearnSetAboRepository;
+import org.hibernate.resource.beans.container.spi.AbstractCdiBeanContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -39,11 +40,9 @@ public class LearnSetController
 
     private final LearnSetService learnSetService;
 
-    private final LearnSetAboService learnSetAboService;
 
     private final CardService cardService;
 
-    private final LearningSessionService learningSessionService;
     
     @Autowired
     public LearnSetAboRepository learnSetAboRepository;
@@ -52,12 +51,10 @@ public class LearnSetController
     public CardStatusRepository cardStatusRepository;
     
     @Autowired
-    public LearnSetController(AccountService accountService, LearnSetService learnSetService, LearnSetAboService learnSetAboService, CardService cardService,LearningSessionService learningSessionService) {
+    public LearnSetController(AccountService accountService, LearnSetService learnSetService, CardService cardService) {
         this.accountService = accountService;
         this.learnSetService = learnSetService;
-        this.learnSetAboService = learnSetAboService;
         this.cardService = cardService;
-        this.learningSessionService = learningSessionService;
     }
 
 
@@ -72,8 +69,7 @@ public class LearnSetController
     public String postCreateLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, Principal principal)
     {
         Optional<Account> account = accountService.getAccount(principal);
-        System.out.println("account isPresent: "+account.isPresent());
-        if(accountService.isLoggedIn(principal) && account.isPresent()){
+        if(account.isPresent()){
             LearnSet learnSet = learnSetService.createLearnSet(newLearnset,account.get());
             learnSetService.saveLearnSet(learnSet);
             return "redirect:cardOverview/" + learnSet.getId();
@@ -85,17 +81,18 @@ public class LearnSetController
     @GetMapping("/learnSets")
     public String getLearnSets(Model model ,Principal principal)
     {
+        Optional<Account> account = accountService.getAccount(principal);
         // check if user is logged in -> else: send to Login
-        if(accountService.isLoggedIn(principal))
+        if(account.isPresent())
         {
             //TODO: Das geht noch eleganter.
-            List<LearnSetAbo> abos = accountService.getLearnSetAbos(principal);
+            List<LearnSetAbo> abos = account.get().getLearnsetAbos();
             List<LearnSetAbo> ownLearnSetAbos = new ArrayList<>();
             List<LearnSetAbo> favoriteLearnSetAbos = new ArrayList<>();
 
             for ( LearnSetAbo learnSetAbo : abos)
             {
-                if(accountService.getAccount(principal).isPresent() && learnSetAbo.getLearnSet().getAdminList().contains(accountService.getAccount(principal).get())){
+                if(learnSetAbo.getLearnSet().getAdminList().contains(account.get())){
                     ownLearnSetAbos.add(learnSetAbo);
                 }else{
                     favoriteLearnSetAbos.add(learnSetAbo);
@@ -113,20 +110,21 @@ public class LearnSetController
     public String getCardOverview(@PathVariable Long id,Principal principal, Model model)
     {
         String filePath = "/learnSetImage/";
+        Optional<Account> account = accountService.getAccount(principal);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(id);
         
-        if (learnSetService.accountIsAuthorized(principal, id))
+        if (account.isPresent() && learnSet.isPresent() && learnSetService.accountIsAuthorized(account.get(), learnSet.get()))
         {
             // check if user has rights! to editn Learnset
             //zusätzlicher check auf den owner
-            boolean isAdmin = accountService.getAccount(principal).isPresent() && learnSetService.getLearnSetByLearnSetId(id).getAdminList().contains(accountService.getAccount(principal).get());
-            boolean isOwner = accountService.getAccount(principal).isPresent() && learnSetService.getLearnSetByLearnSetId(id).getOwner().equals(accountService.getAccount(principal).get());
+            boolean isAdmin = learnSetService.isAdmin(account.get(),learnSet.get());
+            boolean isOwner = learnSetService.isOwner(account.get(), learnSet.get());
             System.out.println("isAdmin: "+isAdmin);
             // TODO : check if the CardContentFile exists; what should we do if it doesnt?
-            CardList cardList = learnSetService.getCardList(id);
-            Optional<Account> account = accountService.getAccount(principal);
-            if(cardList != null && account.isPresent()){
+            CardList cardList = learnSet.get().getCardList();
+            if(cardList != null){
                 model.addAttribute("isOwner", isOwner);
-                model.addAttribute("learnSet", learnSetService.getLearnSetByLearnSetId(id));
+                model.addAttribute("learnSet", learnSet.get());
                 List<Card> listOfCards = cardService.setCardData(filePath, cardList);
                 model.addAttribute("cardList", listOfCards);
                 model.addAttribute("isAdmin", isAdmin);
@@ -147,14 +145,14 @@ public class LearnSetController
     @GetMapping("/deleteCard/{id}")
     public String getDeleteCard(@PathVariable("id") Long id, Principal principal)
     {
+        Optional<Account> account = accountService.getAccount(principal);
+        Long learnSetId = cardService.getLearnSetIdByCardId(id);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
 
-        if(learnSetService.isAdmin(principal, cardService.getLearnSetIdByCardId(id)))
+        if(account.isPresent() && learnSet.isPresent() && learnSetService.isAdmin(account.get(), learnSet.get()))
         {
-            Long learnSetId = cardService.getLearnSetIdByCardId(id);
             Card card = cardService.getCardById(id);
             cardService.deleteCard(card);
-            
-
             return "redirect:/cardOverview/" + learnSetId;
         }
 
@@ -162,16 +160,14 @@ public class LearnSetController
 
     }
     
-    @GetMapping("/editCard/{id}")
-    public String getEditCard(@PathVariable("id") Long id, Principal principal, Model model)
-    {
-        return "editCard";
-    }
     
     @GetMapping("/deleteLearnSet/{id}")
     public String getDeleteLearnSet(@PathVariable("id") Long id, Principal principal)
     {
-        if(learnSetService.isOwner(principal, id))
+        Optional<Account> account = accountService.getAccount(principal);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(id);
+        
+        if(account.isPresent() && learnSet.isPresent() && learnSetService.isOwner(account.get(), learnSet.get()))
         {
             // delete all cards and corresponding cardFiles
             //TODO: Prüfen, ob JPA das nicht automatisch macht.
@@ -186,12 +182,12 @@ public class LearnSetController
     public String getEditLearnSet(@PathVariable("id") Long id, Principal principal, Model model)
     {
         
-        LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(id);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(id);
         Optional<Account> account = accountService.getAccount(principal);
-        if(learnSet != null && account.isPresent() && learnSet.getOwner().equals(account.get()))
+        if(learnSet.isPresent() && account.isPresent() && learnSet.get().getOwner().equals(account.get()))
         {
             model.addAttribute("owner",account.get());
-            model.addAttribute("learnSetOld",learnSet);
+            model.addAttribute("learnSetOld",learnSet.get());
             
             return "editLearnSet";
             
@@ -204,17 +200,17 @@ public class LearnSetController
     public String postUpdateLearnSet(@PathVariable("learnSetId") Long learnSetId ,@ModelAttribute("learnSetOld") LearnSet learnSet ,Principal principal)
     {
         
-        LearnSet learnSetOld = learnSetService.getLearnSetByLearnSetId(learnSetId);
+        Optional<LearnSet> learnSetOld = learnSetService.getLearnSetByLearnSetId(learnSetId);
         Optional<Account> account = accountService.getAccount(principal);
-        if(account.isPresent() && learnSetService.accountIsAuthorized(principal, learnSetOld.getId()) && learnSetOld.getOwner().equals(account.get()))
+        if(account.isPresent() && learnSetOld.isPresent() && learnSetService.accountIsAuthorized(account.get(), learnSetOld.get()) && learnSetOld.get().getOwner().equals(account.get()))
         {
             if(learnSet != null && learnSet.getTitle() != null && learnSet.getDescription() != null && learnSet.getFaculty() != null && learnSet.getVisibility() != null)
             {
-                learnSetOld.setTitle(learnSet.getTitle());
-                learnSetOld.setDescription(learnSet.getDescription());
-                learnSetOld.setFaculty(learnSet.getFaculty());
-                learnSetOld.setVisibility(learnSet.getVisibility());
-                learnSetService.saveLearnSet(learnSetOld);
+                learnSetOld.get().setTitle(learnSet.getTitle());
+                learnSetOld.get().setDescription(learnSet.getDescription());
+                learnSetOld.get().setFaculty(learnSet.getFaculty());
+                learnSetOld.get().setVisibility(learnSet.getVisibility());
+                learnSetService.saveLearnSet(learnSetOld.get());
             }
         }
         
@@ -244,12 +240,12 @@ public class LearnSetController
     {
         Optional<Account> owner = accountService.getAccount(principal);
         Optional<Account> delAdmin = accountService.getAccount(accountId);
-        LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
-        if(owner.isPresent() && learnSet != null && delAdmin.isPresent()  && owner.get().equals(learnSet.getOwner())){
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
+        if(owner.isPresent() && learnSet != null && delAdmin.isPresent()  && owner.get().equals(learnSet.get().getOwner())){
             if(!owner.get().equals(delAdmin.get())){
             
-                learnSet.removeAdmin(delAdmin.get());
-                learnSetService.saveLearnSet(learnSet);
+                learnSet.get().removeAdmin(delAdmin.get());
+                learnSetService.saveLearnSet(learnSet.get());
             }
         }
     
@@ -262,14 +258,14 @@ public class LearnSetController
     {
         Optional<Account> owner = accountService.getAccount(principal);
         Optional<Account> friend = accountService.getAccount(friendId);
-        LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
     
-        if (owner.isPresent() && friend.isPresent() && learnSet != null)
+        if (owner.isPresent() && friend.isPresent() && learnSet.isPresent())
         {
-            if (learnSet.getOwner().equals(owner.get()))
+            if (learnSet.get().getOwner().equals(owner.get()))
             {
-                learnSet.addAdmin(friend.get());
-                learnSetService.saveLearnSet(learnSet);
+                learnSet.get().addAdmin(friend.get());
+                learnSetService.saveLearnSet(learnSet.get());
             }
         }
         return "redirect:/editLearnSet/" + learnSetId;

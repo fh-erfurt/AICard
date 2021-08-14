@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CardContentService {
+    
     @Autowired
     CardContentRepository cardContentRepository;
 
     public CardContent getNewCardContent(String title, String data, String typeString){
         DataType type = this.getDataTypeFromString(typeString);
-        CardContent cardContent = new CardContent(title, data, type);
-        return cardContent;
+        return new CardContent(title, data, type);
     }
 
     public DataType getDataTypeFromString(String type){
