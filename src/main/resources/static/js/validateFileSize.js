@@ -1,3 +1,9 @@
+/**
+ * JS to check if the entered file has a maximum size of 50mb
+ * throws alert Message and removes file from input
+ *
+ * if manipulated the server will throw an error
+ */
 window.addEventListener('DOMContentLoaded', (event) => {
 
     var pictureFileFrontInput = document.getElementById("cardFrontPictureFileInput");

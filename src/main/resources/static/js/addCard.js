@@ -1,3 +1,6 @@
+/**
+ * JS to display correct input field for each card type and card side in addCard.html
+ */
 window.addEventListener('DOMContentLoaded', (event) => {
 
     var cardFrontType = document.getElementById("cardFrontType");

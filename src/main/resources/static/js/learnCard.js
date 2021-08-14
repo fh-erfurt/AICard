@@ -1,3 +1,7 @@
+/**
+ * JS to rotate card during a LearningSession
+ * enabled buttons to evaluate own cardknowledge after the backside of the card was first seen
+ */
 window.addEventListener('DOMContentLoaded', (event) => {
     var front = document.getElementById("front");
     var back = document.getElementById("back");

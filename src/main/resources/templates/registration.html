@@ -4,6 +4,7 @@
 <head th:replace="fragments/head :: head"></head>
 
 <body>
+    <script th:src="@{/js/secondPasswordValidation.js}"></script>
     <div th:replace="fragments/header :: header"></div>
 
 
@@ -70,7 +71,7 @@
 <!--                    </div>-->
 
                     <div class="btnPlaceHolder"></div>
-                    <input type="submit" class="btn blueBtn">
+                    <input id="submitButton" type="submit" class="btn blueBtn">
                 </form>
             </div>
 
