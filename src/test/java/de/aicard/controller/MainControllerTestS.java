@@ -1,4 +1,4 @@
-/*
+
 package de.aicard.controller;
 
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MainControllerTest
+public class MainControllerTestS
 {
     @Autowired
     private MockMvc mockMvc;
@@ -28,4 +28,4 @@ public class MainControllerTest
                 .andExpect(content().string(containsString("html")));
     }
 }
-*/
+
