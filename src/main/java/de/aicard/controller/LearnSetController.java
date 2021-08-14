@@ -118,11 +118,14 @@ public class LearnSetController
         {
             // check if user has rights! to editn Learnset
             //zusätzlicher check auf den owner
-            Boolean isAdmin =  accountService.getAccount(principal).isPresent() && learnSetService.getLearnSetByLearnSetId(id).getAdminList().contains(accountService.getAccount(principal).get());
+            boolean isAdmin = accountService.getAccount(principal).isPresent() && learnSetService.getLearnSetByLearnSetId(id).getAdminList().contains(accountService.getAccount(principal).get());
+            boolean isOwner = accountService.getAccount(principal).isPresent() && learnSetService.getLearnSetByLearnSetId(id).getOwner().equals(accountService.getAccount(principal).get());
             System.out.println("isAdmin: "+isAdmin);
             // TODO : check if the CardContentFile exists; what should we do if it doesnt?
             CardList cardList = learnSetService.getCardList(id);
-            if(cardList != null){
+            Optional<Account> account = accountService.getAccount(principal);
+            if(cardList != null && account.isPresent()){
+                model.addAttribute("isOwner", isOwner);
                 model.addAttribute("learnSet", learnSetService.getLearnSetByLearnSetId(id));
                 List<Card> listOfCards = cardService.setCardData(filePath, cardList);
                 model.addAttribute("cardList", listOfCards);
@@ -184,10 +187,17 @@ public class LearnSetController
     {
         
         LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(id);
-
-        model.addAttribute("learnSetOld",learnSet);
-
-        return "editLearnSet";
+        Optional<Account> account = accountService.getAccount(principal);
+        if(learnSet != null && account.isPresent() && learnSet.getOwner().equals(account.get()))
+        {
+            model.addAttribute("owner",account.get());
+            model.addAttribute("learnSetOld",learnSet);
+            
+            return "editLearnSet";
+            
+        }
+        
+        return "redirect:/index";
     }
     
     @PostMapping("/updateLearnSet/{learnSetId}")
@@ -228,5 +238,41 @@ public class LearnSetController
         return "redirect:/learnSets";
     }
     
+    @GetMapping("/removeAccountFromAdminList/{learnSetId}/{accountId}")
+    public String getRemoveAccountFromAdminList(@PathVariable("learnSetId") Long learnSetId,
+                                                @PathVariable("accountId") Long accountId, Principal principal)
+    {
+        Optional<Account> owner = accountService.getAccount(principal);
+        Optional<Account> delAdmin = accountService.getAccount(accountId);
+        LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
+        if(owner.isPresent() && learnSet != null && delAdmin.isPresent()  && owner.get().equals(learnSet.getOwner())){
+            if(!owner.get().equals(delAdmin.get())){
+            
+                learnSet.removeAdmin(delAdmin.get());
+                learnSetService.saveLearnSet(learnSet);
+            }
+        }
+    
+        return "redirect:/editLearnSet/" + learnSetId;
+    }
+    
+    @GetMapping("/addAccountToAdminList/{learnSetId}/{friendId}")
+    public String getAddAccountToAdminList(@PathVariable("learnSetId") Long learnSetId,
+                                           @PathVariable("friendId") Long friendId,Principal principal)
+    {
+        Optional<Account> owner = accountService.getAccount(principal);
+        Optional<Account> friend = accountService.getAccount(friendId);
+        LearnSet learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
+    
+        if (owner.isPresent() && friend.isPresent() && learnSet != null)
+        {
+            if (learnSet.getOwner().equals(owner.get()))
+            {
+                learnSet.addAdmin(friend.get());
+                learnSetService.saveLearnSet(learnSet);
+            }
+        }
+        return "redirect:/editLearnSet/" + learnSetId;
+    }
 
 }

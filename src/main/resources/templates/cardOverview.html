@@ -25,7 +25,7 @@
 
                 </p>
             </div>
-            <div th:switch="${isAdmin}">
+            <div th:switch="${isOwner}">
                 <div th:case="true" class="btnContainer">
                     <div class="btn redBtn">
                         <a th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}">X</a>

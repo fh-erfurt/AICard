@@ -205,7 +205,10 @@ public class LearnSetAbo extends BaseEntity
             if(this.cardStatus.get(i).getCard().equals(card)){
                 erg = cardStatus.get(i);
                 System.out.println("cardStatusIf: "+erg);
-                this.learningSession.getCardStatusList().remove(erg);
+                if(this.learningSession !=null && this.learningSession.getCardStatusList() != null)
+                {
+                    this.learningSession.getCardStatusList().remove(erg);
+                }
                 this.cardStatus.remove(i);
             }
         }

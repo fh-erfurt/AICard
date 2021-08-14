@@ -39,7 +39,9 @@
 
         <!-- weitere gridItmes werden dynamisch geladen -->
         <div th:each="learnSet : ${learnSetList}" class="gridItem">
-            <div th:text="${learnSet.title}" class="deckName"></div>
+            <div class="deckName">
+                <a th:text="${learnSet.title}"  th:href="@{'/cardOverview/' + ${learnSet.getId()}}"></a>
+            </div>
             <div th:text="${learnSet.getCardList().getListLength()}" class="cardCount">count: </div>
             <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
             <div class="btn edit">

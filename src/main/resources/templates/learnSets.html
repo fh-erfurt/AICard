@@ -20,7 +20,9 @@
 
             <!-- weitere gridItmes werden dynamisch geladen -->
             <div th:each="ownAbo : ${ownLearnSetAbos}" class="gridItem">
-                <div th:text="${ownAbo.getLearnSet().title}" class="deckName"></div>
+                <div class="deckName">
+                    <a th:href="@{'/cardOverview/'+${ownAbo.getLearnSet().getId()}}" th:text="${ownAbo.getLearnSet().title}"></a>
+                </div>
                 <div th:text="${ownAbo.getLearnSet().getCardList().getListLength()}" class="cardCount">count: </div>
                 <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
                 <div class="btnContainer bottom">
@@ -45,7 +47,9 @@
 
             <!-- weitere gridItmes werden dynamisch geladen -->
             <div th:each="favoriteLearnSetAbo : ${favoriteLearnSetAbos}" class="gridItem">
-                <div th:text="${favoriteLearnSetAbo.getLearnSet().title}" class="deckName"></div>
+                <div  class="deckName">
+                    <a th:href="@{'/cardOverview/'+ ${favoriteLearnSetAbo.getLearnSet().getId()}}" th:text="${favoriteLearnSetAbo.getLearnSet().title}"></a>
+                </div>
                 <div th:text="${favoriteLearnSetAbo.getLearnSet().getCardList().getListLength()}" class="cardCount">count: </div>
                 <div class="btn edit">
                     <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">unfollow</a>
