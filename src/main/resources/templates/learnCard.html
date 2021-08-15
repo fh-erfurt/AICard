@@ -15,7 +15,6 @@
 <br>
 <br>
 
-
     <div th:switch="${card.getCardFront().getType().name()}" class=cardOFront id="front" style="display: block">
         <div th:case="TextFile">
             <p th:text="${card.getCardFront().getTitle()}"></p>
@@ -23,7 +22,6 @@
         </div>
 
         <div th:case="PictureFile">
-            <p th:text="${card.getCardFront().getData()}"></p>
             <p th:text="${card.getCardFront().getTitle()}"></p>
             <img th:src="${card.getCardFront().getData()}">
         </div>
@@ -51,7 +49,6 @@
         </div>
 
         <div th:case="PictureFile">
-            <p th:text="${card.getCardBack().getData()}"></p>
             <p th:text="${card.getCardBack().getTitle()}"></p>
             <img th:src="${card.getCardBack().getData()}">
         </div>
@@ -73,9 +70,9 @@
     <!--End Switch-->
 <div class="btnContainer">
     <form th:action="@{'/learnCard/' + ${learnSetAboId}}" method="POST">
-        <button th:name="cardKnown" th:value="false" class="btn blueBtn"  disabled="disabled" id="dumm">I'm stupid!</button>
+        <button th:name="cardKnown" th:value="false" class="btn redBtn"  disabled="disabled" id="dumm" style="display: none">I'm stupid!</button>
         <button class="btn yellowBtn" type="button" id="reverse">Dreh mich!</button>
-        <button th:name="cardKnown" th:value="true" class="btn redBtn" disabled="disabled" id="schlau">Hab ich gewusst!</button>
+        <button th:name="cardKnown" th:value="true" class="btn blueBtn" disabled="disabled" id="schlau" style="display: none;">Hab ich gewusst!</button>
     </form>
 </div>
 <div class="btnPlaceHolder"></div>

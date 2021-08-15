@@ -218,10 +218,7 @@ public class Account extends BaseEntity
      *
      * @author Amine Semlali
      */
-    public void clicksLikeOfMessage(int _chatIndex ,int _messageIndex)
-    {
-        this.getChats().get(_chatIndex).getChatHistory().get(_messageIndex).clickLike(this);
-    }
+    
 
     /**Checks User for valid login data
      *

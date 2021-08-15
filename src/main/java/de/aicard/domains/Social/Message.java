@@ -2,19 +2,15 @@ package de.aicard.domains.Social;
 
 import de.aicard.domains.account.Account;
 import de.aicard.domains.BaseEntity;
+import de.aicard.domains.enums.Recommended;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The class message is used to store informations about a message which are :
@@ -31,63 +27,30 @@ import java.util.List;
 @AllArgsConstructor
 public class Message extends BaseEntity
 {
-
     private String message;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Account sender;
     private LocalDateTime time;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Account> likedBy;
-
+    private Recommended recommended;
+    
     //constructor
     
     /**
      * Constructor of a Message.
-     * @param _newSender the person that sends the message
-     * @param _newMessage the message to send
+     * @param newSender the person that sends the message
+     * @param newMessage the message to send
      *
      * likes are initialized to 0  and time is the time the message was sent
      *
      * @author Amine Semlali
      */
-    public Message(String _newMessage, Account _newSender)
+    public Message(String newMessage, Account newSender /* , Recommended newRecomended*/)
     {
-        message = _newMessage;
-        sender = _newSender;
-        time = LocalDateTime.now();
-        likedBy = new ArrayList<>();
+        this.message = newMessage;
+        this.sender = newSender;
+        this.time = LocalDateTime.now();
+        /*this.recommended = newRecomended;*/
     }
-    
-    //functions
-
-    /**
-     * the function clickLike checks if a person is in the list of those who liked the message
-     * if the person liked the message, his name is removed from the list (dislike)
-     * if the person didn't like the message,his name is added to the list (like)
-     *
-     * @author Amine Semlali
-     */
-    public void clickLike(Account _account)
-    {
-        if(likedBy.contains(_account))
-        {
-            likedBy.remove(_account);
-        }
-        else
-        {
-            likedBy.add(_account);
-        }
-    }
-    /**
-     * the function getLikes return the number of likes that a message has
-     *
-     * @author Amine Semlali
-     */
-    public int getLikes()
-    {
-        return likedBy.size();
-    }
-
 
 }
 

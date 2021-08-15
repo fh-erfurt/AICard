@@ -44,11 +44,20 @@
             </div>
             <div th:text="${learnSet.getCardList().getListLength()}" class="cardCount">count: </div>
             <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
-            <div class="btn edit">
-                <a th:href="@{'/cardOverview/' + ${learnSet.getId()}}">Preview</a>
-            </div>
-            <div class="btn learn">
-                <a th:href="@{'/followLearnSet/' + ${learnSet.getId()}}">Follow</a>
+<!--            <div class="btn edit">-->
+<!--                <a th:href="@{'/cardOverview/' + ${learnSet.getId()}}">Preview</a>-->
+<!--            </div>-->
+<!--            <div class="btn learn">-->
+<!--                <a th:href="@{'/followLearnSet/' + ${learnSet.getId()}}">Follow</a>-->
+<!--            </div>-->
+
+            <div class="btnContainer bottom">
+                <div class="btn yellowBtn">
+                    <a th:href="@{'/cardOverview/' + ${learnSet.getId()}}">Preview</a>
+                </div>
+                <div class="btn  blueBtn">
+                    <a th:href="@{'/followLearnSet/' + ${learnSet.getId()}}">Follow</a>
+                </div>
             </div>
 
         </div>

@@ -13,7 +13,7 @@ import java.security.Principal;
 import java.util.*;
 
 /**
- * @Author Martin Kühlborn,Clemens Berger
+ * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
 public class AccountController
@@ -55,9 +55,11 @@ public class AccountController
         List<String> errors = new ArrayList<>();
         // only loggedIN users can see an account
         Optional<Account> account = accountService.getAccount(userID);
-            if(account.isPresent())
+        Optional<Account> myAccount = accountService.getAccount((principal.getName()));
+            if(account.isPresent() && myAccount.isPresent())
             {
-                model.addAttribute("verified", accountService.getAccount(principal).get().getId().equals(userID));
+                model.addAttribute("isMyFriend", myAccount.get().getFriends().contains(account.get()));
+                model.addAttribute("userIsProfileAccount", myAccount.get().getId().equals(userID));
                 model.addAttribute("account", account.get());
                 return "profile";
             }
@@ -162,6 +164,22 @@ public class AccountController
     
         return "redirect:/profile";
     
+    }
+    
+    @GetMapping("/addFriend/{friendId}")
+    public String getAddFriend(@PathVariable("friendId") Long friendId,Principal principal)
+    {
+        Optional<Account> account = accountService.getAccount(principal);
+        Optional<Account> friend = accountService.getAccount(friendId);
+        
+        if(account.isPresent() && friend.isPresent()){
+            if(!account.get().getFriends().contains(friend.get())){
+                account.get().addFriend(friend.get());
+                accountService.saveAccount(account.get());
+            }
+        }
+        
+        return "redirect:/profile/" + friendId;
     }
 
 

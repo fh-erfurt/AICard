@@ -1,5 +1,7 @@
 package de.aicard.domains.Social;
 
+// TODO : ZOMBIE
+
 /*
 the class group was supposed to be where students share their Learnsets to discuss them, functionalities will be
  added later to make that possible

@@ -22,6 +22,11 @@ Class Chat has 2 Attributes chatHistory where the messages from all participants
 
  @author Semlali Amine
  */
+// TODO : Zombie
+
+
+
+
 
 @Setter
 @Getter

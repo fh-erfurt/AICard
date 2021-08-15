@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 /**
- * @Author Martin Kühlborn,Clemens Berger
+ * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
 public class AddCardController {
@@ -126,11 +126,9 @@ public class AddCardController {
             
             // we are here if the learnSet exists and the Owner or an Admin is logged in
             String cardFrontTitel = cardService.getCorrectTitle(cardFrontType, cardFrontPictureFileTitle,
-                    cardFrontTextFileTile, cardFrontAudioFileTitle,
-                    cardFrontAudioFileTitle);
+                    cardFrontTextFileTile, cardFrontVideoFileTitle, cardFrontAudioFileTitle);
             String cardBackTitel = cardService.getCorrectTitle(cardBackType, cardBackPictureFileTitle,
-                    cardBackTextFileTitle, cardBackAudioFileTitle,
-                    cardBackAudioFileTitle);
+                    cardBackTextFileTitle,cardBackVideoFileTitle, cardBackAudioFileTitle);
 
             //TODO: Doppelter Code kann noch verbessert werden, wenn Zeit
             try {
@@ -167,22 +165,23 @@ public class AddCardController {
             }
 
         }
-        if (errors.isEmpty()) {
+        if (errors.isEmpty() && learnSet.isPresent()) {
             learnSet.get().getCardList().addToList(newCard);
             learnSetService.saveLearnSet(learnSet.get());
             
             modelAndView.setViewName("redirect:/cardOverview/" + learnSetID);
-            return modelAndView;
-        } else {
+            
+        }
+        else
+        {
             for (String error: errors)
             {
                 System.out.println(error);
             }
             // TODO : write errors to frontend -> viel spaß frontend team :)
-            modelAndView.setViewName("redirect:/index");
-            return modelAndView;
+            modelAndView.setViewName("redirect:/addCard/" + learnSetID);
         }
-
+        return modelAndView;
     }
 
 }

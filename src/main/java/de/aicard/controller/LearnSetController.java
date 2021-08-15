@@ -107,7 +107,7 @@ public class LearnSetController
 
             for ( LearnSetAbo learnSetAbo : abos)
             {
-                if(learnSetAbo.getLearnSet().getAdminList().contains(account.get())){
+                if(learnSetAbo.getLearnSet().getOwner().equals(account.get())){
                     ownLearnSetAbos.add(learnSetAbo);
                 }else{
                     favoriteLearnSetAbos.add(learnSetAbo);

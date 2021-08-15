@@ -26,7 +26,7 @@ public class NewMainControllerTest
     @Test
     public void shouldReturnIndex() throws Exception
     {
-        assertThat(this.restTemplate.getForObject( "http://localhost:" + port, String.class).contains("index"));
+        assertThat(this.restTemplate.getForObject( "http://localhost:" + port + "/" , String.class).contains("index"));
 
     }
 }

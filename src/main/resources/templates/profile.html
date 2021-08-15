@@ -13,7 +13,10 @@
     <br>
     <br>
 
-    <button th:if="${verified}"><a th:href="@{/updateProfile}">Account Bearbeiten</a></button>
+    <button th:if="${userIsProfileAccount}"><a th:href="@{/updateProfile}">Account Bearbeiten</a></button>
+
+    <button th:if="${!userIsProfileAccount && !isMyFriend}"><a th:href="@{'/addFriend/' + ${account.getId()}}">Als Freund Hinzufügen</a></button>
+
 
     <h2 th:text="'Name ' + ${account.getName()}"></h2>
     <h4>Beschreibung</h4>
@@ -23,11 +26,13 @@
     <br>
     <br>
 
+
+
     <table th:if="${!#lists.isEmpty(account.getFriends())}">
         <tbody>
         <tr th:each="friend : ${account.getFriends()}">
             <td><a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a></td>
-            <td th:if="${verified}"><a class="" th:href="@{'/removeFriendFromFriendList/' + ${friend.getId()}}">X</a></td>
+            <td th:if="${userIsProfileAccount}"><a class="" th:href="@{'/removeFriendFromFriendList/' + ${friend.getId()}}">X</a></td>
         </tr>
         </tbody>
     </table>

@@ -11,15 +11,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var btnSchlau = document.getElementById("schlau");
     // TODO : buttons deaktivieren funktioniert noch nicht ganz -.-
     btnReverse.addEventListener("click",()=>{
-        if(front.style.display == "block"){
-            front.style.display = "none";
             back.style.display = "block";
             btnDumm.disabled = "";
+            btnDumm.style.display = "block";
+            btnSchlau.style.display = "block";
             btnSchlau.disabled = "";
-        }else{
-            front.style.display = "block";
-            back.style.display = "none";
-
-        }
+            btnReverse.style.display = "none";
+            btnReverse.disabled = "disabled";
     });
 });

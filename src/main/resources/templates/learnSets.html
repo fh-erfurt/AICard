@@ -51,12 +51,22 @@
                     <a th:href="@{'/cardOverview/'+ ${favoriteLearnSetAbo.getLearnSet().getId()}}" th:text="${favoriteLearnSetAbo.getLearnSet().title}"></a>
                 </div>
                 <div th:text="${favoriteLearnSetAbo.getLearnSet().getCardList().getListLength()}" class="cardCount">count: </div>
-                <div class="btn edit">
-                    <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">unfollow</a>
+<!--                <div class="btn edit">-->
+<!--                    <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">unfollow</a>-->
+<!--                </div>-->
+<!--                <div class="btn learn">-->
+<!--                    <a th:href="@{'/initializeLearningSession/' + ${favoriteLearnSetAbo.getId()}}">learn</a>-->
+<!--                </div>-->
+
+                <div class="btnContainer bottom">
+                    <div class="btn yellowBtn">
+                        <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">unfollow</a>
+                    </div>
+                    <div class="btn blueBtn">
+                        <a th:href="@{'/initializeLearningSession/' + ${favoriteLearnSetAbo.getId()}}">learn</a>
+                    </div>
                 </div>
-                <div class="btn learn">
-                    <a th:href="@{'/initializeLearningSession/' + ${favoriteLearnSetAbo.getId()}}">learn</a>
-                </div>
+
             </div>
 
         </div>

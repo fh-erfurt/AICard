@@ -18,10 +18,9 @@
                 </p>
 
                 <div th:each=" admin : ${learnSet.getAdminList()}">
-                    <h4 th:text="${admin.getEmail()}"></h4>
+                    <h4><a th:text="${admin.getEmail()}" th:href="@{'/profile/' + ${admin.getId()}}"></a></h4>
                 </div>
 
-                <p th:text="${learnSet.getOwner().getEmail()}">
 
                 </p>
             </div>
@@ -58,7 +57,6 @@
                     </div>
 
                     <div th:case="PictureFile">
-                        <p th:text="${card.getCardFront().getData()}"></p>
                         <p th:text="${card.getCardFront().getTitle()}"></p>
                         <img th:src="${card.getCardFront().getData()}">
                     </div>
@@ -71,7 +69,7 @@
                     </div>
 
                     <div th:case="VideoFile">
-                        <p th:text="${card.getCardFront().getTitle()}"></p>
+                        <h4 th:text="${card.getCardFront().getTitle()}"></h4>
                         <video width="400" controls>
                             <source th:src="${card.getCardFront().getData()}" type="video/mp4"> <!--type="?"-->
                         </video>
@@ -86,7 +84,6 @@
                     </div>
 
                     <div th:case="PictureFile">
-                        <p th:text="${card.getCardBack().getData()}"></p>
                         <p th:text="${card.getCardBack().getTitle()}"></p>
                         <img th:src="${card.getCardBack().getData()}">
                     </div>
