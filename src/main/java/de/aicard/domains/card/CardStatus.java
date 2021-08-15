@@ -45,7 +45,6 @@ public class CardStatus extends BaseEntity
      */
     public CardStatus(Card _newCard)
     {
-        System.out.println("setStatus");
         this.cardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
         this.card = _newCard;
     }
@@ -81,11 +80,9 @@ public class CardStatus extends BaseEntity
      */
     public void increaseCardKnowledgeLevel()
     {
-        System.out.println("wir sind in increaseCArdKnow.--...");
         switch (cardKnowledgeLevel)
         {
             case NOINFORMATION:
-                System.out.println("wir sind im Swtich" + cardKnowledgeLevel);
                 this.cardKnowledgeLevel = CardKnowledgeLevel.SOMEINFORMATION;
                 break;
             case SOMEINFORMATION:

@@ -11,7 +11,9 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * @Author Martin Kühlborn,Clemens Berger
+ */
 @Controller
 public class LoginController {
 
@@ -21,7 +23,12 @@ public class LoginController {
     public LoginController(AccountService accountService) {
         this.accountService = accountService;
     }
-    
+
+    /**
+     * shows the account registration site
+     * @param model
+     * @return
+     */
     @GetMapping("/registration")
     public String getRegistration(Model model)
     {
@@ -33,14 +40,27 @@ public class LoginController {
     // TODO : nach erfolgreicher Registriebrung zu /login weiterleiten und email ggf. vorladen?
     // TODO : in registrieBrung nicht zwisch
 
+    /**
+     * shows the login site
+     * @param model
+     * @return
+     */
     @GetMapping("/login")
     public String getLogin(Model model)
     {
         return "login";
     }
 
-    
 
+    /**
+     * creates a new account if all given data is accepted
+     * check on password and email
+     * email must not exist in the current database and must match the emal regex
+     * password must match the password regex
+     * @param newAccount
+     * @param model
+     * @return
+     */
     @PostMapping("/createAccount")
     public String postCreateAccount(@ModelAttribute("Account") Account newAccount, Model model)
     {
@@ -50,7 +70,6 @@ public class LoginController {
             Optional<Account> account = accountService.createAccount(newAccount);
             account.ifPresent(accountService::saveAccount);
             return getLogin(model.addAttribute("registeredEmail", newAccount.getEmail()));
-//            return "redirect:/login";
         }
         catch (IllegalStateException e){
             //TODO: Dies ist eine Verzweiflungstat nachts um 11. bei Gelegenheit schöner machen.

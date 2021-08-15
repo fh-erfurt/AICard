@@ -1,10 +1,7 @@
 package de.aicard.services;
 
 import de.aicard.domains.account.Account;
-import de.aicard.domains.card.Card;
-import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
-import de.aicard.domains.learnset.LearnSetAbo;
 import de.aicard.storages.AccountRepository;
 import de.aicard.storages.CardListRepository;
 import de.aicard.storages.LearnSetAboRepository;
@@ -12,9 +9,6 @@ import de.aicard.storages.LearnSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -90,6 +84,8 @@ public class LearnSetService {
         // -> all cards löschen
         // -> cardlist löschen
         // -> delete LearnSet
+
+        //statt oben einfach cascade styles nutzen lol
         learnSet.get().setOwner(null);
         learnSet.get().setAdminList(null);
         learnSetRepository.delete(learnSet.get());

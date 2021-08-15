@@ -75,7 +75,6 @@ public class LearningSession extends BaseEntity
      */
     public void cardKnown()
     {
-        System.out.println("currrentCardKnown:"+this.currentCard);
         this.cardStatusList.get(this.currentCard).increaseCardKnowledgeLevel();
         this.next();
     }

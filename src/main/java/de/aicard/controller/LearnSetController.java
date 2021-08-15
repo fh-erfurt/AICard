@@ -2,20 +2,15 @@ package de.aicard.controller;
 
 import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
-import de.aicard.domains.card.CardStatus;
-import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
-import de.aicard.domains.learnset.LearningSession;
 import de.aicard.services.*;
 
 
 import de.aicard.storages.CardStatusRepository;
 import de.aicard.storages.LearnSetAboRepository;
-import org.hibernate.resource.beans.container.spi.AbstractCdiBeanContainer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,7 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * @Author Martin Kühlborn,Clemens Berger
+ */
 @Controller
 public class LearnSetController
 {
@@ -57,7 +54,11 @@ public class LearnSetController
         this.cardService = cardService;
     }
 
-
+    /**
+     * shows the createLearnset.html with a new learnSet
+     * @param model
+     * @return
+     */
     @GetMapping("/createLearnset")
     public String getCreateLearnset(Model model)
     {
@@ -65,6 +66,13 @@ public class LearnSetController
         return "createLearnset";
     }
 
+    /**
+     * creates a new learnSet with the given Data on the logged in Account
+     * @param newLearnset
+     * @param model
+     * @param principal
+     * @return
+     */
     @PostMapping("/createLearnset")
     public String postCreateLearnset(@ModelAttribute("newLearnset") LearnSet newLearnset, Model model, Principal principal)
     {
@@ -78,6 +86,13 @@ public class LearnSetController
         return "redirect:/login";
     }
 
+    /**
+     * get all learnSetabos of an account they are distinguished between just abos and learnsets with admin rights
+     *
+     * @param model
+     * @param principal
+     * @return
+     */
     @GetMapping("/learnSets")
     public String getLearnSets(Model model ,Principal principal)
     {
@@ -106,6 +121,14 @@ public class LearnSetController
         return "learnSets";
     }
 
+    /**
+     * shows some data of the learnSet and all cards of the learnset
+     * this site gives the ability to add cards if the user is an admin
+     * @param id
+     * @param principal
+     * @param model
+     * @return
+     */
     @GetMapping("cardOverview/{id}")
     public String getCardOverview(@PathVariable Long id,Principal principal, Model model)
     {
@@ -119,7 +142,6 @@ public class LearnSetController
             //zusätzlicher check auf den owner
             boolean isAdmin = learnSetService.isAdmin(account.get(),learnSet.get());
             boolean isOwner = learnSetService.isOwner(account.get(), learnSet.get());
-            System.out.println("isAdmin: "+isAdmin);
             // TODO : check if the CardContentFile exists; what should we do if it doesnt?
             CardList cardList = learnSet.get().getCardList();
             if(cardList != null){
@@ -134,6 +156,12 @@ public class LearnSetController
         return "redirect:/index";
     }
 
+    /**
+     * ???????????????????????????????
+     * @param fileName
+     * @return
+     * @throws IOException
+     */
     // getImagesForLearnSet
     @GetMapping("/learnSetImage/{fileName}")
     public ResponseEntity<byte[]> getImage(@PathVariable("fileName") String fileName) throws IOException
@@ -141,7 +169,14 @@ public class LearnSetController
         File img = new File(System.getProperty("user.dir") + "\\cardFiles\\" + fileName);
         return ResponseEntity.ok().contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(img))).body(Files.readAllBytes(img.toPath()));
     }
-    
+
+    /**
+     * deletes the given card if user has rights when deleting a card all
+     * learnSetAbos with the learnset which holds the card are updated
+     * @param id
+     * @param principal
+     * @return
+     */
     @GetMapping("/deleteCard/{id}")
     public String getDeleteCard(@PathVariable("id") Long id, Principal principal)
     {
@@ -159,8 +194,14 @@ public class LearnSetController
         return "redirect:/index";
 
     }
-    
-    
+
+    /**
+     * deletes a learnSet if the user is the owner
+     * all LearnSetAbos with this learnSet are deleted too
+     * @param id
+     * @param principal
+     * @return
+     */
     @GetMapping("/deleteLearnSet/{id}")
     public String getDeleteLearnSet(@PathVariable("id") Long id, Principal principal)
     {
@@ -177,7 +218,14 @@ public class LearnSetController
         
         return "redirect:/learnSets";
     }
-    
+
+    /**
+     * shows the site to edit the learnSet data if the user is the owner
+     * @param id
+     * @param principal
+     * @param model
+     * @return
+     */
     @GetMapping("/editLearnSet/{id}")
     public String getEditLearnSet(@PathVariable("id") Long id, Principal principal, Model model)
     {
@@ -195,7 +243,14 @@ public class LearnSetController
         
         return "redirect:/index";
     }
-    
+
+    /**
+     * edits data of the learnSet if the user is the owner
+     * @param learnSetId
+     * @param learnSet
+     * @param principal
+     * @return
+     */
     @PostMapping("/updateLearnSet/{learnSetId}")
     public String postUpdateLearnSet(@PathVariable("learnSetId") Long learnSetId ,@ModelAttribute("learnSetOld") LearnSet learnSet ,Principal principal)
     {
@@ -216,10 +271,18 @@ public class LearnSetController
         
         return "redirect:/cardOverview/" + learnSetId;
     }
-    
+
+    /**
+     * removes the learnSetAbo from the list of the account
+     * owners and admins can't deabo!!!
+     * @param followedLearnSetAboId
+     * @param principal
+     * @return
+     */
     @GetMapping("/unfollowLearnSet/{followedLearnSetAboId}")
     public String getUnfollowedLearnSetAboId(@PathVariable("followedLearnSetAboId") Long followedLearnSetAboId, Principal principal)
     {
+        //TODO abos of admins shoud have an unfollow button
         Optional<Account> account = accountService.getAccount(principal);
         Optional<LearnSetAbo> abo = learnSetAboRepository.findById(followedLearnSetAboId);
         if(account.isPresent() && abo.isPresent()){
@@ -233,7 +296,14 @@ public class LearnSetController
         
         return "redirect:/learnSets";
     }
-    
+
+    /**
+     * removes an account from the adminlist only the owner can add and remove admins
+     * @param learnSetId
+     * @param accountId
+     * @param principal
+     * @return
+     */
     @GetMapping("/removeAccountFromAdminList/{learnSetId}/{accountId}")
     public String getRemoveAccountFromAdminList(@PathVariable("learnSetId") Long learnSetId,
                                                 @PathVariable("accountId") Long accountId, Principal principal)
@@ -251,7 +321,14 @@ public class LearnSetController
     
         return "redirect:/editLearnSet/" + learnSetId;
     }
-    
+
+    /**
+     * adds an Account to the adminList only the owner can add and remove admins
+     * @param learnSetId
+     * @param friendId
+     * @param principal
+     * @return
+     */
     @GetMapping("/addAccountToAdminList/{learnSetId}/{friendId}")
     public String getAddAccountToAdminList(@PathVariable("learnSetId") Long learnSetId,
                                            @PathVariable("friendId") Long friendId,Principal principal)

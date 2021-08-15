@@ -180,31 +180,13 @@ public class LearnSetAbo extends BaseEntity
         return newLearningSession;
     }
 
-
-    public boolean containsCard(Card card){
-        for (CardStatus cardStatus:this.cardStatus) {
-            if(cardStatus.getCard().equals(card)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void removeLearnSet(){
-        this.learnSet = null;
-    }
-    
     public CardStatus removeCardStatusByCard(Card card)
     {
         CardStatus erg = null;
-        System.out.println("removeCardStatus: "+erg+" "+card);
         for (int i=this.cardStatus.size()-1;i>=0;i--)
         {
-            System.out.println("for::"+i);
-            System.out.println("card: " + this.cardStatus.get(i).getCard());
             if(this.cardStatus.get(i).getCard().equals(card)){
                 erg = cardStatus.get(i);
-                System.out.println("cardStatusIf: "+erg);
                 if(this.learningSession !=null && this.learningSession.getCardStatusList() != null)
                 {
                     this.learningSession.getCardStatusList().remove(erg);

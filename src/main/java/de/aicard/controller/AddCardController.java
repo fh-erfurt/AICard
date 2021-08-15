@@ -2,7 +2,6 @@ package de.aicard.controller;
 
 import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
-import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.services.AccountService;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.activation.MimetypesFileTypeMap;
-import javax.swing.text.html.Option;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,7 +21,9 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * @Author Martin Kühlborn,Clemens Berger
+ */
 @Controller
 public class AddCardController {
     private final LearnSetService learnSetService;
@@ -39,6 +37,14 @@ public class AddCardController {
         this.accountService = accountService;
     }
 
+    /**
+     * shows the addCard.html if the user can access it
+     * @param learnSetID
+     * @param principal
+     * @param model
+     * @return
+     */
+
     @GetMapping("/addCard/{learnSetID}")
     public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model) {
         Optional<Account> account = accountService.getAccount(principal);
@@ -51,6 +57,34 @@ public class AddCardController {
         return "redirect:/index";
     }
 
+    /**
+     * handles creatng cards for a LearnSet
+     * different params are needed to identify datatypes such as video,audio,text and pictures
+     * for front and back side
+     * @param learnSetID
+     * @param principal
+     * @param model
+     * @param cardFrontType
+     * @param cardFrontTextFileTile
+     * @param cardFrontTextFileInput
+     * @param cardFrontPictureFileTitle
+     * @param cardFrontPictureFileInput
+     * @param cardFrontVideoFileTitle
+     * @param cardFrontVideoFileInput
+     * @param cardFrontAudioFileTitle
+     * @param cardFrontAudioFileInput
+     * @param cardBackType
+     * @param cardBackTextFileTitle
+     * @param cardBackTextFileInput
+     * @param cardBackPictureFileTitle
+     * @param cardBackPictureFileInput
+     * @param cardBackVideoFileTitle
+     * @param cardBackVideoFileInput
+     * @param cardBackAudioFileTitle
+     * @param cardBackAudioFileInput
+     * @return
+     * @throws IOException
+     */
     // --- we offer the possibility for all files to be send but only save those that are selected by the FileTypeSelector
     @PostMapping("/addCard/{learnSetID}")
     @ResponseBody

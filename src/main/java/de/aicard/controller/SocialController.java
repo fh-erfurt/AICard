@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
-
+/**
+ * @Author Martin Kühlborn,Clemens Berger
+ */
 @Controller
 public class SocialController
 {
@@ -18,7 +20,13 @@ public class SocialController
     public SocialController(LearnSetService learnSetService){
         this.learnSetService = learnSetService;
     }
-    
+
+    /**
+     * upcomming comment feature for learnSets
+     * @param learnSetId
+     * @param model
+     * @return
+     */
     @GetMapping("/comments/{learnSetId}")
     public String getComments(@PathVariable("learnSetId") Long learnSetId, Model model){
         

@@ -13,8 +13,7 @@ public interface AccountRepository extends JpaRepository<Account, Long>
 {
     @Query(nativeQuery = true,value = "SELECT * FROM ACCOUNT A JOIN ACCOUNT_LEARNSETABO AL on A.ID = AL.ACCOUNT_ID JOIN LEARNSETABO LA on AL.LEARNSETABOS_ID = LA.ID WHERE LA.LEARNSET_ID = :id ;")
     List<Account> findAllAccountsByLearnsetIdInLearnSetAbo(@Param("id") Long id);
-    
-    Optional<Account> findByName(String name);
+
     Optional<Account> findByEmail(String email);
 
 }

@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
-
+/**
+ * @Author Martin Kühlborn,Clemens Berger
+ */
 @Controller
 public class LearnSetShopController
 {
@@ -34,8 +35,17 @@ public class LearnSetShopController
     LearnSetShopController(AccountService accountService){
         this.accountService = accountService;
     }
-    
-    
+
+    /**
+     * shows all for the account visible unsubscribed LearnSets
+     * only public are visible
+     * and protected if the user is in the same faculty
+     * @param stringFaculty
+     * @param learnSetTitle
+     * @param principal
+     * @param model
+     * @return
+     */
     @GetMapping("/learnSetShop")
     public String getLearnSetShop(@RequestParam(name = "faculty", required = false, defaultValue = "duNull")String stringFaculty,
                                   @RequestParam(name="learnSetTitle", required = false, defaultValue = "") String learnSetTitle,
@@ -69,7 +79,6 @@ public class LearnSetShopController
             // evaluate RequestParams
     
             // if we want to filter for faculty -> filter!
-            System.out.println("faculty:" + stringFaculty);
             List<LearnSet> helperLearnSets = new ArrayList<>();
             try
             {
@@ -89,8 +98,7 @@ public class LearnSetShopController
             {
                 System.out.println(e);
             }
-    
-            // filter for learnset->title containt substring learnSetTitle
+
             if(!learnSetTitle.isEmpty())
             {
                 for (LearnSet learnSet : frontEndLearnSets)
@@ -103,14 +111,18 @@ public class LearnSetShopController
                 frontEndLearnSets = helperLearnSets;
                 helperLearnSets = new ArrayList<>();
             }
-            for (LearnSet learnSet:frontEndLearnSets) {
-                //System.out.println("listLegth: "+learnSet.getCardList().getListLength());
-            }
             model.addAttribute("learnSetList",frontEndLearnSets);
         }
         return"learnSetShop";
     }
-    
+
+    /**
+     * adds a learnsetabo to the account
+     * @param principal
+     * @param model
+     * @param learnSetId
+     * @return
+     */
     @GetMapping("/followLearnSet/{learnSetId}")
     public String getFollowLearnSet(Principal principal, Model model, @PathVariable("learnSetId") Long learnSetId){
         

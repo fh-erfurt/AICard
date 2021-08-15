@@ -235,8 +235,8 @@ public class LearnSet extends BaseEntity
         }
     }
     
-    /*
-    * Messages
+    /**
+    * Messages are used as comments
     *
     * */
     public void addMessage(Message _newMessage)
@@ -256,6 +256,11 @@ public class LearnSet extends BaseEntity
         }
     }
 
+    /**
+     * checks if given account can see the learnSet
+     * @param _account
+     * @return
+     */
     public boolean isAuthorizedToAccessLearnSet(Account _account)
     {
         switch (this.visibility)
@@ -282,9 +287,4 @@ public class LearnSet extends BaseEntity
             }
         return false;
     }
-
-    public void deleteCardlist(){
-        this.cardList = null;
-    }
-    
 }

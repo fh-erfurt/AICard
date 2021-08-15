@@ -74,7 +74,6 @@ public class CardService {
 
     public Long getLearnSetIdByCardId(Long cardId){
         Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(cardId);
-        System.out.println("LearnSetIsPresent: "+learnSet.isPresent());
         if(learnSet.isPresent()){
             return learnSet.get().getId();
         }
@@ -110,35 +109,21 @@ public class CardService {
 
     public void deleteCard(Card card){
         Long id = card.getId();
-        //löschen aus Cardlist in learnset
-        //löschen des CardStatus in allen abos
-        //
-        
         if(cardRepository.existsById(id)){
             
             Long learnSetId = this.getLearnSetIdByCardId(card.getId());
-            
-            
-            //funzt nich
-            
-            System.out.println("learnSetId: "+learnSetId);
             List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAllByLearnSetId(learnSetId);
             this.removeCardFromCardList(card);
-            System.out.println("countAbos: "+learnSetAbos.size());
-            System.out.println("before Loop");
             int i = 0;
             for (LearnSetAbo abo:learnSetAbos)
             {
-                System.out.println("forAbo::"+i);
                 CardStatus status = abo.removeCardStatusByCard(card);
                 learnSetAboRepository.save(abo);
                 if(status != null){
-                    System.out.println("status not null");
                     cardStatusRepository.delete(status);
                 }
                 i++;
             }
-            System.out.println("after Loop");
             
             cardRepository.delete(card);
             
@@ -232,14 +217,8 @@ public class CardService {
             cardFrontFilePath = cardFrontFilePath.replace("\\", "\\\\");
             File newFile = new File(cardFrontFilePath);
             fileInput.transferTo(newFile);
-            
-            
-//            String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-//            String fileType = mimetype.split("/")[0];
-//            System.out.println("mimetype: " + mimetype);
-//            System.out.println("filetype:" + fileType);
+
             String fileType  = fileInput.getContentType().split("/")[0];
-            System.out.println(expectedType);
             if(expectedType.equals("VideoFile") && fileType.equals("video") ||
                expectedType.equals("AudioFile") && fileType.equals("audio") ||
                expectedType.equals("PictureFile") && fileType.equals("image"))

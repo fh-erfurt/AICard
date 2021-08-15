@@ -103,7 +103,6 @@ public class Account extends BaseEntity
             LearnSet newLearnSet = new LearnSet(_title, _description, _faculty,new CardList(),this,_visibility);
             newLearnSet.setOwner(this);
             newLearnSet.addAdmin(this);
-//            this.ownLearnSets.add(newLearnSet);
             this.addLearnSetAbo(newLearnSet);
         }
         catch (Exception e)
@@ -112,20 +111,7 @@ public class Account extends BaseEntity
         }
     }
     
-//    public void deleteOwnLearnSetsByIndex(int _index)
-//    {
-//        this.ownLearnSets.remove(_index);
-//    }
-    
-//    public void deleteOwnLearnSetByLastElement()
-//    {
-//        this.ownLearnSets.remove(this.ownLearnSets.size() - 1);
-//    }
-    
-//    public void deleteAllOwnLearnSets()
-//    {
-//        this.ownLearnSets.clear();
-//    }
+
 
     public LearnSetAbo removeLearnSetAboByLearnSet(LearnSet learnSet){
         for(int i = this.learnsetAbos.size()-1;i>=0;i--){
@@ -137,14 +123,7 @@ public class Account extends BaseEntity
         }
         return null;
     }
-    
     //learnSetAbos
-    
-//    public LearnSetAbo getFavoriteLearnSetByIndex(int _index)
-//    {
-//        return this.learnsetAbos.get(_index);
-//    }
-    
     public void addLearnSetAbo(LearnSet learnSet)
     {
         if(learnSet.isAuthorizedToAccessLearnSet(this))
@@ -164,21 +143,7 @@ public class Account extends BaseEntity
     {
         this.learnsetAbos.remove(_learnSetAbo);
     }
-//
-//    public void deleteFavoriteLearnSetByIndex(int _index)
-//    {
-//        this.learnsetAbos.remove(_index);
-//    }
-//
-//    public void deleteFavoriteLearnSetByLastElement()
-//    {
-//        this.learnsetAbos.remove(this.learnsetAbos.size() - 1);
-//    }
 
-//    public void deleteAllFavoriteLearnSets()
-//    {
-//        this.learnsetAbos.clear();
-//    }
     
     //Friends
 

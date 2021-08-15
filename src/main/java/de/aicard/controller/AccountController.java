@@ -2,9 +2,6 @@ package de.aicard.controller;
 
 import de.aicard.domains.account.Account;
 import de.aicard.services.AccountService;
-import de.aicard.storages.AccountRepository;
-import de.aicard.storages.LearnSetRepository;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +12,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
-
+/**
+ * @Author Martin Kühlborn,Clemens Berger
+ */
 @Controller
 public class AccountController
 {
@@ -30,8 +28,8 @@ public class AccountController
     /**
      * This shows the logged in users Profile, while calling showProfile() with the userID as PathVariable
      * @param model
-     * @param request
-     * @return
+     * @param principal
+     * @return profile.html or index.html
      */
     @GetMapping("/profile")
     public String showMyProfile(Model model, Principal principal)
@@ -44,6 +42,13 @@ public class AccountController
         return "redirect:/index";
     }
 
+    /**
+     * shows the profile of the given account
+     * @param userID
+     * @param model
+     * @param principal
+     * @return
+     */
     @GetMapping("/profile/{userID}")
     public String showProfile(@PathVariable("userID") Long userID, Model model, Principal principal)
     {
@@ -59,7 +64,13 @@ public class AccountController
         
         return "redirect:/index";
     }
-    
+
+    /**
+     * shows the updateProfile.html for the logged in user
+     * @param principal
+     * @param model
+     * @return
+     */
     @GetMapping("/updateProfile")
     public String getUpdateProfile(Principal principal,Model model)
     {
@@ -72,14 +83,22 @@ public class AccountController
         
         return "redirect:/index";
     }
-    
+
+    /**
+     * handles the edit of the logged in account, here friends can be added
+     * and the account data can be changed
+     * @param addFriendByEmail
+     * @param theAccount
+     * @param model
+     * @param principal
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
     @ResponseBody
     @PostMapping("/updateAccount")
     public ModelAndView postUpdateAccount(@RequestParam(value="addFriendByEmail", required = false) String addFriendByEmail,
                                     @ModelAttribute("account") Account theAccount, Model model,Principal principal) throws NoSuchAlgorithmException {
-    
-        System.out.println("request: "+addFriendByEmail);
-        
+
         List<String> errors = new ArrayList<>();
         ModelAndView modelAndView = new ModelAndView();
         Optional<Account> account = accountService.getAccount(principal);
@@ -90,8 +109,7 @@ public class AccountController
                     Optional<Account> friendAccount = accountService.getAccount(addFriendByEmail);
                     if(friendAccount.isEmpty() && !addFriendByEmail.isEmpty())
                         throw new IllegalStateException("Der Account existiert nicht");
-                    System.out.println("friendlist Exists: " + theAccount.getFriends());
-                    
+
                     accountService.updateAccount(theAccount, friendAccount);
                 }
                 catch(IllegalStateException e){
@@ -122,7 +140,14 @@ public class AccountController
         modelAndView.setViewName("redirect:/logout");
         return modelAndView;
     }
-    
+
+    /**
+     * removes a friend from the friendlist of the logged in user
+     * @param friendId
+     * @param model
+     * @param principal
+     * @return
+     */
     @GetMapping("/removeFriendFromFriendList/{friendId}")
     public String getRemoveFriendFromFriendList(@PathVariable("friendId") Long friendId, Model model, Principal principal)
     {
