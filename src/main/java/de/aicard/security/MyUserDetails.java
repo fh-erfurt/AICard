@@ -1,6 +1,5 @@
 package de.aicard.security;
 
-import de.aicard.domains.Social.Chat;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.learnset.LearnSet;
@@ -14,7 +13,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
+/**
+ * @Author Martin Kühlborn
+ */
 @Getter
 @Setter
 public class MyUserDetails implements UserDetails
@@ -28,7 +29,6 @@ public class MyUserDetails implements UserDetails
     private List<LearnSet> ownLearnSets;
     private List<LearnSetAbo> favoriteLearnSets;
     private List<Account> friends;
-    private List<Chat> chats;
     
     private List<GrantedAuthority> authorities;
     
@@ -42,10 +42,8 @@ public class MyUserDetails implements UserDetails
         this.name = account.getName();
         this.description = account.getDescription();
         this.faculty = account.getFaculty();
-        this.ownLearnSets = account.getOwnLearnSets();
         this.favoriteLearnSets = account.getLearnsetAbos();
         this.friends = account.getFriends();
-        this.chats = account.getChats();
         this.authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
     

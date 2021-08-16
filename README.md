@@ -5,6 +5,11 @@
 Als Gruppenprojekt für die Veranstaltungen Java 1 und Java 2 wurde bzw. wird das im Weiteren beschriebene 
 Multiuser-Lernkartensystem implementiert.
 
+### TestAccounts
+testAccount0@test.de - 123
+testAccount1@test.de - 123
+testAccount2@test.de - 123
+
 ### Allgemeine Projektübersicht
 
 <details>

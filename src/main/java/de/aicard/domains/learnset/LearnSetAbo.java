@@ -1,5 +1,6 @@
 package de.aicard.domains.learnset;
 
+import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardStatus;
 import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.CardKnowledgeLevel;
@@ -35,6 +36,7 @@ public class LearnSetAbo extends BaseEntity
      */
     @ManyToMany(cascade = CascadeType.ALL)
     private List<CardStatus> cardStatus;
+    //TODO: kann das weg?
     /**
      * The status of the LearnSet of the Account.
      */
@@ -42,13 +44,17 @@ public class LearnSetAbo extends BaseEntity
     /**
      * The LearnSet the Account subscribed to.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private LearnSet learnSet;
+    
     /**
      * The evaluation the Account has given to the LearnSet. If the Account has not yet given an
      * evaluation to the LearnSet, the variable m_evaluation has the value -1.
      */
     private int evaluation;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private LearningSession learningSession;
 
     /**
      * Constructor of the LearnSetAbo
@@ -57,7 +63,6 @@ public class LearnSetAbo extends BaseEntity
      */
     public LearnSetAbo(LearnSet _learnSet) throws NullPointerException, Exception
     {
-
         this.learnSet = _learnSet;
         this.learnSetStatus = State.NEW;
         this.cardStatus = new ArrayList<>();
@@ -71,37 +76,12 @@ public class LearnSetAbo extends BaseEntity
     }
 
     //getter + setter
-    
-    /**
-     * Sets the evaluation of the Account for the corresponding LearnSet.
-     *
-     * First checks, if there is already an evaluation of this account for this LearnSet.
-     * If so, this evaluation is deleted. Then, the member-variable m_evaluation is set to the
-     * value of the new evaluation, and the evaluation is added to the LearnSet.
-     *
-     * @param _evaluation Evaluation, the Account wants to give to the LearnSet.
-     */
-    public void set_evaluation(int _evaluation)
-    {
-        if(this.evaluation != -1)
-        {
-            this.learnSet.deleteEvaluation(this.evaluation);
-        }
-        this.evaluation = _evaluation;
-        this.learnSet.addEvaluation(evaluation);
-    }
+
 
     /**
      * Deletes the evaluation of the Account for the corresponding LearnSet.
      */
-    public void delete_evaluation()
-    {
-        if(this.evaluation != -1)
-        {
-            this.learnSet.deleteEvaluation(this.evaluation);
-            this.evaluation = -1;
-        }
-    }
+
 
     /**
      * Method to get all Cards of the LearnSet with a specific CardKnowledgeLevel.
@@ -170,6 +150,25 @@ public class LearnSetAbo extends BaseEntity
     {
         
         List<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
-        return new LearningSession(sessionList);
+        LearningSession newLearningSession = new LearningSession(sessionList);
+        this.learningSession = newLearningSession;
+        return newLearningSession;
+    }
+
+    public CardStatus removeCardStatusByCard(Card card)
+    {
+        CardStatus erg = null;
+        for (int i=this.cardStatus.size()-1;i>=0;i--)
+        {
+            if(this.cardStatus.get(i).getCard().equals(card)){
+                erg = cardStatus.get(i);
+                if(this.learningSession !=null && this.learningSession.getCardStatusList() != null)
+                {
+                    this.learningSession.getCardStatusList().remove(erg);
+                }
+                this.cardStatus.remove(i);
+            }
+        }
+        return erg;
     }
 }

@@ -1,12 +1,12 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 
-<beans xmlns = "http://www.springframework.org/schema/beans"
-       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation = "http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="Professor" class="de.aicard.domains.account.Professor"></bean>
-    <bean id="Student" class="de.aicard.domains.account.Student"></bean>
+    <bean id="Account" class="de.aicard.domains.account.Account"></bean>
     <bean id="Card" class="de.aicard.domains.card.Card"></bean>
     <bean id="CardContent" class="de.aicard.domains.card.CardContent"></bean>
     <bean id="CardStatus" class="de.aicard.domains.card.CardStatus"></bean>
@@ -14,17 +14,33 @@
     <bean id="LearningSession" class="de.aicard.domains.learnset.LearningSession"></bean>
     <bean id="LearnSet" class="de.aicard.domains.learnset.LearnSet"></bean>
     <bean id="LearnSetAbo" class="de.aicard.domains.learnset.LearnSetAbo"></bean>
-    <bean id="Chat" class="de.aicard.domains.Social.Chat"></bean>
-    <bean id="Message" class="de.aicard.domains.Social.Message"></bean>
+    <bean id="Message" class="de.aicard.domains.Social.Comment"></bean>
 
     <bean id="AccountRepository" class="de.aicard.storages.AccountRepository" abstract="true"></bean>
     <bean id="CardContentRepository" class="de.aicard.storages.CardContentRepository" abstract="true"></bean>
     <bean id="CardListRepository" class="de.aicard.storages.CardListRepository" abstract="true"></bean>
     <bean id="CardRepository" class="de.aicard.storages.CardRepository" abstract="true"></bean>
     <bean id="CardStatusRepository" class="de.aicard.storages.CardStatusRepository" abstract="true"></bean>
-    <bean id="ChatRepository" class="de.aicard.storages.ChatRepository" abstract="true"></bean>
     <bean id="LearningSessionRepository" class="de.aicard.storages.LearningSessionRepository" abstract="true"></bean>
     <bean id="LearnSetAboRepository" class="de.aicard.storages.LearnSetAboRepository" abstract="true"></bean>
     <bean id="LearnSetRepository" class="de.aicard.storages.LearnSetRepository" abstract="true"></bean>
-    <bean id="MessageRepository" class="de.aicard.storages.MessageRepository" abstract="true"></bean>
+    <bean id="MessageRepository" class="de.aicard.storages.CommentRepository" abstract="true"></bean>
+
+    <bean id="AccountController" class="de.aicard.controller.AccountController"></bean>
+    <bean id="AddCardController" class="de.aicard.controller.AddCardController"></bean>
+    <bean id="LearnSetController" class="de.aicard.controller.LearnSetController"></bean>
+    <bean id="LoginController" class="de.aicard.controller.LoginController"></bean>
+    <bean id="MainController" class="de.aicard.controller.MainController"></bean>
+
+    <bean id="AccountService" class="de.aicard.services.AccountService"></bean>
+    <bean id="CardContentService" class="de.aicard.services.CardContentService"></bean>
+    <bean id="CardService" class="de.aicard.services.CardService"></bean>
+    <bean id="LearnSetService" class="de.aicard.services.LearnSetService"></bean>
+
+    <context:component-scan base-package="de.aicard"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="resources/templates"/>
+        <property name="suffix" value=".html"/>
+    </bean>
 </beans>

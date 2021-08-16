@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="de" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head :: head"></head>
+<head th:replace="fragments/head :: head">
+
+</head>
 
 <body>
+<script th:src="@{/js/addCard.js}"></script>
+<script th:src="@{/js/validateFileSize.js}"></script>
     <div th:replace="fragments/header :: header"></div>
     <div class="pageContent">
         <div class="createCard">
@@ -15,18 +19,18 @@
                             <h3>CardFront</h3>
                             <div class="formListElement">
                                 <select name="cardFrontType" id="cardFrontType">
-          <option selected="selected" value="TextFile">TextFile</option>
-          <option value="AudioFile">AudioFile</option>
-          <option value="PictureFile">PictureFile</option>
-          <option value="VideoFile">VideoFile</option>
-        </select>
+                                  <option selected="selected" value="TextFile">TextFile</option>
+                                  <option value="AudioFile">AudioFile</option>
+                                  <option value="PictureFile">PictureFile</option>
+                                  <option value="VideoFile">VideoFile</option>
+                                </select>
                             </div>
                             <div id="textFileFrontInput" class="formListElement">
                                 <label for="cardFrontTextFileInput">TextFile</label>
                                 <br>
                                 <input type="text" id="cardFrontTextFileTitle" name="cardFrontTextFileTitle">
                                 <br>
-                                <textarea type="text" id="cardFrontTextFileInput" name="cardFrontTextFileInput" maxlength="512"></textarea>
+                                <textarea id="cardFrontTextFileInput" name="cardFrontTextFileInput" maxlength="512"></textarea>
                             </div>
 
                             <div style="display: none" id="pictureFileFrontInput" class="formListElement">
@@ -34,7 +38,7 @@
                                 <br>
                                 <input type="text" id="cardFrontPictureFileTitle" name="cardFrontPictureFileTitle">
                                 <br>
-                                <input type="file" id="cardFrontPictureFileInput" name="cardFrontPictureFileInput" accept="image/*">
+                                <input title="Maximale Dateigröße: 50mb" type="file" id="cardFrontPictureFileInput" name="cardFrontPictureFileInput" accept="image/*">
                             </div>
 
                             <div style="display: none" id="videoFileFrontInput" class="formListElement">
@@ -42,7 +46,7 @@
                                 <br>
                                 <input type="text" id="cardFrontVideoFileTitle" name="cardFrontVideoFileTitle">
                                 <br>
-                                <input type="file" id="cardFrontVideoFileInput" name="cardFrontVideoFileInput" accept="video/*">
+                                <input title="Maximale Dateigröße: 50mb" type="file" id="cardFrontVideoFileInput" name="cardFrontVideoFileInput" accept="video/*">
                             </div>
 
                             <div style="display: none" id="audioFileFrontInput" class="formListElement">
@@ -50,7 +54,7 @@
                                 <br>
                                 <input type="text" id="cardFrontAudioFileTitle" name="cardFrontAudioFileTitle">
                                 <br>
-                                <input type="file" id="cardFrontAudioFileInput" name="cardFrontAudioFileInput" accept="audio/*">
+                                <input title="Maximale Dateigröße: 50mb" type="file" id="cardFrontAudioFileInput" name="cardFrontAudioFileInput" accept="audio/*">
                             </div>
 
                         </div>
@@ -72,7 +76,7 @@
                                 <br>
                                 <input type="text" id="cardBackTextFileTitle" name="cardBackTextFileTitle">
                                 <br>
-                                <textarea maxlength="512" type="text" id="cardBackTextFileInput" name="cardBackTextFileInput"></textarea>
+                                <textarea maxlength="512" id="cardBackTextFileInput" name="cardBackTextFileInput"></textarea>
                             </div>
 
                             <div style="display: none" id="pictureFileBackInput" class="formListElement">
@@ -80,7 +84,7 @@
                                 <br>
                                 <input type="text" id="cardBackPictureFileTitle" name="cardBackPictureFileTitle">
                                 <br>
-                                <input type="file" id="cardBackPictureFileInput" name="cardBackPictureFileInput" accept="image/*">
+                                <input title="Maximale Dateigröße: 50mb" type="file" id="cardBackPictureFileInput" name="cardBackPictureFileInput" accept="image/*">
                             </div>
 
                             <div style="display: none" id="videoFileBackInput" class="formListElement">
@@ -88,7 +92,7 @@
                                 <br>
                                 <input type="text" id="cardBackVideoFileTitle" name="cardBackVideoFileTitle">
                                 <br>
-                                <input type="file" id="cardBackVideoFileInput" name="cardBackVideoFileInput" accept="video/*">
+                                <input title="Maximale Dateigröße: 50mb" type="file" id="cardBackVideoFileInput" name="cardBackVideoFileInput" accept="video/*">
                             </div>
 
                             <div style="display: none" id="audioFileBackInput" class="formListElement">
@@ -96,7 +100,7 @@
                                 <br>
                                 <input type="text" id="cardBackAudioFileTitle" name="cardBackAudioFileTitle">
                                 <br>
-                                <input type="file" id="cardBackAudioFileInput" name="cardBackAudioFileInput" accept="audio/*">
+                                <input title="Maximale Dateigröße: 50mb" type="file" id="cardBackAudioFileInput" name="cardBackAudioFileInput" accept="audio/*">
                             </div>
 
                         </div>
@@ -113,7 +117,7 @@
                     <!--  <input name="cardBackText" id="cardBack" type="text" class="" >-->
                     <!--  <br>-->
                     <div class="btnContainer bottom">
-                        <button class="btn blueBtn">Submit</button>
+                        <button id="submitButton" class="btn blueBtn">Submit</button>
                     </div>
                     <div class="btnPlaceHolder"></div>
 

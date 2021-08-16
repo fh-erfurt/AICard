@@ -9,17 +9,23 @@
 
 <div class="pageContent">
 
-    <br>
-    <br>
-    <br>
-
-    <button th:if="${userIsLoggedIn}"><a th:href="@{/updateProfile}">Account Bearbeiten</a></button>
+    <div class="whiteBG pannel registration">
 
     <h2 th:text="'Name ' + ${account.getName()}"></h2>
     <h4>Beschreibung</h4>
     <p th:text="${account.getDescription()}"></p>
     <h4>Fakultät</h4>
     <p th:text="${account.getFaculty()}"></p>
+    <table th:if="${!#lists.isEmpty(account.getFriends())}">
+        <tbody>
+        <tr th:each="friend : ${account.getFriends()}">
+            <td><a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a></td>
+            <td th:if="${userIsProfileAccount}"><a class="" th:href="@{'/removeFriendFromFriendList/' + ${friend.getId()}}">X</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+
 
 
     <p style="color:white"><p th:text="${account.getName()} + '\'s'"></p> LearnSets</p>
@@ -28,8 +34,12 @@
 <!--    TODO : hier eventuell eigene Learnsets einfüge? Frage, wie die Applikation bedient werden soll-->
     <!--        Folowed LearnSets-->
     <p style="color:white"><p th:text="${account.getName()} + '\'s'"></p> followed LearnSets</p>
-
-
+        <div class="btnContainer bottom">
+            <button class="btn redBtn" th:if="${userIsProfileAccount}"><a th:href="@{/updateProfile}">Account Bearbeiten</a></button>
+            <button class="btn yellowBtn" th:if="${!userIsProfileAccount && !isMyFriend}"><a th:href="@{'/addFriend/' + ${account.getId()}}">Als Freund Hinzufügen</a></button>
+        </div>
+        <div class="btnPlaceHolder"></div>
+    </div>
 </div>
 <div class="footer"><a href="">Impressum</a></div>
 </body>

@@ -4,6 +4,7 @@
 <head th:replace="fragments/head :: head"></head>
 
 <body>
+    <script th:src="@{/js/secondPasswordValidation.js}"></script>
     <div th:replace="fragments/header :: header"></div>
 
 
@@ -36,7 +37,7 @@
 
                     <div class="formListElement">
                         <label for="descriptionProfessor">Beschreibung</label>
-                        <input th:field="*{description}" id="descriptionProfessor" type="" class="inputtext">
+                        <input th:field="*{description}" id="descriptionProfessor" type="text" class="inputtext">
                     </div>
 
                     <div class="formListElement">
@@ -46,7 +47,7 @@
 
                     <div class="formListElement">
                         <label for="passwordProfessor2">Passwort bestätigen</label>
-                        <input id="passwordProfessor2" type="password" class="inputtext" required>
+                        <input id="passwordProfessor2" name="passwordProfessor2" type="password" class="inputtext" required>
                     </div>
 
                     <div class="formListElement">
@@ -70,7 +71,7 @@
 <!--                    </div>-->
 
                     <div class="btnPlaceHolder"></div>
-                    <input type="submit" class="btn blueBtn">
+                    <input id="submitButton" type="submit" class="btn blueBtn">
                 </form>
             </div>
 

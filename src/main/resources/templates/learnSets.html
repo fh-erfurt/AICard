@@ -20,15 +20,25 @@
 
             <!-- weitere gridItmes werden dynamisch geladen -->
             <div th:each="ownAbo : ${ownLearnSetAbos}" class="gridItem">
-                <div th:text="${ownAbo.getLearnSet().title}" class="deckName"></div>
-                <div th:text="${ownAbo.getLearnSet().getCardList().getListLength()}" class="cardCount">count: </div>
+                <div class="deckName">
+                    <a th:href="@{'/cardOverview/'+${ownAbo.getLearnSet().getId()}}" th:text="${ownAbo.getLearnSet().title}"></a>
+                </div>
+                <div th:text="'Karten ' + ${ownAbo.getLearnSet().getCardList().getListLength()}" class="cardCount"></div>
+
+                <h4>Evaluation</h4>
+                <p th:if="${ownAbo.getLearnSet().calculateEvaluation() != -1}" th:text="${ownAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen'}"></p>
+                <p th:if="${ownAbo.getLearnSet().calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
+
                 <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
-                <div class="btn edit">
-                    <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">edit</a>
+                <div class="btnContainer bottom">
+                    <div class="btn yellowBtn">
+                        <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">edit</a>
+                    </div>
+                    <div class="btn blueBtn">
+                        <a th:href="@{'/initializeLearningSession/' + ${ownAbo.getId()}}">learn</a>
+                    </div>
                 </div>
-                <div class="btn learn">
-                    <a th:href="@{/}">learn</a>
-                </div>
+                <div class="btnPlaceHolder"></div>
             </div>
 
         </div>
@@ -42,14 +52,25 @@
 
             <!-- weitere gridItmes werden dynamisch geladen -->
             <div th:each="favoriteLearnSetAbo : ${favoriteLearnSetAbos}" class="gridItem">
-                <div th:text="${favoriteLearnSetAbo.getLearnSet().title}" class="deckName"></div>
-                <div th:text="${favoriteLearnSetAbo.getLearnSet().getCardList().getListLength()}" class="cardCount">count: </div>
-                <div class="btn edit">
-                    <a href="">unfollow</a>
+                <div  class="deckName">
+                    <a th:href="@{'/cardOverview/'+ ${favoriteLearnSetAbo.getLearnSet().getId()}}" th:text="${favoriteLearnSetAbo.getLearnSet().title}"></a>
                 </div>
-                <div class="btn learn">
-                    <a th:href="@{'/learn/' + ${favoriteLearnSetAbo.getId()} + '/10' } ">learn</a>
+                <div th:text="'Karten ' + ${favoriteLearnSetAbo.getLearnSet().getCardList().getListLength()}" class="cardCount"></div>
+
+                <h4>Evaluation</h4>
+                <p th:if="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() != -1}" th:text="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen'}"></p>
+                <p th:if="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
+
+
+                <div class="btnContainer bottom">
+                    <div class="btn yellowBtn">
+                        <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">unfollow</a>
+                    </div>
+                    <div class="btn blueBtn">
+                        <a th:href="@{'/initializeLearningSession/' + ${favoriteLearnSetAbo.getId()}}">learn</a>
+                    </div>
                 </div>
+
             </div>
 
         </div>

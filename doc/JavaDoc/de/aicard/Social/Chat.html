@@ -89,7 +89,6 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">de.aicard.domains.Social.Chat</div>
 </div>
 <section class="description">
 <hr>
@@ -160,7 +159,7 @@ extends java.lang.Object</pre>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(de.aicard.domains.account.Account,de.aicard.domains.account.Account,java.lang.String)">Chat</a></span>&#8203;(<a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newParticipant,
 <a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newCreator,
-java.lang.String&nbsp;_newMessage)</code></th>
+java.lang.String&nbsp;_newComment)</code></th>
 <td class="colLast">
 <div class="block">Constructor of a Chat.</div>
 </td>
@@ -221,17 +220,17 @@ java.lang.String&nbsp;_newMessage)</code></th>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeMessage(de.aicard.domains.Social.Message)">removeMessage</a></span>&#8203;(<a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_oldMessage)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeMessage(de.aicard.domains.Social.Message)">removeMessage</a></span>&#8203;(<a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_oldComment)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeMessageByIndex(int)">removeMessageByIndex</a></span>&#8203;(int&nbsp;_oldMessage)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeMessageByIndex(int)">removeMessageByIndex</a></span>&#8203;(int&nbsp;_oldComment)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessage(java.lang.String,de.aicard.domains.account.Account)">sendMessage</a></span>&#8203;(java.lang.String&nbsp;_newMessage,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessage(java.lang.String,de.aicard.domains.account.Account)">sendMessage</a></span>&#8203;(java.lang.String&nbsp;_newComment,
 <a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newSender)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -300,13 +299,13 @@ java.lang.String&nbsp;_newMessage)</code></th>
 <h3><a id="&lt;init&gt;(de.aicard.domains.account.Account,de.aicard.domains.account.Account,java.lang.String)">Chat</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">Chat</span>&#8203;(<span class="arguments"><a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newParticipant,
 <a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newCreator,
-java.lang.String&nbsp;_newMessage)</span></div>
+java.lang.String&nbsp;_newComment)</span></div>
 <div class="block">Constructor of a Chat.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>_newCreator</code> - the person that creates the chat by sending a message to a participant, the creator is the fist person on the participants list</dd>
 <dd><code>_newParticipant</code> - the person that receives the first message and is the second on the participants list</dd>
-<dd><code>_newMessage</code> - the message to send</dd>
+<dd><code>_newComment</code> - the message to send</dd>
 </dl>
 </section>
 </li>
@@ -370,20 +369,20 @@ java.lang.String&nbsp;_newMessage)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="sendMessage(java.lang.String,de.aicard.domains.account.Account)">sendMessage</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">sendMessage</span>&#8203;(<span class="arguments">java.lang.String&nbsp;_newMessage,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">sendMessage</span>&#8203;(<span class="arguments">java.lang.String&nbsp;_newComment,
 <a href="../account/Account.html" title="class in de.aicard.domains.account">Account</a>&nbsp;_newSender)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="removeMessage(de.aicard.domains.Social.Message)">removeMessage</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeMessage</span>&#8203;(<span class="arguments"><a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_oldMessage)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeMessage</span>&#8203;(<span class="arguments"><a href="Message.html" title="class in de.aicard.domains.Social">Message</a>&nbsp;_oldComment)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="removeMessageByIndex(int)">removeMessageByIndex</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeMessageByIndex</span>&#8203;(<span class="arguments">int&nbsp;_oldMessage)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeMessageByIndex</span>&#8203;(<span class="arguments">int&nbsp;_oldComment)</span></div>
 </section>
 </li>
 </ul>

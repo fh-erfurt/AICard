@@ -2,11 +2,11 @@ package de.aicard.controller;
 
 import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
-import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.LearnSet;
-import de.aicard.storages.AccountRepository;
-import de.aicard.storages.LearnSetRepository;
+import de.aicard.services.AccountService;
+import de.aicard.services.CardService;
+import de.aicard.services.LearnSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.activation.MimetypesFileTypeMap;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,41 +21,76 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * @author Martin Kühlborn,Clemens Berger
+ */
 @Controller
-public class AddCardController
-{
+public class AddCardController {
+    private final LearnSetService learnSetService;
+    private final CardService cardService;
+    private final AccountService accountService;
+
     @Autowired
-    AccountRepository accountRepository;
-    @Autowired
-    LearnSetRepository learnSetRepository;
-    
-    
-    
-    
-    
+    public AddCardController(LearnSetService learnSetService, CardService cardService, AccountService accountService) {
+        this.learnSetService = learnSetService;
+        this.cardService = cardService;
+        this.accountService = accountService;
+    }
+
+    /**
+     * shows the addCard.html if the user can access it
+     * @param learnSetID
+     * @param principal
+     * @param model
+     * @return
+     */
+
     @GetMapping("/addCard/{learnSetID}")
-    public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model)
-    {
-        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-        if(learnSet.isPresent() && account.isPresent())
-        {
-            if (learnSet.get().getAdminList().contains(account.get()))
-            {
-                model.addAttribute("learnSetID", learnSetID);
-                return "addCard";
-            }
+    public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model) {
+        Optional<Account> account = accountService.getAccount(principal);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
+        
+        if (account.isPresent() && learnSet.isPresent() && learnSetService.accountIsAuthorized(account.get(), learnSet.get())) {
+            model.addAttribute("learnSetID", learnSetID);
+            return "addCard";
         }
         return "redirect:/index";
     }
-    
+
+    /**
+     * handles creatng cards for a LearnSet
+     * different params are needed to identify datatypes such as video,audio,text and pictures
+     * for front and back side
+     * @param learnSetID
+     * @param principal
+     * @param model
+     * @param cardFrontType
+     * @param cardFrontTextFileTile
+     * @param cardFrontTextFileInput
+     * @param cardFrontPictureFileTitle
+     * @param cardFrontPictureFileInput
+     * @param cardFrontVideoFileTitle
+     * @param cardFrontVideoFileInput
+     * @param cardFrontAudioFileTitle
+     * @param cardFrontAudioFileInput
+     * @param cardBackType
+     * @param cardBackTextFileTitle
+     * @param cardBackTextFileInput
+     * @param cardBackPictureFileTitle
+     * @param cardBackPictureFileInput
+     * @param cardBackVideoFileTitle
+     * @param cardBackVideoFileInput
+     * @param cardBackAudioFileTitle
+     * @param cardBackAudioFileInput
+     * @return
+     * @throws IOException
+     */
     // --- we offer the possibility for all files to be send but only save those that are selected by the FileTypeSelector
     @PostMapping("/addCard/{learnSetID}")
     @ResponseBody
     public ModelAndView postAddCard(
-            
-            @PathVariable Long learnSetID,Principal principal, Model model,
+
+            @PathVariable Long learnSetID, Principal principal, Model model,
             @RequestParam("cardFrontType") String cardFrontType,
             @RequestParam(value = "cardFrontTextFileTitle", required = false) String cardFrontTextFileTile, @RequestParam(value = "cardFrontTextFileInput", required = false) String cardFrontTextFileInput,
             @RequestParam(value = "cardFrontPictureFileTitle", required = false) String cardFrontPictureFileTitle, @RequestParam(value = "cardFrontPictureFileInput", required = false) MultipartFile cardFrontPictureFileInput,
@@ -65,313 +98,90 @@ public class AddCardController
             @RequestParam(value = "cardFrontAudioFileTitle", required = false) String cardFrontAudioFileTitle, @RequestParam(value = "cardFrontAudioFileInput", required = false) MultipartFile cardFrontAudioFileInput,
 
             @RequestParam("cardBackType") String cardBackType,
-            @RequestParam(value = "cardBackTextFileTitle" , required = false) String cardBackTextFileTitle, @RequestParam(value = "cardBackTextFileInput", required = false) String cardBackTextFileInput,
+            @RequestParam(value = "cardBackTextFileTitle", required = false) String cardBackTextFileTitle, @RequestParam(value = "cardBackTextFileInput", required = false) String cardBackTextFileInput,
             @RequestParam(value = "cardBackPictureFileTitle", required = false) String cardBackPictureFileTitle, @RequestParam(value = "cardBackPictureFileInput", required = false) MultipartFile cardBackPictureFileInput,
             @RequestParam(value = "cardBackVideoFileTitle", required = false) String cardBackVideoFileTitle, @RequestParam(value = "cardBackVideoFileInput", required = false) MultipartFile cardBackVideoFileInput,
             @RequestParam(value = "cardBackAudioFileTitle", required = false) String cardBackAudioFileTitle, @RequestParam(value = "cardBackAudioFileInput", required = false) MultipartFile cardBackAudioFileInput
-    )throws IOException
-    {
+    ) throws IOException {
         // if cardFiles Folder doesnt exist, create it!
-        if(! Files.exists(Path.of(System.getProperty("user.dir") + "\\cardFiles")))
-        {
+        if (!Files.exists(Path.of(System.getProperty("user.dir") + "\\cardFiles"))) {
             Files.createDirectory(Path.of(System.getProperty("user.dir") + "\\cardFiles"));
         }
-        
+
         // --- Logic start ---
         ModelAndView modelAndView = new ModelAndView();
         List<String> errors = new ArrayList<>();
-        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetID);
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
-        if(learnSet.isPresent() && account.isPresent())
+        Card newCard = null;
+
+        // TODO : überprüfe bei allen LernSet Änderungen ob der Account darauf zugriff hat
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
+        Optional<Account> account = accountService.getAccount(principal);
+        
+        if (account.isPresent() &&
+                learnSet.isPresent() &&
+                learnSetService.accountIsAuthorized(account.get(), learnSet.get()) &&
+                accountService.getAccount(principal).isPresent() &&
+                learnSet.get().getAdminList().contains(accountService.getAccount(principal).get()))
         {
-            // TODO : simplify this into a loop or a Service with a loop -> no code repetition
-            if (learnSet.get().getAdminList().contains(account.get()))
-            {
-                // we are here if the learnSet exists and the Owner or an Admin is logged in
-                Card card = new Card();
-                CardContent cardContentFront = new CardContent();
-                CardContent cardContentBack = new CardContent();
-                String cardFrontFilePath = System.getProperty("user.dir") + "\\cardFiles\\";
-//                String cardFrontFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\learnSetImages\\";
+            
+            // we are here if the learnSet exists and the Owner or an Admin is logged in
+            String cardFrontTitel = cardService.getCorrectTitle(cardFrontType, cardFrontPictureFileTitle,
+                    cardFrontTextFileTile, cardFrontVideoFileTitle, cardFrontAudioFileTitle);
+            String cardBackTitel = cardService.getCorrectTitle(cardBackType, cardBackPictureFileTitle,
+                    cardBackTextFileTitle,cardBackVideoFileTitle, cardBackAudioFileTitle);
 
-    
-                // --- --- -- --- ---
-                // --- Card Front ---
-                // --- --- -- --- ---
-                if (cardFrontType.equals(DataType.PictureFile.name()))
-                {
-                    cardContentFront.setTitle(cardFrontPictureFileTitle);
-                    cardContentFront.setType(DataType.PictureFile);
-    
-                    if (cardFrontPictureFileInput != null && ! cardFrontPictureFileInput.isEmpty())
-                    {
-                        // file exists
-                        String fileName = System.currentTimeMillis() + "_" + cardFrontPictureFileInput.getOriginalFilename();
-                        cardFrontFilePath = cardFrontFilePath + fileName;
-                        cardFrontFilePath = cardFrontFilePath.replace("\\", "\\\\");
-                        File newFile = new File(cardFrontFilePath);
-                        cardFrontPictureFileInput.transferTo(newFile);
-    
-                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-                        String fileType = mimetype.split("/")[0];
-                        if (fileType.equals("image"))
-                        {
-                            cardContentFront.setData(fileName);
-    
-                        }
-                        else
-                        {
-                            newFile.delete();
-                            errors.add("Falscher Dateityp für PictureFile");
-                        }
-                    }
-                    else
-                    {
-                        errors.add("Keine Datei hochgeladen");
-                    }
-                }
-                //Audio
-                //TODO: correct paths for audio front
-                //cardFrontFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\audio\\learnSetAudio\\";
-                if (cardFrontType.equals(DataType.AudioFile.name()))
-                {
-                    cardContentFront.setTitle(cardFrontAudioFileTitle);
-                    cardContentFront.setType(DataType.AudioFile);
-    
-                    if (cardFrontAudioFileInput != null && ! cardFrontAudioFileInput.isEmpty())
-                    {
-                        // file exists
-                        String fileName = System.currentTimeMillis() + "_" + cardFrontAudioFileInput.getOriginalFilename();
-                        cardFrontFilePath = cardFrontFilePath + fileName;
-                        cardFrontFilePath = cardFrontFilePath.replace("\\", "\\\\");
-                        File newFile = new File(cardFrontFilePath);
-                        cardFrontAudioFileInput.transferTo(newFile);
-                        cardContentFront.setData(fileName);
-    
-                        // todo: not working for type audio
-                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile); //  keine ahnung was das hier soll
-                        //System.out.println("mimetype "+mimetype);
-                        //String fileType = mimetype.split("/")[0];
+            //TODO: Doppelter Code kann noch verbessert werden, wenn Zeit
+            try {
+                if (cardFrontType.equals(DataType.TextFile.name())) {
 
-                        //System.out.println("Filetype Audio "+fileType);
-                        String fileType = cardFrontAudioFileInput.getContentType().split("/")[0];
+                    String cardFrontInput = cardFrontTextFileInput;
+                    if (cardBackType.equals(DataType.TextFile.name())) {
+                        String cardBackInput = cardBackTextFileInput;
+                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
+                                cardBackType, cardBackTitel, cardBackInput);
 
-
-                        if(fileType.equals("audio"))
-                        {
-                            System.out.println("Audio erkannt "+cardFrontAudioFileInput.getOriginalFilename());
-                            cardContentFront.setData(fileName);
-                            // jetzt wird die datei gespeichert oder was
-                        }
-                        else
-                        {
-                            newFile.delete();
-                            errors.add("Falscher Dateityp für Audio");
-                        }
+                    } else {
+                        MultipartFile cardBackInput = cardService.getCorrectInput(cardBackType, cardBackVideoFileInput,
+                                cardBackPictureFileInput, cardBackAudioFileInput);
+                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
+                                cardBackType, cardBackTitel, cardBackInput);
                     }
-                    else
-                    {
-                        errors.add("Keine Datei hochgeladen");
-                    }
-                }
-                //Video
-                //cardFrontFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\video\\learnSetVideo\\";
-                if (cardFrontType.equals(DataType.VideoFile.name()))
-                {
-                    cardContentFront.setTitle(cardFrontVideoFileTitle);
-                    cardContentFront.setType(DataType.VideoFile);
-    
-                    if (cardFrontVideoFileInput != null && ! cardFrontVideoFileInput.isEmpty())
-                    {
-                        // file exists
-                        String fileName = System.currentTimeMillis() + "_" + cardFrontVideoFileInput.getOriginalFilename();
-                        cardFrontFilePath = cardFrontFilePath + fileName;
-                        cardFrontFilePath = cardFrontFilePath.replace("\\", "\\\\");
-                        File newFile = new File(cardFrontFilePath);
-                        cardFrontVideoFileInput.transferTo(newFile);
-    
-                        cardContentFront.setData(fileName);
-    
-                        // todo: not working for type video
-                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-                        //String fileType = mimetype.split("/")[0]; // ?? warum machst du das hier
-                        System.out.println(cardFrontVideoFileInput.getContentType());
-                        String fileType = cardFrontVideoFileInput.getContentType().split("/")[0];
-                        if(fileType.equals("video"))
-                        {
-                            System.out.println("Video erkannt "+cardFrontVideoFileInput.getOriginalFilename());
-                            cardContentFront.setData(fileName);
-                        }
-                        else
-                        {
-                            newFile.delete();
-                            errors.add("Falscher Dateityp für PictureFile");
-                        }
-                    }
-                    else
-                    {
-                        errors.add("Keine Datei hochgeladen");
+                } else {
+                    MultipartFile cardFrontInput = cardService.getCorrectInput(cardFrontType, cardFrontVideoFileInput,
+                            cardFrontPictureFileInput, cardFrontAudioFileInput);
+                    if (cardBackType.equals(DataType.TextFile.name())) {
+                        String cardBackInput = cardBackTextFileInput;
+                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
+                                cardBackType, cardBackTitel, cardBackInput);
+                    } else {
+                        MultipartFile cardBackInput = cardService.getCorrectInput(cardBackType, cardBackVideoFileInput,
+                                cardBackPictureFileInput, cardBackAudioFileInput);
+                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
+                                cardBackType, cardBackTitel, cardBackInput);
                     }
                 }
-                //Text
-                if (cardFrontType.equals(DataType.TextFile.name()))
-                {
-                    if (cardFrontTextFileInput != null && !cardFrontTextFileInput.isEmpty())
-                    {
-                        cardContentFront.setTitle(cardFrontTextFileTile);
-                        cardContentFront.setData(cardFrontTextFileInput);
-                        cardContentFront.setType(DataType.TextFile);
-                    }
-                    else
-                    {
-                        errors.add("Keine eingaben ins Textfeld erkannt.");
-                    }
-                }
-    
-                // --- --- -- --- ---
-                // --- Card Back ---
-                // --- --- -- --- ---
-                String cardBackFilePath = System.getProperty("user.dir") + "\\cardFiles\\";
-//                String cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\learnSetImages\\";
-                if (cardBackType.equals(DataType.PictureFile.name()))
-                {
-                    cardContentBack.setTitle(cardBackPictureFileTitle);
-                    cardContentBack.setType(DataType.PictureFile);
-    
-                    if (cardBackPictureFileInput != null && ! cardBackPictureFileInput.isEmpty())
-                    {
-                        // file exists
-                        String fileName = System.currentTimeMillis() + "_" + cardBackPictureFileInput.getOriginalFilename();
-                        cardBackFilePath = cardBackFilePath + fileName;
-                        cardBackFilePath = cardBackFilePath.replace("\\", "\\\\");
-                        File newFile = new File(cardBackFilePath);
-                        cardBackPictureFileInput.transferTo(newFile);
-    
-                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-                        String fileType = mimetype.split("/")[0];
-                        if (fileType.equals("image"))
-                        {
-
-                            cardContentBack.setData(fileName);
-    
-                        }
-                        else
-                        {
-                            newFile.delete();
-                            errors.add("Falscher Dateityp für PictureFile");
-                        }
-                    }
-                    else
-                    {
-                        errors.add("Keine Datei hochgeladen");
-                    }
-                }
-                //cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\audio\\learnSetAudio\\";
-                if (cardBackType.equals(DataType.AudioFile.name()))
-                {
-                    cardContentBack.setTitle(cardBackAudioFileTitle);
-                    cardContentBack.setType(DataType.AudioFile);
-    
-                    if (cardBackAudioFileInput != null && ! cardBackAudioFileInput.isEmpty())
-                    {
-                        // file exists
-                        String fileName = System.currentTimeMillis() + "_" + cardBackAudioFileInput.getOriginalFilename();
-                        cardBackFilePath = cardBackFilePath + fileName;
-                        cardBackFilePath = cardBackFilePath.replace("\\", "\\\\");
-                        File newFile = new File(cardBackFilePath);
-                        cardBackAudioFileInput.transferTo(newFile);
-    
-                        cardContentBack.setData(fileName);
-
-                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-                        //String fileType = mimetype.split("/")[0];
-                        String fileType = cardBackAudioFileInput.getContentType().split("/")[0];
-                        if(fileType.equals("audio"))
-                        {
-                            System.out.println("Audio erkannt "+cardBackAudioFileInput.getOriginalFilename());
-                            cardContentBack.setData(fileName);
-                        }
-                        else
-                        {
-                            newFile.delete();
-                            errors.add("Falscher Dateityp für PictureFile");
-                        }
-                    }
-                    else
-                    {
-                        errors.add("Keine Datei hochgeladen");
-                    }
-    
-                }
-                // Video Back
-                //cardBackFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\video\\learnSetVideo\\";
-                if (cardBackType.equals(DataType.VideoFile.name()))
-                {
-                    cardContentBack.setTitle(cardBackVideoFileTitle);
-                    cardContentBack.setType(DataType.VideoFile);
-    
-                    if (cardBackVideoFileInput != null && ! cardBackVideoFileInput.isEmpty())
-                    {
-                        // file exists
-                        String fileName = System.currentTimeMillis() + "_" + cardBackVideoFileInput.getOriginalFilename();
-                        cardBackFilePath = cardBackFilePath + fileName;
-                        cardBackFilePath = cardBackFilePath.replace("\\", "\\\\");
-                        File newFile = new File(cardBackFilePath);
-                        cardBackVideoFileInput.transferTo(newFile);
-    
-                        cardContentBack.setData(fileName);
-
-                        String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-                        //String fileType = mimetype.split("/")[0];
-                        String fileType = cardBackVideoFileInput.getContentType().split("/")[0];
-                        //System.out.println(fileType);
-                        if(fileType.equals("video"))
-                        {
-                            System.out.println("Video erkannt "+cardBackVideoFileInput.getOriginalFilename());
-                            cardContentBack.setData(fileName);
-                        }
-                        else
-                        {
-                            newFile.delete();
-                            errors.add("Falscher Dateityp für PictureFile");
-                        }
-                    }
-                    else
-                    {
-                        errors.add("Keine Datei hochgeladen");
-                    }
-                }
-    
-    
-                if (cardBackType.equals(DataType.TextFile.name()))
-                {
-                    if(cardBackTextFileInput != null && !cardBackTextFileInput.isEmpty())
-                    {
-                        cardContentBack.setTitle(cardBackTextFileTitle);
-                        cardContentBack.setData(cardBackTextFileInput);
-                        cardContentBack.setType(DataType.TextFile);
-                    }
-                    else
-                    {
-                        errors.add("Keine eingaben ins Textfeld erkannt.");
-                    }
-                }
-                
-                
-                if(errors.size() == 0)
-                {
-                    card.setCardFront(cardContentFront);
-                    card.setCardBack(cardContentBack);
-                    learnSet.get().getCardList().addToList(card);
-                    learnSetRepository.save(learnSet.get());
-                    
-                    modelAndView.setViewName("redirect:/cardOverview/" + learnSetID);
-                    return modelAndView;
-                }
+            } catch (IllegalStateException e) {
+                errors.add(e.getMessage());
             }
+
         }
-        modelAndView.setViewName("redirect:/index");
+        if (errors.isEmpty() && learnSet.isPresent()) {
+            learnSet.get().getCardList().addToList(newCard);
+            learnSetService.saveLearnSet(learnSet.get());
+            
+            modelAndView.setViewName("redirect:/cardOverview/" + learnSetID);
+            
+        }
+        else
+        {
+            for (String error: errors)
+            {
+                System.out.println(error);
+            }
+            // TODO : write errors to frontend -> viel spaß frontend team :)
+            modelAndView.setViewName("redirect:/addCard/" + learnSetID);
+        }
         return modelAndView;
     }
-    
+
 }

@@ -1,6 +1,5 @@
 package de.aicard.domains.account;
 
-import de.aicard.domains.Social.Chat;
 import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.enums.Visibility;
@@ -10,7 +9,7 @@ import de.aicard.domains.learnset.LearnSet;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -25,6 +24,7 @@ import java.util.logging.Logger;
 @Entity
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 public class Account extends BaseEntity
 {
     //Logger
@@ -38,9 +38,9 @@ public class Account extends BaseEntity
     protected String description;
     protected Faculty faculty;
     
-    @Setter(AccessLevel.NONE)
-    @ManyToMany(cascade = CascadeType.ALL)
-    protected List<LearnSet> ownLearnSets;
+//    @Setter(AccessLevel.NONE)
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    protected List<LearnSet> ownLearnSets;
     // um festzustellen ob das Learnset von dem account ist wird durch die abos iteriert und die ownerid verglichen
     // learnSet -> isAccountID in AdminList
     @Setter(AccessLevel.NONE)
@@ -48,18 +48,24 @@ public class Account extends BaseEntity
     protected List<LearnSetAbo> learnsetAbos;
 
     @Setter(AccessLevel.NONE)
-    @ManyToMany
+    @ManyToMany( cascade = CascadeType.ALL)
     protected List<Account> friends;
 
-    @Setter(AccessLevel.NONE)
-    @ManyToMany
-    protected List<Chat> chats;
-    
-    
-    //no Constructor cause abstract, Constructor in subclasses Professor and Student
-    
-    
-    
+
+    public Account(String _newEmail, String _newPassword, String _newName, String _newDescription , Faculty _newFaculty)
+    {
+        this.email = _newEmail;
+        this.password = _newPassword;
+        this.name = _newName;
+        this.description  =  _newDescription;
+        this.faculty = _newFaculty;
+        this.learnsetAbos = new ArrayList<LearnSetAbo>();
+        this.friends = new ArrayList<Account>() ;
+    }
+
+
+
+
     /**
      * Setter for ArrayLists are not Required
      */
@@ -68,10 +74,10 @@ public class Account extends BaseEntity
     
     //ownLearnAboSet
     
-    public LearnSet getOwnLearnSetByIndex(int _index)
-    {
-        return ownLearnSets.get(_index);
-    }
+//    public LearnSet getOwnLearnSetByIndex(int _index)
+//    {
+//        return ownLearnSets.get(_index);
+//    }
     
     /**Create a new LearnSetAbo with a new LearnSet
      * puts the new LearnSetAbo in ownLearnSets
@@ -86,8 +92,9 @@ public class Account extends BaseEntity
         try
         {
             LearnSet newLearnSet = new LearnSet(_title, _description, _faculty,new CardList(),this,_visibility);
-            this.ownLearnSets.add(newLearnSet);
-            this.addNewFavoriteLearnSet(newLearnSet);
+            newLearnSet.setOwner(this);
+            newLearnSet.addAdmin(this);
+            this.addLearnSetAbo(newLearnSet);
         }
         catch (Exception e)
         {
@@ -95,35 +102,26 @@ public class Account extends BaseEntity
         }
     }
     
-    public void deleteOwnLearnSetsByIndex(int _index)
-    {
-        this.ownLearnSets.remove(_index);
+
+
+    public LearnSetAbo removeLearnSetAboByLearnSet(LearnSet learnSet){
+        for(int i = this.learnsetAbos.size()-1;i>=0;i--){
+            if(this.learnsetAbos.get(i).getLearnSet().equals(learnSet)){
+                LearnSetAbo abo = this.learnsetAbos.get(i);
+                this.learnsetAbos.remove(abo);
+                return abo;
+            }
+        }
+        return null;
     }
-    
-    public void deleteOwnLearnSetByLastElement()
+    //learnSetAbos
+    public void addLearnSetAbo(LearnSet learnSet)
     {
-        this.ownLearnSets.remove(this.ownLearnSets.size() - 1);
-    }
-    
-    public void deleteAllOwnLearnSets()
-    {
-        this.ownLearnSets.clear();
-    }
-    
-    //favoriteLearnSets
-    
-    public LearnSetAbo getFavoriteLearnSetByIndex(int _index)
-    {
-        return this.learnsetAbos.get(_index);
-    }
-    
-    public void addNewFavoriteLearnSet(LearnSet _favoriteSet)
-    {
-        if(_favoriteSet.isAuthorizedToAddLearnSet(this))
+        if(learnSet.isAuthorizedToAccessLearnSet(this))
         {
             try
             {
-                this.learnsetAbos.add(new LearnSetAbo(_favoriteSet));
+                this.learnsetAbos.add(new LearnSetAbo(learnSet));
             }
             catch (Exception e)
             {
@@ -132,20 +130,11 @@ public class Account extends BaseEntity
         }
     }
     
-    public void deleteFavoriteLearnSetByIndex(int _index)
+    public void removeLearnSetAbo(LearnSetAbo _learnSetAbo)
     {
-        this.learnsetAbos.remove(_index);
+        this.learnsetAbos.remove(_learnSetAbo);
     }
-    
-    public void deleteFavoriteLearnSetByLastElement()
-    {
-        this.learnsetAbos.remove(this.learnsetAbos.size() - 1);
-    }
-    
-    public void deleteAllFavoriteLearnSets()
-    {
-        this.learnsetAbos.clear();
-    }
+
     
     //Friends
 
@@ -169,45 +158,10 @@ public class Account extends BaseEntity
         this.friends.remove(_friend);
     }
 
-    //Chat
 
-    /** isAlreadyInChatWith is a function that checks if there is an existent chat with a person
-     *  @author  Semlali Amine
-     */
-    private boolean isAlreadyInChatWith(Account _account)
-    {
-        for (Chat chat:this.chats)
-        {
-            if(chat.getParticipants().contains(_account) && chat.getParticipants().size() == 2)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
     /** after checking if there is no existent chat with a person, a new chat is created with that person and is added to the chat list
      *  @author  Semlali Amine
      */
-    public void addNewChat(Account _account)
-    {
-        if (!isAlreadyInChatWith(_account))
-        {
-            chats.add(new Chat(_account, this, "Hallo "+ _account.getName() +", von "+ this.getName()));
-        }
-    }
-
-    public void addChat(Chat _chat)
-    {
-        this.chats.add(_chat);
-    }
-
-    /** deleteChat is a function that deletes a chat from the chats list
-     *  @author  Semlali Amine
-     */
-    public void deleteChat(int _chat)
-    {
-        this.chats.remove(_chat);
-    }
     
     //Methods
     
@@ -220,10 +174,7 @@ public class Account extends BaseEntity
      *
      * @author Amine Semlali
      */
-    public void clicksLikeOfMessage(int _chatIndex ,int _messageIndex)
-    {
-        this.getChats().get(_chatIndex).getChatHistory().get(_messageIndex).clickLike(this);
-    }
+    
 
     /**Checks User for valid login data
      *
@@ -258,11 +209,5 @@ public class Account extends BaseEntity
             setPassword(_newPassword);
         }
     }
-
-
-
-
-
-
-
+    
 }
