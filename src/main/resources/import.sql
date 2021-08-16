@@ -19,8 +19,8 @@ insert into ACCOUNT (id,email,password,name,description, faculty) values ('2','t
 
 insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values ('0','textdataFront0','TitelFront0','0'),('1','textdataFront1','TitelFront1','0'),
                                                        ('2','textdataFront2','TitelFront2','0'),('3','textdataFront3','TitelFront3','0'),
-                                                       ('4','textdataFront4','TitelFront4','0'),('5','textdataFront5','TitelFront5','0'),
-                                                       ('6','textdataFront6','TitelFront6','0'),('7','textdataFront7','TitelFront7','0'),('8','textdataFront8','TitelFront8','0'),
+                                                       ('4','textdataFront4','TitelFront4','0'),('5','textdataFront5','TitelFront5','0')
+        ,('6','textdataFront6','TitelFront6','0'),('7','textdataFront7','TitelFront7','0'),('8','textdataFront8','TitelFront8','0'),
                                                        ('9','textdataFront9','TitelFront9','0'),
                                                        ('10','textdataFront10','TitelFront10','0'),('11','textdataFront11','TitelFront11','0'),('12','textdataFront12','TitelFront12','0'),
                                                        ('13','textdataFront13','TitelFront13','0'),
