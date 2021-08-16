@@ -76,37 +76,12 @@ public class LearnSetAbo extends BaseEntity
     }
 
     //getter + setter
-    
-    /**
-     * Sets the evaluation of the Account for the corresponding LearnSet.
-     *
-     * First checks, if there is already an evaluation of this account for this LearnSet.
-     * If so, this evaluation is deleted. Then, the member-variable m_evaluation is set to the
-     * value of the new evaluation, and the evaluation is added to the LearnSet.
-     *
-     * @param _evaluation Evaluation, the Account wants to give to the LearnSet.
-     */
-    public void set_evaluation(int _evaluation)
-    {
-        if(this.evaluation != -1)
-        {
-            this.learnSet.deleteEvaluation(this.evaluation);
-        }
-        this.evaluation = _evaluation;
-        this.learnSet.addEvaluation(evaluation);
-    }
+
 
     /**
      * Deletes the evaluation of the Account for the corresponding LearnSet.
      */
-    public void delete_evaluation()
-    {
-        if(this.evaluation != -1)
-        {
-            this.learnSet.deleteEvaluation(this.evaluation);
-            this.evaluation = -1;
-        }
-    }
+
 
     /**
      * Method to get all Cards of the LearnSet with a specific CardKnowledgeLevel.

@@ -42,14 +42,12 @@
             <div class="deckName">
                 <a th:text="${learnSet.title}"  th:href="@{'/cardOverview/' + ${learnSet.getId()}}"></a>
             </div>
-            <div th:text="${learnSet.getCardList().getListLength()}" class="cardCount">count: </div>
-            <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
-<!--            <div class="btn edit">-->
-<!--                <a th:href="@{'/cardOverview/' + ${learnSet.getId()}}">Preview</a>-->
-<!--            </div>-->
-<!--            <div class="btn learn">-->
-<!--                <a th:href="@{'/followLearnSet/' + ${learnSet.getId()}}">Follow</a>-->
-<!--            </div>-->
+            <div th:text="'Karten ' + ${learnSet.getCardList().getListLength()}" class="cardCount"></div>
+
+            <h4>Evaluation</h4>
+            <p th:if="${learnSet.calculateEvaluation() != -1}" th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen'}"></p>
+            <p th:if="${learnSet.calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
+
 
             <div class="btnContainer bottom">
                 <div class="btn yellowBtn">

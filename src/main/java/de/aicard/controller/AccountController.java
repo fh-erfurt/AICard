@@ -99,8 +99,8 @@ public class AccountController
     @ResponseBody
     @PostMapping("/updateAccount")
     public ModelAndView postUpdateAccount(@RequestParam("passwordProfessor2") String password2, @RequestParam(value="addFriendByEmail", required = false) String addFriendByEmail,
-                                    @ModelAttribute("account") Account theAccount, Model model,Principal principal) throws NoSuchAlgorithmException {
-
+                                    @ModelAttribute("account") Account theAccount, Model model,Principal principal) throws NoSuchAlgorithmException
+    {
         List<String> errors = new ArrayList<>();
         ModelAndView modelAndView = new ModelAndView();
         Optional<Account> account = accountService.getAccount(principal);
@@ -112,28 +112,22 @@ public class AccountController
                     if(!password2.equals(theAccount.getPassword())){
                         throw new IllegalStateException("Passwörter stimmen nicht überein");
                     }
-                    
                     Optional<Account> friendAccount = accountService.getAccount(addFriendByEmail);
                     if(friendAccount.isEmpty() && !addFriendByEmail.isEmpty())
                         throw new IllegalStateException("Der Account existiert nicht");
-
                     accountService.updateAccount(theAccount, friendAccount);
                 }
                 catch(IllegalStateException e){
                     errors.add(e.getMessage());
                 }
-                
-                
-                
-            }else {
+            }
+            else
+            {
                 errors.add("Du manipulatives Arschloch!");
             }
             model.addAttribute("errorList",errors);
             model.addAttribute("account", account.get());
-            
-            
             if(errors.isEmpty()){
-                
                 modelAndView.setViewName("redirect:/profile");
                 return modelAndView;
             }
@@ -143,7 +137,6 @@ public class AccountController
                 return modelAndView;
             }
         }
-        
         modelAndView.setViewName("redirect:/logout");
         return modelAndView;
     }

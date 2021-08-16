@@ -16,6 +16,9 @@
                 <h4>Beschreibung</h4>
                 <p th:text="${learnSet.getDescription()}">
                 </p>
+                <h4>Evaluation</h4>
+                <p th:if="${learnSet.calculateEvaluation() != -1}" th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen'}"></p>
+                <p th:if="${learnSet.calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
 
                 <div th:each=" admin : ${learnSet.getAdminList()}">
                     <h4><a th:text="${admin.getEmail()}" th:href="@{'/profile/' + ${admin.getId()}}"></a></h4>
@@ -32,12 +35,10 @@
                     <div class="btn yellowBtn">
                         <a th:href="@{'/editLearnSet/' + ${learnSet.getId()}}">EDIT</a>
                     </div>
-                    <a th:href="@{'/comments/' + ${learnSet.getId()}}" type="button" class="btn blueBtn">COMMENTS</a>
+                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button" class="btn blueBtn">COMMENTS</a>
                 </div>
                 <div th:case="false" class="btnContainer">
-                  <div class="btn blueBtn">
-                    <a>COMMENTS</a>
-                  </div>
+                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button" class="btn blueBtn">COMMENTS</a>
                 </div>
             </div>
             <div class="btnPlaceHolder"></div>

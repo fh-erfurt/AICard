@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
@@ -25,8 +26,9 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message extends BaseEntity
+public class Comment extends BaseEntity
 {
+    
     private String message;
     @OneToOne
     private Account sender;
@@ -44,12 +46,12 @@ public class Message extends BaseEntity
      *
      * @author Amine Semlali
      */
-    public Message(String newMessage, Account newSender /* , Recommended newRecomended*/)
+    public Comment(String newMessage, Account newSender, Recommended newRecomended)
     {
         this.message = newMessage;
         this.sender = newSender;
         this.time = LocalDateTime.now();
-        /*this.recommended = newRecomended;*/
+        this.recommended = newRecomended;
     }
 
 }

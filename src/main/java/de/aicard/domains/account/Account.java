@@ -1,8 +1,6 @@
 package de.aicard.domains.account;
 
-import de.aicard.domains.Social.Chat;
 import de.aicard.domains.BaseEntity;
-import de.aicard.domains.card.Card;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
@@ -53,11 +51,6 @@ public class Account extends BaseEntity
     @ManyToMany( cascade = CascadeType.ALL)
     protected List<Account> friends;
 
-    @Setter(AccessLevel.NONE)
-    @ManyToMany(cascade = CascadeType.ALL)
-    protected List<Chat> chats;
-
-
 
     public Account(String _newEmail, String _newPassword, String _newName, String _newDescription , Faculty _newFaculty)
     {
@@ -67,9 +60,7 @@ public class Account extends BaseEntity
         this.description  =  _newDescription;
         this.faculty = _newFaculty;
         this.learnsetAbos = new ArrayList<LearnSetAbo>();
-//        this.ownLearnSets = new ArrayList<LearnSet>();
         this.friends = new ArrayList<Account>() ;
-        this.chats = new ArrayList<Chat>();
     }
 
 
@@ -167,45 +158,10 @@ public class Account extends BaseEntity
         this.friends.remove(_friend);
     }
 
-    //Chat
 
-    /** isAlreadyInChatWith is a function that checks if there is an existent chat with a person
-     *  @author  Semlali Amine
-     */
-    private boolean isAlreadyInChatWith(Account _account)
-    {
-        for (Chat chat:this.chats)
-        {
-            if(chat.getParticipants().contains(_account) && chat.getParticipants().size() == 2)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
     /** after checking if there is no existent chat with a person, a new chat is created with that person and is added to the chat list
      *  @author  Semlali Amine
      */
-    public void addNewChat(Account _account)
-    {
-        if (!isAlreadyInChatWith(_account))
-        {
-            chats.add(new Chat(_account, this, "Hallo "+ _account.getName() +", von "+ this.getName()));
-        }
-    }
-
-    public void addChat(Chat _chat)
-    {
-        this.chats.add(_chat);
-    }
-
-    /** deleteChat is a function that deletes a chat from the chats list
-     *  @author  Semlali Amine
-     */
-    public void deleteChat(int _chat)
-    {
-        this.chats.remove(_chat);
-    }
     
     //Methods
     

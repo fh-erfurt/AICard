@@ -1,6 +1,5 @@
 package de.aicard.security;
 
-import de.aicard.domains.Social.Chat;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.learnset.LearnSet;
@@ -30,7 +29,6 @@ public class MyUserDetails implements UserDetails
     private List<LearnSet> ownLearnSets;
     private List<LearnSetAbo> favoriteLearnSets;
     private List<Account> friends;
-    private List<Chat> chats;
     
     private List<GrantedAuthority> authorities;
     
@@ -46,7 +44,6 @@ public class MyUserDetails implements UserDetails
         this.faculty = account.getFaculty();
         this.favoriteLearnSets = account.getLearnsetAbos();
         this.friends = account.getFriends();
-        this.chats = account.getChats();
         this.authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
     

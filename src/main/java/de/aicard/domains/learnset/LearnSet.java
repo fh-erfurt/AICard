@@ -1,8 +1,9 @@
 package de.aicard.domains.learnset;
 
-import de.aicard.domains.Social.Message;
+import de.aicard.domains.Social.Comment;
 import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.Faculty;
+import de.aicard.domains.enums.Recommended;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.account.Account;
 import lombok.Getter;
@@ -49,7 +50,7 @@ public class LearnSet extends BaseEntity
     private CardList cardList;
     
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Message> commentList;
+    private List<Comment> commentList;
     
     /**
      * The Account who created and owns the LearnSet
@@ -71,8 +72,7 @@ public class LearnSet extends BaseEntity
     /**
      * Average evaluation of a LearnSet
      */
-    private double evaluations;
-    private int numberOfEvaluations;
+
 
     // CONSTRUCTORS
 
@@ -101,85 +101,12 @@ public class LearnSet extends BaseEntity
         owner = _newOwner;
         visibility = _visibility;
         adminList = new ArrayList<>();
-        evaluations = 0;
-        numberOfEvaluations = 0;
+
     }
     // METHODS
     public void createCardList()
     {
         this.cardList = new CardList();
-    }
-    
-    
-    /*
-     * Evaluation
-     * */
-    
-    /**Add a new Evaluation and calculates the new average
-     *
-     * @param _newEvaluation int value that in used to calculate new average Evaluation
-     */
-    public void addEvaluation(int _newEvaluation)
-    {
-        if(getNumberOfEvaluations() == 0)
-        {
-            setEvaluations(_newEvaluation);
-            increaseNumberOfEvaluations();
-        }
-        else
-        {
-            double updatedEvaluation = getEvaluations() * getNumberOfEvaluations();
-            updatedEvaluation = updatedEvaluation + _newEvaluation;
-            increaseNumberOfEvaluations();
-            updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
-            setEvaluations(updatedEvaluation);
-        }
-    }
-
-    /**
-     * Deletes an existing evaluation and calculates the new average.
-     *
-     * @param _evaluationToDelete
-     */
-    public void deleteEvaluation(int _evaluationToDelete)
-    {
-        if(this.numberOfEvaluations > 0)
-        {
-            try
-            {
-                double updatedEvaluation = this.evaluations * this.numberOfEvaluations;
-                updatedEvaluation = updatedEvaluation - _evaluationToDelete;
-                decreaseNumberOfEvaluations();
-
-                if(this.numberOfEvaluations != 0)
-                {
-                    updatedEvaluation = updatedEvaluation / this.numberOfEvaluations;
-                }
-
-                this.evaluations = updatedEvaluation;
-            }
-            catch (Exception e)
-            {
-                logger.warning(e.getMessage());
-            }
-        }
-    }
-    
-    public void increaseNumberOfEvaluations()
-    {
-        setNumberOfEvaluations(this.numberOfEvaluations + 1);
-    }
-    
-    public void decreaseNumberOfEvaluations() throws Exception
-    {
-        if(this.numberOfEvaluations <=  0)
-        {
-            // this should never be reached
-            throw new Exception("Can't decrease Number of Evaluations because lower or equal 0.");
-        }
-    
-        this.numberOfEvaluations = this.numberOfEvaluations - 1;
-    
     }
     
     
@@ -236,24 +163,27 @@ public class LearnSet extends BaseEntity
     }
     
     /**
-    * Messages are used as comments
+    * Comments are used as comments
     *
     * */
-    public void addMessage(Message _newMessage)
+    public void addComment(Comment _newComment)
     {
-        this.commentList.add(_newMessage);
+        this.commentList.add(_newComment);
     }
     
-    public void removeMessageByMessage(Message _messageToRemove)
+    public int calculateEvaluation()
     {
-        if(commentList.contains(_messageToRemove))
-        {
-            this.commentList.remove(_messageToRemove);
+        if(this.commentList.size() == 0){
+            return -1;
         }
-        else
-        {
-            logger.warning("messageToRemove is not part of commentList");
+        int numberOfYes = 0;
+        for(Comment comment : this.commentList){
+            if(comment.getRecommended().equals(Recommended.YES)){
+                numberOfYes++;
+            }
         }
+    
+        return (int) 100.0 / this.commentList.size() * numberOfYes;
     }
 
     /**

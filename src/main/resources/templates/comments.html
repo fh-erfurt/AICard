@@ -7,7 +7,53 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-Hier könnten ihre Kommentare stehen
+<div class="pageContent">
+
+    <div th:if="not ${hasCommented}" class="learnset-info whiteBG pannel">
+
+        <form th:action="@{'/addComment/' + ${learnSet.getId()}}" th:object="${newComment}" method="POST">
+
+            <label for="message">Kommentarnachricht</label>
+
+            <textarea th:field="*{message}" name="message" id="message" rows="10" cols="30" maxlength="255"></textarea>
+            <div>
+                <div class="btnContainer">
+                    <input name="recommend" value="no" type="submit" class="btn redBtn">
+                    <input name="recommend" value="yes" type="submit" class="btn blueBtn">
+                </div>
+            </div>
+
+            <div class="btnPlaceHolder"></div>
+
+        </form>
+
+    </div>
+
+
+
+    <div id="addCard" class="cards">
+
+        <div th:each="comment : ${learnSet.getCommentList()}" class="card whiteBG pannel">
+            <div class="cardSites">
+                <p th:text="'Hat empfolen ' + ${comment.getRecommended()}"></p>
+                <p th:text="${comment.getMessage()}"></p>
+                <p th:text="${{comment.getTime()}} + 'Uhr'"></p>
+                <p>Verfasser:
+                    <a th:text="${comment.getSender().getEmail()}" th:href="@{'/profile/' + ${comment.getSender().getId()}}"></a>
+                </p>
+
+                <!--End Switch-->
+            </div>
+
+            <div class="btnPlaceHolder"></div>
+        </div>
+
+
+    </div>
+
+
+</div>
+<div class="footer"><a href="">Impressum</a></div>
 
 </body>
 </html>
