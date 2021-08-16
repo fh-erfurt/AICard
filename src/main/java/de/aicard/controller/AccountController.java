@@ -98,7 +98,7 @@ public class AccountController
      */
     @ResponseBody
     @PostMapping("/updateAccount")
-    public ModelAndView postUpdateAccount(@RequestParam(value="addFriendByEmail", required = false) String addFriendByEmail,
+    public ModelAndView postUpdateAccount(@RequestParam("passwordProfessor2") String password2, @RequestParam(value="addFriendByEmail", required = false) String addFriendByEmail,
                                     @ModelAttribute("account") Account theAccount, Model model,Principal principal) throws NoSuchAlgorithmException {
 
         List<String> errors = new ArrayList<>();
@@ -107,7 +107,12 @@ public class AccountController
         if(account.isPresent())
         {
             if(theAccount.getId().equals(account.get().getId())){
-                try{
+                try
+                {
+                    if(!password2.equals(theAccount.getPassword())){
+                        throw new IllegalStateException("Passwörter stimmen nicht überein");
+                    }
+                    
                     Optional<Account> friendAccount = accountService.getAccount(addFriendByEmail);
                     if(friendAccount.isEmpty() && !addFriendByEmail.isEmpty())
                         throw new IllegalStateException("Der Account existiert nicht");

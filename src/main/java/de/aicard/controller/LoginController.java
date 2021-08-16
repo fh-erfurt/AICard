@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 
@@ -61,22 +62,32 @@ public class LoginController {
      * @param model
      * @return
      */
+    @ResponseBody
     @PostMapping("/createAccount")
-    public String postCreateAccount(@ModelAttribute("Account") Account newAccount, Model model)
+    public ModelAndView postCreateAccount(@RequestParam("passwordProfessor2") String password2, @ModelAttribute("Account") Account newAccount, Model model)
     {
         // List of possible errors to return to user
         List<String> errors = new ArrayList<>();
+        ModelAndView modelAndView = new ModelAndView();
         try{
+            if(!password2.equals(newAccount.getPassword())){
+                throw new IllegalStateException("Passwörter stimmen nicht überein");
+            }
             Optional<Account> account = accountService.createAccount(newAccount);
             account.ifPresent(accountService::saveAccount);
-            return getLogin(model.addAttribute("registeredEmail", newAccount.getEmail()));
+            //modelAndView.addObject("registeredEmail",newAccount.getEmail());
+            modelAndView.setViewName(getLogin(model.addAttribute("registeredEmail", newAccount.getEmail())));
+            return modelAndView;
         }
         catch (IllegalStateException e){
             //TODO: Dies ist eine Verzweiflungstat nachts um 11. bei Gelegenheit schöner machen.
             errors.add(e.getMessage());
             errors.add("Anmeldung Fehlgeschlagen");
             model.addAttribute("errorList",errors);
-            return getRegistration(model.addAttribute("errorList", errors));
+            
+            modelAndView.setViewName(getRegistration(model.addAttribute("errorList", errors)));
+//            return getRegistration(model.addAttribute("errorList", errors));
+            return modelAndView;
         }
     }
 
