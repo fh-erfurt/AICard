@@ -9,6 +9,7 @@
 
 <div class="pageContent">
 
+    <div class="whiteBG pannel registration">
     <br>
     <br>
     <br>
@@ -25,8 +26,6 @@
     <p th:text="${account.getFaculty()}"></p>
     <br>
     <br>
-
-
 
     <table th:if="${!#lists.isEmpty(account.getFriends())}">
         <tbody>
@@ -46,8 +45,11 @@
 <!--    TODO : hier eventuell eigene Learnsets einfüge? Frage, wie die Applikation bedient werden soll-->
     <!--        Folowed LearnSets-->
     <p style="color:white"><p th:text="${account.getName()} + '\'s'"></p> followed LearnSets</p>
-
-
+        <div class="btnContainer bottom">
+            <button class="btn redBtn" th:if="${verified}"><a th:href="@{/updateProfile}">Account Bearbeiten</a></button>
+        </div>
+        <div class="btnPlaceHolder"></div>
+    </div>
 </div>
 <div class="footer"><a href="">Impressum</a></div>
 </body>

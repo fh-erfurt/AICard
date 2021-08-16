@@ -10,8 +10,7 @@
 
 <div class="pageContent">
 
-  <br>
-  <br>
+  <div class="registration whiteBG pannel">
 
   <h1>Account Update Seite</h1>
 
@@ -28,27 +27,27 @@
 
     <input th:field="*{id}" type="number" hidden>
 
-    <div class="registrationElement">
+    <div class="formListElement">
       <label for="nameProfessor">Name</label>
       <input  th:field="*{name}" id="nameProfessor" type="text" class="inputtext">
     </div>
 
-    <div class="registrationElement">
+    <div class="formListElement">
       <label for="descriptionProfessor">Beschreibung</label>
       <input  th:field="*{description}" id="descriptionProfessor" type="text" class="inputtext">
     </div>
 
-    <div class="registrationElement">
+    <div class="formListElement">
       <label for="passwordProfessor1">Passwort</label>
       <input th:field="*{password}" id="passwordProfessor1" type="password" class="inputtext">
     </div>
 
-    <div class="registrationElement">
+    <div class="formListElement">
       <label for="passwordProfessor2">Passwort bestätigen</label>
       <input id="passwordProfessor2" name="passwordProfessor2" type="password" class="inputtext">
     </div>
 
-    <div class="registrationElement">
+    <div class="formListElement">
       <label for="facultyProfessor">Fakukltät</label>
       <select id="facultyProfessor" th:field="*{faculty}">
         <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
@@ -60,17 +59,21 @@
     </div>
 
 
-    <div class="registrationElement">
+    <div class="formListElement">
       <label for="addFriendByEmail">EMail angeben um als Freund hinzuzufügen</label>
       <input id="addFriendByEmail" type="email" name="addFriendByEmail" class="inputtext">
     </div>
 
 
+
+    <div class="btnContainer">
+    <input id="submitButton" type="submit" class="btn blueBtn">
+    </div>
     <div class="btnPlaceHolder"></div>
     <input id="submitButton" type="submit" class="button btn">
   </form>
 
-
+  </div>
 </div>
 <div class="footer"><a href="">Impressum</a></div>
 </body>
