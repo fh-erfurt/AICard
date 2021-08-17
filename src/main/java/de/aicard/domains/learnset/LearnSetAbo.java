@@ -8,7 +8,6 @@ import de.aicard.domains.enums.State;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -36,11 +35,7 @@ public class LearnSetAbo extends BaseEntity
      */
     @ManyToMany(cascade = CascadeType.ALL)
     private List<CardStatus> cardStatus;
-    //TODO: kann das weg?
-    /**
-     * The status of the LearnSet of the Account.
-     */
-    private State learnSetStatus;
+
     /**
      * The LearnSet the Account subscribed to.
      */
@@ -64,7 +59,6 @@ public class LearnSetAbo extends BaseEntity
     public LearnSetAbo(LearnSet _learnSet) throws NullPointerException, Exception
     {
         this.learnSet = _learnSet;
-        this.learnSetStatus = State.NEW;
         this.cardStatus = new ArrayList<>();
         this.evaluation = -1;
 
@@ -77,26 +71,20 @@ public class LearnSetAbo extends BaseEntity
 
     //getter + setter
 
-
-    /**
-     * Deletes the evaluation of the Account for the corresponding LearnSet.
-     */
-
-
     /**
      * Method to get all Cards of the LearnSet with a specific CardKnowledgeLevel.
      *
      * Checks the KnowLedgeLevel of all Cards in the List. Puts the CardStatus with the
      * wanted level in a new ArrayList of CardStatus. Returns this List.
      *
-     * @param _level The CardKnowledgeLevel we are looking for
+     * @param level The CardKnowledgeLevel we are looking for
      * @return A List of all CardStatus in the LearnSetAbo with the CardKnowledgeLevel level
      */
-    private List<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel _level)
+    private List<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel level)
     {
         List<CardStatus> result = new ArrayList<>();
         for(int i=0; i<(this.cardStatus.size()); i++){
-            if (cardStatus.get(i).getCardKnowledgeLevel() == _level){
+            if (cardStatus.get(i).getCardKnowledgeLevel() == level){
                 result.add(cardStatus.get(i));
             }
         }
@@ -154,7 +142,12 @@ public class LearnSetAbo extends BaseEntity
         this.learningSession = newLearningSession;
         return newLearningSession;
     }
-
+    
+    /**
+     * removes a cardStatus with the given card from the cardStatusList
+     * @param card
+     * @return
+     */
     public CardStatus removeCardStatusByCard(Card card)
     {
         CardStatus erg = null;

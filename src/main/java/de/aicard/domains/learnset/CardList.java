@@ -32,8 +32,12 @@ public class CardList extends BaseEntity
      */
     @OneToMany(cascade = CascadeType.ALL)
     public List<Card> listOfCards;
+    
     /**
      * The current listIndex.
+     *
+     * deprecated
+     * not supported in Java 2
      */
     private int listIndex;
     
@@ -44,7 +48,7 @@ public class CardList extends BaseEntity
      */
     public CardList()
     {
-        this(new ArrayList<Card>());
+        this(new ArrayList<>());
     }
 
     /**
@@ -57,46 +61,31 @@ public class CardList extends BaseEntity
         this.listIndex = 0;
     }
     
-    // GETTER + SETTER
-
-    public List<Card> getListOfCards() throws NullPointerException
-    {
-        if(this.listOfCards == null)
-        {
-            throw new NullPointerException("CardList was not set.");
-        }
-        
-        return this.listOfCards;
-    }
-    
-    
-    // METHODS
-    public void addToList(Card _newCard)
-    {
-        if(getListLength() < 200)
-        {
-            this.listOfCards.add(_newCard);
-    }
-        else
-        {
-            logger.warning("Card not added to CardList, only 200 Card are allowed.");
-        }
-    }
-    
-    
-    /**Removes Card Object from list
-     * is overloaded
-     *
-     * @param _card Card that should be removed
+    /**
+     * adds a card to the listOfCards
+     * @param newCard
      */
-    public void removeFromList(Card _card)
+    public void addToList(Card newCard)
     {
-        this.listOfCards.remove(_card);
+        if(!this.listOfCards.contains(newCard)){
+            this.listOfCards.add(newCard);
+        }
     }
+    
     
     /**Removes Card Object from list
      * is overloaded
      *
+     * @param card Card that should be removed
+     */
+    public void removeFromList(Card card)
+    {
+        this.listOfCards.remove(card);
+    }
+    
+    /**Removes Card Object from list
+     * is overloaded
+     * old method only used in tests
      * @param _index index of the Card that should be removed.
      */
     public void removeFromList(int _index)
@@ -106,7 +95,7 @@ public class CardList extends BaseEntity
     
     /**
      * Gets a Card via the current value of ListIndex pointer
-     *
+     * old method only used in tests
      * @return Card from list
      * @throws NullPointerException
      */
@@ -143,7 +132,10 @@ public class CardList extends BaseEntity
     }
     
     
-
+    /**
+     * size of listOfCards
+     * @return
+     */
     public int getListLength()
     {
         return this.listOfCards.size();
@@ -182,6 +174,10 @@ public class CardList extends BaseEntity
         }
     }
     
+    /**
+     * sets the card path of all cards in listOfCards
+     * @param filePath
+     */
     public void setCardPath(String filePath){
         List<Card> listOfCards = this.listOfCards;
         for ( Card card : listOfCards)

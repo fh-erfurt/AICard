@@ -127,6 +127,9 @@ public class CardStatus extends BaseEntity
         }
     }
     
+    /**
+     * resets CardKnowledgeLevel to NOINFORMATION
+     */
     public void resetCardKnowledgeLevel()
     {
         this.cardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
