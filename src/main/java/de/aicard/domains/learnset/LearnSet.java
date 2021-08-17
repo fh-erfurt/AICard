@@ -191,7 +191,7 @@ public class LearnSet extends BaseEntity
      * @param _account
      * @return
      */
-    public boolean isAuthorizedToAccessLearnSet(Account _account)
+    public boolean isAuthorizedToAccessLearnSet(Account account)
     {
         switch (this.visibility)
         {
@@ -199,7 +199,7 @@ public class LearnSet extends BaseEntity
                 return true;
 
             case PRIVATE:
-                if (this.getOwner()==_account)
+                if (this.getOwner()== account)
                 {
                     return true;
                 }
@@ -207,8 +207,8 @@ public class LearnSet extends BaseEntity
 
             case PROTECTED:
                 // TODO: wenn Freunde implementiert sind, sollte hier auch auf die Adminliste geprüft werden
-                if (this.getOwner().getFriends().contains(_account) || this.getOwner()==_account
-                    || this.getFaculty().equals(_account.getFaculty()))
+                if (this.getOwner().getFriends().contains( account) || this.getOwner()== account
+                    || this.getFaculty().equals(account.getFaculty()))
                 {
                     return true;
                 }
@@ -217,4 +217,13 @@ public class LearnSet extends BaseEntity
             }
         return false;
     }
+    
+    public boolean isAdmin(Account account){
+        return this.getAdminList().contains(account);
+    }
+    
+    public boolean isOwner(Account account){
+        return this.getOwner().equals(account);
+    }
+    
 }

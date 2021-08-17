@@ -9,6 +9,4 @@ import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    Optional<Comment> findBySender(Account sender);
-
 }

@@ -20,6 +20,7 @@
                     <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
                             th:text="${faculty}"
                             th:value="${faculty}">
+<!--                        TODO : die ausgewählte option bei neuladen weiterhin anzeigen-->
                     </option>
                 </select>
             </div>
@@ -27,6 +28,7 @@
                 <label for="learnSetTitle">LearnSetTitle SubString suche</label>
                 <input type="text" name="learnSetTitle" id="learnSetTitle">
             </div>
+<!--            TODO : den suchstring beim neuen anzeigen weiterhin hier anzeigen-->
             <div class="btnContainer">
                 <button class="btn blueBtn" type="submit">Filtern</button>
             </div>

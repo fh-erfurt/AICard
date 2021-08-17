@@ -30,8 +30,8 @@ public class CommentController
     @GetMapping("/getComments/{learnSetId}")
     public String getComments(@PathVariable("learnSetId") Long learnSetId, Model model, Principal principal){
         Optional<Account> account = accountService.getAccount(principal);
-        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
-        if(account.isPresent() && learnSet.isPresent() && learnSetService.accountIsAuthorized(account.get(),learnSet.get()))
+        Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetId);
+        if(account.isPresent() && learnSet.isPresent() && learnSet.get().isAuthorizedToAccessLearnSet(account.get()))
         {
             boolean hasCommented = false;
             for (Comment comment: learnSet.get().getCommentList())
@@ -56,7 +56,7 @@ public class CommentController
     public ModelAndView addComment(@RequestParam("recommend")String recommend, @PathVariable("learnSetId") Long learnSetId, @ModelAttribute("newComment") Comment comment, Model model, Principal principal)
     {
         System.out.println("recommend: "+recommend);
-        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetId);
         Optional<Account> account = accountService.getAccount(principal);
         
         
@@ -65,7 +65,7 @@ public class CommentController
         {
             
             if (learnSet.isPresent() && account.isPresent() &&
-                    learnSetService.accountIsAuthorized(account.get(), learnSet.get()) &&
+                    learnSet.get().isAuthorizedToAccessLearnSet(account.get()) &&
                         !comment.getMessage().trim().isEmpty())
             {
                 if(recommend.equals("yes")){

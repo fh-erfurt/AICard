@@ -43,31 +43,13 @@ public class CardService {
     public CardService(){
     }
 
-    public Card getCardById(Long cardId)
+    public Optional<Card> getCard(Long cardId)
     {
-        Optional<Card> card = cardRepository.findById(cardId);
-        if(card.isPresent())
-        {
-            return card.get();
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public Long getLearnSetIdByCardId(Long cardId){
-        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(cardId);
-        if(learnSet.isPresent()){
-            return learnSet.get().getId();
-        }
-        return -1L;
+        return cardRepository.findById(cardId);
     }
 
     public void removeCardFromCardList(Card card){
-        Long cardId = card.getId();
-        Long learnSetId = this.getLearnSetIdByCardId(cardId);
-        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetId);
+        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(card.getId());
         if(learnSet.isPresent()){
             learnSet.get().getCardList().removeFromList(card);
             learnSetRepository.save(learnSet.get());
@@ -75,13 +57,11 @@ public class CardService {
     }
 
     public void deleteCard(Card card){
-        Long id = card.getId();
-        if(cardRepository.existsById(id)){
+        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(card.getId());
+        if(cardRepository.existsById(card.getId()) && learnSet.isPresent()){
             
-            Long learnSetId = this.getLearnSetIdByCardId(card.getId());
-            List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAllByLearnSetId(learnSetId);
+            List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAllByLearnSetId(learnSet.get().getId());
             this.removeCardFromCardList(card);
-            int i = 0;
             for (LearnSetAbo abo:learnSetAbos)
             {
                 CardStatus status = abo.removeCardStatusByCard(card);
@@ -89,7 +69,6 @@ public class CardService {
                 if(status != null){
                     cardStatusRepository.delete(status);
                 }
-                i++;
             }
             
             cardRepository.delete(card);

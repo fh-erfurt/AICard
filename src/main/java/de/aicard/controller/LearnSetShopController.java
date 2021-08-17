@@ -5,8 +5,7 @@ import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
 import de.aicard.services.AccountService;
-import de.aicard.storages.AccountRepository;
-import de.aicard.storages.LearnSetRepository;
+import de.aicard.services.LearnSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,16 +23,13 @@ import java.util.Optional;
 @Controller
 public class LearnSetShopController
 {
-    @Autowired
-    public LearnSetRepository learnSetRepository;
+    private final AccountService accountService;
+    private final LearnSetService learnSetService;
     
     @Autowired
-    public AccountRepository accountRepository;
-
-    public final AccountService accountService;
-
-    LearnSetShopController(AccountService accountService){
+    LearnSetShopController(AccountService accountService,LearnSetService learnSetService){
         this.accountService = accountService;
+        this.learnSetService = learnSetService;
     }
 
     /**
@@ -51,7 +47,7 @@ public class LearnSetShopController
                                   @RequestParam(name="learnSetTitle", required = false, defaultValue = "") String learnSetTitle,
                                   Principal principal, Model model)
     {
-        List<LearnSet> learnSets = learnSetRepository.findAll();
+        List<LearnSet> learnSets = learnSetService.findAll();
         List<LearnSet> frontEndLearnSets = new ArrayList<>();
         Optional<Account> account = accountService.getAccount(principal);
         if(!learnSets.isEmpty() && account.isPresent())
@@ -124,13 +120,14 @@ public class LearnSetShopController
      * @return
      */
     @GetMapping("/followLearnSet/{learnSetId}")
-    public String getFollowLearnSet(Principal principal, Model model, @PathVariable("learnSetId") Long learnSetId){
+    public String getFollowLearnSet(Principal principal, @PathVariable("learnSetId") Long learnSetId){
         
-        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetId);
-        Optional<Account> account = accountRepository.findByEmail(principal.getName());
+        
+        Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetId);
+        Optional<Account> account = accountService.getAccount(principal);
         if(learnSet.isPresent() && account.isPresent()){
             account.get().addLearnSetAbo(learnSet.get());
-            accountRepository.save(account.get());
+            accountService.saveAccount(account.get());
         }
         return "redirect:/learnSetShop";
     }

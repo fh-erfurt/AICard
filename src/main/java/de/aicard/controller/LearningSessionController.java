@@ -6,6 +6,9 @@ import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSetAbo;
 import de.aicard.domains.learnset.LearningSession;
 import de.aicard.services.CardService;
+import de.aicard.services.LearnSetAboService;
+import de.aicard.services.LearnSetService;
+import de.aicard.services.LearningSessionService;
 import de.aicard.storages.LearnSetAboRepository;
 import de.aicard.storages.LearnSetRepository;
 import de.aicard.storages.LearningSessionRepository;
@@ -23,21 +26,16 @@ import java.util.Optional;
 @Controller
 public class LearningSessionController
 {
+
+    
+    private final LearnSetAboService learnSetAboService;
+    private final LearningSessionService learningSessionService;
     
     @Autowired
-    public LearnSetAboRepository learnSetAboRepository;
-    
-    @Autowired
-    public LearningSessionRepository learningSessionRepository;
-    
-    @Autowired
-    public LearnSetRepository learnSetRepository;
-    
-    private final CardService cardService;
-    @Autowired
-    public LearningSessionController(CardService cardService)
+    public LearningSessionController(LearnSetAboService learnSetAboService,LearningSessionService learningSessionService)
     {
-        this.cardService = cardService;
+        this.learnSetAboService = learnSetAboService;
+        this.learningSessionService = learningSessionService;
     }
 
 
@@ -52,7 +50,7 @@ public class LearningSessionController
     public String getInitializeLearningSession(@PathVariable("learnSetAboId") Long learnSetAboId, Model model)
     {
         model.addAttribute("learnSetAboID", learnSetAboId);
-        Optional<LearnSetAbo> learnSetAbo = learnSetAboRepository.findById(learnSetAboId);
+        Optional<LearnSetAbo> learnSetAbo = learnSetAboService.getLearnSetAbo(learnSetAboId);
         if(learnSetAbo.isPresent())
         {
             
@@ -74,7 +72,7 @@ public class LearningSessionController
                 }
             }
             
-            learnSetAboRepository.save(learnSetAbo.get());
+            learnSetAboService.save(learnSetAbo.get());
         }
         
         return "/initializeLearningSession";
@@ -89,21 +87,21 @@ public class LearningSessionController
      * @return
      */
     @PostMapping("/initializeLearningSession/{learnSetAboId}")
-    public String postInitializeLearningSession(@PathVariable("learnSetAboId") Long learnSetAboId, @RequestParam(value = "cardCount") int cardCount, Model model)
+    public String postInitializeLearningSession(@PathVariable("learnSetAboId") Long learnSetAboId, @RequestParam(value = "cardCount") int cardCount)
     {
         
-        Optional<LearnSetAbo> learnSetAbo =  learnSetAboRepository.findById(learnSetAboId);
+        Optional<LearnSetAbo> learnSetAbo =  learnSetAboService.getLearnSetAbo(learnSetAboId);
 
         if(learnSetAbo.isPresent()){
             if(learnSetAbo.get().getLearningSession() != null){
                 LearningSession learningSession = learnSetAbo.get().getLearningSession();
                 learnSetAbo.get().setLearningSession(null);
                 learningSession.setCardStatusList(null);
-                learningSessionRepository.delete(learningSession);
+                learningSessionService.delete(learningSession);
                 
             }
             LearningSession learningSession = learnSetAbo.get().createLearningSession(cardCount);
-            learnSetAboRepository.save(learnSetAbo.get());
+            learnSetAboService.save(learnSetAbo.get());
 
             return "redirect:/learnCard/" + learnSetAbo.get().getId();
         }
@@ -121,7 +119,7 @@ public class LearningSessionController
     public String getLearnCard(@PathVariable("learnSetAboId") Long learnSetAboId, Model model)
     {
 
-        Optional<LearnSetAbo> learnSetAbo = learnSetAboRepository.findById(learnSetAboId);
+        Optional<LearnSetAbo> learnSetAbo = learnSetAboService.getLearnSetAbo(learnSetAboId);
         if(learnSetAbo.isPresent()){
             LearningSession learningSession = learnSetAbo.get().getLearningSession();
             if(learningSession != null && !learningSession.getCardStatusList().isEmpty()){
@@ -153,7 +151,7 @@ public class LearningSessionController
     public ModelAndView postLearnCard(@PathVariable("learnSetAboId") Long learnSetAboId,@RequestParam("cardKnown") Boolean cardKnown , Model model)
     {
         ModelAndView modelAndView = new ModelAndView();
-        Optional<LearnSetAbo> learnSetAbo = learnSetAboRepository.findById(learnSetAboId);
+        Optional<LearnSetAbo> learnSetAbo = learnSetAboService.getLearnSetAbo(learnSetAboId);
         if(learnSetAbo.isPresent())
         {
             if(learnSetAbo.get().getLearningSession() != null)
@@ -168,7 +166,7 @@ public class LearningSessionController
                 {
                     learningSession.cardUnknown();
                 }
-                learnSetAboRepository.save(learnSetAbo.get());
+                learnSetAboService.save(learnSetAbo.get());
                 if(learningSession.isActive())
                 {
                     modelAndView.setViewName("redirect:/learnCard/" + learnSetAboId);

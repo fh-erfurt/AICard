@@ -48,9 +48,9 @@ public class AddCardController {
     @GetMapping("/addCard/{learnSetID}")
     public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model) {
         Optional<Account> account = accountService.getAccount(principal);
-        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetID);
         
-        if (account.isPresent() && learnSet.isPresent() && learnSetService.accountIsAuthorized(account.get(), learnSet.get())) {
+        if (account.isPresent() && learnSet.isPresent() && learnSet.get().isAuthorizedToAccessLearnSet(account.get())) {
             model.addAttribute("learnSetID", learnSetID);
             return "addCard";
         }
@@ -114,12 +114,12 @@ public class AddCardController {
         Card newCard = null;
 
         // TODO : überprüfe bei allen LernSet Änderungen ob der Account darauf zugriff hat
-        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetID);
         Optional<Account> account = accountService.getAccount(principal);
         
         if (account.isPresent() &&
                 learnSet.isPresent() &&
-                learnSetService.accountIsAuthorized(account.get(), learnSet.get()) &&
+                learnSet.get().isAuthorizedToAccessLearnSet(account.get()) &&
                 accountService.getAccount(principal).isPresent() &&
                 learnSet.get().getAdminList().contains(accountService.getAccount(principal).get()))
         {

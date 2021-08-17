@@ -30,9 +30,6 @@ public class AccountService {
     @Autowired
     LearnSetAboRepository learnSetAboRepository;
     
-    
-    
-
 
     @Autowired
     public AccountService(){
@@ -54,10 +51,10 @@ public class AccountService {
                 throw new IllegalStateException("Passwort entspricht nicht den Passwortrichtlinien");
             }
             if(matchingEntries.isPresent()){
-                throw new IllegalStateException("Ein Account mit diser E-Mail Adresse existiert bereits");
+                throw new IllegalStateException("Ein Account mit dieser E-Mail Adresse existiert bereits");
             }
             if(!RegPattern.emailMatches(account.getEmail())){
-                throw new IllegalStateException("die e-mail adresse ist ungültig");
+                throw new IllegalStateException("die e-mail Adresse ist ungültig");
             }
         }
         return(acc);
@@ -75,7 +72,6 @@ public class AccountService {
         
         if(!account.getPassword().isEmpty()) account.setPassword(passwordEncoder.encode(account.getPassword()));
         
-        
         if(oldAccount.isPresent()) {
             oldAccount.get().setName(account.getName());
             oldAccount.get().setDescription(account.getDescription());
@@ -86,11 +82,9 @@ public class AccountService {
             accountRepository.save(oldAccount.get());
         }
     }
-    
 
     public Optional<Account> getAccount(Long userID){
         return  accountRepository.findById(userID);
-
     }
     
     public Optional<Account> getAccount(String email){

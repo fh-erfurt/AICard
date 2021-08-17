@@ -31,7 +31,7 @@ public class SocialController
     public String getComments(@PathVariable("learnSetId") Long learnSetId, Model model){
         
         
-        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetId);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetId);
         if(learnSet.isPresent()){
             model.addAttribute("learnSet", learnSet);
             return "comments";
