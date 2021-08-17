@@ -32,26 +32,28 @@ public class Account extends BaseEntity
     //Attribute
     
     @Column(unique = true)
-    protected String email;
-    protected String password;
-    protected String name;
-    protected String description;
-    protected Faculty faculty;
-    
-//    @Setter(AccessLevel.NONE)
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    protected List<LearnSet> ownLearnSets;
-    // um festzustellen ob das Learnset von dem account ist wird durch die abos iteriert und die ownerid verglichen
-    // learnSet -> isAccountID in AdminList
+    private String email;
+    private String password;
+    private String name;
+    private String description;
+    private Faculty faculty;
+
     @Setter(AccessLevel.NONE)
     @ManyToMany(cascade = CascadeType.ALL)
-    protected List<LearnSetAbo> learnsetAbos;
+    private List<LearnSetAbo> learnsetAbos;
 
     @Setter(AccessLevel.NONE)
     @ManyToMany( cascade = CascadeType.ALL)
-    protected List<Account> friends;
-
-
+    private List<Account> friends;
+    
+    /**
+     * constructor for tests
+     * @param _newEmail
+     * @param _newPassword
+     * @param _newName
+     * @param _newDescription
+     * @param _newFaculty
+     */
     public Account(String _newEmail, String _newPassword, String _newName, String _newDescription , Faculty _newFaculty)
     {
         this.email = _newEmail;
@@ -59,25 +61,10 @@ public class Account extends BaseEntity
         this.name = _newName;
         this.description  =  _newDescription;
         this.faculty = _newFaculty;
-        this.learnsetAbos = new ArrayList<LearnSetAbo>();
-        this.friends = new ArrayList<Account>() ;
+        this.learnsetAbos = new ArrayList<>();
+        this.friends = new ArrayList<>() ;
     }
 
-
-
-
-    /**
-     * Setter for ArrayLists are not Required
-     */
-    
-    //Advanced Getter, Setter and Delete for ArrayLists
-    
-    //ownLearnAboSet
-    
-//    public LearnSet getOwnLearnSetByIndex(int _index)
-//    {
-//        return ownLearnSets.get(_index);
-//    }
     
     /**Create a new LearnSetAbo with a new LearnSet
      * puts the new LearnSetAbo in ownLearnSets
@@ -102,19 +89,13 @@ public class Account extends BaseEntity
         }
     }
     
-
-
-    public LearnSetAbo removeLearnSetAboByLearnSet(LearnSet learnSet){
-        for(int i = this.learnsetAbos.size()-1;i>=0;i--){
-            if(this.learnsetAbos.get(i).getLearnSet().equals(learnSet)){
-                LearnSetAbo abo = this.learnsetAbos.get(i);
-                this.learnsetAbos.remove(abo);
-                return abo;
-            }
-        }
-        return null;
-    }
-    //learnSetAbos
+ 
+    
+    /**
+     * adds learnSetAbo into learnSetAbo list with a given learnset
+     *
+     * @param learnSet
+     */
     public void addLearnSetAbo(LearnSet learnSet)
     {
         if(learnSet.isAuthorizedToAccessLearnSet(this))
@@ -130,84 +111,53 @@ public class Account extends BaseEntity
         }
     }
     
+    /**
+     * removes learnsetabo from learnsetabo list
+     *
+     * @param _learnSetAbo
+     */
     public void removeLearnSetAbo(LearnSetAbo _learnSetAbo)
     {
         this.learnsetAbos.remove(_learnSetAbo);
     }
-
+    
+    /**
+     * method removes learnsetabos from learnsetabo list by learnset and returns it
+     *
+     * @param learnSet
+     * @return
+     */
+    public LearnSetAbo removeLearnSetAboByLearnSet(LearnSet learnSet){
+        for(int i = this.learnsetAbos.size()-1;i>=0;i--){
+            if(this.learnsetAbos.get(i).getLearnSet().equals(learnSet)){
+                LearnSetAbo abo = this.learnsetAbos.get(i);
+                this.removeLearnSetAbo(abo);
+                return abo;
+            }
+        }
+        return null;
+    }
     
     //Friends
-
-    public Account getFriendByIndex(int _index)
-    {
-        return this.friends.get(_index);
-    }
-
+    
+    /**
+     * adds account as friend into friend list
+     *
+     * @param _friend
+     */
     public void addFriend(Account _friend)
     {
         this.friends.add(_friend);
     }
     
+    /**
+     * removes friend from friend list
+     *
+     * @param _friend
+     */
     public void removeFriend(Account _friend)
     {
         this.friends.remove(_friend);
     }
-    
-    public void removeFriend(int _friend)
-    {
-        this.friends.remove(_friend);
-    }
 
-
-    /** after checking if there is no existent chat with a person, a new chat is created with that person and is added to the chat list
-     *  @author  Semlali Amine
-     */
-    
-    //Methods
-    
-    /**
-     * the function clicksLikeOfMessage is used on a specific message to like or dislike it
-     *
-     * clickLike checks if a person is in the list of those who liked the message
-     * if this account liked the message, his name is removed from the list (dislike)
-     * if this account didn't like the message,his name is added to the list (like)
-     *
-     * @author Amine Semlali
-     */
-    
-
-    /**Checks User for valid login data
-     *
-     * @param _email        |
-     * @param _password     | if both are right user will be logged in
-     */
-    public String login(String _email, String _password)
-    {
-        String email = getEmail();
-        String password = getPassword();
-
-        if (email.equals(_email) && password.equals(_password))
-        {
-            return "login was successful";
-        }
-        else
-        {
-            return "login failed";
-        }
-    }
-    /**Checks User for valid login data
-     *
-     * @param _email            | if right password will be changed to new password
-     * @param _newPassword      | new password
-     */
-    public void resetPassword(String _email, String _newPassword)
-    {
-        String email = getEmail();
-
-        if (email.equals(_email))
-        {
-            setPassword(_newPassword);
-        }
-    }
-    
 }

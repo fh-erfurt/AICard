@@ -62,8 +62,6 @@ public class LearnSetAboTest
         try
         {
             LearnSetAbo abo = new LearnSetAbo(learnSet);
-            //then: The Status of the LearnSet should be new
-            Assertions.assertEquals(State.NEW, abo.getLearnSetStatus());
 
             //then: in the LearnSet of the Abo should be the 20 Cards of the TestLearnSet
             CardContent backOfCard = (abo.getLearnSet().getCardList().getCardByIndex(19).getCardBack());
@@ -91,37 +89,5 @@ public class LearnSetAboTest
             logger.warning("Offenbar macht die CardList Probleme." + e);
         }
     }
-
-//    @Test
-//    public void testCreatingAndDeletingEvaluation()
-//    {
-//        //given: Our TestLearnSet and an abo of it
-//        LearnSet learnSet = getTestLearnSet();
-//        try
-//        {
-//            LearnSetAbo abo = new LearnSetAbo(learnSet);
-//
-//            //when: we are giving an evaluation to the learnset.
-//
-//            abo.set_evaluation(5);
-//
-//            //then: it is the only evaluation of the learnSet
-//
-//            Assertions.assertEquals(1, learnSet.getNumberOfEvaluations());
-//            Assertions.assertEquals(5, learnSet.getEvaluations());
-//
-//            //when: deleting the evaluation
-//            abo.delete_evaluation();
-//
-//            //then: should be deleted in LearnSet too.
-//            Assertions.assertEquals(0, learnSet.getNumberOfEvaluations());
-//            Assertions.assertEquals(0, learnSet.getEvaluations());
-//        }
-//        catch (Exception e)
-//        {
-//            logger.warning("OOPs. something went wrong.");
-//        }
-//
-//    }
 
 }

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
  */
 public class AccountTest
 {
+    // TODO : update test to current account state
 //    @Test
 //    void testOwnLearnSetManipulation()
 //    {

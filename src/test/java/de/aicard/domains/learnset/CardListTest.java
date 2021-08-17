@@ -123,29 +123,17 @@ public class CardListTest
     }
 
     @Test
-    public void shouldDisplayLoggerWarningAndNotIncreaseSizePast200()
-    {
-        CardList testCardList = new CardList();
-        for(int index = 0; index < 200; index++)
-        {
-            testCardList.addToList(new Card(new CardContent(), new CardContent()));
-        }
-
-        testCardList.addToList(new Card(new CardContent(), new CardContent()));
-        Assertions.assertEquals(200, testCardList.getListLength());
-    }
-
-    @Test
     void testingRemoveFromCardList()
     {
         // before
         CardList testCardList = new CardList();
         Card testCard1 = new Card(new CardContent(), new CardContent());
         Card testCard2 = new Card(new CardContent(), new CardContent());
-
+        Card testCard3 = new Card(new CardContent(), new CardContent());
+        
         testCardList.addToList(testCard1);
         testCardList.addToList(testCard2);
-        testCardList.addToList(testCard1);
+        testCardList.addToList(testCard3);
         // testing
         testCardList.removeFromList(1);
         Assertions.assertEquals(2, testCardList.getListLength());

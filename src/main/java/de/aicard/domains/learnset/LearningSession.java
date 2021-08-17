@@ -54,18 +54,7 @@ public class LearningSession extends BaseEntity
         this.currentCard = 0;
         this.isActive = true;
     }
-
-    //setter & getter
-
-    public List<CardStatus> getCardStatusList() throws NullPointerException
-    {
-        if (this.cardStatusList == null)
-        {
-            throw new NullPointerException("CardStatusList was not set.");
-        }
-        return this.cardStatusList;
-    }
-
+    
     //methods
 
     /**
