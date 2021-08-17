@@ -69,6 +69,10 @@ a:hover {
     margin-top: 160px;
     margin-bottom: 50px;
     min-height: calc(100vh - 40px - 160px - 50px);
+    padding:0 10%;
+}
+.pageContent>*{
+    margin-bottom: 5%;
 }
 
 .footer {
@@ -126,11 +130,18 @@ a:hover {
     border-radius: 20px;
     overflow: hidden;
 }
+.pannel>*{
+    margin: 10px;
+}
 
 .transparentPannel {
+    position: relative;
+    overflow: hidden;
     border: 5px solid;
+    border-radius: 20px;
     background: none;
     color: white;
+    margin 0;
 }
 
 .transparentPannel a {
@@ -149,6 +160,7 @@ a:hover {
     left: 0;
     height: 50px;
     width: 100%;
+    margin: 0;
 }
 
 .btn {
@@ -174,6 +186,10 @@ a:hover {
     background-color: hsl(54, 77%, 75%);
 }
 
+.greenBtn {
+    background-color: hsl(109, 77%, 75%);
+}
+
 .blueBtn:hover,
 .blueBtn:focus {
     background-color: rgb(52, 153, 221);
@@ -189,6 +205,12 @@ a:hover {
 .yellowBtn:hover,
 .yellowBtn:focus {
     background-color: hsl(49, 82%, 59%);
+    transition: 0.5s;
+}
+
+.greenBtn:hover,
+.greenBtn:focus {
+    background-color: hsl(99, 82%, 59%);
     transition: 0.5s;
 }
 

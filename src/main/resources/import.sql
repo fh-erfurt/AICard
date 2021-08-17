@@ -37,6 +37,7 @@ insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('17','textdataFront17','T
 insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('18','textdataFront18','TitelFront18','0');
 insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('19','textdataFront19','TitelFront19','0');
 insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('20','textdataFront20','TitelFront20','0');
+
 insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('21','textdataBack1','TitelBack1','0');
 insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('22','textdataBack2','TitelBack2','0');
 insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('23','textdataBack3','TitelBack3','0');
@@ -58,35 +59,100 @@ insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('38','textdataBack18','Ti
 insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('39','textdataBack19','TitelBack19','0');
 insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('40','textdataBack20','TitelBack20','0');
 
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('41','textdataFront21','TitelFront21','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('42','textdataFront22','TitelFront22','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('43','textdataFront23','TitelFront23','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('44','textdataFront24','TitelFront24','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('45','textdataFront25','TitelFront25','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('46','textdataFront26','TitelFront26','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('47','textdataFront27','TitelFront27','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('48','textdataFront28','TitelFront28','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('49','textdataFront29','TitelFront29','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('50','textdataFront30','TitelFront30','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('51','textdataFront31','TitelFront31','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('52','textdataFront32','TitelFront32','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('53','textdataFront33','TitelFront33','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('54','textdataFront34','TitelFront34','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('55','textdataFront35','TitelFront35','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('56','textdataFront36','TitelFront36','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('57','textdataFront37','TitelFront37','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('58','textdataFront38','TitelFront38','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('59','textdataFront39','TitelFront39','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('60','textdataFront40','TitelFront40','0');
+
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('61','textdataBack21','TitelBack21','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('62','textdataBack22','TitelBack22','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('63','textdataBack23','TitelBack23','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('64','textdataBack24','TitelBack24','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('65','textdataBack25','TitelBack25','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('66','textdataBack26','TitelBack26','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('67','textdataBack27','TitelBack27','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('68','textdataBack28','TitelBack28','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('69','textdataBack29','TitelBack29','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('70','textdataBack30','TitelBack30','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('71','textdataBack31','TitelBack31','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('72','textdataBack32','TitelBack32','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('73','textdataBack33','TitelBack33','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('74','textdataBack34','TitelBack34','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('75','textdataBack35','TitelBack35','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('76','textdataBack36','TitelBack36','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('77','textdataBack37','TitelBack37','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('78','textdataBack38','TitelBack38','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('79','textdataBack39','TitelBack39','0');
+insert into CARDCONTENT (ID, DATA, TITLE, TYPE) values('80','textdataBack40','TitelBack40','0');
 -- // TABELLE CARD ///////////////////////////////
 
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('1','1','21');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('2','2','22');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('3','3','23');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('4','4','24');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('5','5','25');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('6','6','26');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('7','7','27');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('8','8','28');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('9','9','29');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('10','10','30');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('11','11','31');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('12','12','32');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('13','13','33');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('14','14','34');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('15','15','35');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('16','16','36');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('17','17','37');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('18','18','38');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('19','19','39');
-insert into CARD (ID, CARDBACK_ID, CARDFRONT_ID) values ('20','20','40');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('1','1','21');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('2','2','22');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('3','3','23');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('4','4','24');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('5','5','25');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('6','6','26');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('7','7','27');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('8','8','28');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('9','9','29');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('10','10','30');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('11','11','31');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('12','12','32');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('13','13','33');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('14','14','34');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('15','15','35');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('16','16','36');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('17','17','37');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('18','18','38');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('19','19','39');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('20','20','40');
 
+
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('21','41','61');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('22','42','62');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('23','43','63');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('24','44','64');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('25','45','65');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('26','46','66');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('27','47','67');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('28','48','68');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('29','49','69');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('30','50','70');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('31','51','71');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('32','52','72');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('33','53','73');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('34','54','74');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('35','55','75');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('36','56','76');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('37','57','77');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('38','58','78');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('39','59','79');
+insert into CARD (ID, CARDFRONT_ID, CARDBACK_ID) values ('40','60','80');
 -- // TABELLE CARDLIST ///////////////////////////////////////
 
 
 insert into CARDLIST (ID, LISTINDEX) values ('1','0');
 insert into CARDLIST (ID, LISTINDEX) values ('2','0');
 insert into CARDLIST (ID, LISTINDEX) values ('3','0');
+insert into CARDLIST (ID, LISTINDEX) values ('4','0');
+insert into CARDLIST (ID, LISTINDEX) values ('5','0');
+insert into CARDLIST (ID, LISTINDEX) values ('6','0');
 
 
 
@@ -115,12 +181,36 @@ insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('3','18');
 insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('3','19');
 insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('3','20');
 
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('4','21');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('4','22');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('4','23');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('4','24');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('4','25');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('4','26');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('4','27');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('4','28');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('5','29');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('5','30');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('5','31');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('5','32');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('5','33');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('5','34');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('6','35');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('6','36');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('6','37');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('6','38');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('6','39');
+insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('6','40');
+
 
 -- // TABELLE LEARNSET //////////////////////////
 
-insert into LEARNSET (ID, DESCRIPTION, EVALUATIONS, FACULTY, NUMBEROFEVALUATIONS, TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('1','Learnset1', -1,'4','0','Title1','2', '1','1');
-insert into LEARNSET (ID, DESCRIPTION, EVALUATIONS, FACULTY, NUMBEROFEVALUATIONS, TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('2','Learnset2', -1,'2','0','Title2','2', '2','2');
-insert into LEARNSET (ID, DESCRIPTION, EVALUATIONS, FACULTY, NUMBEROFEVALUATIONS, TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('3','Learnset3', -1,'3','0','Title3','2', '3','3');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('1','Learnset1','4','Title1','2', '1','1');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('2','Learnset2','2','Title2','2', '2','2');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('3','Learnset3','3','Title3','2', '3','3');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('4','Learnset4','4','Title4','2', '4','1');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('5','Learnset5','2','Title5','2', '5','2');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('6','Learnset6','3','Title6','2', '6','3');
 
 
 
@@ -155,6 +245,8 @@ insert into CARDSTATUS (ID, CARDKNOWLEDGELEVEL, CARD_ID) values ('25','0','17');
 insert into CARDSTATUS (ID, CARDKNOWLEDGELEVEL, CARD_ID) values ('26','0','18');
 insert into CARDSTATUS (ID, CARDKNOWLEDGELEVEL, CARD_ID) values ('27','0','19');
 insert into CARDSTATUS (ID, CARDKNOWLEDGELEVEL, CARD_ID) values ('28','0','20');
+
+
 insert into CARDSTATUS (ID, CARDKNOWLEDGELEVEL, CARD_ID) values ('29','0','1');
 insert into CARDSTATUS (ID, CARDKNOWLEDGELEVEL, CARD_ID) values ('30','0','2');
 insert into CARDSTATUS (ID, CARDKNOWLEDGELEVEL, CARD_ID) values ('31','0','3');
@@ -199,16 +291,17 @@ insert into LEARNSETABO_CARDSTATUS (LEARNSETABO_ID, CARDSTATUS_ID) values ('4','
 -- // TABELLE LEARNSET_ACCOUNT //////////////////////////////////////////
 
 insert into LEARNSET_ACCOUNT (LEARNSET_ID, ADMINLIST_ID) values ('1','1'),('2','2'),('3','3');
-
+insert into LEARNSET_ACCOUNT (LEARNSET_ID, ADMINLIST_ID) values ('4','1'),('5','2'),('6','3');
 
 
 -- // TABELLE MESSAGE ////////////////////////////////
 
-insert into MESSAGE (ID, MESSAGE, TIME, SENDER_ID) values ('1','This is Comment 1',CURRENT_TIMESTAMP,'1'),('2','This is Comment 2',CURRENT_TIMESTAMP,'2');
-insert into MESSAGE (ID, MESSAGE, TIME, SENDER_ID) values ('3','This is Comment 3',CURRENT_TIMESTAMP,'3'),('4','This is Comment 4',CURRENT_TIMESTAMP,'1');
+
+insert into COMMENT (ID, MESSAGE, RECOMMENDED, TIME, SENDER_ID) values ('1','This is Comment 1','0',CURRENT_TIMESTAMP,'1'),('2','This is Comment 2','0',CURRENT_TIMESTAMP,'2');
+insert into COMMENT (ID, MESSAGE, RECOMMENDED, TIME, SENDER_ID) values ('3','This is Comment 3','0',CURRENT_TIMESTAMP,'3'),('4','This is Comment 4','0',CURRENT_TIMESTAMP,'1');
 -- // TABELLE LEARNSET_MESSAGE ///////////////////////////////
 --
-insert into LEARNSET_MESSAGE (LEARNSET_ID, COMMENTLIST_ID) values ('1','1'),('1','2'),('2','3'),('3','4');
+insert into LEARNSET_COMMENT (LEARNSET_ID, COMMENTLIST_ID) values ('1','1'),('1','2'),('2','3'),('3','4');
 
 
 

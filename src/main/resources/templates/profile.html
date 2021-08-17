@@ -26,17 +26,9 @@
     </table>
 
 
-
-
-    <p style="color:white"><p th:text="${account.getName()} + '\'s'"></p> LearnSets</p>
-
-        <!-- weitere gridItmes werden dynamisch geladen -->
-<!--    TODO : hier eventuell eigene Learnsets einfüge? Frage, wie die Applikation bedient werden soll-->
-    <!--        Folowed LearnSets-->
-    <p style="color:white"><p th:text="${account.getName()} + '\'s'"></p> followed LearnSets</p>
         <div class="btnContainer bottom">
-            <button class="btn redBtn" th:if="${userIsProfileAccount}"><a th:href="@{/updateProfile}">Account Bearbeiten</a></button>
-            <button class="btn yellowBtn" th:if="${!userIsProfileAccount && !isMyFriend}"><a th:href="@{'/addFriend/' + ${account.getId()}}">Als Freund Hinzufügen</a></button>
+            <button class="btn yellowBtn" th:if="${userIsProfileAccount}"><a th:href="@{/updateProfile}">Account Bearbeiten</a></button>
+            <button class="btn blueBtn" th:if="${!userIsProfileAccount && !isMyFriend}"><a th:href="@{'/addFriend/' + ${account.getId()}}">Als Freund Hinzufügen</a></button>
         </div>
         <div class="btnPlaceHolder"></div>
     </div>

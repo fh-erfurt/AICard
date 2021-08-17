@@ -37,84 +37,31 @@ public class CardService {
     @Autowired
     LearnSetRepository learnSetRepository;
 
-    private final CardContentService cardContentService;
+
 
     @Autowired
-    public CardService(CardContentService cardContentService) {
-        this.cardContentService = cardContentService;
+    public CardService(){
     }
 
-    public Card getCardById(Long cardId)
+    public Optional<Card> getCard(Long cardId)
     {
-        Optional<Card> card = cardRepository.findById(cardId);
-        if(card.isPresent())
-        {
-            return card.get();
-        }
-        else
-        {
-            return null;
-        }
-    }
-    public List<Card> setCardData(String filePath, CardList cardList){
-        List <Card> listOfCards = cardList.getListOfCards();
-        for ( Card card : listOfCards)
-        {
-            if(card.getCardFront().getType() != DataType.TextFile) {
-                card.getCardFront().setData(filePath + card.getCardFront().getData());
-            }
-
-            if(card.getCardBack().getType() != DataType.TextFile)
-            {
-                card.getCardBack().setData(filePath + card.getCardBack().getData());
-            }
-        }
-        return listOfCards;
-    }
-
-    public Long getLearnSetIdByCardId(Long cardId){
-        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(cardId);
-        if(learnSet.isPresent()){
-            return learnSet.get().getId();
-        }
-        return -1L;
+        return cardRepository.findById(cardId);
     }
 
     public void removeCardFromCardList(Card card){
-        Long cardId = card.getId();
-        Long learnSetId = this.getLearnSetIdByCardId(cardId);
-        if(learnSetId>=-1L && learnSetRepository.existsById(learnSetId)){
-            LearnSet learnSet = learnSetRepository.findById(learnSetId).get();
-            learnSet.getCardList().removeFromList(card);
-            learnSetRepository.save(learnSet);
+        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(card.getId());
+        if(learnSet.isPresent()){
+            learnSet.get().getCardList().removeFromList(card);
+            learnSetRepository.save(learnSet.get());
         }
     }
-
-    private void deleteCardContent(Card card){
-        if(card.getCardFront().getType() != DataType.TextFile)
-        {
-            // TODO : sollte das in ein TryCatch oder so ähnlich? --> JA
-            File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardFront().getData());
-            file.delete();
-        }
-        if(card.getCardBack().getType() != DataType.TextFile)
-        {
-            // TODO : sollte das in ein TryCatch oder so ähnlich?
-            File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardBack().getData());
-            file.delete();
-        }
-    }
-    
-    
 
     public void deleteCard(Card card){
-        Long id = card.getId();
-        if(cardRepository.existsById(id)){
+        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(card.getId());
+        if(cardRepository.existsById(card.getId()) && learnSet.isPresent()){
             
-            Long learnSetId = this.getLearnSetIdByCardId(card.getId());
-            List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAllByLearnSetId(learnSetId);
+            List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAllByLearnSetId(learnSet.get().getId());
             this.removeCardFromCardList(card);
-            int i = 0;
             for (LearnSetAbo abo:learnSetAbos)
             {
                 CardStatus status = abo.removeCardStatusByCard(card);
@@ -122,13 +69,12 @@ public class CardService {
                 if(status != null){
                     cardStatusRepository.delete(status);
                 }
-                i++;
             }
             
             cardRepository.delete(card);
             
             //delete data on card
-            this.deleteCardContent(card);
+            card.deleteCardContent();
         }
     }
 
@@ -140,8 +86,8 @@ public class CardService {
 
         if(cardFrontInput != null && !cardFrontInput.isEmpty()
         && cardBackInput != null && !cardBackInput.isEmpty()){
-            cardContentFront = cardContentService.getNewCardContent(cardFrontTitel, cardFrontInput, cardFrontType);
-            cardContentBack = cardContentService.getNewCardContent(cardBackTitel, cardBackInput, cardBackType);
+            cardContentFront = new CardContent(cardFrontTitel, cardFrontInput, cardFrontType);
+            cardContentBack = new CardContent(cardBackTitel, cardBackInput, cardBackType);
         }
         else{
             throw  new IllegalStateException("eine Texteingabe fehlt!");

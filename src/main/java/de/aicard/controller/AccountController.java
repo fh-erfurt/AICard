@@ -52,18 +52,18 @@ public class AccountController
     @GetMapping("/profile/{userID}")
     public String showProfile(@PathVariable("userID") Long userID, Model model, Principal principal)
     {
-        List<String> errors = new ArrayList<>();
         // only loggedIN users can see an account
         Optional<Account> account = accountService.getAccount(userID);
-        Optional<Account> myAccount = accountService.getAccount((principal.getName()));
-            if(account.isPresent() && myAccount.isPresent())
-            {
-                model.addAttribute("isMyFriend", myAccount.get().getFriends().contains(account.get()));
-                model.addAttribute("userIsProfileAccount", myAccount.get().getId().equals(userID));
-                model.addAttribute("account", account.get());
-                return "profile";
-            }
+        Optional<Account> myAccount = accountService.getAccount(principal);
         
+        if(account.isPresent() && myAccount.isPresent())
+        {
+            model.addAttribute("isMyFriend", myAccount.get().getFriends().contains(account.get()));
+            model.addAttribute("userIsProfileAccount", myAccount.get().getId().equals(userID));
+            model.addAttribute("account", account.get());
+            
+            return "profile";
+        }
         return "redirect:/index";
     }
 
@@ -127,15 +127,16 @@ public class AccountController
             }
             model.addAttribute("errorList",errors);
             model.addAttribute("account", account.get());
-            if(errors.isEmpty()){
+            if(errors.isEmpty())
+            {
                 modelAndView.setViewName("redirect:/profile");
-                return modelAndView;
             }
-            else{
+            else
+            {
                 modelAndView.setViewName("updateProfile");
                 modelAndView.addObject(model);
-                return modelAndView;
             }
+            return modelAndView;
         }
         modelAndView.setViewName("redirect:/logout");
         return modelAndView;
@@ -149,7 +150,7 @@ public class AccountController
      * @return
      */
     @GetMapping("/removeFriendFromFriendList/{friendId}")
-    public String getRemoveFriendFromFriendList(@PathVariable("friendId") Long friendId, Model model, Principal principal)
+    public String getRemoveFriendFromFriendList(@PathVariable("friendId") Long friendId, Principal principal)
     {
         Optional<Account> account = accountService.getAccount(principal);
         Optional<Account> friend = accountService.getAccount(friendId);
@@ -158,10 +159,7 @@ public class AccountController
             account.get().removeFriend(friend.get());
             accountService.saveAccount(account.get());
         }
-        
-    
         return "redirect:/profile";
-    
     }
     
     @GetMapping("/addFriend/{friendId}")
@@ -176,7 +174,6 @@ public class AccountController
                 accountService.saveAccount(account.get());
             }
         }
-        
         return "redirect:/profile/" + friendId;
     }
 

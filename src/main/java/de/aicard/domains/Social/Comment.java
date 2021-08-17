@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
@@ -36,7 +35,9 @@ public class Comment extends BaseEntity
     private Recommended recommended;
     
     //constructor
-    
+    /**
+     * command constructer
+     */
     /**
      * Constructor of a Message.
      * @param newSender the person that sends the message

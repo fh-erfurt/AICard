@@ -22,6 +22,8 @@ import java.util.Optional;
 @DataJpaTest
 public class AccountRepositoryTest
 {
+    // TODO : fix all repository tests
+//
 //    @Autowired
 //    private AccountRepository accountRepository;
 //

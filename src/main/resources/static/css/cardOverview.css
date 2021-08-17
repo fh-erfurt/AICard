@@ -1,7 +1,6 @@
 /* --- for current HTML page --- */
 
 .learnset-info {
-    width: 80%;
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
@@ -24,7 +23,6 @@
     margin-top: 30px;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 80%;
 }
 
 .cards>* {
@@ -38,13 +36,9 @@
     font-size: 50px;
 }
 
-.card {
-}
-
 .createCard .pannel {
     left: 50%;
     transform: translate(-50%, 0);
-    width: 80%;
     min-height: 50vh;
     display: list-item;
 }
