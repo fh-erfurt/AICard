@@ -14,19 +14,17 @@
     <bean id="LearningSession" class="de.aicard.domains.learnset.LearningSession"></bean>
     <bean id="LearnSet" class="de.aicard.domains.learnset.LearnSet"></bean>
     <bean id="LearnSetAbo" class="de.aicard.domains.learnset.LearnSetAbo"></bean>
-    <bean id="Chat" class="de.aicard.domains.Social.Chat"></bean>
-    <bean id="Message" class="de.aicard.domains.Social.Message"></bean>
+    <bean id="Message" class="de.aicard.domains.Social.Comment"></bean>
 
     <bean id="AccountRepository" class="de.aicard.storages.AccountRepository" abstract="true"></bean>
     <bean id="CardContentRepository" class="de.aicard.storages.CardContentRepository" abstract="true"></bean>
     <bean id="CardListRepository" class="de.aicard.storages.CardListRepository" abstract="true"></bean>
     <bean id="CardRepository" class="de.aicard.storages.CardRepository" abstract="true"></bean>
     <bean id="CardStatusRepository" class="de.aicard.storages.CardStatusRepository" abstract="true"></bean>
-    <bean id="ChatRepository" class="de.aicard.storages.ChatRepository" abstract="true"></bean>
     <bean id="LearningSessionRepository" class="de.aicard.storages.LearningSessionRepository" abstract="true"></bean>
     <bean id="LearnSetAboRepository" class="de.aicard.storages.LearnSetAboRepository" abstract="true"></bean>
     <bean id="LearnSetRepository" class="de.aicard.storages.LearnSetRepository" abstract="true"></bean>
-    <bean id="MessageRepository" class="de.aicard.storages.MessageRepository" abstract="true"></bean>
+    <bean id="MessageRepository" class="de.aicard.storages.CommentRepository" abstract="true"></bean>
 
     <bean id="AccountController" class="de.aicard.controller.AccountController"></bean>
     <bean id="AddCardController" class="de.aicard.controller.AddCardController"></bean>
@@ -36,9 +34,7 @@
 
     <bean id="AccountService" class="de.aicard.services.AccountService"></bean>
     <bean id="CardContentService" class="de.aicard.services.CardContentService"></bean>
-    <bean id="CardListService" class="de.aicard.services.CardListService"></bean>
     <bean id="CardService" class="de.aicard.services.CardService"></bean>
-    <bean id="LearnSetAboService" class="de.aicard.services.LearnSetAboService"></bean>
     <bean id="LearnSetService" class="de.aicard.services.LearnSetService"></bean>
 
     <context:component-scan base-package="de.aicard"/>

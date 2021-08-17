@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * CardContent is the connection interface between Card and *File Classes
+ * CardContent is one Side of a card
  *
  * @author Martin Kuehlborn
  */

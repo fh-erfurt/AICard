@@ -1,8 +1,9 @@
 package de.aicard.domains.learnset;
 
-import de.aicard.domains.Social.Message;
+import de.aicard.domains.Social.Comment;
 import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.Faculty;
+import de.aicard.domains.enums.Recommended;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.account.Account;
 import lombok.Getter;
@@ -49,7 +50,7 @@ public class LearnSet extends BaseEntity
     private CardList cardList;
     
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Message> commentList;
+    private List<Comment> commentList;
     
     /**
      * The Account who created and owns the LearnSet
@@ -65,14 +66,13 @@ public class LearnSet extends BaseEntity
     /**
      * List of people who can edit the learnset
      */
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Account> adminList;
     
     /**
      * Average evaluation of a LearnSet
      */
-    private double evaluations;
-    private int numberOfEvaluations;
+
 
     // CONSTRUCTORS
 
@@ -101,160 +101,12 @@ public class LearnSet extends BaseEntity
         owner = _newOwner;
         visibility = _visibility;
         adminList = new ArrayList<>();
-        evaluations = 0;
-        numberOfEvaluations = 0;
+
     }
-    
-    // GETTER + SETTER
-//    public String getTitle() throws NullPointerException
-//    {
-//        if(title == null)
-//        {
-//            throw new NullPointerException("LearnSet Title was not set.");
-//        }
-//        return this.title;
-//    }
-//
-//    public String getDescription() throws NullPointerException
-//    {
-//        if(description == null)
-//        {
-//            throw new NullPointerException("LearnSet Description was not set.");
-//        }
-//        return this.description;
-//    }
-//
-//    public Faculty getFaculty() throws NullPointerException
-//    {
-//        if (faculty == null)
-//        {
-//            throw new NullPointerException("LearnSet Faculty was not set.");
-//        }
-//        return this.faculty;
-//    }
-//
-//    public CardList getCardList() throws NullPointerException
-//    {
-//        if(cardList == null)
-//        {
-//            throw new NullPointerException("LearnSet CardList was not set.");
-//        }
-//        return this.cardList;
-//    }
-//
-//    public List<Message> getCommentList() throws NullPointerException
-//    {
-//        if(commentList == null)
-//        {
-//            throw new NullPointerException("LearnSet CommentList was not set.");
-//        }
-//        return this.commentList;
-//    }
-//
-//    public Account getOwner() throws NullPointerException
-//    {
-//        if(owner == null)
-//        {
-//            throw new NullPointerException("LearnSet Owner was not set.");
-//        }
-//        return this.owner;
-//    }
-//
-//    public Visibility getVisibility() throws NullPointerException
-//    {
-//        if(visibility == null)
-//        {
-//            throw new NullPointerException("LearnSet Visibility was not set.");
-//        }
-//        return this.visibility;
-//    }
-//
-//    public List<Account> getAdmins() throws NullPointerException
-//    {
-//        if(adminList == null)
-//        {
-//            throw new NullPointerException("LearnSet AdminList was not set.");
-//        }
-//        return this.adminList;
-//    }
-//
     // METHODS
-    
     public void createCardList()
     {
         this.cardList = new CardList();
-    }
-    
-    
-    /*
-     * Evaluation
-     * */
-    
-    /**Add a new Evaluation and calculates the new average
-     *
-     * @param _newEvaluation int value that in used to calculate new average Evaluation
-     */
-    public void addEvaluation(int _newEvaluation)
-    {
-        if(getNumberOfEvaluations() == 0)
-        {
-            setEvaluations(_newEvaluation);
-            increaseNumberOfEvaluations();
-        }
-        else
-        {
-            double updatedEvaluation = getEvaluations() * getNumberOfEvaluations();
-            updatedEvaluation = updatedEvaluation + _newEvaluation;
-            increaseNumberOfEvaluations();
-            updatedEvaluation = updatedEvaluation / getNumberOfEvaluations();
-            setEvaluations(updatedEvaluation);
-        }
-    }
-
-    /**
-     * Deletes an existing evaluation and calculates the new average.
-     *
-     * @param _evaluationToDelete
-     */
-    public void deleteEvaluation(int _evaluationToDelete)
-    {
-        if(this.numberOfEvaluations > 0)
-        {
-            try
-            {
-                double updatedEvaluation = this.evaluations * this.numberOfEvaluations;
-                updatedEvaluation = updatedEvaluation - _evaluationToDelete;
-                decreaseNumberOfEvaluations();
-
-                if(this.numberOfEvaluations != 0)
-                {
-                    updatedEvaluation = updatedEvaluation / this.numberOfEvaluations;
-                }
-
-                this.evaluations = updatedEvaluation;
-            }
-            catch (Exception e)
-            {
-                logger.warning(e.getMessage());
-            }
-        }
-    }
-    
-    public void increaseNumberOfEvaluations()
-    {
-        setNumberOfEvaluations(this.numberOfEvaluations + 1);
-    }
-    
-    public void decreaseNumberOfEvaluations() throws Exception
-    {
-        if(this.numberOfEvaluations <=  0)
-        {
-            // this should never be reached
-            throw new Exception("Can't decrease Number of Evaluations because lower or equal 0.");
-        }
-    
-        this.numberOfEvaluations = this.numberOfEvaluations - 1;
-    
     }
     
     
@@ -310,27 +162,35 @@ public class LearnSet extends BaseEntity
         }
     }
     
-    /*
-    * Messages
+    /**
+    * Comments are used as comments
     *
     * */
-    public void addMessage(Message _newMessage)
+    public void addComment(Comment _newComment)
     {
-        this.commentList.add(_newMessage);
+        this.commentList.add(_newComment);
     }
     
-    public void removeMessageByMessage(Message _messageToRemove)
+    public int calculateEvaluation()
     {
-        if(commentList.contains(_messageToRemove))
-        {
-            this.commentList.remove(_messageToRemove);
+        if(this.commentList.size() == 0){
+            return -1;
         }
-        else
-        {
-            logger.warning("messageToRemove is not part of commentList");
+        int numberOfYes = 0;
+        for(Comment comment : this.commentList){
+            if(comment.getRecommended().equals(Recommended.YES)){
+                numberOfYes++;
+            }
         }
+    
+        return (int) 100.0 / this.commentList.size() * numberOfYes;
     }
 
+    /**
+     * checks if given account can see the learnSet
+     * @param _account
+     * @return
+     */
     public boolean isAuthorizedToAccessLearnSet(Account _account)
     {
         switch (this.visibility)
@@ -346,7 +206,9 @@ public class LearnSet extends BaseEntity
                 break;
 
             case PROTECTED:
-                if (this.getOwner().getFriends().contains(_account) || this.getOwner()==_account)
+                // TODO: wenn Freunde implementiert sind, sollte hier auch auf die Adminliste geprüft werden
+                if (this.getOwner().getFriends().contains(_account) || this.getOwner()==_account
+                    || this.getFaculty().equals(_account.getFaculty()))
                 {
                     return true;
                 }
@@ -355,5 +217,4 @@ public class LearnSet extends BaseEntity
             }
         return false;
     }
-    
 }

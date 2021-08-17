@@ -2,32 +2,60 @@ package de.aicard.services;
 
 import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardContent;
+import de.aicard.domains.card.CardStatus;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.learnset.CardList;
-import de.aicard.storages.CardRepository;
+import de.aicard.domains.learnset.LearnSet;
+import de.aicard.domains.learnset.LearnSetAbo;
+import de.aicard.storages.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardService {
     @Autowired
     CardRepository cardRepository;
+    
+    @Autowired
+    CardStatusRepository cardStatusRepository;
+    
+    @Autowired
+    LearningSessionRepository learningSessionRepository;
 
-    private final LearnSetService learnSetService;
+    @Autowired
+    LearnSetAboRepository learnSetAboRepository;
+
+    @Autowired
+    CardListRepository cardListRepository;
+
+    @Autowired
+    LearnSetRepository learnSetRepository;
+
     private final CardContentService cardContentService;
 
     @Autowired
-    public CardService(LearnSetService learnSetService, CardContentService cardContentService) {
-        this.learnSetService = learnSetService;
+    public CardService(CardContentService cardContentService) {
         this.cardContentService = cardContentService;
     }
 
+    public Card getCardById(Long cardId)
+    {
+        Optional<Card> card = cardRepository.findById(cardId);
+        if(card.isPresent())
+        {
+            return card.get();
+        }
+        else
+        {
+            return null;
+        }
+    }
     public List<Card> setCardData(String filePath, CardList cardList){
         List <Card> listOfCards = cardList.getListOfCards();
         for ( Card card : listOfCards)
@@ -44,33 +72,65 @@ public class CardService {
         return listOfCards;
     }
 
-    public void deleteCard(Long id){
-        if(cardRepository.existsById(id)){
-            Card card = cardRepository.findById(id).get();
-            if(card.getCardFront().getType() != DataType.TextFile)
-            {
-                // TODO : sollte das in ein TryCatch oder so ähnlich? --> JA
-                File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardFront().getData());
-                file.delete();
-            }
-            if(card.getCardBack().getType() != DataType.TextFile)
-            {
-                // TODO : sollte das in ein TryCatch oder so ähnlich?
-                File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardBack().getData());
-                file.delete();
-            }
-            learnSetService.removeCardFromList(card);
-            cardRepository.deleteById(id);
+    public Long getLearnSetIdByCardId(Long cardId){
+        Optional<LearnSet> learnSet = learnSetRepository.getLearnSetByCardId(cardId);
+        if(learnSet.isPresent()){
+            return learnSet.get().getId();
+        }
+        return -1L;
+    }
+
+    public void removeCardFromCardList(Card card){
+        Long cardId = card.getId();
+        Long learnSetId = this.getLearnSetIdByCardId(cardId);
+        if(learnSetId>=-1L && learnSetRepository.existsById(learnSetId)){
+            LearnSet learnSet = learnSetRepository.findById(learnSetId).get();
+            learnSet.getCardList().removeFromList(card);
+            learnSetRepository.save(learnSet);
         }
     }
 
-    public void deleteAllCardsFromLearnSet(Long learnSetId){
-        for(Card card : learnSetService.getCardList(learnSetId).getListOfCards()){
-            this.deleteCard(card.getId());
+    private void deleteCardContent(Card card){
+        if(card.getCardFront().getType() != DataType.TextFile)
+        {
+            // TODO : sollte das in ein TryCatch oder so ähnlich? --> JA
+            File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardFront().getData());
+            file.delete();
+        }
+        if(card.getCardBack().getType() != DataType.TextFile)
+        {
+            // TODO : sollte das in ein TryCatch oder so ähnlich?
+            File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + card.getCardBack().getData());
+            file.delete();
         }
     }
     
+    
 
+    public void deleteCard(Card card){
+        Long id = card.getId();
+        if(cardRepository.existsById(id)){
+            
+            Long learnSetId = this.getLearnSetIdByCardId(card.getId());
+            List<LearnSetAbo> learnSetAbos = learnSetAboRepository.findAllByLearnSetId(learnSetId);
+            this.removeCardFromCardList(card);
+            int i = 0;
+            for (LearnSetAbo abo:learnSetAbos)
+            {
+                CardStatus status = abo.removeCardStatusByCard(card);
+                learnSetAboRepository.save(abo);
+                if(status != null){
+                    cardStatusRepository.delete(status);
+                }
+                i++;
+            }
+            
+            cardRepository.delete(card);
+            
+            //delete data on card
+            this.deleteCardContent(card);
+        }
+    }
 
     public Card addNewCard(String cardFrontType, String cardFrontTitel, String cardFrontInput, String cardBackType, String cardBackTitel, String cardBackInput){
 
@@ -157,14 +217,8 @@ public class CardService {
             cardFrontFilePath = cardFrontFilePath.replace("\\", "\\\\");
             File newFile = new File(cardFrontFilePath);
             fileInput.transferTo(newFile);
-            
-            
-//            String mimetype = new MimetypesFileTypeMap().getContentType(newFile);
-//            String fileType = mimetype.split("/")[0];
-//            System.out.println("mimetype: " + mimetype);
-//            System.out.println("filetype:" + fileType);
+
             String fileType  = fileInput.getContentType().split("/")[0];
-            System.out.println(expectedType);
             if(expectedType.equals("VideoFile") && fileType.equals("video") ||
                expectedType.equals("AudioFile") && fileType.equals("audio") ||
                expectedType.equals("PictureFile") && fileType.equals("image"))

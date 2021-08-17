@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class LearningSession extends BaseEntity
      * The List of Cards the Account is learning in this session, combined with the Account-specific
      * information of the Cards, saved in an ArrayList of CardStatus.
      */
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CardStatus> cardStatusList;
     /**
      * Information, wheather the Session is active (there is at least one other card to learn in the List)
@@ -95,7 +96,7 @@ public class LearningSession extends BaseEntity
      * Checks, if the current Card was the last Card of the Session. If so, it sets isActive to false.
      * If not, it increases currentCard by one.
      */
-    public void next()
+    private void next()
     {
         if(this.currentCard == (this).cardStatusList.size()-1)
         {
@@ -105,5 +106,6 @@ public class LearningSession extends BaseEntity
             this.currentCard++;
         }
     }
+
 
 }

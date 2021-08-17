@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="pageContent">
+
+    <div class="whiteBG pannel">
+        <h2>Filter</h2>
+
+        <form th:action="learnSetShop" method="GET">
+            <div class="formListElement">
+                <label for="facultyProfessor">Fakukltät</label>
+                <select  name="faculty" id="facultyProfessor" required>
+                    <option value="duDoppelNull">Alle Fakultäten</option>
+                    <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
+                            th:text="${faculty}"
+                            th:value="${faculty}">
+                    </option>
+                </select>
+            </div>
+            <div class="formListElement">
+                <label for="learnSetTitle">LearnSetTitle SubString suche</label>
+                <input type="text" name="learnSetTitle" id="learnSetTitle">
+            </div>
+            <div class="btnContainer">
+                <button class="btn blueBtn" type="submit">Filtern</button>
+            </div>
+            <div class="btnPlaceHolder"></div>
+        </form>
+
+    </div>
+
+
+    <div class="gridContainer">
+    <!-- display:grid 3 Spalten -->
+
+
+        <!-- weitere gridItmes werden dynamisch geladen -->
+        <div th:each="learnSet : ${learnSetList}" class="gridItem">
+            <div class="deckName">
+                <a th:text="${learnSet.title}"  th:href="@{'/cardOverview/' + ${learnSet.getId()}}"></a>
+            </div>
+            <div th:text="'Karten ' + ${learnSet.getCardList().getListLength()}" class="cardCount"></div>
+
+            <h4>Evaluation</h4>
+            <p th:if="${learnSet.calculateEvaluation() != -1}" th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen'}"></p>
+            <p th:if="${learnSet.calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
+
+
+            <div class="btnContainer bottom">
+                <div class="btn yellowBtn">
+                    <a th:href="@{'/cardOverview/' + ${learnSet.getId()}}">Preview</a>
+                </div>
+                <div class="btn  blueBtn">
+                    <a th:href="@{'/followLearnSet/' + ${learnSet.getId()}}">Follow</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

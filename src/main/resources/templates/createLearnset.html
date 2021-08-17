@@ -24,21 +24,21 @@
                     <div class="formListElement">
                         <label for="learnsetFaculty">Fakultät</label>
                         <select id="learnsetFaculty" th:field="*{faculty}">
-                  <option th:each="facu : ${T(de.aicard.domains.enums.Faculty).values()}"
-                          th:text="${facu}"
-                          th:value="${facu}">
-                  </option>
-                </select>
+                          <option th:each="facu : ${T(de.aicard.domains.enums.Faculty).values()}"
+                                  th:text="${facu}"
+                                  th:value="${facu}">
+                          </option>
+                        </select>
                     </div>
 
                     <div class="formListElement">
                         <label for="learnsetVisibility">Sichtbarkeit</label>
                         <select id="learnsetVisibility" th:field="*{visibility}">
-                   <option  th:each="visi : ${T(de.aicard.domains.enums.Visibility).values()}"
-                            th:text="${visi}"
-                            th:value="${visi}">
-                  </option>
-              </select>
+                           <option  th:each="visi : ${T(de.aicard.domains.enums.Visibility).values()}"
+                                    th:text="${visi}"
+                                    th:value="${visi}">
+                          </option>
+                      </select>
                     </div>
 
 

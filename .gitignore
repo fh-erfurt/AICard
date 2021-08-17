@@ -33,3 +33,5 @@ target/
 hs_err_pid*
 Präsentationen/~$2_Präsentation.pptx
 *.lst
+
+cardFiles/

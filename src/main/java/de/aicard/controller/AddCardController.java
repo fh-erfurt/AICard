@@ -1,8 +1,10 @@
 package de.aicard.controller;
 
+import de.aicard.domains.account.Account;
 import de.aicard.domains.card.Card;
-import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.DataType;
+import de.aicard.domains.learnset.LearnSet;
+import de.aicard.services.AccountService;
 import de.aicard.services.CardService;
 import de.aicard.services.LearnSetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,35 +14,77 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.activation.MimetypesFileTypeMap;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
+/**
+ * @author Martin Kühlborn,Clemens Berger
+ */
 @Controller
 public class AddCardController {
     private final LearnSetService learnSetService;
     private final CardService cardService;
+    private final AccountService accountService;
 
     @Autowired
-    public AddCardController(LearnSetService learnSetService, CardService cardService) {
+    public AddCardController(LearnSetService learnSetService, CardService cardService, AccountService accountService) {
         this.learnSetService = learnSetService;
         this.cardService = cardService;
+        this.accountService = accountService;
     }
+
+    /**
+     * shows the addCard.html if the user can access it
+     * @param learnSetID
+     * @param principal
+     * @param model
+     * @return
+     */
 
     @GetMapping("/addCard/{learnSetID}")
     public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model) {
-        if (learnSetService.accountIsAuthorized(principal, learnSetID)) {
+        Optional<Account> account = accountService.getAccount(principal);
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
+        
+        if (account.isPresent() && learnSet.isPresent() && learnSetService.accountIsAuthorized(account.get(), learnSet.get())) {
             model.addAttribute("learnSetID", learnSetID);
             return "addCard";
         }
         return "redirect:/index";
     }
 
+    /**
+     * handles creatng cards for a LearnSet
+     * different params are needed to identify datatypes such as video,audio,text and pictures
+     * for front and back side
+     * @param learnSetID
+     * @param principal
+     * @param model
+     * @param cardFrontType
+     * @param cardFrontTextFileTile
+     * @param cardFrontTextFileInput
+     * @param cardFrontPictureFileTitle
+     * @param cardFrontPictureFileInput
+     * @param cardFrontVideoFileTitle
+     * @param cardFrontVideoFileInput
+     * @param cardFrontAudioFileTitle
+     * @param cardFrontAudioFileInput
+     * @param cardBackType
+     * @param cardBackTextFileTitle
+     * @param cardBackTextFileInput
+     * @param cardBackPictureFileTitle
+     * @param cardBackPictureFileInput
+     * @param cardBackVideoFileTitle
+     * @param cardBackVideoFileInput
+     * @param cardBackAudioFileTitle
+     * @param cardBackAudioFileInput
+     * @return
+     * @throws IOException
+     */
     // --- we offer the possibility for all files to be send but only save those that are selected by the FileTypeSelector
     @PostMapping("/addCard/{learnSetID}")
     @ResponseBody
@@ -69,14 +113,22 @@ public class AddCardController {
         List<String> errors = new ArrayList<>();
         Card newCard = null;
 
-        if (learnSetService.accountIsAuthorized(principal, learnSetID)) {
+        // TODO : überprüfe bei allen LernSet Änderungen ob der Account darauf zugriff hat
+        Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(learnSetID);
+        Optional<Account> account = accountService.getAccount(principal);
+        
+        if (account.isPresent() &&
+                learnSet.isPresent() &&
+                learnSetService.accountIsAuthorized(account.get(), learnSet.get()) &&
+                accountService.getAccount(principal).isPresent() &&
+                learnSet.get().getAdminList().contains(accountService.getAccount(principal).get()))
+        {
+            
             // we are here if the learnSet exists and the Owner or an Admin is logged in
             String cardFrontTitel = cardService.getCorrectTitle(cardFrontType, cardFrontPictureFileTitle,
-                    cardFrontTextFileTile, cardFrontAudioFileTitle,
-                    cardFrontAudioFileTitle);
+                    cardFrontTextFileTile, cardFrontVideoFileTitle, cardFrontAudioFileTitle);
             String cardBackTitel = cardService.getCorrectTitle(cardBackType, cardBackPictureFileTitle,
-                    cardBackTextFileTitle, cardBackAudioFileTitle,
-                    cardBackAudioFileTitle);
+                    cardBackTextFileTitle,cardBackVideoFileTitle, cardBackAudioFileTitle);
 
             //TODO: Doppelter Code kann noch verbessert werden, wenn Zeit
             try {
@@ -113,20 +165,23 @@ public class AddCardController {
             }
 
         }
-        if (errors.isEmpty()) {
-            learnSetService.addCardToList(learnSetID, newCard);
+        if (errors.isEmpty() && learnSet.isPresent()) {
+            learnSet.get().getCardList().addToList(newCard);
+            learnSetService.saveLearnSet(learnSet.get());
+            
             modelAndView.setViewName("redirect:/cardOverview/" + learnSetID);
-            return modelAndView;
-        } else {
+            
+        }
+        else
+        {
             for (String error: errors)
             {
                 System.out.println(error);
             }
             // TODO : write errors to frontend -> viel spaß frontend team :)
-            modelAndView.setViewName("redirect:/index");
-            return modelAndView;
+            modelAndView.setViewName("redirect:/addCard/" + learnSetID);
         }
-
+        return modelAndView;
     }
 
 }
