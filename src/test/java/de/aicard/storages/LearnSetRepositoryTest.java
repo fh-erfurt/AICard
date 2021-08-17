@@ -19,6 +19,9 @@ import java.util.List;
 @DataJpaTest
 public class LearnSetRepositoryTest
 {
+    
+    // TODO : test save(), getLearnSetByCardId()
+    
     @Autowired
     private LearnSetRepository learnSetRepository;
 
