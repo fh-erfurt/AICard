@@ -35,7 +35,7 @@
 
         <div th:each="comment : ${learnSet.getCommentList()}" class="card whiteBG pannel">
             <div class="cardSites">
-                <p th:text="'Hat empfolen ' + ${comment.getRecommended()}"></p>
+                <p th:text="'Hat empfohlen ' + ${comment.getRecommended()}"></p>
                 <p th:text="${comment.getMessage()}"></p>
                 <p th:text="${{comment.getTime()}} + 'Uhr'"></p>
                 <p>Verfasser:

@@ -96,44 +96,19 @@ a {
 }
 
 .gridItem {
-    position: relative;
     width: 250px;
     height: 300px;
-    border-radius: 20px;
     justify-self: center;
     align-self: center;
-    background-color: white;
-    overflow: hidden;
 }
 
 .gridItem>* {
-    position: absolute;
+    position: relative;
+    display: list-item;
 }
 
 .deckName {
-    top: 0px;
     font-size: 30px;
-    padding: 10px;
-}
-
-.cardCount,
-.deckStatus {
-    top: 50%;
-    transform: translate(0, -50%);
-    padding: 10px;
-}
-
-.edit,
-.learn {
-    bottom: 0px;
-    width: 50%;
-    height: 50px;
-    text-align: center;
-    line-height: 50px;
-}
-
-.deckStatus {
-    right: 0px;
 }
 
 .createLearnset .pannel {
