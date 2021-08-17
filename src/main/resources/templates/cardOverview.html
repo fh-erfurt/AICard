@@ -28,7 +28,7 @@
                 </p>
             </div>
             <div th:switch="${isOwner}">
-                <div th:case="true" class="btnContainer">
+                <div th:case="true" class="btnContainer bottom">
                     <div class="btn redBtn">
                         <a th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}">X</a>
                     </div>
@@ -51,7 +51,7 @@
 
             <div th:each="card : ${cardList}" class="card whiteBG pannel">
                 <div class="cardSites">
-                <div th:switch="${card.getCardFront().getType().name()}" class=cardOFront>
+                <div th:switch="${card.getCardFront().getType().name()}">
                     <div th:case="TextFile">
                         <p th:text="${card.getCardFront().getTitle()}"></p>
                         <p th:text="${card.getCardFront().getData()}"></p>
@@ -78,7 +78,7 @@
                 </div>
                 <!--End Switch-->
 
-                <div th:switch="${card.getCardBack().getType().name()}" class=cardOBack>
+                <div th:switch="${card.getCardBack().getType().name()}">
                     <div th:case="TextFile">
                         <p th:text="${card.getCardBack().getTitle()}"></p>
                         <p th:text="${card.getCardBack().getData()}"></p>
