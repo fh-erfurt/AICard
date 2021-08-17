@@ -2,6 +2,7 @@ package de.aicard.domains.learnset;
 
 import de.aicard.domains.card.Card;
 import de.aicard.domains.BaseEntity;
+import de.aicard.domains.enums.DataType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -180,5 +181,12 @@ public class CardList extends BaseEntity
             logger.warning("ListIndex out of bounce.");
         }
     }
-
+    
+    public void setCardPath(String filePath){
+        List<Card> listOfCards = this.listOfCards;
+        for ( Card card : listOfCards)
+        {
+            card.setCardPath(filePath);
+        }
+    }
 }

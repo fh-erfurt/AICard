@@ -1,6 +1,7 @@
 package de.aicard.services;
 
 import de.aicard.domains.account.Account;
+import de.aicard.domains.card.Card;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.storages.AccountRepository;
 import de.aicard.storages.CardListRepository;
@@ -88,6 +89,10 @@ public class LearnSetService {
         //statt oben einfach cascade styles nutzen lol
         learnSet.get().setOwner(null);
         learnSet.get().setAdminList(null);
+        for (Card card:learnSet.get().getCardList().getListOfCards())
+        {
+            card.deleteCardContent();
+        }
         learnSetRepository.delete(learnSet.get());
     }
 

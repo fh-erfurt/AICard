@@ -33,7 +33,6 @@
     <bean id="MainController" class="de.aicard.controller.MainController"></bean>
 
     <bean id="AccountService" class="de.aicard.services.AccountService"></bean>
-    <bean id="CardContentService" class="de.aicard.services.CardContentService"></bean>
     <bean id="CardService" class="de.aicard.services.CardService"></bean>
     <bean id="LearnSetService" class="de.aicard.services.LearnSetService"></bean>
 

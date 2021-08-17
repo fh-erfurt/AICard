@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.lang.reflect.Method;
-import java.util.List;
+
 
 /**
  * CardContent is one Side of a card
@@ -31,4 +30,29 @@ public class CardContent extends BaseEntity
     @Column
     private DataType type;
 
+    
+    public CardContent(String title,String data, String type){
+        this.title = title;
+        this.data = data;
+        this.type = getDataTypeFromString(type);
+    }
+    
+    private DataType getDataTypeFromString(String type){
+        DataType dataType;
+        switch (type) {
+            case "PictureFile":
+                dataType = DataType.PictureFile;
+                break;
+            case "VideoFile":
+                dataType = DataType.VideoFile;
+                break;
+            case "AudioFile":
+                dataType = DataType.AudioFile;
+                break;
+            default:
+                dataType = DataType.TextFile;
+                break;
+        }
+        return dataType;
+    }
 }

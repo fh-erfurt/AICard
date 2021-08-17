@@ -52,7 +52,6 @@ public class LearningSessionController
     public String getInitializeLearningSession(@PathVariable("learnSetAboId") Long learnSetAboId, Model model)
     {
         model.addAttribute("learnSetAboID", learnSetAboId);
-        // TODO: iterate over learnset/abo to get all new cards with cardstatus or delete card
         Optional<LearnSetAbo> learnSetAbo = learnSetAboRepository.findById(learnSetAboId);
         if(learnSetAbo.isPresent())
         {
@@ -61,11 +60,6 @@ public class LearningSessionController
             List<CardStatus> cardStatusList = learnSetAbo.get().getCardStatus();
             for (Card card : cardlist.getListOfCards())
             {
-                
-                // TODO : was passiert mit Karten die aus dem LearnSet gelöscht wurden?
-                //  wie entfernen die die Karten hier? andersherum über die Lisen gehen?
-                //  erst die CardStatusList und dann die Cardlist?
-                
                 boolean cardIsInCardStatusList = false;
                 for(CardStatus cardStatus : cardStatusList)
                 {
@@ -135,14 +129,11 @@ public class LearningSessionController
                 Card card = learningSession.getCardStatusList().get(currentCardIndex).getCard();
                 
                 // Korrekten FilePath zusammenbauen um ihn im Frontend anzuzeigen
-                String filePath = "/learnSetImage/";
-                CardList cardList = new CardList();
-                cardList.addToList(card);
-                Card updatedFilePathCard = cardService.setCardData(filePath, cardList).get(0);
-                
-                model.addAttribute("card", updatedFilePathCard);
+                String filePath = "/getFile/";
+                card.setCardPath(filePath);
+                model.addAttribute("card", card);
                 model.addAttribute("learnSetAboId", learnSetAbo.get().getId());
-                return "/learnCard" /*+ learningSessionId*/;
+                return "/learnCard";
             }
            
         }

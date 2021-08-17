@@ -132,7 +132,7 @@ public class LearnSetController
     @GetMapping("cardOverview/{id}")
     public String getCardOverview(@PathVariable Long id,Principal principal, Model model)
     {
-        String filePath = "/learnSetImage/";
+        String filePath = "/getFile/";
         Optional<Account> account = accountService.getAccount(principal);
         Optional<LearnSet> learnSet = learnSetService.getLearnSetByLearnSetId(id);
         
@@ -147,8 +147,8 @@ public class LearnSetController
             if(cardList != null){
                 model.addAttribute("isOwner", isOwner);
                 model.addAttribute("learnSet", learnSet.get());
-                List<Card> listOfCards = cardService.setCardData(filePath, cardList);
-                model.addAttribute("cardList", listOfCards);
+                cardList.setCardPath(filePath);
+                model.addAttribute("cardList", cardList.getListOfCards());
                 model.addAttribute("isAdmin", isAdmin);
                 return "cardOverview";
             }
@@ -163,8 +163,8 @@ public class LearnSetController
      * @throws IOException
      */
     // getImagesForLearnSet
-    @GetMapping("/learnSetImage/{fileName}")
-    public ResponseEntity<byte[]> getImage(@PathVariable("fileName") String fileName) throws IOException
+    @GetMapping("/getFile/{fileName}")
+    public ResponseEntity<byte[]> getFile(@PathVariable("fileName") String fileName) throws IOException
     {
         File img = new File(System.getProperty("user.dir") + "\\cardFiles\\" + fileName);
         return ResponseEntity.ok().contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(img))).body(Files.readAllBytes(img.toPath()));
