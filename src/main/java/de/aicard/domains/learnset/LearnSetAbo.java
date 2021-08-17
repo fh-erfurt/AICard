@@ -4,7 +4,6 @@ import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardStatus;
 import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.CardKnowledgeLevel;
-import de.aicard.domains.enums.State;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

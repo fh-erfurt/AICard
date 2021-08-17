@@ -36,7 +36,8 @@ Das Team besteht aus 5 Mitgliedern, alle aus der Vertiefungsrichtung Ingenieursi
 
 <details>
 <summary>Projektbeschreibung</summary>
-<br>
+
+####Java 1
 
 Ziel des Projektes ist es, ein Multiuser-Kartenlernsystem für Studierende und Lehrende als Pilotprojekt an der FH Erfurt
 zu entwickeln. Um das System nutzen zu können, müssen die Studierenden und Lehrenden einen Account erstellen. Hierzu
@@ -63,10 +64,42 @@ Gänzlich verabschiedet haben wir uns von dieser Funktion jedoch noch nicht - ev
 Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskommentiert und alle vorhandenen Klassen wurden so gestaltet, dass eine Erweiterung des Gesamtsystems um eine Gruppen-Funktion ohne weiteres möglich ist. 
 
 ![img_5.png](doc/Pictures/business_use_case.png)
+
+####Java 2
+
+Die grundsätzliche Idee des Projektes hat sich seit der Projektabgabe Java 1 nicht geändert - jedoch sind neue Ideen hinzugekommen,
+aus Zeitmanagementgründen wurden Ideen verworfen und die Komplexität der Klassen
+wurde an manchen Stellen vereinfacht. Hier seien nur die Änderungen der vorliegenden
+Abgabe im Vergleich zur Projektbeschreibung Stand Java 1 beschrieben. In allen anderen Punkten ist die Projektbeschreibung
+Java 1 noch gültig. 
+<br>
+Bei der Erstellung eines Accounts haben wir uns dazu entschlossen, alle Angaben verpflichtend zu machen - die User müssen
+nun also neben E-Mail Adresse und Passwort auch einen Namen und eine Beschreibung angeben sowie eine Fakultät auswählen. 
+Da die Unterscheidung zwischen Lehrenden-Accounts und Studierenden-Accounts wegfiel, gilt die zwingende Zuordnung zu einer 
+Fakultät nun auch für Lehrende, nicht nur für Studierende. 
+Auch bei Erstellen von Lernsets ist nun die Auswahl einer Fakultät erforderlich, um abonnierbare Lernsets übersichtlicher
+im Learn Set Shop verfügbar machen zu können. Der Learn Set Shop realisiert die in der Projektbeschreibung Java 1
+beschriebene Suchfunktion.
+<br>
+Die für den Lernvorgang auswählbare Kartenzahl wurde reduziert auf maximal 25 Karten pro Learning-Session.
+Hier kann nun zwischen 10, 15, 20 und 25 Karten gewählt werden. Hierdurch wird bewusst auf die bekanntlich kurze
+Aufmerksamkeitsspanne von Studierenden und Menschen im Allgemeinen eingegangen. Enthält das Lernset weniger als die 
+ausgewählte Kartenmenge, werden nur die existierenden Karten abgefragt. 
+<br>
+Die Möglichkeit des Chats zwischen Accounts wurde vom Team verworfen. Diese Funktion hätte den zeitlichen Rahmen des
+Projekts gesprengt und ist zudem eine Funktion, die bereits durch viele andere Anbieter hinreichend realisiert ist.
+Die Interaktion zwischen Accounts kann über das Bewerten bzw. Kommentieren von Lernsets erfolgen.
+Eine Draufsicht auf die Möglichen Interaktionen zwischen User und System ist im folgenden Diagramm graphisch dargestellt.
+
+![img_10.png](doc/Pictures/Business_UseCase_Java2.png)
+
 </details>
 
 <details>
 <summary>Use-Case-Diagramme</summary>
+Die Folgenden Use-Case Diagramme zeigen den Stand bei Abgabe des Projektes Java 1. Die erfolgten Änderungen sind im Abschnitt
+"Projektbeschreibung" sowie in der weiteren Dokumentation hinreichend beschrieben, weshalb hier auf weitere
+detaillierte Use-Case-Diagramme verzichtet wird.
 
 #### Account
 
@@ -202,7 +235,9 @@ Das bisher entstandene Grundgerüst der Gruppen-Klasse wurde im Projekt auskomme
 ### Zentrale Architekturentscheidungen
 <details>
 <summary> Übersicht </summary>
-<br>
+
+####Java 1
+
 Im Laufe der Projektarbeit mussten in der Gruppe viele Entscheidungen getroffen werden hinsichtlich der Architektur des Systems,
 es musste geklärt werden, wie die Klassen in Packages aufgeteilt werden sollen und welche Funktionalität in welcher Klasse am besten aufgehoben ist.
 Die finale Struktur, die zum Zeitpunkt der Abgabe des Projekts für Java 1 vorliegt, ist das Ergebnis dieses Prozesses,
@@ -217,7 +252,17 @@ gewährleisten hier in verkürzter Version nur mit Klassennamen realisiert ist:
 
 Die zentralen Entscheidungen, die zu diesem Ergebnis geführt haben, werden im Folgenden, geordnet nach Packages, dokumentiert.
 Für die Dokumentation der konkreten Implementierung der Klassen ist bitte die unter Allgemeine Projektübersicht verlinkte JavaDoc sowie der Code selbst zu konsultieren.
+
+####Java 2
+
+Auch im Laufe der Arbeit im Rahmen des Projekts zur Lehrveranstaltung Java 2 wurden weitere Klassenanpassungen vorgenommen. 
+Die Kernpackages, die Teil des Projektes Java 1 waren wurden weiterentwickelt und angepasst, um sie im Rahmen des
+Springframeworks nutzen zu können. In diesem Abschnitt werden nur die Klassen unter de.aicard.domains beschrieben. 
+Die in Java 2 komplett neu hinzugefügten Komponenten werden in einem gesonderten Abschnitt beschrieben.
+
+
 </details>
+
 
 <details>
 <summary>Enums</summary>
