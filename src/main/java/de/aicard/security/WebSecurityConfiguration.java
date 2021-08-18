@@ -40,10 +40,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/addCard/*", "/cardOverview/**", "/createLearnset", "/deckOverview/**",
-                        "/editCard/**", "/editLearnSet/**", "/learnSets", "/profile", "/profile/**",
-                        "/updateProfile/**", "/learnSetShop", "/learnCard/**", "/initializeLearningSession/**",
-                        "/comments/*"
+                .antMatchers("/addCard/*", "/cardOverview/**", "/createLearnset",
+                         "/editLearnSet/**", "/learnSets", "/profile", "/profile/**", "/comments/*",
+                        "/updateProfile/**", "/learnSetShop", "/learnCard/**", "/initializeLearningSession/**"
                         // TODO : hier müssen alle seiten bzw getMethoden eingetragen werden
                 ).hasAnyRole("USER")
 
