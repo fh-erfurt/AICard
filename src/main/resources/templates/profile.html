@@ -25,8 +25,8 @@
                 <tbody>
                 <tr th:each="friend : ${account.getFriends()}">
                     <td><a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a></td>
-                    <td th:if="${userIsProfileAccount}"><a class="XBtn redBtn"
-                                                           th:href="@{'/removeFriendFromFriendList/' + ${friend.getId()}}">x</a>
+                    <td th:if="${userIsProfileAccount}">
+                        <a class="XBtn redBtn" th:href="@{'/removeFriendFromFriendList/' + ${friend.getId()}}" title="Account als Freund entfernen">x</a>
                     </td>
                 </tr>
                 </tbody>

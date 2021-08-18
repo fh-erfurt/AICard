@@ -16,7 +16,7 @@
             <div class="formListElement">
                 <label for="facultyProfessor">Fakukltät</label>
                 <select id="facultyProfessor" name="faculty" required>
-                    <option value="duDoppelNull">Alle Fakultäten</option>
+                    <option value="allFaculties">Alle Fakultäten</option>
                     <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
                             th:selected="${faculty.name().equals(selectedFacultyName)}"
                             th:text="${faculty}"

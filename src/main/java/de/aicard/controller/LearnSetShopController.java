@@ -46,7 +46,7 @@ public class LearnSetShopController {
      * @return String
      */
     @GetMapping("/learnSetShop")
-    public String getLearnSetShop(@RequestParam(name = "faculty", required = false, defaultValue = "duNull") String stringFaculty,
+    public String getLearnSetShop(@RequestParam(name = "faculty", required = false, defaultValue = "allFaculties") String stringFaculty,
                                   @RequestParam(name = "learnSetTitle", required = false, defaultValue = "") String learnSetTitle,
                                   Principal principal, Model model) {
         List<LearnSet> learnSets = learnSetService.findAll();
@@ -86,8 +86,8 @@ public class LearnSetShopController {
                 frontEndLearnSets = helperLearnSets;
                 helperLearnSets = new ArrayList<>();
 
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage()); // for debugging
+            } catch (IllegalArgumentException ignored) {
+                
             }
 
             // if we want to filter learnset title of substring -> filter
