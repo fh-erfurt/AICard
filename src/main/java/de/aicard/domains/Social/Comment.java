@@ -1,7 +1,7 @@
 package de.aicard.domains.Social;
 
-import de.aicard.domains.account.Account;
 import de.aicard.domains.BaseEntity;
+import de.aicard.domains.account.Account;
 import de.aicard.domains.enums.Recommended;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

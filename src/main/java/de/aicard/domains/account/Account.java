@@ -4,12 +4,13 @@ import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
-import de.aicard.domains.learnset.LearnSetAbo;
 import de.aicard.domains.learnset.LearnSet;
+import de.aicard.domains.learnset.LearnSetAbo;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**

@@ -1,11 +1,11 @@
 package de.aicard.domains.learnset;
 
-import de.aicard.domains.Social.Comment;
 import de.aicard.domains.BaseEntity;
+import de.aicard.domains.Social.Comment;
+import de.aicard.domains.account.Account;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.enums.Recommended;
 import de.aicard.domains.enums.Visibility;
-import de.aicard.domains.account.Account;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

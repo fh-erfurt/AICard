@@ -4,6 +4,7 @@ package de.aicard.config;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
