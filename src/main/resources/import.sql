@@ -205,12 +205,12 @@ insert into CARDLIST_CARD (CARDLIST_ID, LISTOFCARDS_ID) values('6','40');
 
 -- // TABELLE LEARNSET //////////////////////////
 
-insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('1','Learnset1','4','Title1','2', '1','1');
-insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('2','Learnset2','2','Title2','2', '2','2');
-insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('3','Learnset3','3','Title3','2', '3','3');
-insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('4','Learnset4','4','Title4','2', '4','1');
-insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('5','Learnset5','2','Title5','2', '5','2');
-insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('6','Learnset6','3','Title6','2', '6','3');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('1','Learnset1','4','Title1','0', '1','1');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('2','Learnset2','2','Title2','0', '2','2');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('3','Learnset3','3','Title3','0', '3','3');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('4','Learnset4','4','Title4','0', '4','1');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('5','Learnset5','2','Title5','0', '5','2');
+insert into LEARNSET (ID, DESCRIPTION, FACULTY,  TITLE, VISIBILITY, CARDLIST_ID, OWNER_ID) values  ('6','Learnset6','3','Title6','0', '6','3');
 
 
 
@@ -267,7 +267,7 @@ insert into LEARNINGSESSION_CARDSTATUS (LEARNINGSESSION_ID, CARDSTATUSLIST_ID) v
 -- // TABELLE LEARNSETABO /////////////////////////////
 
 
-insert into LEARNSETABO (ID, EVALUATION, LEARNSETSTATUS, LEARNSET_ID) values ('1', -1,'0','1'),('2', -1,'1','1'),('3', -1,'0','2'),('4', -1,'0','3');
+insert into LEARNSETABO (ID, EVALUATION, LEARNSET_ID) values ('1', -1,'1'),('2', -1,'1'),('3', -1,'2'),('4', -1,'3');
 
 -- // TABELLE ACCOUNT_LEARNSETABO ///////////////////////////////
 
