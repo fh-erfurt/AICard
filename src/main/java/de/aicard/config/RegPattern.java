@@ -2,7 +2,6 @@ package de.aicard.config;
 
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.regex.Matcher;
@@ -11,13 +10,11 @@ import java.util.regex.Pattern;
 
 /**
  * class to validate email and password
- *
  * @author Clemens Berger
  */
 
 @Setter
 @Getter
-@RequiredArgsConstructor // TODO : muss das einen construcot haben?!
 public class RegPattern {
 
     private static final String patternPass = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";

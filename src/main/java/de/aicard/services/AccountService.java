@@ -81,7 +81,7 @@ public class AccountService {
             throw new IllegalStateException("Der angegebene Account kann nicht hinzugefügt werden");
         }
 
-        if (!account.getPassword().isEmpty()) account.setPassword(passwordEncoder.encode(account.getPassword()));
+        if (oldAccount.isPresent() && !account.getPassword().isEmpty()) oldAccount.get().setPassword(passwordEncoder.encode(account.getPassword()));
 
         if (oldAccount.isPresent()) {
             oldAccount.get().setName(account.getName());
