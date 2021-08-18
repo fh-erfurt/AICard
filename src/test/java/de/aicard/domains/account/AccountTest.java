@@ -1,6 +1,5 @@
 package de.aicard.domains.account;
 
-import de.aicard.domains.enums.AcademicGrade;
 import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.LearnSet;

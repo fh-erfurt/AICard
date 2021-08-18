@@ -4,13 +4,11 @@ import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardContent;
 import de.aicard.domains.enums.DataType;
 import de.aicard.domains.enums.Faculty;
-import de.aicard.domains.enums.State;
 import de.aicard.domains.enums.Visibility;
 import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
 import static de.aicard.domains.enums.CardKnowledgeLevel.NOINFORMATION;
-//import static de.aicard.domains.learnset.LearnSetTest.getTestLearnSet;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
