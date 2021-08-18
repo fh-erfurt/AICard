@@ -8,15 +8,18 @@
     <div th:replace="fragments/header :: header"></div>
 
 
-    <table th:if="${!#lists.isEmpty(errorList)}">
-        <tbody>
-            <tr th:each="error : ${errorList}">
-                <td><span th:text="${error}"> Title </span></td>
-            </tr>
-        </tbody>
-    </table>
+
     <div class="pageContent">
-            <div class="registration">
+        <div class="errorPannel pannel">
+            <table th:if="${!#lists.isEmpty(errorList)}">
+                <tbody>
+                <tr th:each="error : ${errorList}">
+                    <td><span th:text="${error}"> Title </span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+            <div class="registration pannel whiteBG">
                 <div class="formListElement">
                     <label class="head">Registration für Professoren</label>
                 </div>

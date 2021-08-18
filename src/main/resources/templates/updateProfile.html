@@ -9,18 +9,21 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div class="pageContent">
+  <div class="pannel errorPannel">
+    <table th:if="${!#lists.isEmpty(errorList)}">
+      <tbody>
+      <tr th:each="error : ${errorList}">
+        <td><span th:text="${error}"> Title </span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="registration whiteBG pannel">
 
   <h1>Account Update Seite</h1>
 
-  <table th:if="${!#lists.isEmpty(errorList)}">
-    <tbody>
-    <tr th:each="error : ${errorList}">
-      <td><span th:text="${error}"> Title </span></td>
-    </tr>
-    </tbody>
-  </table>
+
 
 
   <form id="signUp-professor" th:action="@{/updateAccount}" th:object="${account}" method="POST">

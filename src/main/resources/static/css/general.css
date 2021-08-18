@@ -152,6 +152,11 @@ a:hover {
     text-align: center;
     font-size: 200px;
 }
+.errorPannel{
+    width: 100%;
+    background: #ff959a;
+    border: 5px solid #b1322f;
+}
 
 .btnContainer {
     position: absolute;

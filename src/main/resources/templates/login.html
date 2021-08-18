@@ -14,16 +14,15 @@
 
 
     <div class="pageContent">
-        <div class="registration">
+        <div class="pannel errorPannel" th:if="${param.error}">
+            Ungültiger Nutzername oder Password.
+        </div>
+        <div class="registration pannel whiteBG">
             <div class="formListElement">
                 <label class="head">Anmeldung</label>
             </div>
 
             <form method="POST" id="loginform" th:action="@{/login}">
-
-                <div th:if="${param.error}">
-                    Ungültiger Nutzername oder Password.
-                </div>
 
                 <div class="formListElement">
                     <label>Email</label>
