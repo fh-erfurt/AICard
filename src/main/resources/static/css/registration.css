@@ -25,22 +25,7 @@
     overflow: auto;
 }
 
-.registrationLink,
-.registrationLink:visited {
-    position: relative;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    line-height: 50px;
-    text-decoration: underline currentColor;
-    text-align: center;
-}
 
-.registrationLink:hover {
-    text-decoration: underline solid currentColor 2px;
-}
 
 .formListElement {
     position: relative;

@@ -129,6 +129,7 @@ a:hover {
     position: relative;
     border-radius: 20px;
     overflow: hidden;
+    min-height: 5vh;
 }
 .pannel>*{
     margin: 10px;
@@ -177,6 +178,15 @@ a:hover {
     font-size: 18px;
     border: none;
     cursor: pointer;
+}
+.btn a{
+    text-decoration: none;
+    line-height: 50px;
+}
+
+.btn a:hover {
+    text-decoration: none;
+
 }
 
 .blueBtn {

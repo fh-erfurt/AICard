@@ -10,8 +10,8 @@
 
 
     <div class="pageContent">
-        <div class="errorPannel pannel">
-            <table th:if="${!#lists.isEmpty(errorList)}">
+        <div class="errorPannel pannel" th:if="${!#lists.isEmpty(errorList)}">
+            <table>
                 <tbody>
                 <tr th:each="error : ${errorList}">
                     <td><span th:text="${error}"> Title </span></td>
@@ -61,7 +61,9 @@
                     </select>
                     </div>
                     <div class="btnPlaceHolder"></div>
-                    <input id="submitButton" type="submit" class="btn blueBtn">
+                    <div class="btnContainer bottom">
+                        <input id="submitButton" type="submit" class="btn blueBtn">
+                    </div>
                 </form>
             </div>
 
