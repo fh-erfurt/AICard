@@ -43,6 +43,8 @@ public class LearnSetAbo extends BaseEntity {
     /**
      * The evaluation the Account has given to the LearnSet. If the Account has not yet given an
      * evaluation to the LearnSet, the variable m_evaluation has the value -1.
+     *
+     * is redundant because evaluation is calculated on the fly by calculating averages of comment recomondations
      */
     private int evaluation;
 
@@ -134,7 +136,7 @@ public class LearnSetAbo extends BaseEntity {
      * removes a cardStatus with the given card from the cardStatusList
      *
      * @param card /
-     * @return CardStatus which is removed
+     * @return CardStatus which is removed to be deleted
      */
     public CardStatus removeCardStatusByCard(Card card) {
         CardStatus erg = null;
