@@ -12,7 +12,7 @@
 <div class="pageContent">
     <div class="pannel whiteBG learnCard">
         <div class="cardSites">
-            <div th:switch="${card.getCardFront().getType().name()}" id="front" style="display: block">
+            <div th:switch="${card.getCardFront().getType().name()}" id="front">
                 <div th:case="TextFile">
                     <p th:text="${card.getCardFront().getTitle()}"></p>
                     <p th:text="${card.getCardFront().getData()}"></p>

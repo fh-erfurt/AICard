@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var btnSchlau = document.getElementById("schlau");
     // TODO : buttons deaktivieren funktioniert noch nicht ganz -.-
     btnReverse.addEventListener("click",()=>{
-            back.style.display = "block";
+            back.style.display = "flex";
             btnDumm.disabled = "";
             btnDumm.style.display = "block";
             btnSchlau.style.display = "block";
