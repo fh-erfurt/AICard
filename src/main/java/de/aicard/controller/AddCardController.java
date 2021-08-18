@@ -113,15 +113,13 @@ public class AddCardController {
         List<String> errors = new ArrayList<>();
         Card newCard = null;
 
-        // TODO : überprüfe bei allen LernSet Änderungen ob der Account darauf zugriff hat
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetID);
         Optional<Account> account = accountService.getAccount(principal);
         
         if (account.isPresent() &&
                 learnSet.isPresent() &&
                 learnSet.get().isAuthorizedToAccessLearnSet(account.get()) &&
-                accountService.getAccount(principal).isPresent() &&
-                learnSet.get().getAdminList().contains(accountService.getAccount(principal).get()))
+                learnSet.get().getAdminList().contains(account.get()))
         {
             
             // we are here if the learnSet exists and the Owner or an Admin is logged in
@@ -174,11 +172,12 @@ public class AddCardController {
         }
         else
         {
+            // for internal debugging
             for (String error: errors)
             {
                 System.out.println(error);
             }
-            // TODO : write errors to frontend -> viel spaß frontend team :)
+            
             modelAndView.setViewName("redirect:/addCard/" + learnSetID);
         }
         return modelAndView;

@@ -89,7 +89,6 @@ public class LearnSetController
         // check if user is logged in -> else: send to Login
         if(account.isPresent())
         {
-            //TODO: Das geht noch eleganter.
             List<LearnSetAbo> abos = account.get().getLearnsetAbos();
             List<LearnSetAbo> ownLearnSetAbos = new ArrayList<>();
             List<LearnSetAbo> favoriteLearnSetAbos = new ArrayList<>();
@@ -127,9 +126,6 @@ public class LearnSetController
         
         if (account.isPresent() && learnSet.isPresent() && learnSet.get().isAuthorizedToAccessLearnSet(account.get()))
         {
-            // check if user has rights! to editn Learnset
-            //zusätzlicher check auf den owner
-            // TODO : check if the CardContentFile exists; what should we do if it doesnt?
             CardList cardList = learnSet.get().getCardList();
             if(cardList != null){
                 model.addAttribute("isOwner", learnSet.get().isOwner(account.get()));
@@ -144,17 +140,16 @@ public class LearnSetController
     }
 
     /**
-     * ???????????????????????????????
+     * loads file from server to frontend
      * @param fileName
      * @return
      * @throws IOException
      */
-    // getImagesForLearnSet
     @GetMapping("/getFile/{fileName}")
     public ResponseEntity<byte[]> getFile(@PathVariable("fileName") String fileName) throws IOException
     {
-        File img = new File(System.getProperty("user.dir") + "\\cardFiles\\" + fileName);
-        return ResponseEntity.ok().contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(img))).body(Files.readAllBytes(img.toPath()));
+        File file = new File(System.getProperty("user.dir") + "\\cardFiles\\" + fileName);
+        return ResponseEntity.ok().contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(file))).body(Files.readAllBytes(file.toPath()));
     }
 
     /**
@@ -264,7 +259,7 @@ public class LearnSetController
     @GetMapping("/unfollowLearnSet/{followedLearnSetAboId}")
     public String getUnfollowedLearnSetAboId(@PathVariable("followedLearnSetAboId") Long followedLearnSetAboId, Principal principal)
     {
-        //TODO abos of admins shoud have an unfollow button
+        
         Optional<Account> account = accountService.getAccount(principal);
         Optional<LearnSetAbo> abo = learnSetAboService.getLearnSetAbo(followedLearnSetAboId);
         if(account.isPresent() && abo.isPresent()){
