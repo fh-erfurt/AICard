@@ -14,7 +14,7 @@ public class ErrorController {
     /**
      * custom error handling
      *
-     * @return error
+     * @return error html
      */
     @GetMapping("/error")
     public String error() {
@@ -25,7 +25,7 @@ public class ErrorController {
     /**
      * custom 403 handling
      *
-     * @return error403
+     * @return error html
      */
     @GetMapping("/error403")
     public String error403() {
