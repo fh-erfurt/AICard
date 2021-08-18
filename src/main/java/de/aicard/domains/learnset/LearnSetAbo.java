@@ -82,9 +82,9 @@ public class LearnSetAbo extends BaseEntity
     private List<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel level)
     {
         List<CardStatus> result = new ArrayList<>();
-        for(int i=0; i<(this.cardStatus.size()); i++){
-            if (cardStatus.get(i).getCardKnowledgeLevel() == level){
-                result.add(cardStatus.get(i));
+        for (CardStatus status : this.cardStatus) {
+            if (status.getCardKnowledgeLevel() == level) {
+                result.add(status);
             }
         }
         return result;
@@ -108,14 +108,9 @@ public class LearnSetAbo extends BaseEntity
         for (CardKnowledgeLevel level : CardKnowledgeLevel.values())
         {
             List<CardStatus> lowestLevelList = getCardStatusOfKnowledgeLevel(level);
-            if(lowestLevelList != null)
-            {
-                for(int i = 0; i< lowestLevelList.size(); i++)
-                {
-                    if (resultCardStatusList.size()<_numOfCards)
-                    {
-                        resultCardStatusList.add(lowestLevelList.get(i));
-                    }
+            for (CardStatus status : lowestLevelList) {
+                if (resultCardStatusList.size() < _numOfCards) {
+                    resultCardStatusList.add(status);
                 }
             }
             if (resultCardStatusList.size()==_numOfCards) break;
@@ -144,8 +139,8 @@ public class LearnSetAbo extends BaseEntity
     
     /**
      * removes a cardStatus with the given card from the cardStatusList
-     * @param card
-     * @return
+     * @param card /
+     * @return CardStatus which is removed
      */
     public CardStatus removeCardStatusByCard(Card card)
     {

@@ -25,7 +25,7 @@ public class RegPattern
 
     /**
      *  checks if the given string matches the password regex
-     * @param password
+     * @param password the password string
      * @return matching
      */
     public static boolean passMatches(String password){
@@ -36,8 +36,8 @@ public class RegPattern
 
     /**
      *  checks if the given string matches the email regex
-     * @param email
-     * @returnmatching
+     * @param email the email string
+     * @return matching
      */
     public static boolean emailMatches(String email){
         Pattern pattern = Pattern.compile(patternEmail);

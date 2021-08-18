@@ -2,7 +2,9 @@ package de.aicard.domains.card;
 
 import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.CardKnowledgeLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +18,8 @@ import java.util.logging.Logger;
  *
  * @author Martin Kuehlborn
  */
+@Setter
+@Getter
 @Entity
 @NoArgsConstructor
 public class CardStatus extends BaseEntity
@@ -44,39 +48,15 @@ public class CardStatus extends BaseEntity
      *
      * Assigns the lowest CardKnowledgeLevel (NOINFORMATION) to the member cardKnowledgeLevel.
      *
-     * @param _newCard the Card to which the status belongs.
+     * @param newCard the Card to which the status belongs.
      */
-    public CardStatus(Card _newCard)
+    public CardStatus(Card newCard)
     {
         this.cardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
-        this.card = _newCard;
-    }
-    
-    
-    //Getter + Setter
-    public Card getCard()
-    {
-        return card;
-    }
-    
-    public void setCard(Card _newCard)
-    {
-        this.card = _newCard;
+        this.card = newCard;
     }
 
-    public CardKnowledgeLevel getCardKnowledgeLevel()
-    {
-        return cardKnowledgeLevel;
-    }
-    
-    public void setCardKnowledgeLevel(CardKnowledgeLevel newCardKnowledgeLevel)
-    {
-        this.cardKnowledgeLevel = newCardKnowledgeLevel;
-    }
-    
-    
     // METHODS
-    
     /**
      * Increases CardKnowledgeLevel or keeps the highest level
      *
@@ -126,7 +106,7 @@ public class CardStatus extends BaseEntity
                 break;
             default:
                 logger.warning("Something went wrong, Default case should never be reached!");
-                return;
+                break;
         }
     }
     

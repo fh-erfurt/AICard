@@ -1,6 +1,5 @@
 package de.aicard.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,23 +10,32 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 /**
- * @Author Martin Kühlborn
+ * SpringSecurity standard implementation of WebSecurityConfigurerAdapter
+ * @author Martin Kühlborn
  */
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
-    @Autowired
-    UserDetailsService userDetailsService;
-    
-    
+    final UserDetailsService userDetailsService;
+
+    public WebSecurityConfiguration(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
         auth.userDetailsService(userDetailsService);
     }
 
+    /**
+     * configuration for access rights for pages
+     * @param http http
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {

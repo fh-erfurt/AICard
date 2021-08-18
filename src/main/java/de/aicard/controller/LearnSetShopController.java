@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 /**
- * @Author Martin Kühlborn,Clemens Berger
+ * browsing feature for accessible LearnSets
+ * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
 public class LearnSetShopController
@@ -36,11 +37,11 @@ public class LearnSetShopController
      * shows all for the account visible unsubscribed LearnSets
      * only public are visible
      * and protected if the user is in the same faculty
-     * @param stringFaculty
-     * @param learnSetTitle
-     * @param principal
-     * @param model
-     * @return
+     * @param stringFaculty /
+     * @param learnSetTitle /
+     * @param principal /
+     * @param model /
+     * @return String
      */
     @GetMapping("/learnSetShop")
     public String getLearnSetShop(@RequestParam(name = "faculty", required = false, defaultValue = "duNull")String stringFaculty,
@@ -94,7 +95,7 @@ public class LearnSetShopController
     
             } catch (IllegalArgumentException e)
             {
-                System.out.println(e);
+                System.out.println(e.getMessage()); // for debugging
             }
 
             // if we want to filter learnset title of substring -> filter
@@ -122,9 +123,9 @@ public class LearnSetShopController
     /**
      * adds a learnsetabo to the account
      *
-     * @param principal
-     * @param learnSetId
-     * @return
+     * @param principal /
+     * @param learnSetId /
+     * @return String
      */
     @GetMapping("/followLearnSet/{learnSetId}")
     public String getFollowLearnSet(Principal principal, @PathVariable("learnSetId") Long learnSetId){

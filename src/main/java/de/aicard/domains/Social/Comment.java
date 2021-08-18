@@ -36,20 +36,17 @@ public class Comment extends BaseEntity
     
     //constructor
     /**
-     * command constructer
-     */
-    /**
      * Constructor of a Message.
      * @param newSender the person that sends the message
-     * @param newMessage the message to send
+     * @param newCommentString the message to send
      *
      * likes are initialized to 0  and time is the time the message was sent
      *
      * @author Amine Semlali
      */
-    public Comment(String newMessage, Account newSender, Recommended newRecomended)
+    public Comment(String newCommentString, Account newSender, Recommended newRecomended)
     {
-        this.message = newMessage;
+        this.message = newCommentString;
         this.sender = newSender;
         this.time = LocalDateTime.now();
         this.recommended = newRecomended;

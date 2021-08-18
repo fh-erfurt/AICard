@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 /**
+ * adds a card to the corresponding learnSet
  * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
@@ -39,10 +40,10 @@ public class AddCardController {
 
     /**
      * shows the addCard.html if the user can access it
-     * @param learnSetID
-     * @param principal
-     * @param model
-     * @return
+     * @param learnSetID /
+     * @param principal /
+     * @param model /
+     * @return html
      */
 
     @GetMapping("/addCard/{learnSetID}")
@@ -61,36 +62,34 @@ public class AddCardController {
      * handles creatng cards for a LearnSet
      * different params are needed to identify datatypes such as video,audio,text and pictures
      * for front and back side
-     * @param learnSetID
-     * @param principal
-     * @param model
-     * @param cardFrontType
-     * @param cardFrontTextFileTile
-     * @param cardFrontTextFileInput
-     * @param cardFrontPictureFileTitle
-     * @param cardFrontPictureFileInput
-     * @param cardFrontVideoFileTitle
-     * @param cardFrontVideoFileInput
-     * @param cardFrontAudioFileTitle
-     * @param cardFrontAudioFileInput
-     * @param cardBackType
-     * @param cardBackTextFileTitle
-     * @param cardBackTextFileInput
-     * @param cardBackPictureFileTitle
-     * @param cardBackPictureFileInput
-     * @param cardBackVideoFileTitle
-     * @param cardBackVideoFileInput
-     * @param cardBackAudioFileTitle
-     * @param cardBackAudioFileInput
-     * @return
-     * @throws IOException
+     * @param learnSetID /
+     * @param principal /
+     * @param cardFrontType /
+     * @param cardFrontTextFileTile /
+     * @param cardFrontTextFileInput /
+     * @param cardFrontPictureFileTitle /
+     * @param cardFrontPictureFileInput /
+     * @param cardFrontVideoFileTitle /
+     * @param cardFrontVideoFileInput /
+     * @param cardFrontAudioFileTitle /
+     * @param cardFrontAudioFileInput /
+     * @param cardBackType /
+     * @param cardBackTextFileTitle /
+     * @param cardBackTextFileInput /
+     * @param cardBackPictureFileTitle /
+     * @param cardBackPictureFileInput /
+     * @param cardBackVideoFileTitle /
+     * @param cardBackVideoFileInput /
+     * @param cardBackAudioFileTitle /
+     * @param cardBackAudioFileInput /
+     * @return html
      */
     // --- we offer the possibility for all files to be send but only save those that are selected by the FileTypeSelector
     @PostMapping("/addCard/{learnSetID}")
     @ResponseBody
     public ModelAndView postAddCard(
 
-            @PathVariable Long learnSetID, Principal principal, Model model,
+            @PathVariable Long learnSetID, Principal principal,
             @RequestParam("cardFrontType") String cardFrontType,
             @RequestParam(value = "cardFrontTextFileTitle", required = false) String cardFrontTextFileTile, @RequestParam(value = "cardFrontTextFileInput", required = false) String cardFrontTextFileInput,
             @RequestParam(value = "cardFrontPictureFileTitle", required = false) String cardFrontPictureFileTitle, @RequestParam(value = "cardFrontPictureFileInput", required = false) MultipartFile cardFrontPictureFileInput,
@@ -132,25 +131,22 @@ public class AddCardController {
             try {
                 if (cardFrontType.equals(DataType.TextFile.name())) {
 
-                    String cardFrontInput = cardFrontTextFileInput;
                     if (cardBackType.equals(DataType.TextFile.name())) {
-                        String cardBackInput = cardBackTextFileInput;
-                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
-                                cardBackType, cardBackTitel, cardBackInput);
+                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontTextFileInput,
+                                cardBackType, cardBackTitel, cardBackTextFileInput);
 
                     } else {
                         MultipartFile cardBackInput = cardService.getCorrectInput(cardBackType, cardBackVideoFileInput,
                                 cardBackPictureFileInput, cardBackAudioFileInput);
-                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
+                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontTextFileInput,
                                 cardBackType, cardBackTitel, cardBackInput);
                     }
                 } else {
                     MultipartFile cardFrontInput = cardService.getCorrectInput(cardFrontType, cardFrontVideoFileInput,
                             cardFrontPictureFileInput, cardFrontAudioFileInput);
                     if (cardBackType.equals(DataType.TextFile.name())) {
-                        String cardBackInput = cardBackTextFileInput;
                         newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
-                                cardBackType, cardBackTitel, cardBackInput);
+                                cardBackType, cardBackTitel, cardBackTextFileInput);
                     } else {
                         MultipartFile cardBackInput = cardService.getCorrectInput(cardBackType, cardBackVideoFileInput,
                                 cardBackPictureFileInput, cardBackAudioFileInput);

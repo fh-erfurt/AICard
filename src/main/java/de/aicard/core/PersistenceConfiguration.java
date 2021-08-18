@@ -15,6 +15,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * configures the persistence
+ * @author Daniel Michel
+ */
 @Configuration
 @EnableTransactionManagement
 public class PersistenceConfiguration {

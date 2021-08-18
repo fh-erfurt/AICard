@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  * Provides CardList with Cards and a Pointer to the current ListIndex
- *
+ * this class is deprecated because listindex is not used
  * @author Martin Kuehlborn, Clemens Berger
  */
 @Getter
@@ -54,17 +54,17 @@ public class CardList extends BaseEntity
 
     /**
      * Constructor which constructs a CardList on the basis of an existing ArrayList of Cards.
-     * @param _newCardList
+     * @param newCardList /
      */
-    public CardList(List<Card> _newCardList)
+    public CardList(List<Card> newCardList)
     {
-        this.listOfCards = _newCardList;
+        this.listOfCards = newCardList;
         this.listIndex = 0;
     }
     
     /**
      * adds a card to the listOfCards
-     * @param newCard
+     * @param newCard /
      */
     public void addToList(Card newCard)
     {
@@ -87,18 +87,18 @@ public class CardList extends BaseEntity
     /**Removes Card Object from list
      * is overloaded
      * old method only used in tests
-     * @param _index index of the Card that should be removed.
+     * @param index index of the Card that should be removed.
      */
-    public void removeFromList(int _index)
+    public void removeFromList(int index)
     {
-        this.listOfCards.remove(_index);
+        this.listOfCards.remove(index);
     }
     
     /**
      * Gets a Card via the current value of ListIndex pointer
      * old method only used in tests
      * @return Card from list
-     * @throws NullPointerException
+     * @throws NullPointerException /
      */
     public Card getCurrentCard() throws NullPointerException
     {
@@ -112,30 +112,30 @@ public class CardList extends BaseEntity
     
     /**Method to get a Card from the list by index
      *
-     * @param _index expects index of the required Card in the list
+     * @param index expects index of the required Card in the list
      * @return Card from list
-     * @throws NullPointerException
+     * @throws NullPointerException /
      * @throws Exception if index is too big or small to be a ListIndex
      */
-    public Card getCardByIndex(int _index) throws NullPointerException, Exception
+    public Card getCardByIndex(int index) throws NullPointerException, Exception
     {
-        if((_index < this.listOfCards.size()) && (0 <= _index))
+        if((index < this.listOfCards.size()) && (0 <= index))
         {
-            if(this.listOfCards.get(_index) == null)
+            if(this.listOfCards.get(index) == null)
             {
-                throw new NullPointerException("No Card set on ListIndex: " + _index);
+                throw new NullPointerException("No Card set on ListIndex: " + index);
             }
     
-            return this.listOfCards.get(_index);
+            return this.listOfCards.get(index);
         }
         
-        throw new Exception("index out of bounce. index: " + _index);
+        throw new Exception("index out of bounce. index: " + index);
     }
     
     
     /**
      * size of listOfCards
-     * @return
+     * @return int
      */
     public int getListLength()
     {
@@ -177,7 +177,7 @@ public class CardList extends BaseEntity
     
     /**
      * sets the card path of all cards in listOfCards
-     * @param filePath
+     * @param filePath /
      */
     public void setCardPath(String filePath){
         List<Card> listOfCards = this.listOfCards;

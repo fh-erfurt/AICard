@@ -15,27 +15,38 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * account service used to create, find, save and update account
+ * can deletes all learnsets with a given learnset reference
+ *
+ * @author Clemens Berger, Daniel Michel, Martin Kühlborn
+ */
 @Service
 public class AccountService {
 
-    @Autowired
-    AccountRepository accountRepository;
+    final AccountRepository accountRepository;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    LearnSetRepository learnSetRepository;
+    final LearnSetRepository learnSetRepository;
 
-    @Autowired
-    LearnSetAboRepository learnSetAboRepository;
+    final LearnSetAboRepository learnSetAboRepository;
     
 
     @Autowired
-    public AccountService(){
+    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder, LearnSetRepository learnSetRepository, LearnSetAboRepository learnSetAboRepository){
 
+        this.accountRepository = accountRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.learnSetRepository = learnSetRepository;
+        this.learnSetAboRepository = learnSetAboRepository;
     }
-    
+
+    /**
+     * creates account after checking if input is satisfactory
+     * @param account account
+     * @return created Account
+     */
     public Optional<Account> createAccount(Account account) throws IllegalStateException{
         Optional<Account> matchingEntries = accountRepository.findByEmail(account.getEmail());
         Optional<Account> acc = Optional.empty();
@@ -99,9 +110,13 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public void deleteLearnSetAbosByLearnSetId(Long id){
-        List<Account> accounts = accountRepository.findAllAccountsByLearnsetIdInLearnSetAbo(id);
-        Optional<LearnSet> learnSet = learnSetRepository.findById(id);
+    /**
+     * deletes all learnsetabos that have a reference to a given learnset
+     * @param learnSetId learnSetId
+     */
+    public void deleteLearnSetAbosByLearnSetId(Long learnSetId){
+        List<Account> accounts = accountRepository.findAllAccountsByLearnsetIdInLearnSetAbo(learnSetId);
+        Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetId);
         if(learnSet.isPresent())
         {
             for (Account account : accounts)

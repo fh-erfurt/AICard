@@ -9,6 +9,11 @@ import java.util.Optional;
 
 public interface LearnSetRepository extends JpaRepository<LearnSet, Long>
 {
+    /**
+     * find learnSet by cardId in cardList
+     * @param cardId cardId
+     * @return learnset
+     */
     @Query(nativeQuery = true, value = "" +
             "SELECT * "+
             "FROM LEARNSET as ls " +

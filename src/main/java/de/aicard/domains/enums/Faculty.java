@@ -1,5 +1,8 @@
 package de.aicard.domains.enums;
 
+/**
+ * faculties for accounts and learnSets (FH)
+ */
 public enum Faculty
 {
     APPLIED_COMPUTER_SCIENCE,

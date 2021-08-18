@@ -3,22 +3,23 @@ package de.aicard.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 /**
- * @Author Martin Kühlborn,Clemens Berger
+ * controller for index
+ * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
 public class MainController {
     /**
-     * i dunno man
-     * @return
+     * returns index
+     * @return String
      */
     @GetMapping("/")
         public String welcome() {
-            return "index";
+            return "redirect:/index";
         }
 
     /**
-     * same
-     * @return
+     * returns index
+     * @return String
      */
         @GetMapping("/index")
         public String notWelcome(){

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  * is the stencil for the subclasses Professor and Student
- * contains basic attributes of and account, who get more specific in the subclasses
+ * contains attributes of an account
  * Provides the user with the functionalities to personalize their account
  *
  * @author Antonio Blechschmidt
@@ -49,37 +49,37 @@ public class Account extends BaseEntity
     
     /**
      * constructor for tests
-     * @param _newEmail
-     * @param _newPassword
-     * @param _newName
-     * @param _newDescription
-     * @param _newFaculty
+     * @param newEmail /
+     * @param newPassword / here it's the plain password in application we use a hashed password
+     * @param newName /
+     * @param newDescription /
+     * @param newFaculty /
      */
-    public Account(String _newEmail, String _newPassword, String _newName, String _newDescription , Faculty _newFaculty)
+    public Account(String newEmail, String newPassword, String newName, String newDescription , Faculty newFaculty)
     {
-        this.email = _newEmail;
-        this.password = _newPassword;
-        this.name = _newName;
-        this.description  =  _newDescription;
-        this.faculty = _newFaculty;
+        this.email = newEmail;
+        this.password = newPassword;
+        this.name = newName;
+        this.description  =  newDescription;
+        this.faculty = newFaculty;
         this.learnsetAbos = new ArrayList<>();
         this.friends = new ArrayList<>() ;
     }
 
     
     /**Create a new LearnSetAbo with a new LearnSet
-     * puts the new LearnSetAbo in ownLearnSets
+     * puts the new LearnSetAbo in learnSetAbos
      *
-     * @param _title        |
-     * @param _description  | provided Imformation for the Constructor of LearnSet
-     * @param _faculty      |
-     * @param _visibility   |
+     * @param title        |
+     * @param description  | provided Information for the Constructor of LearnSet
+     * @param faculty      |
+     * @param visibility   |
      */
-    public void createNewOwnLearnSet(String _title, String _description, Faculty _faculty, Visibility _visibility)
+    public void createNewOwnLearnSet(String title, String description, Faculty faculty, Visibility visibility)
     {
         try
         {
-            LearnSet newLearnSet = new LearnSet(_title, _description, _faculty,new CardList(),this,_visibility);
+            LearnSet newLearnSet = new LearnSet(title, description, faculty,new CardList(),this,visibility);
             newLearnSet.setOwner(this);
             newLearnSet.addAdmin(this);
             this.addLearnSetAbo(newLearnSet);
@@ -95,7 +95,7 @@ public class Account extends BaseEntity
     /**
      * adds learnSetAbo into learnSetAbo list with a given learnset
      *
-     * @param learnSet
+     * @param learnSet /
      */
     public void addLearnSetAbo(LearnSet learnSet)
     {
@@ -115,7 +115,7 @@ public class Account extends BaseEntity
     /**
      * removes learnsetabo from learnsetabo list
      *
-     * @param _learnSetAbo
+     * @param _learnSetAbo /
      */
     public void removeLearnSetAbo(LearnSetAbo _learnSetAbo)
     {
@@ -125,8 +125,8 @@ public class Account extends BaseEntity
     /**
      * method removes learnsetabos from learnsetabo list by learnset and returns it
      *
-     * @param learnSet
-     * @return
+     * @param learnSet /
+     * @return LearnSetAbo
      */
     public LearnSetAbo removeLearnSetAboByLearnSet(LearnSet learnSet){
         for(int i = this.learnsetAbos.size()-1;i>=0;i--){
@@ -144,21 +144,21 @@ public class Account extends BaseEntity
     /**
      * adds account as friend into friend list
      *
-     * @param _friend
+     * @param friend /
      */
-    public void addFriend(Account _friend)
+    public void addFriend(Account friend)
     {
-        this.friends.add(_friend);
+        this.friends.add(friend);
     }
     
     /**
      * removes friend from friend list
      *
-     * @param _friend
+     * @param friend /
      */
-    public void removeFriend(Account _friend)
+    public void removeFriend(Account friend)
     {
-        this.friends.remove(_friend);
+        this.friends.remove(friend);
     }
 
 }

@@ -33,19 +33,19 @@ public class Card extends BaseEntity
     /**
      * card constructor
      *
-     * @param _newCardFront
-     * @param _newCardBack
+     * @param newCardFront /
+     * @param newCardBack  /
      */
-    public Card(CardContent _newCardFront, CardContent _newCardBack)
+    public Card(CardContent newCardFront, CardContent newCardBack)
     {
-        this.cardFront = _newCardFront;
-        this.cardBack  = _newCardBack;
+        this.cardFront = newCardFront;
+        this.cardBack  = newCardBack;
     }
     
     /**
      * sets cardcontent data from each card side to filePath + original cardcontent data
      *
-     * @param filePath
+     * @param filePath path to file directory
      */
     public void setCardPath(String filePath)
     {

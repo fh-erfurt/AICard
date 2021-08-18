@@ -10,11 +10,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 /**
- * @Author Martin Kühlborn
+ * standard Spring Security MyUserDetails to use in priciple
+ * @author Martin Kühlborn
  */
 @Getter
 @Setter
@@ -44,7 +44,7 @@ public class MyUserDetails implements UserDetails
         this.faculty = account.getFaculty();
         this.favoriteLearnSets = account.getLearnsetAbos();
         this.friends = account.getFriends();
-        this.authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        this.authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
     
     

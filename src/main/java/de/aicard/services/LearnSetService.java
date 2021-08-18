@@ -13,27 +13,37 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * handles creations, deletions of learnsets and LearnSetRepository calls
+ * @author Clemens Berger, Daniel Michel, Martin Kühlborn
+ */
 @Service
 public class LearnSetService {
 
     
-    @Autowired
-    LearnSetRepository learnSetRepository;
-    @Autowired
-    public AccountRepository accountRepository;
-    @Autowired
-    public LearnSetAboRepository learnSetAboRepository;
-    @Autowired
-    public CardListRepository cardListRepository;
+    final LearnSetRepository learnSetRepository;
+    final AccountRepository accountRepository;
+    final LearnSetAboRepository learnSetAboRepository;
+    final CardListRepository cardListRepository;
 
     @Autowired
-    public LearnSetService() {
+    public LearnSetService(LearnSetRepository learnSetRepository, AccountRepository accountRepository, LearnSetAboRepository learnSetAboRepository, CardListRepository cardListRepository) {
+        this.learnSetRepository = learnSetRepository;
+        this.accountRepository = accountRepository;
+        this.learnSetAboRepository = learnSetAboRepository;
+        this.cardListRepository = cardListRepository;
     }
 
     public List<LearnSet> findAll(){
         return learnSetRepository.findAll();
     }
-    
+
+    /**
+     * creates new own learn and creates new learnsetabo for it
+     * @param learnSet /
+     * @param account /
+     * @return last inserted learnset from learnsetabos in given account
+     */
     public LearnSet createLearnSet(LearnSet learnSet, Account account)
     {
         account.createNewOwnLearnSet(learnSet.getTitle(),learnSet.getDescription(),learnSet.getFaculty(),learnSet.getVisibility());
@@ -47,13 +57,22 @@ public class LearnSetService {
     public Optional<LearnSet> getLearnSetByCardId(Long cardId){
         return learnSetRepository.getLearnSetByCardId(cardId);
     }
-   
+
+    /**
+     * save learnset
+     * @param learnset given learnset
+     */
     public void saveLearnSet(LearnSet learnset){
         if(learnset != null){
             learnSetRepository.save(learnset);
         }
     }
 
+    /**
+     * deletes learnset after removing the owner and adminlist
+     * deletes cardcontent for each card in learset
+     * @param learnSet given learnset
+     */
     public void deleteLearnSet(LearnSet learnSet)
     {
         learnSet.setOwner(null);

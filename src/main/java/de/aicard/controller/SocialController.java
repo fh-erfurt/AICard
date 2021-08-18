@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 /**
- * @Author Martin Kühlborn,Clemens Berger
+ * controller for comments
+ * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
 public class SocialController
@@ -22,10 +23,10 @@ public class SocialController
     }
 
     /**
-     * upcomming comment feature for learnSets
-     * @param learnSetId
-     * @param model
-     * @return
+     * comment feature for learnSets
+     * @param learnSetId /
+     * @param model /
+     * @return String
      */
     @GetMapping("/comments/{learnSetId}")
     public String getComments(@PathVariable("learnSetId") Long learnSetId, Model model){

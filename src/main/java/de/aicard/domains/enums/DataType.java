@@ -1,6 +1,8 @@
 package de.aicard.domains.enums;
 
-// this enum is not all Caps because it would require too many changes in frontend and we are here to learn Java
+/**
+ * datatypes for cardContent
+ */
 public enum DataType {
     TextFile,
     VideoFile,

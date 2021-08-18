@@ -41,9 +41,9 @@ public class CardContent extends BaseEntity
     /**
      * CardContent constructor
      *
-     * @param title
-     * @param data
-     * @param type
+     * @param title /
+     * @param data /
+     * @param type /
      */
     public CardContent(String title,String data, String type){
         this.title = title;
@@ -54,8 +54,8 @@ public class CardContent extends BaseEntity
     /**
      * selects correct input type for each possible option
      *
-     * @param type
-     * @return
+     * @param type /
+     * @return DataType of the cardside
      */
     private DataType getDataTypeFromString(String type){
         DataType dataType;

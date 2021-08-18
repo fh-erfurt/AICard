@@ -16,7 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Optional;
 /**
- * @Author Martin Kühlborn,Clemens Berger
+ * opens a learningsession for a learnSetAbo
+ * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
 public class LearningSessionController
@@ -37,9 +38,9 @@ public class LearningSessionController
     /**
      * shows the initilizeLearningsession.html makes sure to create new cardStatus if not already present fore each card
      *
-     * @param learnSetAboId
-     * @param model
-     * @return
+     * @param learnSetAboId /
+     * @param model /
+     * @return String
      */
     @GetMapping("/initializeLearningSession/{learnSetAboId}")
     public String getInitializeLearningSession(@PathVariable("learnSetAboId") Long learnSetAboId, Model model)
@@ -76,10 +77,9 @@ public class LearningSessionController
     /**
      * starts the Learningsession with the given amount of cards and uses a randomisation of Cards based on
      * their knowledge level
-     * @param learnSetAboId
-     * @param cardCount
-     * @param model
-     * @return
+     * @param learnSetAboId /
+     * @param cardCount /
+     * @return String
      */
     @PostMapping("/initializeLearningSession/{learnSetAboId}")
     public String postInitializeLearningSession(@PathVariable("learnSetAboId") Long learnSetAboId, @RequestParam(value = "cardCount") int cardCount)
@@ -106,9 +106,9 @@ public class LearningSessionController
 
     /**
      * shows the card which is to learn
-     * @param learnSetAboId
-     * @param model
-     * @return
+     * @param learnSetAboId /
+     * @param model /
+     * @return String
      */
     @GetMapping("/learnCard/{learnSetAboId}")
     public String getLearnCard(@PathVariable("learnSetAboId") Long learnSetAboId, Model model)
@@ -136,14 +136,13 @@ public class LearningSessionController
     /**
      * learns the shown card either increses or decreases the knowledgelevel of the card
      * knowledgelevel can't drop below 0 and is maxed out at 5
-     * @param learnSetAboId
-     * @param cardKnown
-     * @param model
-     * @return
+     * @param learnSetAboId /
+     * @param cardKnown /
+     * @return ModelAndView
      */
     @ResponseBody
     @PostMapping("/learnCard/{learnSetAboId}")
-    public ModelAndView postLearnCard(@PathVariable("learnSetAboId") Long learnSetAboId,@RequestParam("cardKnown") Boolean cardKnown , Model model)
+    public ModelAndView postLearnCard(@PathVariable("learnSetAboId") Long learnSetAboId,@RequestParam("cardKnown") Boolean cardKnown)
     {
         ModelAndView modelAndView = new ModelAndView();
         Optional<LearnSetAbo> learnSetAbo = learnSetAboService.getLearnSetAbo(learnSetAboId);

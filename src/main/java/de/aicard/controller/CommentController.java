@@ -15,6 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 import java.util.Optional;
 
+/**
+ * adds a comment to the corresponding LearnSet
+ * @author Clemens Berger
+ */
 @Controller
 public class CommentController
 {
@@ -26,7 +30,14 @@ public class CommentController
         this.learnSetService = learnSetService;
         this.accountService = accountService;
     }
-    
+
+    /**
+     * shows the commentlist of the learnset
+     * @param learnSetId /
+     * @param model /
+     * @param principal /
+     * @return html
+     */
     @GetMapping("/getComments/{learnSetId}")
     public String getComments(@PathVariable("learnSetId") Long learnSetId, Model model, Principal principal){
         Optional<Account> account = accountService.getAccount(principal);
@@ -50,7 +61,16 @@ public class CommentController
         }
         return "redirect:/learnSet/"+learnSetId;
     }
-    
+
+    /**
+     * adds a comment to the learnset
+     * @param recommend string which is converted to enum of Recommended
+     * @param learnSetId /
+     * @param comment /
+     * @param model /
+     * @param principal /
+     * @return modelAndView
+     */
     @ResponseBody
     @PostMapping("/addComment/{learnSetId}")
     public ModelAndView addComment(@RequestParam("recommend")String recommend, @PathVariable("learnSetId") Long learnSetId, @ModelAttribute("newComment") Comment comment, Model model, Principal principal)

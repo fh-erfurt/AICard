@@ -9,6 +9,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.Objects;
 
+/**
+ * handles the h2 database
+ * @author Clemens Berger
+ */
 @Slf4j
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class H2Controller {

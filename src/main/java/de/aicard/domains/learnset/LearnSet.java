@@ -69,68 +69,64 @@ public class LearnSet extends BaseEntity
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Account> adminList;
     
-    /**
-     * Average evaluation of a LearnSet
-     */
-
 
     // CONSTRUCTORS
     
     /**
      * LearnSet constructor
      *
-     * @param _newCardList
+     * @param newCardList /
      */
-    public LearnSet(CardList _newCardList)
+    public LearnSet(CardList newCardList)
     {
-        this(null, null, null, _newCardList, null, Visibility.PRIVATE);
+        this(null, null, null, newCardList, null, Visibility.PRIVATE);
     }
     
     /**
      * LearnSet constructor
      *
-     * @param _newTitle
-     * @param _newFaculty
-     * @param _newCardList
-     * @param _newOwner
+     * @param newTitle /
+     * @param newFaculty /
+     * @param newCardList /
+     * @param newOwner /
      */
-    public LearnSet(String _newTitle, Faculty _newFaculty, CardList _newCardList, Account _newOwner)
+    public LearnSet(String newTitle, Faculty newFaculty, CardList newCardList, Account newOwner)
     {
-        this(_newTitle, null, _newFaculty, _newCardList, _newOwner, Visibility.PRIVATE);
+        this(newTitle, null, newFaculty, newCardList, newOwner, Visibility.PRIVATE);
     }
     
     /**
      * LearnSet constructor
      *
-     * @param _newTitle
-     * @param _newDescription
-     * @param _newFaculty
+     * @param newTitle /
+     * @param newDescription /
+     * @param newFaculty /
      */
-    public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty)
+    public LearnSet(String newTitle, String newDescription, Faculty newFaculty)
     {
-        this(_newTitle, _newDescription, _newFaculty, new CardList(), null, Visibility.PRIVATE);
+        this(newTitle, newDescription, newFaculty, new CardList(), null, Visibility.PRIVATE);
     }
     
     /**
      * LearnSet constructor
      *
-     * @param _newTitle
-     * @param _newDescription
-     * @param _newFaculty
-     * @param _newCardList
-     * @param _newOwner
-     * @param _visibility
+     * @param newTitle /
+     * @param newDescription /
+     * @param newFaculty /
+     * @param newCardList /
+     * @param newOwner /
+     * @param visibility /
      */
-    public LearnSet(String _newTitle, String _newDescription, Faculty _newFaculty, CardList _newCardList, Account _newOwner, Visibility _visibility)
+    public LearnSet(String newTitle, String newDescription, Faculty newFaculty, CardList newCardList, Account newOwner, Visibility visibility)
     {
-        title = _newTitle;
-        description = _newDescription;
-        faculty = _newFaculty;
-        cardList = _newCardList;
-        commentList = new ArrayList<>();
-        owner = _newOwner;
-        visibility = _visibility;
-        adminList = new ArrayList<>();
+        this.title = newTitle;
+        this.description = newDescription;
+        this.faculty = newFaculty;
+        this.cardList = newCardList;
+        this.commentList = new ArrayList<>();
+        this.owner = newOwner;
+        this.visibility = visibility;
+        this.adminList = new ArrayList<>();
 
     }
     
@@ -142,7 +138,7 @@ public class LearnSet extends BaseEntity
     /**
      * adds given account to adminList if he is not already in the list
      *
-     * @param _newAdmin
+     * @param _newAdmin /
      */
     public void addAdmin(Account _newAdmin)
     {
@@ -161,13 +157,13 @@ public class LearnSet extends BaseEntity
      * is overloaded
      * used in tests
      *
-     * @param _indexToRemove
+     * @param indexToRemove /
      */
-    public void removeAdmin(int _indexToRemove)
+    public void removeAdmin(int indexToRemove)
     {
-        if(_indexToRemove <= adminList.size() && 0 <= _indexToRemove)
+        if(indexToRemove <= adminList.size() && 0 <= indexToRemove)
         {
-            this.adminList.remove(_indexToRemove);
+            this.adminList.remove(indexToRemove);
         }
         else
         {
@@ -179,7 +175,7 @@ public class LearnSet extends BaseEntity
      * Removes Admin from adminList by Account
      * is overloaded
      *
-     * @param _accountToRemove
+     * @param _accountToRemove /
      */
     public void removeAdmin(Account _accountToRemove)
     {
@@ -225,8 +221,8 @@ public class LearnSet extends BaseEntity
     /**
      * checks if given account can see the learnSet
      *
-     * @param account
-     * @return
+     * @param account /
+     * @return if the user can view the learnSet
      */
     public boolean isAuthorizedToAccessLearnSet(Account account)
     {
@@ -257,8 +253,8 @@ public class LearnSet extends BaseEntity
     /**
      * check if given account is in adminList
      *
-     * @param account
-     * @return
+     * @param account /
+     * @return if the user is in the adminList
      */
     public boolean isAdmin(Account account){
         return this.getAdminList().contains(account);
@@ -267,8 +263,8 @@ public class LearnSet extends BaseEntity
     /**
      * check if account is the learnSetOwner
      *
-     * @param account
-     * @return
+     * @param account /
+     * @return if the user is the owner
      */
     public boolean isOwner(Account account){
         return this.getOwner().equals(account);

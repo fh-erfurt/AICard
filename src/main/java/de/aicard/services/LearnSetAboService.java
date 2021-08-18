@@ -7,27 +7,44 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * handles learnsetabo repository requests
+ *
+ * @author Daniel Michel,Martin Kühlborn,Clemens Berger
+ */
 @Service
 public class LearnSetAboService
 {
-    @Autowired
-    LearnSetAboRepository learnSetAboRepository;
+    final LearnSetAboRepository learnSetAboRepository;
     
     
     @Autowired
-    public LearnSetAboService(){
-    
+    public LearnSetAboService(LearnSetAboRepository learnSetAboRepository){
+
+        this.learnSetAboRepository = learnSetAboRepository;
     }
-    
-    
+
+    /**
+     * finds a LearnsetAbo by its id
+     * @param learnSetAboId /
+     * @return Optional\<LearnSetAbo\>
+     */
     public Optional<LearnSetAbo> getLearnSetAbo(Long learnSetAboId){
         return learnSetAboRepository.findById(learnSetAboId);
     }
-    
+
+    /**
+     * saves a learnSetAbo
+     * @param learnSetAbo /
+     */
     public void save(LearnSetAbo learnSetAbo){
        learnSetAboRepository.save(learnSetAbo);
     }
-    
+
+    /**
+     * deletes a learnSetAbo
+     * @param learnSetAbo /
+     */
     public void delete(LearnSetAbo learnSetAbo){
         learnSetAboRepository.delete(learnSetAbo);
     }

@@ -8,13 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
+ * handles editing for accounts and shows profiles
  * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
@@ -29,8 +29,8 @@ public class AccountController
 
     /**
      * This shows the logged in users Profile, while calling showProfile() with the userID as PathVariable
-     * @param model
-     * @param principal
+     * @param model /
+     * @param principal /
      * @return profile.html or index.html
      */
     @GetMapping("/profile")
@@ -46,10 +46,10 @@ public class AccountController
 
     /**
      * shows the profile of the given account
-     * @param userID
-     * @param model
-     * @param principal
-     * @return
+     * @param userID /
+     * @param model /
+     * @param principal /
+     * @return html
      */
     @GetMapping("/profile/{userID}")
     public String showProfile(@PathVariable("userID") Long userID, Model model, Principal principal)
@@ -71,9 +71,9 @@ public class AccountController
 
     /**
      * shows the updateProfile.html for the logged in user
-     * @param principal
-     * @param model
-     * @return
+     * @param principal /
+     * @param model /
+     * @return html
      */
     @GetMapping("/updateProfile")
     public String getUpdateProfile(Principal principal,Model model)
@@ -91,17 +91,16 @@ public class AccountController
     /**
      * handles the edit of the logged in account, here friends can be added
      * and the account data can be changed
-     * @param addFriendByEmail
-     * @param theAccount
-     * @param model
-     * @param principal
-     * @return
-     * @throws NoSuchAlgorithmException
+     * @param addFriendByEmail account email to add friend
+     * @param theAccount /
+     * @param model /
+     * @param principal /
+     * @return html
      */
     @ResponseBody
     @PostMapping("/updateAccount")
     public ModelAndView postUpdateAccount(@RequestParam("passwordProfessor2") String password2, @RequestParam(value="addFriendByEmail", required = false) String addFriendByEmail,
-                                    @ModelAttribute("account") Account theAccount, Model model,Principal principal) throws NoSuchAlgorithmException
+                                    @ModelAttribute("account") Account theAccount, Model model,Principal principal)
     {
         List<String> errors = new ArrayList<>();
         ModelAndView modelAndView = new ModelAndView();
@@ -146,10 +145,9 @@ public class AccountController
 
     /**
      * removes a friend from the friendlist of the logged in user
-     * @param friendId
-     * @param model
-     * @param principal
-     * @return
+     * @param friendId friend account id
+     * @param principal /
+     * @return html
      */
     @GetMapping("/removeFriendFromFriendList/{friendId}")
     public String getRemoveFriendFromFriendList(@PathVariable("friendId") Long friendId, Principal principal)
