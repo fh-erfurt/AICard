@@ -42,10 +42,14 @@
                     <div class="btn yellowBtn">
                         <a th:href="@{'/editLearnSet/' + ${learnSet.getId()}}">EDIT</a>
                     </div>
-                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button" class="btn blueBtn">COMMENTS</a>
+                    <div class="btn blueBtn">
+                        <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">COMMENTS</a>
+                    </div>
                 </div>
                 <div th:case="false" class="btnContainer">
-                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button" class="btn blueBtn">COMMENTS</a>
+                    <div class="btn blueBtn">
+                        <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">COMMENTS</a>
+                    </div>
                 </div>
             </div>
             <div class="btnPlaceHolder"></div>

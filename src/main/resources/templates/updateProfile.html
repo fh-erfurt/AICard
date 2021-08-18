@@ -9,8 +9,9 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div class="pageContent">
-  <div class="pannel errorPannel">
-    <table th:if="${!#lists.isEmpty(errorList)}">
+  <div class="pannel errorPannel"  th:if="${!#lists.isEmpty(errorList)}">
+    <label>ERROR</label>
+    <table>
       <tbody>
       <tr th:each="error : ${errorList}">
         <td><span th:text="${error}"> Title </span></td>
@@ -69,7 +70,7 @@
 
 
 
-    <div class="btnContainer">
+    <div class="btnContainer bottom">
       <input id="submitButton" type="submit" class="btn blueBtn">
     </div>
     <div class="btnPlaceHolder"></div>

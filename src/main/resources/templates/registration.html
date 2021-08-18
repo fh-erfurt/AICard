@@ -11,6 +11,7 @@
 
     <div class="pageContent">
         <div class="errorPannel pannel" th:if="${!#lists.isEmpty(errorList)}">
+            <label>ERROR</label>
             <table>
                 <tbody>
                 <tr th:each="error : ${errorList}">

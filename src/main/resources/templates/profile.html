@@ -10,20 +10,27 @@
 <div class="pageContent">
 
     <div class="whiteBG pannel registration">
+        <h2 th:text="'Name ' + ${account.getName()}"></h2>
+        <div class="formListElement">
+            <label>Beschreibung:</label>
+            <p th:text="${account.getDescription()}"></p>
+        </div>
+        <div class="formListElement">
+            <label>Fakultät:</label>
+            <p th:text="${account.getFaculty()}"></p>
+        </div>
+        <div class="formListElement" th:if="${!#lists.isEmpty(account.getFriends())}">
+            <label>Freunde:</label>
+            <table>
+                <tbody>
+                <tr th:each="friend : ${account.getFriends()}">
+                    <td><a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a></td>
+                    <td th:if="${userIsProfileAccount}"><a class="XBtn redBtn" th:href="@{'/removeFriendFromFriendList/' + ${friend.getId()}}">x</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <h2 th:text="'Name ' + ${account.getName()}"></h2>
-    <h4>Beschreibung</h4>
-    <p th:text="${account.getDescription()}"></p>
-    <h4>Fakultät</h4>
-    <p th:text="${account.getFaculty()}"></p>
-    <table th:if="${!#lists.isEmpty(account.getFriends())}">
-        <tbody>
-        <tr th:each="friend : ${account.getFriends()}">
-            <td><a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a></td>
-            <td th:if="${userIsProfileAccount}"><a class="" th:href="@{'/removeFriendFromFriendList/' + ${friend.getId()}}">X</a></td>
-        </tr>
-        </tbody>
-    </table>
 
 
         <div class="btnContainer bottom">

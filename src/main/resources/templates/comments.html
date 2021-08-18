@@ -17,7 +17,7 @@
 
             <textarea th:field="*{message}" name="message" id="message" rows="10" cols="30" maxlength="255"></textarea>
             <div>
-                <div class="btnContainer">
+                <div class="btnContainer bottom">
                     <input name="recommend" value="no" type="submit" class="btn redBtn">
                     <input name="recommend" value="yes" type="submit" class="btn blueBtn">
                 </div>
@@ -29,28 +29,21 @@
 
     </div>
 
-
-
-    <div id="addCard" class="cards">
-
-        <div th:each="comment : ${learnSet.getCommentList()}" class="card whiteBG pannel">
-            <div class="cardSites">
-                <p th:text="'Hat empfohlen ' + ${comment.getRecommended()}"></p>
+    <div id="addCard" th:each="comment : ${learnSet.getCommentList()}" class="whiteBG pannel">
+            <div class="formListElement">
+                <a th:text="${comment.getSender().getEmail()}" th:href="@{'/profile/' + ${comment.getSender().getId()}}"></a>
+            </div>
+            <div class="formListElement">
                 <p th:text="${comment.getMessage()}"></p>
-                <p th:text="${{comment.getTime()}} + 'Uhr'"></p>
-                <p>Verfasser:
-                    <a th:text="${comment.getSender().getEmail()}" th:href="@{'/profile/' + ${comment.getSender().getId()}}"></a>
-                </p>
-
-                <!--End Switch-->
+                <p class="commentInfo" th:text="'empfiehlt ' + ${comment.getRecommended()} + ', um ' + ${{comment.getTime()}} + ' Uhr'"></p>
             </div>
 
-            <div class="btnPlaceHolder"></div>
+
+            <!--End Switch-->
         </div>
 
-
+        <div class="btnPlaceHolder"></div>
     </div>
-
 
 </div>
 <div th:replace="fragments/footer :: footer"></div>
