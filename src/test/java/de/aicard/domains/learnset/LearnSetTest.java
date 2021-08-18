@@ -50,47 +50,7 @@ public class LearnSetTest
         return learnSet;
     }
 
-    // TODO : update to current evaluation
-//    @Test
-//    public void testingEvaluations()
-//    {
-//        //given: a LearnSet and 3 evaluations.
-//        LearnSet testLearnSet = getTestLearnSet();
-//        int evaluation1 = 4;
-//        int evaluation2 = 2;
-//        int evaluation3 = 3;
-//
-//        //when: adding first evaluation
-//        testLearnSet.addEvaluation(evaluation1);
-//        //then: Evaluation of LearnSet equals the first evaluation
-//        Assertions.assertEquals(evaluation1, testLearnSet.getEvaluations());
-//
-//        //when: adding second evaluation
-//        testLearnSet.addEvaluation(evaluation2);
-//        //then: Evaluation of LearnSet equals the average of the first two evaluations
-//        Assertions.assertEquals((double)(evaluation1 + evaluation2) / 2, testLearnSet.getEvaluations());
-//
-//        //when: adding third evaluation
-//        testLearnSet.addEvaluation(evaluation3);
-//        //then: Evaluation of LearnSet equals the average of the three evaluations
-//        Assertions.assertEquals((double)(evaluation1 + evaluation2 + evaluation3) / 3, testLearnSet.getEvaluations());
-//
-//        //when: deleting the first evaluation
-//        testLearnSet.deleteEvaluation(evaluation1);
-//        //then: Evaluation of LearnSet equals the average of the second and third evaluation
-//        Assertions.assertEquals((double)(evaluation2 + evaluation3) / 2, testLearnSet.getEvaluations());
-//
-//        //when: deleting the second evaluation
-//        testLearnSet.deleteEvaluation(evaluation2);
-//        //then: Evaluation of LearnSet equals toe third evaluation
-//        Assertions.assertEquals((double)evaluation3, testLearnSet.getEvaluations());
-//
-//        //when: deleting the last evaluation
-//        testLearnSet.deleteEvaluation(evaluation3);
-//        //then: Evaluation of LearnSet goes back to zero.
-//        Assertions.assertEquals(0.0, testLearnSet.getEvaluations());
-//
-//    }
+
 
     @Test
     public void testingAdminList()

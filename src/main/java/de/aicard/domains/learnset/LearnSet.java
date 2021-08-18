@@ -106,7 +106,7 @@ public class LearnSet extends BaseEntity
     {
         this(newTitle, newDescription, newFaculty, new CardList(), null, Visibility.PRIVATE);
     }
-    
+
     /**
      * LearnSet constructor
      *
