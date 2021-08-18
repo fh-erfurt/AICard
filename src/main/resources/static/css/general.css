@@ -145,14 +145,16 @@ a:hover {
     box-shadow: 5px 5px rgba(1, 17, 82, 0.5),
                 7px 7px #ffffff,
                 12px 12px rgba(1, 17, 82, 0.5),
-                14px 14px #ffffff;
+                14px 14px #ffffff,
+                19px 19px rgba(0,0,0,0.5);
 }
 .deck:hover{
     background-color: white;
     box-shadow: 7px 7px rgba(1, 17, 82, 0.5),
                 11px 11px #ffffff,
                 18px 18px rgba(1, 17, 82, 0.5),
-                22px 22px #ffffff;
+                22px 22px #ffffff,
+                29px 29px rgba(0,0,0,0.5);
     transition: 0.5s;
 }
 
