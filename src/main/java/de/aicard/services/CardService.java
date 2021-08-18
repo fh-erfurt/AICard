@@ -3,8 +3,6 @@ package de.aicard.services;
 import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardContent;
 import de.aicard.domains.card.CardStatus;
-import de.aicard.domains.enums.DataType;
-import de.aicard.domains.learnset.CardList;
 import de.aicard.domains.learnset.LearnSet;
 import de.aicard.domains.learnset.LearnSetAbo;
 import de.aicard.storages.*;

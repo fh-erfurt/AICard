@@ -1,8 +1,8 @@
 package de.aicard.domains.learnset;
 
+import de.aicard.domains.BaseEntity;
 import de.aicard.domains.card.Card;
 import de.aicard.domains.card.CardStatus;
-import de.aicard.domains.BaseEntity;
 import de.aicard.domains.enums.CardKnowledgeLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -55,7 +55,7 @@ public class LearnSetAbo extends BaseEntity
      *
      * @param _learnSet The LearnSet to which the Account subscribes.
      */
-    public LearnSetAbo(LearnSet _learnSet) throws NullPointerException, Exception
+    public LearnSetAbo(LearnSet _learnSet) throws Exception
     {
         this.learnSet = _learnSet;
         this.cardStatus = new ArrayList<>();

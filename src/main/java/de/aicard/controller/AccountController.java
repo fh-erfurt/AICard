@@ -10,7 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Martin Kühlborn,Clemens Berger
