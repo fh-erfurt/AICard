@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 /**
  * @Author Martin Kühlborn,Clemens Berger
@@ -76,9 +77,11 @@ public class LearnSetShopController
     
             // if we want to filter for faculty -> filter!
             List<LearnSet> helperLearnSets = new ArrayList<>();
+            String selectedFacultyName = "";
             try
             {
                 Faculty.valueOf(stringFaculty);
+                selectedFacultyName = stringFaculty;
     
                 for (LearnSet learnSet : frontEndLearnSets)
                 {
@@ -95,6 +98,8 @@ public class LearnSetShopController
                 System.out.println(e);
             }
 
+            // if we want to filter learnset title of substring -> filter
+            learnSetTitle = learnSetTitle.trim(); // trim front and back blanks before returning to frontend
             if(!learnSetTitle.isEmpty())
             {
                 for (LearnSet learnSet : frontEndLearnSets)
@@ -105,17 +110,20 @@ public class LearnSetShopController
                     }
                 }
                 frontEndLearnSets = helperLearnSets;
-                helperLearnSets = new ArrayList<>();
+                helperLearnSets = new ArrayList<>(); // unnecessary but kept here for possible future expansion
             }
-            model.addAttribute("learnSetList",frontEndLearnSets);
+            
+            model.addAttribute("learnSetTitle", learnSetTitle);
+            model.addAttribute("selectedFacultyName", selectedFacultyName);
+            model.addAttribute("learnSetList", frontEndLearnSets);
         }
         return"learnSetShop";
     }
 
     /**
      * adds a learnsetabo to the account
+     *
      * @param principal
-     * @param model
      * @param learnSetId
      * @return
      */

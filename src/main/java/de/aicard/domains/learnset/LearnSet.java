@@ -219,7 +219,7 @@ public class LearnSet extends BaseEntity
             }
         }
     
-        return (int) 100.0 / this.commentList.size() * numberOfYes;
+        return (int) Math.ceil(100.0 / this.commentList.size() * numberOfYes);
     }
 
     /**

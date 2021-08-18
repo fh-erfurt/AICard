@@ -27,8 +27,14 @@
                     </div>
                     <div th:text="'Karten: ' + ${ownAbo.getLearnSet().getCardList().getListLength()}"></div>
                     <div>
-                        <label>Evaluation</label>
-                        <p th:if="${ownAbo.getLearnSet().calculateEvaluation() != -1}" th:text="${ownAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen'}"></p>
+                        <h4>Fakultät</h4>
+                        <p th:text="${ownAbo.getLearnSet().getFaculty()}"></p>
+                    </div>
+                    <div>
+                        <h4>Evaluation</h4>
+                        <p th:if="${ownAbo.getLearnSet().calculateEvaluation() != -1}"
+                           th:text="${ownAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen bei ' +
+                           ownAbo.getLearnSet().getCommentList().size() + ' Bewertungen'}"></p>
                         <p th:if="${ownAbo.getLearnSet().calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
                     </div>
                     <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
@@ -63,8 +69,14 @@
                     <div th:text="'Karten: ' + ${favoriteLearnSetAbo.getLearnSet().getCardList().getListLength()}"></div>
 
                     <div>
-                        <label>Evaluation</label>
-                        <p th:if="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() != -1}" th:text="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen'}"></p>
+                        <h4>Fakultät</h4>
+                        <p th:text="${favoriteLearnSetAbo.getLearnSet().getFaculty()}"></p>
+                    </div>
+                    <div>
+                        <h4>Evaluation</h4>
+                        <p th:if="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() != -1}"
+                           th:text="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen bei ' +
+                           favoriteLearnSetAbo.getLearnSet().getCommentList().size() + ' Bewertungen'}"></p>
                         <p th:if="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
                     </div>
 

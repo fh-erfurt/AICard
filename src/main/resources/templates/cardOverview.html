@@ -14,18 +14,21 @@
                 <h2 id="kase" th:text="${learnSet.getTitle()}"></h2>
 
                 <h4>Beschreibung</h4>
-                <p th:text="${learnSet.getDescription()}">
-                </p>
+                <p th:text="${learnSet.getDescription()}"></p>
+
+                <h4>Fakultät</h4>
+                <p th:text="${learnSet.getFaculty()}"></p>
+
                 <h4>Evaluation</h4>
-                <p th:if="${learnSet.calculateEvaluation() != -1}" th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen'}"></p>
+                <p th:if="${learnSet.calculateEvaluation() != -1}"
+                   th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen bei '+
+                   learnSet.getCommentList().size() + ' Bewertungen'}"></p>
                 <p th:if="${learnSet.calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
 
                 <div th:each=" admin : ${learnSet.getAdminList()}">
                     <h4><a th:text="${admin.getEmail()}" th:href="@{'/profile/' + ${admin.getId()}}"></a></h4>
                 </div>
 
-
-                </p>
             </div>
             <div th:switch="${isOwner}">
                 <div th:case="true" class="btnContainer bottom">

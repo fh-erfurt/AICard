@@ -19,16 +19,15 @@
                     <option value="duDoppelNull">Alle Fakultäten</option>
                     <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
                             th:text="${faculty}"
-                            th:value="${faculty}">
-<!--                        TODO : die ausgewählte option bei neuladen weiterhin anzeigen-->
+                            th:value="${faculty}"
+                            th:selected="${faculty.name().equals(selectedFacultyName)}">
                     </option>
                 </select>
             </div>
             <div class="formListElement">
                 <label for="learnSetTitle">LearnSetTitle SubString suche</label>
-                <input type="text" name="learnSetTitle" id="learnSetTitle">
+                <input th:value="${learnSetTitle}" type="text" name="learnSetTitle" id="learnSetTitle">
             </div>
-<!--            TODO : den suchstring beim neuen anzeigen weiterhin hier anzeigen-->
             <div class="btnContainer bottom">
                 <button class="btn blueBtn" type="submit">Filtern</button>
             </div>
@@ -49,8 +48,12 @@
             </div>
             <div th:text="'Karten ' + ${learnSet.getCardList().getListLength()}" class="cardCount"></div>
 
+            <h4>Fakultät</h4>
+            <p th:text="${learnSet.getFaculty()}"></p>
+
             <h4>Evaluation</h4>
-            <p th:if="${learnSet.calculateEvaluation() != -1}" th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen'}"></p>
+            <p th:if="${learnSet.calculateEvaluation() != -1}"
+               th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen bei ' + learnSet.getCommentList().size() + ' Bewertungen'}"></p>
             <p th:if="${learnSet.calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
 
 
