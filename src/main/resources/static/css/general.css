@@ -123,11 +123,6 @@ a:hover {
 
 .whiteBG {
     background-color: white;
-    box-shadow: 5px 5px rgba(0,0,0,0.5);
-}
-.whiteBG:hover{
-    box-shadow: 7px 7px rgba(0,0,0,0.5);
-    transition: 0.5s;
 }
 
 .pannel {
@@ -135,13 +130,13 @@ a:hover {
     border-radius: 20px;
     overflow: hidden;
     min-height: 5vh;
+    box-shadow: 5px 5px rgba(0,0,0,0.5);
 }
 .pannel>*{
     margin: 10px;
 }
 
 .deck{
-    background-color: white;
     box-shadow: 5px 5px rgba(1, 17, 82, 0.5),
                 7px 7px #ffffff,
                 12px 12px rgba(1, 17, 82, 0.5),
@@ -149,7 +144,6 @@ a:hover {
                 19px 19px rgba(0,0,0,0.5);
 }
 .deck:hover{
-    background-color: white;
     box-shadow: 7px 7px rgba(1, 17, 82, 0.5),
                 11px 11px #ffffff,
                 18px 18px rgba(1, 17, 82, 0.5),
@@ -165,7 +159,7 @@ a:hover {
     border-radius: 20px;
     background: none;
     color: white;
-    margin 0;
+    margin: 0;
 }
 
 .transparentPannel a {
@@ -175,7 +169,13 @@ a:hover {
     line-height: 300px;
     text-align: center;
     font-size: 200px;
+    text-decoration: none;
 }
+
+.transparentPannel a:hover {
+    font-weight: bold;
+}
+
 .errorPannel{
     width: 100%;
     background: #ff959a;

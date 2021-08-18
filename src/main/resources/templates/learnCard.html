@@ -39,7 +39,7 @@
             </div>
             <!--End Switch-->
 
-            <div th:switch="${card.getCardBack().getType().name()}" id="back" style="display: none">
+            <div th:switch="${card.getCardBack().getType().name()}" id="back" style="visibility: hidden">
                 <div th:case="TextFile">
                     <p th:text="${card.getCardBack().getTitle()}"></p>
                     <p th:text="${card.getCardBack().getData()}"></p>

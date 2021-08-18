@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var btnSchlau = document.getElementById("schlau");
 
     btnReverse.addEventListener("click",()=>{
-            back.style.display = "flex";
+            back.style.visibility = "visible";
             btnDumm.disabled = "";
             btnDumm.style.display = "block";
             btnSchlau.style.display = "block";

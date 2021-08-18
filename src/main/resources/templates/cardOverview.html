@@ -9,26 +9,30 @@
 
         <div class="learnset-info whiteBG pannel">
 
-            <div class="">
+            <div class="formListElement">
                 <h1>Card Overview</h1>
-                <h2 id="kase" th:text="${learnSet.getTitle()}"></h2>
-
-                <h4>Beschreibung</h4>
+                <label class="head" id="kase" th:text="${learnSet.getTitle()}"></label>
+            </div>
+            <div class="formListElement">
+                <label>Beschreibung:</label>
                 <p th:text="${learnSet.getDescription()}"></p>
-
-                <h4>Fakultät</h4>
+            </div>
+            <div class="formListElement">
+                <label>Fakultät:</label>
                 <p th:text="${learnSet.getFaculty()}"></p>
-
-                <h4>Evaluation</h4>
+            </div>
+            <div class="formListElement">
+                <label>Evaluation:</label>
                 <p th:if="${learnSet.calculateEvaluation() != -1}"
                    th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen bei '+
                    learnSet.getCommentList().size() + ' Bewertungen'}"></p>
                 <p th:if="${learnSet.calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
-
+            </div>
+            <div class="formListElement">
+                <label>Admins:</label>
                 <div th:each=" admin : ${learnSet.getAdminList()}">
-                    <h4><a th:text="${admin.getEmail()}" th:href="@{'/profile/' + ${admin.getId()}}"></a></h4>
+                    <a th:text="${admin.getEmail()}" th:href="@{'/profile/' + ${admin.getId()}}"></a>
                 </div>
-
             </div>
             <div th:switch="${isOwner}">
                 <div th:case="true" class="btnContainer bottom">
