@@ -25,17 +25,20 @@
                 <tbody>
                 <tr th:each="friend : ${account.getFriends()}">
                     <td><a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a></td>
-                    <td th:if="${userIsProfileAccount}"><a class="XBtn redBtn" th:href="@{'/removeFriendFromFriendList/' + ${friend.getId()}}">x</a></td>
+                    <td th:if="${userIsProfileAccount}"><a class="XBtn redBtn"
+                                                           th:href="@{'/removeFriendFromFriendList/' + ${friend.getId()}}">x</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
 
-
         <div class="btnContainer bottom">
-            <button class="btn yellowBtn" th:if="${userIsProfileAccount}"><a th:href="@{/updateProfile}">Account Bearbeiten</a></button>
-            <button class="btn blueBtn" th:if="${!userIsProfileAccount && !isMyFriend}"><a th:href="@{'/addFriend/' + ${account.getId()}}">Als Freund Hinzufügen</a></button>
+            <button class="btn yellowBtn" th:if="${userIsProfileAccount}"><a th:href="@{/updateProfile}">Account
+                Bearbeiten</a></button>
+            <button class="btn blueBtn" th:if="${!userIsProfileAccount && !isMyFriend}"><a
+                    th:href="@{'/addFriend/' + ${account.getId()}}">Als Freund Hinzufügen</a></button>
         </div>
         <div class="btnPlaceHolder"></div>
     </div>

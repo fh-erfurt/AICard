@@ -5,63 +5,63 @@
 
 <body th:object="${learnSet}">
 <div th:replace="fragments/header :: header"></div>
-    <div class="pageContent">
+<div class="pageContent">
 
-        <div class="learnset-info whiteBG pannel">
+    <div class="learnset-info whiteBG pannel">
 
-            <div class="formListElement">
-                <h1>Card Overview</h1>
-                <label class="head" id="kase" th:text="${learnSet.getTitle()}"></label>
-            </div>
-            <div class="formListElement">
-                <label>Beschreibung:</label>
-                <p th:text="${learnSet.getDescription()}"></p>
-            </div>
-            <div class="formListElement">
-                <label>Fakultät:</label>
-                <p th:text="${learnSet.getFaculty()}"></p>
-            </div>
-            <div class="formListElement">
-                <label>Evaluation:</label>
-                <p th:if="${learnSet.calculateEvaluation() != -1}"
-                   th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen bei '+
+        <div class="formListElement">
+            <h1>Card Overview</h1>
+            <label class="head" id="kase" th:text="${learnSet.getTitle()}"></label>
+        </div>
+        <div class="formListElement">
+            <label>Beschreibung:</label>
+            <p th:text="${learnSet.getDescription()}"></p>
+        </div>
+        <div class="formListElement">
+            <label>Fakultät:</label>
+            <p th:text="${learnSet.getFaculty()}"></p>
+        </div>
+        <div class="formListElement">
+            <label>Evaluation:</label>
+            <p th:if="${learnSet.calculateEvaluation() != -1}"
+               th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen bei '+
                    learnSet.getCommentList().size() + ' Bewertungen'}"></p>
-                <p th:if="${learnSet.calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
+            <p th:if="${learnSet.calculateEvaluation() == -1}">Es gab noch keine Bewertung</p>
+        </div>
+        <div class="formListElement">
+            <label>Admins:</label>
+            <div th:each=" admin : ${learnSet.getAdminList()}">
+                <a th:href="@{'/profile/' + ${admin.getId()}}" th:text="${admin.getEmail()}"></a>
             </div>
-            <div class="formListElement">
-                <label>Admins:</label>
-                <div th:each=" admin : ${learnSet.getAdminList()}">
-                    <a th:text="${admin.getEmail()}" th:href="@{'/profile/' + ${admin.getId()}}"></a>
+        </div>
+        <div th:switch="${isOwner}">
+            <div class="btnContainer bottom" th:case="true">
+                <div class="btn redBtn">
+                    <a th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}">X</a>
+                </div>
+                <div class="btn yellowBtn">
+                    <a th:href="@{'/editLearnSet/' + ${learnSet.getId()}}">EDIT</a>
+                </div>
+                <div class="btn blueBtn">
+                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">COMMENTS</a>
                 </div>
             </div>
-            <div th:switch="${isOwner}">
-                <div th:case="true" class="btnContainer bottom">
-                    <div class="btn redBtn">
-                        <a th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}">X</a>
-                    </div>
-                    <div class="btn yellowBtn">
-                        <a th:href="@{'/editLearnSet/' + ${learnSet.getId()}}">EDIT</a>
-                    </div>
-                    <div class="btn blueBtn">
-                        <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">COMMENTS</a>
-                    </div>
-                </div>
-                <div th:case="false" class="btnContainer">
-                    <div class="btn blueBtn">
-                        <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">COMMENTS</a>
-                    </div>
+            <div class="btnContainer" th:case="false">
+                <div class="btn blueBtn">
+                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">COMMENTS</a>
                 </div>
             </div>
-            <div class="btnPlaceHolder"></div>
+        </div>
+        <div class="btnPlaceHolder"></div>
+    </div>
+
+    <div class="cards" id="addCard" th:switch="${isAdmin}">
+        <div class="pannel transparentPannel" className="add-card" th:case="true">
+            <a th:href="@{'/addCard/' + ${learnSet.getId()}}">+</a>
         </div>
 
-        <div th:switch="${isAdmin}" id="addCard" class="cards">
-            <div th:case="true" className="add-card" class="pannel transparentPannel">
-                <a  th:href="@{'/addCard/' + ${learnSet.getId()}}">+</a>
-            </div>
-
-            <div th:each="card : ${cardList}" class="card whiteBG pannel">
-                <div class="cardSites">
+        <div class="card whiteBG pannel" th:each="card : ${cardList}">
+            <div class="cardSites">
                 <div th:switch="${card.getCardFront().getType().name()}">
                     <div th:case="TextFile">
                         <p th:text="${card.getCardFront().getTitle()}"></p>
@@ -82,7 +82,7 @@
 
                     <div th:case="VideoFile">
                         <h4 th:text="${card.getCardFront().getTitle()}"></h4>
-                        <video width="400" controls>
+                        <video controls width="400">
                             <source th:src="${card.getCardFront().getData()}" type="video/mp4"> <!--type="?"-->
                         </video>
                     </div>
@@ -109,7 +109,7 @@
 
                     <div th:case="VideoFile">
                         <p th:text="${card.getCardBack().getTitle()}"></p>
-                        <video width="400" controls>
+                        <video controls width="400">
                             <source th:src="${card.getCardBack().getData()}" type="video/mp4"> <!--type="?"-->
                         </video>
                     </div>
@@ -117,25 +117,25 @@
 
                 </div>
                 <!--End Switch-->
-                </div>
-                <div th:switch="${isAdmin}">
-                    <div class="btnContainer bottom" th:case="true">
-<!--                        <div class="btn blueBtn">-->
-<!--                            <a th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>-->
-<!--                        </div>-->
-                        <div class="btn redBtn">
-                            <a  th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
-                        </div>
+            </div>
+            <div th:switch="${isAdmin}">
+                <div class="btnContainer bottom" th:case="true">
+                    <!--                        <div class="btn blueBtn">-->
+                    <!--                            <a th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>-->
+                    <!--                        </div>-->
+                    <div class="btn redBtn">
+                        <a th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
                     </div>
                 </div>
-                <div class="btnPlaceHolder"></div>
             </div>
-
-
+            <div class="btnPlaceHolder"></div>
         </div>
 
 
     </div>
+
+
+</div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 

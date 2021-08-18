@@ -15,11 +15,11 @@ import java.util.Optional;
 
 /**
  * handles editing for accounts and shows profiles
+ *
  * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
-public class AccountController
-{
+public class AccountController {
     private final AccountService accountService;
 
     @Autowired
@@ -29,16 +29,15 @@ public class AccountController
 
     /**
      * This shows the logged in users Profile, while calling showProfile() with the userID as PathVariable
-     * @param model /
+     *
+     * @param model     /
      * @param principal /
      * @return profile.html or index.html
      */
     @GetMapping("/profile")
-    public String showMyProfile(Model model, Principal principal)
-    {
+    public String showMyProfile(Model model, Principal principal) {
         Optional<Account> account = accountService.getAccount(principal);
-        if(account.isPresent())
-        {
+        if (account.isPresent()) {
             return showProfile(account.get().getId(), model, principal);
         }
         return "redirect:/index";
@@ -46,24 +45,23 @@ public class AccountController
 
     /**
      * shows the profile of the given account
-     * @param userID /
-     * @param model /
+     *
+     * @param userID    /
+     * @param model     /
      * @param principal /
      * @return html
      */
     @GetMapping("/profile/{userID}")
-    public String showProfile(@PathVariable("userID") Long userID, Model model, Principal principal)
-    {
+    public String showProfile(@PathVariable("userID") Long userID, Model model, Principal principal) {
         // only loggedIN users can see an account
         Optional<Account> account = accountService.getAccount(userID);
         Optional<Account> myAccount = accountService.getAccount(principal);
-        
-        if(account.isPresent() && myAccount.isPresent())
-        {
+
+        if (account.isPresent() && myAccount.isPresent()) {
             model.addAttribute("isMyFriend", myAccount.get().getFriends().contains(account.get()));
             model.addAttribute("userIsProfileAccount", myAccount.get().getId().equals(userID));
             model.addAttribute("account", account.get());
-            
+
             return "profile";
         }
         return "redirect:/index";
@@ -71,69 +69,60 @@ public class AccountController
 
     /**
      * shows the updateProfile.html for the logged in user
+     *
      * @param principal /
-     * @param model /
+     * @param model     /
      * @return html
      */
     @GetMapping("/updateProfile")
-    public String getUpdateProfile(Principal principal,Model model)
-    {
+    public String getUpdateProfile(Principal principal, Model model) {
         Optional<Account> account = accountService.getAccount(principal);
-        if(account.isPresent())
-        {
+        if (account.isPresent()) {
             model.addAttribute("account", account.get());
             return "updateProfile";
         }
-        
+
         return "redirect:/index";
     }
 
     /**
      * handles the edit of the logged in account, here friends can be added
      * and the account data can be changed
+     *
      * @param addFriendByEmail account email to add friend
-     * @param theAccount /
-     * @param model /
-     * @param principal /
+     * @param theAccount       /
+     * @param model            /
+     * @param principal        /
      * @return html
      */
     @ResponseBody
     @PostMapping("/updateAccount")
-    public ModelAndView postUpdateAccount(@RequestParam("passwordProfessor2") String password2, @RequestParam(value="addFriendByEmail", required = false) String addFriendByEmail,
-                                    @ModelAttribute("account") Account theAccount, Model model,Principal principal)
-    {
+    public ModelAndView postUpdateAccount(@RequestParam("passwordProfessor2") String password2, @RequestParam(value = "addFriendByEmail", required = false) String addFriendByEmail,
+                                          @ModelAttribute("account") Account theAccount, Model model, Principal principal) {
         List<String> errors = new ArrayList<>();
         ModelAndView modelAndView = new ModelAndView();
         Optional<Account> account = accountService.getAccount(principal);
-        if(account.isPresent())
-        {
-            if(theAccount.getId().equals(account.get().getId())){
-                try
-                {
-                    if(!password2.equals(theAccount.getPassword())){
+        if (account.isPresent()) {
+            if (theAccount.getId().equals(account.get().getId())) {
+                try {
+                    if (!password2.equals(theAccount.getPassword())) {
                         throw new IllegalStateException("Passwörter stimmen nicht überein");
                     }
                     Optional<Account> friendAccount = accountService.getAccount(addFriendByEmail);
-                    if(friendAccount.isEmpty() && !addFriendByEmail.isEmpty())
+                    if (friendAccount.isEmpty() && !addFriendByEmail.isEmpty())
                         throw new IllegalStateException("Der Account existiert nicht");
                     accountService.updateAccount(theAccount, friendAccount);
-                }
-                catch(IllegalStateException e){
+                } catch (IllegalStateException e) {
                     errors.add(e.getMessage());
                 }
-            }
-            else
-            {
+            } else {
                 errors.add("Du manipulatives Arschloch!");
             }
-            model.addAttribute("errorList",errors);
+            model.addAttribute("errorList", errors);
             model.addAttribute("account", account.get());
-            if(errors.isEmpty())
-            {
+            if (errors.isEmpty()) {
                 modelAndView.setViewName("redirect:/profile");
-            }
-            else
-            {
+            } else {
                 modelAndView.setViewName("updateProfile");
                 modelAndView.addObject(model);
             }
@@ -145,31 +134,30 @@ public class AccountController
 
     /**
      * removes a friend from the friendlist of the logged in user
-     * @param friendId friend account id
+     *
+     * @param friendId  friend account id
      * @param principal /
      * @return html
      */
     @GetMapping("/removeFriendFromFriendList/{friendId}")
-    public String getRemoveFriendFromFriendList(@PathVariable("friendId") Long friendId, Principal principal)
-    {
+    public String getRemoveFriendFromFriendList(@PathVariable("friendId") Long friendId, Principal principal) {
         Optional<Account> account = accountService.getAccount(principal);
         Optional<Account> friend = accountService.getAccount(friendId);
-        
-        if(account.isPresent() && friend.isPresent() && account.get().getFriends().contains(friend.get())){
+
+        if (account.isPresent() && friend.isPresent() && account.get().getFriends().contains(friend.get())) {
             account.get().removeFriend(friend.get());
             accountService.saveAccount(account.get());
         }
         return "redirect:/profile";
     }
-    
+
     @GetMapping("/addFriend/{friendId}")
-    public String getAddFriend(@PathVariable("friendId") Long friendId,Principal principal)
-    {
+    public String getAddFriend(@PathVariable("friendId") Long friendId, Principal principal) {
         Optional<Account> account = accountService.getAccount(principal);
         Optional<Account> friend = accountService.getAccount(friendId);
-        
-        if(account.isPresent() && friend.isPresent()){
-            if(!account.get().getFriends().contains(friend.get())){
+
+        if (account.isPresent() && friend.isPresent()) {
+            if (!account.get().getFriends().contains(friend.get())) {
                 account.get().addFriend(friend.get());
                 accountService.saveAccount(account.get());
             }

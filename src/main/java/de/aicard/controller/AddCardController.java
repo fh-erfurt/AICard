@@ -21,8 +21,10 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * adds a card to the corresponding learnSet
+ *
  * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
@@ -40,9 +42,10 @@ public class AddCardController {
 
     /**
      * shows the addCard.html if the user can access it
+     *
      * @param learnSetID /
-     * @param principal /
-     * @param model /
+     * @param principal  /
+     * @param model      /
      * @return html
      */
 
@@ -50,7 +53,7 @@ public class AddCardController {
     public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model) {
         Optional<Account> account = accountService.getAccount(principal);
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetID);
-        
+
         if (account.isPresent() && learnSet.isPresent() && learnSet.get().isAuthorizedToAccessLearnSet(account.get())) {
             model.addAttribute("learnSetID", learnSetID);
             return "addCard";
@@ -62,26 +65,27 @@ public class AddCardController {
      * handles creatng cards for a LearnSet
      * different params are needed to identify datatypes such as video,audio,text and pictures
      * for front and back side
-     * @param learnSetID /
-     * @param principal /
-     * @param cardFrontType /
-     * @param cardFrontTextFileTile /
-     * @param cardFrontTextFileInput /
+     *
+     * @param learnSetID                /
+     * @param principal                 /
+     * @param cardFrontType             /
+     * @param cardFrontTextFileTile     /
+     * @param cardFrontTextFileInput    /
      * @param cardFrontPictureFileTitle /
      * @param cardFrontPictureFileInput /
-     * @param cardFrontVideoFileTitle /
-     * @param cardFrontVideoFileInput /
-     * @param cardFrontAudioFileTitle /
-     * @param cardFrontAudioFileInput /
-     * @param cardBackType /
-     * @param cardBackTextFileTitle /
-     * @param cardBackTextFileInput /
-     * @param cardBackPictureFileTitle /
-     * @param cardBackPictureFileInput /
-     * @param cardBackVideoFileTitle /
-     * @param cardBackVideoFileInput /
-     * @param cardBackAudioFileTitle /
-     * @param cardBackAudioFileInput /
+     * @param cardFrontVideoFileTitle   /
+     * @param cardFrontVideoFileInput   /
+     * @param cardFrontAudioFileTitle   /
+     * @param cardFrontAudioFileInput   /
+     * @param cardBackType              /
+     * @param cardBackTextFileTitle     /
+     * @param cardBackTextFileInput     /
+     * @param cardBackPictureFileTitle  /
+     * @param cardBackPictureFileInput  /
+     * @param cardBackVideoFileTitle    /
+     * @param cardBackVideoFileInput    /
+     * @param cardBackAudioFileTitle    /
+     * @param cardBackAudioFileInput    /
      * @return html
      */
     // --- we offer the possibility for all files to be send but only save those that are selected by the FileTypeSelector
@@ -114,18 +118,17 @@ public class AddCardController {
 
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetID);
         Optional<Account> account = accountService.getAccount(principal);
-        
+
         if (account.isPresent() &&
                 learnSet.isPresent() &&
                 learnSet.get().isAuthorizedToAccessLearnSet(account.get()) &&
-                learnSet.get().getAdminList().contains(account.get()))
-        {
-            
+                learnSet.get().getAdminList().contains(account.get())) {
+
             // we are here if the learnSet exists and the Owner or an Admin is logged in
             String cardFrontTitel = cardService.getCorrectTitle(cardFrontType, cardFrontPictureFileTitle,
                     cardFrontTextFileTile, cardFrontVideoFileTitle, cardFrontAudioFileTitle);
             String cardBackTitel = cardService.getCorrectTitle(cardBackType, cardBackPictureFileTitle,
-                    cardBackTextFileTitle,cardBackVideoFileTitle, cardBackAudioFileTitle);
+                    cardBackTextFileTitle, cardBackVideoFileTitle, cardBackAudioFileTitle);
 
             //TODO: Doppelter Code kann noch verbessert werden, wenn Zeit
             try {
@@ -162,18 +165,15 @@ public class AddCardController {
         if (errors.isEmpty() && learnSet.isPresent()) {
             learnSet.get().getCardList().addToList(newCard);
             learnSetService.saveLearnSet(learnSet.get());
-            
+
             modelAndView.setViewName("redirect:/cardOverview/" + learnSetID);
-            
-        }
-        else
-        {
+
+        } else {
             // for internal debugging
-            for (String error: errors)
-            {
+            for (String error : errors) {
                 System.out.println(error);
             }
-            
+
             modelAndView.setViewName("redirect:/addCard/" + learnSetID);
         }
         return modelAndView;

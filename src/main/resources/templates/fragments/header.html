@@ -1,4 +1,4 @@
-<div th:fragment="header" class="header" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div class="header" th:fragment="header" xmlns:sec="http://www.w3.org/1999/xhtml">
     <label class="logo"><a th:href="@{/index}">aiCard</a></label>
     <ul>
         <!-- NavBar -->
@@ -16,9 +16,9 @@
         </li>
     </ul>
 
-    <label  class="logIn"><a sec:authorize="!isAuthenticated()" th:href="@{/login}">Log-In</a></label>
+    <label class="logIn"><a sec:authorize="!isAuthenticated()" th:href="@{/login}">Log-In</a></label>
 
-    <label  class="logIn"><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Log-Out</a></label>
+    <label class="logIn"><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Log-Out</a></label>
 
 </div>
 

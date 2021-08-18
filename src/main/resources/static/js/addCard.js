@@ -18,36 +18,31 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var videoFileBackInput = document.getElementById("videoFileBackInput");
     var audioFileBackInput = document.getElementById("audioFileBackInput");
 
-    cardFrontType.addEventListener("change", function ()
-    {
-        if(cardFrontType.value === "TextFile") console.log("TIE");
+    cardFrontType.addEventListener("change", function () {
+        if (cardFrontType.value === "TextFile") console.log("TIE");
 
-        if(cardFrontType.value === "TextFile")
-        {
+        if (cardFrontType.value === "TextFile") {
             console.log(cardFrontType.value);
             textFileFrontInput.style.display = "block";
             pictureFileFrontInput.style.display = "none";
             videoFileFrontInput.style.display = "none";
             audioFileFrontInput.style.display = "none";
         }
-        if(cardFrontType.value === "AudioFile")
-        {
+        if (cardFrontType.value === "AudioFile") {
             console.log(cardFrontType.value);
             textFileFrontInput.style.display = "none";
             pictureFileFrontInput.style.display = "none";
             videoFileFrontInput.style.display = "none";
             audioFileFrontInput.style.display = "block";
         }
-        if(cardFrontType.value === "PictureFile")
-        {
+        if (cardFrontType.value === "PictureFile") {
             console.log(cardFrontType.value);
             textFileFrontInput.style.display = "none";
             pictureFileFrontInput.style.display = "block";
             videoFileFrontInput.style.display = "none";
             audioFileFrontInput.style.display = "none";
         }
-        if(cardFrontType.value === "VideoFile")
-        {
+        if (cardFrontType.value === "VideoFile") {
             console.log(cardFrontType.value);
             textFileFrontInput.style.display = "none";
             pictureFileFrontInput.style.display = "none";
@@ -58,32 +53,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     });
 
-    cardBackType.addEventListener("change", function ()
-    {
+    cardBackType.addEventListener("change", function () {
 
-        if(cardBackType.value === "TextFile")
-        {
+        if (cardBackType.value === "TextFile") {
             textFileBackInput.style.display = "block";
             pictureFileBackInput.style.display = "none";
             videoFileBackInput.style.display = "none";
             audioFileBackInput.style.display = "none";
         }
-        if(cardBackType.value === "PictureFile")
-        {
+        if (cardBackType.value === "PictureFile") {
             textFileBackInput.style.display = "none";
             pictureFileBackInput.style.display = "block";
             videoFileBackInput.style.display = "none";
             audioFileBackInput.style.display = "none";
         }
-        if(cardBackType.value === "VideoFile")
-        {
+        if (cardBackType.value === "VideoFile") {
             textFileBackInput.style.display = "none";
             pictureFileBackInput.style.display = "none";
             videoFileBackInput.style.display = "block";
             audioFileBackInput.style.display = "none";
         }
-        if(cardBackType.value === "AudioFile")
-        {
+        if (cardBackType.value === "AudioFile") {
             textFileBackInput.style.display = "none";
             pictureFileBackInput.style.display = "none";
             videoFileBackInput.style.display = "none";

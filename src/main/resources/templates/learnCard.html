@@ -12,7 +12,7 @@
 <div class="pageContent">
     <div class="pannel whiteBG learnCard">
         <div class="cardSites">
-            <div th:switch="${card.getCardFront().getType().name()}" id="front">
+            <div id="front" th:switch="${card.getCardFront().getType().name()}">
                 <div th:case="TextFile">
                     <p th:text="${card.getCardFront().getTitle()}"></p>
                     <p th:text="${card.getCardFront().getData()}"></p>
@@ -32,14 +32,14 @@
 
                 <div th:case="VideoFile">
                     <p th:text="${card.getCardFront().getTitle()}"></p>
-                    <video width="400" controls>
+                    <video controls width="400">
                         <source th:src="${card.getCardFront().getData()}" type="video/mp4"> <!--type="?"-->
                     </video>
                 </div>
             </div>
             <!--End Switch-->
 
-            <div th:switch="${card.getCardBack().getType().name()}" id="back" style="visibility: hidden">
+            <div id="back" style="visibility: hidden" th:switch="${card.getCardBack().getType().name()}">
                 <div th:case="TextFile">
                     <p th:text="${card.getCardBack().getTitle()}"></p>
                     <p th:text="${card.getCardBack().getData()}"></p>
@@ -59,19 +59,23 @@
 
                 <div th:case="VideoFile">
                     <p th:text="${card.getCardBack().getTitle()}"></p>
-                    <video width="400" controls>
+                    <video controls width="400">
                         <source th:src="${card.getCardBack().getData()}" type="video/mp4"> <!--type="?"-->
                     </video>
                 </div>
             </div>
         </div>
-            <!--End Switch-->
-        <form th:action="@{'/learnCard/' + ${learnSetAboId}}" method="POST">
-        <div class="btnContainer bottom">
-                <button th:name="cardKnown" th:value="false" class="btn redBtn"  disabled="disabled" id="dumm" style="display: none">I'm stupid!</button>
-                <button class="btn yellowBtn" type="button" id="reverse">Dreh mich!</button>
-                <button th:name="cardKnown" th:value="true" class="btn greenBtn" disabled="disabled" id="schlau" style="display: none;">Hab ich gewusst!</button>
-        </div>
+        <!--End Switch-->
+        <form method="POST" th:action="@{'/learnCard/' + ${learnSetAboId}}">
+            <div class="btnContainer bottom">
+                <button class="btn redBtn" disabled="disabled" id="dumm" style="display: none" th:name="cardKnown"
+                        th:value="false">I'm stupid!
+                </button>
+                <button class="btn yellowBtn" id="reverse" type="button">Dreh mich!</button>
+                <button class="btn greenBtn" disabled="disabled" id="schlau" style="display: none;" th:name="cardKnown"
+                        th:value="true">Hab ich gewusst!
+                </button>
+            </div>
         </form>
         <div class="btnPlaceHolder"></div>
     </div>

@@ -8,8 +8,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var password2 = document.getElementById("passwordProfessor2");
     var submitButton = document.getElementById("submitButton");
 
-    submitButton.addEventListener("click", function (event){
-        if(password1.value !== password2.value){
+    submitButton.addEventListener("click", function (event) {
+        if (password1.value !== password2.value) {
             alert("Passwörter stimmen nicht überein");
             event.preventDefault();
         }

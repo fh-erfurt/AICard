@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
  * The class message is used to store informations about a message which are :
  * the message its self - the sender - the time it was sent - the number of likes and the people who liked this message as a list
  *
- *
  * @author Amine Semlali
  */
 
@@ -25,27 +24,26 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment extends BaseEntity
-{
-    
+public class Comment extends BaseEntity {
+
     private String message;
     @OneToOne
     private Account sender;
     private LocalDateTime time;
     private Recommended recommended;
-    
+
     //constructor
+
     /**
      * Constructor of a Message.
-     * @param newSender the person that sends the message
+     *
+     * @param newSender        the person that sends the message
      * @param newCommentString the message to send
-     *
-     * likes are initialized to 0  and time is the time the message was sent
-     *
+     *                         <p>
+     *                         likes are initialized to 0  and time is the time the message was sent
      * @author Amine Semlali
      */
-    public Comment(String newCommentString, Account newSender, Recommended newRecomended)
-    {
+    public Comment(String newCommentString, Account newSender, Recommended newRecomended) {
         this.message = newCommentString;
         this.sender = newSender;
         this.time = LocalDateTime.now();

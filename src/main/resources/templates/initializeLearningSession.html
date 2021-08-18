@@ -10,10 +10,10 @@
     <div class="whiteBG pannel">
         <h1>Initialize Learning Session</h1>
 
-        <form th:action="@{'/initializeLearningSession/' + ${learnSetAboID}}" method="POST">
+        <form method="POST" th:action="@{'/initializeLearningSession/' + ${learnSetAboID}}">
             <div class="formListElement">
                 <select class="" th:name="cardCount">
-                    <option value="10" selected>10</option>
+                    <option selected value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>

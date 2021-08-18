@@ -24,7 +24,7 @@ body {
     display: list-item;
 }
 
-body>* {
+body > * {
     width: 100%;
 }
 
@@ -37,7 +37,7 @@ h6 {
     text-align: center;
 }
 
-label{
+label {
     font-weight: bold;
 }
 
@@ -64,7 +64,7 @@ a:hover {
     height: 60px;
     position: fixed;
     top: 0;
-    background: rgba(0,0,0,0.35);
+    background: rgba(0, 0, 0, 0.35);
     z-index: 99;
 }
 
@@ -73,9 +73,10 @@ a:hover {
     margin-top: 160px;
     margin-bottom: 50px;
     min-height: calc(100vh - 40px - 160px - 50px);
-    padding:0 10%;
+    padding: 0 10%;
 }
-.pageContent>*{
+
+.pageContent > * {
     margin-bottom: 5%;
 }
 
@@ -94,7 +95,7 @@ a:hover {
     margin-right: 20px;
 }
 
-.header>* {
+.header > * {
     position: relative;
 }
 
@@ -134,30 +135,32 @@ a:hover {
     border-radius: 20px;
     overflow: hidden;
     min-height: 5vh;
-    box-shadow: 5px 5px rgba(0,0,0,0.5);
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
 }
-.pannel>*{
+
+.pannel > * {
     margin: 10px;
 }
 
-.pannel *{
+.pannel * {
     word-wrap: break-word;
     text-overflow: ellipsis;
 }
 
-.deck{
+.deck {
     box-shadow: 5px 5px rgba(1, 17, 82, 0.5),
-                7px 7px #ffffff,
-                12px 12px rgba(1, 17, 82, 0.5),
-                14px 14px #ffffff,
-                19px 19px rgba(0,0,0,0.5);
+    7px 7px #ffffff,
+    12px 12px rgba(1, 17, 82, 0.5),
+    14px 14px #ffffff,
+    19px 19px rgba(0, 0, 0, 0.5);
 }
-.deck:hover{
+
+.deck:hover {
     box-shadow: 7px 7px rgba(1, 17, 82, 0.5),
-                11px 11px #ffffff,
-                18px 18px rgba(1, 17, 82, 0.5),
-                22px 22px #ffffff,
-                29px 29px rgba(0,0,0,0.5);
+    11px 11px #ffffff,
+    18px 18px rgba(1, 17, 82, 0.5),
+    22px 22px #ffffff,
+    29px 29px rgba(0, 0, 0, 0.5);
     transition: 0.5s;
 }
 
@@ -185,7 +188,7 @@ a:hover {
     font-weight: bold;
 }
 
-.errorPannel{
+.errorPannel {
     width: 100%;
     background: #ff959a;
     border: 5px solid #b1322f;
@@ -211,7 +214,8 @@ a:hover {
     border: none;
     cursor: pointer;
 }
-.btn a{
+
+.btn a {
     text-decoration: none;
     line-height: 50px;
 }
@@ -261,7 +265,7 @@ a:hover {
     transition: 0.5s;
 }
 
-.XBtn{
+.XBtn {
     height: 25px;
     width: 25px;
     text-decoration: none;
@@ -284,7 +288,7 @@ a:hover {
     font-weight: bold;
 }
 
-.commentInfo{
+.commentInfo {
     font-size: 12px;
     color: #636363;
 }

@@ -11,6 +11,7 @@ import java.util.Objects;
 
 /**
  * handles the h2 database
+ *
  * @author Clemens Berger
  */
 @Slf4j
@@ -22,12 +23,14 @@ public class H2Controller {
     private final EntityManagerFactory factory;
 
     public static H2Controller getManager() {
-        if (Objects.isNull(instance)){
-             instance = new H2Controller(Persistence.createEntityManagerFactory("de.aicard.jpa"));
+        if (Objects.isNull(instance)) {
+            instance = new H2Controller(Persistence.createEntityManagerFactory("de.aicard.jpa"));
         }
         return instance;
     }
 
-    public EntityManager getEntityManager() {return factory.createEntityManager();}
+    public EntityManager getEntityManager() {
+        return factory.createEntityManager();
+    }
 
 }

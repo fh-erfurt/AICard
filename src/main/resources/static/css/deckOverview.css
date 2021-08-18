@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
- :root {
+:root {
     --fontColor: black;
 }
 
@@ -24,7 +24,7 @@ body {
     display: list-item;
 }
 
-body>* {
+body > * {
     width: 100%;
 }
 
@@ -70,7 +70,7 @@ a {
     margin-right: 20px;
 }
 
-.header>* {
+.header > * {
     position: relative;
 }
 
@@ -102,7 +102,7 @@ a {
     align-self: center;
 }
 
-.gridItem>* {
+.gridItem > * {
     position: relative;
     display: list-item;
 }

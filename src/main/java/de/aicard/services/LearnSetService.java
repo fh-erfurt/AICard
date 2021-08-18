@@ -15,12 +15,13 @@ import java.util.Optional;
 
 /**
  * handles creations, deletions of learnsets and LearnSetRepository calls
+ *
  * @author Clemens Berger, Daniel Michel, Martin Kühlborn
  */
 @Service
 public class LearnSetService {
 
-    
+
     final LearnSetRepository learnSetRepository;
     final AccountRepository accountRepository;
     final LearnSetAboRepository learnSetAboRepository;
@@ -34,36 +35,37 @@ public class LearnSetService {
         this.cardListRepository = cardListRepository;
     }
 
-    public List<LearnSet> findAll(){
+    public List<LearnSet> findAll() {
         return learnSetRepository.findAll();
     }
 
     /**
      * creates new own learn and creates new learnsetabo for it
+     *
      * @param learnSet /
-     * @param account /
+     * @param account  /
      * @return last inserted learnset from learnsetabos in given account
      */
-    public LearnSet createLearnSet(LearnSet learnSet, Account account)
-    {
-        account.createNewOwnLearnSet(learnSet.getTitle(),learnSet.getDescription(),learnSet.getFaculty(),learnSet.getVisibility());
-        return account.getLearnsetAbos().get(account.getLearnsetAbos().size()-1).getLearnSet();
+    public LearnSet createLearnSet(LearnSet learnSet, Account account) {
+        account.createNewOwnLearnSet(learnSet.getTitle(), learnSet.getDescription(), learnSet.getFaculty(), learnSet.getVisibility());
+        return account.getLearnsetAbos().get(account.getLearnsetAbos().size() - 1).getLearnSet();
     }
-    
-    public Optional<LearnSet> getLearnSet(Long learnSetId){
+
+    public Optional<LearnSet> getLearnSet(Long learnSetId) {
         return learnSetRepository.findById(learnSetId);
     }
-    
-    public Optional<LearnSet> getLearnSetByCardId(Long cardId){
+
+    public Optional<LearnSet> getLearnSetByCardId(Long cardId) {
         return learnSetRepository.getLearnSetByCardId(cardId);
     }
 
     /**
      * save learnset
+     *
      * @param learnset given learnset
      */
-    public void saveLearnSet(LearnSet learnset){
-        if(learnset != null){
+    public void saveLearnSet(LearnSet learnset) {
+        if (learnset != null) {
             learnSetRepository.save(learnset);
         }
     }
@@ -71,14 +73,13 @@ public class LearnSetService {
     /**
      * deletes learnset after removing the owner and adminlist
      * deletes cardcontent for each card in learset
+     *
      * @param learnSet given learnset
      */
-    public void deleteLearnSet(LearnSet learnSet)
-    {
+    public void deleteLearnSet(LearnSet learnSet) {
         learnSet.setOwner(null);
         learnSet.setAdminList(null);
-        for (Card card:learnSet.getCardList().getListOfCards())
-        {
+        for (Card card : learnSet.getCardList().getListOfCards()) {
             card.deleteCardContent();
         }
         learnSetRepository.delete(learnSet);

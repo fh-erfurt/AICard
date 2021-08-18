@@ -26,8 +26,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class LearnSetAbo extends BaseEntity
-{
+public class LearnSetAbo extends BaseEntity {
     /**
      * The member-variable m_cardStatus is an ArrayList of CardStatus. It contains a CardStatus
      * for each Card in the LearnSet m_learnSet.
@@ -40,13 +39,13 @@ public class LearnSetAbo extends BaseEntity
      */
     @ManyToOne
     private LearnSet learnSet;
-    
+
     /**
      * The evaluation the Account has given to the LearnSet. If the Account has not yet given an
      * evaluation to the LearnSet, the variable m_evaluation has the value -1.
      */
     private int evaluation;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     private LearningSession learningSession;
 
@@ -55,14 +54,12 @@ public class LearnSetAbo extends BaseEntity
      *
      * @param _learnSet The LearnSet to which the Account subscribes.
      */
-    public LearnSetAbo(LearnSet _learnSet) throws Exception
-    {
+    public LearnSetAbo(LearnSet _learnSet) throws Exception {
         this.learnSet = _learnSet;
         this.cardStatus = new ArrayList<>();
         this.evaluation = -1;
 
-        for(int i = 0; i<learnSet.getCardList().getListLength(); i++)
-        {
+        for (int i = 0; i < learnSet.getCardList().getListLength(); i++) {
             cardStatus.add(new CardStatus(learnSet.getCardList().getCardByIndex(i)));
         }
 
@@ -72,15 +69,14 @@ public class LearnSetAbo extends BaseEntity
 
     /**
      * Method to get all Cards of the LearnSet with a specific CardKnowledgeLevel.
-     *
+     * <p>
      * Checks the KnowLedgeLevel of all Cards in the List. Puts the CardStatus with the
      * wanted level in a new ArrayList of CardStatus. Returns this List.
      *
      * @param level The CardKnowledgeLevel we are looking for
      * @return A List of all CardStatus in the LearnSetAbo with the CardKnowledgeLevel level
      */
-    private List<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel level)
-    {
+    private List<CardStatus> getCardStatusOfKnowledgeLevel(CardKnowledgeLevel level) {
         List<CardStatus> result = new ArrayList<>();
         for (CardStatus status : this.cardStatus) {
             if (status.getCardKnowledgeLevel() == level) {
@@ -92,7 +88,7 @@ public class LearnSetAbo extends BaseEntity
 
     /**
      * Creates an ArrayList of CardStatus with a specific Number of Cards.
-     *
+     * <p>
      * Checks the CardStatus List of the Abo for one CardKnowledgeLevel after another
      * (lowest level first) and fills a new ArrayList of CardStatus with the CardStatus of the
      * lowest level, until there are as many CardStatus in the List as wanted.
@@ -101,19 +97,17 @@ public class LearnSetAbo extends BaseEntity
      * @return List of the size _numOfCards, consists of the CardStatus in the LearnSetAbo with the
      * lowest CardKnowledgeLevel.
      */
-    private List<CardStatus> createCardStatusListForSession(int _numOfCards)
-    {
+    private List<CardStatus> createCardStatusListForSession(int _numOfCards) {
         List<CardStatus> resultCardStatusList = new ArrayList<>();
 
-        for (CardKnowledgeLevel level : CardKnowledgeLevel.values())
-        {
+        for (CardKnowledgeLevel level : CardKnowledgeLevel.values()) {
             List<CardStatus> lowestLevelList = getCardStatusOfKnowledgeLevel(level);
             for (CardStatus status : lowestLevelList) {
                 if (resultCardStatusList.size() < _numOfCards) {
                     resultCardStatusList.add(status);
                 }
             }
-            if (resultCardStatusList.size()==_numOfCards) break;
+            if (resultCardStatusList.size() == _numOfCards) break;
         }
 
         return resultCardStatusList;
@@ -121,36 +115,33 @@ public class LearnSetAbo extends BaseEntity
 
     /**
      * Creates a LearningSession with a specific number of Cards.
-     *
+     * <p>
      * First, it gets a List of the CardStatus in the LearnSetAbo of the lowest CardKnowledgeLevel.
      * Then, it constructs a LearnSet of this CardStatus ArrayList.
      *
      * @param _numOfCards how many Cards should be asked for in the LearningSession
-     * @return  The created LearningSession.
+     * @return The created LearningSession.
      */
-    public LearningSession createLearningSession(int _numOfCards)
-    {
-        
+    public LearningSession createLearningSession(int _numOfCards) {
+
         List<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
         LearningSession newLearningSession = new LearningSession(sessionList);
         this.learningSession = newLearningSession;
         return newLearningSession;
     }
-    
+
     /**
      * removes a cardStatus with the given card from the cardStatusList
+     *
      * @param card /
      * @return CardStatus which is removed
      */
-    public CardStatus removeCardStatusByCard(Card card)
-    {
+    public CardStatus removeCardStatusByCard(Card card) {
         CardStatus erg = null;
-        for (int i=this.cardStatus.size()-1;i>=0;i--)
-        {
-            if(this.cardStatus.get(i).getCard().equals(card)){
+        for (int i = this.cardStatus.size() - 1; i >= 0; i--) {
+            if (this.cardStatus.get(i).getCard().equals(card)) {
                 erg = cardStatus.get(i);
-                if(this.learningSession !=null && this.learningSession.getCardStatusList() != null)
-                {
+                if (this.learningSession != null && this.learningSession.getCardStatusList() != null) {
                     this.learningSession.getCardStatusList().remove(erg);
                 }
                 this.cardStatus.remove(i);

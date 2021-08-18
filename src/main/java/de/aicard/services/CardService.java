@@ -52,6 +52,7 @@ public class CardService {
 
     /**
      * removes a given card from cardlist in learnset
+     *
      * @param card given card
      */
     public void removeCardFromCardList(Card card) {
@@ -64,6 +65,7 @@ public class CardService {
 
     /**
      * deletes card and removes all references to it
+     *
      * @param card card to delete
      */
     public void deleteCard(Card card) {
@@ -89,12 +91,13 @@ public class CardService {
 
     /**
      * main addNewCard Method that is always called to by submethods
-     * @param cardFrontType /
+     *
+     * @param cardFrontType  /
      * @param cardFrontTitel /
      * @param cardFrontInput /
-     * @param cardBackType /
-     * @param cardBackTitel /
-     * @param cardBackInput /
+     * @param cardBackType   /
+     * @param cardBackTitel  /
+     * @param cardBackInput  /
      * @return new Card
      */
     public Card addNewCard(String cardFrontType, String cardFrontTitel, String cardFrontInput, String cardBackType, String cardBackTitel, String cardBackInput) {
@@ -121,12 +124,13 @@ public class CardService {
 
     /**
      * creates and returns new card with file in card front
-     * @param cardFrontType /
+     *
+     * @param cardFrontType  /
      * @param cardFrontTitel /
      * @param cardFrontInput /
-     * @param cardBackType /
-     * @param cardBackTitel /
-     * @param cardBackInput /
+     * @param cardBackType   /
+     * @param cardBackTitel  /
+     * @param cardBackInput  /
      * @return new card by calling main addNewCard Mehtod
      */
     public Card addNewCard(String cardFrontType, String cardFrontTitel, MultipartFile cardFrontInput, String cardBackType, String cardBackTitel, String cardBackInput) throws IOException, IllegalStateException {
@@ -136,12 +140,13 @@ public class CardService {
 
     /**
      * creates and returns new card with file in card back
-     * @param cardFrontType /
+     *
+     * @param cardFrontType  /
      * @param cardFrontTitel /
      * @param cardFrontInput /
-     * @param cardBackType /
-     * @param cardBackTitel /
-     * @param cardBackInput /
+     * @param cardBackType   /
+     * @param cardBackTitel  /
+     * @param cardBackInput  /
      * @return new card by calling main addNewCard Mehtod
      */
     public Card addNewCard(String cardFrontType, String cardFrontTitel, String cardFrontInput, String cardBackType, String cardBackTitel, MultipartFile cardBackInput) throws IOException, IllegalStateException {
@@ -151,12 +156,13 @@ public class CardService {
 
     /**
      * creates and returns new card with files in card front and back
-     * @param cardFrontType /
+     *
+     * @param cardFrontType  /
      * @param cardFrontTitel /
      * @param cardFrontInput /
-     * @param cardBackType /
-     * @param cardBackTitel /
-     * @param cardBackInput /
+     * @param cardBackType   /
+     * @param cardBackTitel  /
+     * @param cardBackInput  /
      * @return new card by calling main addNewCard Mehtod
      */
     public Card addNewCard(String cardFrontType, String cardFrontTitel, MultipartFile cardFrontInput, String cardBackType, String cardBackTitel, MultipartFile cardBackInput) throws IOException, IllegalStateException {
@@ -167,11 +173,12 @@ public class CardService {
 
     /**
      * return correct title string by by checking enum in cardFileType
+     *
      * @param cardFileType enum that is provided by frontend
      * @param pictureTitle /
-     * @param textTitle /
-     * @param videoTitle /
-     * @param audioTitle /
+     * @param textTitle    /
+     * @param videoTitle   /
+     * @param audioTitle   /
      * @return correct title string
      */
     public String getCorrectTitle(String cardFileType, String pictureTitle, String textTitle, String videoTitle, String audioTitle) {
@@ -194,11 +201,12 @@ public class CardService {
     }
 
     /**
-     *  gets correct input from optional file inputs in controller
+     * gets correct input from optional file inputs in controller
+     *
      * @param cardFileType enum provided by fronted
-     * @param videoInput /
+     * @param videoInput   /
      * @param pictureInput /
-     * @param audioInput /
+     * @param audioInput   /
      * @return correct input file
      */
     public MultipartFile getCorrectInput(String cardFileType, MultipartFile videoInput, MultipartFile pictureInput, MultipartFile audioInput) {
@@ -220,7 +228,8 @@ public class CardService {
     /**
      * checks if inputtype mactches input
      * if correct, saves inputfile to cardfiles folder and return filename
-     * @param fileInput multipart file
+     *
+     * @param fileInput    multipart file
      * @param expectedType expected filetype (image, video or audio)
      * @return filename of saved input file
      */

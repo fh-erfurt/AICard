@@ -31,10 +31,10 @@ public class AccountService {
     final LearnSetRepository learnSetRepository;
 
     final LearnSetAboRepository learnSetAboRepository;
-    
+
 
     @Autowired
-    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder, LearnSetRepository learnSetRepository, LearnSetAboRepository learnSetAboRepository){
+    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder, LearnSetRepository learnSetRepository, LearnSetAboRepository learnSetAboRepository) {
 
         this.accountRepository = accountRepository;
         this.passwordEncoder = passwordEncoder;
@@ -44,91 +44,89 @@ public class AccountService {
 
     /**
      * creates account after checking if input is satisfactory
+     *
      * @param account account
      * @return created Account
      */
-    public Optional<Account> createAccount(Account account) throws IllegalStateException{
+    public Optional<Account> createAccount(Account account) throws IllegalStateException {
         Optional<Account> matchingEntries = accountRepository.findByEmail(account.getEmail());
         Optional<Account> acc = Optional.empty();
-        if(matchingEntries.isEmpty()
+        if (matchingEntries.isEmpty()
                 && RegPattern.passMatches(account.getPassword())
-                && RegPattern.emailMatches(account.getEmail())){
+                && RegPattern.emailMatches(account.getEmail())) {
             //encode password
             account.setPassword(passwordEncoder.encode(account.getPassword()));
             acc = Optional.of(account);
-        }
-        else{
-            if(!RegPattern.passMatches(account.getPassword())){
+        } else {
+            if (!RegPattern.passMatches(account.getPassword())) {
                 throw new IllegalStateException("Passwort entspricht nicht den Passwortrichtlinien");
             }
-            if(matchingEntries.isPresent()){
+            if (matchingEntries.isPresent()) {
                 throw new IllegalStateException("Ein Account mit dieser E-Mail Adresse existiert bereits");
             }
-            if(!RegPattern.emailMatches(account.getEmail())){
+            if (!RegPattern.emailMatches(account.getEmail())) {
                 throw new IllegalStateException("die e-mail Adresse ist ungültig");
             }
         }
-        return(acc);
+        return (acc);
     }
 
-    public void updateAccount(Account account,Optional<Account> friend) throws IllegalStateException{
+    public void updateAccount(Account account, Optional<Account> friend) throws IllegalStateException {
         Optional<Account> oldAccount = accountRepository.findById(account.getId());
-        
-        if(!RegPattern.passMatches(account.getPassword()) && !account.getPassword().isEmpty()){
+
+        if (!RegPattern.passMatches(account.getPassword()) && !account.getPassword().isEmpty()) {
             throw new IllegalStateException("Das Passwort stimmt nicht mit den angegebenen Passwortrichtlinien überein");
         }
-        if(oldAccount.isPresent() && friend.isPresent() && friend.get().getId().equals(oldAccount.get().getId())){
+        if (oldAccount.isPresent() && friend.isPresent() && friend.get().getId().equals(oldAccount.get().getId())) {
             throw new IllegalStateException("Der angegebene Account kann nicht hinzugefügt werden");
         }
-        
-        if(!account.getPassword().isEmpty()) account.setPassword(passwordEncoder.encode(account.getPassword()));
-        
-        if(oldAccount.isPresent()) {
+
+        if (!account.getPassword().isEmpty()) account.setPassword(passwordEncoder.encode(account.getPassword()));
+
+        if (oldAccount.isPresent()) {
             oldAccount.get().setName(account.getName());
             oldAccount.get().setDescription(account.getDescription());
             oldAccount.get().setFaculty(account.getFaculty());
-            if(friend.isPresent() && !oldAccount.get().getFriends().contains(friend.get())){
+            if (friend.isPresent() && !oldAccount.get().getFriends().contains(friend.get())) {
                 oldAccount.get().addFriend(friend.get());
             }
             accountRepository.save(oldAccount.get());
         }
     }
 
-    public Optional<Account> getAccount(Long userID){
-        return  accountRepository.findById(userID);
+    public Optional<Account> getAccount(Long userID) {
+        return accountRepository.findById(userID);
     }
-    
-    public Optional<Account> getAccount(String email){
+
+    public Optional<Account> getAccount(String email) {
         return accountRepository.findByEmail(email);
     }
 
-    public Optional<Account> getAccount(Principal principal){
+    public Optional<Account> getAccount(Principal principal) {
         return accountRepository.findByEmail(principal.getName());
     }
 
-    public void saveAccount(Account account){
+    public void saveAccount(Account account) {
         accountRepository.save(account);
     }
 
     /**
      * deletes all learnsetabos that have a reference to a given learnset
+     *
      * @param learnSetId learnSetId
      */
-    public void deleteLearnSetAbosByLearnSetId(Long learnSetId){
+    public void deleteLearnSetAbosByLearnSetId(Long learnSetId) {
         List<Account> accounts = accountRepository.findAllAccountsByLearnsetIdInLearnSetAbo(learnSetId);
         Optional<LearnSet> learnSet = learnSetRepository.findById(learnSetId);
-        if(learnSet.isPresent())
-        {
-            for (Account account : accounts)
-            {
+        if (learnSet.isPresent()) {
+            for (Account account : accounts) {
                 LearnSetAbo learnSetAbo = account.removeLearnSetAboByLearnSet(learnSet.get());
-                if (learnSetAbo != null)
-                {
+                if (learnSetAbo != null) {
                     this.saveAccount(account);
                     learnSetAboRepository.delete(learnSetAbo);
                 }
             }
         }
     }
-    
+
 }

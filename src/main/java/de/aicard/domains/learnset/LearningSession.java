@@ -21,8 +21,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class LearningSession extends BaseEntity
-{
+public class LearningSession extends BaseEntity {
     //attributes
     /**
      * The Card that is currently shown.
@@ -38,59 +37,53 @@ public class LearningSession extends BaseEntity
      * Information, wheather the Session is active (there is at least one other card to learn in the List)
      */
     private boolean isActive;
-    
-    
+
+
     /**
      * Constructor of LearningSession
-     *
+     * <p>
      * sets currentCard to 0 and isActive to true.
      *
      * @param _cardStatusList The List for the LearningSession.
      */
-    public LearningSession(List<CardStatus> _cardStatusList)
-    {
+    public LearningSession(List<CardStatus> _cardStatusList) {
         this.cardStatusList = _cardStatusList;
         this.currentCard = 0;
         this.isActive = true;
     }
-    
+
     //methods
 
     /**
      * Method called if the Card was known by the User.
-     *
+     * <p>
      * It increases the CardKnowledgeLevel and turns to the next Card.
      */
-    public void cardKnown()
-    {
+    public void cardKnown() {
         this.cardStatusList.get(this.currentCard).increaseCardKnowledgeLevel();
         this.next();
     }
 
     /**
      * Method called if the Card was not known by the User.
-     *
+     * <p>
      * It decreases the CardKnowledgeLevel and turns to the next Card.
      */
-    public void cardUnknown()
-    {
+    public void cardUnknown() {
         this.cardStatusList.get(this.currentCard).decreaseCardKnowledgeLevel();
         this.next();
     }
 
     /**
      * Method called to go to next Card in the LearningSession.
-     *
+     * <p>
      * Checks, if the current Card was the last Card of the Session. If so, it sets isActive to false.
      * If not, it increases currentCard by one.
      */
-    private void next()
-    {
-        if(this.currentCard == (this).cardStatusList.size()-1)
-        {
+    private void next() {
+        if (this.currentCard == (this).cardStatusList.size() - 1) {
             this.isActive = false;
-        }
-        else {
+        } else {
             this.currentCard++;
         }
     }

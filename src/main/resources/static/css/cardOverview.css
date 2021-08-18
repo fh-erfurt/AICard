@@ -25,7 +25,7 @@
     transform: translate(-50%, 0);
 }
 
-.cards>* {
+.cards > * {
     position: relative;
     height: 300px;
     width: 100%;
@@ -51,22 +51,22 @@
     justify-content: space-evenly;
 }
 
-.cardSites>div {
+.cardSites > div {
     margin: 10px 0;
 }
 
-.card .cardSites>div {
+.card .cardSites > div {
     width: 45%;
     height: 200px;
 }
 
-.learnCard .cardSites>div {
+.learnCard .cardSites > div {
     width: 45%;
     height: 60vh;
 }
 
 .card .cardSites *,
-.learnCard .cardSites *{
+.learnCard .cardSites * {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -78,7 +78,7 @@
     text-align: center;
 }
 
-.learnCard{
+.learnCard {
     position: relative;
     height: 70vh;
     width: 100%;

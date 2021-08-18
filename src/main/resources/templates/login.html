@@ -4,49 +4,52 @@
 <head th:replace="fragments/head :: head"></head>
 
 <body>
-    <div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"></div>
 
-    <!--<select id="academicGrade">
-    <option th:each="academicGrade : ${errorModel}"
-            th:text="${academicGrade}">
-    </option>
+<!--<select id="academicGrade">
+<option th:each="academicGrade : ${errorModel}"
+        th:text="${academicGrade}">
+</option>
 </select>-->
 
 
-    <div class="pageContent">
-        <div class="pannel errorPannel" th:if="${param.error}">
-            Ungültiger Nutzername oder Password.
+<div class="pageContent">
+    <div class="pannel errorPannel" th:if="${param.error}">
+        Ungültiger Nutzername oder Password.
+    </div>
+    <div class="registration pannel whiteBG">
+        <div class="formListElement">
+            <label class="head">Anmeldung</label>
         </div>
-        <div class="registration pannel whiteBG">
+
+        <form id="loginform" method="POST" th:action="@{/login}">
+
             <div class="formListElement">
-                <label class="head">Anmeldung</label>
+                <label>Email</label>
+                <input class="inputtext" id="email" name="email" onblur="this.placeholder = 'Email'"
+                       onfocus="this.placeholder = ''" placeholder="Email" th:value="${registeredEmail != null} ? ${registeredEmail}"
+                       type="email" value="">
             </div>
 
-            <form method="POST" id="loginform" th:action="@{/login}">
+            <div class="formListElement">
+                <label>Passwort</label>
+                <input class="inputtext" id="password" name="password" onblur="this.placeholder = 'Passwort'"
+                       onfocus="this.placeholder = ''" placeholder="Passwort" type="password">
+            </div>
+            <div class="btnContainer bottom">
 
-                <div class="formListElement">
-                    <label>Email</label>
-                    <input th:value="${registeredEmail != null} ? ${registeredEmail}" type="email" value="" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="inputtext">
+                <div class="btn yellowBtn">
+                    <a th:href="@{/registration}">registrieren</a>
                 </div>
-
-                <div class="formListElement">
-                    <label>Passwort</label>
-                    <input  type="password" id="password" name="password" placeholder="Passwort" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passwort'" class="inputtext">
-                </div>
-                <div class="btnContainer bottom">
-
-                    <div class="btn yellowBtn">
-                        <a th:href="@{/registration}">registrieren</a>
-                    </div>
-                    <input type="submit" name="submit" id="loginbutton" value="anmelden" class="btn blueBtn">
-                </div>
-            </form>
+                <input class="btn blueBtn" id="loginbutton" name="submit" type="submit" value="anmelden">
+            </div>
+        </form>
 
 
-            <div class="btnPlaceHolder"></div>
-        </div>
+        <div class="btnPlaceHolder"></div>
     </div>
-    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>

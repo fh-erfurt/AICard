@@ -7,26 +7,27 @@ import org.springframework.stereotype.Service;
 
 /**
  * provides delete method for learningsession
+ *
  * @author Clemes Berger, Daniel Michel, Martin Kühhlborn
  */
 @Service
-public class LearningSessionService
-{
-    
+public class LearningSessionService {
+
     final LearningSessionRepository learningSessionRepository;
-    
+
     @Autowired
-    public LearningSessionService(LearningSessionRepository learningSessionRepository){
+    public LearningSessionService(LearningSessionRepository learningSessionRepository) {
 
         this.learningSessionRepository = learningSessionRepository;
     }
 
     /**
      * deletes a given learningsession
+     *
      * @param learningSession /
      */
-    public void delete(LearningSession learningSession){
+    public void delete(LearningSession learningSession) {
         learningSessionRepository.delete(learningSession);
     }
-        
+
 }

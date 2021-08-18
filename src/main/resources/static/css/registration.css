@@ -26,14 +26,13 @@
 }
 
 
-
 .formListElement {
     position: relative;
     display: list-item;
     padding: 10px;
 }
 
-.formListElement>* {
+.formListElement > * {
     position: relative;
     display: list-item;
 }

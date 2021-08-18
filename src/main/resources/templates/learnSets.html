@@ -4,94 +4,97 @@
 <head th:replace="fragments/head :: head"></head>
 
 <body>
-    <div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"></div>
 
-    <div class="pageContent">
-            <div class="whiteBG pannel">
-                <label class="head">Meine LearnSets</label>
+<div class="pageContent">
+    <div class="whiteBG pannel">
+        <label class="head">Meine LearnSets</label>
+    </div>
+    <div class="gridContainer">
+        <!-- display:grid 3 Spalten -->
+
+        <div class="gridItem transparentPannel deck">
+            <a th:href="@{/createLearnset}">
+                +
+            </a>
+        </div>
+
+        <!-- weitere gridItmes werden dynamisch geladen -->
+        <div class="gridItem whiteBG pannel deck" th:each="ownAbo : ${ownLearnSetAbos}">
+            <div class="deckName">
+                <a th:href="@{'/cardOverview/'+${ownAbo.getLearnSet().getId()}}"
+                   th:text="${ownAbo.getLearnSet().title}"></a>
             </div>
-            <div class="gridContainer">
-                <!-- display:grid 3 Spalten -->
-
-                <div class="gridItem transparentPannel deck">
-                    <a th:href="@{/createLearnset}">
-                    +
-                    </a>
-                </div>
-
-                <!-- weitere gridItmes werden dynamisch geladen -->
-                <div th:each="ownAbo : ${ownLearnSetAbos}" class="gridItem whiteBG pannel deck">
-                    <div class="deckName">
-                        <a th:href="@{'/cardOverview/'+${ownAbo.getLearnSet().getId()}}" th:text="${ownAbo.getLearnSet().title}"></a>
-                    </div>
-                    <div th:text="'Karten: ' + ${ownAbo.getLearnSet().getCardList().getListLength()}"></div>
-                    <div>
-                        <h4>Fakultät</h4>
-                        <p th:text="${ownAbo.getLearnSet().getFaculty()}"></p>
-                    </div>
-                    <div>
-                        <h4>Evaluation</h4>
-                        <p th:if="${ownAbo.getLearnSet().calculateEvaluation() != -1}"
-                           th:text="${ownAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen bei ' +
+            <div th:text="'Karten: ' + ${ownAbo.getLearnSet().getCardList().getListLength()}"></div>
+            <div>
+                <h4>Fakultät</h4>
+                <p th:text="${ownAbo.getLearnSet().getFaculty()}"></p>
+            </div>
+            <div>
+                <h4>Evaluation</h4>
+                <p th:if="${ownAbo.getLearnSet().calculateEvaluation() != -1}"
+                   th:text="${ownAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen bei ' +
                            ownAbo.getLearnSet().getCommentList().size() + ' Bewertungen'}"></p>
-                        <p th:if="${ownAbo.getLearnSet().calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
-                    </div>
-                    <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
-                    <div class="btnContainer bottom">
-                        <div class="btn yellowBtn">
-                            <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">edit</a>
-                        </div>
-                        <div class="btn blueBtn">
-                            <a th:href="@{'/initializeLearningSession/' + ${ownAbo.getId()}}">learn</a>
-                        </div>
-                    </div>
-                    <div class="btnPlaceHolder"></div>
+                <p th:if="${ownAbo.getLearnSet().calculateEvaluation() == -1}">Es gab noch keine Bewertung</p>
+            </div>
+            <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
+            <div class="btnContainer bottom">
+                <div class="btn yellowBtn">
+                    <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">edit</a>
                 </div>
-
+                <div class="btn blueBtn">
+                    <a th:href="@{'/initializeLearningSession/' + ${ownAbo.getId()}}">learn</a>
+                </div>
             </div>
+            <div class="btnPlaceHolder"></div>
+        </div>
 
-        <!--        Folowed LearnSets-->
-            <div class="whiteBG pannel">
-                <label class="head">followed LearnSets</label>
+    </div>
+
+    <!--        Folowed LearnSets-->
+    <div class="whiteBG pannel">
+        <label class="head">followed LearnSets</label>
+    </div>
+    <div class="gridContainer">
+        <!-- display:grid 3 Spalten -->
+
+
+        <!-- weitere gridItmes werden dynamisch geladen -->
+        <div class="gridItem whiteBG pannel deck" th:each="favoriteLearnSetAbo : ${favoriteLearnSetAbos}">
+            <div class="deckName">
+                <a th:href="@{'/cardOverview/'+ ${favoriteLearnSetAbo.getLearnSet().getId()}}"
+                   th:text="${favoriteLearnSetAbo.getLearnSet().title}"></a>
             </div>
-            <div class="gridContainer">
-                <!-- display:grid 3 Spalten -->
+            <div th:text="'Karten: ' + ${favoriteLearnSetAbo.getLearnSet().getCardList().getListLength()}"></div>
 
-
-                <!-- weitere gridItmes werden dynamisch geladen -->
-                <div th:each="favoriteLearnSetAbo : ${favoriteLearnSetAbos}" class="gridItem whiteBG pannel deck">
-                    <div  class="deckName">
-                        <a th:href="@{'/cardOverview/'+ ${favoriteLearnSetAbo.getLearnSet().getId()}}" th:text="${favoriteLearnSetAbo.getLearnSet().title}"></a>
-                    </div>
-                    <div th:text="'Karten: ' + ${favoriteLearnSetAbo.getLearnSet().getCardList().getListLength()}"></div>
-
-                    <div>
-                        <h4>Fakultät</h4>
-                        <p th:text="${favoriteLearnSetAbo.getLearnSet().getFaculty()}"></p>
-                    </div>
-                    <div>
-                        <h4>Evaluation</h4>
-                        <p th:if="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() != -1}"
-                           th:text="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen bei ' +
+            <div>
+                <h4>Fakultät</h4>
+                <p th:text="${favoriteLearnSetAbo.getLearnSet().getFaculty()}"></p>
+            </div>
+            <div>
+                <h4>Evaluation</h4>
+                <p th:if="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() != -1}"
+                   th:text="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() + ' % positive Bewertungen bei ' +
                            favoriteLearnSetAbo.getLearnSet().getCommentList().size() + ' Bewertungen'}"></p>
-                        <p th:if="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
-                    </div>
+                <p th:if="${favoriteLearnSetAbo.getLearnSet().calculateEvaluation() == -1}">Es gab noch keine
+                    Bewertung</p>
+            </div>
 
-                    <div class="btnContainer bottom">
-                        <div class="btn yellowBtn">
-                            <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">unfollow</a>
-                        </div>
-                        <div class="btn blueBtn">
-                            <a th:href="@{'/initializeLearningSession/' + ${favoriteLearnSetAbo.getId()}}">learn</a>
-                        </div>
-                    </div>
-
+            <div class="btnContainer bottom">
+                <div class="btn yellowBtn">
+                    <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">unfollow</a>
                 </div>
-
+                <div class="btn blueBtn">
+                    <a th:href="@{'/initializeLearningSession/' + ${favoriteLearnSetAbo.getId()}}">learn</a>
+                </div>
             </div>
 
         </div>
-    <div th:replace="fragments/footer :: footer"></div>
+
+    </div>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>

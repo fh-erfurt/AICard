@@ -18,17 +18,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const maxFileSize = 50 * 1024 * 1024;
 
     var fileInputArray = [pictureFileFrontInput, videoFileFrontInput, audioFileFrontInput,
-                            pictureFileBackInput, videoFileBackInput, audioFileBackInput];
+        pictureFileBackInput, videoFileBackInput, audioFileBackInput];
 
     fileInputArray.forEach(item => {
         item.addEventListener('change', event => {
-            console.log(item.files[0].size );
+            console.log(item.files[0].size);
             console.log(maxFileSize);
-            if(item.files[0].size >= maxFileSize) {
+            if (item.files[0].size >= maxFileSize) {
                 item.value = '';
                 alert("Eingegeben Datei überschreitet 50mb und wurde entfernt!");
                 console.log("file too big");
-            };
+            }
+
         })
     })
 

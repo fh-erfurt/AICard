@@ -7,17 +7,17 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="pageContent">
-  <div class="registration pannel errorPannel">
-    <div class="formListElement">
-      <label class="head" th:text="${'ERROR ' + status}"></label>
-      <h5>MESSAGE</h5>
-      <p th:text="${error}"></p>
+    <div class="registration pannel errorPannel">
+        <div class="formListElement">
+            <label class="head" th:text="${'ERROR ' + status}"></label>
+            <h5>MESSAGE</h5>
+            <p th:text="${error}"></p>
+        </div>
+        <div class="btnContainer bottom">
+            <div class="btn redBtn"><a class="registrationLink" th:href="@{/index}"> Zurück auf die Homepage </a></div>
+        </div>
+        <div class="btnPlaceHolder"></div>
     </div>
-    <div class="btnContainer bottom">
-      <div class="btn redBtn"><a class="registrationLink" th:href="@{/index}"> Zurück auf die Homepage </a></div>
-    </div>
-    <div class="btnPlaceHolder"></div>
-  </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>

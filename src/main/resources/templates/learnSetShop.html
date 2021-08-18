@@ -12,21 +12,21 @@
     <div class="whiteBG pannel">
         <h2>Filter</h2>
 
-        <form th:action="learnSetShop" method="GET">
+        <form method="GET" th:action="learnSetShop">
             <div class="formListElement">
                 <label for="facultyProfessor">Fakukltät</label>
-                <select  name="faculty" id="facultyProfessor" required>
+                <select id="facultyProfessor" name="faculty" required>
                     <option value="duDoppelNull">Alle Fakultäten</option>
                     <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
+                            th:selected="${faculty.name().equals(selectedFacultyName)}"
                             th:text="${faculty}"
-                            th:value="${faculty}"
-                            th:selected="${faculty.name().equals(selectedFacultyName)}">
+                            th:value="${faculty}">
                     </option>
                 </select>
             </div>
             <div class="formListElement">
                 <label for="learnSetTitle">LearnSetTitle SubString suche</label>
-                <input th:value="${learnSetTitle}" type="text" name="learnSetTitle" id="learnSetTitle">
+                <input id="learnSetTitle" name="learnSetTitle" th:value="${learnSetTitle}" type="text">
             </div>
             <div class="btnContainer bottom">
                 <button class="btn blueBtn" type="submit">Filtern</button>
@@ -38,15 +38,15 @@
 
 
     <div class="gridContainer">
-    <!-- display:grid 3 Spalten -->
+        <!-- display:grid 3 Spalten -->
 
 
         <!-- weitere gridItmes werden dynamisch geladen -->
-        <div th:each="learnSet : ${learnSetList}" class="gridItem whiteBG pannel deck">
+        <div class="gridItem whiteBG pannel deck" th:each="learnSet : ${learnSetList}">
             <div class="deckName">
-                <a th:text="${learnSet.title}"  th:href="@{'/cardOverview/' + ${learnSet.getId()}}"></a>
+                <a th:href="@{'/cardOverview/' + ${learnSet.getId()}}" th:text="${learnSet.title}"></a>
             </div>
-            <div th:text="'Karten ' + ${learnSet.getCardList().getListLength()}" class="cardCount"></div>
+            <div class="cardCount" th:text="'Karten ' + ${learnSet.getCardList().getListLength()}"></div>
 
             <h4>Fakultät</h4>
             <p th:text="${learnSet.getFaculty()}"></p>
@@ -54,7 +54,7 @@
             <h4>Evaluation</h4>
             <p th:if="${learnSet.calculateEvaluation() != -1}"
                th:text="${learnSet.calculateEvaluation() + ' % positive Bewertungen bei ' + learnSet.getCommentList().size() + ' Bewertungen'}"></p>
-            <p th:if="${learnSet.calculateEvaluation() == -1}" >Es gab noch keine Bewertung</p>
+            <p th:if="${learnSet.calculateEvaluation() == -1}">Es gab noch keine Bewertung</p>
 
 
             <div class="btnContainer bottom">

@@ -28,97 +28,92 @@ import java.util.logging.Logger;
 @Getter
 @Entity
 @NoArgsConstructor
-public class LearnSet extends BaseEntity
-{
+public class LearnSet extends BaseEntity {
     // CLASS VARIABLES
     private static final Logger logger = Logger.getLogger(LearnSet.class.getName());
- 
+
     // MEMBER VARIABLES
     private String title;
-    
+
     /**
      * Short Text Description about the LearnSet content
      */
     private String description;
-    
+
     /**
      * Which Faculty is the LearnSet acquainted with
      */
     private Faculty faculty;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     private CardList cardList;
-    
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> commentList;
-    
+
     /**
      * The Account who created and owns the LearnSet
      */
     @OneToOne(cascade = CascadeType.ALL)
     private Account owner;
-    
+
     /**
      * Visibility for Accounts who are not the owner
      */
     private Visibility visibility;
-    
+
     /**
      * List of people who can edit the learnset
      */
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Account> adminList;
-    
+
 
     // CONSTRUCTORS
-    
+
     /**
      * LearnSet constructor
      *
      * @param newCardList /
      */
-    public LearnSet(CardList newCardList)
-    {
+    public LearnSet(CardList newCardList) {
         this(null, null, null, newCardList, null, Visibility.PRIVATE);
     }
-    
+
     /**
      * LearnSet constructor
      *
-     * @param newTitle /
-     * @param newFaculty /
+     * @param newTitle    /
+     * @param newFaculty  /
      * @param newCardList /
-     * @param newOwner /
+     * @param newOwner    /
      */
-    public LearnSet(String newTitle, Faculty newFaculty, CardList newCardList, Account newOwner)
-    {
+    public LearnSet(String newTitle, Faculty newFaculty, CardList newCardList, Account newOwner) {
         this(newTitle, null, newFaculty, newCardList, newOwner, Visibility.PRIVATE);
     }
-    
+
     /**
      * LearnSet constructor
      *
-     * @param newTitle /
+     * @param newTitle       /
      * @param newDescription /
-     * @param newFaculty /
+     * @param newFaculty     /
      */
-    public LearnSet(String newTitle, String newDescription, Faculty newFaculty)
-    {
+    public LearnSet(String newTitle, String newDescription, Faculty newFaculty) {
         this(newTitle, newDescription, newFaculty, new CardList(), null, Visibility.PRIVATE);
     }
 
     /**
      * LearnSet constructor
      *
-     * @param newTitle /
+     * @param newTitle       /
      * @param newDescription /
-     * @param newFaculty /
-     * @param newCardList /
-     * @param newOwner /
-     * @param visibility /
+     * @param newFaculty     /
+     * @param newCardList    /
+     * @param newOwner       /
+     * @param visibility     /
      */
-    public LearnSet(String newTitle, String newDescription, Faculty newFaculty, CardList newCardList, Account newOwner, Visibility visibility)
-    {
+    public LearnSet(String newTitle, String newDescription, Faculty newFaculty, CardList newCardList, Account newOwner, Visibility visibility) {
         this.title = newTitle;
         this.description = newDescription;
         this.faculty = newFaculty;
@@ -129,29 +124,25 @@ public class LearnSet extends BaseEntity
         this.adminList = new ArrayList<>();
 
     }
-    
+
     /*
-    * Admin
-    *
-    * */
-    
+     * Admin
+     *
+     * */
+
     /**
      * adds given account to adminList if he is not already in the list
      *
      * @param _newAdmin /
      */
-    public void addAdmin(Account _newAdmin)
-    {
-        if(!adminList.contains(_newAdmin))
-        {
+    public void addAdmin(Account _newAdmin) {
+        if (!adminList.contains(_newAdmin)) {
             this.adminList.add(_newAdmin);
-        }
-        else
-        {
+        } else {
             logger.warning("New Admin is already part of adminList");
         }
     }
-    
+
     /**
      * Removes Admin from adminList by Index
      * is overloaded
@@ -159,62 +150,51 @@ public class LearnSet extends BaseEntity
      *
      * @param indexToRemove /
      */
-    public void removeAdmin(int indexToRemove)
-    {
-        if(indexToRemove <= adminList.size() && 0 <= indexToRemove)
-        {
+    public void removeAdmin(int indexToRemove) {
+        if (indexToRemove <= adminList.size() && 0 <= indexToRemove) {
             this.adminList.remove(indexToRemove);
-        }
-        else
-        {
+        } else {
             logger.warning("indexToRemvoe is out of bounce");
         }
     }
-    
+
     /**
      * Removes Admin from adminList by Account
      * is overloaded
      *
      * @param _accountToRemove /
      */
-    public void removeAdmin(Account _accountToRemove)
-    {
-        if(adminList.contains(_accountToRemove))
-        {
+    public void removeAdmin(Account _accountToRemove) {
+        if (adminList.contains(_accountToRemove)) {
             this.adminList.remove(_accountToRemove);
-        }
-        else
-        {
+        } else {
             logger.warning("accountToRemove is not part of adminList");
         }
     }
-    
+
     /**
-    * Comments are used as comments
-    *
-    * */
-    public void addComment(Comment _newComment)
-    {
+     * Comments are used as comments
+     */
+    public void addComment(Comment _newComment) {
         this.commentList.add(_newComment);
     }
-    
+
     /**
      * calculates percentage of positive evaluations
      *
      * @return average positive evaluation or
      */
-    public int calculateEvaluation()
-    {
-        if(this.commentList.size() == 0){
+    public int calculateEvaluation() {
+        if (this.commentList.size() == 0) {
             return -1;
         }
         int numberOfYes = 0;
-        for(Comment comment : this.commentList){
-            if(comment.getRecommended().equals(Recommended.YES)){
+        for (Comment comment : this.commentList) {
+            if (comment.getRecommended().equals(Recommended.YES)) {
                 numberOfYes++;
             }
         }
-    
+
         return (int) Math.ceil(100.0 / this.commentList.size() * numberOfYes);
     }
 
@@ -224,50 +204,46 @@ public class LearnSet extends BaseEntity
      * @param account /
      * @return if the user can view the learnSet
      */
-    public boolean isAuthorizedToAccessLearnSet(Account account)
-    {
-        switch (this.visibility)
-        {
+    public boolean isAuthorizedToAccessLearnSet(Account account) {
+        switch (this.visibility) {
             case PUBLIC:
                 return true;
 
             case PRIVATE:
-                if (this.getOwner()== account || this.getAdminList().contains(account))
-                {
+                if (this.getOwner() == account || this.getAdminList().contains(account)) {
                     return true;
                 }
                 break;
 
             case PROTECTED:
-                if (this.getOwner().getFriends().contains( account) || this.getOwner()== account
-                    || this.getFaculty().equals(account.getFaculty()) || this.getAdminList().contains(account))
-                {
+                if (this.getOwner().getFriends().contains(account) || this.getOwner() == account
+                        || this.getFaculty().equals(account.getFaculty()) || this.getAdminList().contains(account)) {
                     return true;
                 }
                 break;
 
-            }
+        }
         return false;
     }
-    
+
     /**
      * check if given account is in adminList
      *
      * @param account /
      * @return if the user is in the adminList
      */
-    public boolean isAdmin(Account account){
+    public boolean isAdmin(Account account) {
         return this.getAdminList().contains(account);
     }
-    
+
     /**
      * check if account is the learnSetOwner
      *
      * @param account /
      * @return if the user is the owner
      */
-    public boolean isOwner(Account account){
+    public boolean isOwner(Account account) {
         return this.getOwner().equals(account);
     }
-    
+
 }

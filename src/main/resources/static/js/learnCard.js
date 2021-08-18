@@ -10,13 +10,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var btnDumm = document.getElementById("dumm");
     var btnSchlau = document.getElementById("schlau");
 
-    btnReverse.addEventListener("click",()=>{
-            back.style.visibility = "visible";
-            btnDumm.disabled = "";
-            btnDumm.style.display = "block";
-            btnSchlau.style.display = "block";
-            btnSchlau.disabled = "";
-            btnReverse.style.display = "none";
-            btnReverse.disabled = "disabled";
+    btnReverse.addEventListener("click", () => {
+        back.style.visibility = "visible";
+        btnDumm.disabled = "";
+        btnDumm.style.display = "block";
+        btnSchlau.style.display = "block";
+        btnSchlau.disabled = "";
+        btnReverse.style.display = "none";
+        btnReverse.disabled = "disabled";
     });
 });

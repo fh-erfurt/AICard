@@ -22,11 +22,10 @@ import java.util.logging.Logger;
 @Getter
 @Entity
 @NoArgsConstructor
-public class CardStatus extends BaseEntity
-{
+public class CardStatus extends BaseEntity {
     // CLASS VARIABLES
     private static final Logger logger = Logger.getLogger(CardStatus.class.getName());
-    
+
     // MEMBER VARIABLES
     /**
      * Provides information on how well the user has already learned the card content.
@@ -39,32 +38,29 @@ public class CardStatus extends BaseEntity
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private Card card;
-    
-    
+
+
     // CONSTRUCTORS
 
     /**
      * Constructor of an CardStatus object.
-     *
+     * <p>
      * Assigns the lowest CardKnowledgeLevel (NOINFORMATION) to the member cardKnowledgeLevel.
      *
      * @param newCard the Card to which the status belongs.
      */
-    public CardStatus(Card newCard)
-    {
+    public CardStatus(Card newCard) {
         this.cardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
         this.card = newCard;
     }
 
     // METHODS
+
     /**
      * Increases CardKnowledgeLevel or keeps the highest level
-     *
      */
-    public void increaseCardKnowledgeLevel()
-    {
-        switch (cardKnowledgeLevel)
-        {
+    public void increaseCardKnowledgeLevel() {
+        switch (cardKnowledgeLevel) {
             case NOINFORMATION:
                 this.cardKnowledgeLevel = CardKnowledgeLevel.SOMEINFORMATION;
                 break;
@@ -83,14 +79,12 @@ public class CardStatus extends BaseEntity
                 break;
         }
     }
-    
+
     /**
      * Decrases cardKnowledgeLevel or keeps the lowest level
      */
-    public void decreaseCardKnowledgeLevel()
-    {
-        switch (cardKnowledgeLevel)
-        {
+    public void decreaseCardKnowledgeLevel() {
+        switch (cardKnowledgeLevel) {
             case NOINFORMATION:
             case SOMEINFORMATION:
                 this.cardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
@@ -109,13 +103,12 @@ public class CardStatus extends BaseEntity
                 break;
         }
     }
-    
+
     /**
      * resets CardKnowledgeLevel to NOINFORMATION
      */
-    public void resetCardKnowledgeLevel()
-    {
+    public void resetCardKnowledgeLevel() {
         this.cardKnowledgeLevel = CardKnowledgeLevel.NOINFORMATION;
     }
-    
+
 }

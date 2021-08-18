@@ -9,17 +9,17 @@
 
 <div class="pageContent">
 
-    <div th:if="not ${hasCommented}" class="learnset-info whiteBG pannel">
+    <div class="learnset-info whiteBG pannel" th:if="not ${hasCommented}">
 
-        <form th:action="@{'/addComment/' + ${learnSet.getId()}}" th:object="${newComment}" method="POST">
+        <form method="POST" th:action="@{'/addComment/' + ${learnSet.getId()}}" th:object="${newComment}">
 
             <label for="message">Kommentarnachricht</label>
 
-            <textarea th:field="*{message}" name="message" id="message" rows="10" cols="30" maxlength="255"></textarea>
+            <textarea cols="30" id="message" maxlength="255" name="message" rows="10" th:field="*{message}"></textarea>
             <div>
                 <div class="btnContainer bottom">
-                    <input name="recommend" value="no" type="submit" class="btn redBtn">
-                    <input name="recommend" value="yes" type="submit" class="btn blueBtn">
+                    <input class="btn redBtn" name="recommend" type="submit" value="no">
+                    <input class="btn blueBtn" name="recommend" type="submit" value="yes">
                 </div>
             </div>
 
@@ -29,21 +29,23 @@
 
     </div>
 
-    <div id="addCard" th:each="comment : ${learnSet.getCommentList()}" class="whiteBG pannel">
-            <div class="formListElement">
-                <a th:text="${comment.getSender().getEmail()}" th:href="@{'/profile/' + ${comment.getSender().getId()}}"></a>
-            </div>
-            <div class="formListElement">
-                <p th:text="${comment.getMessage()}"></p>
-                <p class="commentInfo" th:text="'empfiehlt ' + ${comment.getRecommended()} + ', um ' + ${{comment.getTime()}} + ' Uhr'"></p>
-            </div>
-
-
-            <!--End Switch-->
+    <div class="whiteBG pannel" id="addCard" th:each="comment : ${learnSet.getCommentList()}">
+        <div class="formListElement">
+            <a th:href="@{'/profile/' + ${comment.getSender().getId()}}"
+               th:text="${comment.getSender().getEmail()}"></a>
+        </div>
+        <div class="formListElement">
+            <p th:text="${comment.getMessage()}"></p>
+            <p class="commentInfo"
+               th:text="'empfiehlt ' + ${comment.getRecommended()} + ', um ' + ${{comment.getTime()}} + ' Uhr'"></p>
         </div>
 
-        <div class="btnPlaceHolder"></div>
+
+        <!--End Switch-->
     </div>
+
+    <div class="btnPlaceHolder"></div>
+</div>
 
 </div>
 <div th:replace="fragments/footer :: footer"></div>
