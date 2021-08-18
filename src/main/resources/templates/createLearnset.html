@@ -41,14 +41,6 @@
                       </select>
                     </div>
 
-
-                    <!-- TODO: not sure about this one yet -->
-                    <!-- <label for="learnsetAdmins">Administratoren</label>
-    <input th:field="*{ad}" id="leansetTitle" type="text" class="" >
-    <th:block th:each="admin : ${admin}">
-      <input type="checkbox" name="learnsetAdmins" th:value="${admin}"/>
-       <label th:text="${}"></label>
-     </th:block> -->
                     <div class="btnContainer">
                         <input type="submit" class="btn blueBtn">
                     </div>
@@ -58,6 +50,7 @@
             </div>
         </div>
     </div>
+    <div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>

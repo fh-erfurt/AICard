@@ -31,7 +31,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        // TODO : add Error Controller + 404 + 503
+        
         http.authorizeRequests()
                 .antMatchers("/addCard/*", "/cardOverview/**", "/createLearnset", "/deckOverview/**",
                              "/editCard/**", "/editLearnSet/**", "/learnSets", "/profile", "/profile/**",
@@ -40,7 +40,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                              // TODO : hier müssen alle seiten bzw getMethoden eingetragen werden
                              ).hasAnyRole("USER")
                 
-                .antMatchers("/","/index", "/login", "/registration").permitAll()
+                .antMatchers("/","/index", "/login", "/registration","/error").permitAll()
                 
                 
                 .and()
@@ -60,8 +60,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     @Bean
     public PasswordEncoder getPasswordEncoder()
     {
-        // TODO : Use an Encoder
-        return new BCryptPasswordEncoder();// NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
    
 }
