@@ -20,7 +20,7 @@
                 </div>
 
                 <!-- weitere gridItmes werden dynamisch geladen -->
-                <div th:each="ownAbo : ${ownLearnSetAbos}" class="gridItem whiteBG pannel">
+                <div th:each="ownAbo : ${ownLearnSetAbos}" class="gridItem whiteBG pannel deck">
                     <div class="deckName">
                         <a th:href="@{'/cardOverview/'+${ownAbo.getLearnSet().getId()}}" th:text="${ownAbo.getLearnSet().title}"></a>
                     </div>
@@ -59,7 +59,7 @@
 
 
                 <!-- weitere gridItmes werden dynamisch geladen -->
-                <div th:each="favoriteLearnSetAbo : ${favoriteLearnSetAbos}" class="gridItem whiteBG pannel">
+                <div th:each="favoriteLearnSetAbo : ${favoriteLearnSetAbos}" class="gridItem whiteBG pannel deck">
                     <div  class="deckName">
                         <a th:href="@{'/cardOverview/'+ ${favoriteLearnSetAbo.getLearnSet().getId()}}" th:text="${favoriteLearnSetAbo.getLearnSet().title}"></a>
                     </div>

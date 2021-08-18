@@ -123,6 +123,11 @@ a:hover {
 
 .whiteBG {
     background-color: white;
+    box-shadow: 5px 5px rgba(0,0,0,0.5);
+}
+.whiteBG:hover{
+    box-shadow: 7px 7px rgba(0,0,0,0.5);
+    transition: 0.5s;
 }
 
 .pannel {
@@ -133,6 +138,22 @@ a:hover {
 }
 .pannel>*{
     margin: 10px;
+}
+
+.deck{
+    background-color: white;
+    box-shadow: 5px 5px rgba(1, 17, 82, 0.5),
+                7px 7px #ffffff,
+                12px 12px rgba(1, 17, 82, 0.5),
+                14px 14px #ffffff;
+}
+.deck:hover{
+    background-color: white;
+    box-shadow: 7px 7px rgba(1, 17, 82, 0.5),
+                11px 11px #ffffff,
+                18px 18px rgba(1, 17, 82, 0.5),
+                22px 22px #ffffff;
+    transition: 0.5s;
 }
 
 .transparentPannel {

@@ -42,7 +42,7 @@
 
 
         <!-- weitere gridItmes werden dynamisch geladen -->
-        <div th:each="learnSet : ${learnSetList}" class="gridItem whiteBG pannel">
+        <div th:each="learnSet : ${learnSetList}" class="gridItem whiteBG pannel deck">
             <div class="deckName">
                 <a th:text="${learnSet.title}"  th:href="@{'/cardOverview/' + ${learnSet.getId()}}"></a>
             </div>
