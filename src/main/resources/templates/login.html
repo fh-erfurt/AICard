@@ -27,7 +27,8 @@
             <div class="formListElement">
                 <label>Email</label>
                 <input class="inputtext" id="email" name="email" onblur="this.placeholder = 'Email'"
-                       onfocus="this.placeholder = ''" placeholder="Email" th:value="${registeredEmail != null} ? ${registeredEmail}"
+                       onfocus="this.placeholder = ''" placeholder="Email"
+                       th:value="${registeredEmail != null} ? ${registeredEmail}"
                        type="email" value="">
             </div>
 

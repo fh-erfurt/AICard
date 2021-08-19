@@ -15,21 +15,24 @@ import java.util.Optional;
  * @author Martin Kühlborn
  */
 @Service
-public class MyUserDetailsService implements UserDetailsService {
-
+public class MyUserDetailsService implements UserDetailsService
+{
+    
     final AccountRepository accountRepository;
-
-    public MyUserDetailsService(AccountRepository accountRepository) {
+    
+    public MyUserDetailsService(AccountRepository accountRepository)
+    {
         this.accountRepository = accountRepository;
     }
-
+    
     @Override
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException
+    {
         Optional<Account> account = accountRepository.findByEmail(userEmail);
-
+        
         account.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userEmail));
-
+        
         return account.map(MyUserDetails::new).get();
-
+        
     }
 }

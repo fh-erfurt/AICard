@@ -20,18 +20,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest(CommentController.class)
-public class CommentControllerTest {
+public class CommentControllerTest
+{
     @MockBean
     private AccountService accountService;
-
+    
     @MockBean
     private LearnSetService learnSetService;
-
+    
     @Autowired
     private MockMvc mockMvc;
-
+    
     @Test
-    public void shouldRedirectToLearnset() throws Exception{
+    public void shouldRedirectToLearnset() throws Exception
+    {
         mockMvc.perform(get("/getComments/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/learnSet/1"));

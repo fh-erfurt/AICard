@@ -1,7 +1,6 @@
 package de.aicard.storages;
 
 import de.aicard.domains.account.Account;
-import de.aicard.domains.enums.Faculty;
 import de.aicard.domains.learnset.LearnSet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -21,52 +20,56 @@ import java.util.Optional;
 public class AccountRepositoryTest
 {
     // TODO : test save(), findAllAccountsByLearnsetIdInLearnSetAbo(), findByEmail()
-
+    
     @Autowired
     private AccountRepository accountRepository;
-
+    
     @BeforeEach
-    public void beforeEach() {
-
+    public void beforeEach()
+    {
+    
     }
-
+    
     @AfterEach
-    public void afterEach() {
+    public void afterEach()
+    {
         accountRepository.deleteAll();
     }
-
-
+    
+    
     @Test
-    void findAllAccountsByLearnsetIdInLearnSetAbo(){
+    void findAllAccountsByLearnsetIdInLearnSetAbo()
+    {
         Account given1 = new Account();
         given1.setEmail("max.mustermann@web.de");
         LearnSet learnSet = new LearnSet();
-
+        
         given1.addLearnSetAbo(learnSet);
-
+        
         // findTopByOrderByIdDesc()
-
+        
         Account given2 = new Account();
         given2.setEmail("wrong@mustermann@web.de");
-
+        
     }
-
+    
     @Test
-    void findByEmail(){
+    void findByEmail()
+    {
         Account given1 = new Account();
-
+        
         Account given2 = new Account();
-
+        
         given1.setEmail("max.mustermann@web.de");
         given1.setName("Markus Mustermann");
         given2.setEmail("wrong@mustermann@web.de");
-
+        
         accountRepository.save(given1);
         accountRepository.save(given2);
-
+        
         Optional<Account> result = accountRepository.findByEmail("max.mustermann@web.de");
-
+        
         Assertions.assertTrue(result.isPresent());
-        Assertions.assertEquals(result.get().getName(),"Markus Mustermann");
+        Assertions.assertEquals(result.get().getName(), "Markus Mustermann");
     }
 }

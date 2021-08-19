@@ -3,7 +3,8 @@ package de.aicard.domains.enums;
 /**
  * datatypes for cardContent
  */
-public enum DataType {
+public enum DataType
+{
     TextFile,
     VideoFile,
     AudioFile,

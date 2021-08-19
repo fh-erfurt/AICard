@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 
-public interface LearnSetRepository extends JpaRepository<LearnSet, Long> {
+public interface LearnSetRepository extends JpaRepository<LearnSet, Long>
+{
     /**
      * find learnSet by cardId in cardList
      *
@@ -20,5 +21,5 @@ public interface LearnSetRepository extends JpaRepository<LearnSet, Long> {
             "JOIN CARDLIST_CARD as CC on ls.CARDLIST_ID = CC.CARDLIST_ID " +
             "where cc.LISTOFCARDS_ID = ?1")
     Optional<LearnSet> getLearnSetByCardId(Long cardId);
-
+    
 }

@@ -20,21 +20,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest(AddCardController.class)
-public class AddCardControlerTest {
+public class AddCardControlerTest
+{
     @MockBean
     private AccountService accountService;
-
+    
     @MockBean
     private CardService cardService;
-
+    
     @MockBean
     private LearnSetService learnSetService;
-
+    
     @Autowired
     private MockMvc mockMvc;
-
+    
     @Test
-    public void shouldRedirectToLogin() throws Exception{
+    public void shouldRedirectToLogin() throws Exception
+    {
         mockMvc.perform(get("/addCard/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));

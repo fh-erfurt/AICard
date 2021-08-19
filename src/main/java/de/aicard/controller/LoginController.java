@@ -18,15 +18,17 @@ import java.util.Optional;
  * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
-public class LoginController {
-
+public class LoginController
+{
+    
     private final AccountService accountService;
-
+    
     @Autowired
-    public LoginController(AccountService accountService) {
+    public LoginController(AccountService accountService)
+    {
         this.accountService = accountService;
     }
-
+    
     /**
      * shows the account registration site
      *
@@ -34,13 +36,14 @@ public class LoginController {
      * @return String
      */
     @GetMapping("/registration")
-    public String getRegistration(Model model) {
+    public String getRegistration(Model model)
+    {
         model.addAttribute("newAccount", new Account());
-
+        
         return "registration";
     }
-
-
+    
+    
     /**
      * shows the login site
      *
@@ -48,40 +51,46 @@ public class LoginController {
      * @return String
      */
     @GetMapping("/login")
-    public String getLogin(Model model) {
+    public String getLogin(Model model)
+    {
         return "login";
     }
-
-
+    
+    
     /**
      * creates a new account if all given data is accepted
      * check on password and email
      * email must not exist in the current database and must match the email regex
      * password must match the password regex
      * name has to be provided
+     *
      * @param newAccount newAccount
      * @param model      model
      * @return ModelAndView
      */
     @ResponseBody
     @PostMapping("/createAccount")
-    public ModelAndView postCreateAccount(@RequestParam("passwordProfessor2") String password2, @ModelAttribute("Account") Account newAccount, Model model) {
+    public ModelAndView postCreateAccount(@RequestParam("passwordProfessor2") String password2, @ModelAttribute("Account") Account newAccount, Model model)
+    {
         // List of possible errors to return to user
         List<String> errors = new ArrayList<>();
         ModelAndView modelAndView = new ModelAndView();
-        try {
-            if (!password2.equals(newAccount.getPassword())) {
+        try
+        {
+            if (! password2.equals(newAccount.getPassword()))
+            {
                 throw new IllegalStateException("Passwörter stimmen nicht überein");
             }
             Optional<Account> account = accountService.createAccount(newAccount);
             account.ifPresent(accountService::saveAccount);
-
+            
             modelAndView.setViewName(getLogin(model.addAttribute("registeredEmail", newAccount.getEmail())));
             return modelAndView;
-        } catch (IllegalStateException e) {
+        } catch (IllegalStateException e)
+        {
             errors.add(e.getMessage());
             errors.add("Anmeldung Fehlgeschlagen");
-
+            
             modelAndView.setViewName(getRegistration(model.addAttribute("errorList", errors)));
             return modelAndView;
         }

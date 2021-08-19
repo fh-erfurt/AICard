@@ -28,18 +28,20 @@ import java.util.Optional;
  * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
-public class AddCardController {
+public class AddCardController
+{
     private final LearnSetService learnSetService;
     private final CardService cardService;
     private final AccountService accountService;
-
+    
     @Autowired
-    public AddCardController(LearnSetService learnSetService, CardService cardService, AccountService accountService) {
+    public AddCardController(LearnSetService learnSetService, CardService cardService, AccountService accountService)
+    {
         this.learnSetService = learnSetService;
         this.cardService = cardService;
         this.accountService = accountService;
     }
-
+    
     /**
      * shows the addCard.html if the user can access it
      *
@@ -48,19 +50,21 @@ public class AddCardController {
      * @param model      /
      * @return html
      */
-
+    
     @GetMapping("/addCard/{learnSetID}")
-    public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model) {
+    public String getAddCard(@PathVariable Long learnSetID, Principal principal, Model model)
+    {
         Optional<Account> account = accountService.getAccount(principal);
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetID);
-
-        if (account.isPresent() && learnSet.isPresent() && learnSet.get().isAuthorizedToAccessLearnSet(account.get())) {
+        
+        if (account.isPresent() && learnSet.isPresent() && learnSet.get().isAuthorizedToAccessLearnSet(account.get()))
+        {
             model.addAttribute("learnSetID", learnSetID);
             return "addCard";
         }
-        return "redirect:/cardOverview/"+learnSetID;
+        return "redirect:/cardOverview/" + learnSetID;
     }
-
+    
     /**
      * handles creating cards for a LearnSet
      * different params are needed to identify datatypes such as video,audio,text and pictures
@@ -92,91 +96,109 @@ public class AddCardController {
     @PostMapping("/addCard/{learnSetID}")
     @ResponseBody
     public ModelAndView postAddCard(
-
+            
             @PathVariable Long learnSetID, Principal principal,
             @RequestParam("cardFrontType") String cardFrontType,
             @RequestParam(value = "cardFrontTextFileTitle", required = false) String cardFrontTextFileTile, @RequestParam(value = "cardFrontTextFileInput", required = false) String cardFrontTextFileInput,
             @RequestParam(value = "cardFrontPictureFileTitle", required = false) String cardFrontPictureFileTitle, @RequestParam(value = "cardFrontPictureFileInput", required = false) MultipartFile cardFrontPictureFileInput,
             @RequestParam(value = "cardFrontVideoFileTitle", required = false) String cardFrontVideoFileTitle, @RequestParam(value = "cardFrontVideoFileInput", required = false) MultipartFile cardFrontVideoFileInput,
             @RequestParam(value = "cardFrontAudioFileTitle", required = false) String cardFrontAudioFileTitle, @RequestParam(value = "cardFrontAudioFileInput", required = false) MultipartFile cardFrontAudioFileInput,
-
+            
             @RequestParam("cardBackType") String cardBackType,
             @RequestParam(value = "cardBackTextFileTitle", required = false) String cardBackTextFileTitle, @RequestParam(value = "cardBackTextFileInput", required = false) String cardBackTextFileInput,
             @RequestParam(value = "cardBackPictureFileTitle", required = false) String cardBackPictureFileTitle, @RequestParam(value = "cardBackPictureFileInput", required = false) MultipartFile cardBackPictureFileInput,
             @RequestParam(value = "cardBackVideoFileTitle", required = false) String cardBackVideoFileTitle, @RequestParam(value = "cardBackVideoFileInput", required = false) MultipartFile cardBackVideoFileInput,
             @RequestParam(value = "cardBackAudioFileTitle", required = false) String cardBackAudioFileTitle, @RequestParam(value = "cardBackAudioFileInput", required = false) MultipartFile cardBackAudioFileInput
-    ) throws IOException {
+    ) throws IOException
+    {
         // if cardFiles Folder doesnt exist, create it!
-        if (!Files.exists(Path.of(System.getProperty("user.dir") + "\\cardFiles"))) {
+        if (! Files.exists(Path.of(System.getProperty("user.dir") + "\\cardFiles")))
+        {
             Files.createDirectory(Path.of(System.getProperty("user.dir") + "\\cardFiles"));
         }
-
+        
         // --- Logic start ---
         ModelAndView modelAndView = new ModelAndView();
         List<String> errors = new ArrayList<>();
         Card newCard = null;
-
+        
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetID);
         Optional<Account> account = accountService.getAccount(principal);
-
+        
         if (account.isPresent() &&
                 learnSet.isPresent() &&
                 learnSet.get().isAuthorizedToAccessLearnSet(account.get()) &&
-                learnSet.get().getAdminList().contains(account.get())) {
-
+                learnSet.get().getAdminList().contains(account.get()))
+        {
+            
             // we are here if the learnSet exists and the Owner or an Admin is logged in
             String cardFrontTitel = cardService.getCorrectTitle(cardFrontType, cardFrontPictureFileTitle,
-                    cardFrontTextFileTile, cardFrontVideoFileTitle, cardFrontAudioFileTitle);
+                                                                cardFrontTextFileTile, cardFrontVideoFileTitle, cardFrontAudioFileTitle);
             String cardBackTitel = cardService.getCorrectTitle(cardBackType, cardBackPictureFileTitle,
-                    cardBackTextFileTitle, cardBackVideoFileTitle, cardBackAudioFileTitle);
-
+                                                               cardBackTextFileTitle, cardBackVideoFileTitle, cardBackAudioFileTitle);
+            
             //TODO: Doppelter Code kann noch verbessert werden, wenn Zeit
-            try {
-                if (cardFrontType.equals(DataType.TextFile.name())) {
-
-                    if (cardBackType.equals(DataType.TextFile.name())) {
+            try
+            {
+                if (cardFrontType.equals(DataType.TextFile.name()))
+                {
+                    
+                    if (cardBackType.equals(DataType.TextFile.name()))
+                    {
                         newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontTextFileInput,
-                                cardBackType, cardBackTitel, cardBackTextFileInput);
-
-                    } else {
-                        MultipartFile cardBackInput = cardService.getCorrectInput(cardBackType, cardBackVideoFileInput,
-                                cardBackPictureFileInput, cardBackAudioFileInput);
-                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontTextFileInput,
-                                cardBackType, cardBackTitel, cardBackInput);
+                                                         cardBackType, cardBackTitel, cardBackTextFileInput);
+                        
                     }
-                } else {
-                    MultipartFile cardFrontInput = cardService.getCorrectInput(cardFrontType, cardFrontVideoFileInput,
-                            cardFrontPictureFileInput, cardFrontAudioFileInput);
-                    if (cardBackType.equals(DataType.TextFile.name())) {
-                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
-                                cardBackType, cardBackTitel, cardBackTextFileInput);
-                    } else {
+                    else
+                    {
                         MultipartFile cardBackInput = cardService.getCorrectInput(cardBackType, cardBackVideoFileInput,
-                                cardBackPictureFileInput, cardBackAudioFileInput);
-                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
-                                cardBackType, cardBackTitel, cardBackInput);
+                                                                                  cardBackPictureFileInput, cardBackAudioFileInput);
+                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontTextFileInput,
+                                                         cardBackType, cardBackTitel, cardBackInput);
                     }
                 }
-            } catch (IllegalStateException e) {
+                else
+                {
+                    MultipartFile cardFrontInput = cardService.getCorrectInput(cardFrontType, cardFrontVideoFileInput,
+                                                                               cardFrontPictureFileInput, cardFrontAudioFileInput);
+                    if (cardBackType.equals(DataType.TextFile.name()))
+                    {
+                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
+                                                         cardBackType, cardBackTitel, cardBackTextFileInput);
+                    }
+                    else
+                    {
+                        MultipartFile cardBackInput = cardService.getCorrectInput(cardBackType, cardBackVideoFileInput,
+                                                                                  cardBackPictureFileInput, cardBackAudioFileInput);
+                        newCard = cardService.addNewCard(cardFrontType, cardFrontTitel, cardFrontInput,
+                                                         cardBackType, cardBackTitel, cardBackInput);
+                    }
+                }
+            } catch (IllegalStateException e)
+            {
                 errors.add(e.getMessage());
             }
-
+            
         }
-        if (errors.isEmpty() && learnSet.isPresent()) {
+        if (errors.isEmpty() && learnSet.isPresent())
+        {
             learnSet.get().getCardList().addToList(newCard);
             learnSetService.saveLearnSet(learnSet.get());
-
+            
             modelAndView.setViewName("redirect:/cardOverview/" + learnSetID);
-
-        } else {
+            
+        }
+        else
+        {
             // for internal debugging
-            for (String error : errors) {
+            for (String error : errors)
+            {
                 System.out.println(error);
             }
-
+            
             modelAndView.setViewName("redirect:/addCard/" + learnSetID);
         }
         return modelAndView;
     }
-
+    
 }

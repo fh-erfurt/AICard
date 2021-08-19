@@ -3,7 +3,6 @@ package de.aicard.domains.Social;
 import de.aicard.domains.BaseEntity;
 import de.aicard.domains.account.Account;
 import de.aicard.domains.enums.Recommended;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,16 +22,17 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @NoArgsConstructor
-public class Comment extends BaseEntity {
-
+public class Comment extends BaseEntity
+{
+    
     private String message;
     @OneToOne
     private Account sender;
     private LocalDateTime time;
     private Recommended recommended;
-
+    
     //constructor
-
+    
     /**
      * Constructor of a Message.
      *
@@ -40,12 +40,13 @@ public class Comment extends BaseEntity {
      * @param newCommentString the message to send
      * @author Amine Semlali
      */
-    public Comment(String newCommentString, Account newSender, Recommended newRecomended) {
+    public Comment(String newCommentString, Account newSender, Recommended newRecomended)
+    {
         this.message = newCommentString;
         this.sender = newSender;
         this.time = LocalDateTime.now();
         this.recommended = newRecomended;
     }
-
+    
 }
 

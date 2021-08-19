@@ -21,16 +21,18 @@ import java.util.Optional;
  * @author Clemens Berger
  */
 @Controller
-public class CommentController {
+public class CommentController
+{
     public final AccountService accountService;
     public final LearnSetService learnSetService;
-
+    
     @Autowired
-    public CommentController(LearnSetService learnSetService, AccountService accountService) {
+    public CommentController(LearnSetService learnSetService, AccountService accountService)
+    {
         this.learnSetService = learnSetService;
         this.accountService = accountService;
     }
-
+    
     /**
      * shows the commentlist of the learnset
      *
@@ -40,16 +42,20 @@ public class CommentController {
      * @return html
      */
     @GetMapping("/getComments/{learnSetId}")
-    public String getComments(@PathVariable("learnSetId") Long learnSetId, Model model, Principal principal) {
+    public String getComments(@PathVariable("learnSetId") Long learnSetId, Model model, Principal principal)
+    {
         Optional<Account> account = accountService.getAccount(principal);
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetId);
-        if (account.isPresent() && learnSet.isPresent() && learnSet.get().isAuthorizedToAccessLearnSet(account.get())) {
+        if (account.isPresent() && learnSet.isPresent() && learnSet.get().isAuthorizedToAccessLearnSet(account.get()))
+        {
             boolean hasCommented = false;
-            for (Comment comment : learnSet.get().getCommentList()) {
-                if (comment.getSender().equals(account.get())) {
+            for (Comment comment : learnSet.get().getCommentList())
+            {
+                if (comment.getSender().equals(account.get()))
+                {
                     hasCommented = true;
                 }
-
+                
             }
             System.out.println("hasCommented: " + hasCommented);
             model.addAttribute("hasCommented", hasCommented);
@@ -59,10 +65,11 @@ public class CommentController {
         }
         return "redirect:/learnSet/" + learnSetId;
     }
-
+    
     /**
      * adds a comment to the commentlist of the learnset
      * a user can only comment once to the same learnset
+     *
      * @param recommend  string which is converted to enum of Recommended
      * @param learnSetId /
      * @param comment    /
@@ -72,36 +79,47 @@ public class CommentController {
      */
     @ResponseBody
     @PostMapping("/addComment/{learnSetId}")
-    public ModelAndView addComment(@RequestParam("recommend") String recommend, @PathVariable("learnSetId") Long learnSetId, @ModelAttribute("newComment") Comment comment, Model model, Principal principal) {
+    public ModelAndView addComment(@RequestParam("recommend") String recommend, @PathVariable("learnSetId") Long learnSetId, @ModelAttribute("newComment") Comment comment, Model model, Principal principal)
+    {
         System.out.println("recommend: " + recommend);
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetId);
         Optional<Account> account = accountService.getAccount(principal);
-
-
-        try {
-
+        
+        
+        try
+        {
+            
             if (learnSet.isPresent() && account.isPresent() &&
                     learnSet.get().isAuthorizedToAccessLearnSet(account.get()) &&
-                    !comment.getMessage().trim().isEmpty()) {
-                if (recommend.equals("yes")) {
+                    ! comment.getMessage().trim().isEmpty())
+            {
+                if (recommend.equals("yes"))
+                {
                     comment.setRecommended(Recommended.YES);
-                } else if (recommend.equals("no")) {
+                }
+                else if (recommend.equals("no"))
+                {
                     comment.setRecommended(Recommended.NO);
-                } else {
+                }
+                else
+                {
                     throw new IllegalStateException("wrong Enum value");
                 }
-
+                
                 learnSet.get().addComment(new Comment(comment.getMessage().trim(), account.get(), comment.getRecommended()));
                 learnSetService.saveLearnSet(learnSet.get());
-            } else {
+            }
+            else
+            {
                 throw new IllegalStateException("fehlende Kommentardaten");
             }
-        } catch (IllegalStateException e) {
+        } catch (IllegalStateException e)
+        {
             System.out.println("exception: " + e);
         }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(getComments(learnSetId, model, principal));
         return modelAndView;
     }
-
+    
 }

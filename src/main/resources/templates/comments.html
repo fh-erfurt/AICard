@@ -14,7 +14,8 @@
         <form method="POST" th:action="@{'/addComment/' + ${learnSet.getId()}}" th:object="${newComment}">
             <div class="formListElement">
                 <label for="message">Kommentarnachricht</label>
-                <textarea cols="30" id="message" maxlength="255" name="message" rows="10" th:field="*{message}"></textarea>
+                <textarea cols="30" id="message" maxlength="255" name="message" rows="10"
+                          th:field="*{message}"></textarea>
             </div>
             <div>
                 <div class="btnContainer bottom">

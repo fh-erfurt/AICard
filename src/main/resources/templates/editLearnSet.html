@@ -56,7 +56,7 @@
                         <td th:if="${owner.getId().equals(learnSetOld.getOwner().getId()) && !admin.getId().equals(owner.getId()) }">
                             <a class=""
                                th:href="@{'/removeAccountFromAdminList/'+${learnSetOld.getId()} + '/' + ${admin.getId()}}"
-                                title="Account als Administrator entfernen">X</a>
+                               title="Account als Administrator entfernen">X</a>
                         </td>
                     </tr>
                     </tbody>
@@ -67,7 +67,8 @@
                 <label> Freunde hinzufügen als Admin:</label>
                 <table id="friendTable">
                     <tbody>
-                    <tr th:each="friend : ${owner.getFriends()}" th:if="${!learnSetOld.getAdminList().contains(friend)}">
+                    <tr th:each="friend : ${owner.getFriends()}"
+                        th:if="${!learnSetOld.getAdminList().contains(friend)}">
                         <td>
                             <a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a>
                         </td>
@@ -82,7 +83,7 @@
             </div>
 
             <div class="btnContainer bottom">
-                <input class="btn blueBtn" value="Kartendeck ändern" type="submit">
+                <input class="btn blueBtn" type="submit" value="Kartendeck ändern">
             </div>
             <div class="btnPlaceHolder"></div>
 

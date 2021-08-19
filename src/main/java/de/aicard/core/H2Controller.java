@@ -16,21 +16,25 @@ import java.util.Objects;
  */
 @Slf4j
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class H2Controller {
-
+public class H2Controller
+{
+    
     private static H2Controller instance;
-
+    
     private final EntityManagerFactory factory;
-
-    public static H2Controller getManager() {
-        if (Objects.isNull(instance)) {
+    
+    public static H2Controller getManager()
+    {
+        if (Objects.isNull(instance))
+        {
             instance = new H2Controller(Persistence.createEntityManagerFactory("de.aicard.jpa"));
         }
         return instance;
     }
-
-    public EntityManager getEntityManager() {
+    
+    public EntityManager getEntityManager()
+    {
         return factory.createEntityManager();
     }
-
+    
 }

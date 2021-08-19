@@ -4,6 +4,7 @@ import de.aicard.domains.learnset.LearningSession;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface LearningSessionRepository extends JpaRepository<LearningSession, Long> {
+public interface LearningSessionRepository extends JpaRepository<LearningSession, Long>
+{
 
 }

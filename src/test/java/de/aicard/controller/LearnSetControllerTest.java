@@ -22,63 +22,68 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest(LearnSetController.class)
-public class LearnSetControllerTest {
+public class LearnSetControllerTest
+{
     @MockBean
     private AccountService accountService;
-
+    
     @MockBean
     private LearnSetService learnSetService;
-
+    
     @MockBean
     private CardService cardService;
-
+    
     @MockBean
     private LearnSetAboService learnSetAboService;
-
+    
     @Autowired
     private MockMvc mockMvc;
-
+    
     @Test
     @WithMockUser
-    public void shouldReturnLearnset() throws Exception{
+    public void shouldReturnLearnset() throws Exception
+    {
         LearnSet learnSet = new LearnSet();
         mockMvc.perform(get("/createLearnset").sessionAttr("newLearnset", learnSet))
-            .andExpect(status().isOk());
+                .andExpect(status().isOk());
     }
-
+    
     @Test
     @WithMockUser
-    public void shouldGetLearnSet() throws  Exception{
+    public void shouldGetLearnSet() throws Exception
+    {
         mockMvc.perform(get("/learnSets"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("learnSets"));
     }
-
+    
     @Test
     @WithMockUser
-    public void shouldRedirectToLearnSets() throws Exception{
+    public void shouldRedirectToLearnSets() throws Exception
+    {
         mockMvc.perform(get("/deleteLearnSet/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/learnSets"));
-
+        
         mockMvc.perform(get("/unfollowLearnSet/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/learnSets"));
-
+        
         mockMvc.perform(get("/cardOverview/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/learnSets"));
-
+        
         mockMvc.perform(get("/deleteCard/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/learnSets"));
-
-
+        
+        
     }
-
+    
     @Test
     @WithMockUser
-    public void shouldRedirectToCardOverview() throws Exception{
+    public void shouldRedirectToCardOverview() throws Exception
+    {
         mockMvc.perform(get("/editLearnSet/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/cardOverview/1"));

@@ -8,7 +8,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Tests get requests to Account Controller
@@ -17,18 +18,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest(AccountController.class)
-public class AccountControllerTest {
+public class AccountControllerTest
+{
     @MockBean
     private AccountService accountService;
-
+    
     @Autowired
     private MockMvc mockMvc;
-
+    
     @Test
     /**
      * is redirected to /login due to SpringSecurity redirection.
      */
-    public void shouldRedirectToLogin() throws Exception{
+    public void shouldRedirectToLogin() throws Exception
+    {
         mockMvc.perform(get("/profile"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
@@ -36,17 +39,19 @@ public class AccountControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
-
+    
     @Test
-    public void shouldRedirectToProfile() throws Exception{
+    public void shouldRedirectToProfile() throws Exception
+    {
         mockMvc.perform(get("/removeFriendFromFriendList/5"))
                 .andExpect(redirectedUrl("/profile"));
     }
-
+    
     @Test
-    public void shouldRedirectToFriendProfile() throws Exception{
+    public void shouldRedirectToFriendProfile() throws Exception
+    {
         mockMvc.perform(get("/addFriend/1"))
                 .andExpect(redirectedUrl("/profile/1"));
     }
-
+    
 }

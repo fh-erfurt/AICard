@@ -9,25 +9,28 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author Martin Kühlborn,Clemens Berger
  */
 @Controller
-public class MainController {
+public class MainController
+{
     /**
      * redirect to index
      *
      * @return index
      */
     @GetMapping("/")
-    public String welcome() {
+    public String welcome()
+    {
         return "redirect:/index";
     }
-
+    
     /**
      * returns index
      *
      * @return index
      */
     @GetMapping("/index")
-    public String notWelcome() {
+    public String notWelcome()
+    {
         return "index";
     }
-
+    
 }

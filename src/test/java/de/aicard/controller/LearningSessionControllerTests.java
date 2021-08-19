@@ -19,29 +19,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest(LearningSessionController.class)
-public class LearningSessionControllerTests {
+public class LearningSessionControllerTests
+{
     @MockBean
     private LearnSetAboService learnSetAboService;
     @MockBean
     private LearningSessionService learningSessionService;
-
+    
     @Autowired
     private MockMvc mockMvc;
-
+    
     @Test
     @WithMockUser
-    public void shouldReturnInitializeLearningSession() throws Exception{
+    public void shouldReturnInitializeLearningSession() throws Exception
+    {
         mockMvc.perform(get("/initializeLearningSession/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("/initializeLearningSession"));
     }
-
+    
     @Test
     @WithMockUser
-    public void shouldReturnLearnCard() throws Exception{
+    public void shouldReturnLearnCard() throws Exception
+    {
         mockMvc.perform(get("/learnCard/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/index"));
     }
-
+    
 }

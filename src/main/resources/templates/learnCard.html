@@ -69,7 +69,8 @@
         <form method="POST" th:action="@{'/learnCard/' + ${learnSetAboId}}">
             <div class="btnContainer bottom">
                 <button class="btn redBtn" disabled="disabled" id="dumm" style="display: none" th:name="cardKnown"
-                        th:value="false">Hab ich falsch!</button>
+                        th:value="false">Hab ich falsch!
+                </button>
                 <button class="btn yellowBtn" id="reverse" type="button">Karte umdrehen</button>
                 <button class="btn greenBtn" disabled="disabled" id="schlau" style="display: none;" th:name="cardKnown"
                         th:value="true">Hab ich gewusst!

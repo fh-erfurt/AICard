@@ -24,50 +24,54 @@ public class LearnSetRepositoryTest
     
     @Autowired
     private LearnSetRepository learnSetRepository;
-
-
+    
+    
     @BeforeEach
-    public void beforeEach() {
-
+    public void beforeEach()
+    {
+    
     }
-
+    
     @AfterEach
-    public void afterEach() {
-
+    public void afterEach()
+    {
+        
         learnSetRepository.deleteAll();
     }
-
-
+    
+    
     @Test
-    void save() {
+    void save()
+    {
         // GIVEN
         LearnSet given = new LearnSet();
-
+        
         // WHEN
         LearnSet result = learnSetRepository.save(given);
         Long resultID = result.getId();
-
+        
         // THEN
         Assertions.assertTrue(resultID != null && resultID > 0);
     }
-
+    
     @Test
-    void findAll(){
+    void findAll()
+    {
         //given
         LearnSet given1 = new LearnSet();
         LearnSet given2 = new LearnSet();
-
+        
         List<Long> idsOfPersisted = new ArrayList<>();
         LearnSet saved1 = learnSetRepository.save(given1);
         LearnSet saved2 = learnSetRepository.save(given2);
         idsOfPersisted.add(saved1.getId());
         idsOfPersisted.add(saved2.getId());
-
+        
         List<LearnSet> result;
         result = learnSetRepository.findAll();
-
-        Assertions.assertTrue(result != null && !result.isEmpty());
+        
+        Assertions.assertTrue(result != null && ! result.isEmpty());
         Assertions.assertFalse(idsOfPersisted.isEmpty());
     }
-
+    
 }

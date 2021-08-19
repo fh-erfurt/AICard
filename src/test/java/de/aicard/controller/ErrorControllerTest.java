@@ -16,19 +16,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest(ErrorController.class)
-public class ErrorControllerTest {
+public class ErrorControllerTest
+{
     @Autowired
     private MockMvc mockMvc;
-
+    
     @Test
-    public void shouldGetErrorPage() throws Exception{
+    public void shouldGetErrorPage() throws Exception
+    {
         mockMvc.perform(get("/error"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("error"));
     }
-
+    
     @Test
-    public void shouldGetError404Page() throws Exception{
+    public void shouldGetError404Page() throws Exception
+    {
         mockMvc.perform(get("/error404"))
                 .andExpect(status().isNotFound());
     }

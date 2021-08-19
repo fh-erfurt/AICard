@@ -19,31 +19,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest(LearnSetShopController.class)
-public class LearnSetShopControllerTest {
+public class LearnSetShopControllerTest
+{
     @MockBean
     private AccountService accountService;
-
+    
     @MockBean
     private LearnSetService learnSetService;
-
+    
     @Autowired
     private MockMvc mockMvc;
-
+    
     @Test
     @WithMockUser
-    public void shouldRedirectLearnSetShop() throws Exception {
+    public void shouldRedirectLearnSetShop() throws Exception
+    {
         mockMvc.perform(get("/followLearnSet/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/learnSetShop"));
     }
-
+    
     @Test
     @WithMockUser
-    public void shouldReturnLearnSetShop() throws Exception {
+    public void shouldReturnLearnSetShop() throws Exception
+    {
         mockMvc.perform(get("/learnSetShop"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("learnSetShop"));
     }
-
-
+    
+    
 }

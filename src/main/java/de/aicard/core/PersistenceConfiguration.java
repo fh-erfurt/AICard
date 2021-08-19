@@ -18,54 +18,61 @@ import java.util.Properties;
 /**
  * configures the persistence
  * database is saved in database folder
+ *
  * @author Daniel Michel
  */
 @Configuration
 @EnableTransactionManagement
-public class PersistenceConfiguration {
-
+public class PersistenceConfiguration
+{
+    
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource()
+    {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
+        
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl("jdbc:h2:file:./database/aicard;DB_CLOSE_DELAY=-1");
         dataSource.setUsername("sa");
-
+        
         return dataSource;
     }
-
+    
     @Bean
-    public PlatformTransactionManager transactionManager(@Autowired LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+    public PlatformTransactionManager transactionManager(@Autowired LocalContainerEntityManagerFactoryBean entityManagerFactory)
+    {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
-
+        
         return transactionManager;
     }
-
+    
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation()
+    {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
-    Properties additionalProperties() {
+    
+    Properties additionalProperties()
+    {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-
+        
         return properties;
     }
-
+    
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource dataSource)
+    {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
         em.setPackagesToScan("de.aicard.domains");
-
+        
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
-
+        
         return em;
     }
 }

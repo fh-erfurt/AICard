@@ -24,7 +24,7 @@ body {
     display: list-item;
 }
 
-body>* {
+body > * {
     width: 100%;
 }
 
@@ -37,7 +37,7 @@ h6 {
     text-align: center;
 }
 
-label{
+label {
     font-weight: bold;
 }
 
@@ -69,7 +69,7 @@ textarea {
     height: 60px;
     position: fixed;
     top: 0;
-    background: rgba(0,0,0,0.35);
+    background: rgba(0, 0, 0, 0.35);
     z-index: 99;
 }
 
@@ -78,9 +78,10 @@ textarea {
     margin-top: 160px;
     margin-bottom: 50px;
     min-height: calc(100vh - 40px - 160px - 50px);
-    padding:0 10%;
+    padding: 0 10%;
 }
-.pageContent>*{
+
+.pageContent > * {
     margin-bottom: 5%;
 }
 
@@ -99,7 +100,7 @@ textarea {
     margin-right: 20px;
 }
 
-.header>* {
+.header > * {
     position: relative;
 }
 
@@ -139,39 +140,42 @@ textarea {
     border-radius: 20px;
     overflow: hidden;
     min-height: 5vh;
-    box-shadow: 5px 5px rgba(0,0,0,0.5);
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
 }
-.pannel>*{
+
+.pannel > * {
     margin: 10px;
 }
 
-.pannel *{
+.pannel * {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.pannel *:hover{
+
+.pannel *:hover {
     text-overflow: unset;
     white-space: unset;
     word-wrap: break-word;
 }
 
-.deck{
+.deck {
     box-shadow: 5px 5px rgba(1, 17, 82, 0.5),
-                7px 7px #ffffff,
-                12px 12px rgba(1, 17, 82, 0.5),
-                14px 14px #ffffff,
-                19px 19px rgba(0,0,0,0.5);
+    7px 7px #ffffff,
+    12px 12px rgba(1, 17, 82, 0.5),
+    14px 14px #ffffff,
+    19px 19px rgba(0, 0, 0, 0.5);
 }
-.deck:hover{
+
+.deck:hover {
     box-shadow: 7px 7px rgba(1, 17, 82, 0.5),
-                11px 11px #ffffff,
-                18px 18px rgba(1, 17, 82, 0.5),
-                22px 22px #ffffff,
-                29px 29px rgba(0,0,0,0.5);
+    11px 11px #ffffff,
+    18px 18px rgba(1, 17, 82, 0.5),
+    22px 22px #ffffff,
+    29px 29px rgba(0, 0, 0, 0.5);
     transition: 0.5s;
 }
 
-.deck *{
+.deck * {
     white-space: nowrap;
 }
 
@@ -199,7 +203,7 @@ textarea {
     font-weight: bold;
 }
 
-.errorPannel{
+.errorPannel {
     width: 100%;
     background: #ff959a;
     border: 5px solid #b1322f;
@@ -225,13 +229,14 @@ textarea {
     border: none;
     cursor: pointer;
 }
-.btn a{
+
+.btn a {
     text-decoration: none;
     line-height: 50px;
 }
 
 .btn a:hover,
-.XBtn a:hover{
+.XBtn a:hover {
     text-decoration: none;
 
 }
@@ -276,7 +281,7 @@ textarea {
     transition: 0.5s;
 }
 
-.XBtn{
+.XBtn {
     height: 25px;
     width: 25px;
     text-decoration: none;
@@ -299,7 +304,7 @@ textarea {
     font-weight: bold;
 }
 
-.commentInfo{
+.commentInfo {
     font-size: 12px;
     color: #636363;
 }
