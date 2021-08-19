@@ -58,7 +58,7 @@ public class AddCardController {
             model.addAttribute("learnSetID", learnSetID);
             return "addCard";
         }
-        return "redirect:/index";
+        return "redirect:/cardOverview/"+learnSetID;
     }
 
     /**

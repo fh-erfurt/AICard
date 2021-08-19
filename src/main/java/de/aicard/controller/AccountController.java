@@ -82,7 +82,7 @@ public class AccountController {
             return "updateProfile";
         }
 
-        return "redirect:/index";
+        return "redirect:/login";
     }
 
     /**
@@ -128,7 +128,7 @@ public class AccountController {
             }
             return modelAndView;
         }
-        modelAndView.setViewName("redirect:/logout");
+        modelAndView.setViewName("redirect:/login");
         return modelAndView;
     }
 

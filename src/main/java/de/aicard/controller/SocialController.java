@@ -32,13 +32,11 @@ public class SocialController {
      */
     @GetMapping("/comments/{learnSetId}")
     public String getComments(@PathVariable("learnSetId") Long learnSetId, Model model) {
-
-
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetId);
         if (learnSet.isPresent()) {
             model.addAttribute("learnSet", learnSet);
             return "comments";
         }
-        return "redirect:/index";
+        return "redirect:/learnSets";
     }
 }

@@ -136,7 +136,7 @@ public class LearnSetController {
                 return "cardOverview";
             }
         }
-        return "redirect:/index";
+        return "redirect:/learnSets";
     }
 
     /**
@@ -170,7 +170,7 @@ public class LearnSetController {
 
             return "redirect:/cardOverview/" + learnSet.get().getId();
         }
-        return "redirect:/index";
+        return "redirect:/learnSets";
     }
 
     /**
@@ -211,10 +211,9 @@ public class LearnSetController {
             model.addAttribute("learnSetOld", learnSet.get());
 
             return "editLearnSet";
-
         }
 
-        return "redirect:/index";
+        return "redirect:/cardOverview/"+learnSetId;
     }
 
     /**
