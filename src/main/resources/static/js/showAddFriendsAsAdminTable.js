@@ -1,6 +1,7 @@
 /**
  *  JS to show and unshow friendTable in editLearnSet.html
  */
+//todo zombie
 window.addEventListener('DOMContentLoaded', (event) => {
     var button = document.getElementById("showAddFriendsAsAdminTable");
     var table = document.getElementById("friendTable");
