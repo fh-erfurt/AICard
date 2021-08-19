@@ -9,13 +9,13 @@
 
 <div class="pageContent">
 
-    <div class="learnset-info whiteBG pannel" th:if="not ${hasCommented}">
+    <div class="registration whiteBG pannel" th:if="not ${hasCommented}">
 
         <form method="POST" th:action="@{'/addComment/' + ${learnSet.getId()}}" th:object="${newComment}">
-
-            <label for="message">Kommentarnachricht</label>
-
-            <textarea cols="30" id="message" maxlength="255" name="message" rows="10" th:field="*{message}"></textarea>
+            <div class="formListElement">
+                <label for="message">Kommentarnachricht</label>
+                <textarea cols="30" id="message" maxlength="255" name="message" rows="10" th:field="*{message}"></textarea>
+            </div>
             <div>
                 <div class="btnContainer bottom">
                     <input class="btn redBtn" name="recommend" type="submit" value="no">
@@ -43,11 +43,8 @@
 
         <!--End Switch-->
     </div>
-
-    <div class="btnPlaceHolder"></div>
 </div>
 
-</div>
 <div th:replace="fragments/footer :: footer"></div>
 
 </body>

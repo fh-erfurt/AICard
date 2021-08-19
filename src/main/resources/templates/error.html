@@ -10,11 +10,11 @@
     <div class="registration pannel errorPannel">
         <div class="formListElement">
             <label class="head" th:text="${'ERROR ' + status}"></label>
-            <h5>MESSAGE</h5>
+            <label>Fehlermeldung:</label>
             <p th:text="${error}"></p>
         </div>
         <div class="btnContainer bottom">
-            <div class="btn redBtn"><a class="registrationLink" th:href="@{/index}"> Zurück auf die Homepage </a></div>
+            <div class="btn redBtn"><a class="registrationLink" th:href="@{/index}"> zurück zur Hauptseite </a></div>
         </div>
         <div class="btnPlaceHolder"></div>
     </div>

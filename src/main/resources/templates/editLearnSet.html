@@ -11,6 +11,7 @@
 <div class="pageContent">
 
     <div class="pannel whiteBG">
+        <h1>Kartendeck ändern</h1>
         <form id="updateLearnSet" method="POST" th:action="@{'/updateLearnSet/' + ${learnSetOld.getId()}} "
               th:object="${learnSetOld}">
 
@@ -20,7 +21,7 @@
             </div>
 
             <div class="formListElement">
-                <label for="description">description</label>
+                <label for="description">Beschreibung</label>
                 <input class="inputtext" id="description" th:field="*{description}" type="text">
             </div>
 
@@ -81,7 +82,7 @@
             </div>
 
             <div class="btnContainer bottom">
-                <input class="btn blueBtn" type="submit">
+                <input class="btn blueBtn" value="Kartendeck ändern" type="submit">
             </div>
             <div class="btnPlaceHolder"></div>
 

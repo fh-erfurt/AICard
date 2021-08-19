@@ -21,7 +21,7 @@
     </div>
     <div class="registration pannel whiteBG">
         <div class="formListElement">
-            <label class="head">Registration für Professoren</label>
+            <label class="head">Registration</label>
         </div>
 
         <form id="signUp-professor" method="POST" th:action="@{/createAccount}" th:object="${newAccount}">
@@ -52,7 +52,7 @@
             </div>
 
             <div class="formListElement">
-                <label for="facultyProfessor">Fakukltät</label>
+                <label for="facultyProfessor">Fakultät</label>
                 <select id="facultyProfessor" required th:field="*{faculty}">
                     <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
                             th:text="${faculty}"

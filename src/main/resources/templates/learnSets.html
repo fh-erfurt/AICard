@@ -37,13 +37,13 @@
                            ownAbo.getLearnSet().getCommentList().size() + ' Bewertungen'}"></p>
                 <p th:if="${ownAbo.getLearnSet().calculateEvaluation() == -1}">Es gab noch keine Bewertung</p>
             </div>
-            <!--                <div th:text="${adminLearnSets}" class="deckStatus">status: learning</div>-->
+
             <div class="btnContainer bottom">
                 <div class="btn yellowBtn">
-                    <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">edit</a>
+                    <a th:href="@{'/cardOverview/' + ${ownAbo.getLearnSet().getId()}}">ändern</a>
                 </div>
                 <div class="btn blueBtn">
-                    <a th:href="@{'/initializeLearningSession/' + ${ownAbo.getId()}}">learn</a>
+                    <a th:href="@{'/initializeLearningSession/' + ${ownAbo.getId()}}">lernen</a>
                 </div>
             </div>
             <div class="btnPlaceHolder"></div>
@@ -53,7 +53,7 @@
 
     <!--        Folowed LearnSets-->
     <div class="whiteBG pannel">
-        <label class="head">followed LearnSets</label>
+        <label class="head">gefolgte Kartendecks</label>
     </div>
     <div class="gridContainer">
         <!-- display:grid 3 Spalten -->
@@ -82,10 +82,10 @@
 
             <div class="btnContainer bottom">
                 <div class="btn yellowBtn">
-                    <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">unfollow</a>
+                    <a th:href="@{'/unfollowLearnSet/' + ${favoriteLearnSetAbo.getId()}}">entfolgen</a>
                 </div>
                 <div class="btn blueBtn">
-                    <a th:href="@{'/initializeLearningSession/' + ${favoriteLearnSetAbo.getId()}}">learn</a>
+                    <a th:href="@{'/initializeLearningSession/' + ${favoriteLearnSetAbo.getId()}}">lernen</a>
                 </div>
             </div>
 

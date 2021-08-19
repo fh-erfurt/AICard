@@ -14,7 +14,7 @@
         <table>
             <tbody>
             <tr th:each="error : ${errorList}">
-                <td><span th:text="${error}"> Title </span></td>
+                <td><span th:text="${error}"> Titel </span></td>
             </tr>
             </tbody>
         </table>
@@ -22,7 +22,7 @@
 
     <div class="registration whiteBG pannel">
 
-        <h1>Account Update Seite</h1>
+        <h1>Account ändern</h1>
 
 
         <form id="signUp-professor" method="POST" th:action="@{/updateAccount}" th:object="${account}">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="formListElement">
-                <label for="facultyProfessor">Fakukltät</label>
+                <label for="facultyProfessor">Fakultät</label>
                 <select id="facultyProfessor" th:field="*{faculty}">
                     <option th:each="faculty : ${T(de.aicard.domains.enums.Faculty).values()}"
                             th:selected="${account.getFaculty()}"
@@ -62,7 +62,7 @@
 
 
             <div class="formListElement">
-                <label for="addFriendByEmail">EMail angeben um als Freund hinzuzufügen</label>
+                <label for="addFriendByEmail">Email angeben um als Freund hinzuzufügen</label>
                 <input class="inputtext" id="addFriendByEmail" name="addFriendByEmail" type="email">
             </div>
 

@@ -25,11 +25,11 @@
                 </select>
             </div>
             <div class="formListElement">
-                <label for="learnSetTitle">LearnSetTitle SubString suche</label>
+                <label for="learnSetTitle">suche nach Kartendecks</label>
                 <input id="learnSetTitle" name="learnSetTitle" th:value="${learnSetTitle}" type="text">
             </div>
             <div class="btnContainer bottom">
-                <button class="btn blueBtn" type="submit">Filtern</button>
+                <button class="btn blueBtn" type="submit">filtern</button>
             </div>
             <div class="btnPlaceHolder"></div>
         </form>
@@ -59,10 +59,10 @@
 
             <div class="btnContainer bottom">
                 <div class="btn yellowBtn">
-                    <a th:href="@{'/cardOverview/' + ${learnSet.getId()}}">Preview</a>
+                    <a th:href="@{'/cardOverview/' + ${learnSet.getId()}}">Vorsicht</a>
                 </div>
                 <div class="btn  blueBtn">
-                    <a th:href="@{'/followLearnSet/' + ${learnSet.getId()}}">Follow</a>
+                    <a th:href="@{'/followLearnSet/' + ${learnSet.getId()}}">folgen</a>
                 </div>
             </div>
 

@@ -230,7 +230,8 @@ textarea {
     line-height: 50px;
 }
 
-.btn a:hover {
+.btn a:hover,
+.XBtn a:hover{
     text-decoration: none;
 
 }

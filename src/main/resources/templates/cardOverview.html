@@ -10,7 +10,7 @@
     <div class="learnset-info whiteBG pannel">
 
         <div class="formListElement">
-            <h1>Card Overview</h1>
+            <h1>Kartenübersicht</h1>
             <label class="head" id="kase" th:text="${learnSet.getTitle()}"></label>
         </div>
         <div class="formListElement">
@@ -37,18 +37,18 @@
         <div th:switch="${isOwner}">
             <div class="btnContainer bottom" th:case="true">
                 <div class="btn redBtn">
-                    <a th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}">X</a>
+                    <a th:href="@{'/deleteLearnSet/' + ${learnSet.getId()}}">löschen</a>
                 </div>
                 <div class="btn yellowBtn">
-                    <a th:href="@{'/editLearnSet/' + ${learnSet.getId()}}">EDIT</a>
+                    <a th:href="@{'/editLearnSet/' + ${learnSet.getId()}}">bearbeiten</a>
                 </div>
                 <div class="btn blueBtn">
-                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">COMMENTS</a>
+                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">kommentieren</a>
                 </div>
             </div>
             <div class="btnContainer" th:case="false">
                 <div class="btn blueBtn">
-                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">COMMENTS</a>
+                    <a th:href="@{'/getComments/' + ${learnSet.getId()}}" type="button">kommentieren</a>
                 </div>
             </div>
         </div>
@@ -120,11 +120,8 @@
             </div>
             <div th:switch="${isAdmin}">
                 <div class="btnContainer bottom" th:case="true">
-                    <!--                        <div class="btn blueBtn">-->
-                    <!--                            <a th:href="@{'/editCard/' + ${card.getId()}}">Please edit ME</a>-->
-                    <!--                        </div>-->
                     <div class="btn redBtn">
-                        <a th:href="@{'/deleteCard/' + ${card.getId()}}">Please Delete ME</a>
+                        <a th:href="@{'/deleteCard/' + ${card.getId()}}">löschen</a>
                     </div>
                 </div>
             </div>
