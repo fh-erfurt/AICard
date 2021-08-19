@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * handles finding, deleting, and saving cards
+ * handles finding, creating, deleting, and saving cards
  *
  * @author Clemes Berger, Daniel Michel, Martin Kühlborn
  */
@@ -90,7 +90,7 @@ public class CardService {
     }
 
     /**
-     * main addNewCard Method that is always called to by submethods
+     * main addNewCard Method that is always called by submethods
      *
      * @param cardFrontType  /
      * @param cardFrontTitel /
@@ -147,7 +147,7 @@ public class CardService {
      * @param cardBackType   /
      * @param cardBackTitel  /
      * @param cardBackInput  /
-     * @return new card by calling main addNewCard Mehtod
+     * @return new card by calling main addNewCard Method
      */
     public Card addNewCard(String cardFrontType, String cardFrontTitel, String cardFrontInput, String cardBackType, String cardBackTitel, MultipartFile cardBackInput) throws IOException, IllegalStateException {
         String cardBackInputString = this.handleFileInput(cardBackInput, cardBackType);
@@ -163,7 +163,7 @@ public class CardService {
      * @param cardBackType   /
      * @param cardBackTitel  /
      * @param cardBackInput  /
-     * @return new card by calling main addNewCard Mehtod
+     * @return new card by calling main addNewCard Method
      */
     public Card addNewCard(String cardFrontType, String cardFrontTitel, MultipartFile cardFrontInput, String cardBackType, String cardBackTitel, MultipartFile cardBackInput) throws IOException, IllegalStateException {
         String cardFrontInputString = this.handleFileInput(cardFrontInput, cardFrontType);
@@ -172,7 +172,7 @@ public class CardService {
     }
 
     /**
-     * return correct title string by by checking enum in cardFileType
+     * return correct title string by checking enum in cardFileType
      *
      * @param cardFileType enum that is provided by frontend
      * @param pictureTitle /
@@ -226,8 +226,8 @@ public class CardService {
     }
 
     /**
-     * checks if inputtype mactches input
-     * if correct, saves inputfile to cardfiles folder and return filename
+     * checks if input type matches input
+     * if correct, saves input file to "cardFiles" folder and return filename
      *
      * @param fileInput    multipart file
      * @param expectedType expected filetype (image, video or audio)

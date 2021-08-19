@@ -17,7 +17,7 @@ import java.util.Properties;
 
 /**
  * configures the persistence
- *
+ * database is saved in database folder
  * @author Daniel Michel
  */
 @Configuration

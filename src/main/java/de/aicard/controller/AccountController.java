@@ -88,6 +88,7 @@ public class AccountController {
     /**
      * handles the edit of the logged in account, here friends can be added
      * and the account data can be changed
+     * friends are added via their account email
      *
      * @param addFriendByEmail account email to add friend
      * @param theAccount       /
@@ -151,6 +152,12 @@ public class AccountController {
         return "redirect:/profile";
     }
 
+    /**
+     * friends are added to the friendlist via a button on their profile
+     * @param friendId /
+     * @param principal /
+     * @return friends profile
+     */
     @GetMapping("/addFriend/{friendId}")
     public String getAddFriend(@PathVariable("friendId") Long friendId, Principal principal) {
         Optional<Account> account = accountService.getAccount(principal);

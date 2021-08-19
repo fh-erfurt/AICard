@@ -61,8 +61,8 @@ public class CommentController {
     }
 
     /**
-     * adds a comment to the learnset
-     *
+     * adds a comment to the commentlist of the learnset
+     * a user can only comment once to the same learnset
      * @param recommend  string which is converted to enum of Recommended
      * @param learnSetId /
      * @param comment    /

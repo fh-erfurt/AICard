@@ -16,9 +16,8 @@ import java.util.List;
  * Provides a LearnSet with further, account-specific information and is thus always embedded
  * into an account. The further information provided by the LearnSetAbo are an ArrayList of
  * CardStatus to safe the state of learning of the user for all the Cards in the LearnSet,
- * the state of the LearnSet, the LearnSet itself and the evaluation the Account has given
- * the LearnSet.
- *
+ * the LearnSet itself and the evaluation the Account has given the LearnSet.
+ * primary place to save learnsets
  * @author Daniel Michel
  */
 
@@ -28,7 +27,7 @@ import java.util.List;
 @NoArgsConstructor
 public class LearnSetAbo extends BaseEntity {
     /**
-     * The member-variable m_cardStatus is an ArrayList of CardStatus. It contains a CardStatus
+     * The member-variable ardStatus is an ArrayList of CardStatus. It contains a CardStatus
      * for each Card in the LearnSet m_learnSet.
      */
     @ManyToMany(cascade = CascadeType.ALL)
@@ -54,15 +53,15 @@ public class LearnSetAbo extends BaseEntity {
     /**
      * Constructor of the LearnSetAbo
      *
-     * @param _learnSet The LearnSet to which the Account subscribes.
+     * @param learnSet The LearnSet to which the Account subscribes.
      */
-    public LearnSetAbo(LearnSet _learnSet) throws Exception {
-        this.learnSet = _learnSet;
+    public LearnSetAbo(LearnSet learnSet) throws Exception {
+        this.learnSet = learnSet;
         this.cardStatus = new ArrayList<>();
         this.evaluation = -1;
 
-        for (int i = 0; i < learnSet.getCardList().getListLength(); i++) {
-            cardStatus.add(new CardStatus(learnSet.getCardList().getCardByIndex(i)));
+        for (int i = 0; i < this.learnSet.getCardList().getListLength(); i++) {
+            cardStatus.add(new CardStatus(this.learnSet.getCardList().getCardByIndex(i)));
         }
 
     }
@@ -95,21 +94,21 @@ public class LearnSetAbo extends BaseEntity {
      * (lowest level first) and fills a new ArrayList of CardStatus with the CardStatus of the
      * lowest level, until there are as many CardStatus in the List as wanted.
      *
-     * @param _numOfCards The number of CardStatus we want in the returned ArrayList.
+     * @param numOfCards The number of CardStatus we want in the returned ArrayList.
      * @return List of the size _numOfCards, consists of the CardStatus in the LearnSetAbo with the
      * lowest CardKnowledgeLevel.
      */
-    private List<CardStatus> createCardStatusListForSession(int _numOfCards) {
+    private List<CardStatus> createCardStatusListForSession(int numOfCards) {
         List<CardStatus> resultCardStatusList = new ArrayList<>();
 
         for (CardKnowledgeLevel level : CardKnowledgeLevel.values()) {
             List<CardStatus> lowestLevelList = getCardStatusOfKnowledgeLevel(level);
             for (CardStatus status : lowestLevelList) {
-                if (resultCardStatusList.size() < _numOfCards) {
+                if (resultCardStatusList.size() < numOfCards) {
                     resultCardStatusList.add(status);
                 }
             }
-            if (resultCardStatusList.size() == _numOfCards) break;
+            if (resultCardStatusList.size() == numOfCards) break;
         }
 
         return resultCardStatusList;
@@ -121,12 +120,12 @@ public class LearnSetAbo extends BaseEntity {
      * First, it gets a List of the CardStatus in the LearnSetAbo of the lowest CardKnowledgeLevel.
      * Then, it constructs a LearnSet of this CardStatus ArrayList.
      *
-     * @param _numOfCards how many Cards should be asked for in the LearningSession
+     * @param numOfCards how many Cards should be asked for in the LearningSession
      * @return The created LearningSession.
      */
-    public LearningSession createLearningSession(int _numOfCards) {
+    public LearningSession createLearningSession(int numOfCards) {
 
-        List<CardStatus> sessionList = createCardStatusListForSession(_numOfCards);
+        List<CardStatus> sessionList = createCardStatusListForSession(numOfCards);
         LearningSession newLearningSession = new LearningSession(sessionList);
         this.learningSession = newLearningSession;
         return newLearningSession;

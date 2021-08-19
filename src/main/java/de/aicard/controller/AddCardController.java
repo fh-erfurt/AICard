@@ -64,7 +64,7 @@ public class AddCardController {
     /**
      * handles creatng cards for a LearnSet
      * different params are needed to identify datatypes such as video,audio,text and pictures
-     * for front and back side
+     * for front and back side and the titles
      *
      * @param learnSetID                /
      * @param principal                 /

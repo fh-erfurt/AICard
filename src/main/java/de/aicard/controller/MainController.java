@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
     /**
-     * returns index
+     * redirect to index
      *
-     * @return String
+     * @return index
      */
     @GetMapping("/")
     public String welcome() {
@@ -23,7 +23,7 @@ public class MainController {
     /**
      * returns index
      *
-     * @return String
+     * @return index
      */
     @GetMapping("/index")
     public String notWelcome() {

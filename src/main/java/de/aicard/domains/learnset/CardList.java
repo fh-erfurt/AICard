@@ -21,7 +21,6 @@ import java.util.logging.Logger;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @Entity
 public class CardList extends BaseEntity {
     // CLASS VARIABLES

@@ -36,7 +36,7 @@ public class LearningSessionController {
 
 
     /**
-     * shows the initilizeLearningsession.html makes sure to create new cardStatus if not already present fore each card
+     * shows the initilizeLearningsession.html makes sure to create new cardStatus if not already present for each card
      *
      * @param learnSetAboId /
      * @param model         /
@@ -129,7 +129,7 @@ public class LearningSessionController {
     }
 
     /**
-     * learns the shown card either increses or decreases the knowledgelevel of the card
+     * learns the shown card either increases or decreases the knowledgelevel of the card
      * knowledgelevel can't drop below 0 and is maxed out at 5
      *
      * @param learnSetAboId /

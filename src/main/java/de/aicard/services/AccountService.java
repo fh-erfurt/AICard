@@ -71,6 +71,12 @@ public class AccountService {
         return (acc);
     }
 
+    /**
+     * updates an account over edit account,
+     * friend is added if provided over email
+     * @param account /
+     * @param friend /
+     */
     public void updateAccount(Account account, Optional<Account> friend) throws IllegalStateException {
         Optional<Account> oldAccount = accountRepository.findById(account.getId());
 

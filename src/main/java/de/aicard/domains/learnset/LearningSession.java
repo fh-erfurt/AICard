@@ -34,14 +34,13 @@ public class LearningSession extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL)
     private List<CardStatus> cardStatusList;
     /**
-     * Information, wheather the Session is active (there is at least one other card to learn in the List)
+     * Information, whether the Session is active (there is at least one other card to learn in the List)
      */
     private boolean isActive;
 
 
     /**
      * Constructor of LearningSession
-     * <p>
      * sets currentCard to 0 and isActive to true.
      *
      * @param _cardStatusList The List for the LearningSession.

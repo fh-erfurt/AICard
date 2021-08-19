@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Comment extends BaseEntity {
 
     private String message;
@@ -39,8 +38,6 @@ public class Comment extends BaseEntity {
      *
      * @param newSender        the person that sends the message
      * @param newCommentString the message to send
-     *                         <p>
-     *                         likes are initialized to 0  and time is the time the message was sent
      * @author Amine Semlali
      */
     public Comment(String newCommentString, Account newSender, Recommended newRecomended) {

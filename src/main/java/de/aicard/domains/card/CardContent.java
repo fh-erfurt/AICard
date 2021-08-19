@@ -28,7 +28,7 @@ public class CardContent extends BaseEntity {
 
     /**
      * data in cardcontent with type TextFile is used as a string to display
-     * <p>
+     *
      * data in cardcontent with other types is used as filenames which will be displayed
      */
     @Column(length = 512)

@@ -56,9 +56,9 @@ public class LoginController {
     /**
      * creates a new account if all given data is accepted
      * check on password and email
-     * email must not exist in the current database and must match the emal regex
+     * email must not exist in the current database and must match the email regex
      * password must match the password regex
-     *
+     * name has to be provided
      * @param newAccount newAccount
      * @param model      model
      * @return ModelAndView

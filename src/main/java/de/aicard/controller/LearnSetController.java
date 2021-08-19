@@ -113,7 +113,7 @@ public class LearnSetController {
     /**
      * shows some data of the learnSet and all cards of the learnset
      * this site gives the ability to add cards if the user is an admin
-     *
+     * the owner has edit and delete buttons for the learnSet
      * @param id        /
      * @param principal /
      * @param model     /
@@ -176,7 +176,8 @@ public class LearnSetController {
     /**
      * deletes a learnSet if the user is the owner
      * all LearnSetAbos with this learnSet are deleted too
-     *
+     * all learnset cards and their content such as files are deleted
+     * the cardstatus of the abos are deleted
      * @param principal /
      * @return String
      */
@@ -244,7 +245,7 @@ public class LearnSetController {
 
     /**
      * removes the learnSetAbo from the list of the account
-     * owners and admins can't deabo!!!
+     * owners can't unfollow
      *
      * @param followedLearnSetAboId /
      * @param principal             /
@@ -265,7 +266,7 @@ public class LearnSetController {
     }
 
     /**
-     * removes an account from the adminlist only the owner can add and remove admins
+     * removes an account from the adminlist only the owner can remove admins
      *
      * @param learnSetId /
      * @param accountId  /
@@ -290,7 +291,7 @@ public class LearnSetController {
     }
 
     /**
-     * adds an Account to the adminList only the owner can add and remove admins
+     * adds an Account to the adminList only the owner can add admins
      *
      * @param learnSetId /
      * @param friendId   /

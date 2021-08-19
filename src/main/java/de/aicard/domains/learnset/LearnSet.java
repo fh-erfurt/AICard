@@ -52,7 +52,7 @@ public class LearnSet extends BaseEntity {
     private List<Comment> commentList;
 
     /**
-     * The Account who created and owns the LearnSet
+     * The Account who created and owns the LearnSet has all rights
      */
     @OneToOne(cascade = CascadeType.ALL)
     private Account owner;
@@ -63,7 +63,7 @@ public class LearnSet extends BaseEntity {
     private Visibility visibility;
 
     /**
-     * List of people who can edit the learnset
+     * List of people who can add and remove cards
      */
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Account> adminList;
@@ -162,11 +162,11 @@ public class LearnSet extends BaseEntity {
      * Removes Admin from adminList by Account
      * is overloaded
      *
-     * @param _accountToRemove /
+     * @param accountToRemove /
      */
-    public void removeAdmin(Account _accountToRemove) {
-        if (adminList.contains(_accountToRemove)) {
-            this.adminList.remove(_accountToRemove);
+    public void removeAdmin(Account accountToRemove) {
+        if (adminList.contains(accountToRemove)) {
+            this.adminList.remove(accountToRemove);
         } else {
             logger.warning("accountToRemove is not part of adminList");
         }
@@ -175,8 +175,8 @@ public class LearnSet extends BaseEntity {
     /**
      * Comments are used as comments
      */
-    public void addComment(Comment _newComment) {
-        this.commentList.add(_newComment);
+    public void addComment(Comment newComment) {
+        this.commentList.add(newComment);
     }
 
     /**

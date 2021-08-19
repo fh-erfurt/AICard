@@ -38,7 +38,9 @@ public class LearnSetShopController {
      * shows all for the account visible unsubscribed LearnSets
      * only public are visible
      * and protected if the user is in the same faculty
-     *
+     * or befriended with the owner
+     * or if the user is in the adminlist
+     * private learnsets are only visible if the user is in the adminlist
      * @param stringFaculty /
      * @param learnSetTitle /
      * @param principal     /
@@ -118,8 +120,6 @@ public class LearnSetShopController {
      */
     @GetMapping("/followLearnSet/{learnSetId}")
     public String getFollowLearnSet(Principal principal, @PathVariable("learnSetId") Long learnSetId) {
-
-
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetId);
         Optional<Account> account = accountService.getAccount(principal);
         if (learnSet.isPresent() && account.isPresent()) {

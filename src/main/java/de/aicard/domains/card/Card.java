@@ -43,7 +43,7 @@ public class Card extends BaseEntity {
 
     /**
      * sets cardcontent data from each card side to filePath + original cardcontent data
-     *
+     * used for fronted call to display files
      * @param filePath path to file directory
      */
     public void setCardPath(String filePath) {
