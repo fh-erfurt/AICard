@@ -54,7 +54,7 @@
                     <tr th:each="admin : ${learnSetOld.getAdminList()}">
                         <td><a th:href="@{'/profile/' + ${admin.getId()}}" th:text="${admin.getEmail()}"></a></td>
                         <td th:if="${owner.getId().equals(learnSetOld.getOwner().getId()) && !admin.getId().equals(owner.getId()) }">
-                            <a class=""
+                            <a class="XBtn redBtn"
                                th:href="@{'/removeAccountFromAdminList/'+${learnSetOld.getId()} + '/' + ${admin.getId()}}"
                                title="Account als Administrator entfernen">X</a>
                         </td>
