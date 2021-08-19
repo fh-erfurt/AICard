@@ -45,7 +45,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .antMatchers("/addCard/*", "/cardOverview/**", "/createLearnset",
                              "/editLearnSet/**", "/learnSets", "/profile", "/profile/**", "/comments/*",
                              "/updateProfile/**", "/learnSetShop", "/learnCard/**", "/initializeLearningSession/**"
-                             // TODO : hier müssen alle seiten bzw getMethoden eingetragen werden
                 ).hasAnyRole("USER")
                 
                 .antMatchers("/", "/index", "/login", "/registration", "/error").permitAll()

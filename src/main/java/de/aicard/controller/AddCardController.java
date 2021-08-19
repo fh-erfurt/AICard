@@ -137,7 +137,6 @@ public class AddCardController
             String cardBackTitel = cardService.getCorrectTitle(cardBackType, cardBackPictureFileTitle,
                                                                cardBackTextFileTitle, cardBackVideoFileTitle, cardBackAudioFileTitle);
             
-            //TODO: Doppelter Code kann noch verbessert werden, wenn Zeit
             try
             {
                 if (cardFrontType.equals(DataType.TextFile.name()))
