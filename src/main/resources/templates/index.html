@@ -7,16 +7,25 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="pageContent">
     <div class="pannel left whiteBG">
-        <label class="head">pannel 0</label>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint nobis placeat corporis corrupti ut rerum animi
-            eum modi expedita natus unde totam necessitatibus, magni facere voluptate officiis maiores, ea dolorum!</p>
+        <label class="head">Willkommen auf aiCard</label>
+        <p>Hier kannst du Karteikartensammlungen erstellen, lernen und mit Anderen teilen.</p>
+        <p>Falls du noch keinen Account bei aiCard hast, kannst du hier anfangen.</p>
+        <div class="btnContainer bottom">
+            <div class="btn blueBtn">
+                <a th:href="@{/registration}">registrieren</a>
+            </div>
+        </div>
         <div class="btnPlaceHolder"></div>
     </div>
     <div class="pannel right whiteBG">
-        <label class="head">pannel 1</label>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint nobis placeat corporis corrupti ut rerum animi
-            eum modi expedita natus unde totam necessitatibus, magni facere voluptate officiis maiores, ea dolorum!</p>
-        <div class="btnPlaceHolder"></div>
+        <label class="head">Vorteile von aiCard</label>
+        <ul>
+            <li>Karteikarten unterstützten Mediadateien:<br> mit aiCard kannst du Text-, Bilder-, Video- und Audiodateien verwenden zum Lernen.</li>
+            <br>
+            <li>Kartendecks folgen:<br> Mit aiCard kannst du Kartendecks von anderen Nutzer folgen und dies nutzen.</li>
+            <br>
+            <li>Kartendecks bewerten:<br> Jedes Karten deck kann von anderen Nutzern bewertet und kommentiert werden.</li>
+        </ul>
     </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
