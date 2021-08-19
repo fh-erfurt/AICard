@@ -30,7 +30,6 @@ public class ErrorControllerTest {
     @Test
     public void shouldGetError404Page() throws Exception{
         mockMvc.perform(get("/error404"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("error404"));
+                .andExpect(status().isNotFound());
     }
 }
