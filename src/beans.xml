@@ -17,14 +17,12 @@
     <bean id="Message" class="de.aicard.domains.Social.Comment"></bean>
 
     <bean id="AccountRepository" class="de.aicard.storages.AccountRepository" abstract="true"></bean>
-    <bean id="CardContentRepository" class="de.aicard.storages.CardContentRepository" abstract="true"></bean>
     <bean id="CardListRepository" class="de.aicard.storages.CardListRepository" abstract="true"></bean>
     <bean id="CardRepository" class="de.aicard.storages.CardRepository" abstract="true"></bean>
     <bean id="CardStatusRepository" class="de.aicard.storages.CardStatusRepository" abstract="true"></bean>
     <bean id="LearningSessionRepository" class="de.aicard.storages.LearningSessionRepository" abstract="true"></bean>
     <bean id="LearnSetAboRepository" class="de.aicard.storages.LearnSetAboRepository" abstract="true"></bean>
     <bean id="LearnSetRepository" class="de.aicard.storages.LearnSetRepository" abstract="true"></bean>
-    <bean id="MessageRepository" class="de.aicard.storages.CommentRepository" abstract="true"></bean>
 
     <bean id="AccountController" class="de.aicard.controller.AccountController"></bean>
     <bean id="AddCardController" class="de.aicard.controller.AddCardController"></bean>
