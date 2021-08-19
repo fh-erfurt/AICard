@@ -1,7 +1,6 @@
 package de.aicard.storages;
 
 import de.aicard.domains.account.Account;
-import de.aicard.domains.learnset.LearnSet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +18,7 @@ import java.util.Optional;
 @DataJpaTest
 public class AccountRepositoryTest
 {
-    // TODO : test save(), findAllAccountsByLearnsetIdInLearnSetAbo(), findByEmail()
+    
     
     @Autowired
     private AccountRepository accountRepository;
@@ -36,22 +35,6 @@ public class AccountRepositoryTest
         accountRepository.deleteAll();
     }
     
-    
-    @Test
-    void findAllAccountsByLearnsetIdInLearnSetAbo()
-    {
-        Account given1 = new Account();
-        given1.setEmail("max.mustermann@web.de");
-        LearnSet learnSet = new LearnSet();
-        
-        given1.addLearnSetAbo(learnSet);
-        
-        // findTopByOrderByIdDesc()
-        
-        Account given2 = new Account();
-        given2.setEmail("wrong@mustermann@web.de");
-        
-    }
     
     @Test
     void findByEmail()

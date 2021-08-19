@@ -19,7 +19,7 @@ import java.util.List;
 @DataJpaTest
 public class LearnSetAboRepositoryTest
 {
-    // TODO : test save(), findAllByLearnSetId()
+    
     
     @Autowired
     private LearnSetAboRepository learnSetAboRepository;

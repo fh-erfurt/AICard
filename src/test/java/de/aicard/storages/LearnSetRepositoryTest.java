@@ -20,7 +20,6 @@ import java.util.List;
 public class LearnSetRepositoryTest
 {
     
-    // TODO : test save(), getLearnSetByCardId()
     
     @Autowired
     private LearnSetRepository learnSetRepository;

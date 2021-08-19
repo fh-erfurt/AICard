@@ -57,7 +57,6 @@ public class CommentController
                 }
                 
             }
-            System.out.println("hasCommented: " + hasCommented);
             model.addAttribute("hasCommented", hasCommented);
             model.addAttribute("newComment", new Comment());
             model.addAttribute("learnSet", learnSet.get());
@@ -81,7 +80,6 @@ public class CommentController
     @PostMapping("/addComment/{learnSetId}")
     public ModelAndView addComment(@RequestParam("recommend") String recommend, @PathVariable("learnSetId") Long learnSetId, @ModelAttribute("newComment") Comment comment, Model model, Principal principal)
     {
-        System.out.println("recommend: " + recommend);
         Optional<LearnSet> learnSet = learnSetService.getLearnSet(learnSetId);
         Optional<Account> account = accountService.getAccount(principal);
         
@@ -113,9 +111,9 @@ public class CommentController
             {
                 throw new IllegalStateException("fehlende Kommentardaten");
             }
-        } catch (IllegalStateException e)
+        } catch (IllegalStateException ignored)
         {
-            System.out.println("exception: " + e);
+        
         }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(getComments(learnSetId, model, principal));
