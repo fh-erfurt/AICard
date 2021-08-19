@@ -29,7 +29,7 @@ public class LearnSetAboService
      * finds a LearnsetAbo by its id
      *
      * @param learnSetAboId /
-     * @return Optional\<LearnSetAbo\>
+     * @return Optional LearnSetAbo
      */
     public Optional<LearnSetAbo> getLearnSetAbo(Long learnSetAboId)
     {

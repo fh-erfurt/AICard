@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 /**
  * Provides CardList with additional information:
  * Title, Description, Faculty(to which Accounts from which Faculties it will be shown)
- * CommentList, Evaluations(only 1 per Account->LearnSetAbo is possible)
+ * CommentList, Evaluations(only 1 per Account to LearnSetAbo is possible)
  * Owner(Account who created the LearnSet), Admins(Accounts who can edit the LearnSet)
  * Visibility(to show the LearnSet to all Account, to Faculty and Friends or only to Owner)
  *

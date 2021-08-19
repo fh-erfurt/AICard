@@ -36,6 +36,7 @@ public class Comment extends BaseEntity
     /**
      * Constructor of a Message.
      *
+     * @param newRecomended recommended enum
      * @param newSender        the person that sends the message
      * @param newCommentString the message to send
      * @author Amine Semlali
