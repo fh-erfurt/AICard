@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * controller for login handles the login function and registration
  *
- * @author Martin Kühlborn,Clemens Berger
+ * @author Martin Kuehlborn,Clemens Berger
  */
 @Controller
 public class LoginController

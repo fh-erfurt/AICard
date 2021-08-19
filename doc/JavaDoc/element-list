@@ -1,5 +1,14 @@
+de.aicard
+de.aicard.config
+de.aicard.controller
+de.aicard.core
+de.aicard.domains
 de.aicard.domains.account
 de.aicard.domains.card
 de.aicard.domains.enums
 de.aicard.domains.learnset
 de.aicard.domains.Social
+de.aicard.rand
+de.aicard.security
+de.aicard.services
+de.aicard.storages

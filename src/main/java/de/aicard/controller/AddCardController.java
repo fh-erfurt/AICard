@@ -25,7 +25,7 @@ import java.util.Optional;
 /**
  * adds a card to the corresponding learnSet
  *
- * @author Martin Kühlborn,Clemens Berger
+ * @author Martin Kuehlborn,Clemens Berger
  */
 @Controller
 public class AddCardController

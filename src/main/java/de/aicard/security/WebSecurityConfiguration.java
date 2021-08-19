@@ -15,7 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 /**
  * SpringSecurity standard implementation of WebSecurityConfigurerAdapter
  *
- * @author Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 @EnableWebSecurity
 @Configuration

@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  * SpringSecurity standard UserDetailsService interface implementation
  *
- * @author Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 @Service
 public class MyUserDetailsService implements UserDetailsService

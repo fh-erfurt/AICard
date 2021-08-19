@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * handles learnsetabo repository requests
  *
- * @author Daniel Michel,Martin Kühlborn,Clemens Berger
+ * @author Daniel Michel,Martin Kuehlborn,Clemens Berger
  */
 @Service
 public class LearnSetAboService

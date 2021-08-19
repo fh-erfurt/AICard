@@ -31,7 +31,7 @@ import java.util.Optional;
 /**
  * creating/showing and editing of learnSets
  *
- * @author Martin Kühlborn,Clemens Berger
+ * @author Martin Kuehlborn,Clemens Berger
  */
 @Controller
 public class LearnSetController

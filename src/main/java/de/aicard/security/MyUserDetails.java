@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * standard Spring Security MyUserDetails to use in priciple
  *
- * @author Martin Kühlborn
+ * @author Martin Kuehlborn
  */
 @Getter
 @Setter

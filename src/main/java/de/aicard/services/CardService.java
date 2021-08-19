@@ -19,7 +19,7 @@ import java.util.Optional;
 /**
  * handles finding, creating, deleting, and saving cards
  *
- * @author Clemes Berger, Daniel Michel, Martin Kühlborn
+ * @author Clemes Berger, Daniel Michel, Martin Kuehlborn
  */
 @Service
 public class CardService
@@ -247,7 +247,7 @@ public class CardService
     
     /**
      * checks if input type matches input
-     * if correct, saves input file to "cardFiles" folder and return filename
+     * if correct, saves input file to cardFiles folder and return filename
      *
      * @param fileInput    multipart file
      * @param expectedType expected filetype (image, video or audio)

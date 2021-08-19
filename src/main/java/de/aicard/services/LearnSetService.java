@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * handles creations, deletions of learnsets and LearnSetRepository calls
  *
- * @author Clemens Berger, Daniel Michel, Martin Kühlborn
+ * @author Clemens Berger, Daniel Michel, Martin Kuehlborn
  */
 @Service
 public class LearnSetService

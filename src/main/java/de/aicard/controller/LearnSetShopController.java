@@ -21,7 +21,7 @@ import java.util.Optional;
 /**
  * browsing feature for accessible LearnSets
  *
- * @author Martin Kühlborn,Clemens Berger
+ * @author Martin Kuehlborn,Clemens Berger
  */
 @Controller
 public class LearnSetShopController

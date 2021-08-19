@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * controller for index
  *
- * @author Martin Kühlborn,Clemens Berger
+ * @author Martin Kuehlborn,Clemens Berger
  */
 @Controller
 public class MainController

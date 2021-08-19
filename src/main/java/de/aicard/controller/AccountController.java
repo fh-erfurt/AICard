@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * handles editing for accounts and shows profiles
  *
- * @author Martin Kühlborn,Clemens Berger
+ * @author Martin Kuehlborn,Clemens Berger
  */
 @Controller
 public class AccountController

@@ -19,7 +19,7 @@ import java.util.Optional;
  * account service used to create, find, save and update account
  * can deletes all learnsets with a given learnset reference
  *
- * @author Clemens Berger, Daniel Michel, Martin Kühlborn
+ * @author Clemens Berger, Daniel Michel, Martin Kuehlborn
  */
 @Service
 public class AccountService

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 /**
  * provides delete method for learningsession
  *
- * @author Clemes Berger, Daniel Michel, Martin Kühhlborn
+ * @author Clemes Berger, Daniel Michel, Martin Kuehlborn
  */
 @Service
 public class LearningSessionService

@@ -19,7 +19,7 @@ import java.util.Optional;
 /**
  * opens a learningsession for a learnSetAbo
  *
- * @author Martin Kühlborn,Clemens Berger
+ * @author Martin Kuehlborn,Clemens Berger
  */
 @Controller
 public class LearningSessionController
