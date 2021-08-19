@@ -27,6 +27,7 @@ Zur Ausführung der Applikation sind folgende Schritte zu befolgen:
 - Das UI der Applikation kann dann über einen beliebigen Browser unter localhost:8080 erreicht werden.
 - Zum Testen dürfen gerne die voreingestellten Testaccounts verwendet werden (siehe vorheriger Abschnitt dieser Dokumentation).
 - Alternativ ist auch das Anlegen eines eigenen Accounts möglich (durch Navigation zu Log-In und dann Klick auf den Button "registrieren").
+- Beispiel für zulässige Passwörter: 12asAs## oder 12ASas!?
 
 
 ### Allgemeine Projektübersicht
@@ -41,6 +42,14 @@ Das Team besteht aus 5 Mitgliedern, alle aus der Vertiefungsrichtung Ingenieursi
 * **Martin Kühlborn** - [Profil](https://github.com/KhbrnDev)
 * **Daniel Michel** - [Profil](https://github.com/DanielMichel350)
 * **Amine Semlali** - [Profil](https://github.com/AmineSemlali)
+
+####Zuständigkeiten im Team:
+
+- Amine Semlali: Domains, Repositories, Tests, Testdaten
+- Antonio Blechschmidt: Frontend komplett
+- Clemens Berger: Controller, Services, Models, Repositories, Testdaten
+- Daniel Michel: Dokumentation, Services, Repositories, Tests
+- Martin Kühlborn: Controller, Models, Services, Repositories, html, Spring Security, Testdaten
 </details>
 
 <details>
@@ -92,18 +101,18 @@ wurde an manchen Stellen vereinfacht. Hier seien nur die Änderungen der vorlieg
 Abgabe im Vergleich zur Projektbeschreibung Stand Java 1 beschrieben. In allen anderen Punkten ist die Projektbeschreibung
 Java 1 noch gültig. 
 <br>
-Bei der Erstellung eines Accounts haben wir uns dazu entschlossen, alle Angaben verpflichtend zu machen - die User müssen
-nun also neben E-Mail Adresse und Passwort auch einen Namen und eine Beschreibung angeben sowie eine Fakultät auswählen. 
+Beim Erstellen eines Accounts haben wir uns dazu entschlossen, mehr Angaben verpflichtend zu machen - die User müssen
+nun also neben E-Mail Adresse (die entgegen des ursprünglichen Plans nicht zwingend die Hochschul-Mailadresse sein muss) und Passwort auch einen Namen angeben sowie eine Fakultät auswählen. 
 Da die Unterscheidung zwischen Lehrenden-Accounts und Studierenden-Accounts wegfiel, gilt die zwingende Zuordnung zu einer 
 Fakultät nun auch für Lehrende, nicht nur für Studierende. 
 Auch bei Erstellen von Lernsets ist nun die Auswahl einer Fakultät erforderlich, um abonnierbare Lernsets übersichtlicher
 im Learn Set Shop verfügbar machen zu können. Der Learn Set Shop realisiert die in der Projektbeschreibung Java 1
-beschriebene Suchfunktion.
+beschriebene Suchfunktion. Die Begrenzung von 200 Karten pro Lernset wurde aufgehoben.
 <br>
 Die für den Lernvorgang auswählbare Kartenzahl wurde reduziert auf maximal 25 Karten pro Learning-Session.
 Hier kann nun zwischen 10, 15, 20 und 25 Karten gewählt werden. Hierdurch wird bewusst auf die bekanntlich kurze
 Aufmerksamkeitsspanne von Studierenden und Menschen im Allgemeinen eingegangen. Enthält das Lernset weniger als die 
-ausgewählte Kartenmenge, werden nur die existierenden Karten abgefragt. 
+ausgewählte Kartenmenge, werden nur die existierenden Karten abgefragt. Enthält das Lernset gar keine Karten, wird der User auf die Seite /learnSets zurück geleitet. 
 <br>
 Die Möglichkeit des Chats zwischen Accounts wurde vom Team verworfen. Diese Funktion hätte den zeitlichen Rahmen des
 Projekts gesprengt und ist zudem eine Funktion, die bereits durch viele andere Anbieter hinreichend realisiert ist.
@@ -131,12 +140,12 @@ Wird die Sichtbarkeit jedoch auf eine niedrigere Stufe als bisher verändert, bl
 
   - Abgebrochene LearningSessions können nicht zu einem späteren Zeitpunkt fortgesetzt werden.
 
-  - Beim Hochladen von Dateien für die Karten gibt es ein Datenlimit von 50mb. Dieses wird von JavaScript geprüft. Falls das Limit überschritten wird, wird der Submit-Button deaktiviert.
+  - Beim Hochladen von Dateien für die Karten gibt es ein Datenlimit von 50mb. Dieses wird von JavaScript geprüft. Falls das Limit überschritten wird, gibt es ein JavaScript Alert und die Datei wird aus dem Input Feld entfernt.
   Diese Prüfung kann zwar umgangen werden, der Versuch des Hochladens einer größeren Datei führt jedoch nie zum Absturz des Servers. 
     Die Seite lädt dann lediglich nicht mehr.
     
 - Einmal erstellte Karten können nicht bearbeitet werden, da sonst die Level der Karten in den LernSetAbos irreführend wären (die alte Karte wurde gewusst/ nicht gewusst, nicht aber die aktualisierte).
-Ist der LearnSetOwner mit einer Karte nicht mehr zufrieden, so kann er sie löschen und eine neue erstellen.
+Ist der LearnSetOwner oder ein Admin des Lernsets mit einer Karte nicht mehr zufrieden, so kann er sie löschen und eine neue erstellen.
   
 - Accounts haben eine Liste befreundeter Accounts. Freundschaften sind jedoch einseitig. Sie müssen nicht von dem anderen Account akzeptiert werden. Dies ist zweckdienlich, da die Freundesliste nur in zwei Bereichen relevant ist:
  nur Freunde können zum Admin eigener Lernsets gemacht werden und nur Freunde können eigene protected Lernsets abonnieren. Mit dem einseitigen Hinzfügen als Freund autorisiert ein Account andere genau hierzu.
@@ -183,92 +192,7 @@ detaillierte Use-Case-Diagramme verzichtet wird.
 
 <details>
 <summary>Codestyle</summary>
-<br>
-
-
-- The goal of this document is to ensure a consistent CodeStyle throughout the project
-- Violations of this CodyStyle are allowed if it enhances readability
-
-#### Naming conventions
-- All names should be written in English
-- Class names must be PascalCase <br>
-    ```
-    ClassName, CardList
-    ```
-- Variable names must be camelCase <br>
-    ```
-    int numberOfCard;   // not: int NumberOfcard;
-    String carName;     // not: String Carname;
-    ```
-- Underscores are banned from all names
-    ```
-    // INCORRECT
-    int number_of_cars;
-    String car_Name;
-  ```
-- Method names must be camelCase
-    ```
-    getNumberOfCars();          // not: GetNumberOfCars();
-    calculateEverageSales();    // not: Calculateeveragesales();
-    ``` 
-- Parametes must start with an _underline
-    ```
-   public void methodeName(_Parameter);
-  ```
-#### Files and Folders
-- Java file names must be PascalCase
-    ```
-    Car.java        // not: car.java
-    SportsCar.java  // not: sportsCard.java
-    ``` 
-- Java test files names must be Pascal Case
-    ```
-    CarTest.java        // not: testcar.java
-    SportsCarTest.java  // not: TestsportsCardtesting.java
-    ``` 
-    - their location must be in the same package structure in the test branch as the implementation
-
-- package names must be lower case
-    - packages in java and test folder must mirror each other
-
-#### Layout
-- Block Layout for curly brackets
-    ```
-    public class TestClass
-    {
-        if (1 < 0)
-        {
-            // Do something
-        }
-    
-        for (int index = 0; index < 10 ; index++)
-        {
-            // Do something
-        }
-    
-    }
-    ```
-
-#### Comments
-- every class must have a comment with its description and its author in JavaDocStyle
-- every member variable must have a comment explaining its use in JavaDocStyle
-- complex methods must be commented in JavaDocStyle
-- short comments in methods are appreciated
-- TODO comments are appreciated
-    ```
-    /**
-    * JavaDocStyle comment example
-    * 
-    * @author: 
-    */
-    
-    // short comment example
-    
-    
-    // TODO: example
-  
-  
-    ```
+Wir halten uns im Projekt an den allgemeinen Java Codestyle.
 </details>
 
 <details>
@@ -390,6 +314,7 @@ Umfang von Anfang an.
 Auch in diesem Package wurde eine Verschlankung vorgenommen. Im Laufe der Weiterentwicklung der reinen Klassenlogik hin zu einer
 Webanwendung mit Datenbankanbindung haben wir bemerkt, dass es einfacher ist, nicht 4 unterschiedliche CardContent Typen zu haben.
 Daher haben wir uns dazu entschlossen, in nur einer Klasse "CardContent" durch ein Attribut vom neuen Enum Typ "DataType" zwischen den verschiedenen Arten von Inhalten zu unterscheiden.
+Dies trägt auch dem CleanCode Prinzip "Composition über Vererbung" Rechnung.
 
 </details>
 
@@ -409,7 +334,7 @@ Anforderungen, die nicht auch die Java eigene Klasse ArrayList erfüllen würde.
 ####Java 2
 Auch im Projekt Java 2 lag unser Fokus auf unserer Kernidee, ein Kartenlernsystem zu entwickeln.
 Die Interaktion zwischen Accounts wurde daher aus Zeitgründen weiter reduziert. Statt einer Klasse Chat und einer Klasse Message interagieren Accounts letztendlich über Kommentare zu Lernsets.
-Hierfür gibt es eine neue Klasse "Comment". Ein Kommentar zu einem Lernset kann einmalig und dauerhaft mit einer Bewertung des Lernsets erstellt werden. 
+Hierfür gibt es eine neue Klasse "Comment". Ein Kommentar zu einem Lernset kann einmalig und dauerhaft mit einer Bewertung des Lernsets erstellt werden. Zur Bewertung wurde eine neue Enumeration "Recommended" hinzugefügt.
 </details>
 
 
@@ -448,6 +373,9 @@ wir Softwaretechnik am Beispiel von Datenbanken, und mit diesem Denkmuster start
 
 ####Java 2
 - Wir haben im Laufe des Projektes festgestellt, dass Java Models viel mächtiger sind, als wir dachten, wodurch wir zunächst insbesondere beim Löschen komplizierter programmiert haben, als es nötig gewesen wäre. Dies haben wir bemerkt, und dann auch möglichst vereinfacht. Dabei sind wir jedoch auch an zeitliche Grenzen gestoßen, wodurch das finale Projekt immernoch an einigen Stellen einfacher sein könnte.
+- Im Frontend sollte nichts gecasted werden.
+- Thymeleaf, Spring MVC und alle anderen genutzten Technologien.
+
 </details>
 <details>
 
@@ -486,6 +414,8 @@ um die gemeisamen Veranstaltungen herum auf dem Campus trifft, ist dies eine bes
 - SVG Bilder können in das System hinzugefügt werden, da sie ein "ImageType" sind, können aber nicht angezeigt werden.
 - Beim Anzeigen von Karten können Audio und Video Dateien zurückgespult, aber nicht vorgespult werden.
 - Die für die Karten hochgeladenen Dateien werden im Ordner "cardFiles" außerhalb der vorgegebenen Projektstruktur gespeichert. 
+- Wir hatten Probleme, Controller Tests mit SpringSecurity zu schreiben. Für die Post-Requests konnten wir keine Lösung finden, wir bekamen immer Access Denied.
+- 
 
 #### Features
 
@@ -498,13 +428,14 @@ um die gemeisamen Veranstaltungen herum auf dem Campus trifft, ist dies eine bes
 
 - Möglichkeit, bei Neuerstellung der Datenbank die Dateien entsprechend zu bereinigen.
 - Prüfen, ob das Prüfen der Existenz der Principals jedes Mal nötig ist, wenn man nur eine Seite laden möchte. Es handelt sich hierbei um ein Relikt der vor-Spring-Security-Vergangenheit.
+- Das Prüfen, ob der Principal ein Account im Repository ist, führt dazu, dass der SpringSecurity User bei den Tests nicht darauf zugreifen kann, obwohl er autorisiert ist. Dies wurde zu spät bemerkt, weshalb die Controller Tests in diesen Fällen nur darauf testen, ob richtig redirected wird.
 
 ### Protokolle
 
 Im Rahmen der Projektarbeit zu Java 1 wurden sehr intensiv Protokolle von Meetings erstellt. Mit der Zeit haben wir als Team jedoch festgestellt, dass wir mit weniger formalen Dokumentationen und Absprachen besser zurecht kommen.
 Es fanden weiterin - die Prüfungsphase ausgenommen - mindestens wöchentliche Meetings statt, zwischen denen jedoch ebenso viel Kommunikation und Absprachen über unseren Discord Gruppenchat erfolgten. 
 Die in Java 1 erstellten Protokolle landeten einmal erstellt im Repository und wurden bis zu ihrer Wanderung in die Dokumentation nicht mehr angetastet.
-Daher haben wir uns gegen weitere Protokolle entschieden, da sie konkret für uns in genau dieser Gruppenkonstellation, nicht beste Weg der Kommunikation darstellen. 
+Daher haben wir uns gegen weitere Protokolle entschieden, da sie konkret für uns in genau dieser Gruppenkonstellation, nicht der beste Weg der Kommunikation darstellen. 
 
 <details>
 <summary>Meeting 5. November 2020</summary>
