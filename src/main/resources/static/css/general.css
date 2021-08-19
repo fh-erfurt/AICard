@@ -54,6 +54,11 @@ a:hover {
     text-decoration: underline solid currentColor 2px;
 }
 
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+}
+
 .header *,
 .footer * {
     color: white;
@@ -141,8 +146,13 @@ a:hover {
 }
 
 .pannel *{
-    word-wrap: break-word;
+    overflow: hidden;
     text-overflow: ellipsis;
+}
+.pannel *:hover{
+    text-overflow: unset;
+    white-space: unset;
+    word-wrap: break-word;
 }
 
 .deck{
@@ -159,6 +169,10 @@ a:hover {
                 22px 22px #ffffff,
                 29px 29px rgba(0,0,0,0.5);
     transition: 0.5s;
+}
+
+.deck *{
+    white-space: nowrap;
 }
 
 .transparentPannel {

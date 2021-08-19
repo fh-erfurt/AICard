@@ -7,12 +7,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+/**
+ * Tests get requests to LoginController
+ *
+ * @author Daniel Michel
+ */
 @WebMvcTest(LoginController.class)
 class LoginControllerTest {
     @MockBean
@@ -31,10 +34,5 @@ class LoginControllerTest {
     public void shouldGetLoginView() throws Exception{
         mockMvc.perform(get("/login")).andExpect(status().isOk())
                 .andExpect(view().name("login"));
-    }
-
-    @Test
-    public void shouldCreateNewAccount() throws Exception{
-
     }
 }

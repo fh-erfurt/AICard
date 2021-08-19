@@ -16,9 +16,16 @@ class MainControllerTest{
     private MockMvc mockMvc;
 
     @Test
-    void shouldgetMainPage() throws Exception{
-        this.mockMvc.perform(get("/")).andExpect(status().isOk()).
-                andExpect(content().string(containsString("/index")))
-        .andExpect(view().name("index"));
+    void shouldGetMainPage() throws Exception{
+        this.mockMvc.perform(get("/index"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"));
+    }
+
+    @Test
+    void shouldRedirectMainPage() throws Exception{
+        this.mockMvc.perform(get("/"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/index"));
     }
 }
