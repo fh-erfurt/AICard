@@ -47,25 +47,6 @@
             </div>
 
             <div class="formListElement">
-                <label> Freunde hinzufügen als Admin:</label>
-                <button  id="showAddFriendsAsAdminTable" type="button"></button>
-                <table id="friendTable" style="display: none;">
-                    <tbody>
-                    <tr th:each="friend : ${owner.getFriends()}" th:if="${!learnSetOld.getAdminList().contains(friend)}">
-                        <td>
-                            <a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a>
-                        </td>
-                        <td>
-                            <a class="greenBtn XBtn"
-                               th:href="@{'/addAccountToAdminList/'+${learnSetOld.getId()} + '/' + ${friend.getId()}}"
-                                title="Freund als Administrator hinzufügen (erlaubt das löschen von Karten)">+</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="formListElement">
                 <label>Admins:</label>
                 <table>
                     <tbody>
@@ -75,6 +56,24 @@
                             <a class=""
                                th:href="@{'/removeAccountFromAdminList/'+${learnSetOld.getId()} + '/' + ${admin.getId()}}"
                                 title="Account als Administrator entfernen">X</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="formListElement">
+                <label> Freunde hinzufügen als Admin:</label>
+                <table id="friendTable">
+                    <tbody>
+                    <tr th:each="friend : ${owner.getFriends()}" th:if="${!learnSetOld.getAdminList().contains(friend)}">
+                        <td>
+                            <a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a>
+                        </td>
+                        <td>
+                            <a class="greenBtn XBtn"
+                               th:href="@{'/addAccountToAdminList/'+${learnSetOld.getId()} + '/' + ${friend.getId()}}"
+                               title="Freund als Administrator hinzufügen (erlaubt das löschen von Karten)">+</a>
                         </td>
                     </tr>
                     </tbody>
