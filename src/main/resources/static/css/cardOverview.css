@@ -55,14 +55,14 @@
     margin: 10px 0;
 }
 
+.cardSites > div {
+    width: 45%;
+    height: 60vh;
+}
+
 .card .cardSites > div {
     width: 45%;
     height: 200px;
-}
-
-.learnCard .cardSites > div {
-    width: 45%;
-    height: 60vh;
 }
 
 .card .cardSites *,

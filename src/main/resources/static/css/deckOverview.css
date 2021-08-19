@@ -109,6 +109,7 @@ a {
 
 .deckName {
     font-size: 30px;
+    overflow: hidden;
 }
 
 .createLearnset .pannel {

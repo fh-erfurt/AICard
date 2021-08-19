@@ -10,7 +10,7 @@
 
 <div class="pageContent">
 
-    <div class="">
+    <div class="pannel whiteBG">
         <form id="updateLearnSet" method="POST" th:action="@{'/updateLearnSet/' + ${learnSetOld.getId()}} "
               th:object="${learnSetOld}">
 
@@ -46,38 +46,42 @@
                 </select>
             </div>
 
-            <button id="showAddFriendsAsAdminTable" type="button">Freunde zum hinzufügen in die AdminListe anzeigen
-            </button>
+            <div class="formListElement">
+                <label> Freunde hinzufügen als Admin:</label>
+                <button  id="showAddFriendsAsAdminTable" type="button"></button>
+                <table id="friendTable" style="display: none;">
+                    <tbody>
+                    <tr th:each="friend : ${owner.getFriends()}" th:if="${!learnSetOld.getAdminList().contains(friend)}">
+                        <td>
+                            <a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a>
+                        </td>
+                        <td>
+                            <a class="greenBtn XBtn"
+                               th:href="@{'/addAccountToAdminList/'+${learnSetOld.getId()} + '/' + ${friend.getId()}}"
+                                title="Freund als Administrator hinzufügen (erlaubt das löschen von Karten)">+</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <table id="friendTable" style="display: none;">
-                <tbody>
-                <tr th:each="friend : ${owner.getFriends()}" th:if="${!learnSetOld.getAdminList().contains(friend)}">
-                    <td><a th:href="@{'/profile/' + ${friend.getId()}}" th:text="${friend.getEmail()}"></a></td>
-                    <td>
-                        <a class=""
-                           th:href="@{'/addAccountToAdminList/'+${learnSetOld.getId()} + '/' + ${friend.getId()}}"
-                            title="Freund als Administrator hinzufügen (erlaubt das löschen von Karten)">+</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="formListElement">
+                <label>Admins:</label>
+                <table>
+                    <tbody>
+                    <tr th:each="admin : ${learnSetOld.getAdminList()}">
+                        <td><a th:href="@{'/profile/' + ${admin.getId()}}" th:text="${admin.getEmail()}"></a></td>
+                        <td th:if="${owner.getId().equals(learnSetOld.getOwner().getId()) && !admin.getId().equals(owner.getId()) }">
+                            <a class=""
+                               th:href="@{'/removeAccountFromAdminList/'+${learnSetOld.getId()} + '/' + ${admin.getId()}}"
+                                title="Account als Administrator entfernen">X</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
-
-            <table>
-                <tbody>
-                <tr th:each="admin : ${learnSetOld.getAdminList()}">
-                    <td><a th:href="@{'/profile/' + ${admin.getId()}}" th:text="${admin.getEmail()}"></a></td>
-                    <td th:if="${owner.getId().equals(learnSetOld.getOwner().getId()) && !admin.getId().equals(owner.getId()) }">
-                        <a class=""
-                           th:href="@{'/removeAccountFromAdminList/'+${learnSetOld.getId()} + '/' + ${admin.getId()}}"
-                            title="Account als Administrator entfernen">X</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-
-            <div class="btnContainer">
+            <div class="btnContainer bottom">
                 <input class="btn blueBtn" type="submit">
             </div>
             <div class="btnPlaceHolder"></div>
